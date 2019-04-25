@@ -198,7 +198,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{ route('home') }}" class="nav-link active">
+            <a href="{{ route('home') }}" class="{!! Request::is('home') ? 'nav-link active' : 'nav-link' !!}">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 Dashboard
@@ -206,7 +206,7 @@
             </a>
           </li>     
           <li class="nav-item">
-            <a href="{{ route('widgets') }}" class="nav-link">
+            <a href="{{ route('widgets') }}" class="{!! Request::is('widgets') ? 'nav-link active' : 'nav-link' !!}">
               <i class="nav-icon fa fa-th"></i>
               <p>
                 Widgets
@@ -214,7 +214,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('charts') }}" class="nav-link">
+            <a href="{{ route('charts') }}" class="{!! Request::is('charts') ? 'nav-link active' : 'nav-link' !!}">
               <i class="nav-icon fa fa-pie-chart"></i>
               <p>
                 Charts
@@ -222,7 +222,7 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="{!! Request::is('#') ? 'nav-link active' : 'nav-link' !!}">
               <i class="nav-icon fa fa-edit"></i>
               <p>
                 Forms
@@ -231,25 +231,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('general') }}" class="nav-link">
+                <a href="{{ route('general') }}" class="{!! Request::is('general') ? 'nav-link active' : 'nav-link' !!}">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>General Elements</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('advanced') }}" class="nav-link">
+                <a href="{{ route('advanced') }}" class="{!! Request::is('advanced') ? 'nav-link active' : 'nav-link' !!}">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Advanced Elements</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('personalizado') }}" class="nav-link">
+                <a href="{{ route('personalizado') }}" class="{!! Request::is('personalizado') ? 'nav-link active' : 'nav-link' !!}">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Ventana Modal</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('sweet') }}" class="nav-link">
+                <a href="{{ route('sweet') }}" class="{!! Request::is('sweet') ? 'nav-link active' : 'nav-link' !!}">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Sweet Alert</p>
                 </a>
@@ -257,7 +257,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="{{ route('tables') }}" class="nav-link">
+            <a href="{{ route('tables') }}" class="{!! Request::is('tables') ? 'nav-link active' : 'nav-link' !!}">
               <i class="nav-icon fa fa-table"></i>
               <p>
                 Tables
@@ -265,7 +265,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('calendar') }}" class="nav-link">
+            <a href="{{ route('calendar') }}" class="{!! Request::is('calendar') ? 'nav-link active' : 'nav-link' !!}">
               <i class="nav-icon fa fa-calendar"></i>
               <p>
                 Calendar
