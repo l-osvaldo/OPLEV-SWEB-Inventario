@@ -1,0 +1,143 @@
+.logologin
+{
+	height: 150px;
+	width: 200px;
+}
+
+.tituloheader
+{
+	font-size: 17px;
+	margin-left: 16px;
+	font-weight: 500;	
+}
+
+.ribbon-perfil
+{
+	padding: 8px;
+	height: 35px;	
+	text-align: left !important;	
+}
+
+.ribbon-area
+{
+	padding: 2px !important;
+	padding-left: 10px !important;
+	height: 35px;	
+}
+
+.titareames
+{
+	font-size: 20px;	
+	font-weight: bold;		
+	text-align: center;
+}
+
+.ribbon-primary
+{
+	background-color: #EA0D94 !important;
+	color: #fff !important;
+	text-align: center;
+}
+
+.ribbon-blanco
+{
+	background: #fff;
+}
+
+.ribbon-rosa
+{
+	background: #FCE6F4;
+}
+
+.ribbon
+{
+	border-top-right-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+	width: 100%;	
+}
+
+.numpasos
+{
+	font-size: 20px;
+}
+
+.fondopaso
+{
+	background: #FCE6F4 !important;
+	font-weight: bold !important;
+	padding: 5px;
+}
+
+.fraserealizado
+{
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.contenido
+{
+	font-size: 15px;	
+}
+
+.contcentrado
+{
+	text-align: center;
+}
+
+.tittabla
+{
+	text-align: center;
+	background: #FCE6F4;
+	font-weight: bold !important;
+	color: #000 !important;
+}
+
+.cantidadrealizada
+{
+	font-size: 20px;
+	font-weight: bold !important;
+}
+
+.contenidotabla
+{
+	text-align: center;		
+	color: #000 !important;
+}
+
+.textuppercase
+{
+	text-transform: uppercase !important;
+}
+
+.letralogin
+{
+	color: #000 !important;
+	background-color: #342234 !important;
+}
+
+.time-small
+{ 
+	font-size: smaller;
+	font-family: verdana;
+}
+
+.folio:hover
+{
+	text-decoration: none;
+}
+
+.alerta
+{
+	color: #f33 !important;
+	font-size: larger !important;
+}
+
+[type="checkbox"],
+[type="radio"] {
+	position: inherit !important; 
+	left: 0 !important;
+	opacity: 1 !important;
+	box-sizing: border-box !important; /* 1 */
+	padding: 0 !important; /* 2 */
+}
