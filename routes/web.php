@@ -27,3 +27,8 @@ Route::get('/widgets', 'HomeController@widgets')->name('widgets');
 Route::get('/general-elements', 'HomeController@generalelements')->name('general');
 Route::get('/advanced-elements', 'HomeController@advanced')->name('advanced');
 Route::get('/personalizado', 'HomeController@personalizado')->name('personalizado');
+Route::get('/catalogos/bienes', 'CatalogosController@bienes')->name('catalogos');
+Route::get('/catalogos/bieneseco', 'CatalogosController@bieneseco')->name('catalogoeco');
+Route::get('/catalogos/lista', 'CatalogosController@lista')->name('lista');
+Route::get('/catalogos/TablaPartida', 'PartidasController@index')->name('tabla-partidas');
+//Route::post('/catalogos/TablaPartida', 'PartidasController@store')->name('tabla-partidas');

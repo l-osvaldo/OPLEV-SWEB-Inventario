@@ -177,7 +177,7 @@
     <a href="index3.html" class="brand-link">
       <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">SIADMON</span>
     </a>
 
     <!-- Sidebar -->
@@ -198,72 +198,29 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{ route('home') }}" class="{!! Request::is('home') ? 'nav-link active' : 'nav-link' !!}">
-              <i class="nav-icon fa fa-dashboard"></i>
-              <p>
-                Dashboard
-              </p>
-            </a>
-          </li>     
-          <li class="nav-item">
-            <a href="{{ route('widgets') }}" class="{!! Request::is('widgets') ? 'nav-link active' : 'nav-link' !!}">
-              <i class="nav-icon fa fa-th"></i>
-              <p>
-                Widgets
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('charts') }}" class="{!! Request::is('charts') ? 'nav-link active' : 'nav-link' !!}">
+            <a href="{{ route('lista') }}" class="{!! Request::is('lista') ? 'nav-link active' : 'nav-link' !!}">
               <i class="nav-icon fa fa-pie-chart"></i>
               <p>
-                Charts
+                Catalogos
               </p>
             </a>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="{!! Request::is('#') ? 'nav-link active' : 'nav-link' !!}">
-              <i class="nav-icon fa fa-edit"></i>
-              <p>
-                Forms
-                <i class="fa fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('general') }}" class="{!! Request::is('general') ? 'nav-link active' : 'nav-link' !!}">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>General Elements</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('advanced') }}" class="{!! Request::is('advanced') ? 'nav-link active' : 'nav-link' !!}">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Advanced Elements</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('personalizado') }}" class="{!! Request::is('personalizado') ? 'nav-link active' : 'nav-link' !!}">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Ventana Modal</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('sweet') }}" class="{!! Request::is('sweet') ? 'nav-link active' : 'nav-link' !!}">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Sweet Alert</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
-            <a href="{{ route('tables') }}" class="{!! Request::is('tables') ? 'nav-link active' : 'nav-link' !!}">
+            <a href="{{ route('catalogos') }}" class="{!! Request::is('catalogos') ? 'nav-link active' : 'nav-link' !!}">
               <i class="nav-icon fa fa-table"></i>
               <p>
-                Tables
+                Bienes OPLE
               </p>
             </a>
           </li>
+          <li class="nav-item">
+              <a href="{{ route('catalogoeco') }}" class="{!! Request::is('catalogoeco') ? 'nav-link active' : 'nav-link' !!}">
+                <i class="nav-icon fa fa-table"></i>
+                <p>
+                  Bienes ECO
+                </p>
+              </a>
+            </li>
           <li class="nav-item">
             <a href="{{ route('calendar') }}" class="{!! Request::is('calendar') ? 'nav-link active' : 'nav-link' !!}">
               <i class="nav-icon fa fa-calendar"></i>
