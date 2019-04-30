@@ -7,7 +7,10 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1><b>Listado de Partidas</b></h1>
+                <h1>
+                  <b>Listado de Partidas</b>
+                  <a href="{{ route('partidas-create') }}" class="btn btn-primary float-right"> Agregar</a>
+                </h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -21,29 +24,31 @@
 
       <section class="content">
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Catalogo de Partidas</h3>
-                        </div>
-                        <div class="car-body">
+                <div class="col-8">     
+                    <div class="center-block">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Catalogo de Partidas</h3> 
+                            </div>
+                            <div class="car-body">
 
-                            <table id="table1" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Partida</th>
-                                        <th>Descripcion Partida</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                        @foreach ($parida as $partida)
-                                    <tr>
-                                        <th>{{ $parida->parida }}</th>
-                                        <th>{{ $parida->descpartida }}</th>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                <table id="table1" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Partida</th>
+                                            <th>Descripcion Partida</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            @foreach ($partida as $partida)
+                                        <tr>
+                                            <th>{{ $partida->partida }}</th>
+                                            <th>{{ $partida->descpartida }}</th>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

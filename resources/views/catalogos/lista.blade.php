@@ -20,7 +20,7 @@
       </section>
 
       <li class="nav-item">
-            <a href="{{ route('tabla-partidas') }}" class="{!! Request::is('tabla-partidas') ? 'nav-link active' : 'nav-link' !!}">     
+            <a href="{{ route('Tabla-Partida') }}" class="{!! Request::is('Tabla-Partida') ? 'nav-link active' : 'nav-link' !!}">     
               <p>
                 <i class="nav-icon fa fa-th"></i>
                     Partidas
