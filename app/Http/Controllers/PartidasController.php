@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 use App\partidas;
 //use Illuminate\Database\Eloquent\Model\partidas;
 
@@ -37,9 +38,10 @@ class PartidasController extends Controller
         $partida = new partidas();
         $partida->partida = $request->input('partida');
         $partida->descpartida = $request->input('descpartida');
-       
-        $partida->savePartida();
-        return redirect()->route('catalogos.Partidas');
+
+        $partida->save();
+        return redirect()->route('Tabla-Partida');
+
     }
     
     
