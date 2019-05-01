@@ -23,7 +23,15 @@
             <a href="{{ route('Tabla-Partida') }}" class="{!! Request::is('Tabla-Partida') ? 'nav-link active' : 'nav-link' !!}">     
               <p>
                 <i class="nav-icon fa fa-th"></i>
-                    Partidas
+                    Catalogo de Partidas
+              </p>
+            </a>
+          </li>     
+          <li class="nav-item">
+            <a href="{{ route('Tabla-Linea') }}" class="{!! Request::is('Tabla-Linea') ? 'nav-link active' : 'nav-link' !!}">
+              <p>
+                <i class="nav-icon fa fa-th"></i>
+                Catalogo de Lineas
               </p>
             </a>
           </li>     
@@ -31,15 +39,7 @@
             <a href="{{ route('widgets') }}" class="{!! Request::is('widgets') ? 'nav-link active' : 'nav-link' !!}">
               <p>
                 <i class="nav-icon fa fa-th"></i>
-                    Linea
-              </p>
-            </a>
-          </li>     
-          <li class="nav-item">
-            <a href="{{ route('widgets') }}" class="{!! Request::is('widgets') ? 'nav-link active' : 'nav-link' !!}">
-              <p>
-                <i class="nav-icon fa fa-th"></i>
-                    Sublinea
+                Catalogo de Sublineas
               </p>
             </a>
           </li>

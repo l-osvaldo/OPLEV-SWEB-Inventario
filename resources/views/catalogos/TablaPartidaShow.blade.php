@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
         <div class="container-fluid">
@@ -9,7 +10,7 @@
             <div class="col-sm-6">
                 <h1>
                   <b>Listado de Partidas</b>
-                  <a href="{{ route('partidas-create') }}" class="btn btn-primary float-right"> Nueva Partida</a>
+                  <a href="{{ route('partidas-create') }}" class="btn btn-primary float-right"> Agregar</a>
                 </h1>
             </div>
             <div class="col-sm-6">
@@ -21,6 +22,7 @@
           </div>
         </div><!-- /.container-fluid -->
       </section>
+
       <section class="content">
             <div class="row">
                 <div class="col-8">     
@@ -36,13 +38,17 @@
                                         <tr>
                                             <th>Partida</th>
                                             <th>Descripcion Partida</th>
+                                            <th>Linea</th>
+                                            <th>Descripcion Linea</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            @foreach ($partida as $partida)
+                                            @foreach ($partidas2 as $partidas2)
                                         <tr>
-                                            <td>{{ $partida->partida }}</td>
-                                            <td>{{ $partida->descpartida }}</td>
+                                            <td>{{ $partidas2->partida }}</td>
+                                            <td>{{ $partidas2->descpartida }}</td>
+                                            <td>{{ $partidas2->partida }}</td>
+                                            <td>{{ $partidas2->descpartida }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -54,4 +60,5 @@
             </div>
     
         </section>
+
 @endsection

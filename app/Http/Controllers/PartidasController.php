@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\partidas;
+use View;
 //use Illuminate\Database\Eloquent\Model\partidas;
 
 class PartidasController extends Controller
@@ -15,7 +16,7 @@ class PartidasController extends Controller
     */
     public function index()
     {
-        $partida = partidas::orderBy('partida','DESC')->paginate();
+        $partida = partidas::orderBy('partida','ASC')->paginate();
         return view('catalogos.TablaPartida', compact('partida'));
     }
 
@@ -45,9 +46,11 @@ class PartidasController extends Controller
     }
     
     
-    public function show($id)
+    public function show( $partida)
     {
-        //
+        $partidas2 = partidas::where('partida',$partida)->get();
+        //echo $partidas2;exit();
+        return view('catalogos.TablaPartidaShow',compact('partidas2'));
     }
 
 }

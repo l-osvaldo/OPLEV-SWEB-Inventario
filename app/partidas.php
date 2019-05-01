@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\lineas;
 
 class partidas extends Model
 {
@@ -10,6 +11,14 @@ class partidas extends Model
         'partida',
         'descpartida',
       ];
+
+
+      //funcion para unir partidas y lineas
+      public function lineas()
+      {
+            return $this->hasMany(lineas::class);
+      }
+      
     //
 /*
     public function save($partida)

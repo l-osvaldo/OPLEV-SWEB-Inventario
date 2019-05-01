@@ -30,40 +30,39 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                   <div class="row">
-                      
-                    <div class="col-md-6">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label>Partida</label>
-                            <input type="text" class="form-control" id="partida" name="partida" placeholder="51100001">
+                            <input type="text" class="form-control" id="partida" name="partida">
                         </div>
                         <!-- -- !-->
                         <div class="form-group">
                                 <label>Linea</label>
-                                <input type="text" class="form-control"  placeholder="No. de linea">
+                                <input type="text" class="form-control" disabled="disabled" value="01" placeholder="01">
                             </div>
                       <!-- /.form-group -->
                       <div class="form-group">
                             <label>Sublinea</label>
-                            <input type="text" class="form-control"  placeholder="No. de sublinea">
+                            <input type="text" class="form-control" disabled="disabled" value="01" placeholder="01">
                         </div>
                       <!-- /.form-group -->
                     </div>
                     <!-- /.col -->
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                             <div class="form-group">
                                 <label>Ddescripción Partida</label>
-                                <input type="text" class="form-control" id="descpartida" name="descpartida" placeholder="">
+                                <input type="text" class="form-control" id="descpartida" name="descpartida">
                             </div>
                             <!-- --  -->
                             <div class="form-group">
                                     <label>Ddescripción Linea</label>
-                                    <input type="text" class="form-control"  placeholder="Desc. linea">
+                                    <input type="text" class="form-control">
                                 </div>
 
                       <!-- /.form-group -->
                       <div class="form-group">
                             <label>Ddescripción Sublinea</label>
-                            <input type="text" class="form-control"  placeholder="Desc. sublinea">
+                            <input type="text" class="form-control">
                         </div>
                       <!-- /.form-group -->     
                     </div>
@@ -71,10 +70,10 @@
                   </div>
                   <div class="form-group">
                       <div class="col-lg-10 col-lg-offset-2">
-                          <button class="btn btn-danger">Cancelar</button>
                           <button type="submit" class="btn btn-primary">
-                                  {{ __('Registro') }}
-                              </button>
+                              {{ __('Guardar') }}
+                          </button>
+                          <button type="reset" class="btn btn-danger">Cancelar</button>
                       </div>
                   </div>
                   <!-- /.row -->

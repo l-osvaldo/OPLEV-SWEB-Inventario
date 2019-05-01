@@ -9,7 +9,7 @@
             <div class="col-sm-6">
                 <h1>
                   <b>Listado de Partidas</b>
-                  <a href="{{ route('partidas-create') }}" class="btn btn-primary float-right"> Nueva Partida</a>
+                  <a href="{{ route('partidas-create') }}" class="btn btn-primary float-right"> Agregar</a>
                 </h1>
             </div>
             <div class="col-sm-6">
@@ -21,28 +21,33 @@
           </div>
         </div><!-- /.container-fluid -->
       </section>
+
       <section class="content">
             <div class="row">
                 <div class="col-8">     
                     <div class="center-block">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Catalogo de Partidas</h3> 
+                                <h3 class="card-title">Catalogo de Lineas</h3> 
                             </div>
                             <div class="car-body">
 
-                                <table id="example2" class="table table-bordered table-hover">
+                                <table id="example1" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>Partida</th>
                                             <th>Descripcion Partida</th>
+                                            <th>Linea</th>
+                                            <th>Descripcion Linea</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            @foreach ($partida as $partida)
+                                            @foreach ($linea as $lineas)
                                         <tr>
-                                            <td>{{ $partida->partida }}</td>
-                                            <td>{{ $partida->descpartida }}</td>
+                                            <th>{{ $lineas->partidas->partida }}</th>
+                                            <th>{{ $lineas->partidas->descpartida }}</th>
+                                            <th>{{ $lineas->linea }}</th>
+                                            <th>{{ $lineas->desclinea }}</th>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -54,4 +59,18 @@
             </div>
     
         </section>
+    
+        <script>
+            $(function () {
+              $("#table1").DataTable();
+              $('#table2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+              });
+            });
+          </script>
 @endsection

@@ -30,6 +30,12 @@ Route::get('/personalizado', 'HomeController@personalizado')->name('personalizad
 Route::get('/catalogos/bienes', 'CatalogosController@bienes')->name('catalogos');
 Route::get('/catalogos/bieneseco', 'CatalogosController@bieneseco')->name('catalogoeco');
 Route::get('/catalogos/lista', 'CatalogosController@lista')->name('lista');
+//rutas del modal de partidas
 Route::get('/catalogos/TablaPartida', 'PartidasController@index')->name('Tabla-Partida');
 Route::post('/catalogos/Partidas', 'PartidasController@store')->name('partidas');
 Route::get('/catalogos/Partidas', 'PartidasController@create')->name('partidas-create');
+Route::get('/catalogos/TablaPartidaShow/{id}', 'PartidasController@show')->name('show-partida');
+//rutas del modal de lineas
+Route::get('/catalogos/TablaLinea', 'LineasController@index')->name('Tabla-Linea');
+Route::post('/catalogos/Lineas', 'LineasController@store')->name('lineas');
+Route::get('/catalogos/Lineas', 'LineasController@create')->name('lineas-create');

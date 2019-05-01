@@ -10,8 +10,10 @@ class sublineas extends Model
     protected $fillable = [
         'sublinea',
         'partida',
+        'descpartida',
         'linea',
-        'descsublinea',
+        'desclinea',
+        'descsub',
         'total',
       ];
 }
