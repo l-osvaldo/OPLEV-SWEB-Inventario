@@ -22,6 +22,8 @@
           <div class="container-fluid">
               <form method="POST" action="{{ route('partidas') }}">
                   @csrf
+                  
+                  <div class="col-sm-8 form-group-lg">
                 <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
                 <div class="card-header">
@@ -38,31 +40,38 @@
                         <!-- -- !-->
                         <div class="form-group">
                                 <label>Linea</label>
-                                <input type="text" class="form-control" disabled="disabled" value="01" placeholder="01">
+                                <input type="text" class="form-control" readonly id="linea" name="linea" value="01" placeholder="01">
                             </div>
                       <!-- /.form-group -->
                       <div class="form-group">
                             <label>Sublinea</label>
-                            <input type="text" class="form-control" disabled="disabled" value="01" placeholder="01">
+                            <input type="text" class="form-control" readonly id="sublinea" name="sublinea" value="01" placeholder="01">
+                        </div>
+                        <div class="form-group" style="display: none">
+                            <label>Total</label>
+                            <input type="text" class="form-control" readonly id="total" name="total" value="0">
                         </div>
                       <!-- /.form-group -->
                     </div>
                     <!-- /.col -->
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                             <div class="form-group">
                                 <label>Ddescripción Partida</label>
-                                <input type="text" class="form-control" id="descpartida" name="descpartida">
+                                <input type="text" class="form-control" id="descpartida" name="descpartida" style="text-transform:uppercase;"
+                                  onkeyup="javascript:this.value=this.value.toUpperCase();">
                             </div>
                             <!-- --  -->
                             <div class="form-group">
                                     <label>Ddescripción Linea</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" id="desclinea" name="desclinea" style="text-transform:uppercase;" 
+                                    onkeyup="javascript:this.value=this.value.toUpperCase();">
                                 </div>
 
                       <!-- /.form-group -->
                       <div class="form-group">
                             <label>Ddescripción Sublinea</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" id="descsub" name="descsub" style="text-transform:uppercase;" 
+                            onkeyup="javascript:this.value=this.value.toUpperCase();">
                         </div>
                       <!-- /.form-group -->     
                     </div>
@@ -84,6 +93,8 @@
                   the plugin.
                 </div>
               </div>
+                </div>
+              
             </form>
           </div>
       </section>

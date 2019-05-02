@@ -31,11 +31,13 @@ Route::get('/catalogos/bienes', 'CatalogosController@bienes')->name('catalogos')
 Route::get('/catalogos/bieneseco', 'CatalogosController@bieneseco')->name('catalogoeco');
 Route::get('/catalogos/lista', 'CatalogosController@lista')->name('lista');
 //rutas del modal de partidas
-Route::get('/catalogos/TablaPartida', 'PartidasController@index')->name('Tabla-Partida');
-Route::post('/catalogos/Partidas', 'PartidasController@store')->name('partidas');
-Route::get('/catalogos/Partidas', 'PartidasController@create')->name('partidas-create');
-Route::get('/catalogos/TablaPartidaShow/{id}', 'PartidasController@show')->name('show-partida');
+Route::get('/catalogos/TablaPartida', 'SublineasController@index')->name('Tabla-Partida');
+Route::post('/catalogos/Partidas', 'SublineasController@store')->name('partidas');
+Route::get('/catalogos/Partidas', 'SublineasController@create')->name('partidas-create');
+//Route::get('/catalogos/TablaPartidaShow/{id}', 'PartidasController@show')->name('show-partida');
 //rutas del modal de lineas
-Route::get('/catalogos/TablaLinea', 'LineasController@index')->name('Tabla-Linea');
-Route::post('/catalogos/Lineas', 'LineasController@store')->name('lineas');
-Route::get('/catalogos/Lineas', 'LineasController@create')->name('lineas-create');
+Route::get('/catalogos/Lineas', 'SublineasController@MostrarLineas')->name('lineas');
+Route::get('/catalogos/AgregaLineas', 'SublineasController@LineaNueva')->name('AgregaLineas');
+Route::get('/catalogos/TablaLineasShow/{id}', 'SublineasController@showlineas')->name('show-lineas');
+Route::post('/catalogos/AgregaLineas', 'SublineasController@lineastore')->name('AgregaLineas');
+//Route::get('/catalogos/Lineas', 'SublineasController@create')->name('lineas-create');

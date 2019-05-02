@@ -10,7 +10,7 @@
             <div class="col-sm-6">
                 <h1>
                   <b>Listado de Partidas</b>
-                  <a href="{{ route('partidas-create') }}" class="btn btn-primary float-right"> Agregar</a>
+                  <a href="{{ route('AgregaLineas') }}" class="btn btn-primary float-right"> Agregar Linea</a>
                 </h1>
             </div>
             <div class="col-sm-6">
@@ -43,12 +43,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            @foreach ($partidas2 as $partidas2)
+                                        @foreach ($linea as $linea)
                                         <tr>
-                                            <td>{{ $partidas2->partida }}</td>
-                                            <td>{{ $partidas2->descpartida }}</td>
-                                            <td>{{ $partidas2->partida }}</td>
-                                            <td>{{ $partidas2->descpartida }}</td>
+                                            <td>{{ $linea->partida }}</td>
+                                            <td>{{ $linea->descpartida }}</td>
+                                            <td>{{ $linea->linea }}</td>
+                                            <td>{{ $linea->desclinea }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
