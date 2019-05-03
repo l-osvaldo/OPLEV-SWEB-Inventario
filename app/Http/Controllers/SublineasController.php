@@ -63,15 +63,15 @@ class SublineasController extends Controller
         $linea = sublineas::distinct()->get(['partida', 'descpartida']);
         return view('catalogos.Lineas', compact('linea'));
     }
-    /////
-    public function showlineas( $partida)
+    // mostrar lineas
+
+    public function showlineas(Request $request)
     {
-        $linea = sublineas::where('partida', $partida, sublineas::raw('count(*) >= 1'))
+        //echo $request->get('Partidas');exit();
+        $linea = sublineas::where('partida', $request->get('Partidas'), sublineas::raw('count(*) >= 1'))
             ->get();
            // echo $linea;exit();
         return view('catalogos.TablaLineasShow',compact('linea'));
-
-
     }
 
 
@@ -92,9 +92,11 @@ class SublineasController extends Controller
     
     public function lineastore(Request $request)
     {
-        $linea = new partidas();
-        $linea->partida = $request->input('partida');
-        $linea->descpartida = $request->input('descpartida');
+        $array = explode (',', $request->input('partida'));
+        //print_r ($array);exit();
+        $linea = new sublineas();
+        $linea->partida = $array[0];
+        $linea->descpartida = $array[1];
         $linea->linea = $request->input('linea');
         $linea->desclinea = $request->input('desclinea');
         $linea->sublinea = $request->input('sublinea');
@@ -102,8 +104,43 @@ class SublineasController extends Controller
         $linea->total = $request->input('total');
 
         $linea->save();
-        return redirect()->route('catalogos.AgregaLineas');
+        return redirect()->route('NuevaLinea');
 
     } 
+
+    //vista de sublineas
+    public function MostrarSubLineas(Request $request)
+    {
+        $sublinea = sublineas::distinct()->get(['partida', 'descpartida']);
+        return view('catalogos.Sublineas', compact('sublinea'));
+    }
+
+    public function showsublineas($partida)
+    {
+        //echo $request->get('Partidas');exit();
+        $sublinea2 = sublineas::where('partida', $partida->get('Partidas'), sublineas::raw('count(*) >= 1'))
+            ->get();
+           // echo $linea;exit();
+        return view('catalogos.Sublineas',compact('sublinea2'));
+    }
+
+    public function sublineastore(Request $request)
+    {
+        $array = explode (',', $request->input('partida'));
+        //print_r ($array);exit();
+        $linea = new sublineas();
+        $linea->partida = $array[0];
+        $linea->descpartida = $array[1];
+        $linea->linea = $request->input('linea');
+        $linea->desclinea = $request->input('desclinea');
+        $linea->sublinea = $request->input('sublinea');
+        $linea->descsub = $request->input('descsub');
+        $linea->total = $request->input('total');
+
+        $linea->save();
+        return redirect()->route('NuevaLinea');
+
+    } 
+
     
 }

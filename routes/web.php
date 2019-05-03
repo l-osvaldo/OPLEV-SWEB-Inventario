@@ -36,8 +36,16 @@ Route::post('/catalogos/Partidas', 'SublineasController@store')->name('partidas'
 Route::get('/catalogos/Partidas', 'SublineasController@create')->name('partidas-create');
 //Route::get('/catalogos/TablaPartidaShow/{id}', 'PartidasController@show')->name('show-partida');
 //rutas del modal de lineas
+Route::post('/catalogos/AgregaLineas', 'SublineasController@lineastore')->name('NuevaLinea');
 Route::get('/catalogos/Lineas', 'SublineasController@MostrarLineas')->name('lineas');
 Route::get('/catalogos/AgregaLineas', 'SublineasController@LineaNueva')->name('AgregaLineas');
-Route::get('/catalogos/TablaLineasShow/{id}', 'SublineasController@showlineas')->name('show-lineas');
-Route::post('/catalogos/AgregaLineas', 'SublineasController@lineastore')->name('AgregaLineas');
+Route::post('/catalogos/TablaLineasShow', 'SublineasController@showlineas')->name('show-lineas');
 //Route::get('/catalogos/Lineas', 'SublineasController@create')->name('lineas-create');
+//Route::get('/catalogos/TablaLineasShow/', 'SublineasController@showlineas')->name('show-lineas');
+
+//sublineas
+Route::get('/catalogos/Sublineas', 'SublineasController@MostrarSublineas')->name('sublineas');
+Route::get('/catalogos/AgregaSubineas', 'SublineasController@SubineaNueva')->name('AgregaSublineas');
+Route::post('/catalogos/Sublineas', 'SublineasController@showsublineas')->name('show-sublineas');
+Route::post('/catalogos/AgregaSubineas', 'SublineasController@sublineastore')->name('NuevaSublinea');
+

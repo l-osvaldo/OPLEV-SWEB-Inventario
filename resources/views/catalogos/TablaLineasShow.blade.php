@@ -9,7 +9,7 @@
           <div class="row mb-2">
             <div class="col-sm-6">
                 <h1>
-                  <b>Listado de Partidas</b>
+                  <b>Linea de partida </b>
                   <a href="{{ route('AgregaLineas') }}" class="btn btn-primary float-right"> Agregar Linea</a>
                 </h1>
             </div>

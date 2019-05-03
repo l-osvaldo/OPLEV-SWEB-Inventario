@@ -20,7 +20,7 @@
     <section class="content"> 
         <div class="col col-8">
             <div class="container-fluid">
-                <form method="POST" action="{{ route('NuevaLinea') }}">
+                <form method="POST" action="{{ route('Sublinea') }}">
                     @csrf
                         
             <div class="card card-default">

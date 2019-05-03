@@ -21,39 +21,45 @@
       </div><!-- /.container-fluid -->
     </section>
     <section class="content">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="container-fluid">
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">Agregar Linea</h3>
+                        <h3 class="card-title">Listado de lineas</h3>
                     </div>
-
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-10">
+                            <div class="col-md-8">
                                 <div class="form-group">
                                     <label>Partidas</label>
-                                    <select class="form-control select2" style="width: 100%;">
-                                    <option selected="selected">No. paritda</option>
-                                    @foreach ($linea as $linea)
-                                    <option>{{ $linea->partida }} | {{ $linea->descpartida }}</option>
+                                    <form method="POST" action="{{ route('show-lineas') }}">
+                                            @csrf
+                                            <select id="Partidas" name="Partidas" class="form-control select2" style="width: 100%;">
+                                   
+                                                    <option selected="selected">No. partida</option>
+                                                    @foreach ($linea as $linea)
+                                                    <option value="{{ $linea->partida }}">{{ $linea->partida }} | {{ $linea->descpartida }}</option>
+                                                    
+                                                    @endforeach
+                                            </select>
+                                            <hr>
+                                            <input type="submit" class="btn btn-info" value="Ver">
+
+                                    </form>
                                     
-                                    @endforeach
-                                    </select>
-                                        <hr>
-                                     <a class="btn btn-info" href="{{ route('show-lineas',$linea->partida) }}">ver</a> 
+                                    
+                                        
                                 </div>
                             </div>
-                            <!--Tabla para mostrar datos de lineas y sublineas -->
-                           
                             
                         </div>
-                        </div>
-                        
+                       
+                        </div>   
+
                     </div>
                 </div>
             </div>
-        
     </section>
+
 
 @endsection
