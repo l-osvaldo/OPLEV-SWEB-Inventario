@@ -48,4 +48,9 @@ Route::get('/catalogos/Sublineas', 'SublineasController@MostrarSublineas')->name
 Route::get('/catalogos/AgregaSubineas', 'SublineasController@SubineaNueva')->name('AgregaSublineas');
 Route::post('/catalogos/Sublineas', 'SublineasController@showsublineas')->name('show-sublineas');
 Route::post('/catalogos/AgregaSubineas', 'SublineasController@sublineastore')->name('NuevaSublinea');
+//Route::get('/catalogos/Sublineas', 'SublineasController@SelectLinea')->name('partida_list');
+
+Route::get('ajaxRequest', 'SublineasController@ajaxRequest');
+
+Route::post('ajaxRequest', 'SublineasController@ajaxRequestPost');
 

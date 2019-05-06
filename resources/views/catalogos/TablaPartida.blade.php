@@ -31,7 +31,7 @@
                             </div>
                             <div class="car-body">
 
-                                <table id="example2" class="table table-bordered table-hover">
+                                <table id="example2" class="table table-bordered table-hover dt-responsive nowrap" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Partida</th>

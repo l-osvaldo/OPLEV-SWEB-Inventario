@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\sublineas;
 
+
 class SublineasController extends Controller
 {
     /*
@@ -122,7 +123,7 @@ class SublineasController extends Controller
             ->get();
            // echo $linea;exit();
         return view('catalogos.Sublineas',compact('sublinea2'));
-    }
+    } 
 
     public function sublineastore(Request $request)
     {
@@ -142,5 +143,22 @@ class SublineasController extends Controller
 
     } 
 
+    public function ajaxRequest(){
+        $sublinea = sublineas::distinct()->get(['partida', 'descpartida']);
+        return view('catalogos.Sublineas', compact('sublinea'));
+    }
+
+    public function ajaxRequestPost(Request $request)
+
+    {
+
+        $input = $request->all();
+
+        $sublinea = sublineas::where('partida',$request->partida)->distinct()
+            ->orderBy('linea', 'ASC')
+                ->get(['linea','desclinea']);
+        return response()->json($sublinea);
+
+    }
     
 }

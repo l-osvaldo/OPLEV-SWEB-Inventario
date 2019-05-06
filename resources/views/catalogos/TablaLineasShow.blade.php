@@ -33,11 +33,9 @@
                             </div>
                             <div class="car-body">
 
-                                <table id="example2" class="table table-bordered table-hover">
+                                <table id="example2" class="table table-bordered table-hover dt-responsive nowrap" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Partida</th>
-                                            <th>Descripcion Partida</th>
                                             <th>Linea</th>
                                             <th>Descripcion Linea</th>
                                         </tr>
@@ -45,8 +43,6 @@
                                     <tbody>
                                         @foreach ($linea as $linea)
                                         <tr>
-                                            <td>{{ $linea->partida }}</td>
-                                            <td>{{ $linea->descpartida }}</td>
                                             <td>{{ $linea->linea }}</td>
                                             <td>{{ $linea->desclinea }}</td>
                                         </tr>

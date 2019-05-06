@@ -29,11 +29,11 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Partidas</label>
-                                        <form method="POST" action="{{ route('show-lineas') }}">
+                                        <form method="POST" action="">
                                                 @csrf
                                                 <div class="col-md-10">
                                                 <div class="form-group">
-                                                <select id="Partidas" name="Partidas" class="form-control select2" style="width: 100%;">
+                                                <select id="Partidas" name="Partidas" class="form-control select2 dynamic" style="width: 100%;" onchange="linea()">
                                        
                                                         <option selected="selected">No. partida</option>
                                                         @foreach ($sublinea as $sublinea)
@@ -41,14 +41,16 @@
                                                         
                                                         @endforeach
                                                 </select>
+
                                                 </div>
                                                 </div>
                                                 <div class="col-md-10">
                                                 <div class="form-group">
-                                                <select name="Linea" id="Linea" class="form-control select2" style="width: 100%;" name="" id="">
-                                                    <option selected="selected" value="">No. Linea</option>
-                                                    <option></option>
-                                                </select>
+                                                  
+                                                  
+                                                    <select class="form-control dynamic" id="Linea" name="Linea">
+                                                        <option value="0" disabled="true" selected="true">Linea</option>
+                                                    </select>
                                                 </div>
                                                 </div>
                                                 <hr>
@@ -82,21 +84,27 @@
         </section>
 
         <script>
-                $(document).ready(function(){
-                  $("#Partidas").change(function(){
-                    var sublinea = $(this).val();
-                    $.get('sublineas/'+sublinea, function(data){
-              //esta el la peticion get, la cual se divide en tres partes. ruta,variables y funcion
-                      console.log(data);
-                        var Linea_select = '<option value="">No. partida</option>'
-                          for (var i=0; i<data.length;i++)
-                          Linea_select+='<option value="'+data[i].partida+'">'+data[i].descpartida+'</option>';
-              
-                          $("#campanas").html(Linea_select);
-              
-                    });
-                  });
+              function linea(){
+
+                $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+            });
+                var data = {partida : $('#Partidas').val(),_token: '{!! csrf_token() !!}'};
+                $.ajax({
+                  type:'POST',
+                  url:'/ajaxRequest',
+                  data:data,
+                  success:function(data){                    
+                    for (let i = 0; i < data.length; i++) {
+                      console.log(data[i]["desclinea"]);
+                      $('#Linea').append('<option value="'+data[i]["desclinea"]+'">'+ data[i]["linea"]+' | '+ data[i]["desclinea"]+'</option>'); 
+                    }
+                  }
                 });
-              </script>
+              }
+        </script>
+        
 
 @endsection
