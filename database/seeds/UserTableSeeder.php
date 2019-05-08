@@ -24,7 +24,6 @@ class UserTableSeeder extends Seeder
 		$user->save();
 		$user->roles()->attach($role_user);
 
-
 		$user = new User();
 		$user->name = 'Admin';
 		$user->username = 'Administrador';

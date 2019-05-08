@@ -6,7 +6,10 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1><b>SubLineas</b></h1>
+              <h1>
+                <b>SubLineas</b>
+                <a href="{{ route('AgregaSublineas') }}" class="btn btn-primary float-right"> Nueva Subinea</a>
+              </h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -33,7 +36,7 @@
                                                 @csrf
                                                 <div class="col-md-10">
                                                 <div class="form-group">
-                                                <select id="Partidas" name="Partidas" class="form-control select2 dynamic" style="width: 100%;" onchange="linea()">
+                                                <select id="Partidas" name="Partidas" class="form-control select2 dynamic" style="width: 100%;">
                                        
                                                         <option selected="selected">No. partida</option>
                                                         @foreach ($sublinea as $sublinea)
@@ -83,28 +86,7 @@
                 </div>
         </section>
 
-        <script>
-              function linea(){
 
-                $.ajaxSetup({
-              headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-            });
-                var data = {partida : $('#Partidas').val(),_token: '{!! csrf_token() !!}'};
-                $.ajax({
-                  type:'POST',
-                  url:'/ajaxRequest',
-                  data:data,
-                  success:function(data){                    
-                    for (let i = 0; i < data.length; i++) {
-                      console.log(data[i]["desclinea"]);
-                      $('#Linea').append('<option value="'+data[i]["desclinea"]+'">'+ data[i]["linea"]+' | '+ data[i]["desclinea"]+'</option>'); 
-                    }
-                  }
-                });
-              }
-        </script>
         
 
 @endsection

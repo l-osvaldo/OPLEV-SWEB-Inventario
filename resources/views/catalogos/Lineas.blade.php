@@ -8,7 +8,7 @@
           <div class="col-sm-6">
             <h1>
                 <b>Lineas</b>
-                <a href="{{ route('AgregaLineas') }}" class="btn btn-primary float-right"> Nueva Linea</a>
+                <a href="{{ route('nuevaLinea') }}" class="btn btn-primary float-right"> Nueva Linea</a>
             </h1>
           </div>
           <div class="col-sm-6">

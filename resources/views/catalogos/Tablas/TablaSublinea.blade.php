@@ -2,15 +2,14 @@
 
 @section('content')
 
-
 <!-- Content Header (Page header) -->
 <section class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
                 <h1>
-                  <b>Linea de partida </b>
-                  <a href="{{ route('AgregaLineas') }}" class="btn btn-primary float-right"> Agregar Linea</a>
+                  <b>Listado de Partidas</b>
+                  <a href="{{ route('partidas-create') }}" class="btn btn-primary float-right"> Agregar</a>
                 </h1>
             </div>
             <div class="col-sm-6">
@@ -29,22 +28,30 @@
                     <div class="center-block">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Catalogo de Partidas</h3> 
+                                <h3 class="card-title">Catalogo de Lineas</h3> 
                             </div>
                             <div class="car-body">
 
-                                <table id="example2" class="table table-bordered table-hover dt-responsive nowrap" style="width:100%">
+                                <table id="example1" class="table table-bordered table-hover dt-responsive nowrap" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th>Partida</th>
+                                            <th>Descripcion Partida</th>
                                             <th>Linea</th>
                                             <th>Descripcion Linea</th>
+                                            <th>sublinea</th>
+                                            <th>Descripcion Sublinea</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($linea as $linea)
+                                            @foreach ($linea as $lineas)
                                         <tr>
-                                            <td>{{ $linea->linea }}</td>
-                                            <td>{{ $linea->desclinea }}</td>
+                                            <th>{{ $lineas->partidas->partida }}</th>
+                                            <th>{{ $lineas->partidas->descpartida }}</th>
+                                            <th>{{ $lineas->linea }}</th>
+                                            <th>{{ $lineas->desclinea }}</th>
+                                            <th>{{ $lineas->sublinea }}</th>
+                                            <th>{{ $lineas->descsub }}</th>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -56,5 +63,5 @@
             </div>
     
         </section>
-
+    
 @endsection

@@ -4,15 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\partidas;
+use App\lineas;
+use App\sublineas;
 
 class lineas extends Model
 {
     //
-    protected $fillable = [
-        'linea',
-        'desclinea',
-        'partida',
+    protected $fillable = [  
+      'partida',
+      'descpartida',
+      'linea',
+      'desclinea',
+        
       ];
+
+
 
       //funcion para unir lineas y partidas
 
@@ -20,4 +26,9 @@ class lineas extends Model
         {
         return $this->belongsTo(partidas::class, 'partida');
         }
+
+        public function sublineas()
+      {
+            return $this->hasMany(sublineas::class);
+      }
 }

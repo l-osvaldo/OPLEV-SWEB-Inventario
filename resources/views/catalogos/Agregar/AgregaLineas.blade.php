@@ -20,7 +20,7 @@
     <section class="content"> 
         <div class="col col-8">
             <div class="container-fluid">
-                <form method="POST" action="{{ route('NuevaLinea') }}">
+                <form method="POST" action="{{ route('agregarLinea') }}">
                     @csrf
                         
             <div class="card card-default">
@@ -34,20 +34,19 @@
                     <div class="col-md-8">
                         <div class="form-group">
                             <label>Partidas</label>
-                            <select id="partida" name="partida" class="form-control select2" style="width: 100%;">
+                            <select id="partida" name="partida" class="form-control select2" style="width: 100%;" onchange="lineaMax()">
                             <option selected="selected">No. partida</option>
-                            @foreach ($linea as $linea)
-                            <option value="{{ $linea->partida.','.$linea->descpartida }}">{{ $linea->partida }} | {{ $linea->descpartida }}</option>
-                            
-                            @endforeach
+                        @foreach ($linea as $linea)
+                            <option value="{{ $linea->partida.','.$linea->descpartida}}">{{ $linea->partida }} | {{ $linea->descpartida }}</option>
+                        @endforeach
                             </select>
-                            
                         </div>
                     </div>
                     <div class="col-md-6">
                     <div class="form-group">
                             <label>Linea</label>
-                            <input type="text" class="form-control" readonly id="linea" name="linea" value="01" placeholder="01">
+                            <input type="text" class="form-control" readonly id="Linea" name="Linea">   
+
                         </div>
                     <!-- /.form-group -->
                     <div class="form-group">
@@ -100,5 +99,35 @@
         </div><!-- /.container-fluid -->
     </div>
     </section>
+
+    <script>
+        function lineaMax(){
+
+          $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        
+      });
+          var data = {partida : $('#partida').val(),_token: '{!! csrf_token() !!}'};
+          
+          $.ajax({
+            type:'POST',
+            url:'/ajaxRequestLineas',
+            data:data,
+            success:function (data){     
+
+                console.log(data[i]["linea"]);
+                $('#Linea').val(Number($('#Linea').val()) + 1).change()            
+                
+               // $('#Linea').append('<option value="'+data[i]["linea"]+'">'+ data[i]["linea"]+'</option>'); 
+                
+                
+              
+            }
+          });
+        }
+        
+  </script>
 
     @endsection

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\lineas;
+use App\sublineas;
 
 class partidas extends Model
 {
@@ -18,6 +19,11 @@ class partidas extends Model
       {
             return $this->hasMany(lineas::class);
       }
+      public function sublineas()
+      {
+            return $this->hasMany(sublineas::class);
+      }
+
       
     //
 /*

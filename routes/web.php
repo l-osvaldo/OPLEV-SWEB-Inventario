@@ -30,27 +30,49 @@ Route::get('/personalizado', 'HomeController@personalizado')->name('personalizad
 Route::get('/catalogos/bienes', 'CatalogosController@bienes')->name('catalogos');
 Route::get('/catalogos/bieneseco', 'CatalogosController@bieneseco')->name('catalogoeco');
 Route::get('/catalogos/lista', 'CatalogosController@lista')->name('lista');
-//rutas del modal de partidas
-Route::get('/catalogos/TablaPartida', 'SublineasController@index')->name('Tabla-Partida');
-Route::post('/catalogos/Partidas', 'SublineasController@store')->name('partidas');
-Route::get('/catalogos/Partidas', 'SublineasController@create')->name('partidas-create');
+//rutas del partidas
+Route::get('/catalogos/TablaPartida', 'PartidasController@index')->name('Tabla-Partida');
+Route::post('/catalogos/GuardarPartidas', 'PartidasController@store')->name('partidas');
+Route::get('/catalogos/NuevaPartida', 'PartidasController@create')->name('partidas-create');
 //Route::get('/catalogos/TablaPartidaShow/{id}', 'PartidasController@show')->name('show-partida');
 //rutas del modal de lineas
-Route::post('/catalogos/AgregaLineas', 'SublineasController@lineastore')->name('NuevaLinea');
-Route::get('/catalogos/Lineas', 'SublineasController@MostrarLineas')->name('lineas');
-Route::get('/catalogos/AgregaLineas', 'SublineasController@LineaNueva')->name('AgregaLineas');
-Route::post('/catalogos/TablaLineasShow', 'SublineasController@showlineas')->name('show-lineas');
+Route::post('/catalogos/AgregaLineas', 'LineasController@store')->name('agregarLinea');
+Route::get('/catalogos/Lineas', 'LineasController@MostrarLineas')->name('lineas');
+Route::get('/catalogos/NuevaLinea', 'LineasController@create')->name('nuevaLinea');
+Route::post('/catalogos/TablaDeLineas', 'LineasController@show')->name('show-lineas');
 //Route::get('/catalogos/Lineas', 'SublineasController@create')->name('lineas-create');
 //Route::get('/catalogos/TablaLineasShow/', 'SublineasController@showlineas')->name('show-lineas');
 
 //sublineas
 Route::get('/catalogos/Sublineas', 'SublineasController@MostrarSublineas')->name('sublineas');
-Route::get('/catalogos/AgregaSubineas', 'SublineasController@SubineaNueva')->name('AgregaSublineas');
+//Route::get('/catalogos/AgregaSublineas', 'SublineasController@SubineaNueva')->name('AgregaSublineas');
 Route::post('/catalogos/Sublineas', 'SublineasController@showsublineas')->name('show-sublineas');
-Route::post('/catalogos/AgregaSubineas', 'SublineasController@sublineastore')->name('NuevaSublinea');
+//Route::post('/catalogos/AgregaSubineas', 'SublineasController@sublineastore')->name('NuevaSublinea');
 //Route::get('/catalogos/Sublineas', 'SublineasController@SelectLinea')->name('partida_list');
 
 Route::get('ajaxRequest', 'SublineasController@ajaxRequest');
+Route::get('catalogos/obtenLineas', 'SublineasController@obtenLineas');
 
-Route::post('ajaxRequest', 'SublineasController@ajaxRequestPost');
 
+
+
+
+
+
+
+
+
+//Route::post('ajaxRequest', 'SublineasController@ajaxRequestPost');
+
+
+
+
+
+
+
+/*
+Route::get('ajaxRequest', 'SublineasController@ajaxRequestLineas');
+Route::post('ajaxRequest', 'SublineasController@ajaxRequestLineasPost');*/
+
+Route::post('/catalogos/AgregaSubineasStore', 'SublineasController@Agregasublineastore')->name('AgregarSub');
+Route::get('/catalogos/Agregar/AgregaSubLineas', 'SublineasController@SublineaNueva')->name('AgregaSublineas');

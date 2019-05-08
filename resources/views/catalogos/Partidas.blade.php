@@ -8,12 +8,7 @@
             <div class="col-sm-6">
               <h1><b>Partidas</b></h1>
             </div>
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Advanced Form</li>
-              </ol>
-            </div>
+            
           </div>
         </div><!-- /.container-fluid -->
       </section>
@@ -79,10 +74,10 @@
                   </div>
                   <div class="form-group">
                       <div class="col-lg-10 col-lg-offset-2">
-                          <button type="submit" class="btn btn-primary">
+                          <button type="submit" style="background-color: #E71096" class="btn btn-secondary">
                               {{ __('Guardar') }}
                           </button>
-                          <button type="reset" class="btn btn-danger">Cancelar</button>
+                          <button type="reset" class="btn btn-danger" onClick="history.go(-1);">Cancelar</button>
                       </div>
                   </div>
                   <!-- /.row -->

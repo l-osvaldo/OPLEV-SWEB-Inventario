@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1><b>Lineas</b></h1>
+            <h1><b>Sublineas</b></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">LINEAS</li>
+              <li class="breadcrumb-item active">Sublinea</li>
             </ol>
           </div>
         </div>
@@ -20,12 +20,12 @@
     <section class="content"> 
         <div class="col col-8">
             <div class="container-fluid">
-                <form method="POST" action="{{ route('Sublinea') }}">
+                <form method="POST" action="{{ route('AgregaSublineas') }}">
                     @csrf
                         
             <div class="card card-default">
                 <div class="card-header">
-                <h3 class="card-title">Agregar Linea</h3>
+                <h3 class="card-title">Agregar Sublinea</h3>
 
                 </div>
                 <!-- /.card-header -->
@@ -36,7 +36,7 @@
                             <label>Partidas</label>
                             <select id="partida" name="partida" class="form-control select2" style="width: 100%;">
                             <option selected="selected">No. partida</option>
-                            @foreach ($linea as $linea)
+                            @foreach ($NuevaSublinea as $linea)
                             <option value="{{ $linea->partida.','.$linea->descpartida }}">{{ $linea->partida }} | {{ $linea->descpartida }}</option>
                             
                             @endforeach
