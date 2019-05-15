@@ -24,14 +24,14 @@
                           <div class="row">
                               <div class="col-md-10">
                                   <div class="form-group">
-                          <a href="{{ route('Tabla-Partida') }}" class="{!! Request::is('Tabla-Partida') ? 'nav-link active' : 'nav-link' !!}">     
+                          <a href="{{ route('Tabla-Partida') }}" class="{!! Request::is('Tabla-Partida') ? 'nav-link active' : 'nav-link' !!}">    
                             <p>
                               <i class="nav-icon fa fa-th"></i>
                                   Partidas
                             </p>
                           </a>
                         <hr>
-                          <a href="{{ route('lineas') }}" class="{!! Request::is('lineas') ? 'nav-link active' : 'nav-link' !!}">
+                          <a href="{{ route('show-lineas') }}" class="{!! Request::is('show-lineas') ? 'nav-link active' : 'nav-link' !!}">
                             <p>
                               <i class="nav-icon fa fa-th"></i>
                               Líneas

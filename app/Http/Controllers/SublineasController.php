@@ -5,170 +5,124 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 
-use App\{sublineas, lineas};
-
+use App\sublineas;
+use APP\partidas;
+use App\lineas;
+use Alert;
 
 class SublineasController extends Controller
 {
-    /*
-    funcion para mostrar los datos de la tabla partida
-		en la vista TablaPartida
-		El controlador ya esta en Partidas controller
-		*/
-		/*
-    public function index()
+  
+  
+  public function formValidationPost(Request $request)
     {
-        $partida = sublineas::distinct()->get(['partida', 'descpartida']);
-        return view('catalogos.Tablas.TablaPartida', compact('partida'));
-    }
-*/
-    /*
-		funcion para llamar a la venta de agregar partida 
-		la funcion ya esta en Partidascontroller
-     */
-		/*
-    public function create()
-    {
-        return view('catalogos.Partidas');
-    }
-*/
-    
-    /*
-    funcion para agregar una partida a la base de datos
-    la variable partida recibe los datos y los envia al modelo 
-    para despues guardarlos en la base de datos.
-     */
-    public function store(Request $request)
-    {
-        $partida = new sublineas();
-        $partida->partida = $request->input('partida');
-        $partida->descpartida = $request->input('descpartida');
-        $partida->linea = $request->input('linea');
-        $partida->desclinea = $request->input('desclinea');
-        $partida->sublinea = $request->input('sublinea');
-        $partida->descsub = $request->input('descsub');
-        $partida->total = $request->input('total');
+        $this->validate($request,[
+
+            'partidaA'           =>  'required|numeric',
+            'descpartida'       =>  'required|min:1|max:250',
+            'lineaA'             =>  'required|numeric',
+            'LineaMax'             =>  'required|numeric',
+            'desclinea'         =>  'required|min:1|max:250',
+            'sublinea'          =>  'required|numeric',
+            'descsub'           =>  'required|min:1|max:250',
+            'total'             =>  'required|numeric',
+
+            ],[
+                
+        'partidaA.required'     => 'La :attribute es obligatoria.',
+        'partidaA.integer'      => 'La :attribute debe ser un entero.',
+
+        'descpartida.required'   => 'La :attribute es obligatoria.',
+        'descpartida.min'        => 'La :attribute debe contener mas de una letra.',
+        'descpartida.max'        => 'La :attribute debe contener max 30 letras.',
+
+        'lineaA.required'     => 'La :attribute es obligatoria.',
+        'lineaA.integer'      => 'La :attribute debe ser un entero.',
+
+        'LineaMax.required'     => 'La :attribute es obligatoria.',
+        'LineaMax.integer'      => 'La :attribute debe ser un entero.',
+
+        'desclinea.required'   => 'La :attribute es obligatoria.',
+        'desclinea.min'        => 'La :attribute debe contener mas de una letra.',
+        'desclinea.max'        => 'La :attribute debe contener max 30 letras.',
         
+        'sublinea.required'     => 'La :attribute es obligatoria.',
+        'sublinea.integer'      => 'La :attribute debe ser un entero.',
 
-        $partida->save();
-        return redirect()->route('Tabla-Partida');
+        'descsub.required'   => 'La :attribute es obligatoria.',
+        'descsub.min'        => 'La :attribute debe contener mas de una letra.',
+        'descsub.max'        => 'La :attribute debe contener max 30 letras.',
 
-    }
-    
-    
-    public function show( $partida)
-    {
-        $linea = sublineas::where('sublinea',$partida)->get();
-        //
-        return view('catalogos.Agregar.AgregaLineas',compact('linea'));
-    }
+        'total.required'     => 'La :attribute es obligatoria.',
+        'total.integer'      => 'La :attribute debe ser un entero.',
+            ]);
 
-    /* vista de lineas */
-    public function MostrarLineas()
-    {
-        $linea = sublineas::distinct()->get(['partida', 'descpartida']);
-        return view('catalogos.Lineas', compact('linea'));
-    }
-    // mostrar lineas
-		/* funcion para mostrar la tabla de lineas
-			la funcion fue reubicada al controlador Lineascontroller
-		*/
-		/*
-    public function showlineas(Request $request)
-    {
-        //echo $request->get('Partidas');exit();
-        $linea = sublineas::where('partida', $request->get('Partidas'), sublineas::raw('count(*) >= 1'))
-            ->get();
-           // echo $linea;exit();
-        return view('catalogos.Tablas.TablaLineasShow',compact('linea'));
+        Alert::error('Revise sus campos', '¡Error!')->autoclose(2000);
     }
 
-			/*
-     /*funcion para mostrar las partidas 
-		 tanto en agregar linea como en catalogo de linea
-		 La funcion se paso a Lineascontroller
-     */ 
-		/*
-    public function LineaNueva()
+
+    public function show(Request $request)
     {
 
-        $linea = sublineas::distinct()->get(['partida', 'descpartida']);
-        return view('catalogos.Agregar.AgregaLineas', compact('linea'));
+        $partida = $request->get('Partidas');
+        $linea = $request->get('Linea');
+        $sublineas = sublineas::where('partida',$partida)->where('linea',$linea)->get();
+        $sublineaAgt = sublineas::distinct()->get(['partida', 'descpartida']); 
+      //  $sublineaSe = sublineas::where('partida',$partida)->where('linea',$linea)->get();
+
+        $usuario = auth()->user();
+        
+        return view('catalogos.Tablas.TablaSublinea', compact('sublineas','sublineaAgt','linea','partida','usuario'));
+
+
+       // var_dump($sublineas);
+        //dd();
+
     }
-
-    */
-    /*
-    funcion para agregar una linea a la base de datos
-    la variable partida recibe los datos y los envia al modelo 
-		para despues guardarlos en la base de datos.
-		la funcion ya esta en el controlador LineasController
-     */
-    /*
-    public function lineastore(Request $request)
-    {
-        $array = explode (',', $request->input('partida'));
-        //print_r ($array);exit();
-        $linea = new sublineas();
-        $linea->partida = $array[0];
-        $linea->descpartida = $array[1];
-        $linea->linea = $request->input('linea');
-        $linea->desclinea = $request->input('desclinea');
-        $linea->sublinea = $request->input('sublinea');
-        $linea->descsub = $request->input('descsub');
-        $linea->total = $request->input('total');
-
-        $linea->save();
-        return redirect()->route('NuevaLinea');
-
-    } 
-
-    */
-
-    public function showsublineas($partida)
-    {
-        //echo $request->get('Partidas');exit();
-        $sublinea2 = sublineas::where('partida', $partida->get('Partidas'), sublineas::raw('count(*) >= 1'))
-            ->get();
-           // echo $linea;exit();
-        return view('catalogos.Sublineas',compact('sublinea2'));
-    } 
-    //checar si esta en uso x_x
-    public function sublineastore(Request $request)
-    {
-        $array = explode (',', $request->input('partida'));
-        //print_r ($array);exit();
-        $linea = new sublineas();
-        $linea->partida = $array[0];
-        $linea->descpartida = $array[1];
-        $linea->linea = $request->input('linea');
-        $linea->desclinea = $request->input('desclinea');
-        $linea->sublinea = $request->input('sublinea');
-        $linea->descsub = $request->input('descsub');
-        $linea->total = $request->input('total');
-
-        $linea->save();
-        return redirect()->route('NuevaLinea2');
-
-    } 
-
 
 		public function obtenLineas(Request $request)
 		{
 			$partida = $request->partida;
 			$lineas = lineas::where('partida', $partida)->get();      
       return response()->json($lineas);
+        }
+        
+        //Agregar Sublinea -- linea
+        public function obtenLineasAg(Request $request)
+		{
+			$partida = $request->partida;
+			$lineas = lineas::where('partida', $partida)->get();      
+      return response()->json($lineas);
+        }
+        
+        //Agregar Sublinea -- sublinea
+        public function obtenSublineas(Request $request)
+		{
 
+            $partida = $request->partida;
+            $linea = $request->linea;
+            $sublineas = sublineas::where('partida', $partida)->where('linea', $linea)->orderBy('sublinea', 'DESC')->get(); 
+            $numsublinea = $sublineas[0]['sublinea'] + 1;
+			
+            return response()->json($numsublinea);
+        }
+        
+        //ultima linea +1
+		public function obtenMaxLineas(Request $request)
+		{
 
-    }
-
-
-
+			$partida = $request->partida;
+			$lineas = lineas::where('partida', $partida)->get(); 
+			
+      return response()->json($lineas);
+		}
 
 
 
     public function ajaxRequest(){
+			$usuario = auth()->user();
 				$sublinea = sublineas::distinct()->get(['partida', 'descpartida']);				
-        return view('catalogos.Sublineas', compact('sublinea'));
+        return view('catalogos.Sublineas', compact('sublinea','usuario'));
     }
 
 
@@ -227,24 +181,40 @@ class SublineasController extends Controller
     }
 
 
-
     //sublineas controller
 
     public function Agregasublineastore(Request $request)
     {
-        $array = explode (',', $request->input('partida'));
-        //print_r ($array);exit();
-        $linea = new sublineas();
-        $linea->partida = $array[0];
-        $linea->descpartida = $array[1];
-        $linea->linea = $request->input('linea');
-        $linea->desclinea = $request->input('desclinea');
-        $linea->sublinea = $request->input('sublinea');
-        $linea->descsub = $request->input('descsub');
-        $linea->total = $request->input('total');
 
-        $linea->save();
-        return redirect()->route('Tabla-Partida');;
+        $partida = $request->input('partidaA');      
+            $querypartida = sublineas::where('partida', '=', $partida)->get();  
+
+            //Aqui busca la descripcion de la linea con el numero de partida
+            $linea = $request->input('lineaA');      
+            $querylinea = sublineas::where('partida', '=', $partida)
+            ->where('linea', '=', $linea)->get(); 
+
+            //var_dump($linea);
+            //var_dump($querylinea[0]['desclinea']);
+           // dd();
+            $descpartida = $querypartida[0]['descpartida'];
+            $desclinea = $querylinea[0]['desclinea'];
+            $sublinea = new sublineas();
+            $sublinea->partida = $request->input('partidaA');
+            $sublinea->descpartida = $descpartida;
+            $sublinea->desclinea = $desclinea;
+            $sublinea->linea = $request->input('lineaA');
+            $sublinea->sublinea = $request->input('sublinea');
+            $sublinea->descsub = $request->input('descsub');
+            $sublinea->total = $request->input('total');
+
+            $sublinea->save();
+
+            $usuario = auth()->user();
+            Alert::success('Sublínea guardada', 'Registro Exitoso')->autoclose(2500);
+
+            return redirect()->route('lista', compact('usuario'));
+        
 
     } 
     /*funcion para mostrar las partidas 
@@ -252,18 +222,21 @@ class SublineasController extends Controller
      */ 
     public function SublineaNueva()
     {
-        $NuevaSublinea = sublineas::distinct()->get(['partida', 'descpartida']);
-        return view('catalogos.Agregar.AgregaSublineas', compact('NuevaSublinea'));
+        $usuario = auth()->user();
+        $sublinea = sublineas::distinct()->get(['partida', 'descpartida']);
+        return view('catalogos.Agregar.AgregaSublineas', compact('sublinea','usuario'));
 
 /*
         $partida = sublineas::distinct()->get(['partida', 'descpartida']);
         return view('catalogos.Tablas.TablaPartida', compact('partida'));
         */
     }
-    //vista de sublineas
-    public function MostrarSubLineas(Request $request)
+    //vista de sublineas 
+    public function MostrarSubLineas()
     {
+		$usuario = auth()->user();
         $sublinea = sublineas::distinct()->get(['partida', 'descpartida']);
-        return view('catalogos.Sublineas', compact('sublinea'));
+        $sublineaAg = sublineas::distinct()->get(['partida', 'descpartida']);    
+        return view('catalogos.Sublineas', compact('sublinea','sublineaAg','usuario'));
     }
 }

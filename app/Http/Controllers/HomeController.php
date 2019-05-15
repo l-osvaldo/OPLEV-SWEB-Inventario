@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Alert;
 
+
 class HomeController extends Controller
 {
     /**
@@ -27,7 +28,9 @@ class HomeController extends Controller
 
         if($request->user()->authorizeRoles(['user', 'admin']))
         {
-            return view('home');
+            $usuario = auth()->user();
+            //print_r ($usuario);exit();
+            return view('home')->with(compact('usuario'));
         }
 
         return view('login');

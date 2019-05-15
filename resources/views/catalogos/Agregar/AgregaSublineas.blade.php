@@ -6,21 +6,15 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1><b>Sublineas</b></h1>
           </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Sublinea</li>
-            </ol>
-          </div>
+          
         </div>
       </div><!-- /.container-fluid -->
     </section>
     <section class="content"> 
         <div class="col col-8">
             <div class="container-fluid">
-                <form method="POST" action="{{ route('AgregaSublineas') }}">
+                <form method="POST" action="{{ route('AgregarSub') }}">
                     @csrf
                         
             <div class="card card-default">
@@ -34,25 +28,25 @@
                     <div class="col-md-8">
                         <div class="form-group">
                             <label>Partidas</label>
-                            <select id="partida" name="partida" class="form-control select2" style="width: 100%;">
+                            <select id="partidaA" name="partidaA" class="form-control select2 dynamic" style="width: 100%;">
                             <option selected="selected">No. partida</option>
-                            @foreach ($NuevaSublinea as $linea)
-                            <option value="{{ $linea->partida.','.$linea->descpartida }}">{{ $linea->partida }} | {{ $linea->descpartida }}</option>
+                            @foreach ($sublinea as $sublinea)
+                            <option value="{{ $sublinea->partida}}">{{ $sublinea->partida }} | {{ $sublinea->descpartida }}</option>
                             
                             @endforeach
                             </select>
-                            
+                            <label>Seleccioné una Línea</label>                 
+                            <select class="form-control dynamic" id="lineaA" name="lineaA" >
+                                <option value="0" disabled="true" selected="true">Linea</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-6">
-                    <div class="form-group">
-                            <label>Linea</label>
-                            <input type="text" class="form-control" readonly id="linea" name="linea" value="01" placeholder="01">
-                        </div>
+                    
                     <!-- /.form-group -->
                     <div class="form-group">
                             <label>Sublinea</label>
-                            <input type="text" class="form-control" readonly id="sublinea" name="sublinea" value="01" placeholder="01">
+                            <input type="text" class="form-control" readonly id="sublinea" name="sublinea" value="0">
                         </div>
                         <div class="form-group" style="display: none">
                                 <label>Total</label>
@@ -63,11 +57,7 @@
                     <!-- /.col -->
                     <div class="col-md-6">
 
-                        <div class="form-group">
-                            <label>Ddescripción Linea</label>
-                            <input type="text" class="form-control" id="desclinea" name="desclinea" style="text-transform:uppercase;" 
-                                onkeyup="javascript:this.value=this.value.toUpperCase();">
-                        </div>
+                        
                     <!-- /.form-group -->
                     <div class="form-group">
                             <label>Ddescripción Sublinea</label>
@@ -91,10 +81,7 @@
                 <!-- /.row -->
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer">
-                Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
-                the plugin.
-                </div>
+                
             </div>
                 </form>
         </div><!-- /.container-fluid -->

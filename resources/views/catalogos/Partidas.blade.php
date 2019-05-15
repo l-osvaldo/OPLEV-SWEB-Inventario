@@ -74,7 +74,7 @@
                   </div>
                   <div class="form-group">
                       <div class="col-lg-10 col-lg-offset-2">
-                          <button type="submit" style="background-color: #E71096" class="btn btn-secondary">
+                          <button type="submit" id="btn-submit2" style="background-color: #E71096" class="btn btn-secondary">
                               {{ __('Guardar') }}
                           </button>
                           <button type="reset" class="btn btn-danger" onClick="history.go(-1);">Cancelar</button>

@@ -11,17 +11,19 @@ class CatalogosController extends Controller
     public function bienes ()
     {
         $products = articulos::orderBy('id', 'DESC')->paginate();
-        return view('catalogos.Bienes', compact('products'));
+        $usuario = auth()->user();
+        return view('catalogos.Bienes', compact('products','usuario'));
     }
 
     public function bieneseco ()
     {
         $products = articulos::orderBy('id', 'DESC')->paginate();
-        return view('catalogos.Bieneseco', compact('products'));
+        $usuario = auth()->user();
+        return view('catalogos.Bieneseco', compact('products','usuario'));
     }
     public function lista ()
     {
-        return view('catalogos.lista');
+        $usuario = auth()->user();
+        return view('catalogos.lista',compact('usuario'));
     }
-   
 }

@@ -36,43 +36,36 @@ Route::post('/catalogos/GuardarPartidas', 'PartidasController@store')->name('par
 Route::get('/catalogos/NuevaPartida', 'PartidasController@create')->name('partidas-create');
 //Route::get('/catalogos/TablaPartidaShow/{id}', 'PartidasController@show')->name('show-partida');
 //rutas del modal de lineas
+Route::get('/catalogos/AgregaLineas', 'LineasController@store')->name('agregarLinea');
 Route::post('/catalogos/AgregaLineas', 'LineasController@store')->name('agregarLinea');
 Route::get('/catalogos/Lineas', 'LineasController@MostrarLineas')->name('lineas');
 Route::get('/catalogos/NuevaLinea', 'LineasController@create')->name('nuevaLinea');
+Route::get('/catalogos/TablaDeLineas', 'LineasController@show')->name('show-lineas');
 Route::post('/catalogos/TablaDeLineas', 'LineasController@show')->name('show-lineas');
 //Route::get('/catalogos/Lineas', 'SublineasController@create')->name('lineas-create');
 //Route::get('/catalogos/TablaLineasShow/', 'SublineasController@showlineas')->name('show-lineas');
 
 //sublineas
 Route::get('/catalogos/Sublineas', 'SublineasController@MostrarSublineas')->name('sublineas');
+Route::post('/catalogos/TablaSublineas', 'SublineasController@show')->name('show-sublineas');
 //Route::get('/catalogos/AgregaSublineas', 'SublineasController@SubineaNueva')->name('AgregaSublineas');
-Route::post('/catalogos/Sublineas', 'SublineasController@showsublineas')->name('show-sublineas');
 //Route::post('/catalogos/AgregaSubineas', 'SublineasController@sublineastore')->name('NuevaSublinea');
 //Route::get('/catalogos/Sublineas', 'SublineasController@SelectLinea')->name('partida_list');
 
-Route::get('ajaxRequest', 'SublineasController@ajaxRequest');
-Route::get('catalogos/obtenLineas', 'SublineasController@obtenLineas');
 
 
-
-
-
-
-
-
-
-
-//Route::post('ajaxRequest', 'SublineasController@ajaxRequestPost');
-
-
-
-
-
-
-
-/*
-Route::get('ajaxRequest', 'SublineasController@ajaxRequestLineas');
-Route::post('ajaxRequest', 'SublineasController@ajaxRequestLineasPost');*/
 
 Route::post('/catalogos/AgregaSubineasStore', 'SublineasController@Agregasublineastore')->name('AgregarSub');
-Route::get('/catalogos/Agregar/AgregaSubLineas', 'SublineasController@SublineaNueva')->name('AgregaSublineas');
+Route::get('/catalogos/AgregaSubLineas', 'SublineasController@SublineaNueva')->name('AgregaSublineas');
+
+
+
+
+Route::get('ajaxRequest', 'SublineasController@ajaxRequest');
+Route::get('catalogos/obtenLineas', 'SublineasController@obtenLineas');
+//MAx Lineas
+Route::get('catalogos/obtenMaxLineas', 'SublineasController@obtenMaxLineas');
+//sublineas
+Route::get('catalogos/obtenLineasAg', 'SublineasController@obtenLineasAg');
+Route::get('catalogos/obtenSublineas', 'SublineasController@obtenSublineas');
+

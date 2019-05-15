@@ -49,8 +49,8 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
   <!-- Bootstrap time Picker -->
   <link rel="stylesheet" href="{{ asset('plugins/timepicker/bootstrap-timepicker.min.css')}}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
+   <!-- Theme style -->
+   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -70,7 +70,7 @@
       <div class="col-sm-11">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">Inventario</li>
+          <li class="breadcrumb-item active">Catálogos</li>
         </ol>
       </div>
     
@@ -110,7 +110,7 @@
           <img src="{{ asset('dist/img/avatar.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Administrador</a>
+        <a href="#" class="d-block">{{ $usuario->username }}</a>
         </div>
       </div>
 
@@ -120,15 +120,15 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('lista') }}" class="{!! Request::is('lista') ? 'nav-link active' : 'nav-link' !!}">
+            <a href="{{ route('lista') }}" class="{!! Request::is('catalogos/lista','catalogos/TablaDeLineas','catalogos/Lineas','catalogos/TablaPartida','catalogos/Sublineas','catalogos/TablaSublineas') ? 'nav-link active' : 'nav-link' !!}">
               <i class="nav-icon fa fa-pie-chart"></i>
               <p>
-                Catalogos
+                Catálogos
               </p>
             </a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('catalogos') }}" class="{!! Request::is('catalogos') ? 'nav-link active' : 'nav-link' !!}">
+            <a href="{{ route('catalogos') }}" class="{!! Request::is('catalogos/bienes') ? 'nav-link active' : 'nav-link' !!}">
               <i class="nav-icon fa fa-table"></i>
               <p>
                 Bienes OPLE
@@ -136,7 +136,7 @@
             </a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
-              <a href="{{ route('catalogoeco') }}" class="{!! Request::is('catalogoeco') ? 'nav-link active' : 'nav-link' !!}">
+              <a href="{{ route('catalogoeco') }}" class="{!! Request::is('catalogos/bieneseco') ? 'nav-link active' : 'nav-link' !!}">
                 <i class="nav-icon fa fa-table"></i>
                 <p>
                   Bienes ECO
@@ -673,6 +673,579 @@
     barChartOptions.datasetFill = false
     barChart.Bar(barChartData, barChartOptions)
   })
+</script>
+
+<script>
+  $(document).ready(function(){
+    $("#nombre, #apePat").change(function(){
+      var value1 = document.getElementById('nombre').value;
+      var value2 = document.getElementById('apePat').value;
+      var value3 = value1.replace(/\s+/g, '').replace(/[á]/, 'a').replace(/[é]/, 'e').replace(/[í]/, 'i').replace(/[ó]/, 'o').replace(/[ú]/, 'u');
+      var value4 = value2.replace(/\s+/g, '').replace(/[á]/, 'a').replace(/[é]/, 'e').replace(/[í]/, 'i').replace(/[ó]/, 'o').replace(/[ú]/, 'u');
+      var value5 = value3 + "." + value4;
+      var value6 = value5.toLowerCase();
+      validarNombreOple(value6);
+      document.getElementById('usuario').value = value6;
+  
+    })
+  });
+  </script>
+  <script>
+  $(document).ready(function(){
+    $("#nombreA, #apePatA").change(function(){
+      var value1 = document.getElementById('nombreA').value;
+      var value2 = document.getElementById('apePatA').value;
+      var value3 = value1.replace(/\s+/g, '').replace(/[á]/, 'a').replace(/[é]/, 'e').replace(/[í]/, 'i').replace(/[ó]/, 'o').replace(/[ú]/, 'u');
+      var value4 = value2.replace(/\s+/g, '').replace(/[á]/, 'a').replace(/[é]/, 'e').replace(/[í]/, 'i').replace(/[ó]/, 'o').replace(/[ú]/, 'u');
+      var value5 = value3 + "." + value4;
+      var value6 = value5.toLowerCase();
+      validarNombre(value6);
+      document.getElementById('usuarioA').value = value6;
+    })
+  });
+  </script>
+  <script>
+  $(document).ready(function(){
+    $("#selectareaA").change(function(){
+      var value1 = $("#selectareaA").val();
+      var text = $("#selectareaA :selected").text();
+      document.getElementById('idOrgA').value = value1;
+      document.getElementById('nameOrgA').value = text;
+  
+    })
+  });
+  </script>
+  <script>
+  $(document).ready(function(){
+    $("#selectareaO").change(function(){
+      var value1 = $("#selectareaO").val();
+      var text = $("#selectareaO :selected").text();
+      document.getElementById('idOrgO').value = value1;
+      document.getElementById('nameOrgO').value = text;
+  
+    })
+  });
+  </script>
+  <script>
+    $(document).on("click", "#passwordGenerate", function(){
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < 8; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+      document.getElementById("contPass").value = result;
+      var valor = $('#contPass').val();
+      var error = $('#contPass').attr("data-errorDos");
+      var id = $('#contPass').attr("id");
+      var tipo = $('#contPass').attr("data-myTypeDos");
+      datosValidosDos(valor, error, id, tipo);
+    });
+  </script>
+  <script>
+    $(document).on("click", "#passwordGenerateA", function(){
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < 8; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+      document.getElementById("contPassA").value = result;
+      var valor = $('#contPassA').val();
+      var error = $('#contPassA').attr("data-error");
+      var id = $('#contPassA').attr("id");
+      var tipo = $('#contPassA').attr("data-myType");
+      datosValidos(valor, error, id, tipo);
+    });
+  
+    $(document).on("click", "#passwordGenerateEdit", function(){
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < 8; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+      document.getElementById("contPassEdit").value = result;
+    });
+  </script>
+  
+  <script>
+   $(document).on("click", "#passCopi", function(){
+     var copyText = document.getElementById("contPass");
+     copyText.select();
+     document.execCommand("copy");
+     swal({
+             type: "info",
+             title: "Password",
+             text: 'Contraseña copiada: '+ copyText.value,
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar"
+          });
+    });
+  </script>
+  <script>
+   $(document).on("click", "#passCopiA", function(){
+     var copyText = document.getElementById("contPassA");
+     copyText.select();
+     document.execCommand("copy");
+     swal({
+             type: "info",
+             title: "Password",
+             text: 'Contraseña copiada: '+ copyText.value,
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar"
+          });
+    });
+  
+   $(document).on("click", "#passCopiEdit", function(){
+     var copyText = document.getElementById("contPassEdit");
+     copyText.select();
+     document.execCommand("copy");
+     swal({
+             type: "info",
+             title: "Password",
+             text: 'Contraseña copiada: '+ copyText.value,
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar"
+          });
+    });
+  </script>
+  <script>
+   $(document).on("click", "#showPass", function(){
+     var x = document.getElementById("contPass");
+      if (x.type === "password") {
+      x.type = "text";
+      } else {
+      x.type = "password";
+      }   
+      });
+  </script>
+  <script>
+   $(document).on("click", "#showPassA", function(){
+     var x = document.getElementById("contPassA");
+      if (x.type === "password") {
+      x.type = "text";
+      } else {
+      x.type = "password";
+      }   
+      });
+  
+   $(document).on("click", "#showPassEdit", function(){
+     var x = document.getElementById("contPassEdit");
+      if (x.type === "password") {
+      x.type = "text";
+      } else {
+      x.type = "password";
+      }   
+      });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<script>
+  $('#btn-submit').on('click',function(e){
+     e.preventDefault();
+     var form = $(this).parents('form');
+     swal({
+         title: "Registro de Líneas",
+         text: "¿Desea continuar?",
+         type: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#0080FF",
+         confirmButtonText: "Sí",
+         closeOnConfirm: false
+     }, function(isConfirm){
+         if (isConfirm) form.submit();
+     });
+ });
+ </script>
+
+<script>
+    $('#btn-submit3').on('click',function(e){
+       e.preventDefault();
+       var form = $(this).parents('form');
+       swal({
+           title: "Registro de Líneas",
+           text: "¿Desea continuar?",
+           type: "warning",
+           showCancelButton: true,
+           confirmButtonColor: "#0080FF",
+           confirmButtonText: "Sí",
+           closeOnConfirm: false
+       }, function(isConfirm){
+           if (isConfirm) form.submit();
+       });
+   });
+   </script>
+
+   <script>
+   $( ".validateData" ).keyup(function() {
+       var valor = $(this).val();
+       var error = $(this).attr("data-error");
+       var id = $(this).attr("id");
+       var tipo = $(this).attr("data-myType");
+       datosValidos(valor, error, id, tipo);
+   });
+   
+   $( ".validateData" ).change(function() {
+       var valor = $(this).val();
+       var error = $(this).attr("data-error");
+       var id = $(this).attr("id");
+       var tipo = $(this).attr("data-myType");
+       datosValidos(valor, error, id, tipo);
+   });
+   
+   $( ".validateDataDos" ).keyup(function() {
+       var valor = $(this).val();
+       var error = $(this).attr("data-errorDos");
+       var id = $(this).attr("id");
+       var tipo = $(this).attr("data-myTypeDos");
+       datosValidosDos(valor, error, id, tipo);
+   });
+   
+   $( ".validateDataDos" ).change(function() {
+       var valor = $(this).val();
+       var error = $(this).attr("data-errorDos");
+       var id = $(this).attr("id");
+       var tipo = $(this).attr("data-myTypeDos");
+       datosValidosDos(valor, error, id, tipo);
+   });
+
+   $( ".validateDataLi" ).keyup(function() {
+       var valor = $(this).val();
+       var error = $(this).attr("data-errorLi");
+       var id = $(this).attr("id");
+       var tipo = $(this).attr("data-myTypeLi");
+       datosValidosLi(valor, error, id, tipo);
+   });
+   
+   $( ".validateDataLi" ).change(function() {
+       var valor = $(this).val();
+       var error = $(this).attr("data-errorLi");
+       var id = $(this).attr("id");
+       var tipo = $(this).attr("data-myTypeLi");
+       datosValidosLi(valor, error, id, tipo);
+   });
+   
+   function datosValidos(valor, error, id, tipo)
+   {
+       switch (tipo) {
+         case 'text':
+           if (valor.match(/^[a-zA-Z0-9\s]*$/) && valor!=""){
+             $('.error'+ error).text("");
+             $('#'+id).attr("data-validacion", '0');
+             $('#'+id).removeClass('inputDanger');
+             $('#'+id).addClass('inputSuccess');
+           }else{
+             $('.error'+ error).text("Este campo no puede ir vacío o llevar caracteres especiales.");
+             $('#'+id).attr("data-validacion", '1');
+             $('#'+id).removeClass('inputSuccess');
+             $('#'+id).addClass('inputDanger');
+           }
+           break;
+         case 'int':
+           if (valor.match(/^[0-9]*$/) && valor!=""){
+             $('.error'+ error).text("");
+             $('#'+id).attr("data-validacion", '0');
+             $('#'+id).removeClass('inputDanger');
+             $('#'+id).addClass('inputSuccess');
+         }else{
+          $('.error'+ error).text("Solo numeros.");
+             $('#'+id).attr("data-validacion", '1');
+             $('#'+id).removeClass('inputSuccess');
+             $('#'+id).addClass('inputDanger'); 
+         }
+         break;
+         case 'password':
+           if (valor!=""){
+           $('.error'+ error).text("");
+           $('#'+id).attr("data-validacion", '0');
+           $('#'+id).removeClass('inputDanger');
+           $('#'+id).addClass('inputSuccess');
+         }else{
+           $('.error'+ error).text("La contraseña no puede ir vacía.");
+           $('#'+id).attr("data-validacion", '1');
+           $('#'+id).removeClass('inputSuccess');
+           $('#'+id).addClass('inputDanger'); 
+         }
+         break;
+         case 'select':
+           if (valor!=""){
+           $('.error'+ error).text("");
+           $('#'+id).attr("data-validacion", '0');
+           $('#'+id).removeClass('inputDanger');
+           $('#'+id).addClass('inputSuccess');
+         }else{
+           $('.error'+ error).text("Seleccione una opción.");
+           $('#'+id).attr("data-validacion", '1');
+           $('#'+id).removeClass('inputSuccess');
+           $('#'+id).addClass('inputDanger'); 
+         }
+         break;
+         default:
+         console.log('default');
+       }
+       enablebtn();
+   }
+   
+   function datosValidosDos(valor, error, id, tipo)
+   {
+       switch (tipo) {
+         case 'text':
+           if (valor.match(/^[a-zA-Z0-9\s]*$/) && valor!=""){
+             $('.error'+ error).text("");
+             $('#'+id).attr("data-validacionDos", '0');
+             $('#'+id).removeClass('inputDanger');
+             $('#'+id).addClass('inputSuccess');
+           }else{
+             $('.error'+ error).text("Este campo no puede ir vacío o llevar caracteres especiales.");
+             $('#'+id).attr("data-validacionDos", '1');
+             $('#'+id).removeClass('inputSuccess');
+             $('#'+id).addClass('inputDanger');
+           }
+           break;
+         case 'int':
+           if (valor.match(/^[0-9]*$/) && valor!=""){
+           $('.error'+ error).text("");
+           $('#'+id).attr("data-validacionDos", '0');
+           $('#'+id).removeClass('inputDanger');
+           $('#'+id).addClass('inputSuccess');
+         }else{
+           $('.error'+ error).text("Ingrese un e-mail válido.");
+           $('#'+id).attr("data-validacionDos", '1');
+           $('#'+id).removeClass('inputSuccess');
+           $('#'+id).addClass('inputDanger'); 
+         }
+         break;
+         case 'password':
+           if (valor!=""){
+           $('.error'+ error).text("");
+           $('#'+id).attr("data-validacionDos", '0');
+           $('#'+id).removeClass('inputDanger');
+           $('#'+id).addClass('inputSuccess');
+         }else{
+           $('.error'+ error).text("La contraseña no puede ir vacía.");
+           $('#'+id).attr("data-validacionDos", '1');
+           $('#'+id).removeClass('inputSuccess');
+           $('#'+id).addClass('inputDanger'); 
+         }
+         break;
+         case 'select':
+           if (valor!=""){
+           $('.error'+ error).text("");
+           $('#'+id).attr("data-validacionDos", '0');
+           $('#'+id).removeClass('inputDanger');
+           $('#'+id).addClass('inputSuccess');
+         }else{
+           $('.error'+ error).text("Seleccione una opción.");
+           $('#'+id).attr("data-validacionDos", '1');
+           $('#'+id).removeClass('inputSuccess');
+           $('#'+id).addClass('inputDanger'); 
+         }
+         break;
+         default:
+         console.log('default');
+       }
+       enablebtnDos();
+   }
+
+
+   
+
+
+   function datosValidosLi(valor, error, id, tipo)
+   {
+       switch (tipo) {
+         case 'text':
+           if (valor.match(/^[a-zA-Z0-9\s]*$/) && valor!=""){
+             $('.error'+ error).text("");
+             $('#'+id).attr("data-validacionLi", '0');
+             $('#'+id).removeClass('inputDanger');
+             $('#'+id).addClass('inputSuccess');
+           }else{
+             $('.error'+ error).text("Este campo no puede ir vacío o llevar caracteres especiales.");
+             $('#'+id).attr("data-validacionLi", '1');
+             $('#'+id).removeClass('inputSuccess');
+             $('#'+id).addClass('inputDanger');
+           }
+           break;
+         case 'int':
+           if (valor.match(/^[0-9]*$/) && valor!=""){
+           $('.error'+ error).text("");
+           $('#'+id).attr("data-validacionLi", '0');
+           $('#'+id).removeClass('inputDanger');
+           $('#'+id).addClass('inputSuccess');
+         }else{
+           $('.error'+ error).text("Ingrese un e-mail válido.");
+           $('#'+id).attr("data-validacionLi", '1');
+           $('#'+id).removeClass('inputSuccess');
+           $('#'+id).addClass('inputDanger'); 
+         }
+         break;
+         case 'password':
+           if (valor!=""){
+           $('.error'+ error).text("");
+           $('#'+id).attr("data-validacionLi", '0');
+           $('#'+id).removeClass('inputDanger');
+           $('#'+id).addClass('inputSuccess');
+         }else{
+           $('.error'+ error).text("La contraseña no puede ir vacía.");
+           $('#'+id).attr("data-validacionLi", '1');
+           $('#'+id).removeClass('inputSuccess');
+           $('#'+id).addClass('inputDanger'); 
+         }
+         break;
+         case 'select':
+           if (valor!=""){
+           $('.error'+ error).text("");
+           $('#'+id).attr("data-validacionLi", '0');
+           $('#'+id).removeClass('inputDanger');
+           $('#'+id).addClass('inputSuccess');
+         }else{
+           $('.error'+ error).text("Seleccione una opción.");
+           $('#'+id).attr("data-validacionLi", '1');
+           $('#'+id).removeClass('inputSuccess');
+           $('#'+id).addClass('inputDanger'); 
+         }
+         break;
+         default:
+         console.log('default');
+       }
+       enablebtnLi();
+   }
+
+
+
+
+
+   
+   function enablebtn()
+   {
+     var array = [];
+     var claserror = $('.validateData');
+   
+     for (var i = 0; i < claserror.length; i++) {
+       array.push(claserror[i].getAttribute('data-validacion'));
+     }
+   
+     if(array.includes('1'))
+     { 
+       $('#btn-submit2').prop("disabled", true);
+     }
+     else
+     {
+       $('#btn-submit2').prop("disabled", false);
+     }
+   
+       console.log(array);
+   }
+   
+   function enablebtnDos()
+   {
+     var array = [];
+     var claserror = $('.validateDataDos');
+   
+     for (var i = 0; i < claserror.length; i++) {
+       array.push(claserror[i].getAttribute('data-validacionDos'));
+     }
+   
+     if(array.includes('1'))
+     { 
+       $('#btn-submit').prop("disabled", true);
+     }
+     else
+     {
+       $('#btn-submit').prop("disabled", false);
+     }
+   
+       console.log(array);
+   }
+
+   function enablebtnLi()
+   {
+     var array = [];
+     var claserror = $('.validateDataLi');
+   
+     for (var i = 0; i < claserror.length; i++) {
+       array.push(claserror[i].getAttribute('data-validacionLi'));
+     }
+   
+     if(array.includes('1'))
+     { 
+       $('#btn-submit3').prop("disabled", true);
+     }
+     else
+     {
+       $('#btn-submit3').prop("disabled", false);
+     }
+   
+       console.log(array);
+   }
+   
+   </script>
+
+<script>
+$('#btn-submit2').on('click',function(e){
+    e.preventDefault();
+    var form = $(this).parents('form');
+    swal({
+        title: "Registro de Partidas",
+        text: "¿Desea continuar?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#0080FF",
+        confirmButtonText: "Sí",
+        closeOnConfirm: false
+    }, function(isConfirm){
+        if (isConfirm) form.submit();
+        
+    });
+});
+
+
+
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+ $('#editModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget);
+  var area = button.data('area');
+  var cargo = button.data('cargo');
+  var description = button.data('rol');
+  var rolid = button.data('rolId');
+  var nombre = button.data('nombre');
+  var ap = button.data('ap');
+  var am = button.data('am');
+  var email = button.data('email');
+  var usuario = button.data('usuario');
+  var id = button.data("id");
+
+  var modal = $(this)
+  modal.find('#editNombre').val(nombre);
+  modal.find('#editAp').val(ap);
+  modal.find('#editAm').val(am);
+  modal.find('#editEmail').val(email);
+  modal.find('#actualizarUser').val(id);
+})
+
+
+
+ $('#passwordModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget);
+  var id = button.data("id");
+  var modal = $(this)
+  modal.find('#editPassword').val(id);
+})
+
 </script>
 <!-- advanced elements -->
 <script>
