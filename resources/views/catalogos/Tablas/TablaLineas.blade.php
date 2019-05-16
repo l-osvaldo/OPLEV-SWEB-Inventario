@@ -1,15 +1,17 @@
-@extends('layouts.admin')
+<!--
+extends('layouts.admin')
 
-@section('content')
-
+section('content')
+-->
 <!-- Content Header (Page header) -->
+<!--
 <section class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
                 <h1>
                   <b>Listado de Partidas</b>
-                  <a href="{{ route('partidas-create') }}" class="btn btn-primary float-right"> Agregar</a>
+                  <a href=" route('partidas-create') " class="btn btn-primary float-right"> Agregar</a>
                 </h1>
             </div>
             <div class="col-sm-6">
@@ -19,7 +21,8 @@
               </ol>
             </div>
           </div>
-        </div><!-- /.container-fluid -->
+        </div> --> <!-- /.container-fluid -->
+        <!--
       </section>
 
       <section class="content">
@@ -42,14 +45,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            @foreach ($linea as $lineas)
+                                            foreach ($linea as $lineas)
                                         <tr>
-                                            <th>{{ $lineas->partidas->partida }}</th>
-                                            <th>{{ $lineas->partidas->descpartida }}</th>
-                                            <th>{{ $lineas->linea }}</th>
-                                            <th>{{ $lineas->desclinea }}</th>
+                                            <th> $lineas->partidas->partida }}</th>
+                                            <th> $lineas->partidas->descpartida }}</th>
+                                            <th> $lineas->linea }}</th>
+                                            <th> $lineas->desclinea }}</th>
                                         </tr>
-                                        @endforeach
+                                        endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -60,4 +63,5 @@
     
         </section>
     
-@endsection
+endsection
+-->

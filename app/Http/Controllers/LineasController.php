@@ -58,27 +58,27 @@ class LineasController extends Controller
     en la vista TablaPartida
     */
     public function index()
-    {
-        $linea = partidas::join('lineas', 'partidas.partida','=','lineas.partida')
-          //  ->join('orders', 'users.id', '=', 'orders.user_id')
-            ->select('partidas.partida','descpartida','linea','desclinea')
-            ->get();
-            $usuario = auth()->user();
-            return view('catalogos.Tablas.Tablalineas', compact('linea','usuario'));
+      {
+          $linea = partidas::join('lineas', 'partidas.partida','=','lineas.partida')
+            //  ->join('orders', 'users.id', '=', 'orders.user_id')
+              ->select('partidas.partida','descpartida','linea','desclinea')
+              ->get();
+              $usuario = auth()->user();
+              return view('catalogos.Tablas.Tablalineas', compact('linea','usuario'));
 
-    }
+      }
 
     /*
     funcion para llamar a la venta de agregar lineas 
      */
     public function create()
-    {
-      
-      $linea = lineas::distinct()->get(['partida', 'descpartida']);
-      $usuario = auth()->user();
-      return view('catalogos.Agregar.AgregaLineas', compact('linea','usuario'));
-       // return view('catalogos.Partidas');
-    }
+      {
+        
+        $linea = lineas::distinct()->get(['partida', 'descpartida']);
+        $usuario = auth()->user();
+        return view('catalogos.Agregar.AgregaLineas', compact('linea','usuario'));
+        // return view('catalogos.Partidas');
+      }
 
     
     /*
@@ -88,63 +88,63 @@ class LineasController extends Controller
      */
     
     public function store(Request $request)
-    {
-      //Aqui busca la descripcion de la partida con el numero de partida
-      $partida = $request->input('partida');      
-      $querypartida = partidas::where('partida', '=', $partida)->get();      
+      {
+        //Aqui busca la descripcion de la partida con el numero de partida
+        $partida = $request->input('partida');      
+        $querypartida = partidas::where('partida', '=', $partida)->get();      
 
-      //var_dump($partida);
-      //var_dump($querypartida[0]['descpartida']);
-      //dd();
-      $descpartida = $querypartida[0]['descpartida'];
+        //var_dump($partida);
+        //var_dump($querypartida[0]['descpartida']);
+        //dd();
+        $descpartida = $querypartida[0]['descpartida'];
 
-      $linea = new lineas();      
-      $linea->partida = $request->input('partida');
-      $linea->descpartida = $descpartida;
-      $linea->linea = $request->input('LineaMax');
-      $linea->desclinea = $request->input('desclinea'); 
-    
-      $sublinea = new sublineas();
-      $sublinea->partida = $request->input('partida');
-      $sublinea->descpartida = $descpartida;
-      $sublinea->linea = $request->input('LineaMax');
-      $sublinea->desclinea = $request->input('desclinea');
-      $sublinea->sublinea = $request->input('sublinea');
-      $sublinea->descsub = $request->input('descsub');
-      $sublinea->total = $request->input('total');
+        $linea = new lineas();      
+        $linea->partida = $request->input('partida');
+        $linea->descpartida = $descpartida;
+        $linea->linea = $request->input('LineaMax');
+        $linea->desclinea = $request->input('desclinea'); 
+      
+        $sublinea = new sublineas();
+        $sublinea->partida = $request->input('partida');
+        $sublinea->descpartida = $descpartida;
+        $sublinea->linea = $request->input('LineaMax');
+        $sublinea->desclinea = $request->input('desclinea');
+        $sublinea->sublinea = $request->input('sublinea');
+        $sublinea->descsub = $request->input('descsub');
+        $sublinea->total = $request->input('total');
 
-      $linea->save();
-      $sublinea->save();
-      Alert::success('Línea guardada', 'Registro Exitoso')->autoclose(2500);
-      return redirect()->route('show-lineas');
+        $linea->save();
+        $sublinea->save();
+        Alert::success('Línea guardada', 'Registro Exitoso')->autoclose(2500);
+        return redirect()->route('show-lineas');
 
-    }
+      }
     
     public function show(Request $request)
-    {
-      
-      $lineaT = partidas::distinct()->get(['partida', 'descpartida']);
-      $lineas = partidas::distinct()->get(['partida', 'descpartida']);
-      $linea8 = partidas::distinct()->get(['partida', 'descpartida']);
-        $linea3 = lineas::where('partida', $request->get('Partidas'), lineas::raw('count(*) >= 1'))
-          ->get();
-          $usuario = auth()->user();
-          // echo $lineas;exit();
-          
-        return view('catalogos.Tablas.TablaLineasShow',compact('linea3','linea8','lineaT','lineas','usuario')); 
-    }
+      {
+        
+        $lineaT = partidas::distinct()->get(['partida', 'descpartida']);
+        $lineas = partidas::distinct()->get(['partida', 'descpartida']);
+        $linea8 = partidas::distinct()->get(['partida', 'descpartida']);
+          $linea3 = lineas::where('partida', $request->get('Partidas'), lineas::raw('count(*) >= 1'))
+            ->get();
+            $usuario = auth()->user();
+            // echo $lineas;exit();
+            
+          return view('catalogos.Tablas.TablaLineasShow',compact('linea3','linea8','lineaT','lineas','usuario')); 
+      }
 
     public function MostrarLineas()
-    { 
-        $usuario = auth()->user();
-        $linea = partidas::distinct()->get(['partida', 'descpartida']);
-        $linea2 = partidas::distinct()->get(['partida', 'descpartida']);
-        $linea8 = partidas::distinct()->get(['partida', 'descpartida']);
-        $lineaT = partidas::distinct()->get(['partida', 'descpartida']);
+      { 
+          $usuario = auth()->user();
+          $linea = partidas::distinct()->get(['partida', 'descpartida']);
+          $linea2 = partidas::distinct()->get(['partida', 'descpartida']);
+          $linea8 = partidas::distinct()->get(['partida', 'descpartida']);
+          $lineaT = partidas::distinct()->get(['partida', 'descpartida']);
 
-        return view('catalogos.Lineas', compact('linea','usuario','lineaT','linea2','linea8'));
-        
-    }
+          return view('catalogos.Lineas', compact('linea','usuario','lineaT','linea2','linea8'));
+          
+      }
 
 
 }
