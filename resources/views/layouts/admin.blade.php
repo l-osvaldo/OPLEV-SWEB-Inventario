@@ -92,7 +92,7 @@
             </a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('catalogos') }}" class="{!! Request::is('catalogos/bienes') ? 'nav-link active' : 'nav-link' !!}">
+            <a href="{{ route('catalogos') }}" class="{!! Request::is('catalogos/bienes','home') ? 'nav-link active' : 'nav-link' !!}">
               <i class="nav-icon fa fa-table"></i>
               <p>
                 Bienes OPLE
@@ -135,9 +135,15 @@
 
     @yield('content');
 
-  </div><!-- /.container-fluid -->
+  </div>
+  <footer class="main-footer">
+      @include('partials.footer')
+  </footer>
+  
+  <!-- /.container-fluid -->
   <!-- /.content-wrapper -->
   <!--
+    
   <footer class="main-footer">
     <strong>Copyright &copy; 2014-2018 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.

@@ -30,7 +30,7 @@ class HomeController extends Controller
         {
             $usuario = auth()->user();
             //print_r ($usuario);exit();
-            return view('home')->with(compact('usuario'));
+            return view('catalogos/bienes')->with(compact('usuario')); 
         }
 
         return view('login');

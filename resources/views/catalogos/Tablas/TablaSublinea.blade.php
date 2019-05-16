@@ -1,23 +1,29 @@
 @extends('layouts.admin')
- <!-- Navbar -->
-<nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
-        <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-      	<a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a> 
-      </li>
-    </ul>
-    <div class="col-sm-11">
-        <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">Sublineas</li>
-        </ol>
-    </div>
-        
-</nav>
-      <!-- /.navbar -->
-@section('content')
 
+@section('content')
+ <!-- Navbar -->
+ <nav class=" navbar navbar-expand bg-white navbar-light border-bottom">
+    <!-- Left navbar links -->
+<ul class="navbar-nav">
+  <li class="nav-item">
+    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a> 
+  </li>
+</ul>
+<div class="col-sm-8">
+    <ol class="breadcrumb float-sm-left">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active">Sublineas</li>
+    </ol>
+</div>
+
+<ul class="navbar-nav ml-auto float-sm-right">   
+    <li class="nav-item">
+      <a class="nav-link" href="#"><h5 style="color:#EA0D94"><b>Dirección Ejecutiva de Administración</b></h5></a>
+    </li>
+</ul>
+    
+</nav>
+  <!-- /.navbar -->
 
 @include('sweet::alert')
 <div class="card">
@@ -71,7 +77,7 @@
             <div class="card-header">
                 <h3 class="card-title">Catálogo de Sublíneas</h3> 
             </div>
-              <div class="car-body">
+              <div class="card-body">
                 <table id="example1" class="table table-bordered table-hover dt-responsive nowrap" style="width:100%">
                   <thead>
                     <tr>
