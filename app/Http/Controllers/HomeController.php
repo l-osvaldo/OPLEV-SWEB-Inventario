@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Alert;
+use Auth;
 
 
 class HomeController extends Controller
@@ -23,6 +24,21 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function index2()
+    {
+        $usuario = auth()->user();
+
+      if (Auth::check())
+      {
+        return view('catalogos.bienes', compact('usuario'));   
+    }
+        else
+        {
+          return redirect()->route('auth.login');
+        }
+      }
+
+
     public function index(Request $request)
     {
 

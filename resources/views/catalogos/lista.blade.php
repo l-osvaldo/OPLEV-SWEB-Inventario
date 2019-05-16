@@ -32,7 +32,7 @@
     </div>
   </div><!-- /.container-fluid -->
 </section>
-<section class="content"> 
+<section class="content "> 
   <div class="col col-8">
     <div class="container-fluid">
       <div class="card card-default">
@@ -71,7 +71,8 @@
                     Areas
                   </p>
                 </a>
-                <hr>     
+                <hr> 
+                    
               </div>
             </div> 
           </div>

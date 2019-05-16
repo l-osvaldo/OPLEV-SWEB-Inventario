@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+
+Route::get('/', 'HomeController@index2')->name('index');
+
+
 Auth::routes();
 
 Route::get('/SweetAlert/{alertType?}', ['as'=>'SweetAlert','uses'=>'HomeController@sweet']);

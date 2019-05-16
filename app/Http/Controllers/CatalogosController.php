@@ -26,4 +26,5 @@ class CatalogosController extends Controller
         $usuario = auth()->user();
         return view('catalogos.lista',compact('usuario'));
     }
+    
 }
