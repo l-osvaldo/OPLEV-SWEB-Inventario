@@ -122,6 +122,8 @@ class LineasController extends Controller
     
     public function show(Request $request)
     {
+      
+      $lineaT = partidas::distinct()->get(['partida', 'descpartida']);
       $lineas = partidas::distinct()->get(['partida', 'descpartida']);
       $linea8 = partidas::distinct()->get(['partida', 'descpartida']);
         $linea3 = lineas::where('partida', $request->get('Partidas'), lineas::raw('count(*) >= 1'))
@@ -129,17 +131,18 @@ class LineasController extends Controller
           $usuario = auth()->user();
           // echo $lineas;exit();
           
-        return view('catalogos.Tablas.TablaLineasShow',compact('linea3','linea8','lineas','usuario')); 
+        return view('catalogos.Tablas.TablaLineasShow',compact('linea3','linea8','lineaT','lineas','usuario')); 
     }
 
     public function MostrarLineas()
-    {
+    { 
         $usuario = auth()->user();
         $linea = partidas::distinct()->get(['partida', 'descpartida']);
         $linea2 = partidas::distinct()->get(['partida', 'descpartida']);
         $linea8 = partidas::distinct()->get(['partida', 'descpartida']);
+        $lineaT = partidas::distinct()->get(['partida', 'descpartida']);
 
-        return view('catalogos.Lineas', compact('linea','usuario','linea2','linea8'));
+        return view('catalogos.Lineas', compact('linea','usuario','lineaT','linea2','linea8'));
         
     }
 

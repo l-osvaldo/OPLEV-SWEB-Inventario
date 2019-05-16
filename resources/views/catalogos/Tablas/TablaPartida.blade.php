@@ -1,4 +1,23 @@
 @extends('layouts.admin')
+ <!-- Navbar -->
+ <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+       <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a> 
+      </li>
+     
+    </ul>
+
+      <div class="col-sm-11">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Partidas</li>
+        </ol>
+      </div>
+    
+  </nav>
+  <!-- /.navbar -->
 
 @section('content')
 

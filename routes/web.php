@@ -48,6 +48,7 @@ Route::post('/catalogos/TablaDeLineas', 'LineasController@show')->name('show-lin
 //sublineas
 Route::get('/catalogos/Sublineas', 'SublineasController@MostrarSublineas')->name('sublineas');
 Route::post('/catalogos/TablaSublineas', 'SublineasController@show')->name('show-sublineas');
+Route::get('/catalogos/TablaSublineas', 'SublineasController@show')->name('show-sublineas');
 //Route::get('/catalogos/AgregaSublineas', 'SublineasController@SubineaNueva')->name('AgregaSublineas');
 //Route::post('/catalogos/AgregaSubineas', 'SublineasController@sublineastore')->name('NuevaSublinea');
 //Route::get('/catalogos/Sublineas', 'SublineasController@SelectLinea')->name('partida_list');

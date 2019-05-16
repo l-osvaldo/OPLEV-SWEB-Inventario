@@ -1,10 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
-
 use App\sublineas;
 use APP\partidas;
 use App\lineas;
@@ -63,16 +61,17 @@ class SublineasController extends Controller
 
     public function show(Request $request)
     {
-
+      
         $partida = $request->get('Partidas');
         $linea = $request->get('Linea');
         $sublineas = sublineas::where('partida',$partida)->where('linea',$linea)->get();
         $sublineaAgt = sublineas::distinct()->get(['partida', 'descpartida']); 
-      //  $sublineaSe = sublineas::where('partida',$partida)->where('linea',$linea)->get();
+       // $sublineaSe = sublineas::where('partida',$partida)->where('linea',$linea)->get();
+        $sublineaSe = sublineas::distinct()->get(['partida', 'descpartida']);
 
         $usuario = auth()->user();
         
-        return view('catalogos.Tablas.TablaSublinea', compact('sublineas','sublineaAgt','linea','partida','usuario'));
+        return view('catalogos.Tablas.TablaSublinea', compact('sublineas','sublineaSe','sublineaAgt','linea','partida','usuario'));
 
 
        // var_dump($sublineas);
@@ -139,28 +138,6 @@ class SublineasController extends Controller
 
     }
 		
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     //ajax para crear lineas
     public function ajaxRequestLineas(){
@@ -226,17 +203,14 @@ class SublineasController extends Controller
         $sublinea = sublineas::distinct()->get(['partida', 'descpartida']);
         return view('catalogos.Agregar.AgregaSublineas', compact('sublinea','usuario'));
 
-/*
-        $partida = sublineas::distinct()->get(['partida', 'descpartida']);
-        return view('catalogos.Tablas.TablaPartida', compact('partida'));
-        */
     }
     //vista de sublineas 
     public function MostrarSubLineas()
     {
 		$usuario = auth()->user();
         $sublinea = sublineas::distinct()->get(['partida', 'descpartida']);
-        $sublineaAg = sublineas::distinct()->get(['partida', 'descpartida']);    
-        return view('catalogos.Sublineas', compact('sublinea','sublineaAg','usuario'));
+        $sublineaAg = sublineas::distinct()->get(['partida', 'descpartida']);   
+        $sublineasTb = sublineas::distinct()->get(['partida', 'descpartida']);    
+        return view('catalogos.Sublineas', compact('sublinea','sublineasTb','sublineaAg','usuario'));
     }
 }
