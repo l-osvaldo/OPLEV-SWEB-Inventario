@@ -15,8 +15,7 @@
             <div class="p-20 content-bottom">
               <div class="content-top-agile"> 
                 <h2>
-                <strong>O</strong>ficialía de <strong>P</strong>artes <br>
-                <strong>S</strong>istema de <strong>C</strong>ontrol de <strong>R</strong>ecepción de <strong>C</strong>orrespondencia
+                <strong>S</strong>istema  <strong>I</strong>ntegral de <strong>A</strong>dministración
                 <br /><br />
                 <h3>Bienvenido(a)</h3>
                 
