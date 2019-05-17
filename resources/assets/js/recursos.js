@@ -104,5 +104,13 @@ $("#partidaA").change(function()
       }); 
     });	
 
+    function el(el) {
+      return document.getElementById(el);
+        }
+  
+    el("depto").addEventListener("input",function() {
+        el("editBtn").disabled = Boolean(this.value.length<=0);
+      });
+
 });
 

@@ -49,6 +49,7 @@
                 <tr>
                   <td>{{ $partida->partida }}</td>
                   <td>{{ $partida->descpartida }}</td>
+                  
                 </tr>
                   @endforeach
               </tbody>

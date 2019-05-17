@@ -84,7 +84,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('lista') }}" class="{!! Request::is('catalogos/lista','catalogos/TablaDeLineas','catalogos/Lineas','catalogos/TablaPartida','catalogos/Sublineas','catalogos/TablaSublineas') ? 'nav-link active' : 'nav-link' !!}">
+            <a href="{{ route('lista') }}" class="{!! Request::is('catalogos/lista','catalogos/TablaDeLineas','catalogos/Lineas','catalogos/TablaPartida','catalogos/Sublineas','catalogos/TablaSublineas','catalogos/TablaAreas') ? 'nav-link active' : 'nav-link' !!}">
               <i class="nav-icon fa fa-pie-chart"></i>
               <p>
                 Catálogos
@@ -92,7 +92,7 @@
             </a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('catalogos') }}" class="{!! Request::is('catalogos/bienes','home') ? 'nav-link active' : 'nav-link' !!}">
+            <a href="{{ route('catalogos') }}" class="{!! Request::is('catalogos/bienes','home','/') ? 'nav-link active' : 'nav-link' !!}">
               <i class="nav-icon fa fa-table"></i>
               <p>
                 Bienes OPLE
@@ -133,7 +133,7 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 
-    @yield('content');
+    @yield('content')
 
   </div>
   <footer class="main-footer">
@@ -754,6 +754,55 @@
     });
   </script>
   <script>
+$('#editModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget);
+  var area = button.data('area');
+  var id = button.data("areaid");
+  var modal = $(this)
+  modal.find('.modal-body #depto').val(area);
+  modal.find('.modal-body #editClave').val(id);
+  console.log(area,id)
+  
+})
+
+    $('#editBtn').on('click',function(e){
+    e.preventDefault();
+    swal({
+        title: "Edición de datos",
+        text: "¿Desea continuar?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#0080FF",
+        confirmButtonText: "Sí",
+        closeOnConfirm: false
+    }, function(isConfirm){
+       if (isConfirm) {
+          var id = $('#editClave').val();
+          var no = $('#depto').val();
+          console.log(id,no);
+          $.ajax({
+             type:'POST',
+             url:'updatearea/',
+             data:{id:id, no:no},
+            success:function(data){
+                swal({title: "Listo!", text: "Area actualizada", type: "success"},
+                   function(){ 
+                       location.reload();
+                   }
+                )
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+                swal("Error!", "Por favor intentelo de nuevo!", "error");
+              }
+          });
+        } else {
+          swal("Error!", "Por favor intentelo de nuevo", "error");
+        }
+    });
+});
+  </script>
+
+  <script>
    $(document).on("click", "#passCopiA", function(){
      var copyText = document.getElementById("contPassA");
      copyText.select();
@@ -816,7 +865,7 @@
 
 
 
-
+<!--validacion-->
 
 
 <script>
@@ -854,6 +903,26 @@
        });
    });
    </script>
+
+   <script>
+/*
+      $('#editBtn').on('click',function(e){
+         e.preventDefault();
+         var form = $(this).parents('form');
+         swal({
+             title: "Registro de Líneas",
+             text: "¿Desea continuar?",
+             type: "warning",
+             showCancelButton: true,
+             confirmButtonColor: "#0080FF",
+             confirmButtonText: "Sí",
+             closeOnConfirm: false
+         }, function(isConfirm){
+             if (isConfirm) form.submit();
+         });
+     });
+*/
+     </script>
 
    <script>
    $( ".validateData" ).keyup(function() {
@@ -903,7 +972,23 @@
        var tipo = $(this).attr("data-myTypeLi");
        datosValidosLi(valor, error, id, tipo);
    });
+   /*
+   $( ".validateDataUp" ).keyup(function() {
+       var valor = $(this).val();
+       var error = $(this).attr("data-errorUp");
+       var id = $(this).attr("id");
+       var tipo = $(this).attr("data-myTypeUp");
+       datosValidosUp(valor, error, id, tipo);
+   });
    
+   $( ".validateDataUp" ).change(function() {
+       var valor = $(this).val();
+       var error = $(this).attr("data-errorUp");
+       var id = $(this).attr("id");
+       var tipo = $(this).attr("data-myTypeUp");
+       datosValidosUp(valor, error, id, tipo);
+   });
+   */
    function datosValidos(valor, error, id, tipo)
    {
        switch (tipo) {
@@ -1091,8 +1176,70 @@
        enablebtnLi();
    }
 
+   /*
+   function datosValidosUp(valor, error, id, tipo)
+   {
+       switch (tipo) {
+         case 'text':
+           if (valor.match(/^[a-zA-Z0-9\s]*$/) && valor!=""){
+             $('.error'+ error).text("");
+             $('#'+id).attr("data-validacionUp", '0');
+             $('#'+id).removeClass('inputDanger');
+             $('#'+id).addClass('inputSuccess');
+           }else{
+             $('.error'+ error).text("Este campo no puede ir vacío o llevar caracteres especiales.");
+             $('#'+id).attr("data-validacionUp", '1');
+             $('#'+id).removeClass('inputSuccess');
+             $('#'+id).addClass('inputDanger');
+           }
+           break;
+         case 'int':
+           if (valor.match(/^[0-9]*$/) && valor!=""){
+           $('.error'+ error).text("");
+           $('#'+id).attr("data-validacionUp", '0');
+           $('#'+id).removeClass('inputDanger');
+           $('#'+id).addClass('inputSuccess');
+         }else{
+           $('.error'+ error).text("Ingrese un e-mail válido.");
+           $('#'+id).attr("data-validacionUp", '1');
+           $('#'+id).removeClass('inputSuccess');
+           $('#'+id).addClass('inputDanger'); 
+         }
+         break;
+         case 'password':
+           if (valor!=""){
+           $('.error'+ error).text("");
+           $('#'+id).attr("data-validacionUp", '0');
+           $('#'+id).removeClass('inputDanger');
+           $('#'+id).addClass('inputSuccess');
+         }else{
+           $('.error'+ error).text("La contraseña no puede ir vacía.");
+           $('#'+id).attr("data-validacionUp", '1');
+           $('#'+id).removeClass('inputSuccess');
+           $('#'+id).addClass('inputDanger'); 
+         }
+         break;
+         case 'select':
+           if (valor!=""){
+           $('.error'+ error).text("");
+           $('#'+id).attr("data-validacionUp", '0');
+           $('#'+id).removeClass('inputDanger');
+           $('#'+id).addClass('inputSuccess');
+         }else{
+           $('.error'+ error).text("Seleccione una opción.");
+           $('#'+id).attr("data-validacionUp", '1');
+           $('#'+id).removeClass('inputSuccess');
+           $('#'+id).addClass('inputDanger'); 
+         }
+         break;
+         default:
+         console.log('default');
+       }
+       enablebtnUp();
+   }
 
 
+*/
 
 
    
@@ -1158,7 +1305,28 @@
    
        console.log(array);
    }
+/*
+   function enablebtnUp()
+   {
+     var array = [];
+     var claserror = $('.validateDataUp');
    
+     for (var i = 0; i < claserror.length; i++) {
+       array.push(claserror[i].getAttribute('data-validacionUp'));
+     }
+   
+     if(array.includes('1'))
+     { 
+       $('#editBtn').prop("disabled", true);
+     }
+     else
+     {
+       $('#editBtn').prop("disabled", false);
+     }
+   
+       console.log(array);
+   }
+   */
    </script>
 
 <script>
@@ -1186,26 +1354,7 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 
- $('#editModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget);
-  var area = button.data('area');
-  var cargo = button.data('cargo');
-  var description = button.data('rol');
-  var rolid = button.data('rolId');
-  var nombre = button.data('nombre');
-  var ap = button.data('ap');
-  var am = button.data('am');
-  var email = button.data('email');
-  var usuario = button.data('usuario');
-  var id = button.data("id");
-
-  var modal = $(this)
-  modal.find('#editNombre').val(nombre);
-  modal.find('#editAp').val(ap);
-  modal.find('#editAm').val(am);
-  modal.find('#editEmail').val(email);
-  modal.find('#actualizarUser').val(id);
-})
+ 
 
 
 

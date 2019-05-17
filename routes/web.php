@@ -59,9 +59,6 @@ Route::get('/catalogos/TablaSublineas', 'SublineasController@show')->name('show-
 Route::post('/catalogos/AgregaSubineasStore', 'SublineasController@Agregasublineastore')->name('AgregarSub');
 //Route::get('/catalogos/AgregaSubLineas', 'SublineasController@SublineaNueva')->name('AgregaSublineas');
 
-
-
-
 Route::get('ajaxRequest', 'SublineasController@ajaxRequest');
 Route::get('catalogos/obtenLineas', 'SublineasController@obtenLineas');
 //MAx Lineas
@@ -69,4 +66,9 @@ Route::get('catalogos/obtenMaxLineas', 'SublineasController@obtenMaxLineas');
 //sublineas
 Route::get('catalogos/obtenLineasAg', 'SublineasController@obtenLineasAg');
 Route::get('catalogos/obtenSublineas', 'SublineasController@obtenSublineas');
+
+//Areas
+Route::get('/catalogos/TablaAreas', 'AreasController@index')->name('Tabla-Areas');
+
+Route::post('/catalogos/updatearea', 'AreasController@updaArea')->name('updatearea');
 
