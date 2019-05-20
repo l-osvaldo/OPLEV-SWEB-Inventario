@@ -81,10 +81,10 @@
                       <div class="col-md-9">
                         <div class="form-group">
                           <label>Departamento</label>
-                          <select id="depto" name="depto" class="form-control select2 validateDataEm" data-myTypeEm="select" data-errorEm= "5" data-validacionEm="1" style="width: 100%;">
+                          <select id="clvdepto" name="clvdepto" class="form-control select2 validateDataEm" data-myTypeEm="select" data-errorEm= "5" data-validacionEm="1" style="width: 100%;">
                             <option selected="selected">Departamento</option>
                              @foreach ($area as $area)																 
-                            <option value="{{ $area->depto }}"> {{ $area->clvdepto }} | {{ $area->depto }} </option>
+                            <option value="{{ $area->clvdepto}}"> {{ $area->clvdepto }} | {{ $area->depto }} </option>
 														@endforeach                                      
                           </select>
                         </div>

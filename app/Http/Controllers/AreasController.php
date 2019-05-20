@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\areas;
+use App\empleados;
 //use Alert;
 
 class AreasController extends Controller
@@ -45,7 +46,7 @@ class AreasController extends Controller
 		{
 			$clave = $request->input('id');
 					$area = $request->input('no');
-					$update = areas::where('clvdepto',$clave)->update(array('depto' => $area));	
+					$update = areas::where('clvdepto',$clave)->update(array('depto' => $area));							
 				//	Alert::success('Partida guardada', 'Registro Exitoso')->autoclose(2500);
 			return response()->json(['success']);
 			//return view ('informes_avisos', compact('breadcrumb'));

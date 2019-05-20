@@ -70,43 +70,46 @@
 <!--Modal-->
 <!-- Modal editar usuarios -->
 <div class="modal fade bd-example-modal-lg" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header" style="background: #a90a6c; color:white">
-					<h5 class="modal-title" id="exampleModalLabel">Editar Area</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="background: #a90a6c; color:white">
+				<h5 class="modal-title" id="exampleModalLabel">Editar Area</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
 
-				<form>
-					<div class="modal-body">
-						<div class="row">
+			<form>
+				<div class="modal-body">
+					<div class="row">
 
-							<div class="col">
-							 <div class="form-group">
-									<label for="clave"><b>Clave</b></label>
-									<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fa fa-list-alt"></i></span>    
-											<input class="form-control form-control-sm" readonly type="text" id="editClave" name="editClave">
-									</div>
-							 </div>
+						<div class="col">
+							<div class="form-group">
+								<label for="clave"><b>Clave</b></label>
+								<div class="input-group-prepend">
+										<span class="input-group-text"><i class="fa fa-list-alt"></i></span>    
+										<input class="form-control form-control-sm" readonly type="text" id="editClave" name="editClave">
+								</div>
 							</div>
-
-							<div class="col">
-									<div class="form-group {{ $errors->has('depto') ? 'has-error' : '' }}">
-										 <label for="nombre"><b>Nombre</b></label>
-										 <div class="input-group-prepend">
-												 <span class="input-group-text"><i class="fa fa-building"></i></span>    
-												 <input class="form-control form-control validateDataLi" data-myTypeLi="text" data-errorLi= "9" data-validacionLi="1" type="text" id="depto" name="depto" style="text-transform:uppercase;" 
-												 onkeyup="javascript:this.value=this.value.toUpperCase();">
-												 <span class="text-danger error9"></span>
-												</div>
-									</div>
-								 </div>
-
-						 </div>
 						</div>
+
+						<div class="col">
+								<div class="form-group {{ $errors->has('depto') ? 'has-error' : '' }}">
+										<label for="nombre"><b>Nombre</b></label>
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fa fa-building"></i></span>    
+											<input class="form-control form-control validateDataLi" data-myTypeLi="text" data-errorLi= "9" data-validacionLi="1" type="text" id="depto" name="depto" style="text-transform:uppercase;" 
+											onkeyup="javascript:this.value=this.value.toUpperCase();">
+											<input class="form-control form-control validateDataLi" data-myTypeLi="text" data-errorLi= "9" data-validacionLi="1" type="hidden" id="nombredepto" name="nombredepto" style="text-transform:uppercase;" 
+											onkeyup="javascript:this.value=this.value.toUpperCase();">
+											
+											<span class="text-danger error9"></span>
+									</div>
+								</div>
+						</div>
+
+					</div>
+				</div>
 
 				<div class="modal-footer">
 					<button class="btn btn-secondary" id="editBtn">Actualizar</button>
@@ -114,11 +117,11 @@
 					
 					
 				</div>
-				</form>
+			</form>
 
-			</div>
 		</div>
 	</div>
+</div>
 <!--Modal-->
 
 

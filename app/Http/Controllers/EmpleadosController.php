@@ -23,6 +23,17 @@ class EmpleadosController extends Controller
 
 		public function store(Request $request)
 		{
+			
+
+			$area = $request->input('clvdepto');      
+        $queryempleado = areas::where('clvdepto', '=', $area)->get();      
+
+        //var_dump($partida);
+        //var_dump($querypartida[0]['descpartida']);
+        //dd();
+				$nombredepto = $queryempleado[0]['depto'];
+				
+
 			$area = new areas();      
 		//	$area->clvdepto = $request->input('clvdepto');
 		//	$area->depto = $request->input('depto'); 
@@ -30,7 +41,9 @@ class EmpleadosController extends Controller
 			$empleado = new empleados();
 			$empleado->numemple = $request->input('numemple');
 			$empleado->nombre = $request->input('nombre');
-			$empleado->nombredepto = $request->input('depto');
+			$empleado->clvdepto = $request->input('clvdepto');	
+		//	$empleado->nombredepto = $request->input('depto');
+			$empleado->nombredepto = $nombredepto;
 			$empleado->cargo = $request->input('cargo');
 
 
