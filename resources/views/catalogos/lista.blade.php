@@ -2,17 +2,20 @@
  
 @section('content')
 <!-- Navbar -->
-<nav class=" navbar navbar-expand bg-white navbar-light border-bottom">
+<nav class=" navbar navbar-expand col-sm-12 bg-white navbar-light border-bottom">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a> 
       </li>
     </ul>
-      <div class="col-sm-8">
+      <div class="">
         <ol class="breadcrumb float-sm-left">
+          <!--
           <li class="breadcrumb-item"><a href="#">Home</a></li>
           <li class="breadcrumb-item active">Catalogos</li>
+          -->
+          <h5>Catálogos</h5>
         </ol>
       </div>
       <ul class="navbar-nav ml-auto float-sm-right">   
@@ -68,7 +71,7 @@
                 <a href="{{ route('Tabla-Areas') }}" class="{!! Request::is('Tabla-Areas') ? 'nav-link active' : 'nav-link' !!}">
                   <p>
                     <i class="fa fa-building"></i>
-                    Areas
+                    Áreas
                   </p>
                 </a>
                 <hr> 

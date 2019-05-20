@@ -2,17 +2,20 @@
 
 @section('content')
  <!-- Navbar -->
- <nav class=" navbar navbar-expand bg-white navbar-light border-bottom">
+ <nav class=" navbar navbar-expand col-sm-12 bg-white navbar-light border-bottom">
     <!-- Left navbar links -->
 <ul class="navbar-nav">
   <li class="nav-item">
     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a> 
   </li>
 </ul>
-<div class="col-sm-8">
+<div class="">
     <ol class="breadcrumb float-sm-left">
+      <!--
       <li class="breadcrumb-item"><a href="#">Home</a></li>
       <li class="breadcrumb-item active">Sublineas</li>
+      -->
+      <h5>Catálogo de Sublíneas</h5>
     </ol>
 </div>
 
@@ -75,7 +78,6 @@
     	<div class="center-block">
           <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Catálogo de Sublíneas</h3> 
             </div>
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-hover dt-responsive nowrap" style="width:100%">
@@ -106,7 +108,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header" style="background: #a90a6c; color:white">
-            <h5 class="modal-title" id="exampleModalLabel"><b>Nuevo Usuario</b></h5>
+            <h5 class="modal-title" id="exampleModalLabel"><b>Nueva Sublínea</b></h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
               </button>
@@ -116,30 +118,28 @@
               <form method="POST" action="{{ route('AgregarSub') }}">
                     @csrf                
                 <div class="card card-default">
-                  <div class="card-header">
-                    <h3 class="card-title">Agregar Sublinea</h3>
-                  </div>
+                  
                             <!-- /.card-header -->
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-8">
                       <div class="form-group">
-                        <label>Partidas</label>
+                        <label>Seleccioné una partida:</label>
                           <select id="partidaA" name="partidaA" class="form-control select2 dynamic" style="width: 100%;">
                             <option selected="selected">No. partida</option>
                               @foreach ($sublineaAgt as $sublineaAgt)
                             <option value="{{ $sublineaAgt->partida}}">{{ $sublineaAgt->partida }} | {{ $sublineaAgt->descpartida }}</option>
                               @endforeach
                           </select>
-                          <label>Seleccioné una Línea</label>                 
+                          <label>Seleccioné una Línea:</label>                 
                             <select class="form-control dynamic" id="lineaA" name="lineaA" >
-                              <option value="0" disabled="true" selected="true">Linea</option>
+                              <option value="0" disabled="true" selected="true">Línea</option>
                             </select>
                       </div>
                     </div>      
                     <div class="col-md-6"> 
                     	<div class="form-group">
-                        <label>Sublinea</label>
+                        <label>Sublínea:</label>
                         <input type="text" class="form-control" readonly id="sublinea" name="sublinea" value="0">
                           @if ($errors->has('sublinea'))
                         <small class="form-text text-danger">{{ $errors->first('sublinea') }}</small>
@@ -155,7 +155,7 @@
                   	</div>
                     <div class="col-md-6">
                       <div class="form-group{{ $errors->has('descsub') ? 'has-error' : '' }}">
-                        <label>Ddescripción Sublinea</label>
+                        <label>Ddescripción Sublínea:</label>
                           <input type="text" class="form-control validateDataDos" data-myTypeDos="text" data-errorDos= "8" data-validacionDos="1" id="descsub" name="descsub" style="text-transform:uppercase;" 
                           onkeyup="javascript:this.value=this.value.toUpperCase();">
                         <span class="text-danger error8"></span>

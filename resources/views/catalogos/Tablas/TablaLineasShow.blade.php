@@ -3,17 +3,18 @@
 
 @section('content')
  <!-- Navbar -->
- <nav class="navbar navbar-expand bg-white navbar-light border-bottom">
+ <nav class="navbar navbar-expand col-sm-12 bg-white navbar-light border-bottom">
     <!-- Left navbar links -->
 <ul class="navbar-nav">
 <li class="nav-item">
   <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a> 
 </li>
 </ul>
-<div class="col-sm-8">
+<div class="">
   <ol class="breadcrumb float-sm-left">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item active">Líneas</li>
+ <!--   <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item active">Líneas</li> -->
+    <h5>Catálogo de Líneas</h5>
   </ol>
 </div>
 
@@ -46,7 +47,7 @@
                   <div class="col-md-4 float-right">
                     @include('sweet::alert')
                       <div  class="btn-group ">
-                        <a href="#" style="background-color: #E71096" class="btn btn-secondary float-right" data-toggle="modal" data-target="#exampleModalLinea"> Nueva Linea</a>
+                        <a href="#" style="background-color: #E71096" class="btn btn-secondary float-right" data-toggle="modal" data-target="#exampleModalLinea"> Nueva Línea</a>
                       </div> 
                   </div>
                 </form>  
@@ -65,8 +66,7 @@
     <div class="col-9">     
       <div class="center-block">
         <div class="card">
-          <div class="card-header"> 
-          	<h5>Partida:</h5>   
+          <div class="card-header">    
           </div>
           <div class="card-body">
               <table id="example1" name="example1" class="table table-bordered table-hover dt-responsive nowrap" style="width:100%">
@@ -112,7 +112,7 @@
                     <div class="row">
                       <div class="col-md-7">
                         <div class="form-group">
-                          <label>Partidas</label>
+                          <label>Partidas:</label>
                           <select id="partida" name="partida" class="form-control select2 validateDataLi" data-myTypeLi="select" data-errorLi= "5" data-validacionLi="1" style="width: 100%;">
                             <option selected="selected">No. partida</option>
                               @foreach ($linea8 as $linea8)
@@ -123,7 +123,7 @@
                       </div>
                       <div class="col-md-6">
 												<div class="form-group">
-													<label>Linea</label>
+													<label>Línea:</label>
 													<input type="text" class="form-control" readonly id="LineaMax" name="LineaMax" value="0">   
 														@if ($errors->has('LineaMax'))
 													<small class="form-text text-danger">{{ $errors->first('LineaMax') }}</small>
@@ -131,7 +131,7 @@
 												</div>
                                                 <!-- /.form-group -->
 												<div class="form-group">
-													<label>Sublinea</label>
+													<label>Sublínea:</label>
 													<input type="text" class="form-control" readonly id="sublinea" name="sublinea" value="01" placeholder="01">
 														@if ($errors->has('sublinea'))
 													<small class="form-text text-danger">{{ $errors->first('sublinea') }}</small>
@@ -149,14 +149,14 @@
                                                 <!-- /.col -->
 											<div class="col-md-6">
 												<div class="form-group {{ $errors->has('desclinea') ? 'has-error' : '' }}">
-													<label>Descripción Linea</label>
+													<label>Descripción Línea:</label>
 													<input type="text" class="form-control validateDataLi" data-myTypeLi="text" data-errorLi= "3" data-validacionLi="1" id="desclinea" name="desclinea" style="text-transform:uppercase;" 
 													onkeyup="javascript:this.value=this.value.toUpperCase();">
 													<span class="text-danger error3"></span>
 												</div>
 											<!-- /.form-group -->
 												<div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}">
-													<label>Descripción Sublinea</label>
+													<label>Descripción Sublínea:</label>
 													<input type="text" class="form-control validateDataLi" data-myTypeLi="text" data-errorLi= "4" data-validacionLi="1" id="descsub" name="descsub" style="text-transform:uppercase;" 
 													onkeyup="javascript:this.value=this.value.toUpperCase();">
 													<span class="text-danger error4"></span>
