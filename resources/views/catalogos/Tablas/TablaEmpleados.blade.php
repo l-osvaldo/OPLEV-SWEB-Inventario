@@ -24,7 +24,7 @@
 @include('sweet::alert')
 <div class="card">
 	<div  class="card-body">
-		<a href="#" style="background-color: #E71096" class="btn btn-secondary float-right" data-toggle="modal" data-target="#exampleModalEmpleado"> Nueva Linea</a>
+		<a href="#" style="background-color: #E71096" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModalEmpleado"> Nueva Linea</a>
 	</div> 
 </div>	
 <section class="content" style="margin-top: 2vh;">

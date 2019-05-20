@@ -84,7 +84,8 @@
             <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
             <li class="nav-item d-none d-sm-inline-block">
-              <a href="{{ route('lista') }}" class="{!! Request::is('catalogos/lista','catalogos/TablaDeLineas','catalogos/Lineas','catalogos/TablaPartida','catalogos/Sublineas','catalogos/TablaSublineas','catalogos/TablaAreas') ? 'nav-link active' : 'nav-link' !!}">
+              <a href="{{ route('lista') }}" class="{!! Request::is('catalogos/lista','catalogos/TablaDeLineas','catalogos/Lineas',
+              'catalogos/TablaEmpleados','catalogos/TablaPartida','catalogos/Sublineas','catalogos/TablaSublineas','catalogos/TablaAreas') ? 'nav-link active' : 'nav-link' !!}">
                 <i class="nav-icon fa fa-pie-chart"></i>
                 <p>
                   Catálogos
@@ -985,7 +986,7 @@ $('#editModal').on('show.bs.modal', function (event) {
    {
        switch (tipo) {
          case 'text':
-           if (valor.match(/^[a-zA-Z0-9\s]*$/) && valor!=""){
+           if (valor.match(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/) && valor!=""){
              $('.error'+ error).text("");
              $('#'+id).attr("data-validacion", '0');
              $('#'+id).removeClass('inputDanger');
@@ -1046,7 +1047,7 @@ $('#editModal').on('show.bs.modal', function (event) {
    {
        switch (tipo) {
          case 'text':
-           if (valor.match(/^[a-zA-Z0-9\s]*$/) && valor!=""){
+           if (valor.match(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/) && valor!=""){
              $('.error'+ error).text("");
              $('#'+id).attr("data-validacionDos", '0');
              $('#'+id).removeClass('inputDanger');
@@ -1065,7 +1066,7 @@ $('#editModal').on('show.bs.modal', function (event) {
            $('#'+id).removeClass('inputDanger');
            $('#'+id).addClass('inputSuccess');
          }else{
-           $('.error'+ error).text("Ingrese un e-mail válido.");
+           $('.error'+ error).text("Solo numeros.");
            $('#'+id).attr("data-validacionDos", '1');
            $('#'+id).removeClass('inputSuccess');
            $('#'+id).addClass('inputDanger'); 
@@ -1111,7 +1112,7 @@ $('#editModal').on('show.bs.modal', function (event) {
    {
        switch (tipo) {
          case 'text':
-           if (valor.match(/^[a-zA-Z0-9\s]*$/) && valor!=""){
+           if (valor.match(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/) && valor!=""){
              $('.error'+ error).text("");
              $('#'+id).attr("data-validacionLi", '0');
              $('#'+id).removeClass('inputDanger');
@@ -1130,7 +1131,7 @@ $('#editModal').on('show.bs.modal', function (event) {
            $('#'+id).removeClass('inputDanger');
            $('#'+id).addClass('inputSuccess');
          }else{
-           $('.error'+ error).text("Ingrese un e-mail válido.");
+           $('.error'+ error).text("Solo numeros.");
            $('#'+id).attr("data-validacionLi", '1');
            $('#'+id).removeClass('inputSuccess');
            $('#'+id).addClass('inputDanger'); 
@@ -1173,7 +1174,7 @@ $('#editModal').on('show.bs.modal', function (event) {
    {
        switch (tipo) {
          case 'text':
-           if (valor.match(/^[a-zA-Z0-9\s]*$/) && valor!=""){
+           if (valor.match(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/) && valor!=""){
              $('.error'+ error).text("");
              $('#'+id).attr("data-validacionEm", '0');
              $('#'+id).removeClass('inputDanger');
@@ -1192,7 +1193,7 @@ $('#editModal').on('show.bs.modal', function (event) {
            $('#'+id).removeClass('inputDanger');
            $('#'+id).addClass('inputSuccess');
          }else{
-           $('.error'+ error).text("Ingrese un e-mail válido.");
+           $('.error'+ error).text("Solo numeros.");
            $('#'+id).attr("data-validacionEm", '1');
            $('#'+id).removeClass('inputSuccess');
            $('#'+id).addClass('inputDanger'); 
