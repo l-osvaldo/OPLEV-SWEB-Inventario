@@ -72,6 +72,13 @@
                   </p>
                 </a>
                 <hr> 
+                <a href="{{ route('show-Empleados') }}" class="{!! Request::is('show-Empleados') ? 'nav-link active' : 'nav-link' !!}">
+                  <p>
+                    <i class="fa fa-id-card"></i>
+                    Empleados
+                  </p>
+                </a>
+                <hr> 
                     
               </div>
             </div> 

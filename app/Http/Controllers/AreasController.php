@@ -41,13 +41,13 @@ class AreasController extends Controller
 				return view('catalogos.Tablas.TablaArea', compact('area','usuario'));
 			}
 
-			public function updaArea(Request $request)
-    {
-        $clave = $request->input('id');
-				$area = $request->input('no');
-				$update = areas::where('clvdepto',$clave)->update(array('depto' => $area));	
-			//	Alert::success('Partida guardada', 'Registro Exitoso')->autoclose(2500);
-        return response()->json(['success']);
-        //return view ('informes_avisos', compact('breadcrumb'));
-    }
+	public function updaArea(Request $request)
+		{
+			$clave = $request->input('id');
+					$area = $request->input('no');
+					$update = areas::where('clvdepto',$clave)->update(array('depto' => $area));	
+				//	Alert::success('Partida guardada', 'Registro Exitoso')->autoclose(2500);
+			return response()->json(['success']);
+			//return view ('informes_avisos', compact('breadcrumb'));
+		}
 }

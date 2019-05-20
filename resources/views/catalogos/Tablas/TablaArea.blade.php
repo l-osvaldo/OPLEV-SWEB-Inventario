@@ -98,7 +98,8 @@
 										 <label for="nombre"><b>Nombre</b></label>
 										 <div class="input-group-prepend">
 												 <span class="input-group-text"><i class="fa fa-building"></i></span>    
-												 <input class="form-control form-control validateDataLi" data-myTypeLi="text" data-errorLi= "9" data-validacionLi="1" type="text" id="depto" name="depto" style="text-transform:uppercase;">
+												 <input class="form-control form-control validateDataLi" data-myTypeLi="text" data-errorLi= "9" data-validacionLi="1" type="text" id="depto" name="depto" style="text-transform:uppercase;" 
+												 onkeyup="javascript:this.value=this.value.toUpperCase();">
 												 <span class="text-danger error9"></span>
 												</div>
 									</div>

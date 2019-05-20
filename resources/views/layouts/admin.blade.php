@@ -6,8 +6,8 @@
   <title>SIADMON | OPLE VER</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <meta name="csrf-token" content="{{ csrf_token() }}">
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
@@ -53,112 +53,106 @@
    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+  <div class="wrapper">
 
+    
   
- 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">SIADMON</span>
-    </a>
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="index3.html" class="brand-link">
+        <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8">
+        <span class="brand-text font-weight-light">SIADMON</span>
+      </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{ asset('dist/img/avatar.jpg') }}" class="img-circle elevation-2" alt="User Image">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="{{ asset('dist/img/avatar.jpg') }}" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+          <a href="#" class="d-block">{{ $usuario->username }}</a>
+          </div>
         </div>
-        <div class="info">
-        <a href="#" class="d-block">{{ $usuario->username }}</a>
-        </div>
-      </div>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class=" nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('lista') }}" class="{!! Request::is('catalogos/lista','catalogos/TablaDeLineas','catalogos/Lineas','catalogos/TablaPartida','catalogos/Sublineas','catalogos/TablaSublineas','catalogos/TablaAreas') ? 'nav-link active' : 'nav-link' !!}">
-              <i class="nav-icon fa fa-pie-chart"></i>
-              <p>
-                Catálogos
-              </p>
-            </a>
-          </li>
-          <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('catalogos') }}" class="{!! Request::is('catalogos/bienes','home','/') ? 'nav-link active' : 'nav-link' !!}">
-              <i class="nav-icon fa fa-table"></i>
-              <p>
-                Bienes OPLE
-              </p>
-            </a>
-          </li>
-          <li class="nav-item d-none d-sm-inline-block">
-              <a href="{{ route('catalogoeco') }}" class="{!! Request::is('catalogos/bieneseco') ? 'nav-link active' : 'nav-link' !!}">
-                <i class="nav-icon fa fa-table"></i>
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class=" nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+            <li class="nav-item d-none d-sm-inline-block">
+              <a href="{{ route('lista') }}" class="{!! Request::is('catalogos/lista','catalogos/TablaDeLineas','catalogos/Lineas','catalogos/TablaPartida','catalogos/Sublineas','catalogos/TablaSublineas','catalogos/TablaAreas') ? 'nav-link active' : 'nav-link' !!}">
+                <i class="nav-icon fa fa-pie-chart"></i>
                 <p>
-                  Bienes ECO
+                  Catálogos
                 </p>
               </a>
             </li>
-          
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('logout') }}"
-                onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();">
-                <span style="color: #FF2D00;">
-                  <i class="nav-icon fa fa-power-off"></i>
-                </span>  
+            <li class="nav-item d-none d-sm-inline-block">
+              <a href="{{ route('catalogos') }}" class="{!! Request::is('catalogos/bienes','home','/') ? 'nav-link active' : 'nav-link' !!}">
+                <i class="nav-icon fa fa-table"></i>
                 <p>
-                  {{ __('Salir') }}
+                  Bienes OPLE
                 </p>
-            </a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-              </form>
-          </li>    
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
+              </a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="{{ route('catalogoeco') }}" class="{!! Request::is('catalogos/bieneseco') ? 'nav-link active' : 'nav-link' !!}">
+                  <i class="nav-icon fa fa-table"></i>
+                  <p>
+                    Bienes ECO
+                  </p>
+                </a>
+              </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('logout') }}"
+                  onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();">
+                  <span style="color: #FF2D00;">
+                    <i class="nav-icon fa fa-power-off"></i>
+                  </span>  
+                  <p>
+                    {{ __('Salir') }}
+                  </p>
+              </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      @csrf
+                </form>
+            </li>    
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      @yield('content')
     </div>
-    <!-- /.sidebar -->
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-
-    @yield('content')
-
-  </div>
-  <footer class="main-footer">
-      @include('partials.footer')
-  </footer>
-  
-  <!-- /.container-fluid -->
-  <!-- /.content-wrapper -->
-  <!--
     
+    
+    
+    <!-- /.container-fluid -->
+    <!-- /.content-wrapper -->
+    
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2018 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.0-alpha
-    </div>
+    @include('partials.footer')
   </footer>
--->
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+
+
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
 
@@ -905,8 +899,7 @@ $('#editModal').on('show.bs.modal', function (event) {
    </script>
 
    <script>
-/*
-      $('#editBtn').on('click',function(e){
+      $('#btn-submitEm').on('click',function(e){
          e.preventDefault();
          var form = $(this).parents('form');
          swal({
@@ -921,7 +914,6 @@ $('#editModal').on('show.bs.modal', function (event) {
              if (isConfirm) form.submit();
          });
      });
-*/
      </script>
 
    <script>
@@ -972,23 +964,23 @@ $('#editModal').on('show.bs.modal', function (event) {
        var tipo = $(this).attr("data-myTypeLi");
        datosValidosLi(valor, error, id, tipo);
    });
-   /*
-   $( ".validateDataUp" ).keyup(function() {
+   
+   $( ".validateDataEm" ).keyup(function() {
        var valor = $(this).val();
-       var error = $(this).attr("data-errorUp");
+       var error = $(this).attr("data-errorEm");
        var id = $(this).attr("id");
-       var tipo = $(this).attr("data-myTypeUp");
-       datosValidosUp(valor, error, id, tipo);
+       var tipo = $(this).attr("data-myTypeEm");
+       datosValidosEm(valor, error, id, tipo);
    });
    
-   $( ".validateDataUp" ).change(function() {
+   $( ".validateDataEm" ).change(function() {
        var valor = $(this).val();
-       var error = $(this).attr("data-errorUp");
+       var error = $(this).attr("data-errorEm");
        var id = $(this).attr("id");
-       var tipo = $(this).attr("data-myTypeUp");
-       datosValidosUp(valor, error, id, tipo);
+       var tipo = $(this).attr("data-myTypeEm");
+       datosValidosEm(valor, error, id, tipo);
    });
-   */
+   
    function datosValidos(valor, error, id, tipo)
    {
        switch (tipo) {
@@ -1176,19 +1168,19 @@ $('#editModal').on('show.bs.modal', function (event) {
        enablebtnLi();
    }
 
-   /*
-   function datosValidosUp(valor, error, id, tipo)
+   
+   function datosValidosEm(valor, error, id, tipo)
    {
        switch (tipo) {
          case 'text':
            if (valor.match(/^[a-zA-Z0-9\s]*$/) && valor!=""){
              $('.error'+ error).text("");
-             $('#'+id).attr("data-validacionUp", '0');
+             $('#'+id).attr("data-validacionEm", '0');
              $('#'+id).removeClass('inputDanger');
              $('#'+id).addClass('inputSuccess');
            }else{
              $('.error'+ error).text("Este campo no puede ir vacío o llevar caracteres especiales.");
-             $('#'+id).attr("data-validacionUp", '1');
+             $('#'+id).attr("data-validacionEm", '1');
              $('#'+id).removeClass('inputSuccess');
              $('#'+id).addClass('inputDanger');
            }
@@ -1196,12 +1188,12 @@ $('#editModal').on('show.bs.modal', function (event) {
          case 'int':
            if (valor.match(/^[0-9]*$/) && valor!=""){
            $('.error'+ error).text("");
-           $('#'+id).attr("data-validacionUp", '0');
+           $('#'+id).attr("data-validacionEm", '0');
            $('#'+id).removeClass('inputDanger');
            $('#'+id).addClass('inputSuccess');
          }else{
            $('.error'+ error).text("Ingrese un e-mail válido.");
-           $('#'+id).attr("data-validacionUp", '1');
+           $('#'+id).attr("data-validacionEm", '1');
            $('#'+id).removeClass('inputSuccess');
            $('#'+id).addClass('inputDanger'); 
          }
@@ -1209,12 +1201,12 @@ $('#editModal').on('show.bs.modal', function (event) {
          case 'password':
            if (valor!=""){
            $('.error'+ error).text("");
-           $('#'+id).attr("data-validacionUp", '0');
+           $('#'+id).attr("data-validacionEm", '0');
            $('#'+id).removeClass('inputDanger');
            $('#'+id).addClass('inputSuccess');
          }else{
            $('.error'+ error).text("La contraseña no puede ir vacía.");
-           $('#'+id).attr("data-validacionUp", '1');
+           $('#'+id).attr("data-validacionEm", '1');
            $('#'+id).removeClass('inputSuccess');
            $('#'+id).addClass('inputDanger'); 
          }
@@ -1222,12 +1214,12 @@ $('#editModal').on('show.bs.modal', function (event) {
          case 'select':
            if (valor!=""){
            $('.error'+ error).text("");
-           $('#'+id).attr("data-validacionUp", '0');
+           $('#'+id).attr("data-validacionEm", '0');
            $('#'+id).removeClass('inputDanger');
            $('#'+id).addClass('inputSuccess');
          }else{
            $('.error'+ error).text("Seleccione una opción.");
-           $('#'+id).attr("data-validacionUp", '1');
+           $('#'+id).attr("data-validacionEm", '1');
            $('#'+id).removeClass('inputSuccess');
            $('#'+id).addClass('inputDanger'); 
          }
@@ -1235,11 +1227,11 @@ $('#editModal').on('show.bs.modal', function (event) {
          default:
          console.log('default');
        }
-       enablebtnUp();
+       enablebtnEm();
    }
 
 
-*/
+
 
 
    
@@ -1305,28 +1297,28 @@ $('#editModal').on('show.bs.modal', function (event) {
    
        console.log(array);
    }
-/*
-   function enablebtnUp()
+
+   function enablebtnEm()
    {
      var array = [];
-     var claserror = $('.validateDataUp');
+     var claserror = $('.validateDataEm');
    
      for (var i = 0; i < claserror.length; i++) {
-       array.push(claserror[i].getAttribute('data-validacionUp'));
+       array.push(claserror[i].getAttribute('data-validacionEm'));
      }
    
      if(array.includes('1'))
      { 
-       $('#editBtn').prop("disabled", true);
+       $('#btn-submitEm').prop("disabled", true);
      }
      else
      {
-       $('#editBtn').prop("disabled", false);
+       $('#btn-submitEm').prop("disabled", false);
      }
    
        console.log(array);
    }
-   */
+   
    </script>
 
 <script>

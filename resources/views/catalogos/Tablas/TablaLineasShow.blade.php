@@ -185,7 +185,7 @@
         </div>
     </form>
   </div>
-                    <!--fin modal-->
+    <!--fin modal-->
 </section>
 
 @endsection
