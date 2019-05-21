@@ -7,6 +7,33 @@ use Illuminate\Database\Eloquent\Model;
 class articulos extends Model
 {
     //
-    
+	protected $fillable = [
+			'iev',
+			'partida',
+			'descpartida',
+			'linea',
+			'desclinea',
+			'sublinea',
+			'descsublinea',
+			'consecutivo',
+			'numeroinv',
+			'concepto',
+			'marca',
+			'importe',
+			'colores',
+			'fechacomp',
+			'clvarea',
+			'nombrearea',
+			'numemple',
+			'nombreemple',
+			'numserie',
+			'medidas',
+			'modelo',
+			'material',
+			'clvestado',
+			'estado',
+			'factura',
+			'idclasi',
+		];
     
 }

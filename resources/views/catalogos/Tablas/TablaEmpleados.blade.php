@@ -94,14 +94,14 @@
                       <div class="col-md-3">
 												<div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}">
 													<label>No. Empleado:</label>
-													<input type="text" class="form-control validateDataEm" data-myTypeEm="int" data-errorEm= "11" data-validacionEm="1" id="numemple" name="numemple" > 
+													<input type="text" maxlength="6" class="form-control validateDataEm" data-myTypeEm="int" data-errorEm= "11" data-validacionEm="1" id="numemple" name="numemple" > 
 													<span class="text-danger error11"></span>  
 												</div>
                       </div>
                             <!-- /.col -->
 											<div class="col-md-9">
 												<div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}">
-													<label>Nombre:</label>
+													<label>Nombre Completo:</label>
 													<input type="text" class="form-control validateDataEm" data-myTypeEm="text" data-errorEm= "10" data-validacionEm="1" id="nombre" name="nombre" style="text-transform:uppercase;" 
 													onkeyup="javascript:this.value=this.value.toUpperCase();">
 													<span class="text-danger error10"></span>

@@ -10,14 +10,14 @@ class CatalogosController extends Controller
     //listado de la tabla
     public function bienes ()
     {
-        $products = articulos::orderBy('id', 'DESC')->paginate();
+        $products = articulos::orderBy('iev', 'DESC')->paginate();
         $usuario = auth()->user();
         return view('catalogos.Bienes', compact('products','usuario'));
     }
 
     public function bieneseco ()
     {
-        $products = articulos::orderBy('id', 'DESC')->paginate();
+        $products = articulos::orderBy('iev', 'DESC')->paginate();
         $usuario = auth()->user();
         return view('catalogos.Bieneseco', compact('products','usuario'));
     }

@@ -26,7 +26,7 @@
 </nav>
   <!-- /.navbar -->
 
-<section class="content" style="margin-top: 2vh;">
+<section >
   <div class="card">
     <div class="card-body">
       <div class="col-12">
@@ -61,12 +61,13 @@
 </section>
 <!-- Content Header (Page header) -->
 
-<section class="content">
+<section class="content" style="margin-top: 2vh;">
   <div class="row">
     <div class="col-9">     
       <div class="center-block">
         <div class="card">
-          <div class="card-header">    
+          <div class="card-header">  
+              {{ $partida }}
           </div>
           <div class="card-body">
               <table id="example1" name="example1" class="table table-bordered table-hover dt-responsive nowrap" style="width:100%">
@@ -185,6 +186,7 @@
         </div>
     </form>
   </div>
+  
     <!--fin modal-->
 </section>
 

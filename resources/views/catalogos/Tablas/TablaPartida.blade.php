@@ -79,7 +79,7 @@
                 <div class="col-md-2">
                   <div class="form-group {{ $errors->has('partida') ? 'has-error' : '' }}">
                     <label>Partida</label>
-                    <input type="text" class="form-control form-control-sm validateData" data-myType="int" data-error= "1" data-validacion="1" id="partida" name="partida" >
+                    <input type="text" maxlength="8" class="form-control form-control-sm validateData" data-myType="int" data-error= "1" data-validacion="1" id="partida" name="partida" >
                     <span class="text-danger error1"></span>
                   </div>
                     <!-- -- !-->

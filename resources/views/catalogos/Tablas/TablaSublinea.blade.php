@@ -4,26 +4,21 @@
  <!-- Navbar -->
  <nav class=" navbar navbar-expand col-sm-12 bg-white navbar-light border-bottom">
     <!-- Left navbar links -->
-<ul class="navbar-nav">
-  <li class="nav-item">
-    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a> 
-  </li>
-</ul>
-<div class="">
-    <ol class="breadcrumb float-sm-left">
-      <!--
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item active">Sublineas</li>
-      -->
-      <h5>Catálogo de Sublíneas</h5>
-    </ol>
-</div>
-
-<ul class="navbar-nav ml-auto float-sm-right">   
+  <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="#"><h5 style="color:#EA0D94"><b>Dirección Ejecutiva de Administración</b></h5></a>
+      <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a> 
     </li>
-</ul>
+  </ul>
+  <div class="">
+      <ol class="breadcrumb float-sm-left">
+        <h5>Catálogo de Sublíneas</h5>
+      </ol>
+  </div>
+  <ul class="navbar-nav ml-auto float-sm-right">   
+      <li class="nav-item">
+        <a class="nav-link" href="#"><h5 style="color:#EA0D94"><b>Dirección Ejecutiva de Administración</b></h5></a>
+      </li>
+  </ul>
     
 </nav>
   <!-- /.navbar -->
@@ -31,50 +26,55 @@
 @include('sweet::alert')
 <div class="card">
 	<div class="card-body">
-      <a href="#" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalTb"> Nueva Sublínea</a>
-          <!---->
-      			<div class="card-body">
-                <div class="row">
-                    <div class="col-md-8">
-           							<div class="form-group">
-                            <label>Seleccioné una Partida</label>
-																<form method="POST" action="{{route('show-sublineas')}}">
-																						@csrf
-																						<div class="col-md-10">
-																									<div class="form-group">
-																											<select id="Partidas" name="Partidas" class="form-control select2 dynamic" style="width: 100%;">
-																						
-																															<option selected="selected">No. partida</option>
-																														@foreach ($sublineaSe as $sublineaSe)
-																															<option value="{{ $sublineaSe->partida }}">{{ $sublineaSe->partida }} | {{ $sublineaSe->descpartida }}</option>
-																															
-																														@endforeach
-																											</select>
-
-																									</div>
-																						</div>
-																						<label>Seleccioné una Línea</label>
-																							<div class="col-md-10">
-																									<div class="form-group">
-																											<select class="form-control dynamic" id="Linea" name="Linea">
-																													<option value="0" disabled="true" selected="true">Línea</option>
-																											</select>
-																									</div>
-																							</div>																	
-																		<input type="submit" style="background-color: #E71096" class="btn btn-secondary" value="Ver">		
-																</form>
-                        </div>
+      <!---->
+      <div class="card-body col-md-12">
+        <div class="row">
+          
+          <div class="col-md-3">
+            <div class="form-group">
+                <form method="POST" action="{{route('show-sublineas')}}">
+                  @csrf
+                  <div class="col-md-12">
+                        <label>Partida:</label>
+                      <select id="Partidas" name="Partidas" class="form-control select2 dynamic" >    
+                          <option selected="selected">Seleccinar Partida</option>
+                        @foreach ($sublineaSe as $sublineaSe)
+                          <option selected="selected" value="{{ $sublineaSe->partida }}">{{ $sublineaSe->partida }} | {{ $sublineaSe->descpartida }}</option>                         
+                        @endforeach
+                      </select>
                     </div>
-                    
+              </div>
+              </div>   
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <div class="col-md-12">
+                        <div class="form-group">                   
+                            <label>Línea:</label>
+                        <select class="form-control select2 dynamic" id="Linea" name="Linea">
+                            <option value="0" disabled="true" selected="true">Seleccionar Línea</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-            </div>  
-        <!---->
+                <div class="col-md-2">
+                  <br>
+                    <input type="submit" style="background-color: #E71096" class="btn btn-secondary" value="Ver">	
+                </div>	
+                </form> 
+              <div class="col-md-4">
+              <a href="#" style="background-color: #E71096" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModalTb"> Nueva Sublínea</a>
+              </div>
+            </div>
+            
+      </div>  
+      <!---->
 	</div>
 </div>
 
 <section class="content">
   <div class="row">
-  	<div class="col-8">     
+  	<div class="col-9">     
     	<div class="center-block">
           <div class="card">
             <div class="card-header">

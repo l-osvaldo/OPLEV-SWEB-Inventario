@@ -52,7 +52,7 @@
    <!-- Theme style -->
    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini ">
   <div class="wrapper">
 
     
@@ -132,26 +132,27 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="min-height: 900px;">
       @yield('content')
     </div>
     
-    
+    <footer class="main-footer">
+        @include('partials.footer')
+    </footer>
     
     <!-- /.container-fluid -->
     <!-- /.content-wrapper -->
-    
-
     <!-- Control Sidebar -->
+    <!-- Control sidebar content goes here -->
+    <!--
     <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
+      
     </aside>
+       -->
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
-  <footer class="main-footer">
-    @include('partials.footer')
-  </footer>
+  
 
 
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
@@ -229,7 +230,9 @@
     "retrieve": true,
     "processing": true,
     "sSearch": "Filter Data",
-    "dom":     "lBfrtip",
+    "dom":     "<'row'<'col-sm-3 text-center'l><'col-sm-5'B><'col-sm-4'f>>" +
+    "<'row'<'col-sm-12'tr>>" +
+    "<'row'<'col-sm-6'i><'col-sm-6'p>>",
     "select": true,
     "language": {
       
