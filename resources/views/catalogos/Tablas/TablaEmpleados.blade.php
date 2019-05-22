@@ -9,10 +9,6 @@
 	</ul>
 		<div class="">
 			<ol class="breadcrumb float-sm-left">
-				<!--
-				<li class="breadcrumb-item"><a href="#">Home</a></li>
-				<li class="breadcrumb-item active">Empleados</li>
-				-->
 				<h5>Catálogo de Empleados</h5>
 			</ol>
 		</div> 

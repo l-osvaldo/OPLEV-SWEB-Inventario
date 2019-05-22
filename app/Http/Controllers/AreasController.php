@@ -45,11 +45,8 @@ class AreasController extends Controller
 		{
 			$clave = $request->input('id');
 					$area = $request->input('no');
-					$update = areas::where('clvdepto',$clave)->update(array('depto' => $area));				
-					
-					$update = empleados::where('clvdepto',$clave)->update(array('nombredepto' => $area));							
-				//	Alert::success('Partida guardada', 'Registro Exitoso')->autoclose(2500);
+					$update = areas::where('clvdepto',$clave)->update(array('depto' => $area));			
+					$update = empleados::where('clvdepto',$clave)->update(array('nombredepto' => $area));	
 			return response()->json(['success']);
-			//return view ('informes_avisos', compact('breadcrumb'));
 		}
 }

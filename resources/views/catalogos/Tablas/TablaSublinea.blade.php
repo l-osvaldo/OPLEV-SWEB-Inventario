@@ -72,41 +72,41 @@
 	</div>
 </div>
 
-<section class="content">
+<section class="content" style="margin-top: 2vh;">
   <div class="row">
   	<div class="col-12">     
     	<div class="center-block">
           <div class="card">
             <div class="card-header">
-              <div class="card-body col-md-12">
+              <div class="card-body col-md-10">
                 <div class="row">
                   <div class="col-6">
                     <h5>Partida: {{ $partida }} </h5>
                   </div>
-
                   <div class="col-6">
                       <h5>Línea: {{ $linea }}</h5>
                     </div>
                 </div>
               </div>
             </div>
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-hover dt-responsive nowrap" style="width:100%">
-                  <thead>
-                    <tr>
-                      <th>No. Sublínea</th>
-                      <th>Descripcion</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach ($sublineas as $sublineas)    
-                    <tr>
-                      <th>{{ $sublineas->sublinea }}</th>
-                      <th>{{ $sublineas->descsub }}</th>
-                    </tr>
-                   	@endforeach
-                  </tbody>
-                </table>
+            <div class="card-body">
+                <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>No. Sublínea</th>
+                    <th>Descripción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($sublineas as $sublineas)    
+                  <tr>
+                    <td style="width: 353px;">{{ $sublineas->sublinea }}</td>
+                    <td>{{ $sublineas->descsub }}</td>
+                    
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

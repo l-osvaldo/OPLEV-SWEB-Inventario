@@ -1,35 +1,41 @@
 @extends('layouts.admin')
 
 @section('content')
-<!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>
-                <b>Sistema de Inventario</b>
-                    <button class="btn btn-primary">Nuevo +</button> 
-                </h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+  <!-- Navbar -->
+  <nav class=" navbar navbar-expand col-sm-12 bg-white navbar-light border-bottom">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a> 
+          </li>
+        </ul>
+          <div class="">
+            <ol class="breadcrumb float-sm-left">
+              <!--
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Inventario</li>
+              <li class="breadcrumb-item active">Catalogos</li>
+              -->
+              <h5>Catálogos de Bienes OPLE</h5>
             </ol>
           </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
+          <ul class="navbar-nav ml-auto float-sm-right">   
+              <li class="nav-item">
+                <a class="nav-link" href="#"><h5 style="color:#EA0D94"><b>Dirección Ejecutiva de Administración</b></h5></a>
+              </li>
+          </ul>
+    </nav>
+    <!-- /.navbar -->
 
-    <section class="content">
+
+
+    <section class="content" style="margin-top: 2vh;">
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Catalogos de Bienes OPLE</h3>
                     </div>
                     <div class="car-body">
-                        <table id="table1" class="table table-bordered table-hover">
+                            <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No. Inventario</th>
@@ -85,7 +91,7 @@
                             <h3 class="card-title">Detalle</h3>
                         </div>
                         <div class="car-body">
-                            <table id="table1" class="table table-bordered table-hover">
+                                <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>Empleado</th>
@@ -113,17 +119,4 @@
         </section>
 
 
-    <script>
-        $(function () {
-          $("#table1").DataTable();
-          $('#table2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false
-          });
-        });
-      </script>
 @endsection   

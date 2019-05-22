@@ -25,15 +25,5 @@ class partidas extends Model
       }
 
       
-    //
-/*
-    public function save($partida)
-        {
-            $this->partida = $partida['partida'];
-            $this->descpartida = $partida['descpartida'];
-            $this->save();
-            return 1;
-        }
-        */
         
 }

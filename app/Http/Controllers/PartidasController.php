@@ -96,12 +96,10 @@ class PartidasController extends Controller
 
 					$partida->partida = $request->input('partida');
 					$partida->descpartida = $request->input('descpartida');
-
 					$linea->partida = $request->input('partida');
 					$linea->descpartida = $request->input('descpartida');
 					$linea->linea = $request->input('linea');
 					$linea->desclinea = $request->input('desclinea');
-
 					$sublinea->partida = $request->input('partida');
 					$sublinea->descpartida = $request->input('descpartida');
 					$sublinea->linea = $request->input('linea');
@@ -109,7 +107,6 @@ class PartidasController extends Controller
 					$sublinea->sublinea = $request->input('sublinea');
 					$sublinea->descsub = $request->input('descsub');
 					$sublinea->total = $request->input('total');
-				// $partida->lineas($linea)->sublineas($sublinea);
 					$partida->save();
 					$linea->save();
 					$sublinea->save();
@@ -122,7 +119,6 @@ class PartidasController extends Controller
     public function show( $partida)
 			{
 					$partidas2 = partidas::where('partida',$partida)->get();
-					//echo $partidas2;exit();
 					return view('catalogos.TablaPartidaShow',compact('partidas2'));
 			}
 

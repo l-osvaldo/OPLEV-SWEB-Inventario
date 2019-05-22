@@ -60,7 +60,6 @@ class LineasController extends Controller
     public function index()
       {
           $linea = partidas::join('lineas', 'partidas.partida','=','lineas.partida')
-            //  ->join('orders', 'users.id', '=', 'orders.user_id')
               ->select('partidas.partida','descpartida','linea','desclinea')
               ->get();
               $usuario = auth()->user();
@@ -77,7 +76,7 @@ class LineasController extends Controller
         $linea = lineas::distinct()->get(['partida', 'descpartida']);
         $usuario = auth()->user();
         return view('catalogos.Agregar.AgregaLineas', compact('linea','usuario'));
-        // return view('catalogos.Partidas');
+        
       }
 
     
@@ -129,7 +128,9 @@ class LineasController extends Controller
        //mostrar partida en la vista
         $lineaL = lineas::where('partida', $request->get('Partidas'), lineas::raw('count(*) >= 1'))
         ->get();
-
+        
+            //el if pregunta si lineaL viene vacia 
+            // en caso de tener una partida mostrara el numero de partida en la vista
         $partida = isset($lineaL[0]) ? $lineaL[0] : false;
         if ($partida){
         $partida = $lineaL[0]['partida'] . " - " . $lineaL[0]['descpartida'];
@@ -138,8 +139,6 @@ class LineasController extends Controller
         $linea3 = lineas::where('partida', $request->get('Partidas'), lineas::raw('count(*) >= 1'))
             ->get();
             $usuario = auth()->user();
-            // echo $lineas;exit();
-            
           return view('catalogos.Tablas.TablaLineasShow',compact('linea3','lineaL','linea8','lineaT','lineas','usuario','partida')); 
       }
 

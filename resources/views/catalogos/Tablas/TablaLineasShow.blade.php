@@ -12,8 +12,6 @@
 </ul>
 <div class="">
   <ol class="breadcrumb float-sm-left">
- <!--   <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item active">Líneas</li> -->
     <h5>Catálogo de Líneas</h5>
   </ol>
 </div>
@@ -63,14 +61,14 @@
 
 <section class="content" style="margin-top: 2vh;">
   <div class="row">
-    <div class="col-9">     
+    <div class="col-12">     
       <div class="center-block">
         <div class="card">
           <div class="card-header">  
              <h5>Partida: {{ $partida }} </h5>
           </div>
           <div class="card-body">
-              <table id="example1" name="example1" class="table table-bordered table-hover dt-responsive nowrap" style="width:100%">
+              <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
                 <thead>
                   <tr>
                     <th>No. Línea</th>

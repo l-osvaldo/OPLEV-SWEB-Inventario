@@ -41,21 +41,6 @@ class validarController extends Controller
 
         Alert::error('Revise sus campos', '¡Error!')->autoclose(2000);
     }
-/*
-    public function username(Request $request)
-    {
-        
-        $username = $request->input('usuario');
-
-        if (User::where('username', '=', $username)->count() > 0){          
-          $popo='1';
-        } else {
-          $popo='0';  
-        }
-        return response()->json(['success'=>compact('popo')]);
-        
-    }
-        */
 
     public function store(Request $request)
     {

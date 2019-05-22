@@ -11,10 +11,6 @@
 		</ul>
 			<div class="">
 				<ol class="breadcrumb float-sm-left">
-					<!--
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item active">Areas</li>
-					-->
 					<h5>Catálogo de Áreas</h5>
 				</ol>
 			</div> 
@@ -28,7 +24,7 @@
 	<!-- /.navbar -->
 	<section class="content" style="margin-top: 2vh;">
 		<div class="row ">
-				<div class="col-9">     
+				<div class="col-12">     
 					<div class="center-block">
 						<div class="card">      
 							<div class="card-body" >

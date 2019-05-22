@@ -34,9 +34,11 @@ Route::get('/personalizado', 'HomeController@personalizado')->name('personalizad
 Route::get('/catalogos/bienes', 'CatalogosController@bienes')->name('catalogos');
 Route::get('/catalogos/bieneseco', 'CatalogosController@bieneseco')->name('catalogoeco');
 Route::get('/catalogos/lista', 'CatalogosController@lista')->name('lista');
+
 //rutas del partidas
 Route::get('/catalogos/TablaPartida', 'PartidasController@index')->name('Tabla-Partida');
 Route::post('/catalogos/GuardarPartidas', 'PartidasController@store')->name('partidas');
+
 //rutas del modal de lineas
 Route::get('/catalogos/AgregaLineas', 'LineasController@store')->name('agregarLinea');
 Route::post('/catalogos/AgregaLineas', 'LineasController@store')->name('agregarLinea');
@@ -49,8 +51,10 @@ Route::get('/catalogos/TablaSublineas', 'SublineasController@show')->name('show-
 Route::post('/catalogos/AgregaSubineasStore', 'SublineasController@Agregasublineastore')->name('AgregarSub');
 Route::get('ajaxRequest', 'SublineasController@ajaxRequest');
 Route::get('catalogos/obtenLineas', 'SublineasController@obtenLineas');
+
 //MAx Lineas
 Route::get('catalogos/obtenMaxLineas', 'SublineasController@obtenMaxLineas');
+
 //sublineas
 Route::get('catalogos/obtenLineasAg', 'SublineasController@obtenLineasAg');
 Route::get('catalogos/obtenSublineas', 'SublineasController@obtenSublineas');
@@ -61,10 +65,8 @@ Route::post('/catalogos/updatearea', 'AreasController@updaArea')->name('updatear
 
 //Empleados
 Route::get('/catalogos/TablaEmpleados', 'EmpleadosController@index')->name('TablaDeEmpleados');
-
 Route::get('/catalogos/AgregaEmpleados', 'EmpleadosController@store')->name('agregarEmpleados');
 Route::post('/catalogos/AgregaEmpleados', 'EmpleadosController@store')->name('agregarEmpleados');
-
 Route::post('/catalogos/TablaEmpleados', 'EmpleadosController@show')->name('show-Empleados');
 Route::get('/catalogos/TablaEmpleados', 'EmpleadosController@show')->name('show-Empleados');
 

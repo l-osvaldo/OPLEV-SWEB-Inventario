@@ -11,10 +11,7 @@
       </ul>
         <div class="">
           <ol class="breadcrumb float-sm-left">
-            <!--
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Catalogos</li>
-            -->
+            
             <h5>Catálogos</h5>
           </ol>
         </div>

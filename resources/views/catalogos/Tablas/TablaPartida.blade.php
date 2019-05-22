@@ -11,8 +11,6 @@
       </ul>
         <div class="">
           <ol class="breadcrumb float-sm-left">
-         <!--   <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Partidas</li> -->
             <h5>Catálogo de Partidas</h5> 
           </ol>
         </div> 
@@ -110,21 +108,21 @@
                 <!-- /.col -->
                 <div class="col-md-10">
                   <div class="form-group {{ $errors->has('descpartida') ? 'has-error' : '' }}">
-                    <label>Ddescripción Partida</label>
+                    <label>Descripción Partida</label>
                     <input type="text" class="form-control validateData" data-myType="text" data-error= "2" data-validacion="2" id="descpartida" name="descpartida" style="text-transform:uppercase;"
                     onkeyup="javascript:this.value=this.value.toUpperCase();">
                     <span class="text-danger error2"></span>
                   </div>
                         <!-- --  -->
                   <div class="form-group {{ $errors->has('desclinea') ? 'has-error' : '' }}">
-                    <label>Ddescripción Línea</label>
+                    <label>Descripción Línea</label>
                     <input type="text" class="form-control validateData" data-myType="text" data-error= "3" data-validacion="3" id="desclinea" name="desclinea" style="text-transform:uppercase;" 
                     onkeyup="javascript:this.value=this.value.toUpperCase();">
                     <span class="text-danger error3"></span>
                   </div>
                   <!-- /.form-group -->
                   <div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}">
-                    <label>Ddescripción Sublínea</label>
+                    <label>Descripción Sublínea</label>
                     <input type="text" class="form-control validateData" data-myType="text" data-error= "4" data-validacion="4" id="descsub" name="descsub" style="text-transform:uppercase;" 
                     onkeyup="javascript:this.value=this.value.toUpperCase();">
                     <span class="text-danger error4"></span>
