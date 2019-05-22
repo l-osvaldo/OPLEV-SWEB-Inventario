@@ -126,12 +126,16 @@ class LineasController extends Controller
         $lineaT = partidas::distinct()->get(['partida', 'descpartida']);
         $lineas = partidas::distinct()->get(['partida', 'descpartida']);
         $linea8 = partidas::distinct()->get(['partida', 'descpartida']);        
+       //mostrar partida en la vista
         $lineaL = lineas::where('partida', $request->get('Partidas'), lineas::raw('count(*) >= 1'))
         ->get();
 
-        $partida = $lineaL[0]['partida'] . " " . $lineaL[0]['descpartida'];
-
-          $linea3 = lineas::where('partida', $request->get('Partidas'), lineas::raw('count(*) >= 1'))
+        $partida = isset($lineaL[0]) ? $lineaL[0] : false;
+        if ($partida){
+        $partida = $lineaL[0]['partida'] . " - " . $lineaL[0]['descpartida'];
+        }
+          
+        $linea3 = lineas::where('partida', $request->get('Partidas'), lineas::raw('count(*) >= 1'))
             ->get();
             $usuario = auth()->user();
             // echo $lineas;exit();

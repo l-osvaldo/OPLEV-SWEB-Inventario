@@ -230,7 +230,7 @@
     "retrieve": true,
     "processing": true,
     "sSearch": "Filter Data",
-    "dom":     "<'row'<'col-sm-3 text-center'l><'col-sm-5'B><'col-sm-4'f>>" +
+    "dom":     "<'row'<'col-sm-3 text-center'l><'col-sm-3'B><'col-sm-3'f>>" +
     "<'row'<'col-sm-12'tr>>" +
     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
     "select": true,
@@ -871,7 +871,7 @@ $('#editModal').on('show.bs.modal', function (event) {
      e.preventDefault();
      var form = $(this).parents('form');
      swal({
-         title: "Registro de Líneas",
+         title: "Registro de Sublíneas",
          text: "¿Desea continuar?",
          type: "warning",
          showCancelButton: true,
@@ -907,7 +907,7 @@ $('#editModal').on('show.bs.modal', function (event) {
          e.preventDefault();
          var form = $(this).parents('form');
          swal({
-             title: "Registro de Líneas",
+             title: "Registro de Empleados",
              text: "¿Desea continuar?",
              type: "warning",
              showCancelButton: true,

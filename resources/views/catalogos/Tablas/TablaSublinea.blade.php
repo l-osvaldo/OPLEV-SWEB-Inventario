@@ -37,21 +37,21 @@
                   <div class="col-md-12">
                         <label>Partida:</label>
                       <select id="Partidas" name="Partidas" class="form-control select2 dynamic" >    
-                          <option selected="selected">Seleccinar Partida</option>
+                          <option selected="selected">Seleccione una Partida</option>
                         @foreach ($sublineaSe as $sublineaSe)
-                          <option selected="selected" value="{{ $sublineaSe->partida }}">{{ $sublineaSe->partida }} | {{ $sublineaSe->descpartida }}</option>                         
+                          <option value="{{ $sublineaSe->partida }}">{{ $sublineaSe->partida }} | {{ $sublineaSe->descpartida }}</option>                         
                         @endforeach
                       </select>
                     </div>
               </div>
-              </div>   
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <div class="col-md-12">
-                        <div class="form-group">                   
+            </div>   
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <div class="form-group">                   
                             <label>Línea:</label>
                         <select class="form-control select2 dynamic" id="Linea" name="Linea">
-                            <option value="0" disabled="true" selected="true">Seleccionar Línea</option>
+                            <option value="0" disabled="true" selected="true">Seleccione una Línea</option>
                         </select>
                       </div>
                     </div>
@@ -63,9 +63,9 @@
                 </div>	
                 </form> 
               <div class="col-md-4">
-              <a href="#" style="background-color: #E71096" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModalTb"> Nueva Sublínea</a>
+                <a href="#" style="background-color: #E71096" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModalTb"> Agregar Sublínea</a>
               </div>
-            </div>
+          </div>
             
       </div>  
       <!---->
@@ -74,10 +74,21 @@
 
 <section class="content">
   <div class="row">
-  	<div class="col-9">     
+  	<div class="col-12">     
     	<div class="center-block">
           <div class="card">
             <div class="card-header">
+              <div class="card-body col-md-12">
+                <div class="row">
+                  <div class="col-6">
+                    <h5>Partida: {{ $partida }} </h5>
+                  </div>
+
+                  <div class="col-6">
+                      <h5>Línea: {{ $linea }}</h5>
+                    </div>
+                </div>
+              </div>
             </div>
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-hover dt-responsive nowrap" style="width:100%">
@@ -124,14 +135,14 @@
                   <div class="row">
                     <div class="col-md-8">
                       <div class="form-group">
-                        <label>Seleccioné una partida:</label>
+                        <label>Seleccione una Partida:</label>
                           <select id="partidaA" name="partidaA" class="form-control select2 dynamic" style="width: 100%;">
                             <option selected="selected">No. partida</option>
                               @foreach ($sublineaAgt as $sublineaAgt)
                             <option value="{{ $sublineaAgt->partida}}">{{ $sublineaAgt->partida }} | {{ $sublineaAgt->descpartida }}</option>
                               @endforeach
                           </select>
-                          <label>Seleccioné una Línea:</label>                 
+                          <label>Seleccione una Línea:</label>                 
                             <select class="form-control dynamic" id="lineaA" name="lineaA" >
                               <option value="0" disabled="true" selected="true">Línea</option>
                             </select>
@@ -155,7 +166,7 @@
                   	</div>
                     <div class="col-md-6">
                       <div class="form-group{{ $errors->has('descsub') ? 'has-error' : '' }}">
-                        <label>Ddescripción Sublínea:</label>
+                        <label>Descripción de Sublínea:</label>
                           <input type="text" class="form-control validateDataDos" data-myTypeDos="text" data-errorDos= "8" data-validacionDos="1" id="descsub" name="descsub" style="text-transform:uppercase;" 
                           onkeyup="javascript:this.value=this.value.toUpperCase();">
                         <span class="text-danger error8"></span>

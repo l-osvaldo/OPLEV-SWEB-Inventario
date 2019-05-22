@@ -47,7 +47,7 @@
                   <div class="col-md-4 float-right">
                     @include('sweet::alert')
                       <div  class="btn-group ">
-                        <a href="#" style="background-color: #E71096" class="btn btn-secondary float-right" data-toggle="modal" data-target="#exampleModalLinea"> Nueva Línea</a>
+                        <a href="#" style="background-color: #E71096" class="btn btn-secondary float-right" data-toggle="modal" data-target="#exampleModalLinea"> Agregar Línea</a>
                       </div> 
                   </div>
                 </form>  
@@ -67,7 +67,7 @@
       <div class="center-block">
         <div class="card">
           <div class="card-header">  
-              {{ $partida }}
+             <h5>Partida: {{ $partida }} </h5>
           </div>
           <div class="card-body">
               <table id="example1" name="example1" class="table table-bordered table-hover dt-responsive nowrap" style="width:100%">
@@ -98,7 +98,7 @@
         <div class="modal-dialog modal-lg" role="document">      
           <div class="modal-content">
             <div class="modal-header" style="background: #a90a6c; color:white">
-              <h5 class="modal-title" id="exampleModalLabel"><b>Agregar Linea</b></h5>
+              <h5 class="modal-title" id="exampleModalLabel"><b>Agregar Línea</b></h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

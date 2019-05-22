@@ -28,12 +28,12 @@
 
       <div class="card">
         <div class="card-body" >
-          <a href="#" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"> Nueva Partida</a>         
+          <a href="#" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"> Agregar Partida</a>         
         </div>
       </div> 
 <section class="content" style="margin-top: 2vh;">
   <div class="row ">
-    <div class="col-8">     
+    <div class="col-12">     
       <div class="center-block">
         <div class="card">
                
@@ -42,7 +42,7 @@
               <thead>
                 <tr>
                   <th>No. Partida</th>
-                  <th>Descripcion</th>
+                  <th>Descripción</th>
                 </tr>
               </thead>
               <tbody>
@@ -84,7 +84,7 @@
                   </div>
                     <!-- -- !-->
                   <div class="form-group {{ $errors->has('linea') ? 'has-error' : '' }}">
-                    <label>Linea</label>
+                    <label>Línea</label>
                     <input type="text" class="form-control " readonly  id="linea" name="linea" value="01" placeholder="01" >
                       @if ($errors->has('linea'))
                     <small class="form-text text-danger">{{ $errors->first('linea') }}</small>
@@ -92,7 +92,7 @@
                   </div>
                   <!-- /.form-group -->
                   <div class="form-group {{ $errors->has('sublinea') ? 'has-error' : '' }}">
-                    <label>Sublinea</label>
+                    <label>Sublínea</label>
                     <input type="text" class="form-control" readonly id="sublinea" name="sublinea" value="01" placeholder="01" >
                       @if ($errors->has('sublinea'))
                     <small class="form-text text-danger">{{ $errors->first('sublinea') }}</small>
@@ -117,14 +117,14 @@
                   </div>
                         <!-- --  -->
                   <div class="form-group {{ $errors->has('desclinea') ? 'has-error' : '' }}">
-                    <label>Ddescripción Linea</label>
+                    <label>Ddescripción Línea</label>
                     <input type="text" class="form-control validateData" data-myType="text" data-error= "3" data-validacion="3" id="desclinea" name="desclinea" style="text-transform:uppercase;" 
                     onkeyup="javascript:this.value=this.value.toUpperCase();">
                     <span class="text-danger error3"></span>
                   </div>
                   <!-- /.form-group -->
                   <div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}">
-                    <label>Ddescripción Sublinea</label>
+                    <label>Ddescripción Sublínea</label>
                     <input type="text" class="form-control validateData" data-myType="text" data-error= "4" data-validacion="4" id="descsub" name="descsub" style="text-transform:uppercase;" 
                     onkeyup="javascript:this.value=this.value.toUpperCase();">
                     <span class="text-danger error4"></span>

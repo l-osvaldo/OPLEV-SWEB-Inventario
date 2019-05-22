@@ -65,12 +65,22 @@ class SublineasController extends Controller
             $linea = $request->get('Linea');
             $sublineas = sublineas::where('partida',$partida)->where('linea',$linea)->get();
             $sublineaAgt = sublineas::distinct()->get(['partida', 'descpartida']); 
-          // $sublineaSe = sublineas::where('partida',$partida)->where('linea',$linea)->get();
             $sublineaSe = sublineas::distinct()->get(['partida', 'descpartida']);
+
+            //mostrar partida en la vista Y linea
+            $lineaL = lineas::where('partida', $request->get('Partidas'), lineas::raw('count(*) >= 1'))
+            ->get();
+
+            $partida = isset($lineaL[0]) ? $lineaL[0] : false;
+            if ($partida){
+            $partida = $lineaL[0]['partida'] . " : " . $lineaL[0]['descpartida'];
+            $linea = $lineaL[0]['linea']. " : " . $lineaL[0]['desclinea'];
+            }
+              
 
             $usuario = auth()->user();
             
-            return view('catalogos.Tablas.TablaSublinea', compact('sublineas','sublineaSe','sublineaAgt','linea','partida','usuario'));
+            return view('catalogos.Tablas.TablaSublinea', compact('sublineas','lineaL','sublineaSe','sublineaAgt','linea','partida','usuario'));
 
 
           // var_dump($sublineas);
@@ -184,7 +194,7 @@ class SublineasController extends Controller
               $usuario = auth()->user();
               Alert::success('Sublínea guardada', 'Registro Exitoso')->autoclose(2500);
 
-              return redirect()->route('lista', compact('usuario'));
+              return redirect()->route('show-sublineas', compact('usuario'));
             
 
           } 
