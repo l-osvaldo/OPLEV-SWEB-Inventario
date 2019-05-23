@@ -19,7 +19,7 @@ class PartidasController extends Controller
 			{
 					$this->validate($request,[
 
-							'partida'           =>  'required|numeric',
+							'partida'           =>  'required|unique|numeric',
 							'descpartida'       =>  'required|min:1|max:250',
 							'linea'             =>  'required|numeric',
 							'desclinea'         =>  'required|min:1|max:250',

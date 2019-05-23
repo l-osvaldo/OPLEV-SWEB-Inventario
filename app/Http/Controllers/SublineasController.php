@@ -59,18 +59,15 @@ class SublineasController extends Controller
 
 
       public function show(Request $request)
-        {
-          
+        {          
             $partida = $request->get('Partidas');
             $linea = $request->get('Linea');
             $sublineas = sublineas::where('partida',$partida)->where('linea',$linea)->get();
             $sublineaAgt = sublineas::distinct()->get(['partida', 'descpartida']); 
             $sublineaSe = sublineas::distinct()->get(['partida', 'descpartida']);
-
             //mostrar partida en la vista Y linea
-            $lineaL = lineas::where('partida', $request->get('Partidas'), lineas::raw('count(*) >= 1'))
+            $lineaL = sublineas::where('partida', $request->get('Partidas'), sublineas::raw('count(*) >= 1'))
             ->get();
-
             //el if pregunta si lineaL viene vacia 
             // en caso de tener una partida y una linea mostrara el numero de partida y linea en la vista
             $partida = isset($lineaL[0]) ? $lineaL[0] : false;
@@ -78,14 +75,9 @@ class SublineasController extends Controller
             $partida = $lineaL[0]['partida'] . " - " . $lineaL[0]['descpartida'];
             $linea = $lineaL[0]['linea']. " - " . $lineaL[0]['desclinea'];
             }
-            
             $usuario = auth()->user(); 
             return view('catalogos.Tablas.TablaSublinea', compact('sublineas','lineaL','sublineaSe','sublineaAgt','linea','partida','usuario'));
-
-
-          // var_dump($sublineas);
-            //dd();
-
+          
           }
 
         public function obtenLineas(Request $request)
@@ -141,7 +133,6 @@ class SublineasController extends Controller
                 ->orderBy('linea', 'ASC')
                     ->get(['linea','desclinea']);
             return response()->json($sublinea);
-
           }
         
 
@@ -188,12 +179,10 @@ class SublineasController extends Controller
               $sublinea->sublinea = $request->input('sublinea');
               $sublinea->descsub = $request->input('descsub');
               $sublinea->total = $request->input('total');
-
               $sublinea->save();
 
               $usuario = auth()->user();
               Alert::success('Sublínea guardada', 'Registro Exitoso')->autoclose(2500);
-
               return redirect()->route('show-sublineas', compact('usuario'));
             
 

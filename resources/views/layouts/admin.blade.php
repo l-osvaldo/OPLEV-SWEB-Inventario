@@ -989,7 +989,7 @@ $('#editModal').on('show.bs.modal', function (event) {
    {
        switch (tipo) {
          case 'text':
-           if (valor.match(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/) && valor!=""){
+           if (valor.match(/^[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]*$/) && valor!=""){
              $('.error'+ error).text("");
              $('#'+id).attr("data-validacion", '0');
              $('#'+id).removeClass('inputDanger');
@@ -1050,7 +1050,7 @@ $('#editModal').on('show.bs.modal', function (event) {
    {
        switch (tipo) {
          case 'text':
-           if (valor.match(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/) && valor!=""){
+           if (valor.match(/^[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]*$/) && valor!=""){
              $('.error'+ error).text("");
              $('#'+id).attr("data-validacionDos", '0');
              $('#'+id).removeClass('inputDanger');
@@ -1115,7 +1115,7 @@ $('#editModal').on('show.bs.modal', function (event) {
    {
        switch (tipo) {
          case 'text':
-           if (valor.match(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/) && valor!=""){
+           if (valor.match(/^[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]*$/) && valor!=""){
              $('.error'+ error).text("");
              $('#'+id).attr("data-validacionLi", '0');
              $('#'+id).removeClass('inputDanger');

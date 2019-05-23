@@ -50,7 +50,7 @@
                     <div class="col-md-12">
                       <div class="form-group">                   
                             <label>Línea:</label>
-                        <select class="form-control select2 dynamic" id="Linea" name="Linea">
+                        <select class="form-control dynamic" id="Linea" name="Linea">
                             <option value="0" disabled="true" selected="true">Seleccione una Línea</option>
                         </select>
                       </div>
@@ -94,7 +94,7 @@
                 <thead>
                   <tr>
                     <th>No. Sublínea</th>
-                    <th>Descripción</th>
+                    <th>Descripción de la Sublínea</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -119,7 +119,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header" style="background: #a90a6c; color:white">
-            <h5 class="modal-title" id="exampleModalLabel"><b>Nueva Sublínea</b></h5>
+            <h5 class="modal-title" id="exampleModalLabel"><b>Agregar Sublínea</b></h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
               </button>
@@ -133,22 +133,22 @@
                             <!-- /.card-header -->
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                       <div class="form-group">
                         <label>Seleccione una Partida:</label>
-                          <select id="partidaA" name="partidaA" class="form-control select2 dynamic" style="width: 100%;">
+                          <select id="partidaA" name="partidaA" class="form-control select2 dynamic" style="width: 80%;">
                             <option selected="selected">No. partida</option>
                               @foreach ($sublineaAgt as $sublineaAgt)
                             <option value="{{ $sublineaAgt->partida}}">{{ $sublineaAgt->partida }} | {{ $sublineaAgt->descpartida }}</option>
                               @endforeach
                           </select>
                           <label>Seleccione una Línea:</label>                 
-                            <select class="form-control dynamic" id="lineaA" name="lineaA" >
+                            <select class="form-control dynamic" id="lineaA" name="lineaA" style="width: 80%;">
                               <option value="0" disabled="true" selected="true">Línea</option>
                             </select>
                       </div>
                     </div>      
-                    <div class="col-md-6"> 
+                    <div class="col-md-2"> 
                     	<div class="form-group">
                         <label>Sublínea:</label>
                         <input type="text" class="form-control" readonly id="sublinea" name="sublinea" value="0">
@@ -164,8 +164,8 @@
                           @endif
                       </div>
                   	</div>
-                    <div class="col-md-6">
-                      <div class="form-group{{ $errors->has('descsub') ? 'has-error' : '' }}">
+                    <div class="col-md-10">
+                      <div class="form-group{{ $errors->has('descsub') ? 'has-error' : '' }}" style="width: 80%;">
                         <label>Descripción de Sublínea:</label>
                           <input type="text" class="form-control validateDataDos" data-myTypeDos="text" data-errorDos= "8" data-validacionDos="1" id="descsub" name="descsub" style="text-transform:uppercase;" 
                           onkeyup="javascript:this.value=this.value.toUpperCase();">
@@ -178,8 +178,8 @@
               </form>
         		</div>
             <div class="card-footer">
-              <button type="reset" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-               <button type="submit" id="btn-submit" class="btn btn-primary float-right" disabled>
+              <button id="btnCerrar"  class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+               <button type="submit" id="btn-submit" style="background-color: #E71096" class="btn btn-secondary float-right"  disabled>
                   {{ __('Guardar') }}
               </button>
             </div>

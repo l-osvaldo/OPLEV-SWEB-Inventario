@@ -16,6 +16,7 @@ class validarController extends Controller
         $this->validate($request,[
         'partida.required'     => 'La :attribute es obligatoria.',
         'partida.integer'      => 'La :attribute debe ser un entero.',
+        'partida.unique'       => 'La :attribute ya existe.',
 
         'descpartida.required'   => 'La :attribute es obligatoria.',
         'descpartida.min'        => 'La :attribute debe contener mas de una letra.',

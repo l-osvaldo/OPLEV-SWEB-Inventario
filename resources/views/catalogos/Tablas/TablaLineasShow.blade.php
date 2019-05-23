@@ -32,7 +32,7 @@
           <div class="row"> 
             <div class="col-md-10">
               <div class="form-group">
-                <label>Sleccioné una Partida</label>
+                <label>Sleccione una Partida</label>
                 <form method="POST" action="{{ route('show-lineas') }}">
                   @csrf  
                     <select id="Partidas" name="Partidas" class="form-control select2" style="width: 40%;">
@@ -72,7 +72,7 @@
                 <thead>
                   <tr>
                     <th>No. Línea</th>
-                    <th>Descripción</th>
+                    <th>Descripción de Línea</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -109,8 +109,8 @@
                                             <!-- /.card-header -->
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-md-7">
-                        <div class="form-group">
+                      <div class="col-md-12">
+                        <div class="form-group" style="width: 75%;">
                           <label>Partidas:</label>
                           <select id="partida" name="partida" class="form-control select2 validateDataLi" data-myTypeLi="select" data-errorLi= "5" data-validacionLi="1" style="width: 100%;">
                             <option selected="selected">No. partida</option>
@@ -120,7 +120,7 @@
                           </select>
                         </div>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-2">
 												<div class="form-group">
 													<label>Línea:</label>
 													<input type="text" class="form-control" readonly id="LineaMax" name="LineaMax" value="0">   
@@ -146,16 +146,16 @@
                                                 <!-- /.form-group -->
                       </div>
                                                 <!-- /.col -->
-											<div class="col-md-6">
-												<div class="form-group {{ $errors->has('desclinea') ? 'has-error' : '' }}">
-													<label>Descripción Línea:</label>
+											<div class="col-md-10">
+												<div class="form-group {{ $errors->has('desclinea') ? 'has-error' : '' }}" style="width: 50%;">
+													<label>Descripción de la Línea:</label>
 													<input type="text" class="form-control validateDataLi" data-myTypeLi="text" data-errorLi= "3" data-validacionLi="1" id="desclinea" name="desclinea" style="text-transform:uppercase;" 
 													onkeyup="javascript:this.value=this.value.toUpperCase();">
 													<span class="text-danger error3"></span>
 												</div>
 											<!-- /.form-group -->
-												<div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}">
-													<label>Descripción Sublínea:</label>
+												<div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}" style="width: 50%;">
+													<label>Descripción de la Sublínea:</label>
 													<input type="text" class="form-control validateDataLi" data-myTypeLi="text" data-errorLi= "4" data-validacionLi="1" id="descsub" name="descsub" style="text-transform:uppercase;" 
 													onkeyup="javascript:this.value=this.value.toUpperCase();">
 													<span class="text-danger error4"></span>

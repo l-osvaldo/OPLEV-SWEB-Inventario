@@ -40,7 +40,7 @@
               <thead>
                 <tr>
                   <th>No. Partida</th>
-                  <th>Descripción</th>
+                  <th>Descripción de la Partida</th>
                 </tr>
               </thead>
               <tbody>
@@ -63,7 +63,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header" style="background: #a90a6c; color:white">
-          <h5 class="modal-title" id="exampleModalLabel"><b>Nueva Partida</b></h5>
+          <h5 class="modal-title" id="exampleModalLabel"><b>Agregar Partida</b></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -75,11 +75,13 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-md-2">
+                  
                   <div class="form-group {{ $errors->has('partida') ? 'has-error' : '' }}">
-                    <label>Partida</label>
-                    <input type="text" maxlength="8" class="form-control form-control-sm validateData" data-myType="int" data-error= "1" data-validacion="1" id="partida" name="partida" >
-                    <span class="text-danger error1"></span>
-                  </div>
+                      <label>Partida</label>
+                      <input type="text" maxlength="8" class="form-control validateData" data-myType="int" data-error= "1" data-validacion="1" id="partida" name="partida">
+                      <span class="text-danger error1"></span>
+                    </div>
+
                     <!-- -- !-->
                   <div class="form-group {{ $errors->has('linea') ? 'has-error' : '' }}">
                     <label>Línea</label>
@@ -109,21 +111,21 @@
                 <div class="col-md-10">
                   <div class="form-group {{ $errors->has('descpartida') ? 'has-error' : '' }}">
                     <label>Descripción Partida</label>
-                    <input type="text" class="form-control validateData" data-myType="text" data-error= "2" data-validacion="2" id="descpartida" name="descpartida" style="text-transform:uppercase;"
+                    <input type="text" class="form-control validateData" data-myType="text" data-error= "2" data-validacion="1" id="descpartida" name="descpartida" style="text-transform:uppercase;"
                     onkeyup="javascript:this.value=this.value.toUpperCase();">
                     <span class="text-danger error2"></span>
                   </div>
                         <!-- --  -->
                   <div class="form-group {{ $errors->has('desclinea') ? 'has-error' : '' }}">
                     <label>Descripción Línea</label>
-                    <input type="text" class="form-control validateData" data-myType="text" data-error= "3" data-validacion="3" id="desclinea" name="desclinea" style="text-transform:uppercase;" 
+                    <input type="text" class="form-control validateData" data-myType="text" data-error= "3" data-validacion="1" id="desclinea" name="desclinea" style="text-transform:uppercase;" 
                     onkeyup="javascript:this.value=this.value.toUpperCase();">
                     <span class="text-danger error3"></span>
                   </div>
                   <!-- /.form-group -->
                   <div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}">
                     <label>Descripción Sublínea</label>
-                    <input type="text" class="form-control validateData" data-myType="text" data-error= "4" data-validacion="4" id="descsub" name="descsub" style="text-transform:uppercase;" 
+                    <input type="text" class="form-control validateData" data-myType="text" data-error= "4" data-validacion="1" id="descsub" name="descsub" style="text-transform:uppercase;" 
                     onkeyup="javascript:this.value=this.value.toUpperCase();">
                     <span class="text-danger error4"></span>
                   </div>
