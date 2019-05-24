@@ -68,6 +68,10 @@ class SublineasController extends Controller
             //mostrar partida en la vista Y linea
             $lineaL = sublineas::where('partida', $request->get('Partidas'), sublineas::raw('count(*) >= 1'))
             ->get();
+            
+            $lineaL = sublineas::where('linea', $request->get('Linea'), sublineas::raw('count(*) >= 1'))
+            ->get();
+
             //el if pregunta si lineaL viene vacia 
             // en caso de tener una partida y una linea mostrara el numero de partida y linea en la vista
             $partida = isset($lineaL[0]) ? $lineaL[0] : false;
@@ -75,6 +79,11 @@ class SublineasController extends Controller
             $partida = $lineaL[0]['partida'] . " - " . $lineaL[0]['descpartida'];
             $linea = $lineaL[0]['linea']. " - " . $lineaL[0]['desclinea'];
             }
+
+            
+
+
+
             $usuario = auth()->user(); 
             return view('catalogos.Tablas.TablaSublinea', compact('sublineas','lineaL','sublineaSe','sublineaAgt','linea','partida','usuario'));
           

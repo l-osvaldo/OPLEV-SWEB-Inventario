@@ -86,7 +86,7 @@
             <li class="nav-item d-none d-sm-inline-block">
               <a href="{{ route('lista') }}" class="{!! Request::is('catalogos/lista','catalogos/TablaDeLineas','catalogos/Lineas',
               'catalogos/TablaEmpleados','catalogos/TablaPartida','catalogos/Sublineas','catalogos/TablaSublineas','catalogos/TablaAreas') ? 'nav-link active' : 'nav-link' !!}">
-                <i class="nav-icon fa fa-pie-chart"></i>
+                <i class="nav-icon fa fa-book"></i>
                 <p>
                   Catálogos
                 </p>
@@ -132,7 +132,7 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="min-height: 900px;">
+    <div class="content-wrapper" style="min-height: 885px;">
       @yield('content')
     </div>
     
@@ -140,18 +140,7 @@
         @include('partials.footer')
     </footer>
     
-    <!-- /.container-fluid -->
-    <!-- /.content-wrapper -->
-    <!-- Control Sidebar -->
-    <!-- Control sidebar content goes here -->
-    <!--
-    <aside class="control-sidebar control-sidebar-dark">
-      
-    </aside>
-       -->
-    <!-- /.control-sidebar -->
   </div>
-  <!-- ./wrapper -->
   
 
 

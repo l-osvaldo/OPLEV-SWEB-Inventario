@@ -111,7 +111,7 @@ $("#partidaA").change(function()
     el("depto").addEventListener("input",function() {
         el("editBtn").disabled = Boolean(this.value.length<=0);
       });
-
+      
       
 
 });

@@ -88,7 +88,7 @@
                         </div>
                       </div>
                       <div class="col-md-3">
-												<div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}">
+												<div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}" style="width: 75%;">
 													<label>No. Empleado:</label>
 													<input type="text" maxlength="6" class="form-control validateDataEm" data-myTypeEm="int" data-errorEm= "11" data-validacionEm="1" id="numemple" name="numemple" > 
 													<span class="text-danger error11"></span>  
@@ -123,7 +123,7 @@
 								</div>
 										<!--Fin Agregar Linea -->
 								<div class="card-footer">                                              
-									<button type="reset" class="btn btn-danger" data-dismiss="modal"">Cancelar</button>
+									<button type="reset" id="btnLimpiar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 									<button type="submit" id="btn-submitEm" style="background-color: #E71096" class="btn btn-secondary float-right" disabled>
 										{{ __('Guardar') }}
 									</button>
