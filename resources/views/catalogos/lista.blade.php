@@ -35,21 +35,21 @@
                 <div class="form-group">
                   <a href="{{ route('Tabla-Partida') }}" class="{!! Request::is('Tabla-Partida') ? 'nav-link active' : 'nav-link' !!}">    
                     <p>
-                      <i class="fa fa-table"></i>
+                      <i class="fa fa-file-text-o"></i>
                         Partidas
                     </p>
                   </a>
                   <hr>
                   <a href="{{ route('show-lineas') }}" class="{!! Request::is('show-lineas') ? 'nav-link active' : 'nav-link' !!}">
                     <p>
-                      <i class="fa fa-table"></i>
+                      <i class="fa fa-file-text-o"></i>
                       Líneas
                     </p>
                   </a>
                   <hr>
                   <a href="{{ route('show-sublineas') }}" class="{!! Request::is('show-sublineas') ? 'nav-link active' : 'nav-link' !!}">
                     <p>
-                      <i class="fa fa-table"></i>
+                      <i class="fa fa-file-text-o"></i>
                       Sublíneas
                     </p>
                   </a>

@@ -65,10 +65,10 @@ class SublineasController extends Controller
             $sublineas = sublineas::where('partida',$partida)->where('linea',$linea)->get();
             $sublineaAgt = sublineas::distinct()->get(['partida', 'descpartida']); 
             $sublineaSe = sublineas::distinct()->get(['partida', 'descpartida']);
-            //mostrar partida en la vista Y linea
+            //mostrar partida en la vista 
             $lineaL = sublineas::where('partida', $request->get('Partidas'), sublineas::raw('count(*) >= 1'))
             ->get();
-            
+            //busca la linea y la muestra en la vista
             $lineaL = sublineas::where('linea', $request->get('Linea'), sublineas::raw('count(*) >= 1'))
             ->get();
 
@@ -79,10 +79,6 @@ class SublineasController extends Controller
             $partida = $lineaL[0]['partida'] . " - " . $lineaL[0]['descpartida'];
             $linea = $lineaL[0]['linea']. " - " . $lineaL[0]['desclinea'];
             }
-
-            
-
-
 
             $usuario = auth()->user(); 
             return view('catalogos.Tablas.TablaSublinea', compact('sublineas','lineaL','sublineaSe','sublineaAgt','linea','partida','usuario'));
@@ -160,7 +156,6 @@ class SublineasController extends Controller
                     ->get(['linea']);
             return response()->json($sublinea);
           }
-
 
         //sublineas controller
 
