@@ -39,6 +39,8 @@ Route::get('/catalogos/lista', 'CatalogosController@lista')->name('lista');
 Route::get('/catalogos/TablaPartida', 'PartidasController@index')->name('Tabla-Partida');
 Route::post('/catalogos/GuardarPartidas', 'PartidasController@store')->name('partidas');
 
+Route::get('/catalogos/validarPartida', 'PartidasController@validarPartida');
+
 //rutas del modal de lineas
 Route::get('/catalogos/AgregaLineas', 'LineasController@store')->name('agregarLinea');
 Route::post('/catalogos/AgregaLineas', 'LineasController@store')->name('agregarLinea');

@@ -113,6 +113,9 @@
                     <label>Descripción Partida</label>
                     <input type="text" class="form-control validateData" data-myType="text" data-error= "2" data-validacion="1" id="descpartida" name="descpartida" style="text-transform:uppercase;"
                     onkeyup="javascript:this.value=this.value.toUpperCase();">
+                    @if ($errors->has('partida'))
+                      <br>
+                    @endif
                     <span class="text-danger error2"></span>
                   </div>
                         <!-- --  -->

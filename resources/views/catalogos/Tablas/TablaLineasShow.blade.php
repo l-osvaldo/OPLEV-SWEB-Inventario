@@ -113,7 +113,7 @@
                         <div class="form-group" style="width: 75%;">
                           <label>Partidas:</label>
                           <select id="partida" name="partida" class="form-control select2 validateDataLi" data-myTypeLi="select" data-errorLi= "5" data-validacionLi="1" style="width: 100%;">
-                            <option selected="selected">No. partida</option>
+                            <option selected value="0">No. partida</option>
                               @foreach ($linea8 as $linea8)
                             <option value="{{ $linea8->partida }}"> {{ $linea8->partida }} | {{ $linea8->descpartida }}</option>
                               @endforeach         
@@ -173,7 +173,7 @@
      						</div>
                     <!--Fin Agregar Linea -->
                 <div class="card-footer">                                              
-                  <button type="reset" class="btn btn-danger" data-dismiss="modal"">Cancelar</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                   <button type="submit" id="btn-submit3" style="background-color: #E71096" class="btn btn-secondary float-right" disabled>
                     {{ __('Guardar') }}
                   </button>

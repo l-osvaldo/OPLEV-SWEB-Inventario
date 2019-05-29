@@ -58,78 +58,7 @@
     
   
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
-        <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
-        <span class="brand-text font-weight-light">SIADMON</span>
-      </a>
-
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="{{ asset('dist/img/avatar.jpg') }}" class="img-circle elevation-2" alt="User Image">
-          </div>
-          <div class="info">
-          <a href="#" class="d-block">{{ $usuario->username }}</a>
-          </div>
-        </div>
-
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-          <ul class=" nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-                with font-awesome or any other icon font library -->
-            <li class="nav-item d-none d-sm-inline-block">
-              <a href="{{ route('lista') }}" class="{!! Request::is('catalogos/lista','catalogos/TablaDeLineas','catalogos/Lineas',
-              'catalogos/TablaEmpleados','catalogos/TablaPartida','catalogos/Sublineas','catalogos/TablaSublineas','catalogos/TablaAreas') ? 'nav-link active' : 'nav-link' !!}">
-                <i class="nav-icon fa fa-book"></i>
-                <p>
-                  Catálogos
-                </p>
-              </a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-              <a href="{{ route('catalogos') }}" class="{!! Request::is('catalogos/bienes','home','/') ? 'nav-link active' : 'nav-link' !!}">
-                <i class="nav-icon fa fa-table"></i>
-                <p>
-                  Bienes OPLE
-                </p>
-              </a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('catalogoeco') }}" class="{!! Request::is('catalogos/bieneseco') ? 'nav-link active' : 'nav-link' !!}">
-                  <i class="nav-icon fa fa-table"></i>
-                  <p>
-                    Bienes ECO
-                  </p>
-                </a>
-              </li>
-            
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('logout') }}"
-                  onclick="event.preventDefault();
-                  document.getElementById('logout-form').submit();">
-                  <span style="color: #FF2D00;">
-                    <i class="nav-icon fa fa-power-off"></i>
-                  </span>  
-                  <p>
-                    {{ __('Salir') }}
-                  </p>
-              </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                      @csrf
-                </form>
-            </li>    
-          </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
-      </div>
-      <!-- /.sidebar -->
-    </aside>
+    @include('partials.aside')
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="min-height: 885px;">
@@ -213,6 +142,7 @@
 <!-- ChartJS 1.0.1 -->
 <script src="{{ asset('plugins/chartjs-old/Chart.min.js') }}"></script>
 <script src="{{ asset('js/recursos.js') }}"></script>
+<script src="{{ asset('js/validaciones.js') }}"></script>
 <script>
   $('#example1').DataTable( {
     "deferRender": true,
@@ -892,6 +822,8 @@ $('#editModal').on('show.bs.modal', function (event) {
    </script>
 
    <script>
+
+    var validoNumeroPartida = true;
       $('#btn-submitEm').on('click',function(e){
          e.preventDefault();
          var form = $(this).parents('form');
@@ -992,16 +924,17 @@ $('#editModal').on('show.bs.modal', function (event) {
            break;
          case 'int':
            if (valor.match(/^[0-9]*$/) && valor!=""){
-             $('.error'+ error).text("");
-             $('#'+id).attr("data-validacion", '0');
-             $('#'+id).removeClass('inputDanger');
-             $('#'+id).addClass('inputSuccess');
-         }else{
-          $('.error'+ error).text("Solo numeros.");
-             $('#'+id).attr("data-validacion", '1');
-             $('#'+id).removeClass('inputSuccess');
-             $('#'+id).addClass('inputDanger'); 
-         }
+            validarPartida(valor,error,id);
+            $('.error'+ error).text("");
+            $('#'+id).attr("data-validacion", '0');
+            $('#'+id).removeClass('inputDanger');
+            $('#'+id).addClass('inputSuccess');          
+           }else{
+            $('.error'+ error).text("Solo numeros.");
+            $('#'+id).attr("data-validacion", '1');
+            $('#'+id).removeClass('inputSuccess');
+            $('#'+id).addClass('inputDanger'); 
+           }
          break;
          case 'password':
            if (valor!=""){
@@ -1034,7 +967,8 @@ $('#editModal').on('show.bs.modal', function (event) {
        }
        enablebtn();
    }
-   
+
+
    function datosValidosDos(valor, error, id, tipo)
    {
        switch (tipo) {
@@ -1091,7 +1025,7 @@ $('#editModal').on('show.bs.modal', function (event) {
          }
          break;
          default:
-         console.log('default');
+         //console.log('default');
        }
        enablebtnDos();
    }
@@ -1246,7 +1180,7 @@ $('#editModal').on('show.bs.modal', function (event) {
        $('#btn-submit2').prop("disabled", false);
      }
    
-       console.log(array);
+       //console.log(array);
    }
    
    function enablebtnDos()
@@ -1267,7 +1201,7 @@ $('#editModal').on('show.bs.modal', function (event) {
        $('#btn-submit').prop("disabled", false);
      }
    
-       console.log(array);
+       //console.log(array);
    }
 
    function enablebtnLi()
@@ -1288,7 +1222,7 @@ $('#editModal').on('show.bs.modal', function (event) {
        $('#btn-submit3').prop("disabled", false);
      }
    
-       console.log(array);
+       //console.log(array);
    }
 
    function enablebtnEm()
@@ -1309,7 +1243,7 @@ $('#editModal').on('show.bs.modal', function (event) {
        $('#btn-submitEm').prop("disabled", false);
      }
    
-       console.log(array);
+       //console.log(array);
    }
    
    </script>
@@ -1417,6 +1351,44 @@ $(function () {
       showInputs: false
     })
   })
+</script>
+
+<script>
+ 
+    $('#exampleModal').on('hidden.bs.modal', function (e) {
+      $(this).find('.validateData').removeClass('inputSuccess');
+      $(this).find('.validateData').removeClass('inputDanger');
+      $(this).find('.validateData').attr("data-validacion",'1');
+      $(this).find('.text-danger').text('');
+      $(this).find("input,textarea,select").val('').end();      
+    })
+
+    $('#exampleModalLinea').on('hidden.bs.modal', function (e) {
+      $(this).find('.validateDataLi').removeClass('inputSuccess');
+      $(this).find('.validateDataLi').removeClass('inputDanger');
+      $(this).find('.validateDataLi').attr("data-validacion",'1');
+      $(this).find('.text-danger').text('');
+      $(this).find("input,textarea,select").val('').end();
+      $('#partida').val("0").change();
+      $('#LineaMax').val(b);        
+    })
+
+    /*$('#exampleModal').on('hidden.bs.modal', function (e) {
+      $(this).find('.validateData').removeClass('inputSuccess');
+      $(this).find('.validateData').removeClass('inputDanger');
+      $(this).find('.validateData').attr("data-validacion",'1');
+      $(this).find('.text-danger').text('');
+      $(this).find("input,textarea,select").val('').end();      
+    })
+
+    $('#exampleModal').on('hidden.bs.modal', function (e) {
+      $(this).find('.validateData').removeClass('inputSuccess');
+      $(this).find('.validateData').removeClass('inputDanger');
+      $(this).find('.validateData').attr("data-validacion",'1');
+      $(this).find('.text-danger').text('');
+      $(this).find("input,textarea,select").val('').end();      
+    })*/
+
 </script>
 </body>
 </html>

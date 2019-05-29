@@ -22,8 +22,5 @@ class partidas extends Model
       public function sublineas()
       {
             return $this->hasMany(sublineas::class);
-      }
-
-      
-        
+      }        
 }

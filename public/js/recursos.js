@@ -35,6 +35,7 @@ $(function() {
   {		
 		$('#LineaMax').html('');    
 		var partida = $('#partida').find(':selected').val();
+    //console.log('->' + partida);
     $.ajax({
       url: "obtenMaxLineas",
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -44,7 +45,6 @@ $(function() {
       contentType: 'application/json'
       }).done(function(response) {
         console.log(response.length);	
-
 
 
       var b = response.length+1;

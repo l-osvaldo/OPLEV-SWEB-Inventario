@@ -89,37 +89,42 @@ class PartidasController extends Controller
     para despues guardarlos en la base de datos.
      */
     public function store(Request $request)
-			{
-					$partida = new partidas();
-					$linea = new lineas();
-					$sublinea = new sublineas();
+	{
+		$partida = new partidas();
+		$linea = new lineas();
+		$sublinea = new sublineas();
 
-					$partida->partida = $request->input('partida');
-					$partida->descpartida = $request->input('descpartida');
-					$linea->partida = $request->input('partida');
-					$linea->descpartida = $request->input('descpartida');
-					$linea->linea = $request->input('linea');
-					$linea->desclinea = $request->input('desclinea');
-					$sublinea->partida = $request->input('partida');
-					$sublinea->descpartida = $request->input('descpartida');
-					$sublinea->linea = $request->input('linea');
-					$sublinea->desclinea = $request->input('desclinea');
-					$sublinea->sublinea = $request->input('sublinea');
-					$sublinea->descsub = $request->input('descsub');
-					$sublinea->total = $request->input('total');
-					$partida->save();
-					$linea->save();
-					$sublinea->save();
-					Alert::success('Partida guardada', 'Registro Exitoso')->autoclose(2500);
-					return redirect()->route('Tabla-Partida');
+		$partida->partida = $request->input('partida');
+		$partida->descpartida = $request->input('descpartida');
+		$linea->partida = $request->input('partida');
+		$linea->descpartida = $request->input('descpartida');
+		$linea->linea = $request->input('linea');
+		$linea->desclinea = $request->input('desclinea');
+		$sublinea->partida = $request->input('partida');
+		$sublinea->descpartida = $request->input('descpartida');
+		$sublinea->linea = $request->input('linea');
+		$sublinea->desclinea = $request->input('desclinea');
+		$sublinea->sublinea = $request->input('sublinea');
+		$sublinea->descsub = $request->input('descsub');
+		$sublinea->total = $request->input('total');
+		$partida->save();
+		$linea->save();
+		$sublinea->save();
+		Alert::success('Partida guardada', 'Registro Exitoso')->autoclose(2500);
+		return redirect()->route('Tabla-Partida');
 
-			}
+	}
     
     
     public function show( $partida)
-			{
-					$partidas2 = partidas::where('partida',$partida)->get();
-					return view('catalogos.TablaPartidaShow',compact('partidas2'));
-			}
+	{
+		$partidas2 = partidas::where('partida',$partida)->get();
+		return view('catalogos.TablaPartidaShow',compact('partidas2'));
+	}
+
+	public function validarPartida(Request $request){
+		$existe = partidas::select('partida')->where('partida',$request->partida)->get();
+		return $existe;		
+	}
 
 }
