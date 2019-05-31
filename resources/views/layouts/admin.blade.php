@@ -18,7 +18,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'">
+  {{-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'"> --}}
   <!-- Select2 -->
   <link rel="stylesheet" href="{{ asset('plugins/select2/select2.min.css')}}">
   <!-- iCheck -->
@@ -39,12 +39,12 @@
   <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/dist/fullcalendar.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/dist/fullcalendar.min.css') }}">
   <!-- Bootstrap-->
-  <link rel="stylesheet" href="{{ asset('plugins/bootstrap/dist/css/bootstrap.min.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('plugins/bootstrap/dist/css/bootstrap.min.css') }}"> --}}
   <!-- Bootstrap Color Picker -->
   <link rel="stylesheet" href="{{ asset('plugins/colorpicker/bootstrap-colorpicker.min.css') }}">
   <!-- DataTables-->
   <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap4.css') }}">
-  <link rel="stylesheet" href="{{ asset('plugins/datatables/buttons.bootstrap4.min.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('plugins/datatables/buttons.bootstrap4.min.css') }}"> --}}
   <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
   <!-- Bootstrap time Picker -->
@@ -73,8 +73,8 @@
   
 
 
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+{{-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script> --}}
+{{-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> --}}
 
 <!-- jQuery -->
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
@@ -143,6 +143,7 @@
 <script src="{{ asset('plugins/chartjs-old/Chart.min.js') }}"></script>
 <script src="{{ asset('js/recursos.js') }}"></script>
 <script src="{{ asset('js/validaciones.js') }}"></script>
+<script src="{{ asset('js/cancelar.js') }}"></script>
 <script>
   $('#example1').DataTable( {
     "deferRender": true,
@@ -629,7 +630,7 @@
       datosValidosDos(valor, error, id, tipo);
     });
   </script>
-  <script>
+  {{-- <script>
     $(document).on("click", "#passwordGenerateA", function(){
         var result = '';
         var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -654,7 +655,7 @@
         }
       document.getElementById("contPassEdit").value = result;
     });
-  </script>
+  </script> --}}
   
   <script>
    $(document).on("click", "#passCopi", function(){
@@ -850,13 +851,13 @@ $('#editModal').on('show.bs.modal', function (event) {
        datosValidos(valor, error, id, tipo);
    });
    
-   $( ".validateData" ).change(function() {
-       var valor = $(this).val();
-       var error = $(this).attr("data-error");
-       var id = $(this).attr("id");
-       var tipo = $(this).attr("data-myType");
-       datosValidos(valor, error, id, tipo);
-   });
+   // $( ".validateData" ).change(function() {
+   //     var valor = $(this).val();
+   //     var error = $(this).attr("data-error");
+   //     var id = $(this).attr("id");
+   //     var tipo = $(this).attr("data-myType");
+   //     datosValidos(valor, error, id, tipo);
+   // });
    
    $( ".validateDataDos" ).keyup(function() {
        var valor = $(this).val();
@@ -925,10 +926,10 @@ $('#editModal').on('show.bs.modal', function (event) {
          case 'int':
            if (valor.match(/^[0-9]*$/) && valor!=""){
             validarPartida(valor,error,id);
-            $('.error'+ error).text("");
-            $('#'+id).attr("data-validacion", '0');
-            $('#'+id).removeClass('inputDanger');
-            $('#'+id).addClass('inputSuccess');          
+            // $('.error'+ error).text("");
+            // $('#'+id).attr("data-validacion", '0');
+            // $('#'+id).removeClass('inputDanger');
+            // $('#'+id).addClass('inputSuccess');          
            }else{
             $('.error'+ error).text("Solo numeros.");
             $('#'+id).attr("data-validacion", '1');
@@ -1077,7 +1078,8 @@ $('#editModal').on('show.bs.modal', function (event) {
          }
          break;
          case 'select':
-           if (valor!=""){
+         console.log('llegue');
+           if (valor!="0"){
            $('.error'+ error).text("");
            $('#'+id).attr("data-validacionLi", '0');
            $('#'+id).removeClass('inputDanger');
@@ -1170,6 +1172,8 @@ $('#editModal').on('show.bs.modal', function (event) {
      for (var i = 0; i < claserror.length; i++) {
        array.push(claserror[i].getAttribute('data-validacion'));
      }
+
+     //console.log(array);
    
      if(array.includes('1'))
      { 
@@ -1212,6 +1216,8 @@ $('#editModal').on('show.bs.modal', function (event) {
      for (var i = 0; i < claserror.length; i++) {
        array.push(claserror[i].getAttribute('data-validacionLi'));
      }
+
+     console.log(array);
    
      if(array.includes('1'))
      { 
@@ -1353,42 +1359,5 @@ $(function () {
   })
 </script>
 
-<script>
- 
-    $('#exampleModal').on('hidden.bs.modal', function (e) {
-      $(this).find('.validateData').removeClass('inputSuccess');
-      $(this).find('.validateData').removeClass('inputDanger');
-      $(this).find('.validateData').attr("data-validacion",'1');
-      $(this).find('.text-danger').text('');
-      $(this).find("input,textarea,select").val('').end();      
-    })
-
-    $('#exampleModalLinea').on('hidden.bs.modal', function (e) {
-      $(this).find('.validateDataLi').removeClass('inputSuccess');
-      $(this).find('.validateDataLi').removeClass('inputDanger');
-      $(this).find('.validateDataLi').attr("data-validacion",'1');
-      $(this).find('.text-danger').text('');
-      $(this).find("input,textarea,select").val('').end();
-      $('#partida').val("0").change();
-      $('#LineaMax').val(b);        
-    })
-
-    /*$('#exampleModal').on('hidden.bs.modal', function (e) {
-      $(this).find('.validateData').removeClass('inputSuccess');
-      $(this).find('.validateData').removeClass('inputDanger');
-      $(this).find('.validateData').attr("data-validacion",'1');
-      $(this).find('.text-danger').text('');
-      $(this).find("input,textarea,select").val('').end();      
-    })
-
-    $('#exampleModal').on('hidden.bs.modal', function (e) {
-      $(this).find('.validateData').removeClass('inputSuccess');
-      $(this).find('.validateData').removeClass('inputDanger');
-      $(this).find('.validateData').attr("data-validacion",'1');
-      $(this).find('.text-danger').text('');
-      $(this).find("input,textarea,select").val('').end();      
-    })*/
-
-</script>
 </body>
 </html>

@@ -44,13 +44,15 @@ $(function() {
       dataType: 'json',
       contentType: 'application/json'
       }).done(function(response) {
-        console.log(response.length);	
+        //console.log(response.length);
 
-
-      var b = response.length+1;
-        console.log(b);
-        $('#LineaMax').attr("value",b);
-      //  $('#LineaMax').text(b);
+        if (response.length != 0){
+          var b = response.length+1;
+          console.log(b);
+          $('#LineaMax').val(b);
+        }else{
+          $('#LineaMax').val("0");
+        }	
 
       }); 
   });		

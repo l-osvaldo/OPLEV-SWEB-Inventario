@@ -15,7 +15,7 @@ function validarPartida(valor,error,id){
       dataType: 'json',
       contentType: 'application/json'
     }).done(function(response) {
-    	console.log(valor);
+    	//console.log(valor);
     	if (response.length > 0){
 
     		$('.error'+ error).text("Este número de partida ya existe.");
@@ -28,6 +28,8 @@ function validarPartida(valor,error,id){
             $('#'+id).removeClass('inputDanger');
             $('#'+id).addClass('inputSuccess');
     	}
-    	enablebtn() 				
-    });
+    	enablebtn() 
+
+
+    }); 
 }

@@ -34,7 +34,7 @@
     <div class="col-12">     
       <div class="center-block">
         <div class="card">
-               
+
           <div class="card-body" >
             <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
               <thead>
@@ -78,7 +78,7 @@
                   
                   <div class="form-group {{ $errors->has('partida') ? 'has-error' : '' }}">
                       <label>Partida</label>
-                      <input type="text" maxlength="8" class="form-control validateData" data-myType="int" data-error= "1" data-validacion="1" id="partida" name="partida">
+                      <input type="text" maxlength="8" class="form-control validateData" data-myType="int" data-error= "1" data-validacion="1" id="partidaI" name="partidaI">
                       <span class="text-danger error1"></span>
                     </div>
 
@@ -113,9 +113,6 @@
                     <label>Descripción Partida</label>
                     <input type="text" class="form-control validateData" data-myType="text" data-error= "2" data-validacion="1" id="descpartida" name="descpartida" style="text-transform:uppercase;"
                     onkeyup="javascript:this.value=this.value.toUpperCase();">
-                    @if ($errors->has('partida'))
-                      <br>
-                    @endif
                     <span class="text-danger error2"></span>
                   </div>
                         <!-- --  -->
@@ -123,6 +120,7 @@
                     <label>Descripción Línea</label>
                     <input type="text" class="form-control validateData" data-myType="text" data-error= "3" data-validacion="1" id="desclinea" name="desclinea" style="text-transform:uppercase;" 
                     onkeyup="javascript:this.value=this.value.toUpperCase();">
+                    
                     <span class="text-danger error3"></span>
                   </div>
                   <!-- /.form-group -->

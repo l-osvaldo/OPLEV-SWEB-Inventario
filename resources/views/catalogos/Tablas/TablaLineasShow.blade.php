@@ -35,7 +35,7 @@
                 <label>Sleccione una Partida</label>
                 <form method="POST" action="{{ route('show-lineas') }}">
                   @csrf  
-                    <select id="Partidas" name="Partidas" class="form-control select2" style="width: 40%;">
+                    <select id="Partidas" name="Partidas" class="form-control select2" style="width: 40%;" required>
                       <option selected="selected">No. partida</option>
                          @foreach ($lineas as $linea)
                       <option value="{{ $linea->partida }}">{{ $linea->partida }} | {{ $linea->descpartida }}</option>
