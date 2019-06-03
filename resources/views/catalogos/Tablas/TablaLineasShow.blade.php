@@ -32,16 +32,16 @@
           <div class="row"> 
             <div class="col-md-10">
               <div class="form-group">
-                <label>Sleccione una Partida</label>
+                <label>Seleccione una Partida</label>
                 <form method="POST" action="{{ route('show-lineas') }}">
                   @csrf  
-                    <select id="Partidas" name="Partidas" class="form-control select2" style="width: 40%;" required>
+                    <select id="Partidas" name="Partidas" class="form-control select2 validateDataBusquedaLinea" data-myTypeBusquedaLinea="select" data-errorBusquedaLinea="1" data-validacionBusquedaLinea="1" style="width: 40%;" required>
                       <option selected="selected">No. partida</option>
                          @foreach ($lineas as $linea)
                       <option value="{{ $linea->partida }}">{{ $linea->partida }} | {{ $linea->descpartida }}</option>
                         @endforeach
                   	</select>
-                  <input type="submit" style="background-color: #E71096" class="btn btn-secondary" value="Mostrar">
+                  <input type="submit" id="btn-submitBL" style="background-color: #E71096" class="btn btn-secondary" value="Mostrar" disabled>
                   <div class="col-md-4 float-right">
                     @include('sweet::alert')
                       <div  class="btn-group ">

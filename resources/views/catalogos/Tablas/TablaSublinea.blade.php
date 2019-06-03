@@ -59,7 +59,7 @@
                 </div>
                 <div class="col-md-2">
                   <br>
-                    <input type="submit" style="background-color: #E71096" class="btn btn-secondary" value="Ver">	
+                    <input type="submit" style="background-color: #E71096" class="btn btn-secondary" value="Mostrar">	
                 </div>	
                 </form> 
               <div class="col-md-4">

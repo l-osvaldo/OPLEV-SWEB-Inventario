@@ -20,7 +20,7 @@ $(function() {
       dataType: 'json',
       contentType: 'application/json'
       }).done(function(response) {
-				console.log(response);
+				// console.log(response);
         comboLineas = "<option value='0'>Seleccione Linea...</option>";
         $.each(response, function(index, value){
           var cadena = value['linea'] + " - " + value['desclinea'];
@@ -52,6 +52,7 @@ $(function() {
           $('#LineaMax').val(b);
         }else{
           $('#LineaMax').val("0");
+          $('#LineaMax').html("0");
         }	
 
       }); 
@@ -96,7 +97,7 @@ $("#partidaA").change(function()
       dataType: 'json',
       contentType: 'application/json'
       }).done(function(response) {
-        console.log(response);	                
+        //console.log(response);	                
         $('#sublinea').attr("value",response);
 /*
         var c = response.length+1;

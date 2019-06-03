@@ -144,6 +144,7 @@
 <script src="{{ asset('js/recursos.js') }}"></script>
 <script src="{{ asset('js/validaciones.js') }}"></script>
 <script src="{{ asset('js/cancelar.js') }}"></script>
+<script src="{{ asset('js/camposValidados.js') }}"></script>
 <script>
   $('#example1').DataTable( {
     "deferRender": true,
@@ -906,6 +907,14 @@ $('#editModal').on('show.bs.modal', function (event) {
        var tipo = $(this).attr("data-myTypeEm");
        datosValidosEm(valor, error, id, tipo);
    });
+
+   $( ".validateDataBusquedaLinea" ).change(function() {
+       var valor = $(this).val();
+       var error = $(this).attr("data-errorBusquedaLinea");
+       var id = $(this).attr("id");
+       var tipo = $(this).attr("data-myTypeBusquedaLinea");
+       datosValidosLineaBusqueda(valor, error, id, tipo);       
+   });
    
    function datosValidos(valor, error, id, tipo)
    {
@@ -1217,7 +1226,7 @@ $('#editModal').on('show.bs.modal', function (event) {
        array.push(claserror[i].getAttribute('data-validacionLi'));
      }
 
-     console.log(array);
+    //console.log(array);
    
      if(array.includes('1'))
      { 
@@ -1247,6 +1256,27 @@ $('#editModal').on('show.bs.modal', function (event) {
      else
      {
        $('#btn-submitEm').prop("disabled", false);
+     }
+   
+       //console.log(array);
+   }
+
+   function enablebtnBusquedaLinea()
+   {
+     var array = [];
+     var claserror = $('.validateDataBusquedaLinea');
+   
+     for (var i = 0; i < claserror.length; i++) {
+       array.push(claserror[i].getAttribute('data-validacionBusquedaLinea'));
+     }
+   
+     if(array.includes('1'))
+     { 
+       $('#btn-submitBL').prop("disabled", true);
+     }
+     else
+     {
+       $('#btn-submitBL').prop("disabled", false);
      }
    
        //console.log(array);

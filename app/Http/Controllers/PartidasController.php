@@ -96,11 +96,11 @@ class PartidasController extends Controller
 
 		$partida->partida = $request->input('partidaI');
 		$partida->descpartida = $request->input('descpartida');
-		$linea->partida = $request->input('partida');
+		$linea->partida = $request->input('partidaI');
 		$linea->descpartida = $request->input('descpartida');
 		$linea->linea = $request->input('linea');
 		$linea->desclinea = $request->input('desclinea');
-		$sublinea->partida = $request->input('partida');
+		$sublinea->partida = $request->input('partidaI');
 		$sublinea->descpartida = $request->input('descpartida');
 		$sublinea->linea = $request->input('linea');
 		$sublinea->desclinea = $request->input('desclinea');
