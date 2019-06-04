@@ -26,49 +26,49 @@
 @include('sweet::alert')
 <div class="card">
 	<div class="card-body">
-      <!---->
-      <div class="card-body col-md-12">
-        <div class="row">
-          
-          <div class="col-md-3">
-            <div class="form-group">
-                <form method="POST" action="{{route('show-sublineas')}}">
-                  @csrf
-                  <div class="col-md-12">
-                        <label>Partida:</label>
-                      <select id="Partidas" name="Partidas" class="form-control select2 dynamic" >    
-                          <option selected="selected">Seleccione una Partida</option>
-                        @foreach ($sublineaSe as $sublineaSe)
-                          <option value="{{ $sublineaSe->partida }}">{{ $sublineaSe->partida }} | {{ $sublineaSe->descpartida }}</option>                         
-                        @endforeach
-                      </select>
-                    </div>
-              </div>
-            </div>   
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <div class="col-md-12">
-                      <div class="form-group">                   
-                            <label>Línea:</label>
-                        <select class="form-control dynamic" id="Linea" name="Linea">
-                            <option value="0" disabled="true" selected="true">Seleccione una Línea</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <br>
-                    <input type="submit" style="background-color: #E71096" class="btn btn-secondary" value="Mostrar">	
-                </div>	
-                </form> 
-              <div class="col-md-4">
-                <a href="#" style="background-color: #E71096" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModalTb"> Agregar Sublínea</a>
+    <div class="card-body col-md-12">
+      <div class="row">          
+        <div class="col-md-3">
+          <div class="form-group">
+            <form method="POST" action="{{route('show-sublineas')}}">
+              @csrf
+              <div class="col-md-12">
+                <label>Partida:</label>
+                <select id="Partidas" name="Partidas" class="form-control select2">    
+                  <option selected="selected">Seleccione una Partida</option>
+                  @foreach ($sublineaSe as $sublineaSe)
+                    <option value="{{ $sublineaSe->partida }}">{{ $sublineaSe->partida }} | {{ $sublineaSe->descpartida }}</option>   
+                  @endforeach
+                </select>
               </div>
           </div>
+        </div>   
+                
+        <div class="col-md-3">
+          <div class="form-group">
+            <div class="col-md-12">
+              <div class="form-group">                   
+                <label>Línea:</label>
+                <select class="form-control select2" id="Linea" name="Linea" disabled >
+                  <option value="0">Seleccione una Línea</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+            <input type="submit" style="background-color: #E71096; margin-top: 30px;" class="btn btn-secondary" id="btnMostrarSublinea" name="btnMostrarSublinea" value="Mostrar" disabled>	
+        </div>	
+        </form>
+
+        <div class="col-md-4">
+          <a href="#" style="background-color: #E71096; margin-top: 30px;" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModalTb"> Agregar Sublínea</a>
+        </div>
             
       </div>  
       <!---->
+    </div>
 	</div>
 </div>
 
@@ -136,14 +136,14 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Seleccione una Partida:</label>
-                          <select id="partidaA" name="partidaA" class="form-control select2 dynamic" style="width: 80%;">
-                            <option selected="selected">No. partida</option>
+                          <select id="partidaA" name="partidaA" class="form-control select2 validateDataDos" data-myTypeDos="select" data-errorDos= "8" data-validacionDos="1" style="width: 80%;">
+                            <option  selected="selected">No. partida</option>
                               @foreach ($sublineaAgt as $sublineaAgt)
                             <option value="{{ $sublineaAgt->partida}}">{{ $sublineaAgt->partida }} | {{ $sublineaAgt->descpartida }}</option>
                               @endforeach
                           </select>
                           <label>Seleccione una Línea:</label>                 
-                            <select class="form-control dynamic" id="lineaA" name="lineaA" style="width: 80%;">
+                            <select class="form-control validateDataDos" data-myTypeDos="select" data-errorDos= "8" data-validacionDos="1" id="lineaA" name="lineaA" style="width: 80%;">
                               <option value="0" disabled="true" selected="true">Línea</option>
                             </select>
                       </div>

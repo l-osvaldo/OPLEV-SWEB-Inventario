@@ -10,9 +10,12 @@ $(function() {
 
   $("#Partidas").change(function() 
   {		
-		$('#Linea').html('');    
+		$('#Linea').val("0").change();      
 		var partida = $('#Partidas').find(':selected').val();
-    $.ajax({
+    console.log(partida);
+    if (partida != 'Seleccione una Partida'){
+      
+      $.ajax({
       url: "obtenLineas",
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
@@ -20,22 +23,46 @@ $(function() {
       dataType: 'json',
       contentType: 'application/json'
       }).done(function(response) {
-				// console.log(response);
-        comboLineas = "<option value='0'>Seleccione Linea...</option>";
-        $.each(response, function(index, value){
-          var cadena = value['linea'] + " - " + value['desclinea'];
-          comboLineas += "<option value='"+value['linea']+"'>"+ cadena +"</option>";
-        });
-        $('#Linea').html(comboLineas);  				
-    	});
-  });		
+        // console.log(response);
+
+        
+          // console.log('123');
+          // $('#Linea').val("Seleccione una Línea").change();
+          
+          comboLineas = "<option value='0'>Seleccione Linea...</option>";
+          $.each(response, function(index, value){
+            var cadena = value['linea'] + " - " + value['desclinea'];
+            comboLineas += "<option value='"+value['linea']+"'>"+ cadena +"</option>";
+          });
+
+          $('#Linea').html(comboLineas);
+        
+          $('#Linea').prop("disabled", false);
+
+          console.log('prueba');
+                  
+      });
+    }else{
+      comboLineas = "<option value='0'>Seleccione Linea...</option>";
+      $('#Linea').html(comboLineas);
+      $('#Linea').prop("disabled", true);
+    }    
+  });
+
+ $('#Linea').change(function()
+ {    
+    if ($('#Linea').val() != 0){
+      $('#btnMostrarSublinea').prop("disabled", false);
+    }else{
+      $('#btnMostrarSublinea').prop("disabled", true);
+    }
+ }); 		
 
 //funcion para traer partida
   $("#partida").change(function() 
   {		
 		$('#LineaMax').html('');    
-		var partida = $('#partida').find(':selected').val();
-    //console.log('->' + partida);
+		var partida = $('#partida').find(':selected').val();;
     $.ajax({
       url: "obtenMaxLineas",
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -62,8 +89,13 @@ $(function() {
 //funcion para traer partida y linea
 $("#partidaA").change(function() 
 {		
-  $('#lineaA').html('');    
+  $('#lineaA').html('');
+  $('#lineaA').removeClass('inputSuccess');
+  $('#lineaA').removeClass('inputDanger');
+  $('#lineaA').attr("data-validacion",'1');
+  $('#btn-submit').prop("disabled", true);      
   var partida = $('#partidaA').find(':selected').val();
+  //console.log(partida);
   $.ajax({
     url: "/catalogos/obtenLineasAg",
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -97,9 +129,10 @@ $("#partidaA").change(function()
       dataType: 'json',
       contentType: 'application/json'
       }).done(function(response) {
-        //console.log(response);	                
-        $('#sublinea').attr("value",response);
-/*
+
+        $('#sublinea').val(response);
+        $('#sublinea').html(response);
+/*      
         var c = response.length+1;
         console.log(c);
         $('#sublinea').attr("value",c);*/

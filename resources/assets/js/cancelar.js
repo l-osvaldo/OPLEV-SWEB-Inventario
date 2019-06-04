@@ -20,14 +20,17 @@ $('#exampleModalLinea').on('hidden.bs.modal', function (e) {
   $('#descsub').val("");         
 })
 
-/*$('#exampleModal').on('hidden.bs.modal', function (e) {
-  $(this).find('.validateData').removeClass('inputSuccess');
-  $(this).find('.validateData').removeClass('inputDanger');
-  $(this).find('.validateData').attr("data-validacion",'1');
+$('#exampleModalTb').on('hidden.bs.modal', function (e) {
+  $(this).find('.validateDataDos').removeClass('inputSuccess');
+  $(this).find('.validateDataDos').removeClass('inputDanger');
+  $(this).find('.validateDataDos').attr("data-validacion",'1');
   $(this).find('.text-danger').text('');
-  $(this).find("input,textarea,select").val('').end();      
+  $('#descsub').val("");
+  $('#partidaA').val("No. partida").change(); 
+  $('#sublinea').val("0");    
 })
 
+/*
 $('#exampleModal').on('hidden.bs.modal', function (e) {
   $(this).find('.validateData').removeClass('inputSuccess');
   $(this).find('.validateData').removeClass('inputDanger');

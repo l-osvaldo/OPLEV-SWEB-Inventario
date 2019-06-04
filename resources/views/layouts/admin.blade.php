@@ -915,6 +915,14 @@ $('#editModal').on('show.bs.modal', function (event) {
        var tipo = $(this).attr("data-myTypeBusquedaLinea");
        datosValidosLineaBusqueda(valor, error, id, tipo);       
    });
+
+   // $( ".validateDataPartida" ).change(function() {
+   //     var valor = $(this).val();
+   //     var error = $(this).attr("data-errorPartida");
+   //     var id = $(this).attr("id");
+   //     var tipo = $(this).attr("data-myTypePartida");
+   //     datosValidosPartida(valor, error, id, tipo);       
+   // });
    
    function datosValidos(valor, error, id, tipo)
    {
@@ -1281,6 +1289,8 @@ $('#editModal').on('show.bs.modal', function (event) {
    
        //console.log(array);
    }
+
+
    
    </script>
 
