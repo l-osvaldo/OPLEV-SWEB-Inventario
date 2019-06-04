@@ -673,16 +673,16 @@
     });
   </script>
   <script>
-$('#editModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget);
-  var area = button.data('area');
-  var id = button.data("areaid");
-  var modal = $(this)
-  modal.find('.modal-body #depto').val(area);
-  modal.find('.modal-body #editClave').val(id);
-  console.log(area,id)
-  
-})
+    $('#editModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      var area = button.data('area');
+      var id = button.data("areaid");
+      var modal = $(this)
+      modal.find('.modal-body #depto').val(area);
+      modal.find('.modal-body #editClave').val(id);
+      console.log(area,id)
+      
+    })
 
     $('#editBtn').on('click',function(e){
     e.preventDefault();
@@ -860,7 +860,7 @@ $('#editModal').on('show.bs.modal', function (event) {
    //     datosValidos(valor, error, id, tipo);
    // });
    
-   $( ".validateDataDos" ).keyup(function() {
+   $( ".validateDataDos" ).keyup(function() {    
        var valor = $(this).val();
        var error = $(this).attr("data-errorDos");
        var id = $(this).attr("id");
@@ -881,7 +881,9 @@ $('#editModal').on('show.bs.modal', function (event) {
        var error = $(this).attr("data-errorLi");
        var id = $(this).attr("id");
        var tipo = $(this).attr("data-myTypeLi");
+       console.log(valor,error,id,tipo);
        datosValidosLi(valor, error, id, tipo);
+
    });
    
    $( ".validateDataLi" ).change(function() {
@@ -889,6 +891,7 @@ $('#editModal').on('show.bs.modal', function (event) {
        var error = $(this).attr("data-errorLi");
        var id = $(this).attr("id");
        var tipo = $(this).attr("data-myTypeLi");
+       console.log(valor,error,id,tipo);
        datosValidosLi(valor, error, id, tipo);
    });
    
@@ -916,13 +919,13 @@ $('#editModal').on('show.bs.modal', function (event) {
        datosValidosLineaBusqueda(valor, error, id, tipo);       
    });
 
-   // $( ".validateDataPartida" ).change(function() {
-   //     var valor = $(this).val();
-   //     var error = $(this).attr("data-errorPartida");
-   //     var id = $(this).attr("id");
-   //     var tipo = $(this).attr("data-myTypePartida");
-   //     datosValidosPartida(valor, error, id, tipo);       
-   // });
+   $( ".validateDataArea" ).keyup(function() {
+       var valor = $(this).val();
+       var error = $(this).attr("data-errorArea");
+       var id = $(this).attr("id");
+       var tipo = $(this).attr("data-myTypeArea");
+       datosValidosArea(valor, error, id, tipo);
+   });
    
    function datosValidos(valor, error, id, tipo)
    {
@@ -1046,10 +1049,7 @@ $('#editModal').on('show.bs.modal', function (event) {
          //console.log('default');
        }
        enablebtnDos();
-   }
-
-
-   
+   } 
 
 
    function datosValidosLi(valor, error, id, tipo)
@@ -1095,7 +1095,6 @@ $('#editModal').on('show.bs.modal', function (event) {
          }
          break;
          case 'select':
-         console.log('llegue');
            if (valor!="0"){
            $('.error'+ error).text("");
            $('#'+id).attr("data-validacionLi", '0');
@@ -1111,6 +1110,7 @@ $('#editModal').on('show.bs.modal', function (event) {
          default:
          console.log('default');
        }
+       console.log('paso2');
        enablebtnLi();
    }
 
@@ -1285,6 +1285,29 @@ $('#editModal').on('show.bs.modal', function (event) {
      else
      {
        $('#btn-submitBL').prop("disabled", false);
+     }
+   
+       //console.log(array);
+   }
+
+   function enablebtnArea()
+   {
+     var array = [];
+     var claserror = $('.validateDataArea');
+   
+     for (var i = 0; i < claserror.length; i++) {
+       array.push(claserror[i].getAttribute('data-validacionArea'));
+     }
+
+    console.log(array);
+   
+     if(array.includes('1'))
+     { 
+       $('#editBtn').prop("disabled", true);
+     }
+     else
+     {
+       $('#editBtn').prop("disabled", false);
      }
    
        //console.log(array);

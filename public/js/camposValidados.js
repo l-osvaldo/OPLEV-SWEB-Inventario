@@ -20,22 +20,28 @@ function datosValidosLineaBusqueda(valor, error, id, tipo)
  enablebtnBusquedaLinea();
 }
 
-// function datosValidosPartida(valor, error, id, tipo)
-// {
-//  switch (tipo) {
-//    case 'select':      
-//      if (valor!="Seleccione una Partida"){
-//        $('.error'+ error).text("");
-//        $('#'+id).attr("data-validacionPartida", '0');
-//      }else{
-//        $('.error'+ error).text("Seleccione una opción.");
-//        $('#'+id).attr("data-validacionPartida", '1');
-//        //$('#Linea').val("Seleccione una Partida");
-//        //$('#Linea').prop("disabled", true);
-//      }
-//    break;
-//    default:
-//    console.log('default');
-//  }
-//  enablebtnPartida();
-// }
+
+function datosValidosArea(valor, error, id, tipo)
+{
+ switch (tipo) {
+  case 'text':
+    if (valor.match(/^[0-9a-zA-ZÀ-ÿ.\u00f1\u00d1]+(\s*[0-9a-zA-ZÀ-ÿ.\u00f1\u00d1]*)*[0-9a-zA-ZÀ-ÿ.\u00f1\u00d1]*$/) && valor!=""){
+     $('.error'+ error).text("");
+     $('#'+id).attr("data-validacionArea", '0');
+     $('#'+id).removeClass('inputDanger');
+     $('#'+id).addClass('inputSuccess');
+    }else{
+     $('.error'+ error).text("Este campo no puede ir vacío o llevar caracteres especiales.");
+     $('#'+id).attr("data-validacionArea", '1');
+     $('#'+id).removeClass('inputSuccess');
+     $('#'+id).addClass('inputDanger');
+    }
+    break;
+   
+  default:
+   console.log('default');
+ }
+ console.log('paso2');
+ enablebtnLi();
+}
+

@@ -48,7 +48,7 @@
 														data-area="{{ $area->depto }}" 
 														
 														data-toggle="modal" data-target="#editModal">
-														<a href="#" data-toggle="tooltip" data-placement="top" title="Editar" style="color: #fff;">
+														<a  data-toggle="tooltip" data-placement="top" title="Editar" style="color: #fff;">
 															<i class="fa fa-pencil"></i>
 														</a>
 													</button>
@@ -81,7 +81,7 @@
 				<div class="modal-body">
 					<div class="row">
 
-						<div class="col">
+						<div class="col-sm-12">
 							<div class="form-group">
 								<label for="clave"><b>Clave</b></label>
 								<div class="input-group-prepend">
@@ -91,18 +91,16 @@
 							</div>
 						</div>
 
-						<div class="col">
+						<div class="col-sm-12">
 								<div class="form-group {{ $errors->has('depto') ? 'has-error' : '' }}">
 										<label for="nombre"><b>Nombre</b></label>
 										<div class="input-group-prepend">
 											<span class="input-group-text"><i class="fa fa-building"></i></span>    
-											<input class="form-control form-control validateDataLi" data-myTypeLi="text" data-errorLi= "9" data-validacionLi="1" type="text" id="depto" name="depto" style="text-transform:uppercase;" 
-											onkeyup="javascript:this.value=this.value.toUpperCase();">
-											<input class="form-control form-control validateDataLi" data-myTypeLi="text" data-errorLi= "9" data-validacionLi="1" type="hidden" id="nombredepto" name="nombredepto" style="text-transform:uppercase;" 
-											onkeyup="javascript:this.value=this.value.toUpperCase();">
+											<input class="form-control form-control validateDataArea" data-myTypeArea="text" data-errorArea= "1" data-validacionArea="1" type="text" id="depto" name="depto" style="text-transform:uppercase;" 
+											onkeyup="javascript:this.value=this.value.toUpperCase();">		
 											
-											<span class="text-danger error9"></span>
 									</div>
+									<span class="text-danger error1"></span>
 								</div>
 						</div>
 
@@ -110,7 +108,7 @@
 				</div>
 
 				<div class="modal-footer">
-					<button class="btn btn-secondary" id="editBtn">Actualizar</button>
+					<button class="btn btn-secondary" id="editBtn" disabled>Actualizar</button>
 					<input type="hidden" name="Area" id="actualizarArea"> 
 					
 					
