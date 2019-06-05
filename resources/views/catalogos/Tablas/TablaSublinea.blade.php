@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Catálogo Sublineas')
 
 @section('content')
  <!-- Navbar -->
@@ -167,8 +168,7 @@
                     <div class="col-md-10">
                       <div class="form-group{{ $errors->has('descsub') ? 'has-error' : '' }}" style="width: 80%;">
                         <label>Descripción de Sublínea:</label>
-                          <input type="text" class="form-control validateDataDos" data-myTypeDos="text" data-errorDos= "8" data-validacionDos="1" id="descsub" name="descsub" style="text-transform:uppercase;" 
-                          onkeyup="javascript:this.value=this.value.toUpperCase();">
+                          <input type="text" class="form-control validateDataDos" data-myTypeDos="text" data-errorDos= "8" data-validacionDos="1" id="descsub" name="descsub" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'sublinea');" onkeyup="javascript:this.value=this.value.toUpperCase();">
                         <span class="text-danger error8"></span>
                       </div>
                     </div>

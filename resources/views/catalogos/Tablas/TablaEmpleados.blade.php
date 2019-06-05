@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Catálogo Empleados')
 @section('content')
 <nav class=" navbar navbar-expand col-sm-12 bg-white navbar-light border-bottom">
 	<!-- Left navbar links -->

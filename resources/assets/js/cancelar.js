@@ -30,11 +30,13 @@ $('#exampleModalTb').on('hidden.bs.modal', function (e) {
   $('#sublinea').val("0");    
 })
 
-/*
-$('#exampleModal').on('hidden.bs.modal', function (e) {
-  $(this).find('.validateData').removeClass('inputSuccess');
-  $(this).find('.validateData').removeClass('inputDanger');
-  $(this).find('.validateData').attr("data-validacion",'1');
-  $(this).find('.text-danger').text('');
-  $(this).find("input,textarea,select").val('').end();      
-})*/
+
+$('#editModal').on('hidden.bs.modal', function (e) {
+  console.log('si');
+  $(this).find('.validateDataArea').removeClass('inputSuccess');
+  $(this).find('.validateDataArea').removeClass('inputDanger');
+  $(this).find('.validateDataArea').attr("data-validacionArea",'1');
+  $(this).find('.text-danger').text('');   
+  
+})
+

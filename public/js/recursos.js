@@ -95,6 +95,7 @@ $("#partidaA").change(function()
   $('#lineaA').attr("data-validacion",'1');
   $('#btn-submit').prop("disabled", true);      
   var partida = $('#partidaA').find(':selected').val();
+
   //console.log(partida);
   $.ajax({
     url: "/catalogos/obtenLineasAg",

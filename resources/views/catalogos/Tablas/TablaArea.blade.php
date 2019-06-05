@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Catálogo Áreas')
 
 @section('content')
  <!-- Navbar -->
@@ -67,12 +68,12 @@
 	</section>
 <!--Modal-->
 <!-- Modal editar usuarios -->
-<div class="modal fade bd-example-modal-lg" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="background: #a90a6c; color:white">
 				<h5 class="modal-title" id="exampleModalLabel">Editar Area</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" onClick="cerrar();" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -96,8 +97,7 @@
 										<label for="nombre"><b>Nombre</b></label>
 										<div class="input-group-prepend">
 											<span class="input-group-text"><i class="fa fa-building"></i></span>    
-											<input class="form-control form-control validateDataArea" data-myTypeArea="text" data-errorArea= "1" data-validacionArea="1" type="text" id="depto" name="depto" style="text-transform:uppercase;" 
-											onkeyup="javascript:this.value=this.value.toUpperCase();">		
+											<input class="form-control form-control validateDataArea" data-myTypeArea="text" data-errorArea= "1" data-validacionArea="1" type="text" id="depto" name="depto" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'area');" onkeyup="javascript:this.value=this.value.toUpperCase();">		
 											
 									</div>
 									<span class="text-danger error1"></span>

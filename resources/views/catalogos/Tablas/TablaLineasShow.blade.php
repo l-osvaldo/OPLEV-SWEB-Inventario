@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Catálogo Líneas')
 
 
 @section('content')
@@ -149,15 +150,14 @@
 											<div class="col-md-10">
 												<div class="form-group {{ $errors->has('desclinea') ? 'has-error' : '' }}" style="width: 50%;">
 													<label>Descripción de la Línea:</label>
-													<input type="text" class="form-control validateDataLi" data-myTypeLi="text" data-errorLi= "3" data-validacionLi="1" id="desclinea" name="desclinea" style="text-transform:uppercase;" 
-													onkeyup="javascript:this.value=this.value.toUpperCase();">
+													<input type="text" class="form-control validateDataLi" data-myTypeLi="text" data-errorLi= "3" data-validacionLi="1" id="desclinea" name="desclinea" style="text-transform:uppercase;"	onkeyup="javascript:this.value=this.value.toUpperCase();" onKeyPress="return SoloNumerosLetras(event,'linea');">
 													<span class="text-danger error3"></span>
 												</div>
 											<!-- /.form-group -->
 												<div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}" style="width: 50%;">
 													<label>Descripción de la Sublínea:</label>
-													<input type="text" class="form-control validateDataLi" data-myTypeLi="text" data-errorLi= "4" data-validacionLi="1" id="descsub" name="descsub" style="text-transform:uppercase;" 
-													onkeyup="javascript:this.value=this.value.toUpperCase();">
+													<input type="text" class="form-control validateDataLi" data-myTypeLi="text" data-errorLi= "4" data-validacionLi="1" id="descsub" name="descsub" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'sublinea');"
+													onkeyup="javascript:this.value=this.value.toUpperCase();" >
 													<span class="text-danger error4"></span>
 												</div>
 											<!-- /.form-group -->

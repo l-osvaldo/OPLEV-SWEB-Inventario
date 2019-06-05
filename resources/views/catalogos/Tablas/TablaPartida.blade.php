@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Catálogo Partidas')
 
 @section('content')
  <!-- Navbar -->
@@ -78,7 +79,7 @@
                   
                   <div class="form-group {{ $errors->has('partida') ? 'has-error' : '' }}">
                       <label>Partida</label>
-                      <input type="text" maxlength="8" class="form-control validateData" data-myType="int" data-error= "1" data-validacion="1" id="partidaI" name="partidaI">
+                      <input type="text" maxlength="8" class="form-control validateData" data-myType="int" data-error= "1" data-validacion="1" id="partidaI" name="partidaI" onKeyPress="return SoloNumerosLetras(event,'numero');">
                       <span class="text-danger error1"></span>
                     </div>
 
@@ -111,14 +112,14 @@
                 <div class="col-md-10">
                   <div class="form-group {{ $errors->has('descpartida') ? 'has-error' : '' }}">
                     <label>Descripción Partida</label>
-                    <input type="text" class="form-control validateData" data-myType="text" data-error= "2" data-validacion="1" id="descpartida" name="descpartida" style="text-transform:uppercase;"
+                    <input type="text" class="form-control validateData" data-myType="text" data-error= "2" data-validacion="1" id="descpartida" name="descpartida" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'partida');"
                     onkeyup="javascript:this.value=this.value.toUpperCase();">
                     <span class="text-danger error2"></span>
                   </div>
                         <!-- --  -->
                   <div class="form-group {{ $errors->has('desclinea') ? 'has-error' : '' }}">
                     <label>Descripción Línea</label>
-                    <input type="text" class="form-control validateData" data-myType="text" data-error= "3" data-validacion="1" id="desclinea" name="desclinea" style="text-transform:uppercase;" 
+                    <input type="text" class="form-control validateData" data-myType="text" data-error= "3" data-validacion="1" id="desclinea" name="desclinea" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'linea');"
                     onkeyup="javascript:this.value=this.value.toUpperCase();">
                     
                     <span class="text-danger error3"></span>
@@ -126,8 +127,7 @@
                   <!-- /.form-group -->
                   <div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}">
                     <label>Descripción Sublínea</label>
-                    <input type="text" class="form-control validateData" data-myType="text" data-error= "4" data-validacion="1" id="descsub" name="descsub" style="text-transform:uppercase;" 
-                    onkeyup="javascript:this.value=this.value.toUpperCase();">
+                    <input type="text" class="form-control validateData" data-myType="text" data-error= "4" data-validacion="1" id="descsub" name="descsub" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'sublinea');" onkeyup="javascript:this.value=this.value.toUpperCase();">
                     <span class="text-danger error4"></span>
                   </div>
                   <!-- /.form-group -->     

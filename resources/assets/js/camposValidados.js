@@ -41,7 +41,6 @@ function datosValidosArea(valor, error, id, tipo)
   default:
    console.log('default');
  }
- console.log('paso2');
  enablebtnLi();
 }
 

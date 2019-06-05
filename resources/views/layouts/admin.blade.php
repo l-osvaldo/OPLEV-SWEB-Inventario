@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SIADMON | OPLE VER</title>
+  <title>SIADMON | OPLE VER | @yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  <link rel="icon" href="{{ asset('images/logoople.png') }}">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
@@ -680,9 +682,26 @@
       var modal = $(this)
       modal.find('.modal-body #depto').val(area);
       modal.find('.modal-body #editClave').val(id);
-      console.log(area,id)
+      //console.log(area,id)
       
-    })
+    });
+
+    $('#btn-submit2').on('click',function(e){
+      e.preventDefault();
+      var form = $(this).parents('form');
+      swal({
+          title: "Registro de Partidas",
+          text: "¿Desea continuar?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#0080FF",
+          confirmButtonText: "Sí",
+          closeOnConfirm: false
+      }, function(isConfirm){
+          if (isConfirm) form.submit();
+          
+      });
+    });
 
     $('#editBtn').on('click',function(e){
     e.preventDefault();
@@ -693,7 +712,7 @@
         showCancelButton: true,
         confirmButtonColor: "#0080FF",
         confirmButtonText: "Sí",
-        closeOnConfirm: false
+        closeOnConfirm: true
     }, function(isConfirm){
        if (isConfirm) {
           var id = $('#editClave').val();
@@ -881,7 +900,7 @@
        var error = $(this).attr("data-errorLi");
        var id = $(this).attr("id");
        var tipo = $(this).attr("data-myTypeLi");
-       console.log(valor,error,id,tipo);
+       //console.log(valor,error,id,tipo);
        datosValidosLi(valor, error, id, tipo);
 
    });
@@ -891,7 +910,7 @@
        var error = $(this).attr("data-errorLi");
        var id = $(this).attr("id");
        var tipo = $(this).attr("data-myTypeLi");
-       console.log(valor,error,id,tipo);
+       //console.log(valor,error,id,tipo);
        datosValidosLi(valor, error, id, tipo);
    });
    
@@ -931,7 +950,7 @@
    {
        switch (tipo) {
          case 'text':
-           if (valor.match(/^[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]*$/) && valor!=""){
+           if (valor.match(/^[0-9a-zA-ZÀ-ÿ.,-^'^"\u00f1\u00d1]+(\s*[0-9a-zA-ZÀ-ÿ.,-^'^"\u00f1\u00d1]*)*[0-9a-zA-ZÀ-ÿ.,-^'^"\u00f1\u00d1]*$/) && valor!=""){
              $('.error'+ error).text("");
              $('#'+id).attr("data-validacion", '0');
              $('#'+id).removeClass('inputDanger');
@@ -994,7 +1013,7 @@
    {
        switch (tipo) {
          case 'text':
-           if (valor.match(/^[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]*$/) && valor!=""){
+           if (valor.match(/^[0-9a-zA-ZÀ-ÿ.,-^'^"\u00f1\u00d1]+(\s*[0-9a-zA-ZÀ-ÿ.,-^'^"\u00f1\u00d1]*)*[0-9a-zA-ZÀ-ÿ.,-^'^"\u00f1\u00d1]*$/) && valor!=""){
              $('.error'+ error).text("");
              $('#'+id).attr("data-validacionDos", '0');
              $('#'+id).removeClass('inputDanger');
@@ -1056,7 +1075,7 @@
    {
        switch (tipo) {
          case 'text':
-           if (valor.match(/^[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[0-9a-zA-ZÀ-ÿ\u00f1\u00d1]*$/) && valor!=""){
+           if (valor.match(/^[0-9a-zA-ZÀ-ÿ.,-^'^"\u00f1\u00d1]+(\s*[0-9a-zA-ZÀ-ÿ.,-^'^"\u00f1\u00d1]*)*[0-9a-zA-ZÀ-ÿ.,-^'^"\u00f1\u00d1]*$/) && valor!=""){
              $('.error'+ error).text("");
              $('#'+id).attr("data-validacionLi", '0');
              $('#'+id).removeClass('inputDanger');
@@ -1110,7 +1129,6 @@
          default:
          console.log('default');
        }
-       console.log('paso2');
        enablebtnLi();
    }
 
@@ -1299,7 +1317,7 @@
        array.push(claserror[i].getAttribute('data-validacionArea'));
      }
 
-    console.log(array);
+    //console.log(array);
    
      if(array.includes('1'))
      { 
@@ -1310,31 +1328,21 @@
        $('#editBtn').prop("disabled", false);
      }
    
-       //console.log(array);
    }
 
+  function cerrar(){
+    console.log('si');
+    $('#depto').removeClass('inputSuccess');
+    $('#depto').removeClass('inputDanger');
+    $('#depto').attr("data-validacionArea",'1');
+    $('#depto').find('.text-danger').text('');
+    enablebtnArea();
+  }
 
    
    </script>
 
 <script>
-$('#btn-submit2').on('click',function(e){
-    e.preventDefault();
-    var form = $(this).parents('form');
-    swal({
-        title: "Registro de Partidas",
-        text: "¿Desea continuar?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#0080FF",
-        confirmButtonText: "Sí",
-        closeOnConfirm: false
-    }, function(isConfirm){
-        if (isConfirm) form.submit();
-        
-    });
-});
-
 
 
 
