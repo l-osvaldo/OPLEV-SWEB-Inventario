@@ -570,13 +570,13 @@
   $(document).ready(function(){
     $("#nombre, #apePat").change(function(){
       var value1 = document.getElementById('nombre').value;
-      var value2 = document.getElementById('apePat').value;
+      //var value2 = document.getElementById('apePat').value;
       var value3 = value1.replace(/\s+/g, '').replace(/[á]/, 'a').replace(/[é]/, 'e').replace(/[í]/, 'i').replace(/[ó]/, 'o').replace(/[ú]/, 'u');
-      var value4 = value2.replace(/\s+/g, '').replace(/[á]/, 'a').replace(/[é]/, 'e').replace(/[í]/, 'i').replace(/[ó]/, 'o').replace(/[ú]/, 'u');
-      var value5 = value3 + "." + value4;
+      //var value4 = value2.replace(/\s+/g, '').replace(/[á]/, 'a').replace(/[é]/, 'e').replace(/[í]/, 'i').replace(/[ó]/, 'o').replace(/[ú]/, 'u');
+      var value5 = value3;
       var value6 = value5.toLowerCase();
-      validarNombreOple(value6);
-      document.getElementById('usuario').value = value6;
+      //validarNombreOple(value6);
+      //document.getElementById('usuario').value = value6;
   
     })
   });
@@ -927,6 +927,7 @@
        var error = $(this).attr("data-errorEm");
        var id = $(this).attr("id");
        var tipo = $(this).attr("data-myTypeEm");
+       //console.log(valor);
        datosValidosEm(valor, error, id, tipo);
    });
 
@@ -1137,7 +1138,7 @@
    {
        switch (tipo) {
          case 'text':
-           if (valor.match(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/) && valor!=""){
+           if (valor.match(/^[a-zA-ZÀ-ÿ.^"\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ.^"\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ.^"\u00f1\u00d1]*$/) && valor!=""){
              $('.error'+ error).text("");
              $('#'+id).attr("data-validacionEm", '0');
              $('#'+id).removeClass('inputDanger');

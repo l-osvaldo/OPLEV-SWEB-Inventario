@@ -31,12 +31,14 @@ $('#exampleModalTb').on('hidden.bs.modal', function (e) {
 })
 
 
-$('#editModal').on('hidden.bs.modal', function (e) {
-  console.log('si');
-  $(this).find('.validateDataArea').removeClass('inputSuccess');
-  $(this).find('.validateDataArea').removeClass('inputDanger');
-  $(this).find('.validateDataArea').attr("data-validacionArea",'1');
+$('#exampleModalEmpleado').on('hidden.bs.modal', function (e) {
+  $(this).find('.validateDataEm').removeClass('inputSuccess');
+  $(this).find('.validateDataEm').removeClass('inputDanger');
+  $(this).find('.validateDataEm').attr("data-validacionEm",'1');
   $(this).find('.text-danger').text('');   
-  
+  $('#numemple').val("");
+  $('#nombre').val("");
+  $('#cargo').val("");
+  $('#clvdepto').val("0").change();
 })
 
