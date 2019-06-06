@@ -11,6 +11,10 @@ use Alert;
 
 class LineasController extends Controller
 {
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
 
   public function formValidationPost(Request $request)
     {

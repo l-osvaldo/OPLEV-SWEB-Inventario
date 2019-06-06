@@ -28,21 +28,21 @@ class HomeController extends Controller
     {
         $usuario = auth()->user();
 
-      if (Auth::check())
-      {
-        return view('catalogos.bienes', compact('usuario'));   
-    }
+        if (Auth::check()){
+
+            return view('catalogos.bienes', compact('usuario'));   
+        }
         else
         {
           return redirect()->route('auth.login');
         }
-      }
+    }
 
 
     public function index(Request $request)
     {
 
-        if($request->user()->authorizeRoles(['user', 'admin']))
+        if($request->user()->authorizeRoles(['user', 'admin']) && Auth::check())
         {
             $usuario = auth()->user();
             //print_r ($usuario);exit();

@@ -72,6 +72,11 @@
               Bienes OPLE
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item" style="margin-left: 25px;">
+              
+            </li>
+          </ul>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{ route('catalogoeco') }}" class="{!! Request::is('catalogos/bieneseco') ? 'nav-link active' : 'nav-link' !!}">

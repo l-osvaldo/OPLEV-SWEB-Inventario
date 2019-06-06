@@ -7,6 +7,10 @@ use App\articulos;
 
 class CatalogosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //listado de la tabla
     public function bienes ()
     {

@@ -7,5 +7,9 @@ use App\articulos;
 
 class ArticulosController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
 }
