@@ -59,4 +59,9 @@ class EmpleadosController extends Controller
 				return view('catalogos.Tablas.TablaEmpleados',compact('empleado','area','usuario')); 
 
 		}
+
+		public function validarNumeroEmpleado(Request $request){
+		$existe = empleados::select('numemple')->where('numemple',$request->numeroEmpleado)->get();
+		return $existe;		
+	}
 }

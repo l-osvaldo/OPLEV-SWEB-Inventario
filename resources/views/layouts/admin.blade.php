@@ -922,7 +922,7 @@
        datosValidosEm(valor, error, id, tipo);
    });
    
-   $( ".validateDataEm" ).change(function() {
+   $( "#clvdepto" ).change(function() {
        var valor = $(this).val();
        var error = $(this).attr("data-errorEm");
        var id = $(this).attr("id");
@@ -1152,10 +1152,7 @@
            break;
          case 'int':
            if (valor.match(/^[0-9]*$/) && valor!=""){
-           $('.error'+ error).text("");
-           $('#'+id).attr("data-validacionEm", '0');
-           $('#'+id).removeClass('inputDanger');
-           $('#'+id).addClass('inputSuccess');
+            validarNumeroEmpleado(valor,error,id);
          }else{
            $('.error'+ error).text("Solo numeros.");
            $('#'+id).attr("data-validacionEm", '1');
@@ -1276,6 +1273,7 @@
        array.push(claserror[i].getAttribute('data-validacionEm'));
      }
    
+    console.log(array);
      if(array.includes('1'))
      { 
        $('#btn-submitEm').prop("disabled", true);
@@ -1285,7 +1283,7 @@
        $('#btn-submitEm').prop("disabled", false);
      }
    
-       //console.log(array);
+       
    }
 
    function enablebtnBusquedaLinea()

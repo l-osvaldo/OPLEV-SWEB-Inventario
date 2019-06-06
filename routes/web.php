@@ -72,3 +72,6 @@ Route::post('/catalogos/AgregaEmpleados', 'EmpleadosController@store')->name('ag
 Route::post('/catalogos/TablaEmpleados', 'EmpleadosController@show')->name('show-Empleados');
 Route::get('/catalogos/TablaEmpleados', 'EmpleadosController@show')->name('show-Empleados');
 
+Route::get('/catalogos/validarNumeroEmpleado', 'EmpleadosController@validarNumeroEmpleado');
+
+

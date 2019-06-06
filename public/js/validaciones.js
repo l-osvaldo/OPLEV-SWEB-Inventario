@@ -44,29 +44,29 @@ function validarNumeroEmpleado(valor,error,id){
    });
 
   $.ajax({
-      url: "", 
+      url: "validarNumeroEmpleado", 
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
-      data: {partida: valor},
+      data: {numeroEmpleado: valor},
       dataType: 'json',
       contentType: 'application/json'
     }).done(function(response) {
       //console.log(valor);
-      if (response.length > 0){
 
-        $('.error'+ error).text("Este número de partida ya existe.");
-            $('#'+id).attr("data-validacion", '1');
-            $('#'+id).removeClass('inputSuccess');
-            $('#'+id).addClass('inputDanger'); 
+      if (response.length > 0){
+        console.log('valor->  '+ valor + '  id ->  ' + id + ' error->  ' +error);
+        $('.error'+ error).text("Este número de empleado ya está registrado.");
+        $('#'+id).attr("data-validacionEm", '1');
+        $('#'+id).removeClass('inputSuccess');
+        $('#'+id).addClass('inputDanger');
       }else{
         $('.error'+ error).text("");
-            $('#'+id).attr("data-validacion", '0');
-            $('#'+id).removeClass('inputDanger');
-            $('#'+id).addClass('inputSuccess');
+        $('#'+id).attr("data-validacionEm", '0');
+        $('#'+id).removeClass('inputDanger');
+        $('#'+id).addClass('inputSuccess');
       }
-      enablebtn() 
-
-
+      enablebtnEm() 
+      
     }); 
 }
 
