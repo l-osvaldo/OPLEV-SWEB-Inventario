@@ -11,5 +11,13 @@ class ArticulosController extends Controller
     {
         $this->middleware('auth');
     }
-    //
+    
+    public function vistaAlta()
+	{
+		$usuario = auth()->user();
+
+		return view('ople.alta', compact('usuario'));
+
+	}
+
 }

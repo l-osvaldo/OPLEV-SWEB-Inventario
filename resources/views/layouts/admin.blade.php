@@ -965,11 +965,7 @@
            break;
          case 'int':
            if (valor.match(/^[0-9]*$/) && valor!=""){
-            validarPartida(valor,error,id);
-            // $('.error'+ error).text("");
-            // $('#'+id).attr("data-validacion", '0');
-            // $('#'+id).removeClass('inputDanger');
-            // $('#'+id).addClass('inputSuccess');          
+            validarPartida(valor,error,id);        
            }else{
             $('.error'+ error).text("Solo numeros.");
             $('#'+id).attr("data-validacion", '1');

@@ -66,15 +66,15 @@ class PartidasController extends Controller
     en la vista TablaPartida
     */
     public function index()
-			{
-					$usuario = auth()->user();
-					$partida = partidas::distinct()->orderBy('partida', 'DESC')->get(['partida', 'descpartida']);
-					//var_dump($partida[0]);
-					//dd();
+	{
+		$usuario = auth()->user();
+		$partida = partidas::distinct()->orderBy('partida', 'DESC')->get(['partida', 'descpartida']);
+		//var_dump($partida[0]);
+		//dd();
 
-					return view('catalogos.Tablas.TablaPartida', compact('partida', 'usuario'));
+		return view('catalogos.Tablas.TablaPartida', compact('partida', 'usuario'));
 
-			}
+	}
 
     /*
     funcion para llamar a la venta de agregar partida

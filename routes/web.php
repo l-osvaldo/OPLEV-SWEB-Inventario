@@ -70,6 +70,10 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('/catalogos/TablaEmpleados', 'EmpleadosController@show')->name('show-Empleados');
 
 	Route::get('/catalogos/validarNumeroEmpleado', 'EmpleadosController@validarNumeroEmpleado');
+
+	// ************* OPLE ******************
+	// Alta Artículo
+	Route::get('/ople/alta', 'ArticulosController@vistaAlta')->name('alta-articulo'); 
 });
 
 Route::get('/', function () {
