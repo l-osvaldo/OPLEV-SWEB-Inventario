@@ -946,6 +946,10 @@
        var tipo = $(this).attr("data-myTypeArea");
        datosValidosArea(valor, error, id, tipo);
    });
+
+   function prueba(){
+    console.log('si');
+   }
    
    function datosValidos(valor, error, id, tipo)
    {

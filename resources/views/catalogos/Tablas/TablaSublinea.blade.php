@@ -2,27 +2,10 @@
 @section('title', 'Catálogo Sublineas')
 
 @section('content')
- <!-- Navbar -->
- <nav class=" navbar navbar-expand col-sm-12 bg-white navbar-light border-bottom">
-    <!-- Left navbar links -->
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a> 
-    </li>
-  </ul>
-  <div class="">
-      <ol class="breadcrumb float-sm-left">
-        <h5>Catálogo de Sublíneas</h5>
-      </ol>
-  </div>
-  <ul class="navbar-nav ml-auto float-sm-right">   
-      <li class="nav-item">
-        <a class="nav-link" href="#"><h5 style="color:#EA0D94"><b>Dirección Ejecutiva de Administración</b></h5></a>
-      </li>
-  </ul>
-    
-</nav>
-  <!-- /.navbar -->
+
+<!-- Navbar -->
+@include('partials.header',['tituloEncabezado' => 'Catálogos de Sublíneas'])
+<!-- /.navbar -->
 
 @include('sweet::alert')
 <div class="card">
