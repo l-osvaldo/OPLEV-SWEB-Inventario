@@ -15,7 +15,7 @@
       </div>
       <div class="info">
       <a href="/home" class="d-block">{{ $usuario->username }}</a>
-      </div>
+      </div> 
     </div>
 
     <!-- Sidebar Menu -->
