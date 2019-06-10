@@ -13,9 +13,9 @@ function datosValidosLineaBusqueda(valor, error, id, tipo)
        $('#'+id).removeClass('inputSuccess');
        $('#'+id).addClass('inputDanger'); 
      }
-   break;
+    break;
    default:
-   console.log('default');
+    console.log('default');
  }
  enablebtnBusquedaLinea();
 }
@@ -42,5 +42,5 @@ function datosValidosArea(valor, error, id, tipo)
    console.log('default');
  }
  enablebtnLi();
-}
+} 
 

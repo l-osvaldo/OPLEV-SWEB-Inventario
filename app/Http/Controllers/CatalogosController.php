@@ -14,16 +14,16 @@ class CatalogosController extends Controller
     //listado de la tabla
     public function bienes ()
     {
-        $products = articulos::orderBy('iev', 'DESC')->paginate();
+        $articulos = articulos::orderBy('iev', 'DESC')->get();
         $usuario = auth()->user();
-        return view('catalogos.Bienes', compact('products','usuario'));
+        return view('catalogos.Bienes', compact('articulos','usuario'));
     }
 
     public function bieneseco ()
     {
-        $products = articulos::orderBy('iev', 'DESC')->paginate();
+        $articulos = articulos::orderBy('iev', 'DESC')->paginate();
         $usuario = auth()->user();
-        return view('catalogos.Bieneseco', compact('products','usuario'));
+        return view('catalogos.Bieneseco', compact('articulos','usuario'));
     }
     public function lista ()
     {

@@ -92,7 +92,7 @@
 				</div>
 
 				<div class="modal-footer">
-					<button class="btn btn-secondary" id="editBtn" disabled>Actualizar</button>
+					<button style="background-color: #E71096" class="btn btn-secondary float-right" id="editBtn" disabled>Actualizar</button>
 					<input type="hidden" name="Area" id="actualizarArea"> 
 					
 					

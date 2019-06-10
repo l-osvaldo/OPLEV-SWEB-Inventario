@@ -23,7 +23,7 @@
       <ul class=" nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
             with font-awesome or any other icon font library -->
-        <li class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/lista','catalogos/TablaDeLineas','catalogos/Lineas',
+        <li id="cat" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/lista','catalogos/TablaDeLineas','catalogos/Lineas',
           'catalogos/TablaEmpleados','catalogos/TablaPartida','catalogos/Sublineas','catalogos/TablaSublineas','catalogos/TablaAreas') ? 'menu-open' : '' !!}">
           <a class="{!! Request::is('catalogos/lista','catalogos/TablaDeLineas','catalogos/Lineas',
           'catalogos/TablaEmpleados','catalogos/TablaPartida','catalogos/Sublineas','catalogos/TablaSublineas','catalogos/TablaAreas') ? 'nav-link active' : 'nav-link' !!}">
@@ -66,7 +66,7 @@
               </li>
             </ul>
         </li>
-        <li class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bienes','home','/','ople/alta') ? 'menu-open' : '' !!}">
+        <li id="ople" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bienes','home','/','ople/alta') ? 'menu-open' : '' !!}">
           <a class="{!! Request::is('catalogos/bienes','home','/','ople/alta') ? 'nav-link active' : 'nav-link' !!}">
             <i class="nav-icon fa fa-desktop"></i>
             <p>
@@ -81,22 +81,16 @@
                 <p style="margin-left: 10px;">Cátalogo</p>
               </a>
             </li>
-            <li class="nav-item" style="margin-left: 25px;">
-              <a href="{{ route('alta-articulo') }}" class="{!! Request::is('ople/alta') ? 'nav-link active' : 'nav-link' !!}">
-                <i class="fa fa-arrow-up"></i>
-                <p style="margin-left: 10px;">Alta Artículo</p>
-              </a>
-            </li>
           </ul>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('catalogoeco') }}" class="{!! Request::is('catalogos/bieneseco') ? 'nav-link active' : 'nav-link' !!}">
-              <i class="nav-icon fa fa-desktop"></i>
-              <p>
-                Bienes ECO
-              </p>
-            </a>
-          </li>
+        <li id="eco" class="nav-item d-none d-sm-inline-block">
+          <a href="{{ route('catalogoeco') }}" class="{!! Request::is('catalogos/bieneseco') ? 'nav-link active' : 'nav-link' !!}">
+            <i class="nav-icon fa fa-desktop"></i>
+            <p>
+              Bienes ECO
+            </p>
+          </a>
+        </li>
         
         <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}"

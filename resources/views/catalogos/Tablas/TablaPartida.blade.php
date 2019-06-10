@@ -10,11 +10,11 @@
 
 @include('sweet::alert')
 
-      <div class="card">
-        <div class="card-body" >
-          <a href="#" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"> Agregar Partida</a>         
-        </div>
-      </div> 
+<div class="card">
+  <div class="card-body" >
+    <a href="#" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"> Agregar Partida</a>         
+  </div>
+</div> 
 <section class="content" style="margin-top: 2vh;">
   <div class="row ">
     <div class="col-12">     
