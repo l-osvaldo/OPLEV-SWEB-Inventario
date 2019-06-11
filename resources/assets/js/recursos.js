@@ -39,7 +39,7 @@ $(function() {
         
           $('#Linea').prop("disabled", false);
 
-          console.log('prueba');
+          //console.log('prueba');
                   
       });
     }else{

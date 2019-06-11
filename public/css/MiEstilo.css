@@ -1,0 +1,19 @@
+.bordediv {
+
+	border-top-style: dotted;
+	border-bottom-style: dotted;
+	border-left-style: dotted;
+	border-right-style: dotted; 
+    border-width: 1px; 
+}
+
+.bordediv2 {
+
+	border-left-style: dotted;
+	border-right-style: dotted;
+	border-bottom-style: dotted; 
+    border-width: 1px; 
+}
+
+
+

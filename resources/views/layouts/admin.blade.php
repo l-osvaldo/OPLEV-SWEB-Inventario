@@ -149,6 +149,13 @@
 <script type="text/javascript" src="{{ asset('js/validaciones.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/cancelar.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/camposValidados.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap-input-spinner.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/agregararticulo.js') }}"></script>
+<script>
+    $ ("input[type='number']").inputSpinner();
+</script>
+
+
 <script>
   $('#example1').DataTable( {
     "deferRender": true,

@@ -57,6 +57,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	//sublineas
 	Route::get('catalogos/obtenLineasAg', 'SublineasController@obtenLineasAg');
 	Route::get('catalogos/obtenSublineas', 'SublineasController@obtenSublineas');
+	Route::get('catalogos/obtenSublineas2', 'SublineasController@obtenSublineas2');
 
 	//Areas
 	Route::get('/catalogos/TablaAreas', 'AreasController@index')->name('Tabla-Areas');

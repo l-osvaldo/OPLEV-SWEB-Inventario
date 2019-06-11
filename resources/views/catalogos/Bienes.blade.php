@@ -8,9 +8,9 @@
 
 <div class="card">
   <div class="card-body" >
-    <a href="" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#altasModal"> 
-        Altas 
+    <a href="" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#altasModal">
         <i class="fa fa-arrow-up"></i> 
+        Altas         
     </a>
   </div>
 </div>
@@ -33,7 +33,7 @@
                         </thead>
                         <tbody>
                             @foreach ($articulos as $articulo)
-                                <tr>
+                                <tr data-toggle="tooltip" data-placement="top" title="Click para ver toda la información del artículo: {{ $articulo->concepto }}, Número de inventario: {{ $articulo->numeroinv }} ">
                                     <td> {{ $articulo->numeroinv }} </td>
                                     <td> {{ $articulo->concepto }} </td>
                                     <td> {{ $articulo->factura }} </td>
@@ -49,40 +49,6 @@
             </div>
         </div>
     </div>
-</section>
-
-<section class="content">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Detalle</h3>
-                </div>
-                <div class="car-body">
-                        <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Empleado</th>
-                                <th>Area</th>
-                                <th>Num. Serie</th>
-                                <th>Estado</th>
-                                <th>Modelo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>empleaod</th>
-                                <th>area</th>
-                                <th>xxxxx</th>
-                                <th>BUENO</th>
-                                <th>////</th>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <!-- Modal -->
@@ -90,7 +56,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header" style="background: #a90a6c; color:white">
-          <h5 class="modal-title" id="exampleModalLabel"><b>Agregar Partida</b></h5>
+          <h5 class="modal-title" id="altasModalLabel"><b>Alta de Artículo(s)</b></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -100,67 +66,107 @@
           <form method="POST" action="{{ route('partidas') }}">
             @csrf
             <div class="card-body">
-              <div class="row">
-                <div class="col-md-2">
-                  
-                  <div class="form-group {{ $errors->has('partida') ? 'has-error' : '' }}">
-                      <label>Partida</label>
-                      <input type="text" maxlength="8" class="form-control validateData" data-myType="int" data-error= "1" data-validacion="1" id="partidaI" name="partidaI" onKeyPress="return SoloNumerosLetras(event,'numero');">
-                      <span class="text-danger error1"></span>
-                    </div>
+              <div class="row bordediv">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label style="margin-top: 10px;">Seleccione una Partida:</label>
+                        <select id="partidaAltaArticulo" name="partidaAltaArticulo" class="form-control select2 " style="width: 90%;">
+                            <option  value="0" selected="selected">No. partida</option>
+                            @foreach ($partidas as $partida)
+                                <option value="{{ $partida->partida }}" > {{ $partida->partida }} | {{ $partida->descpartida }} </option>
+                            @endforeach  
+                        </select>
+                        <label>Seleccione una Línea:</label>                 
+                        <select class="form-control select2" id="lineaAltaArticulo" name="lineaAltaArticulo" style="width: 90%;" disabled>
+                            <option value="0" disabled="true" selected="true">Línea</option>
+                        </select>
+                        <label>Seleccione una Sublinea:</label>                 
+                        <select class="form-control select2" id="sublineaAltaArticulo" name="sublineaAltaArticulo" style="width: 90%;" disabled>
+                            <option value="0" disabled="true" selected="true">Sublinea</option>
+                        </select>                        
+                    </div>                                       
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label style="margin-top: 10px;">Cantidad de Bienes:</label>
+                        <input type="number" name="numberNumBienes" id="numberNumBienes" min="1" value="1" class="form-control" disabled>
+                        <label id="lblNumInv">Número de Inventario</label>
+                        <textarea id="txtaNumInv" class="form-control" disabled rows="3"></textarea>
+                    </div> 
+                </div> <!-- /.col -->
+              </div> <!-- /.row -->
+              <div class="row bordediv2">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="width: 100%; margin-top: 10px;">Concepto:</label>
+                        <input type="text" name="txtConcepto" id="txtConcepto" style="width: 100%;" disabled class="form-control">
+                        <label style="width: 100%">Factura:</label>
+                        <input type="text" name="txtFactura" id="txtFactura" style="width: 100%;" disabled class="form-control">
+                        <label style="width: 100%">Precio Unitario:</label>
+                        <input type="text" name="txtImporte" id="txtImporte" style="width: 100%; text-align:right;" disabled value="$ 0.0" class="form-control">
+                    </div>                                         
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="margin-top: 10px;">Fecha de Compra:</label>
+                        <div class="card bg-success-gradient">
+                          <div class="card-header no-border">
 
-                    <!-- -- !-->
-                  <div class="form-group {{ $errors->has('linea') ? 'has-error' : '' }}">
-                    <label>Línea</label>
-                    <input type="text" class="form-control " readonly  id="linea" name="linea" value="01" placeholder="01" >
-                      @if ($errors->has('linea'))
-                    <small class="form-text text-danger">{{ $errors->first('linea') }}</small>
-                      @endif
-                  </div>
-                  <!-- /.form-group -->
-                  <div class="form-group {{ $errors->has('sublinea') ? 'has-error' : '' }}">
-                    <label>Sublínea</label>
-                    <input type="text" class="form-control" readonly id="sublinea" name="sublinea" value="01" placeholder="01" >
-                      @if ($errors->has('sublinea'))
-                    <small class="form-text text-danger">{{ $errors->first('sublinea') }}</small>
-                      @endif
+                            <h3 class="card-title">
+                              <i class="fa fa-calendar"></i>
+                              Calendario
+                            </h3>
+                          </div>
+                          <!-- /.card-header -->
+                          <div class="card-body p-0">
+                            <!--The calendar -->
+                            <div id="calendar" style="width: 100%"></div>
+                          </div>
+                          <!-- /.card-body -->
+                        </div>
                     </div>
-                    <div class="form-group {{ $errors->has('total') ? 'has-error' : '' }}" style="display: none">
-                      <label>Total</label>
-                      <input type="text" class="form-control"  readonly id="total" name="total" value="0">
-                        @if ($errors->has('total'))
-                      <small class="form-text text-danger">{{ $errors->first('total') }}</small>
-                      @endif
-                    </div>
-                  <!-- /.form-group -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-10">
-                  <div class="form-group {{ $errors->has('descpartida') ? 'has-error' : '' }}">
-                    <label>Descripción Partida</label>
-                    <input type="text" class="form-control validateData" data-myType="text" data-error= "2" data-validacion="1" id="descpartida" name="descpartida" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'partida');"
-                    onkeyup="javascript:this.value=this.value.toUpperCase();">
-                    <span class="text-danger error2"></span>
-                  </div>
-                        <!-- --  -->
-                  <div class="form-group {{ $errors->has('desclinea') ? 'has-error' : '' }}">
-                    <label>Descripción Línea</label>
-                    <input type="text" class="form-control validateData" data-myType="text" data-error= "3" data-validacion="1" id="desclinea" name="desclinea" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'linea');"
-                    onkeyup="javascript:this.value=this.value.toUpperCase();">
-                    
-                    <span class="text-danger error3"></span>
-                  </div>
-                  <!-- /.form-group -->
-                  <div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}">
-                    <label>Descripción Sublínea</label>
-                    <input type="text" class="form-control validateData" data-myType="text" data-error= "4" data-validacion="1" id="descsub" name="descsub" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'sublinea');" onkeyup="javascript:this.value=this.value.toUpperCase();">
-                    <span class="text-danger error4"></span>
-                  </div>
-                  <!-- /.form-group -->     
-                </div>
-                <!-- /.col -->
+                </div> 
               </div>
-              <!-- /.row -->
+              <div class="row bordediv2">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                        <label style="width: 100%; margin-top: 10px;">Responsable:</label>
+                        <input type="text" name="txtResponsable" id="txtResponsable" style="width: 100%;" disabled value="Bodega" class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="form-group">
+                        <label style="width: 100%; margin-top: 10px;">Área:</label>
+                        <input type="text" name="txtArea" id="txtArea" style="width: 100%;" disabled value="Bodega" class="form-control">
+                      </div>
+                  </div>
+              </div>
+              <div class="row bordediv2">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="width: 100%; margin-top: 10px;">Marca:</label>
+                        <input type="text" name="txtMarca" id="txtMarca" style="width: 100%;" disabled class="form-control">
+                        <label style="width: 100%;">Modelo:</label>
+                        <input type="text" name="txtModelo" id="txtModelo" style="width: 100%;" disabled class="form-control">
+                        <label style="width: 100%;">Número de Serie:</label>
+                        <input type="text" name="txtNumSerie" id="txtNumSerie" style="width: 100%;" disabled class="form-control">
+                        <label style="width: 100%;">Color:</label>
+                        <input type="text" name="txtColor" id="txtColor" style="width: 100%;" disabled class="form-control">
+                    </div>                    
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label style="width: 100%; margin-top: 10px;">Material:</label>
+                        <input type="text" name="txtMaterial" id="txtMaterial" style="width: 100%;" disabled class="form-control">
+                        <label style="width: 100%;">Medidas:</label>
+                        <input type="text" name="txtMedidas" id="txtMedidas" style="width: 100%;" disabled class="form-control">
+                        <label style="width: 100%;">Estado:</label>
+                        <select name="txtEstado" id="txtEstado" style="width: 100%;" disabled class="form-control">
+                            <option value="0" selected >Bueno</option>
+                        </select>
+                    </div>                    
+                </div>                  
+              </div>
             </div>
             <!--Fin Agregar Partida -->
             <div class="card-footer">

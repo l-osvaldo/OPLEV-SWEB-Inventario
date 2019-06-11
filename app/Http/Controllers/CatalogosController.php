@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\articulos;
+use App\partidas;
 
 class CatalogosController extends Controller
 {
@@ -15,8 +16,9 @@ class CatalogosController extends Controller
     public function bienes ()
     {
         $articulos = articulos::orderBy('iev', 'DESC')->get();
+        $partidas = partidas::all();
         $usuario = auth()->user();
-        return view('catalogos.Bienes', compact('articulos','usuario'));
+        return view('catalogos.Bienes', compact('articulos','usuario','partidas'));
     }
 
     public function bieneseco ()

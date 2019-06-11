@@ -114,6 +114,16 @@ class SublineasController extends Controller
 
     return response()->json($numsublinea);
   }
+
+      //obtiene las sublineas para agregar un artículo
+  public function obtenSublineas2(Request $request)
+  {
+    $partida = $request->partida;
+    $linea = $request->linea;
+    $sublineas = sublineas::where('partida', $partida)->where('linea', $linea)->orderBy('sublinea', 'DESC')->get(); 
+
+    return response()->json($sublineas);
+  }
       
       //ultima linea +1
   public function obtenMaxLineas(Request $request)
