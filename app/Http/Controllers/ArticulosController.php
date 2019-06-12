@@ -12,12 +12,11 @@ class ArticulosController extends Controller
         $this->middleware('auth');
     }
     
-    public function vistaAlta()
-	{
-		$usuario = auth()->user();
+    public function numeroInventarioMax(Request $request){
 
-		return view('ople.alta', compact('usuario'));
+    	$numeroInventarioMax = articulos::where([['partida',$request->partida],['linea', $request->linea],['sublinea',$request->sublinea]])->max('consecutivo');
 
-	}
+    	return response()->json($numeroInventarioMax);
+    }
 
 }

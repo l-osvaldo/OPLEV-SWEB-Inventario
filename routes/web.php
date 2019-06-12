@@ -19,15 +19,6 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Auth::routes();
 
 	Route::get('/SweetAlert/{alertType?}', ['as'=>'SweetAlert','uses'=>'HomeController@sweet']);
-	Route::get('/sweet', 'HomeController@sweetalert')->name('sweet');
-	Route::get('/home', 'HomeController@index')->name('home');
-	Route::get('/calendar', 'HomeController@calendar')->name('calendar');
-	Route::get('/tables', 'HomeController@tables')->name('tables');
-	Route::get('/charts', 'HomeController@charts')->name('charts');
-	Route::get('/widgets', 'HomeController@widgets')->name('widgets');
-	Route::get('/general-elements', 'HomeController@generalelements')->name('general');
-	Route::get('/advanced-elements', 'HomeController@advanced')->name('advanced');
-	Route::get('/personalizado', 'HomeController@personalizado')->name('personalizado');
 	Route::get('/catalogos/bienes', 'CatalogosController@bienes')->name('catalogos');
 	Route::get('/catalogos/bieneseco', 'CatalogosController@bieneseco')->name('catalogoeco');
 	Route::get('/catalogos/lista', 'CatalogosController@lista')->name('lista');
@@ -74,7 +65,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 
 	// ************* OPLE ******************
 	// Alta Artículo
-	Route::get('/ople/alta', 'ArticulosController@vistaAlta')->name('alta-articulo'); 
+	Route::get('/catalogos/numeroInventario', 'ArticulosController@numeroInventarioMax'); 
 });
 
 Route::get('/', function () {

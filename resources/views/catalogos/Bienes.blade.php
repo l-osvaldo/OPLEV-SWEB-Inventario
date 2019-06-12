@@ -67,26 +67,26 @@
             @csrf
             <div class="card-body">
               <div class="row bordediv">
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="form-group">
                         <label style="margin-top: 10px;">Seleccione una Partida:</label>
-                        <select id="partidaAltaArticulo" name="partidaAltaArticulo" class="form-control select2 " style="width: 90%;">
+                        <select id="partidaAltaArticulo" name="partidaAltaArticulo" class="form-control select2 " style="width: 95%;">
                             <option  value="0" selected="selected">No. partida</option>
                             @foreach ($partidas as $partida)
-                                <option value="{{ $partida->partida }}" > {{ $partida->partida }} | {{ $partida->descpartida }} </option>
+                                <option value="{{ $partida->partida }}*{{ $partida->descpartida }}" > {{ $partida->partida }} | {{ $partida->descpartida }} </option>
                             @endforeach  
                         </select>
                         <label>Seleccione una Línea:</label>                 
-                        <select class="form-control select2" id="lineaAltaArticulo" name="lineaAltaArticulo" style="width: 90%;" disabled>
+                        <select class="form-control select2" id="lineaAltaArticulo" name="lineaAltaArticulo" style="width: 95%;" disabled>
                             <option value="0" disabled="true" selected="true">Línea</option>
                         </select>
                         <label>Seleccione una Sublinea:</label>                 
-                        <select class="form-control select2" id="sublineaAltaArticulo" name="sublineaAltaArticulo" style="width: 90%;" disabled>
+                        <select class="form-control select2" id="sublineaAltaArticulo" name="sublineaAltaArticulo" style="width: 95%;" disabled>
                             <option value="0" disabled="true" selected="true">Sublinea</option>
                         </select>                        
                     </div>                                       
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="form-group">
                         <label style="margin-top: 10px;">Cantidad de Bienes:</label>
                         <input type="number" name="numberNumBienes" id="numberNumBienes" min="1" value="1" class="form-control" disabled>
@@ -103,12 +103,12 @@
                         <label style="width: 100%">Factura:</label>
                         <input type="text" name="txtFactura" id="txtFactura" style="width: 100%;" disabled class="form-control">
                         <label style="width: 100%">Precio Unitario:</label>
-                        <input type="text" name="txtImporte" id="txtImporte" style="width: 100%; text-align:right;" disabled value="$ 0.0" class="form-control">
+                        <input type="text" name="txtImporte" id="txtImporte" style="width: 100%; text-align:right;" disabled placeholder="$ 0.0" class="form-control">
                     </div>                                         
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                        <label style="margin-top: 10px;">Fecha de Compra:</label>
+                        <label style="margin-top: 10px;">Fecha de Compra: -- / -- / ----</label>
                         <div class="card bg-success-gradient">
                           <div class="card-header no-border">
 
