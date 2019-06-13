@@ -31,7 +31,8 @@
             autoInterval: 100, // speed of auto value change
             boostThreshold: 10, // boost after these steps
             boostMultiplier: "auto", // you can also set a constant number as multiplier
-            locale: null // the locale for number rendering; if null, the browsers language is used
+            locale: null, // the locale for number rendering; if null, the browsers language is used
+            Mystyle: "text-transform:uppercase;"
         }
         for (var option in options) {
             config[option] = options[option]
@@ -41,7 +42,7 @@
             '<div class="input-group-prepend">' +
             '<button style="min-width: ' + config.buttonsWidth + '" class="btn btn-decrement ' + config.buttonsClass + '" type="button">' + config.decrementButton + '</button>' +
             '</div>' +
-            '<input type="text" style="text-align: ' + config.textAlign + '" class="form-control"/>' +
+            '<input type="text" style="'+ config.Mystyle +' text-align: ' + config.textAlign + '" class="form-control" onKeyPress="return SoloNumeros(event);" />' +
             '<div class="input-group-append">' +
             '<button style="min-width: ' + config.buttonsWidth + '" class="btn btn-increment ' + config.buttonsClass + '" type="button">' + config.incrementButton + '</button>' +
             '</div>' +

@@ -87,8 +87,10 @@ function SoloNumerosLetras(evt, tipovalidacion){
 function soloLetras(e,tipovalidacion) {
   key = e.keyCode || e.which;
   tecla = String.fromCharCode(key).toString();
-  letras = " áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ";//Se define todo el abecedario que se quiere que se muestre.
+  letras = "áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ";//Se define todo el abecedario que se quiere que se muestre.
   especiales = [8, 6, 32]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+
+  //console.log(key);
 
   if (tipovalidacion == 'partida' ){
     especiales = [8, 6, 32, 44, 45]; 
@@ -103,7 +105,16 @@ function soloLetras(e,tipovalidacion) {
     especiales = [8, 6, 32, 46];
   }
   if (tipovalidacion == 'cargo' ) {
-    especiales = [8, 6, 46, 34];
+    especiales = [8, 6, 46, 34, 32];
+  }
+  if (tipovalidacion == 'factura'){
+    especiales = [8, 6, 45];
+  }
+  if (tipovalidacion == 'modelo' ) {
+    especiales = [8, 6, 32, 34, 44 ,45, 46, 47];
+  }
+  if (tipovalidacion == 'serie' ) { 
+    especiales = [8, 6, 32, 44 ,45, 47, 58];
   }
 
   tecla_especial = false
@@ -113,6 +124,7 @@ function soloLetras(e,tipovalidacion) {
           break;
       }
   }
+  
 
   if(letras.indexOf(tecla) == -1 && !tecla_especial){
       return false;
@@ -137,3 +149,55 @@ function SoloNumeros(evt){
   return false;
  }
 }
+
+
+function valorPrecio(e, field) {
+  key = e.keyCode ? e.keyCode : e.which
+  // backspace
+  if (key == 8){
+    return true;
+  } 
+  // 0-9
+  // if (key > 47 && key < 58) {
+  //   if (field.value == ""){
+  //     return true
+  //   } 
+  //   regexp = /.[0-9]{2}$/
+  //   return !(regexp.test(field.value))
+  // }
+  // // .
+  // if (key == 46) {
+  //   if (field.value == ""){
+  //     return false
+  //   } 
+  //   regexp = /^[0-9]+$/
+  //   return regexp.test(field.value)
+  // }
+  // // other key
+  // return false
+
+     if (key > 47 && key < 58) {
+       if (field.value == ""){
+        return true;
+       } 
+       var existePto = (/[.]/).test(field.value);
+       if (existePto == false){
+           regexp = /.[0-9]{10}$/; //PARTE ENTERA 10
+       }
+       else {
+         regexp = /.[0-9]{2}$/; //PARTE DECIMAL2
+       }
+       return !(regexp.test(field.value));
+     }
+     if (key == 46) {
+       if (field.value == ""){
+        return false;
+       } 
+       regexp = /^[0-9]+$/;
+       return regexp.test(field.value);
+     }
+     return false;
+ 
+}
+
+

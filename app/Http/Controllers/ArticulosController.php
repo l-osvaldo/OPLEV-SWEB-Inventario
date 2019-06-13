@@ -16,6 +16,11 @@ class ArticulosController extends Controller
 
     	$numeroInventarioMax = articulos::where([['partida',$request->partida],['linea', $request->linea],['sublinea',$request->sublinea]])->max('consecutivo');
 
+
+    	if ($numeroInventarioMax == null){
+    		$numeroInventarioMax = 0;
+    	}
+
     	return response()->json($numeroInventarioMax);
     }
 

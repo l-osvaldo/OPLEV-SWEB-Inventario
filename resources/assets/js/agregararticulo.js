@@ -50,8 +50,6 @@ $('#lineaAltaArticulo').change(function(){
 		var lineaCompleta = $(this).val().split('*');
 		filtroSublinea(lineaCompleta[0]);
 		$('#sublineaAltaArticulo').prop("disabled", false);
-		$('#txtFactura').prop("disabled", false);
-		$('#txtImporte').prop("disabled", false);
 	}else{
 		reiniciarmodal($(this).attr("id"));
 	}
@@ -96,7 +94,17 @@ $('#sublineaAltaArticulo').change(function(){
 		var sublineaCompleta = 	$('#sublineaAltaArticulo').val().split('*');
 		$('#txtConcepto').val(lineaCompleta[1] + ' ' + sublineaCompleta[1]);
 		$('#numberNumBienes').val("1");
+
 		$('#numberNumBienes').prop("disabled", false);
+		$('#txtFactura').prop("disabled", false);
+		$('#txtImporte').prop("disabled", false);
+		$('#txtMarca').prop("disabled", false);
+		$('#txtModelo').prop("disabled", false);
+		$('#txtNumSerie').prop("disabled", false);
+		$('#txtColor').prop("disabled", false);
+		$('#txtMaterial').prop("disabled", false);
+		$('#txtMedidas').prop("disabled", false);
+
 		generarNumeroInventario($('#numberNumBienes').val());
 	}else{
 		reiniciarmodal($(this).attr("id"));
@@ -105,54 +113,65 @@ $('#sublineaAltaArticulo').change(function(){
 
 $('#numberNumBienes').change(function(){
 	generarNumeroInventario($(this).val());
+	setTimeout(generarNumeroInventario($(this).val()),2500);
 });
 
 
 function generarNumeroInventario(cantidadArticulos){
+
+	if (cantidadArticulos > 0){
+		//console.log(cantidadArticulos);
 	
-	var partidaCompleta = 	$('#partidaAltaArticulo').val().split('*');
-	var lineaCompleta = 	$('#lineaAltaArticulo').val().split('*');
-	var sublineaCompleta = 	$('#sublineaAltaArticulo').val().split('*');
+		var partidaCompleta = 	$('#partidaAltaArticulo').val().split('*');
+		var lineaCompleta = 	$('#lineaAltaArticulo').val().split('*');
+		var sublineaCompleta = 	$('#sublineaAltaArticulo').val().split('*');
 
-	var partida = 	partidaCompleta[0];
-	var linea = 	( lineaCompleta[0] < 10 ) ? '0'+lineaCompleta[0] : lineaCompleta[0];
-	var sublinea = 	( sublineaCompleta[0] < 10 ) ? '0'+sublineaCompleta[0] : sublineaCompleta[0];
+		var partida = 	partidaCompleta[0];
+		var linea = 	( lineaCompleta[0] < 10 ) ? '0'+lineaCompleta[0] : lineaCompleta[0];
+		var sublinea = 	( sublineaCompleta[0] < 10 ) ? '0'+sublineaCompleta[0] : sublineaCompleta[0];
 
-	var numInv = '';
+		var numInv = '';
 
-	$.ajaxSetup(
-	{
-		headers:
-		{ 
-    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	    }
-	});
+		$.ajaxSetup(
+		{
+			headers:
+			{ 
+	    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		    }
+		});
 
-	$.ajax({
-      url: "numeroInventario",
-      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-      type: 'GET',
-      data: {partida: partida , linea: linea, sublinea: sublinea },
-      dataType: 'json',
-      contentType: 'application/json'
-      }).done(function(response) {
-      	console.log(response);
-      	var identificador = 0;
-      	if (cantidadArticulos > 1){
-      		$('#lblNumInv').html('Números de Inventario');
-      	}else{
-      		$('#lblNumInv').html('Número de Inventario');
-      	}
+		$.ajax({
+	      url: "numeroInventario",
+	      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+	      type: 'GET',
+	      data: {partida: partida , linea: linea, sublinea: sublinea },
+	      dataType: 'json',
+	      contentType: 'application/json'
+	      }).done(function(response) {
+	      	//console.log(response);
+	      	
+	      	var identificador = 0;
+	      	if (cantidadArticulos > 1){
+	      		$('#lblNumInv').html('Números de Inventario');
+	      	}else{
+	      		$('#lblNumInv').html('Número de Inventario');
+	      	}
 
-      	for (var i = 1 ; i <= cantidadArticulos ; i++) {
-      		numInv += 'OPLEV-'+ partida + '-' + linea + '-' + sublinea + '-';
-      		identificador = parseInt(response)+i;
-      		identificador = ( identificador < 10) ? '000'+identificador : ( identificador < 100 ) ? '00'+identificador : ( identificador < 1000 ) ? '0'+identificador : identificador;
-      		numInv += identificador + '\n';
-      	}     	
-      	
-      	$('#txtaNumInv').val(numInv);      	
-      }); 
+	      	for (var i = 1 ; i <= cantidadArticulos ; i++) {
+	      		numInv += 'OPLEV-'+ partida + '-' + linea + '-' + sublinea + '-';
+	      		identificador = parseInt(response)+i;
+	      		identificador = ( identificador < 10) ? '000'+identificador : ( identificador < 100 ) ? '00'+identificador : ( identificador < 1000 ) ? '0'+identificador : identificador;
+	      		numInv += identificador + '\n';
+	      	}     	
+	      	
+	      	$('#txtaNumInv').val(numInv);      	
+	      }); 
+	  }else{
+	  	$('#numberNumBienes').val("1");
+	  	generarNumeroInventario(1);
+	  }
+
+	
 }
 
 
@@ -171,8 +190,49 @@ function reiniciarmodal(campo){
 			$('#numberNumBienes').val("1");
 			$('#txtaNumInv').val("");
 			$('#txtConcepto').val("");
+			$('#txtFactura').val("");
+			$('#txtImporte').val("");
+			$('#txtMarca').val("");
+			$('#txtModelo').val("");
+			$('#txtNumSerie').val("");
+			$('#txtColor').val("");
+			$('#txtMaterial').val("");
+			$('#txtMedidas').val("");
+
+
 			$('#txtFactura').prop("disabled", true);
 			$('#txtImporte').prop("disabled", true);
+			$('#txtMarca').prop("disabled", true);
+			$('#txtModelo').prop("disabled", true);
+			$('#txtNumSerie').prop("disabled", true);
+			$('#txtColor').prop("disabled", true);
+			$('#txtMaterial').prop("disabled", true);
+			$('#txtMedidas').prop("disabled", true);
+
+
+			$('.error1').text("");
+			$('.error2').text("");
+			$('.error3').text("");
+			$('.error4').text("");
+			$('.error5').text("");
+
+			$('#txtFactura').attr("data-validacionArticulo", '1');
+			$('#txtImporte').attr("data-validacionArticulo", '1');
+			$('#txtMarca').attr("data-validacionArticulo", '1');
+			$('#txtModelo').attr("data-validacionArticulo", '1');
+			$('#txtNumSerie').attr("data-validacionArticulo", '1');
+
+			$('#txtFactura').removeClass('inputDanger');
+			$('#txtImporte').removeClass('inputDanger');
+			$('#txtMarca').removeClass('inputDanger');
+			$('#txtModelo').removeClass('inputDanger');
+			$('#txtNumSerie').removeClass('inputDanger');
+
+			$('#txtFactura').removeClass('inputSuccess');
+			$('#txtImporte').removeClass('inputSuccess');
+			$('#txtMarca').removeClass('inputSuccess');
+			$('#txtModelo').removeClass('inputSuccess');
+			$('#txtNumSerie').removeClass('inputSuccess');
 		break;
 
 	}

@@ -89,7 +89,7 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label style="margin-top: 10px;">Cantidad de Bienes:</label>
-                        <input type="number" name="numberNumBienes" id="numberNumBienes" min="1" value="1" class="form-control" disabled>
+                        <input type="number" name="numberNumBienes" id="numberNumBienes" min="1" value="1" class="form-control" onKeyPress="return SoloNumerosLetras(event,'numero');" onkeyup="javascript:this.value=this.value.toUpperCase();" disabled>
                         <label id="lblNumInv">Número de Inventario</label>
                         <textarea id="txtaNumInv" class="form-control" disabled rows="3"></textarea>
                     </div> 
@@ -100,10 +100,16 @@
                     <div class="form-group">
                         <label style="width: 100%; margin-top: 10px;">Concepto:</label>
                         <input type="text" name="txtConcepto" id="txtConcepto" style="width: 100%;" disabled class="form-control">
+
                         <label style="width: 100%">Factura:</label>
-                        <input type="text" name="txtFactura" id="txtFactura" style="width: 100%;" disabled class="form-control">
+                        <input type="text" name="txtFactura" id="txtFactura" style="width: 100%;" disabled class="form-control validateDataArticulo" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'factura');" onkeyup="javascript:this.value=this.value.toUpperCase();" data-errorArticulo="1" data-myTypeArticulo="text" data-validacionArticulo="1">
+                        <span class="text-danger error1"></span>
+                        
+                        
+
                         <label style="width: 100%">Precio Unitario:</label>
-                        <input type="text" name="txtImporte" id="txtImporte" style="width: 100%; text-align:right;" disabled placeholder="$ 0.0" class="form-control">
+                        <input type="text" name="txtImporte" id="txtImporte" style="width: 100%; text-align:right;" disabled placeholder="$ 0.0" class="form-control validateDataArticulo" data-errorArticulo="2" data-myTypeArticulo="text" data-validacionArticulo="1" onKeyPress="return valorPrecio(event,this);">
+                        <span class="text-danger error2"></span>
                     </div>                                         
                   </div>
                   <div class="col-md-6">
@@ -145,11 +151,17 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label style="width: 100%; margin-top: 10px;">Marca:</label>
-                        <input type="text" name="txtMarca" id="txtMarca" style="width: 100%;" disabled class="form-control">
+                        <input type="text" name="txtMarca" id="txtMarca" style="width: 100%;" disabled class="form-control validateDataArticulo" data-errorArticulo="3" data-myTypeArticulo="text" data-validacionArticulo="1" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'factura');" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                        <span class="text-danger error3"></span>
+
                         <label style="width: 100%;">Modelo:</label>
-                        <input type="text" name="txtModelo" id="txtModelo" style="width: 100%;" disabled class="form-control">
+                        <input type="text" name="txtModelo" id="txtModelo" style="width: 100%;" disabled class="form-control validateDataArticulo" data-errorArticulo="4" data-myTypeArticulo="text" data-myTypeArticulo="text" data-validacionArticulo="1" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'modelo');" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                        <span class="text-danger error4"></span>
+
                         <label style="width: 100%;">Número de Serie:</label>
-                        <input type="text" name="txtNumSerie" id="txtNumSerie" style="width: 100%;" disabled class="form-control">
+                        <input type="text" name="txtNumSerie" id="txtNumSerie" style="width: 100%;" disabled class="form-control validateDataArticulo" data-errorArticulo="5" data-myTypeArticulo="text" data-validacionArticulo="1" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'serie');" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                        <span class="text-danger error5"></span>
+
                         <label style="width: 100%;">Color:</label>
                         <input type="text" name="txtColor" id="txtColor" style="width: 100%;" disabled class="form-control">
                     </div>                    
@@ -171,7 +183,7 @@
             <!--Fin Agregar Partida -->
             <div class="card-footer">
               <button type="reset" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>
-              <button type="submit" id="btn-submit2" style="background-color: #E71096" class="btn btn-secondary float-right" disabled>
+              <button type="submit" id="btnGuardarArticulo" style="background-color: #E71096" class="btn btn-secondary float-right" disabled>
                   {{ __('Guardar') }}
               </button>
             </div>
