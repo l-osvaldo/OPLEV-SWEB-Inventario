@@ -28,7 +28,7 @@
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="{{ asset('plugins/iCheck/all.css')}}">
   <!-- Morris chart -->
-  <link rel="stylesheet" href="{{ asset('plugins/morris/morris.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('plugins/morris/morris.css') }}"> --}}
   <!-- jvectormap -->
   <link rel="stylesheet" href="{{ asset('plugins/jvectormap/jquery-jvectormap-1.2.2.css') }}">
   <!-- Date Picker -->
@@ -38,8 +38,8 @@
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
   <!-- fullCalendar 2.2.5-->
-  <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/dist/fullcalendar.css') }}">
-  <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/dist/fullcalendar.min.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/dist/fullcalendar.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/dist/fullcalendar.min.css') }}"> --}}
   <!-- Bootstrap-->
   {{-- <link rel="stylesheet" href="{{ asset('plugins/bootstrap/dist/css/bootstrap.min.css') }}"> --}}
   <!-- Bootstrap Color Picker -->
@@ -77,11 +77,12 @@
   
 
 
-{{-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script> --}}
-{{-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> --}}
+
 
 <!-- jQuery -->
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+<!-- Morris.js charts -->
+<script src="{{ asset('plugins/morris/morris.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -90,9 +91,7 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<!-- Morris.js charts -->
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="{{ asset('plugins/morris/morris.min.js') }}"></script> --}}
+
 <!-- Sparkline -->
 <script src="{{ asset('plugins/sparkline/jquery.sparkline.min.js') }}"></script>
 <!-- jvectormap -->
@@ -130,8 +129,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
 <!-- fullCalendar 2.2.5 -->
-<script src="{{ asset('plugins/fullcalendar/dist/fullcalendar.min.js') }}"></script>
-<script src="{{ asset('plugins/fullcalendar/dist/locale/es.js') }}"></script>
+{{-- <script src="{{ asset('plugins/fullcalendar/dist/fullcalendar.min.js') }}"></script>
+<script src="{{ asset('plugins/fullcalendar/dist/locale/es.js') }}"></script> --}}
 <!-- DataTables -->
 <script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('plugins/datatables/dataTables.bootstrap4.js') }}"></script>
@@ -152,169 +151,14 @@
 <script type="text/javascript" src="{{ asset('js/bootstrap-input-spinner.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/agregararticulo.js') }}"></script>
 
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script> --}}
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> 
+
+
 <script>
     $ ("input[type='number']").inputSpinner();
 </script>
-
-<script>
-    $(function () {
-  
-      /* initialize the external events
-       -----------------------------------------------------------------*/
-      function ini_events(ele) {
-        ele.each(function () {
-  
-          // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-          // it doesn't need to have a start or end
-          var eventObject = {
-            title: $.trim($(this).text()) // use the element's text as the event title
-          }
-  
-          // store the Event Object in the DOM element so we can get to it later
-          $(this).data('eventObject', eventObject)
-  
-          // make the event draggable using jQuery UI
-          $(this).draggable({
-            zIndex        : 1070,
-            revert        : true, // will cause the event to go back to its
-            revertDuration: 0  //  original position after the drag
-          })
-  
-        })
-      }
-  
-      ini_events($('#external-events div.external-event'))
-  
-      /* initialize the calendar
-       -----------------------------------------------------------------*/
-      //Date for the calendar events (dummy data)
-      var date = new Date()
-      var d    = date.getDate(),
-          m    = date.getMonth(),
-          y    = date.getFullYear()
-      $('#calendario').fullCalendar({
-        header    : {
-          left  : 'prev,next today',
-          center: 'title',
-          right : 'month, listWeek,agendaWeek,agendaDay'
-        },
-        //Random default events
-        events    : [
-          {
-            title          : 'All Day Event',
-            start          : new Date(y, m, 1),
-            backgroundColor: '#f56954', //red
-            borderColor    : '#f56954' //red
-          },
-          {
-            title          : 'Long Event',
-            start          : new Date(y, m, d - 5),
-            end            : new Date(y, m, d - 2),
-            backgroundColor: '#f39c12', //yellow
-            borderColor    : '#f39c12' //yellow
-          },
-          {
-            title          : 'Meeting',
-            start          : new Date(y, m, d, 10, 30),
-            allDay         : false,
-            backgroundColor: '#0073b7', //Blue
-            borderColor    : '#0073b7' //Blue
-          },
-          {
-            title          : 'Lunch',
-            start          : new Date(y, m, d, 12, 0),
-            end            : new Date(y, m, d, 14, 0),
-            allDay         : false,
-            backgroundColor: '#00c0ef', //Info (aqua)
-            borderColor    : '#00c0ef' //Info (aqua)
-          },
-          {
-            title          : 'Birthday Party',
-            start          : new Date(y, m, d + 1, 19, 0),
-            end            : new Date(y, m, d + 1, 22, 30),
-            allDay         : false,
-            backgroundColor: '#00a65a', //Success (green)
-            borderColor    : '#00a65a' //Success (green)
-          },
-          {
-            title          : 'Click for Google',
-            start          : new Date(y, m, 28),
-            end            : new Date(y, m, 29),
-            url            : 'http://google.com/',
-            backgroundColor: '#3c8dbc', //Primary (light-blue)
-            borderColor    : '#3c8dbc' //Primary (light-blue)
-          }
-        ],
-        editable  : true,
-        droppable : true, // this allows things to be dropped onto the calendar !!!
-        drop      : function (date, allDay) { // this function is called when something is dropped
-  
-          // retrieve the dropped element's stored Event Object
-          var originalEventObject = $(this).data('eventObject')
-  
-          // we need to copy it, so that multiple events don't have a reference to the same object
-          var copiedEventObject = $.extend({}, originalEventObject)
-  
-          // assign it the date that was reported
-          copiedEventObject.start           = date
-          copiedEventObject.allDay          = allDay
-          copiedEventObject.backgroundColor = $(this).css('background-color')
-          copiedEventObject.borderColor     = $(this).css('border-color')
-  
-          // render the event on the calendar
-          // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-          $('#calendario').fullCalendar('renderEvent', copiedEventObject, true)
-  
-          // is the "remove after drop" checkbox checked?
-          if ($('#drop-remove').is(':checked')) {
-            // if so, remove the element from the "Draggable Events" list
-            $(this).remove()
-          }
-  
-        }
-      })
-  
-      /* ADDING EVENTS */
-      var currColor = '#3c8dbc' //Red by default
-      //Color chooser button
-      var colorChooser = $('#color-chooser-btn')
-      $('#color-chooser > li > a').click(function (e) {
-        e.preventDefault()
-        //Save color
-        currColor = $(this).css('color')
-        //Add color effect to button
-        $('#add-new-event').css({
-          'background-color': currColor,
-          'border-color'    : currColor
-        })
-      })
-      $('#add-new-event').click(function (e) {
-        e.preventDefault()
-        //Get value and make sure it is not null
-        var val = $('#new-event').val()
-        if (val.length == 0) {
-          return
-        }
-  
-        //Create events
-        var event = $('<div />')
-        event.css({
-          'background-color': currColor,
-          'border-color'    : currColor,
-          'color'           : '#fff'
-        }).addClass('external-event')
-        event.html(val)
-        $('#external-events').prepend(event)
-  
-        //Add draggable funtionality
-        ini_events(event)
-  
-        //Remove event from text input
-        $('#new-event').val('')
-      })
-    })
-</script>
-
 
 <script>
   $('#example1').DataTable( {
@@ -481,6 +325,9 @@
     });
   </script>
   <script>
+
+
+
     $('#editModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget);
       var area = button.data('area');
@@ -646,27 +493,45 @@
            if (isConfirm) form.submit();
        });
    });
-   </script>
+</script>
 
-   <script>
+<script>
 
-    var validoNumeroPartida = true;
-      $('#btn-submitEm').on('click',function(e){
-         e.preventDefault();
-         var form = $(this).parents('form');
-         swal({
-             title: "Registro de Empleados",
-             text: "¿Desea continuar?",
-             type: "warning",
-             showCancelButton: true,
-             confirmButtonColor: "#0080FF",
-             confirmButtonText: "Sí",
-             closeOnConfirm: false
-         }, function(isConfirm){
-             if (isConfirm) form.submit();
-         });
+var validoNumeroPartida = true;
+  $('#btn-submitEm').on('click',function(e){
+     e.preventDefault();
+     var form = $(this).parents('form');
+     swal({
+         title: "Registro de Empleados",
+         text: "¿Desea continuar?",
+         type: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#0080FF",
+         confirmButtonText: "Sí",
+         closeOnConfirm: false
+     }, function(isConfirm){
+         if (isConfirm) form.submit();
      });
-     </script>
+ });
+ </script>
+
+ <script>
+  $('#btnGuardarArticulo').on('click',function(e){
+     e.preventDefault();
+     var form = $(this).parents('form');
+     swal({
+         title: "Registro(s) de Articulo(s)",
+         text: "¿Desea continuar?",
+         type: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#0080FF",
+         confirmButtonText: "Sí",
+         closeOnConfirm: false
+     }, function(isConfirm){
+         if (isConfirm) form.submit();
+     });
+   });
+</script>
 
    <script>
    $( ".validateData" ).keyup(function() {
@@ -756,6 +621,16 @@
    });
 
    $( ".validateDataArticulo" ).keyup(function() {
+
+       var valor = $(this).val();
+       var error = $(this).attr("data-errorArticulo");
+       var id = $(this).attr("id");
+       var tipo = $(this).attr("data-myTypeArticulo");
+       //console.log(valor,error,id,tipo);
+       datosValidosArticulo(valor, error, id, tipo);
+   });
+
+   $( ".validateDataArticulo" ).change(function() {
 
        var valor = $(this).val();
        var error = $(this).attr("data-errorArticulo");
@@ -1052,6 +927,20 @@
              $('#'+id).addClass('inputDanger');
            }
            break;
+        case 'date':
+          console.log(valor);
+          if (valor != ""){
+            $('.error'+ error).text("");
+            $('#'+id).attr("data-validacionArticulo", '0');
+            $('#'+id).removeClass('inputDanger');
+            $('#'+id).addClass('inputSuccess');
+          }else{
+            $('.error'+ error).text("Este campo no puede ir vacío.");
+            $('#'+id).attr("data-validacionArticulo", '1');
+            $('#'+id).removeClass('inputSuccess');
+            $('#'+id).addClass('inputDanger');
+          }
+        break;
          default:
          console.log('default');
        }
@@ -1200,7 +1089,7 @@
        array.push(claserror[i].getAttribute('data-validacionArticulo'));
      }
 
-    console.log(array);
+    //console.log(array);
    
      if(array.includes('1'))
      { 

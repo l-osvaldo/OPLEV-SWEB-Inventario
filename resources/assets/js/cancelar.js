@@ -42,3 +42,8 @@ $('#exampleModalEmpleado').on('hidden.bs.modal', function (e) {
   $('#clvdepto').val("0").change();
 })
 
+
+$('#altasModal').on('hidden.bs.modal', function (e) {
+  //reiniciarmodal('partidaAltaArticulo');
+  $('#partidaAltaArticulo').val("0").change();
+})

@@ -6,6 +6,8 @@
 @include('partials.header',['tituloEncabezado' => 'Catálogos de Bienes OPLE'])
 <!-- /.navbar -->
 
+@include('sweet::alert')
+
 <div class="card">
   <div class="card-body" >
     <a href="" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#altasModal">
@@ -63,7 +65,8 @@
         </div>
             <!--Agregar Partida -->
         <div class="container-fluid">
-          <form method="POST" action="{{ route('partidas') }}">
+          <form method="POST" action="{{ route('GuardarArticulos') }}">
+
             @csrf
             <div class="card-body">
               <div class="row bordediv">
@@ -90,6 +93,9 @@
                     <div class="form-group">
                         <label style="margin-top: 10px;">Cantidad de Bienes:</label>
                         <input type="number" name="numberNumBienes" id="numberNumBienes" min="1" value="1" class="form-control" onKeyPress="return SoloNumerosLetras(event,'numero');" onkeyup="javascript:this.value=this.value.toUpperCase();" disabled>
+                        <input type="hidden" name="txtConsecutivo" id="txtConsecutivo">
+                        <input type="hidden" name="txtArregloNumInv" id="txtArregloNumInv">
+
                         <label id="lblNumInv">Número de Inventario</label>
                         <textarea id="txtaNumInv" class="form-control" disabled rows="3"></textarea>
                     </div> 
@@ -98,38 +104,26 @@
               <div class="row bordediv2">
                   <div class="col-md-6">
                     <div class="form-group">
-                        <label style="width: 100%; margin-top: 10px;">Concepto:</label>
-                        <input type="text" name="txtConcepto" id="txtConcepto" style="width: 100%;" disabled class="form-control">
+                      <label style="width: 100%; margin-top: 10px;">Concepto:</label>
+                      <input type="text" name="txtConcepto" id="txtConcepto" style="width: 100%;" disabled class="form-control">
+                      <input type="hidden" name="txtConceptoEnv" id="txtConceptoEnv">
 
-                        <label style="width: 100%">Factura:</label>
-                        <input type="text" name="txtFactura" id="txtFactura" style="width: 100%;" disabled class="form-control validateDataArticulo" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'factura');" onkeyup="javascript:this.value=this.value.toUpperCase();" data-errorArticulo="1" data-myTypeArticulo="text" data-validacionArticulo="1">
-                        <span class="text-danger error1"></span>
-                        
+                      <label style="width: 100%">Factura:</label>
+                      <input type="text" name="txtFactura" id="txtFactura" style="width: 100%;" disabled class="form-control validateDataArticulo" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'factura');" onkeyup="javascript:this.value=this.value.toUpperCase();" data-errorArticulo="1" data-myTypeArticulo="text" data-validacionArticulo="1">
+                      <span class="text-danger error1"></span>                     
                         
 
-                        <label style="width: 100%">Precio Unitario:</label>
-                        <input type="text" name="txtImporte" id="txtImporte" style="width: 100%; text-align:right;" disabled placeholder="$ 0.0" class="form-control validateDataArticulo" data-errorArticulo="2" data-myTypeArticulo="text" data-validacionArticulo="1" onKeyPress="return valorPrecio(event,this);">
-                        <span class="text-danger error2"></span>
                     </div>                                         
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                        <label style="margin-top: 10px;">Fecha de Compra: -- / -- / ----</label>
-                        <div class="card bg-success-gradient">
-                          <div class="card-header no-border">
+                      <label style="width: 100%;margin-top: 10px;">Precio Unitario:</label>
+                      <input type="text" name="txtImporte" id="txtImporte" style="width: 100%; text-align:right;" disabled placeholder="$ 0.0" class="form-control validateDataArticulo" data-errorArticulo="2" data-myTypeArticulo="text" data-validacionArticulo="1" onKeyPress="return valorPrecio(event,this);">
+                      <span class="text-danger error2"></span>
 
-                            <h3 class="card-title">
-                              <i class="fa fa-calendar"></i>
-                              Calendario
-                            </h3>
-                          </div>
-                          <!-- /.card-header -->
-                          <div class="card-body p-0">
-                            <!--The calendar -->
-                            <div id="calendar" style="width: 100%"></div>
-                          </div>
-                          <!-- /.card-body -->
-                        </div>
+                      <label style="width: 100%">Fecha de Compra:</label>                        
+                      <input type="date" name="dateFechaCompra" id="dateFechaCompra" class="form-control validateDataArticulo" disabled data-errorArticulo="7" data-myTypeArticulo="date" data-validacionArticulo="1">
+                      <span class="text-danger error7"></span>
                     </div>
                 </div> 
               </div>
@@ -138,12 +132,16 @@
                       <div class="form-group">
                         <label style="width: 100%; margin-top: 10px;">Responsable:</label>
                         <input type="text" name="txtResponsable" id="txtResponsable" style="width: 100%;" disabled value="Bodega" class="form-control">
+                        <input type="hidden" name="txtResponsableNumEmpleado" id="txtResponsableNumEmpleado" value="999">
+                        <input type="hidden" name="txtResponsableNombre" id="txtResponsableNombre" value="BODEGA">
                       </div>
                   </div>
                   <div class="col-md-6">
                       <div class="form-group">
                         <label style="width: 100%; margin-top: 10px;">Área:</label>
                         <input type="text" name="txtArea" id="txtArea" style="width: 100%;" disabled value="Bodega" class="form-control">
+                        <input type="hidden" name="txtAreaClave" id="txtAreaClave" value="15">
+                        <input type="hidden" name="txtAreaNombre" id="txtAreaNombre" value="BODEGA">
                       </div>
                   </div>
               </div>
@@ -163,19 +161,21 @@
                         <span class="text-danger error5"></span>
 
                         <label style="width: 100%;">Color:</label>
-                        <input type="text" name="txtColor" id="txtColor" style="width: 100%;" disabled class="form-control">
+                        <input type="text" name="txtColor" id="txtColor" style="width: 100%;" disabled class="form-control" style="text-transform:uppercase;"  onkeyup="javascript:this.value=this.value.toUpperCase();">
                     </div>                    
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label style="width: 100%; margin-top: 10px;">Material:</label>
-                        <input type="text" name="txtMaterial" id="txtMaterial" style="width: 100%;" disabled class="form-control">
+                        <input type="text" name="txtMaterial" id="txtMaterial" style="width: 100%;" disabled class="form-control" style="text-transform:uppercase;"  onkeyup="javascript:this.value=this.value.toUpperCase();">
                         <label style="width: 100%;">Medidas:</label>
-                        <input type="text" name="txtMedidas" id="txtMedidas" style="width: 100%;" disabled class="form-control">
+                        <input type="text" name="txtMedidas" id="txtMedidas" style="width: 100%;" disabled class="form-control" style="text-transform:uppercase;"  onkeyup="javascript:this.value=this.value.toUpperCase();">
                         <label style="width: 100%;">Estado:</label>
                         <select name="txtEstado" id="txtEstado" style="width: 100%;" disabled class="form-control">
                             <option value="0" selected >Bueno</option>
                         </select>
+                        <input type="hidden" name="txtEstadoClave" id="txtEstadoClave" value="1">
+                        <input type="hidden" name="txtEstadoNombre" id="txtEstadoNombre" value="BUENO">
                     </div>                    
                 </div>                  
               </div>

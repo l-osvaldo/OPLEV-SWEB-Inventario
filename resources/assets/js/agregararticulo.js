@@ -93,6 +93,8 @@ $('#sublineaAltaArticulo').change(function(){
 		var lineaCompleta = 	$('#lineaAltaArticulo').val().split('*');
 		var sublineaCompleta = 	$('#sublineaAltaArticulo').val().split('*');
 		$('#txtConcepto').val(lineaCompleta[1] + ' ' + sublineaCompleta[1]);
+		$('#txtConceptoEnv').val(lineaCompleta[1] + ' ' + sublineaCompleta[1]);
+		
 		$('#numberNumBienes').val("1");
 
 		$('#numberNumBienes').prop("disabled", false);
@@ -104,6 +106,7 @@ $('#sublineaAltaArticulo').change(function(){
 		$('#txtColor').prop("disabled", false);
 		$('#txtMaterial').prop("disabled", false);
 		$('#txtMedidas').prop("disabled", false);
+		$('#dateFechaCompra').prop("disabled", false);
 
 		generarNumeroInventario($('#numberNumBienes').val());
 	}else{
@@ -132,6 +135,9 @@ function generarNumeroInventario(cantidadArticulos){
 
 		var numInv = '';
 
+		var consecutivo = [];
+		var arregloNumInv = [];
+
 		$.ajaxSetup(
 		{
 			headers:
@@ -159,11 +165,15 @@ function generarNumeroInventario(cantidadArticulos){
 
 	      	for (var i = 1 ; i <= cantidadArticulos ; i++) {
 	      		numInv += 'OPLEV-'+ partida + '-' + linea + '-' + sublinea + '-';
+	      		var base = 'OPLEV-'+ partida + '-' + linea + '-' + sublinea + '-';
 	      		identificador = parseInt(response)+i;
 	      		identificador = ( identificador < 10) ? '000'+identificador : ( identificador < 100 ) ? '00'+identificador : ( identificador < 1000 ) ? '0'+identificador : identificador;
+	      		consecutivo[i-1]=identificador;
+	      		arregloNumInv[i-1]= base + identificador;
 	      		numInv += identificador + '\n';
 	      	}     	
-	      	
+	      	$('#txtConsecutivo').val(consecutivo);
+	      	$('#txtArregloNumInv').val(arregloNumInv);
 	      	$('#txtaNumInv').val(numInv);      	
 	      }); 
 	  }else{
@@ -198,6 +208,7 @@ function reiniciarmodal(campo){
 			$('#txtColor').val("");
 			$('#txtMaterial').val("");
 			$('#txtMedidas').val("");
+			$('#dateFechaCompra').val("");
 
 
 			$('#txtFactura').prop("disabled", true);
@@ -208,6 +219,7 @@ function reiniciarmodal(campo){
 			$('#txtColor').prop("disabled", true);
 			$('#txtMaterial').prop("disabled", true);
 			$('#txtMedidas').prop("disabled", true);
+			$('#dateFechaCompra').prop("disabled", true);
 
 
 			$('.error1').text("");
@@ -215,25 +227,30 @@ function reiniciarmodal(campo){
 			$('.error3').text("");
 			$('.error4').text("");
 			$('.error5').text("");
+			$('.error7').text("");
 
 			$('#txtFactura').attr("data-validacionArticulo", '1');
 			$('#txtImporte').attr("data-validacionArticulo", '1');
 			$('#txtMarca').attr("data-validacionArticulo", '1');
 			$('#txtModelo').attr("data-validacionArticulo", '1');
 			$('#txtNumSerie').attr("data-validacionArticulo", '1');
+			$('#dateFechaCompra').attr("data-validacionArticulo", '1');
 
 			$('#txtFactura').removeClass('inputDanger');
 			$('#txtImporte').removeClass('inputDanger');
 			$('#txtMarca').removeClass('inputDanger');
 			$('#txtModelo').removeClass('inputDanger');
 			$('#txtNumSerie').removeClass('inputDanger');
+			$('#dateFechaCompra').removeClass('inputDanger');
 
 			$('#txtFactura').removeClass('inputSuccess');
 			$('#txtImporte').removeClass('inputSuccess');
 			$('#txtMarca').removeClass('inputSuccess');
 			$('#txtModelo').removeClass('inputSuccess');
 			$('#txtNumSerie').removeClass('inputSuccess');
+			$('#dateFechaCompra').removeClass('inputSuccess')
 		break;
 
 	}
 }
+
