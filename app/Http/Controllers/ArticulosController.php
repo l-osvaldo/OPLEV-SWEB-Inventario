@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\articulos;
 use App\partidas;
+use App\areas;
 use Alert;
 
 class ArticulosController extends Controller
@@ -76,8 +77,10 @@ class ArticulosController extends Controller
 
 	public function reportes(){
 		$usuario = auth()->user();
+		$partidas = partidas::distinct()->orderBy('partida', 'DESC')->get(['partida', 'descpartida']);
+		$areas = areas::distinct()->orderBy('clvdepto', 'DESC')->get(['clvdepto', 'depto']);
 
-		return view('ople.reportes', compact('usuario'));
+		return view('ople.reportes', compact('usuario','partidas','areas'));
 	}
 
 }
