@@ -66,7 +66,7 @@
               </li>
             </ul>
         </li>
-        <li id="ople" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bienes','home','/','ople/alta') ? 'menu-open' : '' !!}">
+        <li id="ople" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bienes','home','/','ople/alta','catalogos/reportes') ? 'menu-open' : '' !!}">
           <a class="{!! Request::is('catalogos/bienes','home','/','ople/alta') ? 'nav-link active' : 'nav-link' !!}">
             <i class="nav-icon fa fa-desktop"></i>
             <p>
@@ -79,6 +79,12 @@
               <a href="{{ route('catalogos') }}" class="{!! Request::is('catalogos/bienes','home','/') ? 'nav-link active' : 'nav-link' !!}">
                 <i class="fa fa-book"></i>
                 <p style="margin-left: 10px;">Cátalogo</p>
+              </a>
+            </li>
+            <li class="nav-item" style="margin-left: 25px;">
+              <a href="{{ route('reportes') }}" class="{!! Request::is('catalogos/reportes') ? 'nav-link active' : 'nav-link' !!}">
+                <i class="fa fa-file-pdf-o"></i>
+                <p style="margin-left: 10px;">Reportes</p>
               </a>
             </li>
           </ul>

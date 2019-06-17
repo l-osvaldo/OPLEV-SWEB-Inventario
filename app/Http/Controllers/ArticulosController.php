@@ -30,25 +30,54 @@ class ArticulosController extends Controller
 	{
 		//print_r($request);
 
-		$arrayPartida = explode("*", $request->input('partidaAltaArticulo'));
-		$arrayLinea = explode("*", $request->input('lineaAltaArticulo'));
-		$arraySubLinea = explode("*", $request->input('sublineaAltaArticulo'));
+		$arrayPartida 		= explode("*", $request->input('partidaAltaArticulo'));
+		$arrayLinea 		= explode("*", $request->input('lineaAltaArticulo'));
+		$arraySubLinea 		= explode("*", $request->input('sublineaAltaArticulo'));
+		$arrayConsecutivo 	= explode(",",$request->txtConsecutivo);
+		$arrayNumeroInv 	=  explode(",",$request->txtArregloNumInv);
 
-		for ($i=0; $i < sizeof($request->txtConsecutivo); $i++) { 
-			var $articulo = new articulos();
+		for ($i=0; $i < sizeof($arrayConsecutivo); $i++) { 
+			$articulo = new articulos();
 
-			$articulo->iev = 'OPLE';
-			$articulo->partida = $arrayPartida[0];
-			$articulo->descpartida = $arrayPartida[1];
-			$articulo->liena = $arrayLinea[0];
-			$articulo->descliena = $arrayLinea[1];
-			$articulo->sublinea = $arraySubLinea[0];
-			$articulo->sublinea = $arraySubLinea[1];
-			$articulo->consecutivo = $request->input('consecutivo');
+			$articulo->iev 			= 'OPLE';
+			$articulo->partida 		= $arrayPartida[0];
+			$articulo->descpartida 	= $arrayPartida[1];
+			$articulo->linea 		= $arrayLinea[0];
+			$articulo->desclinea 	= $arrayLinea[1];
+			$articulo->sublinea 	= $arraySubLinea[0];
+			$articulo->descsublinea = $arraySubLinea[1];
+			$articulo->consecutivo 	= $arrayConsecutivo[$i];
+			$articulo->numeroinv 	= $arrayNumeroInv[$i];
+			$articulo->concepto 	= $request->txtConceptoEnv;
+			$articulo->marca 		= $request->txtMarca;
+			$articulo->importe 		= $request->txtImporte;
+			$articulo->colores 		= $request->txtColor;
+			$articulo->fechacomp	= $request->dateFechaCompra;
+			$articulo->clvarea		= $request->txtAreaClave;
+			$articulo->nombrearea	= $request->txtAreaNombre;
+			$articulo->numemple		= $request->txtResponsableNumEmpleado;
+			$articulo->nombreemple	= $request->txtResponsableNombre;
+			$articulo->numserie 	= $request->txtNumSerie;
+			$articulo->medidas 		= $request->txtMedidas;
+			$articulo->modelo 		= $request->txtModelo;
+			$articulo->material 	= $request->txtMaterial;
+			$articulo->clvestado 	= $request->txtEstadoClave;
+			$articulo->estado 		= $request->txtEstadoNombre;
+			$articulo->factura		= $request->txtFactura;
+			$articulo->idclasi		= '0';
+
+			$articulo->save();
+
 		}
 
        	Alert::success('Artículo guardado', 'Registro Exitoso')->autoclose(2500);
         return redirect()->route('catalogos');
+	}
+
+	public function reportes(){
+		$usuario = auth()->user();
+
+		return view('ople.reportes', compact('usuario'));
 	}
 
 }

@@ -66,7 +66,11 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	// ************* OPLE ******************
 	// Alta Artículo
 	Route::get('/catalogos/numeroInventario', 'ArticulosController@numeroInventarioMax');
-	Route::post('/catalogos/GuardarArticulos', 'ArticulosController@store')->name('GuardarArticulos'); 
+	Route::post('/catalogos/GuardarArticulos', 'ArticulosController@store')->name('GuardarArticulos');
+
+	// reportes
+	Route::get('/catalogos/reportes', 'ArticulosController@reportes')->name('reportes');
+
 });
 
 Route::get('/', function () {
