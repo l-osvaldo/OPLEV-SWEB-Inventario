@@ -71,6 +71,9 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	// reportes
 	Route::get('/catalogos/reportes', 'ArticulosController@reportes')->name('reportes');
 
+	// Bienes por Partida
+	Route::get('catalogos/BienesXPartida', 'ArticulosController@BienesXPartida');
+
 });
 
 Route::get('/', function () {

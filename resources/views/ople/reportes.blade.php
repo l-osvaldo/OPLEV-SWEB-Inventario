@@ -21,7 +21,7 @@
 		    		<option value="6">Resguardo por empleado</option>
 		    	</select>
 	    	</div>
-	    	<div class="col-md-3">
+	    	<div class="col-md-3" id="seleccionSelect">
 	    		<div class="form-group" style="display: none; width: 100%" id="divPartida">
 	    			<select class="form-control select2" id="selectPartida" style="width: 100%">
 			    		<option value="0">Seleccione partida </option>
@@ -40,13 +40,12 @@
 			    	</select>
 	    		</div>
 	    		
-
-		    	{{-- 
-		    	<div style="display: none" id="divEmpleado">
-		    		<select class="form-control select2" id="selectEmpleado" style="width: 30%; margin-left: 15px; display: none;">
-			    		<option value="0">Seleccione empleado</option>
+	    		<div class="form-group" style="display: none; width: 100%" id="divEmpleado">
+	    			<select class="form-control select2" id="selectEmpleado" style="width: 100%">
+			    		<option value="0">Seleccione empleado </option>
+			    		
 			    	</select>
-		    	</div> --}}	  
+	    		</div>	  
 	    	</div>
 	    	<div class="col-md-2">
 	    		<a href="" style="background-color: #E71096; margin-left: 15px; display: none; width: 60%" class="btn btn-secondary" id="btnGenerarPDF">
@@ -60,4 +59,20 @@
 	  </div>
 	</div>
 
+
+	<div class="col-12">     
+      <div class="center-block">
+        <div class="card">
+
+          <div class="card-body" >
+            <div id="respuestaReporte">
+		
+			</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 @endsection
+

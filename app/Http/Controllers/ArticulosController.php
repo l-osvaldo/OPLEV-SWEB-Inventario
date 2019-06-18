@@ -83,4 +83,9 @@ class ArticulosController extends Controller
 		return view('ople.reportes', compact('usuario','partidas','areas'));
 	}
 
+	public function BienesXPartida(Request $request){
+
+		return view('ople.reportes.BienesPorPartida');
+	}
+
 }
