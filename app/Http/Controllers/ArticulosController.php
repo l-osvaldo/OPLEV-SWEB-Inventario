@@ -7,6 +7,7 @@ use App\articulos;
 use App\partidas;
 use App\areas;
 use Alert;
+use PDF;
 
 class ArticulosController extends Controller
 {
@@ -85,7 +86,18 @@ class ArticulosController extends Controller
 
 	public function BienesXPartida(Request $request){
 
-		return view('ople.reportes.BienesPorPartida');
+		$partida = $request;
+		$bienesPartida = articulos::where('partida', $request->numPartida)->orderBy('concepto')->get();
+		return view('ople.reportes.BienesPorPartida', compact('partida','bienesPartida'));
+	}
+
+	public function generarBienesPartida(Request $request){
+
+		$partida = $request;
+		$bienesPartida = articulos::select('numeroinv', 'concepto', 'numserie', 'marca', 'modelo', 'nombreemple', 'factura', 'importe', 'estado')->where('partida', $request->numPartida)->orderBy('concepto')->take(125)->get();
+
+		$pdf = PDF::loadView('ople.reportes.BienesPorPartida',compact('partida','bienesPartida'))->setPaper('letter', 'landscape');
+        return  $pdf->stream();
 	}
 
 }

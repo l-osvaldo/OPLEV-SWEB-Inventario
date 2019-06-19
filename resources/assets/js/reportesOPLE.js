@@ -31,7 +31,9 @@ $('#selectReportes').change(function() {
 $('#selectPartida').change(function(){
 	if ($(this).val() != 0 ){
 		bienesPorPartida($(this).val());
+		var partidaNumNombre = $(this).val().split('*');
 		$('#btnGenerarPDF').css("display","block");
+		$('#btnGenerarPDF').attr("href","/catalogos/reportes/generarBienesPartida/"+partidaNumNombre[0]+"/"+partidaNumNombre[1]);
 	}else{
 		$('#btnGenerarPDF').css("display","none");
 	}
@@ -59,6 +61,8 @@ function desactivarcampos(){
 	$('#selectPartida').val("0").change();
 	$('#selectArea').val("0").change();
 	$('#selectEmpleado').val("0").change();
+
+	$('#btnGenerarPDF').attr("href","");
 }
 
 function bienesPorPartida(partida){
