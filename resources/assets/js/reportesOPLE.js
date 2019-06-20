@@ -1,5 +1,5 @@
 $('#selectReportes').change(function() {
-	desactivarcampos();
+	//desactivarcampos();
 	switch ($(this).val()){
 		case '1':
 			$('#divPartida').css("display","block");
@@ -23,7 +23,10 @@ $('#selectReportes').change(function() {
 			$('#divEmpleado').css("display","block");
 			break;
 		default:
-			desactivarcampos();			   
+			console.log('default');
+			
+			$('#selectPartida').val("0").change();
+			//desactivarcampos();			   
 			break;
 	}
 });
@@ -33,9 +36,11 @@ $('#selectPartida').change(function(){
 		bienesPorPartida($(this).val());
 		var partidaNumNombre = $(this).val().split('*');
 		$('#btnGenerarPDF').css("display","block");
+		$('#divRespuesta').css("display","block");
 		$('#btnGenerarPDF').attr("href","/catalogos/reportes/generarBienesPartida/"+partidaNumNombre[0]+"/"+partidaNumNombre[1]);
 	}else{
 		$('#btnGenerarPDF').css("display","none");
+		$('#divRespuesta').css("display","none");
 	}
 	
 });
@@ -50,7 +55,15 @@ $('#selectArea').change(function(){
 });
 
 function desactivarcampos(){
+	console.log('si');
+	
+	$('#selectArea').val("0").change();
+	$('#selectEmpleado').val("0").change();
+
+
 	$('#seleccionSelect').css("display","block");
+
+
 
 	$('#divPartida').css("display","none");
 	$('#divArea').css("display","none");
@@ -58,11 +71,10 @@ function desactivarcampos(){
 
 	$('#btnGenerarPDF').css("display","none");
 
-	$('#selectPartida').val("0").change();
-	$('#selectArea').val("0").change();
-	$('#selectEmpleado').val("0").change();
-
+	
 	$('#btnGenerarPDF').attr("href","");
+
+	$('#divRespuesta').css("display","none");
 }
 
 function bienesPorPartida(partida){
@@ -85,7 +97,6 @@ function bienesPorPartida(partida){
       dataType: 'html',
       contentType: 'application/json'
     }).done(function(response) {
-    	console.log('hola');
     	$('#respuestaReporte').html(response);
     	
     });

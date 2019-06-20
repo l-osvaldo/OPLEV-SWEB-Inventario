@@ -60,7 +60,7 @@
 	</div>
 
 
-	<div class="col-12">     
+	<div class="col-12" id="divRespuesta" style="display: none;">     
       <div class="center-block">
         <div class="card">
 
