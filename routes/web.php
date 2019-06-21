@@ -75,6 +75,8 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('catalogos/BienesXPartida', 'ArticulosController@BienesXPartida');
 	Route::get('catalogos/reportes/generarBienesPartida/{numPartida}/{nombrePartida}', 'ArticulosController@generarBienesPartida');
 
+	// Importe de Bienes Por área
+	Route::get('catalogos/importeBienesPorArea', 'ArticulosController@importeBienesPorArea');
 	
 
 });

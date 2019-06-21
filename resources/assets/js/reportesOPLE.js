@@ -1,5 +1,5 @@
 $('#selectReportes').change(function() {
-	//desactivarcampos();
+	desactivarcampos();
 	switch ($(this).val()){
 		case '1':
 			$('#divPartida').css("display","block");
@@ -7,6 +7,7 @@ $('#selectReportes').change(function() {
 		case '2':
 			$('#seleccionSelect').css("display","none");	
 			$('#btnGenerarPDF').css("display","block");
+			importeBienesPorArea();
 			break;
 		case '3':			
 			$('#seleccionSelect').css("display","none");	
@@ -21,12 +22,6 @@ $('#selectReportes').change(function() {
 			break;
 		case '6':			
 			$('#divEmpleado').css("display","block");
-			break;
-		default:
-			console.log('default');
-			
-			$('#selectPartida').val("0").change();
-			//desactivarcampos();			   
 			break;
 	}
 });
@@ -55,15 +50,13 @@ $('#selectArea').change(function(){
 });
 
 function desactivarcampos(){
-	console.log('si');
-	
+
+	$('#selectPartida').val("0").change();
 	$('#selectArea').val("0").change();
 	$('#selectEmpleado').val("0").change();
 
 
 	$('#seleccionSelect').css("display","block");
-
-
 
 	$('#divPartida').css("display","none");
 	$('#divArea').css("display","none");
@@ -95,10 +88,38 @@ function bienesPorPartida(partida){
       type: 'GET',
       data: { numPartida: partidaNumNombre[0], nombrePartida: partidaNumNombre[1]},
       dataType: 'html',
+      async: true,
       contentType: 'application/json'
+
     }).done(function(response) {
+
     	$('#respuestaReporte').html(response);
-    	
+    	    	
+    });
+}
+
+function importeBienesPorArea(){
+
+	$.ajaxSetup(
+	{
+		headers:
+		{ 
+    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+	$.ajax({
+      url: "importeBienesPorArea",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      dataType: 'html',
+      async: true,
+      contentType: 'application/json'
+
+    }).done(function(response) {
+    	$('#divRespuesta').css("display","block");
+    	$('#respuestaReporte').html(response);
+    	    	
     });
 
 }

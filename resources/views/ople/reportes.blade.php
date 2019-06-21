@@ -48,7 +48,7 @@
 	    		</div>	  
 	    	</div>
 	    	<div class="col-md-2">
-	    		<a style="background-color: #E71096; margin-left: 15px; display: none; width: 60%" class="btn btn-secondary" id="btnGenerarPDF" target="_blank">
+	    		<a style="background-color: #E71096; margin-left: 15px; display: none; width: 60%;" class="btn btn-secondary" id="btnGenerarPDF" target="_blank">
 			        <i class="fa fa-file-pdf-o"></i> 
 			        Generar PDF        
 			    </a>

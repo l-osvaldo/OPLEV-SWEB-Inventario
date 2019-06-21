@@ -76,6 +76,7 @@ class ArticulosController extends Controller
         return redirect()->route('catalogos');
 	}
 
+	// ************ vista de reportes ************
 	public function reportes(){
 		$usuario = auth()->user();
 		$partidas = partidas::distinct()->orderBy('partida', 'DESC')->get(['partida', 'descpartida']);
@@ -84,6 +85,7 @@ class ArticulosController extends Controller
 		return view('ople.reportes', compact('usuario','partidas','areas'));
 	}
 
+	// ************ vista previa de reportes ************
 	public function BienesXPartida(Request $request){
 
 		$partida = $request;
@@ -91,6 +93,13 @@ class ArticulosController extends Controller
 		return view('ople.reportes.BienesPorPartida', compact('partida','bienesPartida'));
 	}
 
+	public function importeBienesPorArea(){
+
+		$areas = areas::distinct()->orderBy('clvdepto', 'DESC')->get(['clvdepto', 'depto']);
+		return view('ople.reportes.ImporteDeBienesPorArea', compact('areas'));
+	}
+
+	// ************ generar reportes ************
 	public function generarBienesPartida(Request $request){
 
 		$partida = $request;
@@ -99,5 +108,6 @@ class ArticulosController extends Controller
 		$pdf = PDF::loadView('ople.reportes.BienesPorPartida',compact('partida','bienesPartida'))->setPaper('letter', 'landscape');
         return  $pdf->stream();
 	}
+
 
 }
