@@ -7,23 +7,31 @@
 		      <td style="width: 100%" align="center" >
 		          <h2>
 		            <small>
-		            <strong>ORGANISMO PÚBLICO LOCAL ELECTORAL </strong><small style="font-weight:lighter;"><br> <strong>DIRECCIÓN EJECUTIVA DE ADMINISTRACIÓN </strong> <small style="font-weight:lighter;"><br>INVENTARIO DE ACTIVO FIJO</small> </small></small>
+		            <strong>ORGANISMO PÚBLICO LOCAL ELECTORAL </strong><small><br> <strong>DIRECCIÓN EJECUTIVA DE ADMINISTRACIÓN </strong> <small style="font-weight:lighter;"><br>Departamento de Recursos Materiales</small> <br> <strong> RESGUARDO DE BIENES </strong>
 		          </h2>   
 		      </td>
 		      
 		    </tr>
 		</table>
 		<br>
-		<label><strong>INVENTARIO POR PARTIDA</strong></label>
-		<br>
-		<label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida->numPartida }} {{ $partida->nombrePartida }} </i></label>
+		<table width="100%">
+			<tr>
+				<td width="50%"><strong> ÁREA: </strong> </td>
+				<td width="50%"><strong> No. DE EMPLEADO: </strong> </td>
+			</tr>
+			<tr>
+				<td width="50%"><strong> NOMBRE DE EMPLEADO: </strong> </td>
+				<td width="50%"><strong> TOTAL DE BIENES: </strong> </td>
+			</tr>
+		</table>
+		
 
 		<div class="row ">
 		    <div class="col-12">     
 		      <div class="center-block">	      	
 		        <div class="card">
 		          <div class="card-body" >
-		            <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
+		            {{-- <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
 		              <thead>
 		                <tr>
 		                  <th>No. DE INVENTARIO</th>
@@ -37,8 +45,7 @@
 						  <th>ESTADO DEL BIEN</th>
 		                </tr>
 		              </thead>
-		              <tbody>
-		                  @foreach ($bienesPartida as $bien)
+		              	@foreach ($bienesAlfabetico as $bien)
 			                <tr>
 			                	<td>{{ $bien->numeroinv }}</td>
 					          	<td>{{ $bien->concepto }}</td>
@@ -50,13 +57,17 @@
 					          	<td>${{ $bien->importe }}</td>
 					          	<td>{{ $bien->estado }}</td>               
 			                </tr>
-		                  @endforeach
+		                @endforeach
+		              <tbody>
+		                  
 		              </tbody>
-		            </table>
+		            </table> --}}
 		          </div>
 		        </div>
 		      </div>
 		    </div>
 		</div>
 	</section>
+
+
 @endsection

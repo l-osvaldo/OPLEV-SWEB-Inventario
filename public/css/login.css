@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Heebo:700&display=swap');
+body{background: url('../images/backc.jpg') center center; font-family: 'Heebo', sans-serif;}
+.contentLogin{position: relative;}
+.topBar{background:#f3f3f4;min-height: 8vh; height: auto !important; height:8vh;box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);}
+.topLeftBar{background: #293846; color: #fff;position: relative;font-size: 1.4rem;font-weight:bold;text-align: center;padding: 1rem 0; min-height: 10vh; height: auto !important; height:10vh;box-shadow: 3px 0 6px rgba(0, 0, 0, 0.3);}
+.topRightBar{position: relative;font-size: 1.5em;padding: 1rem;min-height: 8vh; height: auto !important; height:8vh;color: #7D7D7D;}
+.subTopL{position: absolute;top: 50%;transform: translate(0, -50%);width: 100%;}
+.subTopR{position: absolute;top: 50%;transform: translate(0, -50%);}
+.bottomBar{background:#fff;min-height: 12vh; height: auto !important; height:12vh;box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);padding: 2vh 0;box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26)}
+.contentLogin{height: 78vh;position: relative;}
+.imgLogin{height: 8vh;}
+.imgContent{text-align: center;}
+.contentForm{background: #fff; padding: 2rem; height: auto; margin: 0;position: absolute;top: 50%;left: 50%;margin-right: -50%;transform: translate(-50%, -50%);box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);}
+.footerText{font-size: 1.2em;}
+.btnLogin{background:#293846 !important;}
+.htext{color: #E71096;}
+.left{float:left;}
+.inlogo{display: inline-block;}

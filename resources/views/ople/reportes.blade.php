@@ -43,7 +43,9 @@
 	    		<div class="form-group" style="display: none; width: 100%" id="divEmpleado">
 	    			<select class="form-control select2" id="selectEmpleado" style="width: 100%">
 			    		<option value="0">Seleccione empleado </option>
-			    		
+			    		@foreach ($empleados as $empleado)
+			    			<option value="{{ $empleado->numemple }}*{{ $empleado->nombre }}"> {{ $empleado->nombre }} </option>
+			    		@endforeach
 			    	</select>
 	    		</div>	  
 	    	</div>

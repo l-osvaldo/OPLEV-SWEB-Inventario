@@ -77,6 +77,18 @@ Route::group(['middleware' => 'disablepreventback'],function()
 
 	// Importe de Bienes Por área
 	Route::get('catalogos/importeBienesPorArea', 'ArticulosController@importeBienesPorArea');
+
+	// Importe de Bienes Por Partida
+	Route::get('catalogos/importeBienesPorPartida', 'ArticulosController@importeBienesPorPartida');
+
+	// Inventario Por Área
+	Route::get('catalogos/inventarioPorArea', 'ArticulosController@inventarioPorArea');
+
+	// Inventario Por Orden Alfabético
+	Route::get('catalogos/inventarioPorOrdenAlfabetico', 'ArticulosController@inventarioPorOrdenAlfabetico');
+
+	// Resguardo de bienes por empleado
+	Route::get('catalogos/ResguardoPorEmpleado', 'ArticulosController@ResguardoPorEmpleado');
 	
 
 });

@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\articulos;
 use App\partidas;
 use App\areas;
+use App\empleados;
 use Alert;
 use PDF;
+use DB;
 
 class ArticulosController extends Controller
 {
@@ -81,8 +83,9 @@ class ArticulosController extends Controller
 		$usuario = auth()->user();
 		$partidas = partidas::distinct()->orderBy('partida', 'DESC')->get(['partida', 'descpartida']);
 		$areas = areas::distinct()->orderBy('clvdepto', 'DESC')->get(['clvdepto', 'depto']);
+		$empleados = empleados::orderBy('nombre', 'ASC')->get();
 
-		return view('ople.reportes', compact('usuario','partidas','areas'));
+		return view('ople.reportes', compact('usuario','partidas','areas','empleados'));
 	}
 
 	// ************ vista previa de reportes ************
@@ -95,8 +98,34 @@ class ArticulosController extends Controller
 
 	public function importeBienesPorArea(){
 
-		$areas = areas::distinct()->orderBy('clvdepto', 'DESC')->get(['clvdepto', 'depto']);
-		return view('ople.reportes.ImporteDeBienesPorArea', compact('areas'));
+		$areaAndImporteTotal = DB::table('articulos')->select('nombrearea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->groupBy('nombrearea')->get();
+
+		//return response()->json($areaAndImporteTotal);
+
+		return view('ople.reportes.ImporteDeBienesPorArea', compact('areaAndImporteTotal'));
+	}
+
+	public function importeBienesPorPartida(){
+		$partidaAndImporteTotal = DB::table('articulos')->select('partida','descpartida', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->groupBy('partida','descpartida')->get();
+
+		return view('ople.reportes.ImporteDeBienesPorPartida', compact('partidaAndImporteTotal'));
+	}
+
+	public function inventarioPorArea(Request $request){
+
+		$area = $request;
+		$bienesArea = articulos::where('clvarea', $request->numArea)->orderBy('concepto')->get();
+		return view('ople.reportes.InventarioPorArea',compact('area','bienesArea'));
+	}
+
+	public function inventarioPorOrdenAlfabetico(){
+
+		$bienesAlfabetico = articulos::orderBy('concepto', 'DESC')->get();
+		return view('ople.reportes.InventarioPorOrdenAlfabetico',compact('bienesAlfabetico'));
+	}
+
+	public function ResguardoPorEmpleado(){
+		return view('ople.reportes.ResguardoPorEmpleado');
 	}
 
 	// ************ generar reportes ************

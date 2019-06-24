@@ -12,6 +12,7 @@ $('#selectReportes').change(function() {
 		case '3':			
 			$('#seleccionSelect').css("display","none");	
 			$('#btnGenerarPDF').css("display","block");
+			importeBienesPorPartida();
 			break;
 		case '4':			
 			$('#divArea').css("display","block");
@@ -19,6 +20,7 @@ $('#selectReportes').change(function() {
 		case '5':
 			$('#seleccionSelect').css("display","none");	
 			$('#btnGenerarPDF').css("display","block");
+			inventarioPorOrdenAlfabetico();
 			break;
 		case '6':			
 			$('#divEmpleado').css("display","block");
@@ -42,11 +44,26 @@ $('#selectPartida').change(function(){
 
 $('#selectArea').change(function(){
 	if ($(this).val() != 0 ){
+		inventarioPorArea($(this).val());
 		$('#btnGenerarPDF').css("display","block");
+		$('#divRespuesta').css("display","block");
 	}else{
 		$('#btnGenerarPDF').css("display","none");
+		$('#divRespuesta').css("display","none");
 	}
 	
+});
+
+
+$('#selectEmpleado').change(function(){
+	if ($(this).val() != 0 ){
+		ResguardoPorEmpleado($(this).val());
+		$('#btnGenerarPDF').css("display","block");
+		$('#divRespuesta').css("display","block");
+	}else{
+		$('#btnGenerarPDF').css("display","none");
+		$('#divRespuesta').css("display","none");
+	}
 });
 
 function desactivarcampos(){
@@ -117,9 +134,127 @@ function importeBienesPorArea(){
       contentType: 'application/json'
 
     }).done(function(response) {
+    	//console.log(response);
     	$('#divRespuesta').css("display","block");
     	$('#respuestaReporte').html(response);
     	    	
     });
 
 }
+
+function importeBienesPorPartida(){
+
+	$.ajaxSetup(
+	{
+		headers:
+		{ 
+    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+	$.ajax({
+      url: "importeBienesPorPartida",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      dataType: 'html',
+      async: true,
+      contentType: 'application/json'
+
+    }).done(function(response) {
+    	//console.log(response);
+    	$('#divRespuesta').css("display","block");
+    	$('#respuestaReporte').html(response);
+    	    	
+    });
+
+}
+
+function inventarioPorArea(area){
+
+	var areaNumNombre = area.split('*');
+
+	$.ajaxSetup(
+	{
+		headers:
+		{ 
+    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+	$.ajax({
+      url: "inventarioPorArea",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      data: { numArea: areaNumNombre[0], nombreArea: areaNumNombre[1]},
+      dataType: 'html',
+      async: true,
+      contentType: 'application/json'
+
+    }).done(function(response) {
+    	//console.log(response);
+    	$('#divRespuesta').css("display","block");
+    	$('#respuestaReporte').html(response);
+    	    	
+    });
+
+}
+
+
+function inventarioPorOrdenAlfabetico(){
+
+	$.ajaxSetup(
+	{
+		headers:
+		{ 
+    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+	$.ajax({
+      url: "inventarioPorOrdenAlfabetico",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      dataType: 'html',
+      async: true,
+      contentType: 'application/json'
+
+    }).done(function(response) {
+    	//console.log(response);
+    	$('#divRespuesta').css("display","block");
+    	$('#respuestaReporte').html(response);
+    	    	
+    });
+
+}
+
+function ResguardoPorEmpleado(empleado){
+
+	var empleadoNumNombre = empleado.split('*');
+
+	$.ajaxSetup(
+	{
+		headers:
+		{ 
+    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+	$.ajax({
+      url: "ResguardoPorEmpleado",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      data: { numEmpleado: empleadoNumNombre[0], nombreEmpleado: empleadoNumNombre[1]},
+      dataType: 'html',
+      async: true,
+      contentType: 'application/json'
+
+    }).done(function(response) {
+    	//console.log(response);
+    	$('#divRespuesta').css("display","block");
+    	$('#respuestaReporte').html(response);
+    	    	
+    });
+
+}
+
+

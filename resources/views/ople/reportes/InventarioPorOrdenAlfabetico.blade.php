@@ -7,16 +7,17 @@
 		      <td style="width: 100%" align="center" >
 		          <h2>
 		            <small>
-		            <strong>ORGANISMO PÚBLICO LOCAL ELECTORAL </strong><small style="font-weight:lighter;"><br> <strong>DIRECCIÓN EJECUTIVA DE ADMINISTRACIÓN </strong> <small style="font-weight:lighter;"><br>INVENTARIO DE ACTIVO FIJO</small> </small></small>
+		            <strong>ORGANISMO PÚBLICO LOCAL ELECTORAL </strong><small><br> <strong>DIRECCIÓN EJECUTIVA DE ADMINISTRACIÓN </strong> <small style="font-weight:lighter;"><br>INVENTARIO DE ACTIVO FIJO</small> 
 		          </h2>   
 		      </td>
 		      
 		    </tr>
 		</table>
 		<br>
-		<label><strong>INVENTARIO POR PARTIDA</strong></label>
+		<label><strong>INVENTARIO POR ÁREA</strong></label>
 		<br>
-		<label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida->numPartida }} {{ $partida->nombrePartida }} </i></label>
+		<label><strong>ÁREA:</strong></label> <label style="font-weight:lighter;"> <i> TODAS </i></label>
+		
 
 		<div class="row ">
 		    <div class="col-12">     
@@ -37,8 +38,7 @@
 						  <th>ESTADO DEL BIEN</th>
 		                </tr>
 		              </thead>
-		              <tbody>
-		                  @foreach ($bienesPartida as $bien)
+		              	@foreach ($bienesAlfabetico as $bien)
 			                <tr>
 			                	<td>{{ $bien->numeroinv }}</td>
 					          	<td>{{ $bien->concepto }}</td>
@@ -50,7 +50,9 @@
 					          	<td>${{ $bien->importe }}</td>
 					          	<td>{{ $bien->estado }}</td>               
 			                </tr>
-		                  @endforeach
+		                @endforeach
+		              <tbody>
+		                  
 		              </tbody>
 		            </table>
 		          </div>
@@ -59,4 +61,6 @@
 		    </div>
 		</div>
 	</section>
+
+
 @endsection

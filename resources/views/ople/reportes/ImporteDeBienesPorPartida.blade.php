@@ -7,7 +7,7 @@
 		      <td style="width: 100%" align="center" >
 		          <h2>
 		            <small>
-		            <strong>ORGANISMO PÚBLICO LOCAL ELECTORAL </strong><small><br> <strong>DIRECCIÓN EJECUTIVA DE ADMINISTRACIÓN </strong> <small style="font-weight:lighter;"><br>Departamento de Recursos Materiales</small> </small></small><br> <small> Concentrado de Importes por Área </small>
+		            <strong>ORGANISMO PÚBLICO LOCAL ELECTORAL </strong><small><br> <strong>DIRECCIÓN EJECUTIVA DE ADMINISTRACIÓN </strong> <small style="font-weight:lighter;"><br>Departamento de Recursos Materiales</small> </small></small><br> <small> Concentrado de Importes por Partida </small>
 		          </h2>   
 		      </td>
 		      
@@ -24,15 +24,16 @@
 		            <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
 		              <thead>
 		                <tr>
-		                  <th>Nombre del Área</th>
+		                  <th>Partida</th>
+						  <th>Clasificación del Bien</th>
 						  <th>Importe en Bienes</th>
-						  
 		                </tr>
 		              </thead>
-		              	@foreach ($areaAndImporteTotal as $areaImporte)
+		              	@foreach ($partidaAndImporteTotal as $partidaImporte)
 			                <tr>
-			                	<td>{{ $areaImporte->nombrearea }}</td>
-					          	<td>$ {{ $areaImporte->importetotal }}</td>              
+			                	<td>{{ $partidaImporte->partida }}</td>
+			                	<td>{{ $partidaImporte->descpartida }}</td>
+					          	<td>$ {{ $partidaImporte->importetotal }}</td>              
 			                </tr>
 		                @endforeach
 		              <tbody>
