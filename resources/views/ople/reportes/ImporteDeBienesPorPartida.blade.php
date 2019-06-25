@@ -14,7 +14,13 @@
 		    </tr>
 		</table>
 		<br>
-		
+		<table width="100%">
+			<tr>
+				<td width="100%" align="right">
+					<label style="margin-right: 80px"> <strong>TOTAL DE IMPORTE: $  </strong> {{ $totalImporte }} </label>
+				</td>
+			</tr>
+		</table>
 
 		<div class="row ">
 		    <div class="col-12">     

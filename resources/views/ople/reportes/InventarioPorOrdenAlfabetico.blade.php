@@ -14,9 +14,22 @@
 		    </tr>
 		</table>
 		<br>
-		<label><strong>INVENTARIO POR ÁREA</strong></label>
-		<br>
-		<label><strong>ÁREA:</strong></label> <label style="font-weight:lighter;"> <i> TODAS </i></label>
+		<table width="100%">
+			<tr>
+				<td>
+					<label><strong>INVENTARIO POR ÁREA</strong></label>
+				</td>
+			</tr>
+			<tr>
+				<td width="50%">
+					<label><strong>ÁREA:</strong></label> <label style="font-weight:lighter;"> <i> TODAS </i></label>
+				</td>
+				<td width="50%" align="right">
+					<label style="margin-right: 80px"> <strong>TOTAL DE IMPORTE: $ </strong> {{ $totalImporte }} </label>
+				</td>
+			</tr>
+		</table>
+		
 		
 
 		<div class="row ">
@@ -47,7 +60,7 @@
 					          	<td>{{ $bien->modelo }}</td>
 					          	<td>{{ $bien->nombreemple }}</td>
 					          	<td>{{ $bien->factura }}</td>
-					          	<td>${{ $bien->importe }}</td>
+					          	<td>$ {{ $bien->importe }}</td>
 					          	<td>{{ $bien->estado }}</td>               
 			                </tr>
 		                @endforeach

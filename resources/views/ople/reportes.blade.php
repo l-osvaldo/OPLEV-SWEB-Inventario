@@ -61,6 +61,9 @@
 	  </div>
 	</div>
 
+	<div class="spinner-border" role="status">
+	  <span class="sr-only">Loading...</span>
+	</div>
 
 	<div class="col-12" id="divRespuesta" style="display: none;">     
       <div class="center-block">

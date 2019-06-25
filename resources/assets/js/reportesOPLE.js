@@ -231,6 +231,8 @@ function ResguardoPorEmpleado(empleado){
 
 	var empleadoNumNombre = empleado.split('*');
 
+	console.log(empleadoNumNombre);
+
 	$.ajaxSetup(
 	{
 		headers:
@@ -245,7 +247,6 @@ function ResguardoPorEmpleado(empleado){
       type: 'GET',
       data: { numEmpleado: empleadoNumNombre[0], nombreEmpleado: empleadoNumNombre[1]},
       dataType: 'html',
-      async: true,
       contentType: 'application/json'
 
     }).done(function(response) {
@@ -255,6 +256,6 @@ function ResguardoPorEmpleado(empleado){
     	    	
     });
 
-}
+} 
 
 

@@ -93,46 +93,94 @@ class ArticulosController extends Controller
 
 		$partida = $request;
 		$bienesPartida = articulos::where('partida', $request->numPartida)->orderBy('concepto')->get();
-		return view('ople.reportes.BienesPorPartida', compact('partida','bienesPartida'));
+		$totalImporte = DB::table('articulos')->select( DB::raw('SUM(importe) as total'))->where('partida', $request->numPartida)->get();
+
+		foreach ($totalImporte as  $value) {
+			$value->total = number_format($value->total,2);
+		}
+
+		foreach ($bienesPartida as $value) {
+			$value->importe = number_format($value->importe,2);
+		}
+
+		return view('ople.reportes.BienesPorPartida', compact('partida','bienesPartida','totalImporte'));
 	}
 
 	public function importeBienesPorArea(){
 
 		$areaAndImporteTotal = DB::table('articulos')->select('nombrearea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->groupBy('nombrearea')->get();
+		$totalImporte = 0;
+		foreach ($areaAndImporteTotal as $value) {
+			$totalImporte += $value->importetotal;
+			$value->importetotal = number_format($value->importetotal,2);
+		}
+		$totalImporte = number_format($totalImporte,2);
 
-		//return response()->json($areaAndImporteTotal);
-
-		return view('ople.reportes.ImporteDeBienesPorArea', compact('areaAndImporteTotal'));
+		return view('ople.reportes.ImporteDeBienesPorArea', compact('areaAndImporteTotal','totalImporte'));
 	}
 
 	public function importeBienesPorPartida(){
-		$partidaAndImporteTotal = DB::table('articulos')->select('partida','descpartida', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->groupBy('partida','descpartida')->get();
 
-		return view('ople.reportes.ImporteDeBienesPorPartida', compact('partidaAndImporteTotal'));
+		$partidaAndImporteTotal = DB::table('articulos')->select('partida','descpartida', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->groupBy('partida','descpartida')->get();
+		$totalImporte = 0;
+		foreach ($partidaAndImporteTotal as $value) {
+			$totalImporte += $value->importetotal;
+			$value->importetotal = number_format($value->importetotal,2);
+		}
+		$totalImporte = number_format($totalImporte,2);
+
+		return view('ople.reportes.ImporteDeBienesPorPartida', compact('partidaAndImporteTotal','totalImporte'));
 	}
 
 	public function inventarioPorArea(Request $request){
 
 		$area = $request;
 		$bienesArea = articulos::where('clvarea', $request->numArea)->orderBy('concepto')->get();
-		return view('ople.reportes.InventarioPorArea',compact('area','bienesArea'));
+		$totalImporte = 0;
+		foreach ($bienesArea as $value) {
+			$totalImporte += $value->importe;
+			$value->importe = number_format($value->importe,2);
+		}
+
+		$totalImporte = number_format($totalImporte,2);
+
+		return view('ople.reportes.InventarioPorArea',compact('area','bienesArea','totalImporte'));
 	}
 
 	public function inventarioPorOrdenAlfabetico(){
 
 		$bienesAlfabetico = articulos::orderBy('concepto', 'DESC')->get();
-		return view('ople.reportes.InventarioPorOrdenAlfabetico',compact('bienesAlfabetico'));
+		$totalImporte = 0;
+		foreach ($bienesAlfabetico as $value) {
+			$totalImporte += $value->importe;
+			$value->importe = number_format($value->importe,2);
+		}
+
+		$totalImporte = number_format($totalImporte,2);
+
+		return view('ople.reportes.InventarioPorOrdenAlfabetico',compact('bienesAlfabetico','totalImporte'));
 	}
 
-	public function ResguardoPorEmpleado(){
-		return view('ople.reportes.ResguardoPorEmpleado');
+	public function ResguardoPorEmpleado(Request $request){		
+
+		$datosEmpleado = empleados::select('numemple','nombre','nombredepto')->where('numemple', $request->numEmpleado)->get();
+		$articulos = articulos::where('numemple', $request->numEmpleado)->get();
+		$totalArticulos = DB::table('articulos')->select( DB::raw('COUNT(numeroinv) as total'))->where('numemple', $request->numEmpleado)->get();
+		$totalImporte = 0;
+		foreach ($articulos as $value) {
+			$totalImporte += $value->importe;
+			$value->importe = number_format($value->importe,2);
+		}
+		$totalImporte = number_format($totalImporte,2);
+
+		return view('ople.reportes.ResguardoPorEmpleado', compact('datosEmpleado','articulos','totalArticulos','totalImporte'));
 	}
 
 	// ************ generar reportes ************
 	public function generarBienesPartida(Request $request){
 
 		$partida = $request;
-		$bienesPartida = articulos::select('numeroinv', 'concepto', 'numserie', 'marca', 'modelo', 'nombreemple', 'factura', 'importe', 'estado')->where('partida', $request->numPartida)->orderBy('concepto')->take(125)->get();
+		$bienesPartida = articulos::select('numeroinv', 'concepto', 'numserie', 'marca', 'modelo', 'nombreemple', 'factura', 'importe', 'estado')->where('partida', $request->numPartida)->orderBy('concepto')->get();
 
 		$pdf = PDF::loadView('ople.reportes.BienesPorPartida',compact('partida','bienesPartida'))->setPaper('letter', 'landscape');
         return  $pdf->stream();
