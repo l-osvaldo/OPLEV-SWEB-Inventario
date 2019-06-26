@@ -61,10 +61,15 @@
 	  </div>
 	</div>
 
-	<div class="spinner-border" role="status">
-	  <span class="sr-only">Loading...</span>
+	<div id="cargando" style="display: none;">
+		
+		<div class="d-flex justify-content-center" >
+		  <div class="spinner-border" role="status">
+		    <span class="sr-only">Loading...</span>
+		  </div>
+		</div>
 	</div>
-
+	<br>
 	<div class="col-12" id="divRespuesta" style="display: none;">     
       <div class="center-block">
         <div class="card">

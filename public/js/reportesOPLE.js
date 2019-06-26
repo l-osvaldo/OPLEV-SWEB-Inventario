@@ -9,7 +9,7 @@ $('#selectReportes').change(function() {
 			$('#btnGenerarPDF').css("display","block");
 			importeBienesPorArea();
 			break;
-		case '3':			
+		case '3':		
 			$('#seleccionSelect').css("display","none");	
 			$('#btnGenerarPDF').css("display","block");
 			importeBienesPorPartida();
@@ -29,12 +29,13 @@ $('#selectReportes').change(function() {
 });
 
 $('#selectPartida').change(function(){
-	if ($(this).val() != 0 ){
+	if ($(this).val() != 0 ){		
 		bienesPorPartida($(this).val());
 		var partidaNumNombre = $(this).val().split('*');
 		$('#btnGenerarPDF').css("display","block");
-		$('#divRespuesta').css("display","block");
+		
 		$('#btnGenerarPDF').attr("href","/catalogos/reportes/generarBienesPartida/"+partidaNumNombre[0]+"/"+partidaNumNombre[1]);
+
 	}else{
 		$('#btnGenerarPDF').css("display","none");
 		$('#divRespuesta').css("display","none");
@@ -46,7 +47,6 @@ $('#selectArea').change(function(){
 	if ($(this).val() != 0 ){
 		inventarioPorArea($(this).val());
 		$('#btnGenerarPDF').css("display","block");
-		$('#divRespuesta').css("display","block");
 	}else{
 		$('#btnGenerarPDF').css("display","none");
 		$('#divRespuesta').css("display","none");
@@ -59,7 +59,6 @@ $('#selectEmpleado').change(function(){
 	if ($(this).val() != 0 ){
 		ResguardoPorEmpleado($(this).val());
 		$('#btnGenerarPDF').css("display","block");
-		$('#divRespuesta').css("display","block");
 	}else{
 		$('#btnGenerarPDF').css("display","none");
 		$('#divRespuesta').css("display","none");
@@ -67,6 +66,8 @@ $('#selectEmpleado').change(function(){
 });
 
 function desactivarcampos(){
+
+	$('#cargando').css("display","none");
 
 	$('#selectPartida').val("0").change();
 	$('#selectArea').val("0").change();
@@ -89,6 +90,9 @@ function desactivarcampos(){
 
 function bienesPorPartida(partida){
 
+	$('#cargando').css("display","block");
+	$('#divRespuesta').css("display","none");
+
 	var partidaNumNombre = partida.split('*');
 
 	$.ajaxSetup(
@@ -109,13 +113,17 @@ function bienesPorPartida(partida){
       contentType: 'application/json'
 
     }).done(function(response) {
-
+    	$('#divRespuesta').css("display","block");
     	$('#respuestaReporte').html(response);
+    	$('#cargando').css("display","none");
     	    	
     });
 }
 
 function importeBienesPorArea(){
+
+	$('#cargando').css("display","block");
+	$('#divRespuesta').css("display","none");
 
 	$.ajaxSetup(
 	{
@@ -137,12 +145,16 @@ function importeBienesPorArea(){
     	//console.log(response);
     	$('#divRespuesta').css("display","block");
     	$('#respuestaReporte').html(response);
+    	$('#cargando').css("display","none");
     	    	
     });
 
 }
 
 function importeBienesPorPartida(){
+
+	$('#cargando').css("display","block");
+	$('#divRespuesta').css("display","none");
 
 	$.ajaxSetup(
 	{
@@ -164,12 +176,16 @@ function importeBienesPorPartida(){
     	//console.log(response);
     	$('#divRespuesta').css("display","block");
     	$('#respuestaReporte').html(response);
+    	$('#cargando').css("display","none");
     	    	
     });
 
 }
 
 function inventarioPorArea(area){
+
+	$('#cargando').css("display","block");
+	$('#divRespuesta').css("display","none");
 
 	var areaNumNombre = area.split('*');
 
@@ -194,6 +210,7 @@ function inventarioPorArea(area){
     	//console.log(response);
     	$('#divRespuesta').css("display","block");
     	$('#respuestaReporte').html(response);
+    	$('#cargando').css("display","none");
     	    	
     });
 
@@ -201,6 +218,9 @@ function inventarioPorArea(area){
 
 
 function inventarioPorOrdenAlfabetico(){
+
+	$('#cargando').css("display","block");
+	$('#divRespuesta').css("display","none");
 
 	$.ajaxSetup(
 	{
@@ -222,12 +242,16 @@ function inventarioPorOrdenAlfabetico(){
     	//console.log(response);
     	$('#divRespuesta').css("display","block");
     	$('#respuestaReporte').html(response);
+    	$('#cargando').css("display","none");
     	    	
     });
 
 }
 
 function ResguardoPorEmpleado(empleado){
+
+	$('#cargando').css("display","block");
+	$('#divRespuesta').css("display","none");
 
 	var empleadoNumNombre = empleado.split('*');
 
@@ -253,6 +277,7 @@ function ResguardoPorEmpleado(empleado){
     	//console.log(response);
     	$('#divRespuesta').css("display","block");
     	$('#respuestaReporte').html(response);
+    	$('#cargando').css("display","none");
     	    	
     });
 

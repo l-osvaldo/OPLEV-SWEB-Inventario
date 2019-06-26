@@ -16,13 +16,13 @@
 		<br>
 		<table width="100%">
 			<tr>
-				<td width="50%"> <label><strong>INVENTARIO POR PARTIDA</strong></label> </td>
+				<td> <label><strong>INVENTARIO POR PARTIDA</strong></label> </td>
 			</tr>
 			<tr>
-				<td width="50%"> 
+				<td width="70%"> 
 					<label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida->numPartida }} {{ $partida->nombrePartida }} </i></label>
 				</td>
-				<td width="50%" align="right">
+				<td width="30%" align="right">
 					<label style="margin-right: 80px"> <strong>TOTAL DE IMPORTE: $ </strong>
 					@foreach ($totalImporte as $total)
 					 	{{ $total->total }}

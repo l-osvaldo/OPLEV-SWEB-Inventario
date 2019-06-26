@@ -55,6 +55,8 @@
    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
 
    <link rel="stylesheet" href="{{ asset('css/MiEstilo.css') }}">
+
+   <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 </head>
 <body class="hold-transition sidebar-mini ">
   <div class="wrapper">
