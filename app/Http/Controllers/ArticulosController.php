@@ -108,7 +108,7 @@ class ArticulosController extends Controller
 
 	public function importeBienesPorArea(){
 
-		$areaAndImporteTotal = DB::table('articulos')->select('nombrearea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->groupBy('nombrearea')->get();
+		$areaAndImporteTotal = DB::table('articulos')->select('nombrearea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal','clvarea'))->orderBy('clvarea')->groupBy('nombrearea','clvarea')->get();
 		$totalImporte = 0;
 		foreach ($areaAndImporteTotal as $value) {
 			$totalImporte += $value->importetotal;
@@ -187,15 +187,21 @@ class ArticulosController extends Controller
 	}
 
 	public function importeBienesPorAreaPDF(){
-		$areaAndImporteTotal = DB::table('articulos')->select('nombrearea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->groupBy('nombrearea')->get();
+		$areaAndImporteTotal = DB::table('articulos')->select('nombrearea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal','clvarea'))->orderBy('clvarea')->groupBy('nombrearea','clvarea')->get();
 		$totalImporte = 0;
 		foreach ($areaAndImporteTotal as $value) {
 			$totalImporte += $value->importetotal;
 			$value->importetotal = number_format($value->importetotal,2);
 		}
 		$totalImporte = number_format($totalImporte,2);
+		$hoy = getdate();
 
-		$pdf = PDF::loadView('ople.reportes.pdf.ImporteDeBienesPorAreaPDF');
+		$fecha = $hoy['mday'].'/'.$hoy['mon'].'/'.$hoy['year'];
+
+		//print_r($fecha); exit;
+
+
+		$pdf = PDF::loadView('ople.reportes.pdf.ImporteDeBienesPorAreaPDF', compact('fecha','totalImporte','areaAndImporteTotal'))->setPaper('letter', 'portrait');
 		return $pdf->stream();
 	}
 

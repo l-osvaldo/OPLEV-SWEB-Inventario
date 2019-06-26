@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Reporte | Importe de bienes por área | OPLE Veracruz<title>
+    <title>Reporte | Importe de bienes por área | OPLE Veracruz</title>
     <link rel="stylesheet" type="text/css" src="css/normalize.css">
 
     <style type="text/css" media="all">
@@ -50,42 +50,94 @@
       <td style="width: calc(100% - 240px);">
           <h2>
             <small>
-            ORGANISMO PÚBLICO LOCAL ELECTORAL <br>
-            Dirección Ejecutiva de Administración <small style="font-weight:lighter;"><br><br>Departamento de Recursos Materiales</small></small>
+              ORGANISMO PÚBLICO LOCAL ELECTORAL 
+              <br>
+              Dirección Ejecutiva de Administración 
+              <small style="font-weight:lighter;">
+                <br>
+                Departamento de Recursos Materiales
+              </small>
+            </small>
           </h2>  
         </span>   
       </td>
       <td style="width: 120px; color:#fff">...</td>
     </tr>
+    <tr>
+      <td colspan="3">
+        <h2>
+          <small>Concentrado de Importes por Área</small>
+        </h2>
+      </td>
+    </tr>
   </table>
   
   <div class="row">
-    <strong> <i> Fecha de Impresión: &nbsp;  </i> </strong> <br>
+    
+      <strong> <i> Fecha de Impresión: &nbsp; {{ $fecha }} </i> </strong> <br>    
   </div>
   
 
-  {{-- <div class="row">
+  <div class="row">
     <table style="margin-top: 15px;">
       <thead>
         <tr style="background-color: #ccc; border: solid 1px #000;">
-          <th style="text-align: left; padding: 15px">Nombre del Destinatario</th>
-          <th style="text-align: center; padding: 15px">Correspondencia en el mes</th>
+          <th style="text-align: left; padding: 15px">Nombre del Área</th>
+          <th style="text-align: center; padding: 15px">Importe de Bienes</th>
         </tr>
       </thead>
       <tbody>
-        @foreach ($areas as $area)
+        @foreach ($areaAndImporteTotal as $area)
           <tr>
-            <td style="text-align: left; padding: 2px 12px" class="border"> {{ mb_strtoupper($area->nombre) }} </td>
-            <td style="text-align: center" class="border"> {{ $oficialias->where('destinatario', $area->id)->count() }} </td>                                                
+            <td style="text-align: left; padding: 2px 12px" class="border"> {{ mb_strtoupper($area->nombrearea) }} </td>
+            <td style="text-align: center" class="border"> {{ $area->importetotal }} </td>                                                
           </tr>
         @endforeach
-          <tr>
-            <td style="text-align: right; padding: 20px 0"> <strong> Total de Correspondencia </strong> </td>
-            <td style="text-align: center"> <strong> {{ $oficialias->count() }} </strong> </td>                                                
-          </tr>
       </tbody>
     </table>
-  </div> --}}
+  </div>
+  <div class="row">
+    <table style="margin-top: 15px;">
+      <thead>
+        <tr>
+          <td align="center">
+            <strong>Vo. Bo.</strong>
+          </td>
+          <td align="center">
+            <strong>REVISO</strong>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td align="center">
+            ________________________________________
+          </td>
+          <td align="center">
+            ________________________________________
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>LIC. JOSÉ LAURO VILLAS RIVAS</strong>
+          </td>
+          <td>
+            <strong>MTRA. ERIKA CAROLINA MALPICA ALCÁNTARA</strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>DIRECTOR EJECUTIVO DE ADMINISTRACIÓN</strong>
+          </td>
+          <td>
+            <strong>JEFA DEL DEPARTAMENTO DE RECURSOS </strong>
+            <br>
+            <strong>MATERIALES Y SERVICIOS GENERALES</strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   </body>
 </html>
