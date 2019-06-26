@@ -186,5 +186,18 @@ class ArticulosController extends Controller
         return  $pdf->stream();
 	}
 
+	public function importeBienesPorAreaPDF(){
+		$areaAndImporteTotal = DB::table('articulos')->select('nombrearea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->groupBy('nombrearea')->get();
+		$totalImporte = 0;
+		foreach ($areaAndImporteTotal as $value) {
+			$totalImporte += $value->importetotal;
+			$value->importetotal = number_format($value->importetotal,2);
+		}
+		$totalImporte = number_format($totalImporte,2);
+
+		$pdf = PDF::loadView('ople.reportes.pdf.ImporteDeBienesPorAreaPDF');
+		return $pdf->stream();
+	}
+
 
 }

@@ -1,3 +1,4 @@
+/******************** Menu de reportes ***********************/
 $('#selectReportes').change(function() {
 	desactivarcampos();
 	switch ($(this).val()){
@@ -6,12 +7,10 @@ $('#selectReportes').change(function() {
 			break;
 		case '2':
 			$('#seleccionSelect').css("display","none");	
-			$('#btnGenerarPDF').css("display","block");
 			importeBienesPorArea();
 			break;
 		case '3':		
-			$('#seleccionSelect').css("display","none");	
-			$('#btnGenerarPDF').css("display","block");
+			$('#seleccionSelect').css("display","none");
 			importeBienesPorPartida();
 			break;
 		case '4':			
@@ -19,7 +18,6 @@ $('#selectReportes').change(function() {
 			break;
 		case '5':
 			$('#seleccionSelect').css("display","none");	
-			$('#btnGenerarPDF').css("display","block");
 			inventarioPorOrdenAlfabetico();
 			break;
 		case '6':			
@@ -28,11 +26,12 @@ $('#selectReportes').change(function() {
 	}
 });
 
+/******************** selección de partida, area y empleado ***********************/
 $('#selectPartida').change(function(){
 	if ($(this).val() != 0 ){		
 		bienesPorPartida($(this).val());
 		var partidaNumNombre = $(this).val().split('*');
-		$('#btnGenerarPDF').css("display","block");
+		
 		
 		$('#btnGenerarPDF').attr("href","/catalogos/reportes/generarBienesPartida/"+partidaNumNombre[0]+"/"+partidaNumNombre[1]);
 
@@ -46,7 +45,6 @@ $('#selectPartida').change(function(){
 $('#selectArea').change(function(){
 	if ($(this).val() != 0 ){
 		inventarioPorArea($(this).val());
-		$('#btnGenerarPDF').css("display","block");
 	}else{
 		$('#btnGenerarPDF').css("display","none");
 		$('#divRespuesta').css("display","none");
@@ -58,13 +56,13 @@ $('#selectArea').change(function(){
 $('#selectEmpleado').change(function(){
 	if ($(this).val() != 0 ){
 		ResguardoPorEmpleado($(this).val());
-		$('#btnGenerarPDF').css("display","block");
 	}else{
 		$('#btnGenerarPDF').css("display","none");
 		$('#divRespuesta').css("display","none");
 	}
 });
 
+/******************** funcion para reiniciar los componentes ***********************/
 function desactivarcampos(){
 
 	$('#cargando').css("display","none");
@@ -88,10 +86,13 @@ function desactivarcampos(){
 	$('#divRespuesta').css("display","none");
 }
 
+
+/******************** Funciones ajax para la consulta de los reportes ***********************/
 function bienesPorPartida(partida){
 
 	$('#cargando').css("display","block");
 	$('#divRespuesta').css("display","none");
+	$('#btnGenerarPDF').css("display","none");
 
 	var partidaNumNombre = partida.split('*');
 
@@ -116,6 +117,7 @@ function bienesPorPartida(partida){
     	$('#divRespuesta').css("display","block");
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
+    	$('#btnGenerarPDF').css("display","block");
     	    	
     });
 }
@@ -124,6 +126,7 @@ function importeBienesPorArea(){
 
 	$('#cargando').css("display","block");
 	$('#divRespuesta').css("display","none");
+	$('#btnGenerarPDF').css("display","none");
 
 	$.ajaxSetup(
 	{
@@ -146,6 +149,8 @@ function importeBienesPorArea(){
     	$('#divRespuesta').css("display","block");
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
+    	$('#btnGenerarPDF').css("display","block");
+    	$('#btnGenerarPDF').attr("href","/catalogos/reportes/importeBienesPorAreaPDF");
     	    	
     });
 
@@ -155,6 +160,7 @@ function importeBienesPorPartida(){
 
 	$('#cargando').css("display","block");
 	$('#divRespuesta').css("display","none");
+	$('#btnGenerarPDF').css("display","none");
 
 	$.ajaxSetup(
 	{
@@ -177,6 +183,7 @@ function importeBienesPorPartida(){
     	$('#divRespuesta').css("display","block");
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
+    	$('#btnGenerarPDF').css("display","block");
     	    	
     });
 
@@ -186,6 +193,7 @@ function inventarioPorArea(area){
 
 	$('#cargando').css("display","block");
 	$('#divRespuesta').css("display","none");
+	$('#btnGenerarPDF').css("display","none");
 
 	var areaNumNombre = area.split('*');
 
@@ -211,6 +219,7 @@ function inventarioPorArea(area){
     	$('#divRespuesta').css("display","block");
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
+    	$('#btnGenerarPDF').css("display","block");
     	    	
     });
 
@@ -221,6 +230,7 @@ function inventarioPorOrdenAlfabetico(){
 
 	$('#cargando').css("display","block");
 	$('#divRespuesta').css("display","none");
+	$('#btnGenerarPDF').css("display","none");
 
 	$.ajaxSetup(
 	{
@@ -243,6 +253,7 @@ function inventarioPorOrdenAlfabetico(){
     	$('#divRespuesta').css("display","block");
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
+    	$('#btnGenerarPDF').css("display","block");
     	    	
     });
 
@@ -252,6 +263,7 @@ function ResguardoPorEmpleado(empleado){
 
 	$('#cargando').css("display","block");
 	$('#divRespuesta').css("display","none");
+	$('#btnGenerarPDF').css("display","none");
 
 	var empleadoNumNombre = empleado.split('*');
 
@@ -278,6 +290,7 @@ function ResguardoPorEmpleado(empleado){
     	$('#divRespuesta').css("display","block");
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
+    	$('#btnGenerarPDF').css("display","block");
     	    	
     });
 

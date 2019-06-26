@@ -77,6 +77,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 
 	// Importe de Bienes Por área
 	Route::get('catalogos/importeBienesPorArea', 'ArticulosController@importeBienesPorArea');
+	Route::get('catalogos/reportes/importeBienesPorAreaPDF', 'ArticulosController@importeBienesPorAreaPDF');
 
 	// Importe de Bienes Por Partida
 	Route::get('catalogos/importeBienesPorPartida', 'ArticulosController@importeBienesPorPartida');
