@@ -30,10 +30,7 @@ $('#selectReportes').change(function() {
 $('#selectPartida').change(function(){
 	if ($(this).val() != 0 ){		
 		bienesPorPartida($(this).val());
-		var partidaNumNombre = $(this).val().split('*');
-		
-		
-		$('#btnGenerarPDF').attr("href","/catalogos/reportes/generarBienesPartida/"+partidaNumNombre[0]+"/"+partidaNumNombre[1]);
+		var partidaNumNombre = $(this).val().split('*');		
 
 	}else{
 		$('#btnGenerarPDF').css("display","none");
@@ -118,6 +115,7 @@ function bienesPorPartida(partida){
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
     	$('#btnGenerarPDF').css("display","block");
+    	$('#btnGenerarPDF').attr("href","/catalogos/reportes/BienesPorPartida/"+partidaNumNombre[0]+"/"+partidaNumNombre[1]);
     	    	
     });
 }
@@ -184,6 +182,7 @@ function importeBienesPorPartida(){
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
     	$('#btnGenerarPDF').css("display","block");
+    	$('#btnGenerarPDF').attr("href","/catalogos/reportes/importeBienesPorPartidaPDF");
     	    	
     });
 

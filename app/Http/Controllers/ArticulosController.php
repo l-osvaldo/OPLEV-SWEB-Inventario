@@ -176,14 +176,13 @@ class ArticulosController extends Controller
 		return view('ople.reportes.ResguardoPorEmpleado', compact('datosEmpleado','articulos','totalArticulos','totalImporte'));
 	}
 
+	
+
 	// ************ generar reportes ************
-	public function generarBienesPartida(Request $request){
-
-		$partida = $request;
-		$bienesPartida = articulos::select('numeroinv', 'concepto', 'numserie', 'marca', 'modelo', 'nombreemple', 'factura', 'importe', 'estado')->where('partida', $request->numPartida)->orderBy('concepto')->get();
-
-		$pdf = PDF::loadView('ople.reportes.BienesPorPartida',compact('partida','bienesPartida'))->setPaper('letter', 'landscape');
-        return  $pdf->stream();
+	public function BienesPorPartida(Request $request){
+		$htmlA = $this->generarHtml($request);
+		$pdf = PDF::loadHTML($htmlA)->setPaper('legal', 'landscape');
+		return $pdf->stream('ImporteDeBienesPorArea.pdf');
 	}
 
 	public function importeBienesPorAreaPDF(){
@@ -202,7 +201,175 @@ class ArticulosController extends Controller
 
 
 		$pdf = PDF::loadView('ople.reportes.pdf.ImporteDeBienesPorAreaPDF', compact('fecha','totalImporte','areaAndImporteTotal'))->setPaper('letter', 'portrait');
-		return $pdf->stream();
+		return $pdf->stream('ImporteDeBienesPorArea.pdf');
+	}
+
+
+	public function importeBienesPorPartidaPDF(){
+
+		$partidaAndImporteTotal = DB::table('articulos')->select('partida','descpartida', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->groupBy('partida','descpartida')->get();
+		$totalImporte = 0;
+		foreach ($partidaAndImporteTotal as $value) {
+			$totalImporte += $value->importetotal;
+			$value->importetotal = number_format($value->importetotal,2);
+		}
+		$totalImporte = number_format($totalImporte,2);
+
+		$hoy = getdate();
+
+		$fecha = $hoy['mday'].'/'.$hoy['mon'].'/'.$hoy['year'];
+
+		$pdf = PDF::loadView('ople.reportes.pdf.ImporteDeBienesPorPartidaPDF',compact('fecha','partidaAndImporteTotal','totalImporte'))->setPaper('letter', 'portrait');
+		return $pdf->stream('ImporteBienesPorPartida.pdf');
+	}
+
+
+	/****************************************************************************************/
+	function generarHtml(Request $request){
+
+		$partida = $request;
+		$bienesPartida = articulos::where('partida', $request->numPartida)->orderBy('concepto')->get();
+		$totalImporte = DB::table('articulos')->select( DB::raw('SUM(importe) as total'))->where('partida', $request->numPartida)->get();
+
+		//print_r($bienesPartida); exit;
+
+		foreach ($totalImporte as  $value) {
+			$value->total = number_format($value->total,2);
+		}
+
+		// foreach ($bienesPartida as $value) {
+		// 	$value->importe = number_format($value->importe,2);
+		// }
+
+		$htmlP = '<!DOCTYPE html>
+					<html lang="en">
+					  <head>
+					    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+					    <title>Reporte | Importe de bienes por Partida | OPLE Veracruz</title>
+					    <link rel="stylesheet" type="text/css" src="css/normalize.css">
+
+					    <style type="text/css" media="all">
+					      *{
+					      font-family: Arial, Helvetica, sans-serif;
+					      }
+					      body {
+					        font-size: 12px;
+					      }
+					      .row:after {
+					        content: "";
+					        display: table;
+					        clear: both;
+					      }
+					      .column {
+					        float: left;
+					        width: 50%;
+					      }
+					      table{
+					        width: 100%;
+					        margin: 0 0 20px 0;
+					        border-spacing: 0;
+					      }
+					      td { 
+					        border: none;
+					        text-align: center;
+					        height: 25px;
+					      }
+					      td.border {
+					        border-bottom: solid 1px #ccc;
+					      }
+					      .logo {
+					        width: 120px;
+					      }
+					      .text-center {
+					        text-align: center;
+					      }
+
+					      .page-break {
+					        page-break-after: always;
+					      }
+					    </style>
+					  </head>
+					  <body>  
+						  <table>
+						    <tr>
+						      <td style="width: 120px;vertical-align: text-top;padding-left: 30px"><img class="logo" src="images/logoople.png" alt=""></td>
+						      <td style="width: calc(100% - 240px);">
+						          <h2>
+						            <small>
+						              ORGANISMO PÚBLICO LOCAL ELECTORAL 
+						              <br>
+						              Dirección Ejecutiva de Administración 
+						              <small>
+						                <br>
+						                INVENTARIO DE ACTIVO FIJO 
+						              </small>
+						            </small>
+						          </h2>  
+						        </span>   
+						      </td>
+						      <td style="width: 120px; color:#fff">...</td>
+						    </tr>
+						  </table>
+						  <br>
+						  <label><strong>INVENTARIO POR PARTIDA</strong></label>
+						  <br>
+						  <label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> '.$partida->numPartida.' '. $partida->nombrePartida.' </i></label>
+						  <div class="row">
+						    <table style="margin-top: 15px;">
+						      <thead>
+						        <tr style="background-color: #ccc; border: solid 1px #000;">
+						          <th style="text-align: left; padding: 15px">No. DE INVENTARIO</th>
+						          <th style="text-align: left; padding: 15px">DESCRIPCIÓN DEL BIEN</th>
+						          <th style="text-align: left; padding: 15px">NÚMERO DE SERIE</th>
+						          <th style="text-align: left; padding: 15px">MARCA</th>
+						          <th style="text-align: left; padding: 15px">MODELO</th>
+						          <th style="text-align: left; padding: 15px">NOMBRE DEL RESPONSABLE</th>
+						          <th style="text-align: left; padding: 15px">No. DE FACTURA</th>
+						          <th style="text-align: left; padding: 15px">IMPORTE DE ADQUISICIÓN</th>
+						          <th style="text-align: left; padding: 15px">ESTADO DEL BIEN</th>						          
+						        </tr>
+						      </thead>
+						      <tbody>';
+						        foreach ($bienesPartida as $value) {
+						        	$htmlP .= '<tr>
+									            <td style="text-align: left; padding: 2px 12px" class="border">            
+									              '.$value->numeroinv.'             
+									            </td>
+									            <td style="text-align: left; padding: 2px 12px" class="border">            
+									              '.$value->concepto.'         
+									            </td>
+									            <td style="text-align: left; padding: 2px 12px" class="border">            
+									              '.$value->numserie.'              
+									            </td>
+									            <td style="text-align: left; padding: 2px 12px" class="border">            
+									              '.$value->marca.'              
+									            </td>
+									            <td style="text-align: left; padding: 2px 12px" class="border">            
+									              '.$value->modelo.'              
+									            </td>
+									            <td style="text-align: left; padding: 2px 12px" class="border">            
+									              '.$value->nombreemple.'              
+									            </td>
+									            <td style="text-align: left; padding: 2px 12px" class="border">            
+									              '.$value->factura.'              
+									            </td>
+									            <td style="text-align: left; padding: 2px 12px" class="border">            
+									              '.$value->importe.'              
+									            </td>
+									            <td style="text-align: left; padding: 2px 12px" class="border">            
+									              '.$value->estado.'              
+									            </td>
+									           <tr>';
+						        }
+
+						          
+						          
+					$htmlP .= '</tbody>
+						    </table>
+						  </div>
+						</body>
+					</html>';
+		return $htmlP;
 	}
 
 

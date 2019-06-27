@@ -73,7 +73,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 
 	// Bienes por Partida
 	Route::get('catalogos/BienesXPartida', 'ArticulosController@BienesXPartida');
-	Route::get('catalogos/reportes/generarBienesPartida/{numPartida}/{nombrePartida}', 'ArticulosController@generarBienesPartida');
+	Route::get('catalogos/reportes/BienesPorPartida/{numPartida}/{nombrePartida}', 'ArticulosController@BienesPorPartida');
 
 	// Importe de Bienes Por área
 	Route::get('catalogos/importeBienesPorArea', 'ArticulosController@importeBienesPorArea');
@@ -81,6 +81,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 
 	// Importe de Bienes Por Partida
 	Route::get('catalogos/importeBienesPorPartida', 'ArticulosController@importeBienesPorPartida');
+	Route::get('catalogos/reportes/importeBienesPorPartidaPDF', 'ArticulosController@importeBienesPorPartidaPDF');
 
 	// Inventario Por Área
 	Route::get('catalogos/inventarioPorArea', 'ArticulosController@inventarioPorArea');
