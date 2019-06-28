@@ -10,6 +10,7 @@ use App\empleados;
 use Alert;
 use PDF;
 use DB;
+use App;
 
 class ArticulosController extends Controller
 {
@@ -181,8 +182,12 @@ class ArticulosController extends Controller
 	// ************ generar reportes ************
 	public function BienesPorPartida(Request $request){
 		$htmlA = $this->generarHtml($request);
+		$pdf = App::make('snappy.pdf.wrapper');
 		$pdf = PDF::loadHTML($htmlA)->setPaper('legal', 'landscape');
-		return $pdf->stream('ImporteDeBienesPorArea.pdf');
+
+		//return $htmlA;
+
+		return $pdf->inline('ImporteDeBienesPorArea.pdf');
 	}
 
 	public function importeBienesPorAreaPDF(){
@@ -197,11 +202,9 @@ class ArticulosController extends Controller
 
 		$fecha = $hoy['mday'].'/'.$hoy['mon'].'/'.$hoy['year'];
 
-		//print_r($fecha); exit;
-
-
+		//$pdf = App::make('snappy.pdf.wrapper');
 		$pdf = PDF::loadView('ople.reportes.pdf.ImporteDeBienesPorAreaPDF', compact('fecha','totalImporte','areaAndImporteTotal'))->setPaper('letter', 'portrait');
-		return $pdf->stream('ImporteDeBienesPorArea.pdf');
+		return $pdf->inline('ImporteDeBienesPorArea.pdf');
 	}
 
 
@@ -226,28 +229,27 @@ class ArticulosController extends Controller
 
 	/****************************************************************************************/
 	function generarHtml(Request $request){
-
+		set_time_limit(300);
 		$partida = $request;
 		$bienesPartida = articulos::where('partida', $request->numPartida)->orderBy('concepto')->get();
 		$totalImporte = DB::table('articulos')->select( DB::raw('SUM(importe) as total'))->where('partida', $request->numPartida)->get();
 
-		//print_r($bienesPartida); exit;
+		$chunks = $bienesPartida->chunk(20);
+
+		//return $chunks;
+
+		//print_r($chunks); exit;
 
 		foreach ($totalImporte as  $value) {
 			$value->total = number_format($value->total,2);
 		}
 
-		// foreach ($bienesPartida as $value) {
-		// 	$value->importe = number_format($value->importe,2);
-		// }
+		foreach ($bienesPartida as $value) {
+			$value->importe = number_format($value->importe,2);
+		}
 
-		$htmlP = '<!DOCTYPE html>
-					<html lang="en">
-					  <head>
-					    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-					    <title>Reporte | Importe de bienes por Partida | OPLE Veracruz</title>
-					    <link rel="stylesheet" type="text/css" src="css/normalize.css">
-
+		$htmlP = '  <title>Reporte | Importe de bienes por Partida | OPLE Veracruz</title>
+					    
 					    <style type="text/css" media="all">
 					      *{
 					      font-family: Arial, Helvetica, sans-serif;
@@ -288,8 +290,8 @@ class ArticulosController extends Controller
 					        page-break-after: always;
 					      }
 					    </style>
-					  </head>
-					  <body>  
+					  
+					    
 						  <table>
 						    <tr>
 						      <td style="width: 120px;vertical-align: text-top;padding-left: 30px"><img class="logo" src="images/logoople.png" alt=""></td>
@@ -314,7 +316,7 @@ class ArticulosController extends Controller
 						  <label><strong>INVENTARIO POR PARTIDA</strong></label>
 						  <br>
 						  <label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> '.$partida->numPartida.' '. $partida->nombrePartida.' </i></label>
-						  <div class="row">
+						  <div>
 						    <table style="margin-top: 15px;">
 						      <thead>
 						        <tr style="background-color: #ccc; border: solid 1px #000;">
@@ -360,15 +362,11 @@ class ArticulosController extends Controller
 									              '.$value->estado.'              
 									            </td>
 									           <tr>';
-						        }
-
-						          
+						        }        
 						          
 					$htmlP .= '</tbody>
 						    </table>
-						  </div>
-						</body>
-					</html>';
+						  </div>';
 		return $htmlP;
 	}
 
