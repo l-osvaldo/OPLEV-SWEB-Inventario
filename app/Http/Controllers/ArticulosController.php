@@ -109,7 +109,8 @@ class ArticulosController extends Controller
 
 	public function importeBienesPorArea(){
 
-		$areaAndImporteTotal = DB::table('articulos')->select('nombrearea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal','clvarea'))->orderBy('clvarea')->groupBy('nombrearea','clvarea')->get();
+		$areaAndImporteTotal = DB::table('articulos')->select('clvarea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('clvarea')->groupBy('clvarea')->get();
+		$nombreArea = areas::all();
 		$totalImporte = 0;
 		foreach ($areaAndImporteTotal as $value) {
 			$totalImporte += $value->importetotal;
@@ -117,7 +118,7 @@ class ArticulosController extends Controller
 		}
 		$totalImporte = number_format($totalImporte,2);
 
-		return view('ople.reportes.ImporteDeBienesPorArea', compact('areaAndImporteTotal','totalImporte'));
+		return view('ople.reportes.ImporteDeBienesPorArea', compact('areaAndImporteTotal','totalImporte','nombreArea'));
 	}
 
 	public function importeBienesPorPartida(){
@@ -181,17 +182,30 @@ class ArticulosController extends Controller
 
 	// ************ generar reportes ************
 	public function BienesPorPartida(Request $request){
-		$htmlA = $this->generarHtml($request);
-		$pdf = App::make('snappy.pdf.wrapper');
-		$pdf = PDF::loadHTML($htmlA)->setPaper('legal', 'landscape');
 
-		//return $htmlA;
+		$partida = $request;
+		$bienesPartida = articulos::where('partida', $request->numPartida)->orderBy('concepto')->get();
+		$totalImporte = DB::table('articulos')->select( DB::raw('SUM(importe) as total'))->where('partida', $request->numPartida)->get();
 
-		return $pdf->inline('ImporteDeBienesPorArea.pdf');
+
+		foreach ($totalImporte as  $value) {
+			$value->total = number_format($value->total,2);
+		}
+
+		foreach ($bienesPartida as $value) {
+			$value->importe = number_format($value->importe,2);
+		}
+		
+		$pdf = PDF::loadView('ople.reportes.pdf.BienesPorPartidaPDF', compact('partida','bienesPartida','totalImporte'))->setPaper('legal', 'landscape');
+
+
+
+		return $pdf->inline('BienesPorPartida.pdf');
 	}
 
 	public function importeBienesPorAreaPDF(){
-		$areaAndImporteTotal = DB::table('articulos')->select('nombrearea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal','clvarea'))->orderBy('clvarea')->groupBy('nombrearea','clvarea')->get();
+		$areaAndImporteTotal = DB::table('articulos')->select('clvarea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('clvarea')->groupBy('clvarea')->get();
+		$nombreArea = areas::all();
 		$totalImporte = 0;
 		foreach ($areaAndImporteTotal as $value) {
 			$totalImporte += $value->importetotal;
@@ -202,8 +216,8 @@ class ArticulosController extends Controller
 
 		$fecha = $hoy['mday'].'/'.$hoy['mon'].'/'.$hoy['year'];
 
-		//$pdf = App::make('snappy.pdf.wrapper');
-		$pdf = PDF::loadView('ople.reportes.pdf.ImporteDeBienesPorAreaPDF', compact('fecha','totalImporte','areaAndImporteTotal'))->setPaper('letter', 'portrait');
+		
+		$pdf = PDF::loadView('ople.reportes.pdf.ImporteDeBienesPorAreaPDF', compact('fecha','totalImporte','areaAndImporteTotal','nombreArea'))->setPaper('letter', 'portrait');
 		return $pdf->inline('ImporteDeBienesPorArea.pdf');
 	}
 
@@ -223,7 +237,7 @@ class ArticulosController extends Controller
 		$fecha = $hoy['mday'].'/'.$hoy['mon'].'/'.$hoy['year'];
 
 		$pdf = PDF::loadView('ople.reportes.pdf.ImporteDeBienesPorPartidaPDF',compact('fecha','partidaAndImporteTotal','totalImporte'))->setPaper('letter', 'portrait');
-		return $pdf->stream('ImporteBienesPorPartida.pdf');
+		return $pdf->inline('ImporteBienesPorPartida.pdf');
 	}
 
 
@@ -234,11 +248,6 @@ class ArticulosController extends Controller
 		$bienesPartida = articulos::where('partida', $request->numPartida)->orderBy('concepto')->get();
 		$totalImporte = DB::table('articulos')->select( DB::raw('SUM(importe) as total'))->where('partida', $request->numPartida)->get();
 
-		$chunks = $bienesPartida->chunk(20);
-
-		//return $chunks;
-
-		//print_r($chunks); exit;
 
 		foreach ($totalImporte as  $value) {
 			$value->total = number_format($value->total,2);

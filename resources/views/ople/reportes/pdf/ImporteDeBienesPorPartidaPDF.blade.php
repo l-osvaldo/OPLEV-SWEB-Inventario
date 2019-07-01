@@ -23,7 +23,7 @@
       }
       table{
         width: 100%;
-        margin: 0 0 0 0;
+        margin: 0 0 20px 0;
         border-spacing: 0;
       }
       td { 
@@ -118,19 +118,44 @@
           </tr>
         @endforeach
         <tr>
-          <td colspan="4" style="text-align: right; padding-right: 15px;">
-            <strong>Total del Importe: $ {{ $totalImporte }} </strong> 
+          <td colspan="4">
+            &nbsp;
           </td>
         </tr>
         <tr>
-          <td colspan="4">
-            <label style="font-weight:lighter;">------------------------------------------------------------------------------------ FIN DEL REPORTE ------------------------------------------------------------------------------------</label>
+          <td colspan="4" style="text-align: right; padding-right: 15px;">
+            <strong>Total del Importe: $ {{ $totalImporte }} </strong> 
           </td>
-        </tr>
+        </tr>      
       </tbody>
     </table>
   </div>
 
+  <div class="row">
+    <table>
+      <tbody>
+        <tr>
+          <td style="text-align: center;">
+            <label style="font-weight:lighter; text-align: center;">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - FIN DEL REPORTE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</label>
+          </td>
+        </tr>  
+        
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   <div class="row">
     <table>
       <thead>
@@ -196,10 +221,9 @@
   <br>
   <br>
   <br>
+  <br>
   <div class="row" align="right">
     <label>Página:   {{ $pagina }} </label>
   </div>
-  
-
   </body>
 </html>

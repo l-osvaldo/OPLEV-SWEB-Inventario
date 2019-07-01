@@ -49,10 +49,8 @@
   <body>
 
   @php
-    $i = 1;
-    $limite = 1;
+    $signoPesos = 1;
     $pagina = 1;
-    $continuar = 1;
   @endphp
 
   <table>
@@ -102,30 +100,27 @@
 
           <tr>
             <td style="text-align: left; padding: 2px 12px" class="border">            
-              {{ mb_strtoupper($area->nombrearea) }}              
+              {{ mb_strtoupper( $nombreArea->where('clvdepto', $area->clvarea)->first()->depto  ) }}              
             </td>
             <td class="border">
-              @if ($i == 1)
+              @if ($signoPesos == 1)
                 <label style="text-align: right;">$</label>
               @endif
               
               @php
-                $i = 0
+                $signoPesos = 0;
               @endphp  
             </td>
             <td style="text-align: right; padding-right: 50px" class="border"> {{ $area->importetotal }} </td>                                                
           </tr>
-          @if ($limite == 26)
-            @break
-          @endif
-          @php
-            $limite += 1;
-
-          @endphp
         @endforeach
       </tbody>
     </table>
   </div>
+  <br>
+  <br>
+  <br>
+  <br>
   <br>
   <div class="row">
     <table style="margin-top: 15px;">
@@ -169,13 +164,21 @@
       </tbody>
     </table>
   </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   <div class="row" align="right">
     <label>Página:   {{ $pagina }} </label>
     @php
       $pagina += 1;
     @endphp
   </div>
-  
+    
+
 
   </body>
 </html>
