@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Reporte | Bienes por Partida | OPLE Veracruz</title>
+    <title>Reporte | Resguardo Por Empleado | OPLE Veracruz</title>
     <link rel="stylesheet" type="text/css" src="css/normalize.css">
 
     <style type="text/css" media="all">
@@ -44,29 +44,33 @@
       .page-break {
         page-break-after: always;
       }
+
+      .margen {
+      	margin-bottom: 1px;
+      }
     </style>
   </head>
   <body>
   	@php
-  		$bloques = 15;
+  		$bloques = 10;
   		$inicioBloque = 0;
   		$contadorBloques = 1;
   		$pagina = 1;
   		$tope = 0;
   	@endphp
 
-  	@foreach ($bienesPartida as $element)
+  	@foreach ($articulos as $element)
   		@if ($loop->index == ($bloques - 1) )
   		@php
   			$contadorBloques += 1;
-  			$bloques += 15;
+  			$bloques += 10;
   		@endphp
   			
   		@endif
   	@endforeach
 
   	@php
-  		$bloques = 15;
+  		$bloques = 10;
   	@endphp
 
   	@for ($i = 0; $i < $contadorBloques; $i++)	
@@ -82,7 +86,7 @@
 		              Dirección Ejecutiva de Administración 
 		              <small>
 		                <br>
-		                INVENTARIO DE ACTIVO FIJO
+		                DEPARTAMENTO DE RECURSOS MATERIALES Y SERVICIOS GENERALES
 		              </small>
 		            </small>
 		          </h2>  
@@ -92,39 +96,67 @@
 		    </tr>
 	  	</table>
 
-	  	<br>
-	  	<label><strong>INVENTARIO POR PARTIDA</strong></label>
-	  	<br>
-	  	<label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida->numPartida }} {{ $partida->nombrePartida }} </i></label>
+	  	@foreach ($datosEmpleado as $datos)
 
-	  	<div style="height: 580px">
+		  	<table>
+		  		<tr>
+		  			<td style="text-align: left; padding: 15px" width="25%">
+		  				<strong> ÁREA: </strong> 
+		  			</td>
+		  			<td style="text-align: left;" >
+		  				 {{ $datos->nombredepto }}
+		  			</td>
+		  			<td style="text-align: left;">
+		  				<strong>RESGUARDO DE VIENES</strong>
+		  			</td>
+		  		</tr>
+		  		<tr>
+		  			<td style="text-align: left; padding: 15px" >
+		  				<strong> NOMBRE DEL EMPLEADO: </strong> 
+		  			</td>
+		  			<td style="text-align: left;" >
+		  				{{ $datos->nombre }}
+		  			</td>
+		  			<td style="text-align: left;">
+		  				<strong>No. DE EMPLEADO:</strong>  &nbsp;&nbsp; {{ $datos->numemple }}
+		  			</td>
+		  		</tr>
+		  		<tr>
+		  			<td style="text-align: left; padding: 15px" >
+		  				<strong> FECHA DE IMPRESIÓN: </strong> 
+		  			</td>
+		  			<td style="text-align: left;" >
+		  				{{ $fecha }}
+		  			</td>
+		  			<td style="text-align: left;">
+		  				<strong>TOTAL DE BIENES: </strong> &nbsp;&nbsp;
+		  				@foreach ($totalArticulos as $total)
+		  					{{ $total->total }}
+		  				@endforeach
+		  			</td>
+		  		</tr>
+		  	</table>
+	  	@endforeach
+
+	  	
+	  	<div style="height: 420px">
 		  	<table style="margin-top: 15px;">
 			  <thead>
 			    <tr style="background-color: #ccc; border: solid 1px #000;">
 			      <th style="text-align: left; padding: 15px" width="14%">No. DE INVENTARIO</th>
 			      <th style="text-align: left; padding: 15px">DESCRIPCIÓN DEL BIEN</th>
 			      <th style="text-align: left; padding: 15px">NÚMERO DE SERIE</th>
-			      <th style="text-align: left; padding: 15px">MARCA</th>
-			      <th style="text-align: left; padding: 15px">MODELO</th>
-			      <th style="text-align: left; padding: 15px">NOMBRE DEL RESPONSABLE</th>
-			      <th style="text-align: left; padding: 15px">No. DE FACTURA</th>
-			      <th style="text-align: left; padding: 15px">IMPORTE DE ADQUISICIÓN</th>
-			      <th style="text-align: left; padding: 15px">ESTADO DEL BIEN</th>						          
+			      <th style="text-align: left; padding: 15px">IMPORTE</th>						          
 			    </tr>
-			  </thead>
+			  </thead> 
 			  <tbody>
-			  	@foreach ($bienesPartida as $bien)
+			  	@foreach ($articulos as $bien)
 		            @if ( $inicioBloque <= $loop->index and $bloques > $loop->index)
 			  			<tr>
 		                	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->numeroinv }}</td>
 				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->concepto }}</td>
 				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->numserie }}</td>
-				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->marca }}</td>
-				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->modelo }}</td>
-				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->nombreemple }}</td>
-				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->factura }}</td>
-				          	<td style="text-align: left; padding: 2px 12px" class="border">$ {{ $bien->importe }}</td>
-				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->estado }}</td>               
+				          	<td style="text-align: left; padding: 2px 12px" class="border">$ {{ $bien->importe }}</td>             
 		                </tr>
 			  		@endif
 
@@ -142,7 +174,7 @@
 
 			  	@php
 			  		$inicioBloque = $bloques;
-			  		$bloques += 15;
+			  		$bloques += 10;
 			  	@endphp
 
 			  	<tr>
@@ -154,10 +186,7 @@
 				  	<tr>
 				  		<td style="text-align: right; padding: 15px" colspan="9">
 				  			<strong>
-				  				TOTAL DEL IMPORTE: $ 
-				  				@foreach ($totalImporte as $total)
-						 			{{ $total->total }}
-						 		@endforeach  
+				  				TOTAL DEL IMPORTE: $ {{ $totalImporte }}
 						 	</strong> 
 				  		</td>
 				  	</tr>
@@ -170,7 +199,7 @@
 		      <thead>
 		        <tr>
 		          <td align="center">
-		            <strong>FORMULÓ</strong>
+		            <strong>ELABORÓ</strong>
 		          </td>
 		          <td align="center">
 		            <strong>REVISO</strong>
@@ -178,10 +207,16 @@
 		          <td align="center">
 		            <strong>Vo. Bo.</strong>
 		          </td>
+		          <td align="center">
+		            <strong>RECIBIÓ</strong>
+		          </td>
 		        </tr>
 		      </thead>
 		      <tbody>
 		        <tr>
+		          <td align="center">
+		            ________________________________________
+		          </td>
 		          <td align="center">
 		            ________________________________________
 		          </td>
@@ -201,7 +236,14 @@
 		          </td>
 		          <td>
 		            <strong>LIC. JOSÉ LAURO VILLAS RIVAS</strong>
-		          </td>	          
+		          </td>
+		          <td>
+		            <strong>
+			            @foreach ($datosEmpleado as $datos)
+			            	{{ $datos->nombre }}
+			            @endforeach	
+		            </strong>
+		          </td>		          
 		        </tr>
 		        <tr>
 		          <td>
@@ -214,6 +256,13 @@
 		          </td>
 		          <td>
 		            <strong>DIRECTOR EJECUTIVO DE ADMINISTRACIÓN</strong>
+		          </td>
+		          <td>
+		            <strong>
+		            	@foreach ($datosEmpleado as $datos)
+			            	{{ $datos->cargo }}
+			            @endforeach	
+		            </strong>
 		          </td>
 		        </tr>
 		      </tbody>
@@ -229,4 +278,3 @@
 	@endfor
   </body>
 </html>
-

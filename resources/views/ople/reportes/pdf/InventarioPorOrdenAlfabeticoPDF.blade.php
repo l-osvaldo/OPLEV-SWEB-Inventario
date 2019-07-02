@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Reporte | Bienes por Partida | OPLE Veracruz</title>
+    <title>Reporte | Inventario por Orden Alfabético | OPLE Veracruz</title>
     <link rel="stylesheet" type="text/css" src="css/normalize.css">
 
     <style type="text/css" media="all">
@@ -55,7 +55,7 @@
   		$tope = 0;
   	@endphp
 
-  	@foreach ($bienesPartida as $element)
+  	@foreach ($bienesAlfabetico as $element)
   		@if ($loop->index == ($bloques - 1) )
   		@php
   			$contadorBloques += 1;
@@ -93,9 +93,9 @@
 	  	</table>
 
 	  	<br>
-	  	<label><strong>INVENTARIO POR PARTIDA</strong></label>
+	  	<label><strong>INVENTARIO POR ÁREA</strong></label>
 	  	<br>
-	  	<label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida->numPartida }} {{ $partida->nombrePartida }} </i></label>
+	  	<label><strong>ÁREA:</strong></label> <label style="font-weight:lighter;"> <i> TODAS </i></label>
 
 	  	<div style="height: 580px">
 		  	<table style="margin-top: 15px;">
@@ -111,9 +111,9 @@
 			      <th style="text-align: left; padding: 15px">IMPORTE DE ADQUISICIÓN</th>
 			      <th style="text-align: left; padding: 15px">ESTADO DEL BIEN</th>						          
 			    </tr>
-			  </thead>
+			  </thead> 
 			  <tbody>
-			  	@foreach ($bienesPartida as $bien)
+			  	@foreach ($bienesAlfabetico as $bien)
 		            @if ( $inicioBloque <= $loop->index and $bloques > $loop->index)
 			  			<tr>
 		                	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->numeroinv }}</td>
@@ -154,10 +154,7 @@
 				  	<tr>
 				  		<td style="text-align: right; padding: 15px" colspan="9">
 				  			<strong>
-				  				TOTAL DEL IMPORTE: $ 
-				  				@foreach ($totalImporte as $total)
-						 			{{ $total->total }}
-						 		@endforeach  
+				  				TOTAL DEL IMPORTE: $ {{ $totalImporte }}
 						 	</strong> 
 				  		</td>
 				  	</tr>
@@ -229,4 +226,3 @@
 	@endfor
   </body>
 </html>
-

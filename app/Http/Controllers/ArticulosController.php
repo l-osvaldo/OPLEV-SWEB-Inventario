@@ -200,7 +200,7 @@ class ArticulosController extends Controller
 
 
 
-		return $pdf->inline('BienesPorPartida.pdf');
+		return $pdf->inline('BienesPorPartida-'.$request->nombrePartida.'.pdf');
 	}
 
 	public function importeBienesPorAreaPDF(){
@@ -240,144 +240,58 @@ class ArticulosController extends Controller
 		return $pdf->inline('ImporteBienesPorPartida.pdf');
 	}
 
-
-	/****************************************************************************************/
-	function generarHtml(Request $request){
-		set_time_limit(300);
-		$partida = $request;
-		$bienesPartida = articulos::where('partida', $request->numPartida)->orderBy('concepto')->get();
-		$totalImporte = DB::table('articulos')->select( DB::raw('SUM(importe) as total'))->where('partida', $request->numPartida)->get();
-
-
-		foreach ($totalImporte as  $value) {
-			$value->total = number_format($value->total,2);
-		}
-
-		foreach ($bienesPartida as $value) {
+	public function inventarioPorAreaPDF(Request $request){
+		$area = $request;
+		$bienesArea = articulos::where('clvarea', $request->numArea)->orderBy('concepto')->get();
+		$totalImporte = 0;
+		foreach ($bienesArea as $value) {
+			$totalImporte += $value->importe;
 			$value->importe = number_format($value->importe,2);
 		}
 
-		$htmlP = '  <title>Reporte | Importe de bienes por Partida | OPLE Veracruz</title>
-					    
-					    <style type="text/css" media="all">
-					      *{
-					      font-family: Arial, Helvetica, sans-serif;
-					      }
-					      body {
-					        font-size: 12px;
-					      }
-					      .row:after {
-					        content: "";
-					        display: table;
-					        clear: both;
-					      }
-					      .column {
-					        float: left;
-					        width: 50%;
-					      }
-					      table{
-					        width: 100%;
-					        margin: 0 0 20px 0;
-					        border-spacing: 0;
-					      }
-					      td { 
-					        border: none;
-					        text-align: center;
-					        height: 25px;
-					      }
-					      td.border {
-					        border-bottom: solid 1px #ccc;
-					      }
-					      .logo {
-					        width: 120px;
-					      }
-					      .text-center {
-					        text-align: center;
-					      }
+		$totalImporte = number_format($totalImporte,2);
 
-					      .page-break {
-					        page-break-after: always;
-					      }
-					    </style>
-					  
-					    
-						  <table>
-						    <tr>
-						      <td style="width: 120px;vertical-align: text-top;padding-left: 30px"><img class="logo" src="images/logoople.png" alt=""></td>
-						      <td style="width: calc(100% - 240px);">
-						          <h2>
-						            <small>
-						              ORGANISMO PÚBLICO LOCAL ELECTORAL 
-						              <br>
-						              Dirección Ejecutiva de Administración 
-						              <small>
-						                <br>
-						                INVENTARIO DE ACTIVO FIJO 
-						              </small>
-						            </small>
-						          </h2>  
-						        </span>   
-						      </td>
-						      <td style="width: 120px; color:#fff">...</td>
-						    </tr>
-						  </table>
-						  <br>
-						  <label><strong>INVENTARIO POR PARTIDA</strong></label>
-						  <br>
-						  <label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> '.$partida->numPartida.' '. $partida->nombrePartida.' </i></label>
-						  <div>
-						    <table style="margin-top: 15px;">
-						      <thead>
-						        <tr style="background-color: #ccc; border: solid 1px #000;">
-						          <th style="text-align: left; padding: 15px">No. DE INVENTARIO</th>
-						          <th style="text-align: left; padding: 15px">DESCRIPCIÓN DEL BIEN</th>
-						          <th style="text-align: left; padding: 15px">NÚMERO DE SERIE</th>
-						          <th style="text-align: left; padding: 15px">MARCA</th>
-						          <th style="text-align: left; padding: 15px">MODELO</th>
-						          <th style="text-align: left; padding: 15px">NOMBRE DEL RESPONSABLE</th>
-						          <th style="text-align: left; padding: 15px">No. DE FACTURA</th>
-						          <th style="text-align: left; padding: 15px">IMPORTE DE ADQUISICIÓN</th>
-						          <th style="text-align: left; padding: 15px">ESTADO DEL BIEN</th>						          
-						        </tr>
-						      </thead>
-						      <tbody>';
-						        foreach ($bienesPartida as $value) {
-						        	$htmlP .= '<tr>
-									            <td style="text-align: left; padding: 2px 12px" class="border">            
-									              '.$value->numeroinv.'             
-									            </td>
-									            <td style="text-align: left; padding: 2px 12px" class="border">            
-									              '.$value->concepto.'         
-									            </td>
-									            <td style="text-align: left; padding: 2px 12px" class="border">            
-									              '.$value->numserie.'              
-									            </td>
-									            <td style="text-align: left; padding: 2px 12px" class="border">            
-									              '.$value->marca.'              
-									            </td>
-									            <td style="text-align: left; padding: 2px 12px" class="border">            
-									              '.$value->modelo.'              
-									            </td>
-									            <td style="text-align: left; padding: 2px 12px" class="border">            
-									              '.$value->nombreemple.'              
-									            </td>
-									            <td style="text-align: left; padding: 2px 12px" class="border">            
-									              '.$value->factura.'              
-									            </td>
-									            <td style="text-align: left; padding: 2px 12px" class="border">            
-									              '.$value->importe.'              
-									            </td>
-									            <td style="text-align: left; padding: 2px 12px" class="border">            
-									              '.$value->estado.'              
-									            </td>
-									           <tr>';
-						        }        
-						          
-					$htmlP .= '</tbody>
-						    </table>
-						  </div>';
-		return $htmlP;
+		$pdf = PDF::loadView('ople.reportes.pdf.InventarioPorAreaPDF',compact('area','bienesArea','totalImporte'))->setPaper('legal', 'landscape');
+		return $pdf->inline('InventarioPorArea-'.$request->nombreArea.'.pdf');
 	}
 
+	public function inventarioPorOrdenAlfabeticoPDF(){
+
+		$bienesAlfabetico = articulos::orderBy('concepto', 'DESC')->get();
+		$totalImporte = 0;
+		foreach ($bienesAlfabetico as $value) {
+			$totalImporte += $value->importe;
+			$value->importe = number_format($value->importe,2);
+		}
+
+		$totalImporte = number_format($totalImporte,2);
+
+
+
+		$pdf = PDF::loadView('ople.reportes.InventarioPorOrdenAlfabetico',compact('bienesAlfabetico','totalImporte'))->setPaper('legal', 'landscape');
+		return $pdf->inline('inventarioPorOrdenAlfabetico.pdf');
+
+	}
+
+	public function ResguardoPorEmpleadoPDF(Request $request){
+
+		$datosEmpleado = empleados::select('numemple','nombre','nombredepto','cargo')->where('numemple', $request->numEmpleado)->get();
+		$articulos = articulos::where('numemple', $request->numEmpleado)->get();
+		$totalArticulos = DB::table('articulos')->select( DB::raw('COUNT(numeroinv) as total'))->where('numemple', $request->numEmpleado)->get();
+		$totalImporte = 0;
+		foreach ($articulos as $value) {
+			$totalImporte += $value->importe;
+			$value->importe = number_format($value->importe,2);
+		}
+		$totalImporte = number_format($totalImporte,2);
+
+		$hoy = getdate();
+
+		$fecha = $hoy['mday'].'/'.$hoy['mon'].'/'.$hoy['year'];
+
+		$pdf = PDF::loadView('ople.reportes.pdf.ResguardoPorEmpleadoPDF', compact('datosEmpleado','articulos','totalArticulos','totalImporte','fecha'))->setPaper('letter', 'landscape');
+		return $pdf->inline('InventarioPorArea-'.$request->nombreEmpleado.'.pdf');
+
+	}
 
 }

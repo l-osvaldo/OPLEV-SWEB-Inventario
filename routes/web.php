@@ -85,13 +85,15 @@ Route::group(['middleware' => 'disablepreventback'],function()
 
 	// Inventario Por Área
 	Route::get('catalogos/inventarioPorArea', 'ArticulosController@inventarioPorArea');
+	Route::get('catalogos/reportes/inventarioPorAreaPDF/{numArea}/{nombreArea}', 'ArticulosController@inventarioPorAreaPDF');
 
 	// Inventario Por Orden Alfabético
 	Route::get('catalogos/inventarioPorOrdenAlfabetico', 'ArticulosController@inventarioPorOrdenAlfabetico');
+	Route::get('catalogos/reportes/inventarioPorOrdenAlfabeticoPDF', 'ArticulosController@inventarioPorOrdenAlfabeticoPDF');
 
 	// Resguardo de bienes por empleado
 	Route::get('catalogos/ResguardoPorEmpleado', 'ArticulosController@ResguardoPorEmpleado');
-	
+	Route::get('catalogos/reportes/ResguardoPorEmpleadoPDF/{numEmpleado}/{nombreEmpleado}', 'ArticulosController@ResguardoPorEmpleadoPDF');
 
 });
 
