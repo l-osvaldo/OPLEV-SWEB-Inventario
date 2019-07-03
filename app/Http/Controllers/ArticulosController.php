@@ -257,7 +257,7 @@ class ArticulosController extends Controller
 
 	public function inventarioPorOrdenAlfabeticoPDF(){
 
-		$bienesAlfabetico = articulos::orderBy('concepto', 'DESC')->get();
+		$bienesAlfabetico = articulos::orderBy('concepto', 'ASC')->get();
 		$totalImporte = 0;
 		foreach ($bienesAlfabetico as $value) {
 			$totalImporte += $value->importe;
@@ -267,8 +267,7 @@ class ArticulosController extends Controller
 		$totalImporte = number_format($totalImporte,2);
 
 
-
-		$pdf = PDF::loadView('ople.reportes.InventarioPorOrdenAlfabetico',compact('bienesAlfabetico','totalImporte'))->setPaper('legal', 'landscape');
+		$pdf = PDF::loadView('ople.reportes.pdf.InventarioPorOrdenAlfabeticoPDF',compact('bienesAlfabetico','totalImporte'))->setPaper('legal', 'landscape');
 		return $pdf->inline('inventarioPorOrdenAlfabetico.pdf');
 
 	}

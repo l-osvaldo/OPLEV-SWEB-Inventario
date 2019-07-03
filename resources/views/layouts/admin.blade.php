@@ -149,6 +149,7 @@
 <script type="text/javascript" src="{{ asset('js/bootstrap-input-spinner.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/agregararticulo.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/reportesOPLE.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/editarArticulo.js') }}"></script>
 
 
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script> --}}

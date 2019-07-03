@@ -45,9 +45,6 @@
         page-break-after: always;
       }
 
-      .margen {
-      	margin-bottom: 1px;
-      }
     </style>
   </head>
   <body>
@@ -99,51 +96,54 @@
 	  	@foreach ($datosEmpleado as $datos)
 
 		  	<table>
-		  		<tr>
-		  			<td style="text-align: left; padding: 15px" width="25%">
-		  				<strong> ÁREA: </strong> 
-		  			</td>
-		  			<td style="text-align: left;" >
-		  				 {{ $datos->nombredepto }}
-		  			</td>
-		  			<td style="text-align: left;">
-		  				<strong>RESGUARDO DE VIENES</strong>
-		  			</td>
-		  		</tr>
-		  		<tr>
-		  			<td style="text-align: left; padding: 15px" >
-		  				<strong> NOMBRE DEL EMPLEADO: </strong> 
-		  			</td>
-		  			<td style="text-align: left;" >
-		  				{{ $datos->nombre }}
-		  			</td>
-		  			<td style="text-align: left;">
-		  				<strong>No. DE EMPLEADO:</strong>  &nbsp;&nbsp; {{ $datos->numemple }}
-		  			</td>
-		  		</tr>
-		  		<tr>
-		  			<td style="text-align: left; padding: 15px" >
-		  				<strong> FECHA DE IMPRESIÓN: </strong> 
-		  			</td>
-		  			<td style="text-align: left;" >
-		  				{{ $fecha }}
-		  			</td>
-		  			<td style="text-align: left;">
-		  				<strong>TOTAL DE BIENES: </strong> &nbsp;&nbsp;
-		  				@foreach ($totalArticulos as $total)
-		  					{{ $total->total }}
-		  				@endforeach
-		  			</td>
-		  		</tr>
+		  		<tbody>
+		  		
+			  		<tr>
+			  			<td style="text-align: left; padding: 2px 12px" width="25%"  >
+			  				<strong> ÁREA: </strong> 
+			  			</td>
+			  			<td style="text-align: left; padding: 2px 12px"  >
+			  				 {{ $datos->nombredepto }}
+			  			</td>
+			  			<td style="text-align: left; padding: 2px 12px" >
+			  				<strong>RESGUARDO DE VIENES</strong>
+			  			</td>
+			  		</tr>
+			  		<tr>
+			  			<td style="text-align: left; padding: 2px 12px"  >
+			  				<strong> NOMBRE DEL EMPLEADO: </strong> 
+			  			</td>
+			  			<td style="text-align: left; padding: 2px 12px"  >
+			  				{{ $datos->nombre }}
+			  			</td>
+			  			<td style="text-align: left; padding: 2px 12px" >
+			  				<strong>No. DE EMPLEADO:</strong>  &nbsp;&nbsp; {{ $datos->numemple }}
+			  			</td>
+			  		</tr>
+			  		<tr>
+			  			<td style="text-align: left; padding: 2px 12px" c>
+			  				<strong> FECHA DE IMPRESIÓN: </strong> 
+			  			</td>
+			  			<td style="text-align: left; padding: 2px 12px"  >
+			  				{{ $fecha }}
+			  			</td>
+			  			<td style="text-align: left; padding: 2px 12px" >
+			  				<strong>TOTAL DE BIENES: </strong> &nbsp;&nbsp;
+			  				@foreach ($totalArticulos as $total)
+			  					{{ $total->total }}
+			  				@endforeach
+			  			</td>
+			  		</tr>
+		  		</tbody>
 		  	</table>
 	  	@endforeach
 
 	  	
-	  	<div style="height: 420px">
+	  	<div style="height: 410px">
 		  	<table style="margin-top: 15px;">
 			  <thead>
 			    <tr style="background-color: #ccc; border: solid 1px #000;">
-			      <th style="text-align: left; padding: 15px" width="14%">No. DE INVENTARIO</th>
+			      <th style="text-align: left; padding: 15px" width="20%">No. DE INVENTARIO</th>
 			      <th style="text-align: left; padding: 15px">DESCRIPCIÓN DEL BIEN</th>
 			      <th style="text-align: left; padding: 15px">NÚMERO DE SERIE</th>
 			      <th style="text-align: left; padding: 15px">IMPORTE</th>						          
@@ -268,6 +268,21 @@
 		      </tbody>
 		    </table>
 		</div>
+
+		<div class="row" style="text-align: justify; background-color: #ccc; border: solid 1px #0a0a0a; padding: 3px 3px 3px 3px">
+			<label> 
+				<strong>
+				RECIBÍ DEL ORGANISMO PÚBLICO LOCAL ELECTORAL LOS BIENES ANTES DESCRITOS PARA EL DESARROLLO DE MIS FUNCIONES DE ACUERDO AL ARTÍCULO 93 DE LA LEY DE ADQUISICIONES,
+				ARRENDAMIENTOS Y ADMINISTRACIÓN DE BIENES MUEBLES DEL ESTADO DE VERACRUZ DE IGNACIO DE LA LLAVE, QUE A LA LETRA DICE: <br>
+				"LOS SERVIDORES PUBLICOS QUE TENGAN BIENES MUEBLES BAJO SU CUSTODIA, RESGUARDO O USO DERIVADO, SERÁN RESPONSABLES DE SU CUIDADO, Y EN SU CASO, DE SU REPARACIÓN 
+				Y DEL RESARCIMIENTO DE LOS DAÑOS Y PERJUICIOS CAUSADOS, INDEPENDIENTEMENTE DE LAS RESPONSABILIDADES A QUE HAYA LUGAR. CUANDO LOS BIENES ESTÉN ASEGURADOS. 
+				PAGARÁN LOS GASTOS DIRECTOS E INDIRECTOS DEL RESCATE DEL MONTO ASEGURADO". <br>
+				ORIGINAL PARA EL ENCARGADO DEL INVENTARIO <br>
+				ORIGINAL PARA EL SERVIDOR PÚBLICO
+				</strong>
+			</label>
+		</div>
+		<br>
 		<div class="row" align="right">
 		    <label>Página:   {{ $pagina }} </label>
 		    @php
