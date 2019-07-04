@@ -35,7 +35,7 @@
                         </thead>
                         <tbody>
                           @foreach ($articulos as $articulo)
-                            <tr data-toggle="tooltip" data-placement="top" title="Click para ver toda la información del artículo: {{ $articulo->concepto }}, Número de inventario: {{ $articulo->numeroinv }} " onclick="abrirModal();">
+                            <tr data-toggle="tooltip" data-placement="top" title="Click para ver toda la información del artículo: {{ $articulo->concepto }}, Número de inventario: {{ $articulo->numeroinv }} " onclick="abrirModalEditar(' {{ $articulo->numeroinv }} ');">
                               <td> {{ $articulo->numeroinv }} </td>
                               <td> {{ $articulo->concepto }} </td>
                               <td> {{ $articulo->factura }} </td>
@@ -199,7 +199,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header" style="background: #a90a6c; color:white">
-            <h5 class="modal-title" id="altasModalLabel"><b>Artículo(s)</b></h5>
+            <h5 class="modal-title" id="altasModalLabel"><b>Artículo </b></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -210,37 +210,64 @@
 
               @csrf
               <div class="card-body">
-                <div class="row bordediv">
-                  <div class="col-md-7">
+                <div class="row">
+                  <div class="col-md-12">
                       <div class="form-group">
-                          <label style="margin-top: 10px;">Seleccione una Partida:</label>
-                          <select id="partidaAltaArticulo" name="partidaAltaArticulo" class="form-control select2 " style="width: 95%;">
-                              <option  value="0" selected="selected">No. partida</option>
-                              @foreach ($partidas as $partida)
-                                  <option value="{{ $partida->partida }}*{{ $partida->descpartida }}" > {{ $partida->partida }} | {{ $partida->descpartida }} </option>
-                              @endforeach  
-                          </select>
-                          <label>Seleccione una Línea:</label>                 
-                          <select class="form-control select2" id="lineaAltaArticulo" name="lineaAltaArticulo" style="width: 95%;" disabled>
-                              <option value="0" disabled="true" selected="true">Línea</option>
-                          </select>
-                          <label>Seleccione una Sublinea:</label>                 
-                          <select class="form-control select2" id="sublineaAltaArticulo" name="sublineaAltaArticulo" style="width: 95%;" disabled>
-                              <option value="0" disabled="true" selected="true">Sublinea</option>
-                          </select>                        
-                      </div>                                       
-                  </div>
-                  <div class="col-md-5">
-                      <div class="form-group">
-                          <label style="margin-top: 10px;">Cantidad de Bienes:</label>
-                          <input type="number" name="numberNumBienes" id="numberNumBienes" min="1" value="1" class="form-control" onKeyPress="return SoloNumerosLetras(event,'numero');" onkeyup="javascript:this.value=this.value.toUpperCase();" disabled>
-                          <input type="hidden" name="txtConsecutivo" id="txtConsecutivo">
-                          <input type="hidden" name="txtArregloNumInv" id="txtArregloNumInv">
 
-                          <label id="lblNumInv">Número de Inventario</label>
-                          <textarea id="txtaNumInv" class="form-control" disabled rows="3"></textarea>
-                      </div> 
-                  </div> <!-- /.col -->
+                          <table width="100%" class="table">
+                            <tr>
+                              <td width="15%" class="table-info" >
+                                No. Partida:
+                              </td>
+                              <td width="20%">
+                                <label style="margin-top: 10px;" id="editarPartida" > </label>
+                              </td>
+                              <td width="15%" class="table-info">
+                                Partida:
+                              </td>
+                              <td width="50%">
+                                <label style="margin-top: 10px;" id="editarPartidaN" > </label>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="table-info">
+                                No. Línea:
+                              </td>
+                              <td>
+                                <label style="margin-top: 10px;" id="editarLinea"> </label>
+                              </td>
+                              <td class="table-info">
+                                Línea:
+                              </td>
+                              <td>
+                                <label style="margin-top: 10px;" id="editarLineaN" > </label>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="table-info">
+                                No. Sublinea:
+                              </td>
+                              <td>
+                                <label style="margin-top: 10px;" id="editarSublinea"> </label>
+                              </td>
+                              <td class="table-info">
+                                Sublinea:
+                              </td>
+                              <td>
+                                <label style="margin-top: 10px;" id="editarSublineaN" > </label>
+                              </td>
+                            </tr>
+                            
+                          </table>
+
+                          <table width="100%" class="table">
+                            
+                            
+                          </table>
+                                 
+                                                 
+                      </div>                                       
+                  </div><!-- /.col -->
                 </div> <!-- /.row -->
                 <div class="row bordediv2">
                     <div class="col-md-6">

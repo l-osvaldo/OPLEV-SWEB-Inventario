@@ -293,4 +293,12 @@ class ArticulosController extends Controller
 
 	}
 
+		// ************ editar artículo ************
+	public function InformacionArticulo(Request $request){
+
+		$infoArticulo = articulos::where('numeroinv',$request->numInventario)->get();
+
+		return response()->json($infoArticulo);
+	}
+
 }

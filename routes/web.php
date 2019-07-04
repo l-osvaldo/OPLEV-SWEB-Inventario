@@ -95,6 +95,9 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('catalogos/ResguardoPorEmpleado', 'ArticulosController@ResguardoPorEmpleado');
 	Route::get('catalogos/reportes/ResguardoPorEmpleadoPDF/{numEmpleado}/{nombreEmpleado}', 'ArticulosController@ResguardoPorEmpleadoPDF');
 
+	// Editar Artículo
+	Route::get('/catalogos/InformacionArticulo', 'ArticulosController@InformacionArticulo')->name('InformacionArticulo');
+
 });
 
 Route::get('/', function () {
