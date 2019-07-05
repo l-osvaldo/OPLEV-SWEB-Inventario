@@ -298,6 +298,12 @@ class ArticulosController extends Controller
 
 		$infoArticulo = articulos::where('numeroinv',$request->numInventario)->get();
 
+		foreach ($infoArticulo as $value) {
+			$value->fechacomp = date('Y-m-d',strtotime($value->fechacomp ));
+		}
+
+		
+
 		return response()->json($infoArticulo);
 	}
 

@@ -33,7 +33,22 @@
     		$('#editarLineaN').html(item['desclinea']);
     		$('#editarSublineaN').html(item['descsublinea']);
 
-    		
+    		$('#editarNoInventario').html(item['numeroinv']);
+    		$('#editarConcepto').html(item['concepto']); 
+    		$('#editarResponsable').html(item['nombreemple']); 
+    		$('#editarArea').html(item['nombrearea']); 
+
+    		$('#editarFactura').val(item['factura']);
+    		$('#editarImporte').val(item['importe']);
+    		$('#editarDateFechaCompra').val(item['fechacomp']);
+    		$('#editarMarca').val(item['marca']);
+    		$('#editarModelo').val(item['modelo']);
+    		$('#EditarNumSerie').val(item['numserie']);
+    		$('#editarColor').val(item['colores']);
+    		$('#editarMaterial').val(item['material']);
+    		$('#editarMedidas').val(item['medidas']);
+    		$('#editarEstado').val(item['clvestado']);
+
 
 		});
 
