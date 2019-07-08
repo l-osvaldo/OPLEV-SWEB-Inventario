@@ -47,7 +47,7 @@
     		$('#editarColor').val(item['colores']);
     		$('#editarMaterial').val(item['material']);
     		$('#editarMedidas').val(item['medidas']);
-    		$('#editarEstado').val(item['clvestado']);
+    		$('#editarEstado').val(item['clvestado']).change();
 
 
 		});
@@ -56,6 +56,21 @@
     	    	
     });
 
+
+    $('#activarEditar').change(function(){
+    	
+    	
+    	$('#editarFactura').prop("disabled", false);
+    	$('#editarImporte').prop("disabled", false);
+    	$('#editarDateFechaCompra').prop("disabled", false);
+    	$('#editarMarca').prop("disabled", false);
+    	$('#editarModelo').prop("disabled", false);
+    	$('#EditarNumSerie').prop("disabled", false);
+    	$('#editarColor').prop("disabled", false);
+    	$('#editarMaterial').prop("disabled", false);
+    	$('#editarMedidas').prop("disabled", false);
+    	$('#editarEstado').prop("disabled", false);
+    });
 
  	
  }

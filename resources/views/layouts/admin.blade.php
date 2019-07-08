@@ -57,6 +57,10 @@
    <link rel="stylesheet" href="{{ asset('css/MiEstilo.css') }}">
 
    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-toggle.min.css') }}">
+
+
 </head>
 <body class="hold-transition sidebar-mini ">
   <div class="wrapper">
@@ -150,7 +154,7 @@
 <script type="text/javascript" src="{{ asset('js/agregararticulo.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/reportesOPLE.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/editarArticulo.js') }}"></script>
-
+<script type="text/javascript" src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
 
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script> --}}
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>

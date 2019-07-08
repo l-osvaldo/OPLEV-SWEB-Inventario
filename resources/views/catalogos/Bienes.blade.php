@@ -204,7 +204,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-              <!--Agregar Partida -->
+              <!--editar Partida -->
           <div class="container-fluid">
             <form method="POST" action="{{ route('GuardarArticulos') }}">
 
@@ -214,85 +214,85 @@
                   <div class="col-md-12">
                       <div class="form-group">
                         <br>
-                        <table width="100%">
+                        <table width="100%" class="table">
                           <thead>
-                            <th style="background-color: #F562BC;">
+                            <th class="table-dark" style="padding: 5px">
                               No. Partida
                             </th>
-                            <th style="background-color: #F562BC;">
+                            <th class="table-dark" style="padding: 5px">
                               Partida
                             </th>
                           </thead>
                           <tbody>
-                            <td>
-                              <label style="margin-top: 10px;font-weight:lighter;" id="editarPartida" > </label>
+                            <td style="padding: 2px">
+                              <label style="font-weight:lighter;" id="editarPartida" > </label>
                             </td>
-                            <td>
-                              <label style="margin-top: 10px;font-weight:lighter;" id="editarPartidaN" > </label>
+                            <td style="padding: 2px">
+                              <label style="font-weight:lighter;" id="editarPartidaN" > </label>
                             </td>
                           </tbody>
                           <thead>
-                            <th style="background-color: #F562BC;">
+                            <th class="table-dark" style="padding: 5px">
                               No. Línea
                             </th>
-                            <th style="background-color: #F562BC;">
+                            <th class="table-dark" style="padding: 5px">
                               Línea
                             </th>
                           </thead>
                           <tbody>
-                            <td>
-                              <label style="margin-top: 10px;font-weight:lighter;" id="editarLinea"> </label>
+                            <td style="padding: 2px">
+                              <label style="font-weight:lighter;" id="editarLinea"> </label>
                             </td>
-                            <td>
-                              <label style="margin-top: 10px;font-weight:lighter;" id="editarLineaN" > </label>
+                            <td style="padding: 2px">
+                              <label style="font-weight:lighter;" id="editarLineaN" > </label>
                             </td>
                           </tbody>
                           <thead>
-                            <th style="background-color: #F562BC;">
+                            <th class="table-dark" style="padding: 5px">
                               No. Sublinea
                             </th>
-                            <th style="background-color: #F562BC;">
+                            <th class="table-dark" style="padding: 5px">
                               Sublinea
                             </th>
                           </thead>
                           <tbody>
-                            <td>
-                              <label style="margin-top: 10px;font-weight:lighter;" id="editarSublinea"> </label>
+                            <td style="padding: 2px">
+                              <label style="font-weight:lighter;" id="editarSublinea"> </label>
                             </td>
-                            <td>
-                              <label style="margin-top: 10px;font-weight:lighter;" id="editarSublineaN" > </label>
+                            <td style="padding: 2px">
+                              <label style="font-weight:lighter;" id="editarSublineaN" > </label>
                             </td>
                           </tbody>
                           <thead>
-                            <th style="background-color: #F562BC;">
+                            <th class="table-dark" style="padding: 5px">
                               No. Inventario                              
                             </th>
-                            <th style="background-color: #F562BC;">
+                            <th class="table-dark" style="padding: 5px">
                               Concepto
                             </th>
                           </thead>
                           <tbody>
-                            <td>
-                              <label style="margin-top: 10px;font-weight:lighter;" id="editarNoInventario" > </label>
+                            <td style="padding: 2px">
+                              <label style="font-weight:lighter;" id="editarNoInventario" > </label>
                             </td>
-                            <td>
-                              <label style="margin-top: 10px;font-weight:lighter;" id="editarConcepto" > </label>
+                            <td style="padding: 2px">
+                              <label style="font-weight:lighter;" id="editarConcepto" > </label>
                             </td>
                           </tbody>
                           <thead>
-                            <th style="background-color: #F562BC;">
+                            <th class="table-dark" style="padding: 5px">
                               Responsable                              
                             </th>
-                            <th style="background-color: #F562BC;">
+                            <th class="table-dark" style="padding: 5px">
                               Área                              
                             </th>
                           </thead>
                           <tbody>
-                            <td>
-                              <label style="margin-top: 10px;font-weight:lighter;" id="editarResponsable" > </label>
+                            <td style="padding: 2px">
+                              <label style="font-weight:lighter;" id="editarResponsable" > </label>
                             </td>
-                            <td>
-                              <label style="margin-top: 10px;font-weight:lighter;" id="editarArea" > </label>
+                            <td style="padding: 2px">
+                              <label style="font-weight:lighter;" id="editarArea" > </label>
                             </td>
                           </tbody>                          
                         </table>                        
@@ -304,10 +304,10 @@
                     <div class="col-md-12">
                       <div class="form-group">
 
-                        <table width="100%">
+                        <table width="100%" class="table">
                           <thead>
-                            <th style="background-color: #F562BC;">Factura</th>
-                            <th style="background-color: #F562BC;">Precio Unitario</th>
+                            <th style="background-color: #F694D0;" width="50%">Factura</th>
+                            <th style="background-color: #F694D0;" width="50%">Precio Unitario</th>
                           </thead>
                           <tbody>
                             <tr>
@@ -321,11 +321,13 @@
                               </td>
                             </tr>
                           </tbody>
+                        </table>
+                        <table width="100%" class="table">
                           <thead>
-                            <th style="background-color: #F562BC;">
+                            <th style="background-color: #F694D0;" width="50%">
                               Fecha de Compra
                             </th>
-                            <th style="background-color: #F562BC;">
+                            <th style="background-color: #F694D0;" width="50%">
                               Marca
                             </th>
                           </thead>
@@ -339,11 +341,13 @@
                               <span class="text-danger error3"></span>
                             </td>
                           </tbody>
+                        </table>
+                        <table width="100%" class="table">
                           <thead>
-                            <th style="background-color: #F562BC;">
+                            <th style="background-color: #F694D0;" width="50%">
                               Modelo
                             </th>
-                            <th style="background-color: #F562BC;">
+                            <th style="background-color: #F694D0;" width="50%">
                               Número de Serie
                             </th>
                           </thead>
@@ -357,11 +361,13 @@
                               <span class="text-danger error5"></span>
                             </td>
                           </tbody>
+                        </table>
+                        <table width="100%" class="table">
                           <thead>
-                            <th style="background-color: #F562BC;">
+                            <th style="background-color: #F694D0;" width="50%">
                               Color
                             </th>
-                            <th style="background-color: #F562BC;">
+                            <th style="background-color: #F694D0;" width="50%">
                               Material
                             </th>
                           </thead>
@@ -373,11 +379,13 @@
                               <input type="text" name="editarMaterial" id="editarMaterial" style="width: 100%;" disabled class="form-control" style="text-transform:uppercase;"  onkeyup="javascript:this.value=this.value.toUpperCase();">
                             </td>
                           </tbody>
+                        </table>
+                        <table width="100%" class="table">
                           <thead>
-                            <th style="background-color: #F562BC;">
+                            <th style="background-color: #F694D0;" width="50%">
                               Medidas
                             </th>
-                            <th style="background-color: #F562BC;">
+                            <th style="background-color: #F694D0;" width="50%">
                               Estado
                             </th>
                           </thead>
@@ -387,7 +395,11 @@
                             </td>
                             <td>
                               <select name="editarEstado" id="editarEstado" style="width: 100%;" disabled class="form-control">
-                                  <option value="0" selected >Bueno</option>
+                                  <option value="1" selected >Bueno</option>
+                                  <option value="2" selected >Regular</option>
+                                  <option value="3" selected >Obsoleto</option>
+                                  <option value="4" selected >Inservible</option>
+                                  <option value="6" selected >No localizado</option>
                               </select>
                             </td>
                           </tbody>
@@ -399,6 +411,13 @@
                 </div>
               </div>
               <!--Fin Editar Partida -->
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group" align="center">
+                    <input type="checkbox" data-toggle="toggle" data-on="Editar" data-off="No Editar" data-onstyle="success" data-offstyle="danger" data-width="100" id="activarEditar">
+                  </div>
+                </div>
+              </div>
               
               <div class="card-footer">
                 <button type="reset" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>
