@@ -300,11 +300,56 @@ class ArticulosController extends Controller
 
 		foreach ($infoArticulo as $value) {
 			$value->fechacomp = date('Y-m-d',strtotime($value->fechacomp ));
+		}		
+
+		return response()->json($infoArticulo);
+	}
+
+	public function EditarArticulos(Request $request){
+		$articulo = articulos::where('numeroinv',$request->numeroInventario)->first();
+		$nombreEstado = '';
+
+
+
+		switch ($request->editarEstado) {
+			case '1':
+				$nombreEstado = 'BUENO';
+				break;			
+			case '2':
+				$nombreEstado = 'REGULAR';
+				break;
+			case '3':
+				$nombreEstado = 'OBSOLETO';
+				break;
+			case '4':
+				$nombreEstado = 'INSERVIBLE';
+				break;
+			case '6':
+				$nombreEstado = 'NO LOCALIZADO';
+				break;
 		}
 
 		
+		$articulo->estado 		= $nombreEstado;
+		$articulo->clvestado 	= $request->editarEstado;
+		$articulo->medidas 		= $request->editarMedidas;
+		$articulo->material 	= $request->editarMaterial;
+		$articulo->colores 		= $request->editarColor;
+		$articulo->numserie 	= $request->EditarNumSerie;
+		$articulo->modelo 		= $request->editarModelo;
+		$articulo->marca 		= $request->editarMarca;
+		$articulo->fechacomp	= $request->editarDateFechaCompra;
+		$articulo->importe 		= $request->editarImporte;
+		$articulo->factura		= $request->editarFactura;
 
-		return response()->json($infoArticulo);
+		//print_r($articulo); exit;
+
+		$articulo->save();
+
+		$articulos = articulos::orderBy('iev', 'DESC')->get();
+        $partidas = partidas::all();
+        $usuario = auth()->user();
+        return view('catalogos.Bienes', compact('articulos','usuario','partidas'));
 	}
 
 }

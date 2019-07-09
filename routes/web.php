@@ -97,6 +97,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 
 	// Editar Artículo
 	Route::get('/catalogos/InformacionArticulo', 'ArticulosController@InformacionArticulo')->name('InformacionArticulo');
+	Route::post('/catalogos/EditarArticulos', 'ArticulosController@EditarArticulos')->name('EditarArticulos');
 
 });
 

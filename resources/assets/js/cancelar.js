@@ -47,3 +47,5 @@ $('#altasModal').on('hidden.bs.modal', function (e) {
   //reiniciarmodal('partidaAltaArticulo');
   $('#partidaAltaArticulo').val("0").change();
 })
+
+

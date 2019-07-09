@@ -19,7 +19,7 @@
       contentType: 'application/json'
 
     }).done(function(response) {
-    	console.log(response);
+    	//console.log(response);
 
 
     	$.each(response, function(i, item) {
@@ -49,28 +49,99 @@
     		$('#editarMedidas').val(item['medidas']);
     		$('#editarEstado').val(item['clvestado']).change();
 
+    		$('#numeroInventario').val(numInventario);
+
 
 		});
-
-    	$('#editarModal').modal('show'); 
-    	    	
-    });
-
-
-    $('#activarEditar').change(function(){
-    	
-    	
-    	$('#editarFactura').prop("disabled", false);
-    	$('#editarImporte').prop("disabled", false);
-    	$('#editarDateFechaCompra').prop("disabled", false);
-    	$('#editarMarca').prop("disabled", false);
-    	$('#editarModelo').prop("disabled", false);
-    	$('#EditarNumSerie').prop("disabled", false);
-    	$('#editarColor').prop("disabled", false);
-    	$('#editarMaterial').prop("disabled", false);
-    	$('#editarMedidas').prop("disabled", false);
-    	$('#editarEstado').prop("disabled", false);
-    });
-
- 	
+    	$('#editarModal').modal('show');     	    	
+    }); 	
  }
+
+$('#editarModal').on('hidden.bs.modal', function (e) {
+  $('#activarEditar').prop("checked", false).change();
+})
+
+ $('#activarEditar').change(function(){
+    	if( $('#activarEditar').is(':checked') ) {
+		    $('#editarFactura').prop("disabled", false);
+	    	$('#editarImporte').prop("disabled", false);
+	    	$('#editarDateFechaCompra').prop("disabled", false);
+	    	$('#editarMarca').prop("disabled", false);
+	    	$('#editarModelo').prop("disabled", false);
+	    	$('#EditarNumSerie').prop("disabled", false);
+	    	$('#editarColor').prop("disabled", false);
+	    	$('#editarMaterial').prop("disabled", false);
+	    	$('#editarMedidas').prop("disabled", false);
+	    	$('#editarEstado').prop("disabled", false);
+
+
+	    	$('#editarFactura').removeClass('inputDanger');
+	    	$('#editarImporte').removeClass('inputDanger');
+	    	$('#editarDateFechaCompra').removeClass('inputDanger');
+	    	$('#editarMarca').removeClass('inputDanger');
+	    	$('#editarModelo').removeClass('inputDanger');
+	    	$('#EditarNumSerie').removeClass('inputDanger');
+	    	$('#editarColor').removeClass('inputDanger');
+	    	$('#editarMaterial').removeClass('inputDanger');
+	    	$('#editarMedidas').removeClass('inputDanger');
+	    	$('#editarEstado').removeClass('inputDanger');
+
+
+	    	$('#editarFactura').addClass('inputSuccess');
+	    	$('#editarImporte').addClass('inputSuccess');
+	    	$('#editarDateFechaCompra').addClass('inputSuccess');
+	    	$('#editarMarca').addClass('inputSuccess');
+	    	$('#editarModelo').addClass('inputSuccess');
+	    	$('#EditarNumSerie').addClass('inputSuccess');
+	    	$('#editarColor').addClass('inputSuccess');
+	    	$('#editarMaterial').addClass('inputSuccess');
+	    	$('#editarMedidas').addClass('inputSuccess');
+	    	$('#editarEstado').addClass('inputSuccess');
+		}else{
+			$('#editarFactura').prop("disabled", true);
+	    	$('#editarImporte').prop("disabled", true);
+	    	$('#editarDateFechaCompra').prop("disabled", true);
+	    	$('#editarMarca').prop("disabled", true);
+	    	$('#editarModelo').prop("disabled", true);
+	    	$('#EditarNumSerie').prop("disabled", true);
+	    	$('#editarColor').prop("disabled", true);
+	    	$('#editarMaterial').prop("disabled", true);
+	    	$('#editarMedidas').prop("disabled", true);
+	    	$('#editarEstado').prop("disabled", true);
+
+	    	$('#editarFactura').removeClass('inputDanger');
+	    	$('#editarImporte').removeClass('inputDanger');
+	    	$('#editarDateFechaCompra').removeClass('inputDanger');
+	    	$('#editarMarca').removeClass('inputDanger');
+	    	$('#editarModelo').removeClass('inputDanger');
+	    	$('#EditarNumSerie').removeClass('inputDanger');
+	    	$('#editarColor').removeClass('inputDanger');
+	    	$('#editarMaterial').removeClass('inputDanger');
+	    	$('#editarMedidas').removeClass('inputDanger');
+	    	$('#editarEstado').removeClass('inputDanger');
+
+
+	    	$('#editarFactura').removeClass('inputSuccess');
+	    	$('#editarImporte').removeClass('inputSuccess');
+	    	$('#editarDateFechaCompra').removeClass('inputSuccess');
+	    	$('#editarMarca').removeClass('inputSuccess');
+	    	$('#editarModelo').removeClass('inputSuccess');
+	    	$('#EditarNumSerie').removeClass('inputSuccess');
+	    	$('#editarColor').removeClass('inputSuccess');
+	    	$('#editarMaterial').removeClass('inputSuccess');
+	    	$('#editarMedidas').removeClass('inputSuccess');
+	    	$('#editarEstado').removeClass('inputSuccess');
+
+	    	$('.error1').text("");
+	    	$('.error2').text("");
+	    	$('.error7').text("");
+	    	$('.error3').text("");
+	    	$('.error4').text("");
+	    	$('.error5').text("");
+
+	    	$('#btnActualizarArticulo').prop("disabled", true);
+			$('#btnActualizarArticulo').css("display","none");
+		}
+    	
+    	
+    });

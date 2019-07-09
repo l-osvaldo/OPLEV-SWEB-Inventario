@@ -35,7 +35,7 @@
                         </thead>
                         <tbody>
                           @foreach ($articulos as $articulo)
-                            <tr data-toggle="tooltip" data-placement="top" title="Click para ver toda la información del artículo: {{ $articulo->concepto }}, Número de inventario: {{ $articulo->numeroinv }} " onclick="abrirModalEditar(' {{ $articulo->numeroinv }} ');">
+                            <tr data-toggle="tooltip" data-placement="top" title="Click para ver toda la información del artículo: {{ $articulo->concepto }}, Número de inventario: {{ $articulo->numeroinv }} " onclick="abrirModalEditar('{{ $articulo->numeroinv }}');">
                               <td> {{ $articulo->numeroinv }} </td>
                               <td> {{ $articulo->concepto }} </td>
                               <td> {{ $articulo->factura }} </td>
@@ -199,20 +199,22 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header" style="background: #a90a6c; color:white">
-            <h5 class="modal-title" id="altasModalLabel"><b>Artículo </b></h5>
+            <h5 class="modal-title" id="editarModalLabel"><b>Artículo </b></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
               <!--editar Partida -->
           <div class="container-fluid">
-            <form method="POST" action="{{ route('GuardarArticulos') }}">
+            <form method="POST" action="{{ route('EditarArticulos') }}">
 
               @csrf
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-12">
                       <div class="form-group">
+                        <input type="hidden" name="numeroInventario" id="numeroInventario" value="">
+
                         <br>
                         <table width="100%" class="table">
                           <thead>
@@ -300,6 +302,14 @@
                       </div>                                       
                   </div><!-- /.col -->
                 </div> <!-- /.row -->
+                <hr>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group" align="right">
+                      <input type="checkbox" data-toggle="toggle" data-on="No Editar" data-off="Editar" data-onstyle="default" data-offstyle="dark" data-width="100" id="activarEditar">
+                    </div>
+                  </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
@@ -312,11 +322,11 @@
                           <tbody>
                             <tr>
                               <td>
-                                <input type="text" name="editarFactura" id="editarFactura" style="width: 100%;" disabled class="form-control validateDataArticulo" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'factura');" onkeyup="javascript:this.value=this.value.toUpperCase();" data-errorArticulo="1" data-myTypeArticulo="text" data-validacionArticulo="1">
+                                <input type="text" name="editarFactura" id="editarFactura" style="width: 100%;" disabled class="form-control validateDataArticuloEditar" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'factura');" onkeyup="javascript:this.value=this.value.toUpperCase();" data-errorArticuloEditar="1" data-myTypeArticuloEditar="text" data-validacionArticuloEditar="0">
                                 <span class="text-danger error1"></span>
                               </td>
                               <td>
-                                <input type="text" name="editarImporte" id="editarImporte" style="width: 100%; text-align:right;" disabled placeholder="$ 0.0" class="form-control validateDataArticulo" data-errorArticulo="2" data-myTypeArticulo="text" data-validacionArticulo="1" onKeyPress="return valorPrecio(event,this);">
+                                <input type="text" name="editarImporte" id="editarImporte" style="width: 100%; text-align:right;" disabled placeholder="$ 0.0" class="form-control validateDataArticuloEditar" data-errorArticuloEditar="2" data-myTypeArticuloEditar="text" data-validacionArticuloEditar="0" onKeyPress="return valorPrecio(event,this);">
                                 <span class="text-danger error2"></span>
                               </td>
                             </tr>
@@ -333,11 +343,11 @@
                           </thead>
                           <tbody>
                             <td>
-                              <input type="date" name="editarDateFechaCompra" id="editarDateFechaCompra" class="form-control validateDataArticulo" disabled data-errorArticulo="7" data-myTypeArticulo="date" data-validacionArticulo="1">
+                              <input type="date" name="editarDateFechaCompra" id="editarDateFechaCompra" class="form-control validateDataArticuloEditar" disabled data-errorArticuloEditar="7" data-myTypeArticuloEditar="date" data-validacionArticuloEditar="0">
                               <span class="text-danger error7"></span>
                             </td>
                             <td>
-                              <input type="text" name="editarMarca" id="editarMarca" style="width: 100%;" disabled class="form-control validateDataArticulo" data-errorArticulo="3" data-myTypeArticulo="text" data-validacionArticulo="1" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'factura');" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                              <input type="text" name="editarMarca" id="editarMarca" style="width: 100%;" disabled class="form-control validateDataArticuloEditar" data-errorArticuloEditar="3" data-myTypeArticuloEditar="text" data-validacionArticuloEditar="0" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'factura');" onkeyup="javascript:this.value=this.value.toUpperCase();">
                               <span class="text-danger error3"></span>
                             </td>
                           </tbody>
@@ -353,11 +363,11 @@
                           </thead>
                           <tbody>
                             <td>
-                              <input type="text" name="editarModelo" id="editarModelo" style="width: 100%;" disabled class="form-control validateDataArticulo" data-errorArticulo="4" data-myTypeArticulo="text" data-myTypeArticulo="text" data-validacionArticulo="1" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'modelo');" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                              <input type="text" name="editarModelo" id="editarModelo" style="width: 100%;" disabled class="form-control validateDataArticuloEditar" data-errorArticuloEditar="4" data-myTypeArticuloEditar="text" data-myTypeArticuloEditar="text" data-validacionArticuloEditar="0" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'modelo');" onkeyup="javascript:this.value=this.value.toUpperCase();">
                               <span class="text-danger error4"></span>
                             </td>
                             <td>
-                              <input type="text" name="EditarNumSerie" id="EditarNumSerie" style="width: 100%;" disabled class="form-control validateDataArticulo" data-errorArticulo="5" data-myTypeArticulo="text" data-validacionArticulo="1" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'serie');" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                              <input type="text" name="EditarNumSerie" id="EditarNumSerie" style="width: 100%;" disabled class="form-control validateDataArticuloEditar" data-errorArticuloEditar="5" data-myTypeArticuloEditar="text" data-validacionArticuloEditar="0" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'serie');" onkeyup="javascript:this.value=this.value.toUpperCase();">
                               <span class="text-danger error5"></span>
                             </td>
                           </tbody>
@@ -395,11 +405,11 @@
                             </td>
                             <td>
                               <select name="editarEstado" id="editarEstado" style="width: 100%;" disabled class="form-control">
-                                  <option value="1" selected >Bueno</option>
-                                  <option value="2" selected >Regular</option>
-                                  <option value="3" selected >Obsoleto</option>
-                                  <option value="4" selected >Inservible</option>
-                                  <option value="6" selected >No localizado</option>
+                                  <option value="1" >Bueno</option>
+                                  <option value="2" >Regular</option>
+                                  <option value="3" >Obsoleto</option>
+                                  <option value="4" >Inservible</option>
+                                  <option value="6" >No localizado</option>
                               </select>
                             </td>
                           </tbody>
@@ -411,19 +421,14 @@
                 </div>
               </div>
               <!--Fin Editar Partida -->
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group" align="center">
-                    <input type="checkbox" data-toggle="toggle" data-on="Editar" data-off="No Editar" data-onstyle="success" data-offstyle="danger" data-width="100" id="activarEditar">
-                  </div>
-                </div>
-              </div>
+              
               
               <div class="card-footer">
                 <button type="reset" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>
-                <button type="submit" id="btnGuardarArticulo" style="background-color: #E71096" class="btn btn-secondary float-right" disabled>
-                    {{ __('Guardar') }}
-                </button>
+                  <button type="submit" id="btnActualizarArticulo" style="background-color: #E71096; display: none" class="btn btn-secondary float-right" disabled>
+                      {{ __('Actualizar') }}
+                  </button>
+                  
               </div>
             </form>
           </div>
