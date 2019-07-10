@@ -299,14 +299,29 @@ class ArticulosController extends Controller
 		$infoArticulo = articulos::where('numeroinv',$request->numInventario)->get();
 
 		foreach ($infoArticulo as $value) {
-			$value->fechacomp = date('Y-m-d',strtotime($value->fechacomp ));
+			if ($value->fechacomp == '  -   -'){
+				$value->fechacomp = '0';
+			}else{
+				if (strpos($value->fechacomp, '/')){
+
+					$fecha = explode("/", $value->fechacomp);
+					if (strlen($fecha[2]) == 4){
+						$dia = $fecha[0];
+						$mes = $fecha[1];
+						$anio = $fecha[2];
+
+						$value->fechacomp = $anio.'-'.$mes.'-'.$dia;
+					}
+				}
+
+			}			
 		}		
 
 		return response()->json($infoArticulo);
 	}
 
 	public function EditarArticulos(Request $request){
-		$articulo = articulos::where('numeroinv',$request->numeroInventario)->first();
+		
 		$nombreEstado = '';
 
 
@@ -329,27 +344,22 @@ class ArticulosController extends Controller
 				break;
 		}
 
-		
-		$articulo->estado 		= $nombreEstado;
-		$articulo->clvestado 	= $request->editarEstado;
-		$articulo->medidas 		= $request->editarMedidas;
-		$articulo->material 	= $request->editarMaterial;
-		$articulo->colores 		= $request->editarColor;
-		$articulo->numserie 	= $request->EditarNumSerie;
-		$articulo->modelo 		= $request->editarModelo;
-		$articulo->marca 		= $request->editarMarca;
-		$articulo->fechacomp	= $request->editarDateFechaCompra;
-		$articulo->importe 		= $request->editarImporte;
-		$articulo->factura		= $request->editarFactura;
+		$articulo = articulos::where('numeroinv',$request->numeroInventario)
+		->update([
+			'estado' 	=> $nombreEstado, 
+			'clvestado' => $request->editarEstado,
+			'medidas' 	=> $request->editarMedidas,
+			'material' 	=> $request->editarMaterial,
+			'colores' 	=> $request->editarColor,
+			'numserie' 	=> $request->EditarNumSerie,
+			'modelo' 	=> $request->editarModelo,
+			'marca' 	=> $request->editarMarca,
+			'fechacomp'	=> $request->editarDateFechaCompra,
+			'importe'	=> $request->editarImporte,
+			'factura'	=> $request->editarFactura ]);
 
-		//print_r($articulo); exit;
-
-		$articulo->save();
-
-		$articulos = articulos::orderBy('iev', 'DESC')->get();
-        $partidas = partidas::all();
-        $usuario = auth()->user();
-        return view('catalogos.Bienes', compact('articulos','usuario','partidas'));
+		Alert::success('Datos Actualizados', 'Actualización Exitoso')->autoclose(2500);
+        return redirect()->route('catalogos');
 	}
 
 }

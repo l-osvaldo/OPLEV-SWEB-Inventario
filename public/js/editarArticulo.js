@@ -1,6 +1,7 @@
  
  function abrirModalEditar(numInventario) {
 
+ 	$('#editarDateFechaCompra').val("0");
  	$.ajaxSetup(
 	{
 		headers:
@@ -23,7 +24,9 @@
 
 
     	$.each(response, function(i, item) {
-    		console.log(item['partida']);
+    		//console.log(item['partida']);
+
+
 
     		$('#editarPartida').html(item['partida']);
     		$('#editarLinea').html(item['linea']);
@@ -40,6 +43,8 @@
 
     		$('#editarFactura').val(item['factura']);
     		$('#editarImporte').val(item['importe']);
+
+
     		$('#editarDateFechaCompra').val(item['fechacomp']);
     		$('#editarMarca').val(item['marca']);
     		$('#editarModelo').val(item['modelo']);
@@ -51,6 +56,9 @@
 
     		$('#numeroInventario').val(numInventario);
 
+    		$('#btnActualizarArticulo').prop("disabled", true);
+			$('#btnActualizarArticulo').css("display","none");
+
 
 		});
     	$('#editarModal').modal('show');     	    	
@@ -59,6 +67,7 @@
 
 $('#editarModal').on('hidden.bs.modal', function (e) {
   $('#activarEditar').prop("checked", false).change();
+
 })
 
  $('#activarEditar').change(function(){
@@ -141,7 +150,30 @@ $('#editarModal').on('hidden.bs.modal', function (e) {
 
 	    	$('#btnActualizarArticulo').prop("disabled", true);
 			$('#btnActualizarArticulo').css("display","none");
+
+
 		}
     	
     	
     });
+
+
+ $('#editarColor').keyup(function(){
+ 	$('#btnActualizarArticulo').prop("disabled", false);
+	$('#btnActualizarArticulo').css("display","block");
+ })
+
+ $('#editarMaterial').keyup(function(){
+ 	$('#btnActualizarArticulo').prop("disabled", false);
+	$('#btnActualizarArticulo').css("display","block");
+ })
+
+ $('#editarMedidas').keyup(function(){
+ 	$('#btnActualizarArticulo').prop("disabled", false);
+	$('#btnActualizarArticulo').css("display","block");
+ })
+
+  $('#editarEstado').change(function(){
+ 	$('#btnActualizarArticulo').prop("disabled", false);
+	$('#btnActualizarArticulo').css("display","block");
+ })

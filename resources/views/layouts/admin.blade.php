@@ -331,8 +331,6 @@
   </script>
   <script>
 
-
-
     $('#editModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget);
       var area = button.data('area');
@@ -340,6 +338,7 @@
       var modal = $(this)
       modal.find('.modal-body #depto').val(area);
       modal.find('.modal-body #editClave').val(id);
+      modal.backdrop('static');
       //console.log(area,id)
       
     });
@@ -357,6 +356,27 @@
           closeOnConfirm: false
       }, function(isConfirm){
           if (isConfirm) form.submit();
+          
+      });
+    });
+
+    $('#btnActualizarArticulo').on('click',function(e){
+      e.preventDefault();
+      var form = $(this).parents('form');
+      swal({
+          title: "Actualización de Datos de Artículo",
+          text: "¿Desea continuar?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#0080FF",
+          confirmButtonText: "Sí",
+          closeOnConfirm: false
+      }, function(isConfirm){
+          if (isConfirm) {
+            form.submit();
+          }else {
+            swal("Error!", "Por favor intentelo de nuevo", "error");
+          }
           
       });
     });

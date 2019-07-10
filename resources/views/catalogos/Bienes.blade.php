@@ -218,10 +218,10 @@
                         <br>
                         <table width="100%" class="table">
                           <thead>
-                            <th class="table-dark" style="padding: 5px">
+                            <th class="table-dark" style="padding: 5px" width="40%">
                               No. Partida
                             </th>
-                            <th class="table-dark" style="padding: 5px">
+                            <th class="table-dark" style="padding: 5px" width="60%">
                               Partida
                             </th>
                           </thead>
@@ -251,10 +251,10 @@
                           </tbody>
                           <thead>
                             <th class="table-dark" style="padding: 5px">
-                              No. Sublinea
+                              No. Sublínea
                             </th>
                             <th class="table-dark" style="padding: 5px">
-                              Sublinea
+                              Sublínea
                             </th>
                           </thead>
                           <tbody>
@@ -306,7 +306,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group" align="right">
-                      <input type="checkbox" data-toggle="toggle" data-on="No Editar" data-off="Editar" data-onstyle="default" data-offstyle="dark" data-width="100" id="activarEditar">
+                      <input type="checkbox" data-toggle="toggle" data-on="Visualizar" data-off="Edición" data-onstyle="default" data-offstyle="dark" data-width="100" id="activarEditar">
                     </div>
                   </div>
                 </div>
@@ -316,8 +316,8 @@
 
                         <table width="100%" class="table">
                           <thead>
-                            <th style="background-color: #F694D0;" width="50%">Factura</th>
-                            <th style="background-color: #F694D0;" width="50%">Precio Unitario</th>
+                            <th style="background-color: #F694D0; padding: 5px" width="50%">Factura</th>
+                            <th style="background-color: #F694D0; padding: 5px" width="50%">Precio Unitario</th>
                           </thead>
                           <tbody>
                             <tr>
@@ -334,10 +334,10 @@
                         </table>
                         <table width="100%" class="table">
                           <thead>
-                            <th style="background-color: #F694D0;" width="50%">
+                            <th style="background-color: #F694D0; padding: 5px" width="50%">
                               Fecha de Compra
                             </th>
-                            <th style="background-color: #F694D0;" width="50%">
+                            <th style="background-color: #F694D0; padding: 5px" width="50%">
                               Marca
                             </th>
                           </thead>
@@ -354,10 +354,10 @@
                         </table>
                         <table width="100%" class="table">
                           <thead>
-                            <th style="background-color: #F694D0;" width="50%">
+                            <th style="background-color: #F694D0; padding: 5px" width="50%">
                               Modelo
                             </th>
-                            <th style="background-color: #F694D0;" width="50%">
+                            <th style="background-color: #F694D0; padding: 5px" width="50%">
                               Número de Serie
                             </th>
                           </thead>
@@ -374,10 +374,10 @@
                         </table>
                         <table width="100%" class="table">
                           <thead>
-                            <th style="background-color: #F694D0;" width="50%">
+                            <th style="background-color: #F694D0; padding: 5px" width="50%">
                               Color
                             </th>
-                            <th style="background-color: #F694D0;" width="50%">
+                            <th style="background-color: #F694D0; padding: 5px" width="50%">
                               Material
                             </th>
                           </thead>
@@ -392,10 +392,10 @@
                         </table>
                         <table width="100%" class="table">
                           <thead>
-                            <th style="background-color: #F694D0;" width="50%">
+                            <th style="background-color: #F694D0; padding: 5px" width="50%">
                               Medidas
                             </th>
-                            <th style="background-color: #F694D0;" width="50%">
+                            <th style="background-color: #F694D0; padding: 5px" width="50%">
                               Estado
                             </th>
                           </thead>
