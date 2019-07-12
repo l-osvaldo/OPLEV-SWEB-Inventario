@@ -97,7 +97,7 @@
     </div>
   </div>
 
-	<div class="modal fade bd-example-modal-lg" id="exampleModalTb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade bd-example-modal-lg" id="exampleModalTb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <form method="POST" action="{{ route('AgregarSub') }}" id="form">
           {{ csrf_field()}}
       <div class="modal-dialog modal-lg" role="document">

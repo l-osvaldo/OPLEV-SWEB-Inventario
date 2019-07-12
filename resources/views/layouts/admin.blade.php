@@ -338,7 +338,6 @@
       var modal = $(this)
       modal.find('.modal-body #depto').val(area);
       modal.find('.modal-body #editClave').val(id);
-      modal.backdrop('static');
       //console.log(area,id)
       
     });

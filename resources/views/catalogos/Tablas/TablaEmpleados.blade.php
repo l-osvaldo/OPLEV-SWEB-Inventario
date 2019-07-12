@@ -44,7 +44,7 @@
     </div>
 	</div>
 	<!--Modal-->
-	<div class="modal fade bd-example-modal-lg" id="exampleModalEmpleado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade bd-example-modal-lg" id="exampleModalEmpleado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
 		<form method="POST" action="{{ route('agregarEmpleados') }}" id="form">
 			{{ csrf_field()}}
 				<div class="modal-dialog modal-lg" role="document">      

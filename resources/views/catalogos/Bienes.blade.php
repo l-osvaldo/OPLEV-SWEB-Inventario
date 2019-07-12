@@ -54,7 +54,7 @@
 
 
     <!-- Modal altas -->
-    <div class="modal fade bd-example-modal-lg" id="altasModal" tabindex="-1" role="dialog" aria-labelledby="altasModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="altasModal" tabindex="-1" role="dialog" aria-labelledby="altasModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header" style="background: #a90a6c; color:white">
@@ -195,7 +195,7 @@
 
 
     <!-- Modal editar -->
-    <div class="modal fade bd-example-modal-lg" id="editarModal" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="editarModal" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header" style="background: #a90a6c; color:white">
@@ -206,7 +206,7 @@
           </div>
               <!--editar Partida -->
           <div class="container-fluid">
-            <form method="POST" action="{{ route('EditarArticulos') }}">
+            <form method="POST" action="{{ route('EditarArticulos') }}" id="formEditar">
 
               @csrf
               <div class="card-body">

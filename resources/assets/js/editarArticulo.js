@@ -1,7 +1,6 @@
  
  function abrirModalEditar(numInventario) {
 
- 	$('#editarDateFechaCompra').val("0");
  	$.ajaxSetup(
 	{
 		headers:
@@ -44,8 +43,16 @@
     		$('#editarFactura').val(item['factura']);
     		$('#editarImporte').val(item['importe']);
 
+    		if (item['fechacomp'] === '0'){
+    			console.log('entre');
+    			//$('#editarDateFechaCompra').val("2001-05-05");
+    			//$('#editarDateFechaCompra').val("DD-MM-YYYY");
+    			//$('#editarDateFechaCompra').val("YYYY-MM-DD");
+    		}else{
+    			$('#editarDateFechaCompra').val(item['fechacomp']);
+    		}
 
-    		$('#editarDateFechaCompra').val(item['fechacomp']);
+    		
     		$('#editarMarca').val(item['marca']);
     		$('#editarModelo').val(item['modelo']);
     		$('#EditarNumSerie').val(item['numserie']);
@@ -67,7 +74,8 @@
 
 $('#editarModal').on('hidden.bs.modal', function (e) {
   $('#activarEditar').prop("checked", false).change();
-
+  //$('#formEditar').reset();
+  document. getElementById("formEditar"). reset();
 })
 
  $('#activarEditar').change(function(){
