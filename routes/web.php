@@ -99,6 +99,15 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('/catalogos/InformacionArticulo', 'ArticulosController@InformacionArticulo')->name('InformacionArticulo');
 	Route::post('/catalogos/EditarArticulos', 'ArticulosController@EditarArticulos')->name('EditarArticulos');
 
+	// ************* ECO ******************
+	// Alta Artículo
+	Route::get('/catalogos/numeroInventarioECO', 'ArticulosECOsController@numeroInventarioMaxECO');
+	Route::post('/catalogos/GuardarArticulosECO', 'ArticulosECOsController@store')->name('GuardarArticulosECO');
+
+	// Editar Artículo
+	Route::get('/catalogos/InformacionArticuloECO', 'ArticulosECOsController@InformacionArticuloECO')->name('InformacionArticuloECO');
+	Route::post('/catalogos/EditarArticulosECO', 'ArticulosECOsController@EditarArticulosECO')->name('EditarArticulosECO');
+
 });
 
 Route::get('/', function () {

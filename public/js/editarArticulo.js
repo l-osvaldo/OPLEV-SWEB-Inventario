@@ -23,8 +23,7 @@
 
 
     	$.each(response, function(i, item) {
-    		//console.log(item['partida']);
-
+    		//console.log(item['partida 
 
 
     		$('#editarPartida').html(item['partida']);
@@ -74,8 +73,6 @@
 
 $('#editarModal').on('hidden.bs.modal', function (e) {
   $('#activarEditar').prop("checked", false).change();
-  //$('#formEditar').reset();
-  document. getElementById("formEditar"). reset();
 })
 
  $('#activarEditar').change(function(){
@@ -169,19 +166,21 @@ $('#editarModal').on('hidden.bs.modal', function (e) {
  $('#editarColor').keyup(function(){
  	$('#btnActualizarArticulo').prop("disabled", false);
 	$('#btnActualizarArticulo').css("display","block");
- })
+ });
 
  $('#editarMaterial').keyup(function(){
  	$('#btnActualizarArticulo').prop("disabled", false);
 	$('#btnActualizarArticulo').css("display","block");
- })
+ });
 
  $('#editarMedidas').keyup(function(){
  	$('#btnActualizarArticulo').prop("disabled", false);
 	$('#btnActualizarArticulo').css("display","block");
- })
+ });
 
   $('#editarEstado').change(function(){
  	$('#btnActualizarArticulo').prop("disabled", false);
 	$('#btnActualizarArticulo').css("display","block");
- })
+ });
+
+
