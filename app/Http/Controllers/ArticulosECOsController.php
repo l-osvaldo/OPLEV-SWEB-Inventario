@@ -104,6 +104,8 @@ class ArticulosECOsController extends Controller
 	}
 
 	public function EditarArticulosECO(Request $request){
+
+
 		$nombreEstado = '';
 
 		switch ($request->editarEstadoECO) {
@@ -124,7 +126,9 @@ class ArticulosECOsController extends Controller
 				break;
 		}
 
-		$articulo = articulosecos::where('numeroinventario',$request->numeroInventario)
+		//echo $request;
+
+		$articulo = articulosecos::where('numeroinventario',$request->numeroInventarioECO)
 		->update([
 			'estado' 	=> $nombreEstado, 
 			'claveestado' => $request->editarEstadoECO,

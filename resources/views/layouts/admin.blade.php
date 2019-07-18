@@ -384,6 +384,27 @@
       });
     });
 
+    $('#btnActualizarArticuloECO').on('click',function(e){
+      e.preventDefault();
+      var form = $(this).parents('form');
+      swal({
+          title: "Actualización de Datos de Artículo ECO",
+          text: "¿Desea continuar?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#0080FF",
+          confirmButtonText: "Sí",
+          closeOnConfirm: false
+      }, function(isConfirm){
+          if (isConfirm) {
+            form.submit();
+          }else {
+            swal("Error!", "Por favor intentelo de nuevo", "error");
+          }
+          
+      });
+    });
+
     $('#editBtn').on('click',function(e){
     e.preventDefault();
     swal({
