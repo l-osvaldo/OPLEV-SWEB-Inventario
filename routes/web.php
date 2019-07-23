@@ -108,6 +108,17 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('/catalogos/InformacionArticuloECO', 'ArticulosECOsController@InformacionArticuloECO')->name('InformacionArticuloECO');
 	Route::post('/catalogos/EditarArticulosECO', 'ArticulosECOsController@EditarArticulosECO')->name('EditarArticulosECO');
 
+	// reportes ECO
+	Route::get('/catalogos/reportesECO', 'ArticulosECOsController@reportesECO')->name('reportesECO');
+
+	// Bienes por Partida ECO
+	Route::get('catalogos/BienesXPartidaECO', 'ArticulosECOsController@BienesXPartidaECO');
+	Route::get('catalogos/reportes/BienesPorPartidaECO/{numPartida}/{nombrePartida}', 'ArticulosECOsController@BienesPorPartidaECO');
+
+	// Importe de Bienes Por área ECO
+	Route::get('catalogos/importeBienesPorAreaECO', 'ArticulosECOsController@importeBienesPorAreaECO');
+	Route::get('catalogos/reportes/importeBienesPorAreaPDFECO', 'ArticulosECOsController@importeBienesPorAreaPDFECO');
+
 });
 
 Route::get('/', function () {

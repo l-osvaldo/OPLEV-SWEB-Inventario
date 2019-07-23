@@ -89,7 +89,7 @@
             </li>
           </ul>
         </li>
-        <li id="eco" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bieneseco') ? 'menu-open' : '' !!}">
+        <li id="eco" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bieneseco','catalogos/reportesECO') ? 'menu-open' : '' !!}">
           <a class="{!! Request::is('catalogos/bieneseco') ? 'nav-link active' : 'nav-link' !!}">
             <i class="nav-icon fa fa-desktop"></i>
             <p>
@@ -102,6 +102,12 @@
               <a href="{{ route('catalogoeco') }}" class="{!! Request::is('catalogos/bieneseco') ? 'nav-link active' : 'nav-link' !!}">
                 <i class="fa fa-book"></i>
                 <p style="margin-left: 10px;">Cátalogo</p>
+              </a>
+            </li>
+            <li class="nav-item" style="margin-left: 25px;">
+              <a href="{{ route('reportesECO') }}" class="{!! Request::is('catalogos/reportesECO') ? 'nav-link active' : 'nav-link' !!}">
+                <i class="fa fa-file-pdf-o"></i>
+                <p style="margin-left: 10px;">Reportes</p>
               </a>
             </li>
           </ul>

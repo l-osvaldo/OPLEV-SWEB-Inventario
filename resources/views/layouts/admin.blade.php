@@ -154,6 +154,7 @@
 <script type="text/javascript" src="{{ asset('js/agregararticulo.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/agregararticuloECO.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/reportesOPLE.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/reportesECO.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/editarArticulo.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/editarArticuloECO.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
@@ -1240,11 +1241,16 @@ var validoNumeroPartida = true;
      { 
        $('#btnActualizarArticulo').prop("disabled", true);
        $('#btnActualizarArticulo').css("display","none");
+       $('#btnActualizarArticuloECO').prop("disabled", true);
+       $('#btnActualizarArticuloECO').css("display","none");
+       
      }
      else
      {
        $('#btnActualizarArticulo').prop("disabled", false);
        $('#btnActualizarArticulo').css("display","block");
+       $('#btnActualizarArticuloECO').prop("disabled", false);
+       $('#btnActualizarArticuloECO').css("display","block");
      }
    
    }

@@ -24,7 +24,7 @@ $('#selectReportes').change(function() {
 			$('#divEmpleado').css("display","block");
 			break;
 	}
-});
+}); 
 
 /******************** selección de partida, area y empleado ***********************/
 $('#selectPartida').change(function(){

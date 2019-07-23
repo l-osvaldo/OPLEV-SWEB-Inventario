@@ -77,6 +77,7 @@ class ArticulosECOsController extends Controller
         return redirect()->route('catalogoeco');
 	}
 
+	// ************ editar artículo ************
 	public function InformacionArticuloECO(Request $request){
 		$infoArticulo = articulosecos::where('numeroinventario',$request->numInventario)->get();
 
@@ -102,6 +103,7 @@ class ArticulosECOsController extends Controller
 		return response()->json($infoArticulo);
 
 	}
+
 
 	public function EditarArticulosECO(Request $request){
 
@@ -144,5 +146,70 @@ class ArticulosECOsController extends Controller
 
 		Alert::success('Datos Actualizados', 'Actualización Exitoso')->autoclose(2500);
         return redirect()->route('catalogoeco');
+	}
+
+	// ************ vista de reportes ************
+	public function reportesECO(){
+		$usuario = auth()->user();
+		$partidas = partidas::distinct()->orderBy('partida', 'DESC')->get(['partida', 'descpartida']);
+		$areas = areas::distinct()->orderBy('clvdepto', 'DESC')->get(['clvdepto', 'depto']);
+		$empleados = empleados::orderBy('nombre', 'ASC')->get();
+
+		return view('eco.reportesECO', compact('usuario','partidas','areas','empleados'));
+	}
+
+	// ************ vista previa de reportes ************
+	public function BienesXPartidaECO(Request $request){
+
+		$partida = $request;
+		$bienesPartida = articulosecos::where('partida', $request->numPartida)->orderBy('concepto')->get();
+		$totalImporte = DB::table('articulosecos')->select( DB::raw('SUM(importe) as total'))->where('partida', $request->numPartida)->get();
+
+		foreach ($totalImporte as  $value) {
+			$value->total = number_format($value->total,2);
+		}
+
+		foreach ($bienesPartida as $value) {
+			$value->importe = number_format($value->importe,2);
+		}
+
+		return view('eco.reportes.BienesPorPartidaECO', compact('partida','bienesPartida','totalImporte'));
+	}
+
+	public function importeBienesPorAreaECO(){
+
+		$areaAndImporteTotal = DB::table('articulosecos')->select('clavearea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('clavearea')->groupBy('clavearea')->get();
+		$nombreArea = areas::all();
+		$totalImporte = 0;
+		foreach ($areaAndImporteTotal as $value) {
+			$totalImporte += $value->importetotal;
+			$value->importetotal = number_format($value->importetotal,2);
+		}
+		$totalImporte = number_format($totalImporte,2);
+
+		return view('eco.reportes.ImporteDeBienesPorAreaECO', compact('areaAndImporteTotal','totalImporte','nombreArea'));
+	}
+
+	// ************ generar reportes ************
+	public function BienesPorPartidaECO(Request $request){
+
+		$partida = $request;
+		$bienesPartida = articulosecos::where('partida', $request->numPartida)->orderBy('concepto')->get();
+		$totalImporte = DB::table('articulosecos')->select( DB::raw('SUM(importe) as total'))->where('partida', $request->numPartida)->get();
+
+
+		foreach ($totalImporte as  $value) {
+			$value->total = number_format($value->total,2);
+		}
+
+		foreach ($bienesPartida as $value) {
+			$value->importe = number_format($value->importe,2);
+		}
+		
+		$pdf = PDF::loadView('eco.reportes.pdf.BienesPorPartidaPDFECO', compact('partida','bienesPartida','totalImporte'))->setPaper('legal', 'landscape');
+
+
+
+		return $pdf->inline('BienesPorPartidaECO-'.$request->nombrePartida.'.pdf');
 	}
 }
