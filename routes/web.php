@@ -104,7 +104,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('/catalogos/numeroInventarioECO', 'ArticulosECOsController@numeroInventarioMaxECO');
 	Route::post('/catalogos/GuardarArticulosECO', 'ArticulosECOsController@store')->name('GuardarArticulosECO');
 
-	// Editar Artículo
+	// Editar Artículo ECO
 	Route::get('/catalogos/InformacionArticuloECO', 'ArticulosECOsController@InformacionArticuloECO')->name('InformacionArticuloECO');
 	Route::post('/catalogos/EditarArticulosECO', 'ArticulosECOsController@EditarArticulosECO')->name('EditarArticulosECO');
 
@@ -118,6 +118,22 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	// Importe de Bienes Por área ECO
 	Route::get('catalogos/importeBienesPorAreaECO', 'ArticulosECOsController@importeBienesPorAreaECO');
 	Route::get('catalogos/reportes/importeBienesPorAreaPDFECO', 'ArticulosECOsController@importeBienesPorAreaPDFECO');
+
+	// Importe de Bienes Por Partida ECO
+	Route::get('catalogos/importeBienesPorPartidaECO', 'ArticulosECOsController@importeBienesPorPartidaECO');
+	Route::get('catalogos/reportes/importeBienesPorPartidaPDFECO', 'ArticulosECOsController@importeBienesPorPartidaPDFECO');
+
+	// Inventario Por Área ECO
+	Route::get('catalogos/inventarioPorAreaECO', 'ArticulosECOsController@inventarioPorAreaECO');
+	Route::get('catalogos/reportes/inventarioPorAreaPDFECO/{numArea}/{nombreArea}', 'ArticulosECOsController@inventarioPorAreaPDFECO');
+
+	// Inventario Por Orden Alfabético ECO
+	Route::get('catalogos/inventarioPorOrdenAlfabeticoECO', 'ArticulosECOsController@inventarioPorOrdenAlfabeticoECO');
+	Route::get('catalogos/reportes/inventarioPorOrdenAlfabeticoPDFECO', 'ArticulosECOsController@inventarioPorOrdenAlfabeticoPDFECO');
+
+	// Resguardo de bienes por empleado ECO
+	Route::get('catalogos/ResguardoPorEmpleadoECO', 'ArticulosECOsController@ResguardoPorEmpleadoECO');
+	Route::get('catalogos/reportes/ResguardoPorEmpleadoPDFECO/{numEmpleado}/{nombreEmpleado}', 'ArticulosECOsController@ResguardoPorEmpleadoPDFECO');
 
 });
 

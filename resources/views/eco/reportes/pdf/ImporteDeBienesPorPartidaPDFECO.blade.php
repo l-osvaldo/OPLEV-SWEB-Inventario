@@ -103,7 +103,7 @@
               {{ mb_strtoupper($partida->partida) }}              
             </td>
             <td style="text-align: left; padding: 2px 12px" class="border">            
-              {{ mb_strtoupper($partida->descpartida) }}              
+              {{ mb_strtoupper($partida->descripcionpartida) }}              
             </td>
             <td class="border">
               @if ($signoPesos == 1)

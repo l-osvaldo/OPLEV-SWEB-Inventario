@@ -116,12 +116,12 @@
 			  	@foreach ($bienesArea as $bien)
 		            @if ( $inicioBloque <= $loop->index and $bloques > $loop->index)
 			  			<tr>
-		                	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->numeroinv }}</td>
+		                	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->numeroinventario }}</td>
 				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->concepto }}</td>
-				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->numserie }}</td>
+				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->numeroserie }}</td>
 				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->marca }}</td>
 				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->modelo }}</td>
-				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->nombreemple }}</td>
+				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->nombreempleado }}</td>
 				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->factura }}</td>
 				          	<td style="text-align: left; padding: 2px 12px" class="border">$ {{ $bien->importe }}</td>
 				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->estado }}</td>               

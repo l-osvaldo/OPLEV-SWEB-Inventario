@@ -152,3 +152,145 @@ function importeBienesPorAreaECO(){
     });
 
 }
+
+function importeBienesPorPartidaECO(){
+
+	$('#cargandoECO').css("display","block");
+	$('#divRespuestaECO').css("display","none");
+	$('#btnGenerarPDFECO').css("display","none");
+
+	$.ajaxSetup(
+	{
+		headers:
+		{ 
+    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+	$.ajax({
+      url: "importeBienesPorPartidaECO",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      dataType: 'html',
+      async: true,
+      contentType: 'application/json'
+
+    }).done(function(response) {
+    	//console.log(response);
+    	$('#divRespuestaECO').css("display","block");
+    	$('#respuestaReporteECO').html(response);
+    	$('#cargandoECO').css("display","none");
+    	$('#btnGenerarPDFECO').css("display","block");
+    	$('#btnGenerarPDFECO').attr("href","/catalogos/reportes/importeBienesPorPartidaPDFECO");
+    	    	
+    });
+ 
+}
+
+function inventarioPorAreaECO(area){
+
+	$('#cargandoECO').css("display","block");
+	$('#divRespuestaECO').css("display","none");
+	$('#btnGenerarPDFECO').css("display","none");
+
+	var areaNumNombre = area.split('*');
+
+	$.ajaxSetup(
+	{
+		headers:
+		{ 
+    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+	$.ajax({
+      url: "inventarioPorAreaECO",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      data: { numArea: areaNumNombre[0], nombreArea: areaNumNombre[1]},
+      dataType: 'html',
+      async: true,
+      contentType: 'application/json'
+
+    }).done(function(response) {
+    	//console.log(response);
+    	$('#divRespuestaECO').css("display","block");
+    	$('#respuestaReporteECO').html(response);
+    	$('#cargandoECO').css("display","none");
+    	$('#btnGenerarPDFECO').css("display","block");
+    	$('#btnGenerarPDFECO').attr("href","/catalogos/reportes/inventarioPorAreaPDFECO/"+areaNumNombre[0]+"/"+areaNumNombre[1]);
+    	    	
+    });
+
+}
+
+function inventarioPorOrdenAlfabeticoECO(){
+
+	$('#cargandoECO').css("display","block");
+	$('#divRespuestaECO').css("display","none");
+	$('#btnGenerarPDFECO').css("display","none");
+
+	$.ajaxSetup(
+	{
+		headers:
+		{ 
+    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+	$.ajax({
+      url: "inventarioPorOrdenAlfabeticoECO",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      dataType: 'html',
+      async: true,
+      contentType: 'application/json'
+
+    }).done(function(response) {
+    	//console.log(response);
+    	$('#divRespuestaECO').css("display","block");
+    	$('#respuestaReporteECO').html(response);
+    	$('#cargandoECO').css("display","none");
+    	$('#btnGenerarPDFECO').css("display","block");
+    	$('#btnGenerarPDFECO').attr("href","/catalogos/reportes/inventarioPorOrdenAlfabeticoPDFECO");
+    	    	
+    });
+
+}
+
+function ResguardoPorEmpleadoECO(empleado){
+
+	$('#cargandoECO').css("display","block");
+	$('#divRespuestaECO').css("display","none");
+	$('#btnGenerarPDFECO').css("display","none");
+
+	var empleadoNumNombre = empleado.split('*');
+
+	console.log(empleadoNumNombre);
+
+	$.ajaxSetup(
+	{
+		headers:
+		{ 
+    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+	$.ajax({
+      url: "ResguardoPorEmpleadoECO",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      data: { numEmpleado: empleadoNumNombre[0], nombreEmpleado: empleadoNumNombre[1]},
+      dataType: 'html',
+      contentType: 'application/json'
+
+    }).done(function(response) {
+    	//console.log(response);
+    	$('#divRespuestaECO').css("display","block");
+    	$('#respuestaReporteECO').html(response);
+    	$('#cargandoECO').css("display","none");
+    	$('#btnGenerarPDFECO').css("display","block");
+    	$('#btnGenerarPDFECO').attr("href","/catalogos/reportes/ResguardoPorEmpleadoPDFECO/"+empleadoNumNombre[0]+"/"+empleadoNumNombre[1]);
+    }); 
+
+} 

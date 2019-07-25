@@ -153,9 +153,9 @@
 			  	@foreach ($articulos as $bien)
 		            @if ( $inicioBloque <= $loop->index and $bloques > $loop->index)
 			  			<tr>
-		                	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->numeroinv }}</td>
+		                	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->numeroinventario }}</td>
 				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->concepto }}</td>
-				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->numserie }}</td>
+				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->numeroserie }}</td>
 				          	<td style="text-align: left; padding: 2px 12px" class="border">$ {{ $bien->importe }}</td>             
 		                </tr>
 			  		@endif

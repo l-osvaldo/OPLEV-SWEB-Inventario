@@ -50,9 +50,9 @@
 		              </thead>
 		              	@foreach ($articulos as $bien)
 			                <tr>
-			                	<td>{{ $bien->numeroinv }}</td>
+			                	<td>{{ $bien->numeroinventario }}</td>
 					          	<td>{{ $bien->concepto }}</td>
-					          	<td>{{ $bien->numserie }}</td>
+					          	<td>{{ $bien->numeroserie }}</td>
 					          	<td>$ {{ $bien->importe }}</td>               
 			                </tr>
 		                @endforeach

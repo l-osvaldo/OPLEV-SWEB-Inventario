@@ -53,12 +53,12 @@
 		              </thead>
 		              	@foreach ($bienesAlfabetico as $bien)
 			                <tr>
-			                	<td>{{ $bien->numeroinv }}</td>
+			                	<td>{{ $bien->numeroinventario }}</td>
 					          	<td>{{ $bien->concepto }}</td>
-					          	<td>{{ $bien->numserie }}</td>
+					          	<td>{{ $bien->numeroserie }}</td>
 					          	<td>{{ $bien->marca }}</td>
 					          	<td>{{ $bien->modelo }}</td>
-					          	<td>{{ $bien->nombreemple }}</td>
+					          	<td>{{ $bien->nombreempleado }}</td>
 					          	<td>{{ $bien->factura }}</td>
 					          	<td>$ {{ $bien->importe }}</td>
 					          	<td>{{ $bien->estado }}</td>               

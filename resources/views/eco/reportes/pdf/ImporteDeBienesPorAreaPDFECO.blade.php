@@ -100,7 +100,7 @@
 
           <tr>
             <td style="text-align: left; padding: 2px 12px" class="border">            
-              {{ mb_strtoupper( $nombreArea->where('clvdepto', $area->clvarea)->first()->depto  ) }}              
+              {{ mb_strtoupper( $nombreArea->where('clvdepto', $area->clavearea)->first()->depto  ) }}              
             </td>
             <td class="border">
               @if ($signoPesos == 1)

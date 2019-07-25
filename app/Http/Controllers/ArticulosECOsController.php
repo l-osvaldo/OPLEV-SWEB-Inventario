@@ -179,6 +179,7 @@ class ArticulosECOsController extends Controller
 	public function importeBienesPorAreaECO(){
 
 		$areaAndImporteTotal = DB::table('articulosecos')->select('clavearea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('clavearea')->groupBy('clavearea')->get();
+
 		$nombreArea = areas::all();
 		$totalImporte = 0;
 		foreach ($areaAndImporteTotal as $value) {
@@ -187,7 +188,65 @@ class ArticulosECOsController extends Controller
 		}
 		$totalImporte = number_format($totalImporte,2);
 
+
 		return view('eco.reportes.ImporteDeBienesPorAreaECO', compact('areaAndImporteTotal','totalImporte','nombreArea'));
+	}
+
+	public function importeBienesPorPartidaECO(){
+
+		$partidaAndImporteTotal = DB::table('articulosecos')->select('partida','descripcionpartida', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->groupBy('partida','descripcionpartida')->get();
+		$totalImporte = 0;
+		foreach ($partidaAndImporteTotal as $value) {
+			$totalImporte += $value->importetotal;
+			$value->importetotal = number_format($value->importetotal,2);
+		}
+		$totalImporte = number_format($totalImporte,2);
+
+		return view('eco.reportes.ImporteDeBienesPorPartidaECO', compact('partidaAndImporteTotal','totalImporte'));
+	}
+
+	public function inventarioPorAreaECO(Request $request){
+
+		$area = $request;
+		$bienesArea = articulosecos::where('clavearea', $request->numArea)->orderBy('concepto')->get();
+		$totalImporte = 0;
+		foreach ($bienesArea as $value) {
+			$totalImporte += $value->importe;
+			$value->importe = number_format($value->importe,2);
+		}
+
+		$totalImporte = number_format($totalImporte,2);
+
+		return view('eco.reportes.InventarioPorAreaECO',compact('area','bienesArea','totalImporte'));
+	}
+
+	public function inventarioPorOrdenAlfabeticoECO(){
+
+		$bienesAlfabetico = articulosecos::orderBy('concepto', 'DESC')->get();
+		$totalImporte = 0;
+		foreach ($bienesAlfabetico as $value) {
+			$totalImporte += $value->importe;
+			$value->importe = number_format($value->importe,2);
+		}
+
+		$totalImporte = number_format($totalImporte,2);
+
+		return view('eco.reportes.InventarioPorOrdenAlfabeticoECO',compact('bienesAlfabetico','totalImporte'));
+	}
+
+	public function ResguardoPorEmpleadoECO(Request $request){		
+
+		$datosEmpleado = empleados::select('numemple','nombre','nombredepto')->where('numemple', $request->numEmpleado)->get();
+		$articulos = articulosecos::where('numeroempleado', $request->numEmpleado)->get();
+		$totalArticulos = DB::table('articulosecos')->select( DB::raw('COUNT(numeroinventario) as total'))->where('numeroempleado', $request->numEmpleado)->get();
+		$totalImporte = 0;
+		foreach ($articulos as $value) {
+			$totalImporte += $value->importe;
+			$value->importe = number_format($value->importe,2);
+		}
+		$totalImporte = number_format($totalImporte,2);
+
+		return view('eco.reportes.ResguardoPorEmpleadoECO', compact('datosEmpleado','articulos','totalArticulos','totalImporte'));
 	}
 
 	// ************ generar reportes ************
@@ -211,5 +270,94 @@ class ArticulosECOsController extends Controller
 
 
 		return $pdf->inline('BienesPorPartidaECO-'.$request->nombrePartida.'.pdf');
+	}
+
+	public function importeBienesPorAreaPDFECO(){
+		$areaAndImporteTotal = DB::table('articulosecos')->select('clavearea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('clavearea')->groupBy('clavearea')->get();
+		$nombreArea = areas::all();
+		$totalImporte = 0;
+		foreach ($areaAndImporteTotal as $value) {
+			$totalImporte += $value->importetotal;
+			$value->importetotal = number_format($value->importetotal,2);
+		}
+		$totalImporte = number_format($totalImporte,2);
+		$hoy = getdate();
+
+		$fecha = $hoy['mday'].'/'.$hoy['mon'].'/'.$hoy['year'];
+
+		
+		$pdf = PDF::loadView('eco.reportes.pdf.ImporteDeBienesPorAreaPDFECO', compact('fecha','totalImporte','areaAndImporteTotal','nombreArea'))->setPaper('letter', 'portrait');
+		return $pdf->inline('ImporteDeBienesPorAreaECO.pdf');
+	}
+
+	public function importeBienesPorPartidaPDFECO(){
+
+		$partidaAndImporteTotal = DB::table('articulosecos')->select('partida','descripcionpartida', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->groupBy('partida','descripcionpartida')->get();
+		$totalImporte = 0;
+		foreach ($partidaAndImporteTotal as $value) {
+			$totalImporte += $value->importetotal;
+			$value->importetotal = number_format($value->importetotal,2);
+		}
+		$totalImporte = number_format($totalImporte,2);
+
+		$hoy = getdate();
+
+		$fecha = $hoy['mday'].'/'.$hoy['mon'].'/'.$hoy['year'];
+
+		$pdf = PDF::loadView('eco.reportes.pdf.ImporteDeBienesPorPartidaPDFECO',compact('fecha','partidaAndImporteTotal','totalImporte'))->setPaper('letter', 'portrait');
+		return $pdf->inline('ImporteBienesPorPartidaECO.pdf');
+	}
+
+	public function inventarioPorAreaPDFECO(Request $request){
+		$area = $request;
+		$bienesArea = articulosecos::where('clavearea', $request->numArea)->orderBy('concepto')->get();
+		$totalImporte = 0;
+		foreach ($bienesArea as $value) {
+			$totalImporte += $value->importe;
+			$value->importe = number_format($value->importe,2);
+		}
+
+		$totalImporte = number_format($totalImporte,2);
+
+		$pdf = PDF::loadView('eco.reportes.pdf.InventarioPorAreaPDFECO',compact('area','bienesArea','totalImporte'))->setPaper('legal', 'landscape');
+		return $pdf->inline('InventarioPorAreaECO-'.$request->nombreArea.'.pdf');
+	}
+
+	public function inventarioPorOrdenAlfabeticoPDFECO(){
+
+		$bienesAlfabetico = articulosecos::orderBy('concepto', 'ASC')->get();
+		$totalImporte = 0;
+		foreach ($bienesAlfabetico as $value) {
+			$totalImporte += $value->importe;
+			$value->importe = number_format($value->importe,2);
+		}
+
+		$totalImporte = number_format($totalImporte,2);
+
+
+		$pdf = PDF::loadView('eco.reportes.pdf.InventarioPorOrdenAlfabeticoPDFECO',compact('bienesAlfabetico','totalImporte'))->setPaper('legal', 'landscape');
+		return $pdf->inline('inventarioPorOrdenAlfabeticoECO.pdf');
+
+	}
+
+	public function ResguardoPorEmpleadoPDFECO(Request $request){
+
+		$datosEmpleado = empleados::select('numemple','nombre','nombredepto','cargo')->where('numemple', $request->numEmpleado)->get();
+		$articulos = articulosecos::where('numeroempleado', $request->numEmpleado)->get();
+		$totalArticulos = DB::table('articulosecos')->select( DB::raw('COUNT(numeroinventario) as total'))->where('numeroempleado', $request->numEmpleado)->get();
+		$totalImporte = 0;
+		foreach ($articulos as $value) {
+			$totalImporte += $value->importe;
+			$value->importe = number_format($value->importe,2);
+		}
+		$totalImporte = number_format($totalImporte,2);
+
+		$hoy = getdate();
+
+		$fecha = $hoy['mday'].'/'.$hoy['mon'].'/'.$hoy['year'];
+
+		$pdf = PDF::loadView('eco.reportes.pdf.ResguardoPorEmpleadoPDFECO', compact('datosEmpleado','articulos','totalArticulos','totalImporte','fecha'))->setPaper('letter', 'landscape');
+		return $pdf->inline('InventarioPorArea-'.$request->nombreEmpleado.'.pdf');
+
 	}
 }
