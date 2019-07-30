@@ -16,9 +16,9 @@
 								<table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
 									<thead>
 										<tr>
-											<th>Clave</th>
-											<th>Nombre</th>
-											<th>Acciones</th>
+											<th style="text-align: center">Número de área</th>
+											<th style="text-align: center">Nombre</th>
+											<th style="text-align: center">Acciones</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -66,17 +66,16 @@
 				<div class="modal-body">
 					<div class="row">
 
-						<div class="col-sm-12">
+						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="clave"><b>Clave</b></label>
+								<label for="clave"><b>Número de área</b></label>
 								<div class="input-group-prepend">
 										<span class="input-group-text"><i class="fa fa-list-alt"></i></span>    
-										<input class="form-control form-control-sm" readonly type="text" id="editClave" name="editClave">
+										<input class="form-control form-control" readonly type="text" id="editClave" name="editClave">
 								</div>
 							</div>
 						</div>
-
-						<div class="col-sm-12">
+						<div class="col-sm-9">
 								<div class="form-group {{ $errors->has('depto') ? 'has-error' : '' }}">
 										<label for="nombre"><b>Nombre</b></label>
 										<div class="input-group-prepend">

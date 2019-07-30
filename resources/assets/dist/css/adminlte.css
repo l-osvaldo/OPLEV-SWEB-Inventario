@@ -2390,16 +2390,16 @@ fieldset:disabled a.btn {
 
 .btn-secondary {
   color: #ffffff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #000;
+  border-color: #000;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
   border-radius: 0;
 }
 
 .btn-secondary:hover {
   color: #ffffff;
-  background-color: #3396ff;
-  border-color: #3396ff;
+  background-color: #ced4da;
+  border-color: #ced4da;
 }
 
 .btn-secondary:focus, .btn-secondary.focus {
@@ -4565,7 +4565,7 @@ input[type="button"].btn-block {
   border-top-right-radius: 0;
 }
 
-.breadcrumb {
+/*.breadcrumb {
   display: flex;
   flex-wrap: wrap;
   padding: 0.75rem 1rem;
@@ -4596,7 +4596,41 @@ input[type="button"].btn-block {
 
 .breadcrumb-item.active {
   color: #6c757d;
+}*/
+
+.breadcrumb {
+display: flex;
+flex-wrap: wrap;
+padding: 0.75rem 1rem;
+margin-bottom: 1rem;
+list-style: none;
+background-color: #FAF0F7;
+border-radius: 0.25rem;
 }
+
+.breadcrumb-item + .breadcrumb-item {
+padding-left: 0.5rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+display: inline-block;
+padding-right: 0.5rem;
+color: #6c757d;
+content: "/";
+}
+
+.breadcrumb-item + .breadcrumb-item:hover::before {
+text-decoration: underline;
+}
+
+.breadcrumb-item + .breadcrumb-item:hover::before {
+text-decoration: none;
+}
+
+.breadcrumb-item.active {
+color: #EA0D94;
+}
+
 
 .pagination {
   display: flex;
@@ -4611,7 +4645,7 @@ input[type="button"].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #007bff;
+  color: #e600ac;
   background-color: #ffffff;
   border: 1px solid #dee2e6;
 }
@@ -4646,10 +4680,10 @@ input[type="button"].btn-block {
 }
 
 .page-item.active .page-link {
-  z-index: 1;
-  color: #ffffff;
-  background-color: #007bff;
-  border-color: #007bff;
+z-index: 1;
+color: #ffffff;
+background-color: #e600ac;
+border-color: #e600ac; 
 }
 
 .page-item.disabled .page-link {
@@ -13305,3 +13339,4 @@ a.text-muted:hover {
 }
 
 /*# sourceMappingURL=adminlte.css.map */
+

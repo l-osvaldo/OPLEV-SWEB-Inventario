@@ -11,8 +11,8 @@
 <div class="card">
   <div class="card-body" >
     <a href="" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#altasModal">
-        <i class="fa fa-arrow-up"></i> 
-        Altas         
+        <i class="fa fa-plus"></i> 
+        Alta del bien        
     </a>
   </div>
 </div>
@@ -26,11 +26,11 @@
                     <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
                         <thead>
                             <tr>
-                                <th>No. Inventario</th>
-                                <th>Concepto</th>
-                                <th>Factura</th>
-                                <th>F. Compra</th>
-                                <th>Importe</th>
+                                <th style="text-align: center">Número de Inventario</th>
+                                <th style="text-align: center">Concepto</th>
+                                <th style="text-align: center">Factura</th>
+                                <th style="text-align: center">Fecha Compra</th>
+                                <th style="text-align: center">Importe</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,7 +40,7 @@
                               <td> {{ $articulo->concepto }} </td>
                               <td> {{ $articulo->factura }} </td>
                               <td> {{ $articulo->fechacomp }} </td>
-                              <td> {{ $articulo->importe }} </td>
+                              <td> $ {{ $articulo->importe }} </td>
                             </tr>
                              
                           @endforeach
@@ -58,7 +58,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header" style="background: #a90a6c; color:white">
-            <h5 class="modal-title" id="altasModalLabel"><b>Alta de Artículo(s)</b></h5>
+            <h5 class="modal-title" id="altasModalLabel"><b>Nuevo Artículo(s)</b></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -74,18 +74,18 @@
                       <div class="form-group">
                           <label style="margin-top: 10px;">Seleccione una Partida:</label>
                           <select id="partidaAltaArticulo" name="partidaAltaArticulo" class="form-control select2 " style="width: 95%;">
-                              <option  value="0" selected="selected">No. partida</option>
+                              <option  value="0" selected="selected">Número de partida</option>
                               @foreach ($partidas as $partida)
                                   <option value="{{ $partida->partida }}*{{ $partida->descpartida }}" > {{ $partida->partida }} | {{ $partida->descpartida }} </option>
                               @endforeach  
                           </select>
                           <label>Seleccione una Línea:</label>                 
                           <select class="form-control select2" id="lineaAltaArticulo" name="lineaAltaArticulo" style="width: 95%;" disabled>
-                              <option value="0" disabled="true" selected="true">Línea</option>
+                              <option value="0" disabled="true" selected="true">Número de Línea</option>
                           </select>
                           <label>Seleccione una Sublinea:</label>                 
                           <select class="form-control select2" id="sublineaAltaArticulo" name="sublineaAltaArticulo" style="width: 95%;" disabled>
-                              <option value="0" disabled="true" selected="true">Sublinea</option>
+                              <option value="0" disabled="true" selected="true">Número de Sublinea</option>
                           </select>                        
                       </div>                                       
                   </div>

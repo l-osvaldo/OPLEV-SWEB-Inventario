@@ -62,10 +62,9 @@
 
 
 </head>
-<body class="hold-transition sidebar-mini ">
+<body class="hold-transition sidebar-mini">
   <div class="wrapper">
-
-    
+   
   
     <!-- Main Sidebar Container -->
     @include('partials.aside')
@@ -157,6 +156,7 @@
 <script type="text/javascript" src="{{ asset('js/reportesECO.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/editarArticulo.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/editarArticuloECO.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/lineas.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
 
 <script src="{{ asset('/plugins/jquery-maskmoney-master/dist/jquery.maskMoney.js') }}"></script>
@@ -176,13 +176,53 @@
     "retrieve": true,
     "processing": true,
     "sSearch": "Filter Data",
-    "dom":     "<'row'<'col-sm-3 text-center'l><'col-sm-3'B><'col-sm-3'f>>" +
+    "dom":     "<'row'<'col-sm-1'l><'col-sm-3'f><'col-sm-8 text-right'B>>" +
     "<'row'<'col-sm-12'tr>>" +
     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
     "select": true,
     "language": {
       
-          "sProcessing":     "Procesando...",
+      "sProcessing":     "Procesando...",
+      "sLengthMenu":     "Mostrar _MENU_ registros",
+      "sZeroRecords":    "No se encontraron resultados",
+      "sEmptyTable":     "Ningún dato disponible en esta tabla",
+      "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+      "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+      "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+      "sInfoPostFix":    "",
+      "sSearch":         "Buscar:",
+      "sUrl":            "",
+      "sInfoThousands":  ",",
+      "sLoadingRecords": "Cargando...",
+      "oPaginate": {
+      "sFirst":    "Primero",
+      "sLast":     "Último",
+      "sNext":     "Siguiente",
+      "sPrevious": "Anterior"
+      },
+      "oAria": {
+        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+      }
+    },
+   "buttons": ['excel']
+} );
+</script>
+
+<script>
+  $('#tableReporte').DataTable( {
+    "deferRender": true,
+    "retrieve": true,
+    "processing": true,
+    "paging": false,
+    "sSearch": "Filter Data",
+    "dom":     "<'row'<'col-sm-1'l><'col-sm-3'f><'col-sm-8 text-right'B>>" +
+    "<'row'<'col-sm-12'tr>>" +
+    "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+    "select": true,
+    "language": {
+      
+      "sProcessing":     "Procesando...",
       "sLengthMenu":     "Mostrar _MENU_ registros",
       "sZeroRecords":    "No se encontraron resultados",
       "sEmptyTable":     "Ningún dato disponible en esta tabla",
@@ -215,7 +255,7 @@
   $(function () {
     $("#example1").DataTable();
     $('#example2').DataTable({
-      "paging": true,
+      "paging": false,
       "lengthChange": false,
       "searching": false,
       "ordering": true,
@@ -1411,6 +1451,9 @@ $(function () {
   // Place caret at the end of the input on focus
   bringCaretAtEndOnFocus: true
 });
+
+
+
 </script>
 
 

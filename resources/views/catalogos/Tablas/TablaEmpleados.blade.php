@@ -9,7 +9,7 @@
 @include('sweet::alert')
 <div class="card">
 	<div  class="card-body">
-		<a href="#" style="background-color: #E71096" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModalEmpleado"> Agregar Empleado</a>
+		<a href="#" style="background-color: #E71096" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModalEmpleado"><i class="fa fa-plus"></i> Nuevo Empleado</a>
 	</div> 
 </div>	
 <section class="content" style="margin-top: 2vh;">
@@ -21,17 +21,17 @@
             <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
               <thead>
                 <tr>
-                  <th>No. Empleado</th>
-                  <th>Nombre</th>
-                  <th>Área</th>
-                  <th>cargo</th>
+                  <th style="text-align: center">Número de Empleado</th>
+                  <th style="text-align: center">Nombre</th>
+                  <th style="text-align: center">Área</th>
+                  <th style="text-align: center">Cargo</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($empleado as $empleado)
                 <tr>
                   <td>{{ $empleado->numemple}}</td>
-									<td>{{ $empleado->nombre}}</td>
+				  <td>{{ $empleado->nombre}}</td>
                   <td>{{ $empleado->nombredepto}}</td>
                   <td>{{ $empleado->cargo}}</td>                  
                 </tr>                 
@@ -50,7 +50,7 @@
 				<div class="modal-dialog modal-lg" role="document">      
 					<div class="modal-content">
 						<div class="modal-header" style="background: #a90a6c; color:white">
-							<h5 class="modal-title" id="exampleModalLabel"><b>Agregar Empleado</b></h5>
+							<h5 class="modal-title" id="exampleModalLabel"><b>Nuevo Empleado</b></h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>

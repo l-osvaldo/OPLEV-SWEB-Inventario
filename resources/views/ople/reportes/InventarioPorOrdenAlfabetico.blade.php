@@ -2,18 +2,7 @@
 @section('content')
 
 	<section class="content" style="margin-top: 2vh;">
-		<table width="100%">
-		    <tr>
-		      <td style="width: 100%" align="center" >
-		          <h2>
-		            <small>
-		            <strong>ORGANISMO PÚBLICO LOCAL ELECTORAL </strong><small><br> <strong>DIRECCIÓN EJECUTIVA DE ADMINISTRACIÓN </strong> <small style="font-weight:lighter;"><br>INVENTARIO DE ACTIVO FIJO</small> 
-		          </h2>   
-		      </td>
-		      
-		    </tr>
-		</table>
-		<br>
+		
 		<table width="100%">
 			<tr>
 				<td>

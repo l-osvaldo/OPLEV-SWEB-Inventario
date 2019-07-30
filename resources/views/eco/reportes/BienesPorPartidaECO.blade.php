@@ -2,7 +2,7 @@
 @section('content')
 
 	<section class="content" style="margin-top: 2vh;">
-		<table width="100%">
+		{{-- <table width="100%">
 		    <tr>
 		      <td style="width: 100%" align="center" >
 		          <h2>
@@ -13,7 +13,7 @@
 		      
 		    </tr>
 		</table>
-		<br>
+		<br> --}}
 		<table width="100%">
 			<tr>
 				<td> <label><strong>INVENTARIO POR PARTIDA</strong></label> </td>

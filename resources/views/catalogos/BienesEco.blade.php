@@ -11,8 +11,8 @@
 <div class="card">
   <div class="card-body" >
     <a href="" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#altasECOModal">
-        <i class="fa fa-arrow-up"></i> 
-        Altas         
+        <i class="fa fa-plus"></i> 
+        Alta del bien          
     </a>
   </div>
 </div>
@@ -26,11 +26,11 @@
                     <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
                         <thead>
                             <tr>
-                                <th>No. Inventario</th>
-                                <th>Concepto</th>
-                                <th>Factura</th>
-                                <th>F. Compra</th>
-                                <th>Importe</th>
+                                <th style="text-align: center">Número de Inventario</th>
+                                <th style="text-align: center">Concepto</th>
+                                <th style="text-align: center">Factura</th>
+                                <th style="text-align: center">Fecha Compra</th>
+                                <th style="text-align: center">Importe</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,7 +40,7 @@
                               <td> {{ $articulo->concepto }} </td>
                               <td> {{ $articulo->factura }} </td>
                               <td> {{ $articulo->fechacompra }} </td>
-                              <td> {{ $articulo->importe }} </td>
+                              <td> $ {{ $articulo->importe }} </td>
                             </tr>
                              
                           @endforeach
@@ -76,18 +76,18 @@
                       <div class="form-group">
                           <label style="margin-top: 10px;">Seleccione una Partida:</label>
                           <select id="partidaAltaArticuloECO" name="partidaAltaArticuloECO" class="form-control select2 " style="width: 95%;">
-                              <option  value="0" selected="selected">No. partida</option>
+                              <option  value="0" selected="selected">Número de partida</option>
                               @foreach ($partidas as $partida)
                                   <option value="{{ $partida->partida }}*{{ $partida->descpartida }}" > {{ $partida->partida }} | {{ $partida->descpartida }} </option>
                               @endforeach  
                           </select>
                           <label>Seleccione una Línea:</label>                 
                           <select class="form-control select2" id="lineaAltaArticuloECO" name="lineaAltaArticuloECO" style="width: 95%;" disabled>
-                              <option value="0" disabled="true" selected="true">Línea</option>
+                              <option value="0" disabled="true" selected="true">Número de Línea</option>
                           </select>
                           <label>Seleccione una Sublinea:</label>                 
                           <select class="form-control select2" id="sublineaAltaArticuloECO" name="sublineaAltaArticuloECO" style="width: 95%;" disabled>
-                              <option value="0" disabled="true" selected="true">Sublinea</option>
+                              <option value="0" disabled="true" selected="true">Número de Sublinea</option>
                           </select>                        
                       </div>                                       
                   </div>

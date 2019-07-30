@@ -2,18 +2,7 @@
 @section('content')
 
 	<section class="content" style="margin-top: 2vh;">
-		<table width="100%">
-		    <tr>
-		      <td style="width: 100%" align="center" >
-		          <h2>
-		            <small>
-		            <strong>ORGANISMO PÚBLICO LOCAL ELECTORAL </strong><small><br> <strong>DIRECCIÓN EJECUTIVA DE ADMINISTRACIÓN </strong> <small style="font-weight:lighter;"><br>Departamento de Recursos Materiales</small> </small></small><br> <small> Concentrado de Importes por Área </small>
-		          </h2>   
-		      </td>
-		      
-		    </tr>
-		</table>
-		<br>
+		
 		<table width="100%">
 			<tr>
 				<td width="100%" align="right">
@@ -27,7 +16,7 @@
 		      <div class="center-block">	      	
 		        <div class="card">
 		          <div class="card-body" >
-		            <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
+		            <table id="tableReporte" name="tableReporte" class="table table-bordered table-striped" style="width:100%">
 		              <thead>
 		                <tr>
 		                  <th>Nombre del Área</th>

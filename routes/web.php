@@ -34,6 +34,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::post('/catalogos/AgregaLineas', 'LineasController@store')->name('agregarLinea');
 	Route::get('/catalogos/TablaDeLineas', 'LineasController@show')->name('show-lineas');
 	Route::post('/catalogos/TablaDeLineas', 'LineasController@show')->name('show-lineas');
+	Route::get('/catalogos/datosLinea', 'LineasController@datosLinea');
 
 	//sublineas
 	Route::post('/catalogos/TablaSublineas', 'SublineasController@show')->name('show-sublineas');

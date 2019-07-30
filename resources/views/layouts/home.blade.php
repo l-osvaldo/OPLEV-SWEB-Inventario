@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('images/logoople.png') }}">
 
-    <title>@yield('title') | SICLI | OPLE Veracruz</title>
+    <title>@yield('title') | SIADMON | OPLE Veracruz</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Bootstrap 4.0-->

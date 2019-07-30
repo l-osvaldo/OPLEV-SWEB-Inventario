@@ -82,8 +82,8 @@ class ArticulosController extends Controller
 	// ************ vista de reportes ************
 	public function reportes(){
 		$usuario = auth()->user();
-		$partidas = partidas::distinct()->orderBy('partida', 'DESC')->get(['partida', 'descpartida']);
-		$areas = areas::distinct()->orderBy('clvdepto', 'DESC')->get(['clvdepto', 'depto']);
+		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
+		$areas = areas::distinct()->orderBy('clvdepto', 'ASC')->get(['clvdepto', 'depto']);
 		$empleados = empleados::orderBy('nombre', 'ASC')->get();
 
 		return view('ople.reportes', compact('usuario','partidas','areas','empleados'));

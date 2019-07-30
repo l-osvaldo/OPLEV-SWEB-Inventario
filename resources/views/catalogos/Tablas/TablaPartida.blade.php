@@ -12,7 +12,7 @@
 
 <div class="card">
   <div class="card-body" >
-    <a href="#" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"> Agregar Partida</a>         
+    <a href="#" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"> <i class="fa fa-plus"></i> Nueva Partida</a>         
   </div>
 </div> 
 <section class="content" style="margin-top: 2vh;">
@@ -25,8 +25,8 @@
             <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
               <thead>
                 <tr>
-                  <th>No. Partida</th>
-                  <th>Descripción de la Partida</th>
+                  <th style="text-align: center">Número de la Partida</th>
+                  <th style="text-align: center">Descripción de la Partida</th>
                 </tr>
               </thead>
               <tbody>
@@ -49,7 +49,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header" style="background: #a90a6c; color:white">
-          <h5 class="modal-title" id="exampleModalLabel"><b>Agregar Partida</b></h5>
+          <h5 class="modal-title" id="exampleModalLabel"><b>Nueva Partida</b></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -60,17 +60,17 @@
             @csrf
             <div class="card-body">
               <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-3">
                   
                   <div class="form-group {{ $errors->has('partida') ? 'has-error' : '' }}">
-                      <label>Partida</label>
+                      <label>Número de Partida</label>
                       <input type="text" maxlength="8" class="form-control validateData" data-myType="int" data-error= "1" data-validacion="1" id="partidaI" name="partidaI" onKeyPress="return SoloNumerosLetras(event,'numero');">
                       <span class="text-danger error1"></span>
                     </div>
 
                     <!-- -- !-->
                   <div class="form-group {{ $errors->has('linea') ? 'has-error' : '' }}">
-                    <label>Línea</label>
+                    <label>Número de Línea</label>
                     <input type="text" class="form-control " readonly  id="linea" name="linea" value="01" placeholder="01" >
                       @if ($errors->has('linea'))
                     <small class="form-text text-danger">{{ $errors->first('linea') }}</small>
@@ -78,7 +78,7 @@
                   </div>
                   <!-- /.form-group -->
                   <div class="form-group {{ $errors->has('sublinea') ? 'has-error' : '' }}">
-                    <label>Sublínea</label>
+                    <label>Número de Sublínea</label>
                     <input type="text" class="form-control" readonly id="sublinea" name="sublinea" value="01" placeholder="01" >
                       @if ($errors->has('sublinea'))
                     <small class="form-text text-danger">{{ $errors->first('sublinea') }}</small>
@@ -94,16 +94,16 @@
                   <!-- /.form-group -->
                 </div>
                 <!-- /.col -->
-                <div class="col-md-10">
+                <div class="col-md-9">
                   <div class="form-group {{ $errors->has('descpartida') ? 'has-error' : '' }}">
-                    <label>Descripción Partida</label>
+                    <label>Descripción de la Partida</label>
                     <input type="text" class="form-control validateData" data-myType="text" data-error= "2" data-validacion="1" id="descpartida" name="descpartida" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'partida');"
                     onkeyup="javascript:this.value=this.value.toUpperCase();">
                     <span class="text-danger error2"></span>
                   </div>
                         <!-- --  -->
                   <div class="form-group {{ $errors->has('desclinea') ? 'has-error' : '' }}">
-                    <label>Descripción Línea</label>
+                    <label>Descripción de la Línea</label>
                     <input type="text" class="form-control validateData" data-myType="text" data-error= "3" data-validacion="1" id="desclinea" name="desclinea" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'linea');"
                     onkeyup="javascript:this.value=this.value.toUpperCase();">
                     
@@ -111,7 +111,7 @@
                   </div>
                   <!-- /.form-group -->
                   <div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}">
-                    <label>Descripción Sublínea</label>
+                    <label>Descripción de la Sublínea</label>
                     <input type="text" class="form-control validateData" data-myType="text" data-error= "4" data-validacion="1" id="descsub" name="descsub" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'sublinea');" onkeyup="javascript:this.value=this.value.toUpperCase();">
                     <span class="text-danger error4"></span>
                   </div>

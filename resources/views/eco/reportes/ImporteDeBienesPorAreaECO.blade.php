@@ -27,7 +27,7 @@
 		      <div class="center-block">	      	
 		        <div class="card">
 		          <div class="card-body" >
-		            <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
+		            <table id="tableReporte" name="tableReporte" class="table table-bordered table-striped" style="width:100%">
 		              <thead>
 		                <tr>
 		                  <th>Nombre del Área</th>

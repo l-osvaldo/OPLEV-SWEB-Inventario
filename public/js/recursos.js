@@ -12,7 +12,7 @@ $(function() {
   {		
 		$('#Linea').val("0").change();      
 		var partida = $('#Partidas').find(':selected').val();
-    console.log(partida);
+    //console.log(partida);
     if (partida != 'Seleccione una Partida'){
       
       $.ajax({

@@ -9,13 +9,18 @@
 
 	<div class="card">
 	  <div class="card-body" >
+	  	<div class="row">
+	  		<div class="col-md-3">
+	  			<label>Seleccione un Reporte:</label>
+	  		</div>
+	  	</div>
 	    <div class="row">
 	    	<div class="col-md-3">
 	    		<select class="form-control select2" id="selectReportesECO" style="width: 90%;">
 		    		<option value="0">Seleccione reporte</option>
 		    		<option value="1">Bienes por partida</option>
-		    		<option value="2">Importe de bienes por área</option>
-		    		<option value="3">Importe de bienes por partida</option>
+		    		<option value="2">Concentrado de bienes por área</option>
+		    		<option value="3">Concentrado de bienes por partida</option>
 		    		<option value="4">Inventario por área</option>
 		    		<option value="5">Inventario por orden alfabético</option>
 		    		<option value="6">Resguardo por empleado</option>
