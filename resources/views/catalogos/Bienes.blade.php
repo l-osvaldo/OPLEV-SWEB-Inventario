@@ -102,31 +102,39 @@
                   </div> <!-- /.col -->
                 </div> <!-- /.row -->
                 <div class="row bordediv2">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                       <div class="form-group">
                         <label style="width: 100%; margin-top: 10px;">Concepto:</label>
                         <input type="text" name="txtConcepto" id="txtConcepto" style="width: 100%;" disabled class="form-control">
                         <input type="hidden" name="txtConceptoEnv" id="txtConceptoEnv">
-
-                        <label style="width: 100%">Factura:</label>
-                        <input type="text" name="txtFactura" id="txtFactura" style="width: 100%;" disabled class="form-control validateDataArticulo" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'factura');" onkeyup="javascript:this.value=this.value.toUpperCase();" data-errorArticulo="1" data-myTypeArticulo="text" data-validacionArticulo="1">
-                        <span class="text-danger error1"></span>                     
-                          
-
                       </div>                                         
                     </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label style="width: 100%;margin-top: 10px;">Precio Unitario:</label>
-                        <input type="text" name="txtImporte" id="txtImporte" style="width: 100%; text-align:right;" disabled placeholder="$ 0.0" class="form-control validateDataArticulo" data-errorArticulo="2" data-myTypeArticulo="text" data-validacionArticulo="1" onKeyPress="return valorPrecio(event,this);">
-                        <span class="text-danger error2"></span>
-
-                        <label style="width: 100%">Fecha de Compra:</label>                        
-                        <input type="date" name="dateFechaCompra" id="dateFechaCompra" class="form-control validateDataArticulo" disabled data-errorArticulo="7" data-myTypeArticulo="date" data-validacionArticulo="1">
-                        <span class="text-danger error7"></span>
-                      </div>
-                  </div> 
                 </div>
+                <div class="row bordediv2">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label style="width: 100%;">Factura:</label>
+                      <input type="text" name="txtFactura" id="txtFactura" style="width: 100%;" disabled class="form-control validateDataArticulo" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'factura');" onkeyup="javascript:this.value=this.value.toUpperCase();" data-errorArticulo="1" data-myTypeArticulo="text" data-validacionArticulo="1">
+                      <span class="text-danger error1"></span>
+                    </div>
+                  </div> 
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label style="width: 100%;">Precio Unitario:</label>
+                      <input type="text" name="txtImporte" id="txtImporte" style="width: 100%; text-align:right;" disabled placeholder="$ 0.0" class="form-control validateDataArticulo" data-errorArticulo="2" data-myTypeArticulo="text" data-validacionArticulo="1" onKeyPress="return valorPrecio(event,this);">
+                      <span class="text-danger error2"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label style="width: 100%">Fecha de Compra:</label>                        
+                      <input type="date" name="dateFechaCompra" id="dateFechaCompra" class="form-control validateDataArticulo" disabled data-errorArticulo="7" data-myTypeArticulo="date" data-validacionArticulo="1">
+                      <span class="text-danger error7"></span>
+                    </div>
+                  </div>
+                </div>
+                     
+                
                 <div class="row bordediv2">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -214,12 +222,13 @@
                   <div class="col-md-12">
                       <div class="form-group">
                         <input type="hidden" name="numeroInventario" id="numeroInventario" value="">
-
+                        <label>Número de inventario: <strong id="editarNoInventario" style="background-color: #F694D0"></strong> </label> 
+                        <hr>
                         <br>
                         <table width="100%" class="table">
                           <thead>
                             <th class="table-dark" style="padding: 5px" width="40%">
-                              No. Partida
+                              Número de Partida
                             </th>
                             <th class="table-dark" style="padding: 5px" width="60%">
                               Partida
@@ -235,7 +244,7 @@
                           </tbody>
                           <thead>
                             <th class="table-dark" style="padding: 5px">
-                              No. Línea
+                              Número de Línea
                             </th>
                             <th class="table-dark" style="padding: 5px">
                               Línea
@@ -251,7 +260,7 @@
                           </tbody>
                           <thead>
                             <th class="table-dark" style="padding: 5px">
-                              No. Sublínea
+                              Número de Sublínea
                             </th>
                             <th class="table-dark" style="padding: 5px">
                               Sublínea
@@ -266,34 +275,32 @@
                             </td>
                           </tbody>
                           <thead>
-                            <th class="table-dark" style="padding: 5px">
-                              No. Inventario                              
-                            </th>
-                            <th class="table-dark" style="padding: 5px">
+                            <th class="table-dark" style="padding: 5px" colspan="2">
                               Concepto
                             </th>
                           </thead>
                           <tbody>
-                            <td style="padding: 2px">
-                              <label style="font-weight:lighter;" id="editarNoInventario" > </label>
-                            </td>
-                            <td style="padding: 2px">
+                            <td style="padding: 2px" colspan="2">
                               <label style="font-weight:lighter;" id="editarConcepto" > </label>
                             </td>
                           </tbody>
                           <thead>
-                            <th class="table-dark" style="padding: 5px">
+                            <th class="table-dark" style="padding: 5px" colspan="2">
                               Responsable                              
-                            </th>
-                            <th class="table-dark" style="padding: 5px">
+                            </th>                            
+                          </thead>
+                          <tbody>
+                            <td style="padding: 2px" colspan="2">
+                              <label style="font-weight:lighter;" id="editarResponsable" > </label>
+                            </td>                            
+                          </tbody>
+                          <thead>
+                            <th class="table-dark" style="padding: 5px" colspan="2">
                               Área                              
                             </th>
                           </thead>
                           <tbody>
-                            <td style="padding: 2px">
-                              <label style="font-weight:lighter;" id="editarResponsable" > </label>
-                            </td>
-                            <td style="padding: 2px">
+                            <td style="padding: 2px" colspan="2">
                               <label style="font-weight:lighter;" id="editarArea" > </label>
                             </td>
                           </tbody>                          

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\areas;
 use App\empleados;
+use App\articulos;
+use App\articulosecos;
 //use Alert;
 
 class AreasController extends Controller
@@ -20,18 +22,18 @@ class AreasController extends Controller
 	{
 		$this->validate($request,[
 
-				'clvdepto'    =>  'required|numeric',
-				'depto'       =>  'required|min:1|max:250',
+				'idarea'    =>  'required|numeric',
+				'nombrearea'       =>  'required|min:1|max:250',
 				
 
 				],[
 						
-		'clvdepto.required'     => 'La :attribute es obligatoria.',
-		'clvdepto.integer'      => 'La :attribute debe ser un entero.',
+		'idarea.required'     => 'La :attribute es obligatoria.',
+		'idarea.integer'      => 'La :attribute debe ser un entero.',
 
-		'depto.required'   => 'La :attribute es obligatoria.',
-		'depto.min'        => 'La :attribute debe contener mas de una letra.',
-		'depto.max'        => 'La :attribute debe contener max 30 letras.',
+		'nombrearea.required'   => 'La :attribute es obligatoria.',
+		'nombrearea.min'        => 'La :attribute debe contener mas de una letra.',
+		'nombrearea.max'        => 'La :attribute debe contener max 30 letras.',
 				]);
 
 		Alert::error('Revise sus campos', '¡Error!')->autoclose(2000);
@@ -40,7 +42,7 @@ class AreasController extends Controller
     public function index()
 	{
 		$usuario = auth()->user();
-		$area = areas::distinct()->orderBy('clvdepto', 'DESC')->get(['clvdepto', 'depto']);
+		$area = areas::distinct()->orderBy('idarea', 'DESC')->get(['idarea', 'nombrearea']);
 		//var_dump($partida[0]);
 		//dd();
 
@@ -50,8 +52,12 @@ class AreasController extends Controller
 	{
 		$clave = $request->input('id');
 		$area = $request->input('no');
-		$update = areas::where('clvdepto',$clave)->update(array('depto' => $area));			
-		$update = empleados::where('clvdepto',$clave)->update(array('nombredepto' => $area));	
+		$update = areas::where('idarea',$clave)->update(array('nombrearea' => $area));			
+		$update = empleados::where('idarea',$clave)->update(array('nombrearea' => $area));
+
+		$update = articulos::where('idarea',$clave)->update(array('nombrearea' => $area));
+		$update = articulosecos::where('idarea',$clave)->update(array('nombrearea' => $area));
+
 		return response()->json(['success']);
 	}
 }

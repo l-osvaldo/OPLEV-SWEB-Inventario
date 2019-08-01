@@ -10,8 +10,8 @@ class empleados extends Model
     protected $fillable = [
         'numemple',
         'nombre',
-        'clvdepto',
-        'nombredepto',
+        'idarea',
+        'nombrearea',
         'cargo',
       ];
 }

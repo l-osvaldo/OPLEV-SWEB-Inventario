@@ -11,7 +11,7 @@
 	  <div class="card-body" >
 	  	<div class="row">
 	  		<div class="col-md-3">
-	  			<label>Seleccione un Reporte:</label>
+	  			<label>1.- Seleccione un Reporte:</label>
 	  		</div>
 	  	</div>
 	    <div class="row">
@@ -40,7 +40,7 @@
 	    			<select class="form-control select2" id="selectArea" style="width: 100%">
 			    		<option value="0">Seleccione área </option>
 			    		@foreach ($areas as $area)
-			    			<option value="{{ $area->clvdepto }}*{{ $area->depto }}"> {{ $area->clvdepto }} | {{ $area->depto }} </option>
+			    			<option value="{{ $area->idarea }}*{{ $area->nombrearea }}"> {{ $area->idarea }} | {{ $area->nombrearea }} </option>
 			    		@endforeach
 			    	</select>
 	    		</div>
@@ -53,14 +53,7 @@
 			    		@endforeach
 			    	</select>
 	    		</div>	  
-	    	</div>
-	    	<div class="col-md-2">
-	    		<a style="background-color: #E71096; margin-left: 15px; display: none; width: 60%;" class="btn btn-secondary" id="btnGenerarPDF" target="_blank">
-			        <i class="fa fa-file-pdf-o"></i> 
-			        Generar PDF        
-			    </a>
-	    	</div>
-	    	  	
+	    	</div>    	  	
 	    	
 	    </div>
 	  </div>

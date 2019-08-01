@@ -24,13 +24,13 @@
 									<tbody>
 										@foreach ($area as $area)												
 										<tr>
-											<td>{{ $area->clvdepto }}</td>
-											<td>{{ $area->depto }}</td>
+											<td>{{ $area->idarea }}</td>
+											<td>{{ $area->nombrearea }}</td>
 											<td><div class="btn-group">
 
-													<button class="btn btn-success" 
-														data-areaid="{{ $area->clvdepto }}"
-														data-area="{{ $area->depto }}" 
+													<button class="btn" style="background-color:  #EA0D94" 
+														data-areaid="{{ $area->idarea }}"
+														data-area="{{ $area->nombrearea }}" 
 														
 														data-toggle="modal" data-target="#editModal">
 														<a  data-toggle="tooltip" data-placement="top" title="Editar" style="color: #fff;">
@@ -68,18 +68,16 @@
 
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="clave"><b>Número de área</b></label>
-								<div class="input-group-prepend">
-										<span class="input-group-text"><i class="fa fa-list-alt"></i></span>    
+								<label for="clave"><b>Número del área</b></label>
+								<div class="input-group-prepend">  
 										<input class="form-control form-control" readonly type="text" id="editClave" name="editClave">
 								</div>
 							</div>
 						</div>
 						<div class="col-sm-9">
-								<div class="form-group {{ $errors->has('depto') ? 'has-error' : '' }}">
-										<label for="nombre"><b>Nombre</b></label>
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fa fa-building"></i></span>    
+								<div class="form-group {{ $errors->has('nombrearea') ? 'has-error' : '' }}">
+										<label for="nombre"><b>Nombre del área</b></label>
+										<div class="input-group-prepend">   
 											<input class="form-control form-control validateDataArea" data-myTypeArea="text" data-errorArea= "1" data-validacionArea="1" type="text" id="depto" name="depto" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'area');" onkeyup="javascript:this.value=this.value.toUpperCase();">		
 											
 									</div>

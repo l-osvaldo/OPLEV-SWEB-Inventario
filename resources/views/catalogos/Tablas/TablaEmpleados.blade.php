@@ -32,7 +32,7 @@
                 <tr>
                   <td>{{ $empleado->numemple}}</td>
 				  <td>{{ $empleado->nombre}}</td>
-                  <td>{{ $empleado->nombredepto}}</td>
+                  <td>{{ $empleado->nombrearea}}</td>
                   <td>{{ $empleado->cargo}}</td>                  
                 </tr>                 
 								@endforeach
@@ -61,40 +61,47 @@
 								@csrf               
 								<div class="card card-default">
 									<div class="card-body">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}">
+								<label>1.- Número de Empleado:</label>
+								<input type="text" maxlength="6" class="form-control validateDataEm" data-myTypeEm="int" data-errorEm= "11" data-validacionEm="1" id="numemple" name="numemple" onKeyPress="return SoloNumerosLetras(event,'numero');" >  
+							</div>
+	                    </div>
+	                    <div class="col-md-7">
+							<div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}"> 
+								<span class="text-danger error11"></span>  
+							</div>
+	                    </div>
+					</div>
                     <div class="row">
-                      <div class="col-md-9">
+                      <div class="col-md-12">
                         <div class="form-group">
-                          <label>Área:</label>
-                          <select id="clvdepto" name="clvdepto" class="form-control select2 validateDataEm" data-myTypeEm="select" data-errorEm= "5" data-validacionEm="1" style="width: 100%;">
+                          <label>2.- Área:</label>
+                          <select id="clvdepto" name="clvdepto" class="form-control select2 validateDataEm" data-myTypeEm="select" data-errorEm= "5" data-validacionEm="1" style="width: 100%;" disabled>
                             <option value="0" selected="selected">Área</option>
                              @foreach ($area as $area)																 
-                            <option value="{{ $area->clvdepto}}"> {{ $area->clvdepto }} | {{ $area->depto }} </option>
+                            <option value="{{ $area->idarea}}"> {{ $area->idarea }} | {{ $area->nombrearea }} </option>
 														@endforeach                                      
                           </select>
                         </div>
                       </div>
-                      <div class="col-md-3">
-						<div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}" style="width: 75%;">
-							<label>No. Empleado:</label>
-							<input type="text" maxlength="6" class="form-control validateDataEm" data-myTypeEm="int" data-errorEm= "11" data-validacionEm="1" id="numemple" name="numemple" onKeyPress="return SoloNumerosLetras(event,'numero');" > 
-							<span class="text-danger error11"></span>  
-						</div>
-                      </div>
+                      
                             <!-- /.col -->
-						<div class="col-md-9">
+						<div class="col-md-12">
 							<div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}">
-								<label>Nombre Completo:</label>
+								<label>3.- Nombre Completo:</label>
 								<input type="text" class="form-control validateDataEm" data-myTypeEm="text" data-errorEm= "10" data-validacionEm="1" id="nombre" name="nombre" style="text-transform:uppercase;" onKeyPress="return soloLetras(event,'');"
-								onkeyup="javascript:this.value=this.value.toUpperCase();">
+								onkeyup="javascript:this.value=this.value.toUpperCase();" disabled>
 								<span class="text-danger error10"></span>
 							</div>
 						</div>
 						<!-- /.form-group -->
-						<div class="col-md-9">
+						<div class="col-md-12">
 							<div class="form-group {{ $errors->has('descsub') ? 'has-error' : '' }}">
-								<label>Cargo:</label>
+								<label>4.- Cargo:</label>
 								<input type="text" class="form-control validateDataEm" data-myTypeEm="text" data-errorEm= "9" data-validacionEm="1" id="cargo" name="cargo" style="text-transform:uppercase;" onKeyPress="return soloLetras(event,'cargo');"
-								onkeyup="javascript:this.value=this.value.toUpperCase();">
+								onkeyup="javascript:this.value=this.value.toUpperCase();" disabled>
 								<span class="text-danger error9"></span>
 							</div>
 						<!-- /.form-group -->

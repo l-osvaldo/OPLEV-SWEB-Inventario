@@ -69,7 +69,7 @@
     "retrieve": true,
     "processing": true,
     "sSearch": "Filter Data",
-    "dom":     "<'row'<'col-sm-3 text-center'l><'col-sm-3'B><'col-sm-3'f>>" +
+    "dom":     "<'row'<'col-sm-1'l><'col-sm-3'f><'col-sm-8 text-right'B>>" +
     "<'row'<'col-sm-12'tr>>" +
     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
     "select": true,

@@ -29,7 +29,7 @@ $(function() {
           // console.log('123');
           // $('#Linea').val("Seleccione una Línea").change();
           
-          comboLineas = "<option value='0'>Seleccione Linea...</option>";
+          comboLineas = "<option value='0'>Número de Línea</option>";
           $.each(response, function(index, value){
             var cadena = value['linea'] + " - " + value['desclinea'];
             comboLineas += "<option value='"+value['linea']+"'>"+ cadena +"</option>";
@@ -38,6 +38,8 @@ $(function() {
           $('#Linea').html(comboLineas);
         
           $('#Linea').prop("disabled", false);
+
+          $('#sublineaRespuesta').css("display","none");
 
           //console.log('prueba');
                   
@@ -48,6 +50,7 @@ $(function() {
       $('#Linea').prop("disabled", true);
     }    
   });
+});
 
  $('#Linea').change(function()
  {    
@@ -75,6 +78,9 @@ $(function() {
 
         if (response.length != 0){
           var b = response.length+1;
+          if (b < 10){
+            b = '0' + b; 
+          }
           console.log(b);
           $('#LineaMax').val(b);
         }else{
@@ -107,39 +113,39 @@ $("#partidaA").change(function()
     }).done(function(response) {
         //console.log(response);
         
-        comboLineasA = "<option value='0'>Seleccione Linea...</option>";
+        comboLineasA = "<option value='0'>Número de Línea</option>";
         $.each(response, function(index, value){
           var cadena = value['linea'] + " - " + value['desclinea'];
           comboLineasA += "<option value='"+value['linea']+"'>"+ cadena +"</option>";
         });
-        $('#lineaA').html(comboLineasA);  				
+        $('#lineaA').html(comboLineasA);
+        $('#lineaA').val('0').change();  				
     	});
   });
 
 
-  $("#lineaA").change(function() 
-  {		
-		$('#sublinea').html('');    
-    var partida = $('#partidaA').find(':selected').val();
-    var linea = $('#lineaA').find(':selected').val();
-    $.ajax({
-      url: "obtenSublineas",
-      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-      type: 'GET',
-      data: {partida: partida, linea:linea},
-      dataType: 'json',
-      contentType: 'application/json'
-      }).done(function(response) {
+$("#lineaA").change(function() {
+    if ($(this).val() != '0'){
+      $('#sublinea').html('');    
+      var partida = $('#partidaA').find(':selected').val();
+      var linea = $('#lineaA').find(':selected').val();
+      $.ajax({
+        url: "obtenSublineas",
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        type: 'GET',
+        data: {partida: partida, linea:linea},
+        dataType: 'json',
+        contentType: 'application/json'
+        }).done(function(response) {
 
-        $('#sublinea').val(response);
-        $('#sublinea').html(response);
-/*      
-        var c = response.length+1;
-        console.log(c);
-        $('#sublinea').attr("value",c);*/
+          $('#sublinea').val(response);
+          $('#sublinea').html(response);
+  /*      
+          var c = response.length+1;
+          console.log(c);
+          $('#sublinea').attr("value",c);*/
 
-      }); 
-    });	
-      
-});
-
+        }); 
+    }   
+    
+}); 

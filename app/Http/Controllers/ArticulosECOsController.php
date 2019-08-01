@@ -57,7 +57,7 @@ class ArticulosECOsController extends Controller
 			$articulo->importe 				= $request->txtImporteECO;
 			$articulo->colores 				= $request->txtColorECO;
 			$articulo->fechacompra			= $request->dateFechaCompraECO;
-			$articulo->clavearea			= $request->txtAreaClaveECO;
+			$articulo->idarea			= $request->txtAreaClaveECO;
 			$articulo->nombrearea			= $request->txtAreaNombreECO;
 			$articulo->numeroempleado		= $request->txtResponsableNumEmpleadoECO;
 			$articulo->nombreempleado		= $request->txtResponsableNombreECO;
@@ -151,8 +151,8 @@ class ArticulosECOsController extends Controller
 	// ************ vista de reportes ************
 	public function reportesECO(){
 		$usuario = auth()->user();
-		$partidas = partidas::distinct()->orderBy('partida', 'DESC')->get(['partida', 'descpartida']);
-		$areas = areas::distinct()->orderBy('clvdepto', 'DESC')->get(['clvdepto', 'depto']);
+		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
+		$areas = areas::distinct()->orderBy('idarea', 'ASC')->get(['idarea', 'nombrearea']);
 		$empleados = empleados::orderBy('nombre', 'ASC')->get();
 
 		return view('eco.reportesECO', compact('usuario','partidas','areas','empleados'));
@@ -178,7 +178,7 @@ class ArticulosECOsController extends Controller
 
 	public function importeBienesPorAreaECO(){
 
-		$areaAndImporteTotal = DB::table('articulosecos')->select('clavearea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('clavearea')->groupBy('clavearea')->get();
+		$areaAndImporteTotal = DB::table('articulosecos')->select('idarea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('idarea')->groupBy('idarea')->get();
 
 		$nombreArea = areas::all();
 		$totalImporte = 0;
@@ -208,7 +208,7 @@ class ArticulosECOsController extends Controller
 	public function inventarioPorAreaECO(Request $request){
 
 		$area = $request;
-		$bienesArea = articulosecos::where('clavearea', $request->numArea)->orderBy('concepto')->get();
+		$bienesArea = articulosecos::where('idarea', $request->numArea)->orderBy('concepto')->get();
 		$totalImporte = 0;
 		foreach ($bienesArea as $value) {
 			$totalImporte += $value->importe;
@@ -236,7 +236,7 @@ class ArticulosECOsController extends Controller
 
 	public function ResguardoPorEmpleadoECO(Request $request){		
 
-		$datosEmpleado = empleados::select('numemple','nombre','nombredepto')->where('numemple', $request->numEmpleado)->get();
+		$datosEmpleado = empleados::select('numemple','nombre','nombrearea')->where('numemple', $request->numEmpleado)->get();
 		$articulos = articulosecos::where('numeroempleado', $request->numEmpleado)->get();
 		$totalArticulos = DB::table('articulosecos')->select( DB::raw('COUNT(numeroinventario) as total'))->where('numeroempleado', $request->numEmpleado)->get();
 		$totalImporte = 0;
@@ -273,7 +273,7 @@ class ArticulosECOsController extends Controller
 	}
 
 	public function importeBienesPorAreaPDFECO(){
-		$areaAndImporteTotal = DB::table('articulosecos')->select('clavearea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('clavearea')->groupBy('clavearea')->get();
+		$areaAndImporteTotal = DB::table('articulosecos')->select('idarea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('idarea')->groupBy('idarea')->get();
 		$nombreArea = areas::all();
 		$totalImporte = 0;
 		foreach ($areaAndImporteTotal as $value) {
@@ -310,7 +310,7 @@ class ArticulosECOsController extends Controller
 
 	public function inventarioPorAreaPDFECO(Request $request){
 		$area = $request;
-		$bienesArea = articulosecos::where('clavearea', $request->numArea)->orderBy('concepto')->get();
+		$bienesArea = articulosecos::where('idarea', $request->numArea)->orderBy('concepto')->get();
 		$totalImporte = 0;
 		foreach ($bienesArea as $value) {
 			$totalImporte += $value->importe;
@@ -342,7 +342,7 @@ class ArticulosECOsController extends Controller
 
 	public function ResguardoPorEmpleadoPDFECO(Request $request){
 
-		$datosEmpleado = empleados::select('numemple','nombre','nombredepto','cargo')->where('numemple', $request->numEmpleado)->get();
+		$datosEmpleado = empleados::select('numemple','nombre','nombrearea','cargo')->where('numemple', $request->numEmpleado)->get();
 		$articulos = articulosecos::where('numeroempleado', $request->numEmpleado)->get();
 		$totalArticulos = DB::table('articulosecos')->select( DB::raw('COUNT(numeroinventario) as total'))->where('numeroempleado', $request->numEmpleado)->get();
 		$totalImporte = 0;

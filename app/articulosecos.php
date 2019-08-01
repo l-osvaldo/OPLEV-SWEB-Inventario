@@ -22,7 +22,7 @@ class articulosecos extends Model
 			'importe',
 			'colores',
 			'fechacompra',
-			'clavearea',
+			'idarea',
 			'nombrearea',
 			'numeroempleado',
 			'nombreempleado',

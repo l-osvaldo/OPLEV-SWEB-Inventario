@@ -26,7 +26,7 @@ $('#exampleModalTb').on('hidden.bs.modal', function (e) {
   $(this).find('.validateDataDos').attr("data-validacion",'1');
   $(this).find('.text-danger').text('');
   $('#descsub').val("");
-  $('#partidaA').val("No. partida").change(); 
+  $('#partidaA').val("0").change(); 
   $('#sublinea').val("0");    
 })
 

@@ -2,17 +2,14 @@
 @section('content')
 
 	<section class="content" style="margin-top: 2vh;">
-		<table width="100%">
-		    <tr>
-		      <td style="width: 100%" align="center" >
-		          <h2>
-		            <small>
-		            <strong>ORGANISMO PÚBLICO LOCAL ELECTORAL </strong><small><br> <strong>DIRECCIÓN EJECUTIVA DE ADMINISTRACIÓN </strong> <small style="font-weight:lighter;"><br>Departamento de Recursos Materiales</small> </small></small><br> <small> Concentrado de Importes por Partida </small>
-		          </h2>   
-		      </td>
-		      
-		    </tr>
-		</table>
+		<div class="row">
+			<div class="col-md-12" align="right">
+	    		<a style="background-color: #E71096; margin-left: 15px; display: none; width: 10%;" class="btn btn-secondary" id="btnGenerarPDFECO" target="_blank">
+			        <i class="fa fa-file-pdf-o"></i> 
+			        Generar PDF        
+			    </a>
+	    	</div>
+		</div>
 		<br>
 		<table width="100%">
 			<tr>
@@ -30,9 +27,9 @@
 		            <table id="tableReporte" name="tableReporte" class="table table-bordered table-striped" style="width:100%">
 		              <thead>
 		                <tr>
-		                  <th>Partida</th>
-						  <th>Clasificación del Bien</th>
-						  <th>Importe en Bienes</th>
+		                  <th style="text-align: center">Partida</th>
+						  <th style="text-align: center">Clasificación del Bien</th>
+						  <th style="text-align: center">Importe en Bienes</th>
 		                </tr>
 		              </thead>
 		              	@foreach ($partidaAndImporteTotal as $partidaImporte)

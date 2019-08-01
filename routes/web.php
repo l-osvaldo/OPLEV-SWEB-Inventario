@@ -42,6 +42,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::post('/catalogos/AgregaSubineasStore', 'SublineasController@Agregasublineastore')->name('AgregarSub');
 	Route::get('ajaxRequest', 'SublineasController@ajaxRequest');
 	Route::get('catalogos/obtenLineas', 'SublineasController@obtenLineas');
+	Route::get('/catalogos/datosSublinea', 'SublineasController@datosSublinea');
 
 	//MAx Lineas
 	Route::get('catalogos/obtenMaxLineas', 'SublineasController@obtenMaxLineas');

@@ -162,10 +162,11 @@ class LineasController extends Controller
 
       public function datosLinea(Request $request){
         $lineas = lineas::where('partida', $request->Partidas)->get();
+        $partida = partidas::where('partida', $request->Partidas)->get();
 
         //print_r($lineas);
 
-        return response()->json($lineas);
+        return view('catalogos.Tablas.datatable.lineas', compact('lineas','partida'));
       }
 
 

@@ -124,11 +124,11 @@
 				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->nombreemple }}</td>
 				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->factura }}</td>
 				          	<td style="text-align: left; padding: 2px 12px" class="border">$ {{ $bien->importe }}</td>
-				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->estado }}</td>               
+				          	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->estado }} </td>               
 		                </tr>
 			  		@endif
 
-			  		@if ($loop->index > $bloques)
+			  		@if ($loop->index >= $bloques)
 			  			@break
 			  		@endif
 

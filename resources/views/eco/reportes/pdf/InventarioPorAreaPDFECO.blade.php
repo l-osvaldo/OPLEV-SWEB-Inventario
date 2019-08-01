@@ -128,7 +128,7 @@
 		                </tr>
 			  		@endif
 
-			  		@if ($loop->index > $bloques)
+			  		@if ($loop->index >= $bloques)
 			  			@break
 			  		@endif
 

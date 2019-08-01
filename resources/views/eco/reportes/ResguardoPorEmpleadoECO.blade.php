@@ -2,17 +2,14 @@
 @section('content')
 
 	<section class="content" style="margin-top: 2vh;">
-		<table width="100%">
-		    <tr>
-		      <td style="width: 100%" align="center" >
-		          <h2>
-		            <small>
-		            <strong>ORGANISMO PÚBLICO LOCAL ELECTORAL </strong><small><br> <strong>DIRECCIÓN EJECUTIVA DE ADMINISTRACIÓN </strong> <small style="font-weight:lighter;"><br>Departamento de Recursos Materiales</small> <br> <strong> RESGUARDO DE BIENES </strong>
-		          </h2>   
-		      </td>
-		      
-		    </tr>
-		</table>
+		<div class="row">
+			<div class="col-md-12" align="right">
+	    		<a style="background-color: #E71096; margin-left: 15px; display: none; width: 10%;" class="btn btn-secondary" id="btnGenerarPDFECO" target="_blank">
+			        <i class="fa fa-file-pdf-o"></i> 
+			        Generar PDF        
+			    </a>
+	    	</div>
+		</div>
 		<br>
 		<table width="100%">
 			@foreach ($datosEmpleado as $dato)			
@@ -42,10 +39,10 @@
 		            <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
 		              <thead>
 		                <tr>
-		                  <th>No. DE INVENTARIO</th>
-						  <th>DESCRIPCIÓN DEL BIEN</th>
-						  <th>NÚMERO DE SERIE</th>
-						  <th>IMPORTE</th>
+		                  <th style="text-align: center">Número de inventario</th>
+						  <th style="text-align: center">Descripción del bien</th>
+						  <th style="text-align: center">Número de serie</th>
+						  <th style="text-align: center">Importe</th>
 		                </tr>
 		              </thead>
 		              	@foreach ($articulos as $bien)

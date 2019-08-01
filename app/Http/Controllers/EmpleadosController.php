@@ -17,7 +17,7 @@ class EmpleadosController extends Controller
     public function index()
 	{
 	    $usuario = auth()->user();
-		$empleado = empleados::orderBy('numemple', 'DESC')->get(['numemple', 'nombre','nombredepto','cargo']);
+		$empleado = empleados::orderBy('numemple', 'DESC')->get(['numemple', 'nombre','nombrearea','cargo']);
 		//var_dump($partida[0]);
 		//dd();
 
@@ -30,12 +30,12 @@ class EmpleadosController extends Controller
 		
 
 		$area = $request->input('clvdepto');      
-    	$queryempleado = areas::where('clvdepto', '=', $area)->get();      
+    	$queryempleado = areas::where('idarea', '=', $area)->get();      
 
     //var_dump($partida);
-    //var_dump($queryempleado[0]['clvdepto']);
+    //var_dump($queryempleado[0]['idarea']);
     //dd();
-			$nombredepto = $queryempleado[0]['depto'];
+			$nombrearea = $queryempleado[0]['nombrearea'];
 			
 
 		$area = new areas();      
@@ -43,8 +43,8 @@ class EmpleadosController extends Controller
 		$empleado = new empleados();
 		$empleado->numemple = $request->input('numemple');
 		$empleado->nombre = $request->input('nombre');
-		$empleado->clvdepto = $request->input('clvdepto');
-		$empleado->nombredepto = $nombredepto;
+		$empleado->idarea = $request->input('clvdepto');
+		$empleado->nombrearea = $nombrearea;
 		$empleado->cargo = $request->input('cargo');
 
 	//	$area->save();
@@ -56,8 +56,8 @@ class EmpleadosController extends Controller
 	public function show(Request $request)
 	{
 		
-		$empleado = empleados::get(['numemple', 'nombre','nombredepto','cargo']);
-		$area = areas::distinct()->get(['clvdepto', 'depto']);
+		$empleado = empleados::get(['numemple', 'nombre','nombrearea','cargo']);
+		$area = areas::distinct()->get(['idarea', 'nombrearea']);
 				$usuario = auth()->user();
 				
 			return view('catalogos.Tablas.TablaEmpleados',compact('empleado','area','usuario')); 

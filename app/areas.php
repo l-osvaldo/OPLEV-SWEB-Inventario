@@ -8,7 +8,7 @@ class areas extends Model
 {
     //
     protected $fillable = [
-        'clvdepto',
-        'depto',
+        'idarea',
+        'nombrearea',
       ];
 }

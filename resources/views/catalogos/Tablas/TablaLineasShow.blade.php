@@ -16,7 +16,7 @@
           <div class="row"> 
             <div class="col-md-10">
               <div class="form-group">
-                <label>Seleccione una Partida</label>
+                <label>1.- Seleccione una Partida</label>
                 <form method="POST" action="{{ route('show-lineas') }}">
                   @csrf  
                     <select id="PartidasL" name="PartidasL" class="form-control select2 validateDataBusquedaLinea" data-myTypeBusquedaLinea="select" data-errorBusquedaLinea="1" data-validacionBusquedaLinea="1" style="width: 40%;" required>
@@ -41,31 +41,12 @@
   </div>  
 </section>
 <!-- Content Header (Page header) -->
+<div id="lineaRespuesta">
+                
+</div>
 
-<section class="content" style="margin-top: 2vh;">
-  <div class="row">
-    <div class="col-12">     
-      <div class="center-block">
-        <div class="card">
-          <div class="card-header">  
-             <h5>Partida: {{ $partida }} </h5>
-          </div>
-          <div class="card-body">
-              <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
-                <thead>
-                  <tr>
-                    <th style="text-align: center">Número de Línea</th>
-                    <th style="text-align: center">Descripción de Línea</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+
             <!-- Modal -->
   <div class="modal fade bd-example-modal-lg" id="exampleModalLinea" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <form method="POST" action="{{ route('agregarLinea') }}" id="form">

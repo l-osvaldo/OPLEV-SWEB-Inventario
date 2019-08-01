@@ -40,13 +40,9 @@
             </div>
           </div>
         </div>
-
-        <div class="col-md-2">
-            <input type="submit" style="background-color: #E71096; margin-top: 30px;" class="btn btn-secondary" id="btnMostrarSublinea" name="btnMostrarSublinea" value="Mostrar" disabled>	
-        </div>	
         </form>
 
-        <div class="col-md-4">
+        <div class="col-md-4" align="right">
           <a href="#" style="background-color: #E71096; margin-top: 30px;" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModalTb"><i class="fa fa-plus"></i> Nueva Sublínea</a>
         </div>
             
@@ -56,47 +52,13 @@
 	</div>
 </div>
 
-<section class="content" style="margin-top: 2vh;">
-  <div class="row">
-  	<div class="col-12">     
-    	<div class="center-block">
-          <div class="card">
-            <div class="card-header">
-              <div class="card-body col-md-10">
-                <div class="row">
-                  <div class="col-6">
-                    <h5>Partida: {{ $partida }} </h5>
-                  </div>
-                  <div class="col-6">
-                      <h5>Línea: {{ $linea }}</h5>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-                <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
-                <thead>
-                  <tr>
-                    <th style="text-align: center">Número de Sublínea</th>
-                    <th style="text-align: center">Descripción de la Sublínea</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($sublineas as $sublineas)    
-                  <tr>
-                    <td style="width: 353px;">{{ $sublineas->sublinea }}</td>
-                    <td>{{ $sublineas->descsub }}</td>
-                    
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-    </div>
-  </div>
+<div id="sublineaRespuesta">
+                
+</div>
 
+<section class="content" style="margin-top: 2vh;">
+  
+  <!-- Modal -->
 	<div class="modal fade bd-example-modal-lg" id="exampleModalTb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <form method="POST" action="{{ route('AgregarSub') }}" id="form">
           {{ csrf_field()}}
@@ -121,7 +83,7 @@
                       <div class="form-group">
                         <label>Seleccione una Partida:</label>
                           <select id="partidaA" name="partidaA" class="form-control select2 validateDataDos" data-myTypeDos="select" data-errorDos= "8" data-validacionDos="1" style="width: 100%;">
-                            <option  selected="selected">Número de partida</option>
+                            <option  value="0" selected="selected">Número de partida</option>
                               @foreach ($sublineaAgt as $sublineaAgt)
                             <option value="{{ $sublineaAgt->partida}}">{{ $sublineaAgt->partida }} | {{ $sublineaAgt->descpartida }}</option>
                               @endforeach

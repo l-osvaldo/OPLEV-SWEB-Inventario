@@ -63,16 +63,24 @@ function validarNumeroEmpleado(valor,error,id){
       //console.log(valor);
 
       if (response.length > 0){
-        console.log('valor->  '+ valor + '  id ->  ' + id + ' error->  ' +error);
         $('.error'+ error).text("Este número de empleado ya está registrado.");
         $('#'+id).attr("data-validacionEm", '1');
         $('#'+id).removeClass('inputSuccess');
         $('#'+id).addClass('inputDanger');
+
+        $('#clvdepto').prop("disabled", true);
+        $('#nombre').prop("disabled", true);
+        $('#cargo').prop("disabled", true);
+
       }else{
         $('.error'+ error).text("");
         $('#'+id).attr("data-validacionEm", '0');
         $('#'+id).removeClass('inputDanger');
         $('#'+id).addClass('inputSuccess');
+
+        $('#clvdepto').prop("disabled", false);
+        $('#nombre').prop("disabled", false);
+        $('#cargo').prop("disabled", false);
       }
       enablebtnEm() 
       

@@ -22,7 +22,7 @@ class articulos extends Model
 			'importe',
 			'colores',
 			'fechacomp',
-			'clvarea',
+			'idarea',
 			'nombrearea',
 			'numemple',
 			'nombreemple',

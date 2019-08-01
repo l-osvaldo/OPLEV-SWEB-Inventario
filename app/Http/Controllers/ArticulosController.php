@@ -58,7 +58,7 @@ class ArticulosController extends Controller
 			$articulo->importe 		= $request->txtImporte;
 			$articulo->colores 		= $request->txtColor;
 			$articulo->fechacomp	= $request->dateFechaCompra;
-			$articulo->clvarea		= $request->txtAreaClave;
+			$articulo->idarea		= $request->txtAreaClave;
 			$articulo->nombrearea	= $request->txtAreaNombre;
 			$articulo->numemple		= $request->txtResponsableNumEmpleado;
 			$articulo->nombreemple	= $request->txtResponsableNombre;
@@ -83,7 +83,7 @@ class ArticulosController extends Controller
 	public function reportes(){
 		$usuario = auth()->user();
 		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
-		$areas = areas::distinct()->orderBy('clvdepto', 'ASC')->get(['clvdepto', 'depto']);
+		$areas = areas::distinct()->orderBy('idarea', 'ASC')->get(['idarea', 'nombrearea']);
 		$empleados = empleados::orderBy('nombre', 'ASC')->get();
 
 		return view('ople.reportes', compact('usuario','partidas','areas','empleados'));
@@ -109,7 +109,7 @@ class ArticulosController extends Controller
 
 	public function importeBienesPorArea(){
 
-		$areaAndImporteTotal = DB::table('articulos')->select('clvarea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('clvarea')->groupBy('clvarea')->get();
+		$areaAndImporteTotal = DB::table('articulos')->select('idarea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('idarea')->groupBy('idarea')->get();
 		$nombreArea = areas::all();
 		$totalImporte = 0;
 		foreach ($areaAndImporteTotal as $value) {
@@ -137,7 +137,7 @@ class ArticulosController extends Controller
 	public function inventarioPorArea(Request $request){
 
 		$area = $request;
-		$bienesArea = articulos::where('clvarea', $request->numArea)->orderBy('concepto')->get();
+		$bienesArea = articulos::where('idarea', $request->numArea)->orderBy('concepto')->get();
 		$totalImporte = 0;
 		foreach ($bienesArea as $value) {
 			$totalImporte += $value->importe;
@@ -165,7 +165,7 @@ class ArticulosController extends Controller
 
 	public function ResguardoPorEmpleado(Request $request){		
 
-		$datosEmpleado = empleados::select('numemple','nombre','nombredepto')->where('numemple', $request->numEmpleado)->get();
+		$datosEmpleado = empleados::select('numemple','nombre','nombrearea')->where('numemple', $request->numEmpleado)->get();
 		$articulos = articulos::where('numemple', $request->numEmpleado)->get();
 		$totalArticulos = DB::table('articulos')->select( DB::raw('COUNT(numeroinv) as total'))->where('numemple', $request->numEmpleado)->get();
 		$totalImporte = 0;
@@ -204,7 +204,7 @@ class ArticulosController extends Controller
 	}
 
 	public function importeBienesPorAreaPDF(){
-		$areaAndImporteTotal = DB::table('articulos')->select('clvarea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('clvarea')->groupBy('clvarea')->get();
+		$areaAndImporteTotal = DB::table('articulos')->select('idarea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('idarea')->groupBy('idarea')->get();
 		$nombreArea = areas::all();
 		$totalImporte = 0;
 		foreach ($areaAndImporteTotal as $value) {
@@ -242,7 +242,7 @@ class ArticulosController extends Controller
 
 	public function inventarioPorAreaPDF(Request $request){
 		$area = $request;
-		$bienesArea = articulos::where('clvarea', $request->numArea)->orderBy('concepto')->get();
+		$bienesArea = articulos::where('idarea', $request->numArea)->orderBy('concepto')->get();
 		$totalImporte = 0;
 		foreach ($bienesArea as $value) {
 			$totalImporte += $value->importe;
@@ -274,7 +274,7 @@ class ArticulosController extends Controller
 
 	public function ResguardoPorEmpleadoPDF(Request $request){
 
-		$datosEmpleado = empleados::select('numemple','nombre','nombredepto','cargo')->where('numemple', $request->numEmpleado)->get();
+		$datosEmpleado = empleados::select('numemple','nombre','nombrearea','cargo')->where('numemple', $request->numEmpleado)->get();
 		$articulos = articulos::where('numemple', $request->numEmpleado)->get();
 		$totalArticulos = DB::table('articulos')->select( DB::raw('COUNT(numeroinv) as total'))->where('numemple', $request->numEmpleado)->get();
 		$totalImporte = 0;

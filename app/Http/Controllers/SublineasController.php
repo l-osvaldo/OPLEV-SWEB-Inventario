@@ -112,6 +112,10 @@ class SublineasController extends Controller
     $sublineas = sublineas::where('partida', $partida)->where('linea', $linea)->orderBy('sublinea', 'DESC')->get(); 
     $numsublinea = $sublineas[0]['sublinea'] + 1;
 
+    if ($numsublinea < 10 ){
+      $numsublinea = '0'.$numsublinea; 
+    }
+
     return response()->json($numsublinea);
   }
 
@@ -223,5 +227,16 @@ class SublineasController extends Controller
     $sublineaAg = sublineas::distinct()->get(['partida', 'descpartida']);   
     $sublineasTb = sublineas::distinct()->get(['partida', 'descpartida']);    
     return view('catalogos.Sublineas', compact('sublinea','sublineasTb','sublineaAg','usuario'));
+  }
+
+
+  public function datosSublinea (Request $request){
+    $partida = $request->get('Partida');
+    $linea = $request->get('Linea');
+    $sublineas = sublineas::where('partida',$partida)->where('linea',$linea)->get();
+
+    return view('catalogos.Tablas.datatable.sublineas', compact('partida', 'linea', 'sublineas'));
+
+
   }
 }

@@ -130,8 +130,8 @@ function generarNumeroInventarioECO(cantidadArticulos){
 		var sublineaCompleta = 	$('#sublineaAltaArticuloECO').val().split('*');
 
 		var partida = 	partidaCompleta[0];
-		var linea = 	( lineaCompleta[0] < 10 ) ? '0'+lineaCompleta[0] : lineaCompleta[0];
-		var sublinea = 	( sublineaCompleta[0] < 10 ) ? '0'+sublineaCompleta[0] : sublineaCompleta[0];
+		var linea = 	lineaCompleta[0];
+		var sublinea = 	sublineaCompleta[0];
 
 		var numInv = '';
 
