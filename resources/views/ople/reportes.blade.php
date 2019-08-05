@@ -13,6 +13,9 @@
 	  		<div class="col-md-3">
 	  			<label>1.- Seleccione un Reporte:</label>
 	  		</div>
+	  		<div class="col-md-3" id="segundaInstruccion" style="display: none;">
+	  			<label id="instruccion">2.- Seleccione un Reporte:</label>
+	  		</div>
 	  	</div>
 	    <div class="row">
 	    	<div class="col-md-3">
@@ -29,7 +32,7 @@
 	    	<div class="col-md-3" id="seleccionSelect">
 	    		<div class="form-group" style="display: none; width: 100%" id="divPartida">
 	    			<select class="form-control select2" id="selectPartida" style="width: 100%">
-			    		<option value="0">Seleccione partida </option>
+			    		<option value="0">Seleccione una partida </option>
 			    		@foreach ($partidas as $partida)
 			    			<option value="{{ $partida->partida }}*{{ $partida->descpartida }}"> {{ $partida->partida }} | {{ $partida->descpartida }} </option>
 			    		@endforeach
@@ -38,7 +41,7 @@
 
 	    		<div class="form-group" style="display: none; width: 100%" id="divArea">
 	    			<select class="form-control select2" id="selectArea" style="width: 100%">
-			    		<option value="0">Seleccione área </option>
+			    		<option value="0">Seleccione una área </option>
 			    		@foreach ($areas as $area)
 			    			<option value="{{ $area->idarea }}*{{ $area->nombrearea }}"> {{ $area->idarea }} | {{ $area->nombrearea }} </option>
 			    		@endforeach
@@ -47,7 +50,7 @@
 	    		
 	    		<div class="form-group" style="display: none; width: 100%" id="divEmpleado">
 	    			<select class="form-control select2" id="selectEmpleado" style="width: 100%">
-			    		<option value="0">Seleccione empleado </option>
+			    		<option value="0">Seleccione un empleado </option>
 			    		@foreach ($empleados as $empleado)
 			    			<option value="{{ $empleado->numemple }}*{{ $empleado->nombre }}"> {{ $empleado->nombre }} </option>
 			    		@endforeach

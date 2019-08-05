@@ -4,24 +4,33 @@ $('#selectReportesECO').change(function() {
 	switch ($(this).val()){
 		case '1':
 			$('#divPartidaECO').css("display","block");
+			$('#segundaInstruccionECO').css("display","block");
+			$('#instruccionECO').html('2.- Seleccione una partida:');
 			break;
 		case '2':
-			$('#seleccionSelectECO').css("display","none");	
+			$('#seleccionSelectECO').css("display","none");
+			$('#segundaInstruccionECO').css("display","none");	
 			importeBienesPorAreaECO();
 			break;
 		case '3':		
 			$('#seleccionSelectECO').css("display","none");
+			$('#segundaInstruccionECO').css("display","none");
 			importeBienesPorPartidaECO();
 			break;
 		case '4':			
 			$('#divAreaECO').css("display","block");
+			$('#segundaInstruccionECO').css("display","block");
+			$('#instruccionECO').html('2.- Seleccione una área:');
 			break;
 		case '5':
-			$('#seleccionSelectECO').css("display","none");	
+			$('#seleccionSelectECO').css("display","none");
+			$('#segundaInstruccionECO').css("display","none");	
 			inventarioPorOrdenAlfabeticoECO();
 			break;
 		case '6':			
 			$('#divEmpleadoECO').css("display","block");
+			$('#segundaInstruccionECO').css("display","block");
+			$('#instruccionECO').html('2.- Seleccione un empleado:');
 			break;
 	}
 });

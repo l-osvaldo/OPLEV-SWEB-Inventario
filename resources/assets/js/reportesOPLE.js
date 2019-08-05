@@ -4,24 +4,33 @@ $('#selectReportes').change(function() {
 	switch ($(this).val()){
 		case '1':
 			$('#divPartida').css("display","block");
+			$('#segundaInstruccion').css("display","block");
+			$('#instruccion').html('2.- Seleccione una partida:');
 			break;
 		case '2':
-			$('#seleccionSelect').css("display","none");	
+			$('#seleccionSelect').css("display","none");
+			$('#segundaInstruccion').css("display","none");	
 			importeBienesPorArea();
 			break;
 		case '3':		
 			$('#seleccionSelect').css("display","none");
+			$('#segundaInstruccion').css("display","none");
 			importeBienesPorPartida();
 			break;
 		case '4':			
 			$('#divArea').css("display","block");
+			$('#segundaInstruccion').css("display","block");
+			$('#instruccion').html('2.- Seleccione una partida:');
 			break;
 		case '5':
-			$('#seleccionSelect').css("display","none");	
+			$('#seleccionSelect').css("display","none");
+			$('#segundaInstruccion').css("display","none");	
 			inventarioPorOrdenAlfabetico();
 			break;
 		case '6':			
 			$('#divEmpleado').css("display","block");
+			$('#segundaInstruccion').css("display","block");
+			$('#instruccion').html('2.- Seleccione una partida:');
 			break;
 	}
 }); 
