@@ -40,7 +40,14 @@ class ArticulosECOsController extends Controller
 		$arrayConsecutivo 	= explode(",",$request->txtConsecutivoECO);
 		$arrayNumeroInv 	=  explode(",",$request->txtArregloNumInvECO);
 
-		for ($i=0; $i < sizeof($arrayConsecutivo); $i++) { 
+		for ($i=0; $i < sizeof($arrayConsecutivo); $i++) {
+
+			
+
+			$fecha = explode("-", $request->dateFechaCompraECO);
+
+			$fechaOPLE = $fecha[2].'/'.$fecha[1].'/'.$fecha[0];
+
 			$articulo = new articulosecos();
 
 			$articulo->iev 					= 'ECO';
@@ -56,8 +63,8 @@ class ArticulosECOsController extends Controller
 			$articulo->marca 				= $request->txtMarcaECO;
 			$articulo->importe 				= $request->txtImporteECO;
 			$articulo->colores 				= $request->txtColorECO;
-			$articulo->fechacompra			= $request->dateFechaCompraECO;
-			$articulo->idarea			= $request->txtAreaClaveECO;
+			$articulo->fechacompra			= $fechaOPLE;
+			$articulo->idarea				= $request->txtAreaClaveECO;
 			$articulo->nombrearea			= $request->txtAreaNombreECO;
 			$articulo->numeroempleado		= $request->txtResponsableNumEmpleadoECO;
 			$articulo->nombreempleado		= $request->txtResponsableNombreECO;
@@ -82,18 +89,18 @@ class ArticulosECOsController extends Controller
 		$infoArticulo = articulosecos::where('numeroinventario',$request->numInventario)->get();
 
 		foreach ($infoArticulo as $value) {
-			if ($value->fechacomp == '  -   -'){
-				$value->fechacomp = '0';
+			if ($value->fechacompra == '  -   -'){
+				$value->fechacompra = '0';
 			}else{
-				if (strpos($value->fechacomp, '/')){
+				if (strpos($value->fechacompra, '/')){
 
-					$fecha = explode("/", $value->fechacomp);
+					$fecha = explode("/", $value->fechacompra);
 					if (strlen($fecha[2]) == 4){
 						$dia = $fecha[0];
 						$mes = $fecha[1];
 						$anio = $fecha[2];
 
-						$value->fechacomp = $anio.'-'.$mes.'-'.$dia;
+						$value->fechacompra = $anio.'-'.$mes.'-'.$dia;
 					}
 				}
 
@@ -128,6 +135,10 @@ class ArticulosECOsController extends Controller
 				break;
 		}
 
+		$fecha = explode("-", $request->editarDateFechaCompraECO);
+
+		$fechaOPLE = $fecha[2].'/'.$fecha[1].'/'.$fecha[0];
+
 		//echo $request;
 
 		$articulo = articulosecos::where('numeroinventario',$request->numeroInventarioECO)
@@ -140,7 +151,7 @@ class ArticulosECOsController extends Controller
 			'numeroserie' 	=> $request->EditarNumSerieECO,
 			'modelo' 	=> $request->editarModeloECO,
 			'marca' 	=> $request->editarMarcaECO,
-			'fechacompra'	=> $request->editarDateFechaCompraECO,
+			'fechacompra'	=> $fechaOPLE,
 			'importe'	=> $request->editarImporteECO,
 			'factura'	=> $request->editarFacturaECO ]);
 

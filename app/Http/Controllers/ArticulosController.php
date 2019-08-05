@@ -42,6 +42,11 @@ class ArticulosController extends Controller
 		$arrayNumeroInv 	=  explode(",",$request->txtArregloNumInv);
 
 		for ($i=0; $i < sizeof($arrayConsecutivo); $i++) { 
+
+			$fecha = explode("-", $request->dateFechaCompra);
+
+			$fechaOPLE = $fecha[2].'/'.$fecha[1].'/'.$fecha[0];
+
 			$articulo = new articulos();
 
 			$articulo->iev 			= 'OPLE';
@@ -57,7 +62,7 @@ class ArticulosController extends Controller
 			$articulo->marca 		= $request->txtMarca;
 			$articulo->importe 		= $request->txtImporte;
 			$articulo->colores 		= $request->txtColor;
-			$articulo->fechacomp	= $request->dateFechaCompra;
+			$articulo->fechacomp	= $fechaOPLE;
 			$articulo->idarea		= $request->txtAreaClave;
 			$articulo->nombrearea	= $request->txtAreaNombre;
 			$articulo->numemple		= $request->txtResponsableNumEmpleado;
@@ -344,6 +349,10 @@ class ArticulosController extends Controller
 				break;
 		}
 
+		$fecha = explode("-", $request->editarDateFechaCompra);
+
+		$fechaOPLE = $fecha[2].'/'.$fecha[1].'/'.$fecha[0];
+
 		$articulo = articulos::where('numeroinv',$request->numeroInventario)
 		->update([
 			'estado' 	=> $nombreEstado, 
@@ -354,7 +363,7 @@ class ArticulosController extends Controller
 			'numserie' 	=> $request->EditarNumSerie,
 			'modelo' 	=> $request->editarModelo,
 			'marca' 	=> $request->editarMarca,
-			'fechacomp'	=> $request->editarDateFechaCompra,
+			'fechacomp'	=> $fechaOPLE,
 			'importe'	=> $request->editarImporte,
 			'factura'	=> $request->editarFactura ]);
 

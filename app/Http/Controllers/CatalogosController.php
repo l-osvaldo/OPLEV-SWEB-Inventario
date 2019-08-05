@@ -24,7 +24,7 @@ class CatalogosController extends Controller
 
     public function bieneseco ()
     {
-        $articulosecos = articulosecos::orderBy('iev', 'DESC')->paginate();
+        $articulosecos = articulosecos::orderBy('iev', 'DESC')->get();
         $partidas = partidas::all();
         $usuario = auth()->user();
         return view('catalogos.Bieneseco', compact('articulosecos','usuario','partidas'));

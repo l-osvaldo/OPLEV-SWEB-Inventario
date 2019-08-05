@@ -18,7 +18,9 @@
    
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Didact+Gothic&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:500&display=swap" rel="stylesheet">
+  {{-- <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet"> --}}
   <!-- Ionicons -->
   {{-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'"> --}}
   <!-- Select2 -->
@@ -62,7 +64,7 @@
 
 
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini sidebar-collapse" onload="cerrarMenus();">
   <div class="wrapper">
    
   
@@ -1396,64 +1398,123 @@ $(function () {
   });
 
   $("#editarImporte").maskMoney({
-  // The symbol to be displayed before the value entered by the user
-  prefix:'MXN$ ',
-  // The suffix to be displayed after the value entered by the user(example: "1234.23 €").
-  suffix: "",
-  // Delay formatting of text field until focus leaves the field
-  formatOnBlur: false,
-  // Prevent users from inputing zero
-  allowZero:false,
-  // Prevent users from inputing negative values
-  allowNegative:true,
-  // Allow empty input values, so that when you delete the number it doesn't reset to 0.00.
-  allowEmpty: false,
-  // Select text in the input on double click
-  doubleClickSelection: true,
-  // Select all text in the input when the element fires the focus event.
-  selectAllOnFocus: false,
-  // The thousands separator
-  thousands: ',',
-  // The decimal separator
-  decimal: '.' ,
-  // How many decimal places are allowed
-  precision: 2,
-  // Set if the symbol will stay in the field after the user exits the field.
-  affixesStay : false,
-  // Place caret at the end of the input on focus
-  bringCaretAtEndOnFocus: true
-});
+    // The symbol to be displayed before the value entered by the user
+    prefix:'MXN$ ',
+    // The suffix to be displayed after the value entered by the user(example: "1234.23 €").
+    suffix: "",
+    // Delay formatting of text field until focus leaves the field
+    formatOnBlur: false,
+    // Prevent users from inputing zero
+    allowZero:false,
+    // Prevent users from inputing negative values
+    allowNegative:true,
+    // Allow empty input values, so that when you delete the number it doesn't reset to 0.00.
+    allowEmpty: false,
+    // Select text in the input on double click
+    doubleClickSelection: true,
+    // Select all text in the input when the element fires the focus event.
+    selectAllOnFocus: false,
+    // The thousands separator
+    thousands: ',',
+    // The decimal separator
+    decimal: '.' ,
+    // How many decimal places are allowed
+    precision: 2,
+    // Set if the symbol will stay in the field after the user exits the field.
+    affixesStay : false,
+    // Place caret at the end of the input on focus
+    bringCaretAtEndOnFocus: true
+  });
 
-    $("#editarImporteECO").maskMoney({
-  // The symbol to be displayed before the value entered by the user
-  prefix:'MXN$ ',
-  // The suffix to be displayed after the value entered by the user(example: "1234.23 €").
-  suffix: "",
-  // Delay formatting of text field until focus leaves the field
-  formatOnBlur: false,
-  // Prevent users from inputing zero
-  allowZero:false,
-  // Prevent users from inputing negative values
-  allowNegative:true,
-  // Allow empty input values, so that when you delete the number it doesn't reset to 0.00.
-  allowEmpty: false,
-  // Select text in the input on double click
-  doubleClickSelection: true,
-  // Select all text in the input when the element fires the focus event.
-  selectAllOnFocus: false,
-  // The thousands separator
-  thousands: ',',
-  // The decimal separator
-  decimal: '.' ,
-  // How many decimal places are allowed
-  precision: 2,
-  // Set if the symbol will stay in the field after the user exits the field.
-  affixesStay : false,
-  // Place caret at the end of the input on focus
-  bringCaretAtEndOnFocus: true
-});
+  $("#editarImporteECO").maskMoney({
+    // The symbol to be displayed before the value entered by the user
+    prefix:'MXN$ ',
+    // The suffix to be displayed after the value entered by the user(example: "1234.23 €").
+    suffix: "",
+    // Delay formatting of text field until focus leaves the field
+    formatOnBlur: false,
+    // Prevent users from inputing zero
+    allowZero:false,
+    // Prevent users from inputing negative values
+    allowNegative:true,
+    // Allow empty input values, so that when you delete the number it doesn't reset to 0.00.
+    allowEmpty: false,
+    // Select text in the input on double click
+    doubleClickSelection: true,
+    // Select all text in the input when the element fires the focus event.
+    selectAllOnFocus: false,
+    // The thousands separator
+    thousands: ',',
+    // The decimal separator
+    decimal: '.' ,
+    // How many decimal places are allowed
+    precision: 2,
+    // Set if the symbol will stay in the field after the user exits the field.
+    affixesStay : false,
+    // Place caret at the end of the input on focus
+    bringCaretAtEndOnFocus: true
+  });
 
 
+  
+  $("#txtImporteECO").maskMoney({
+    // The symbol to be displayed before the value entered by the user
+    prefix:'MXN$ ',
+    // The suffix to be displayed after the value entered by the user(example: "1234.23 €").
+    suffix: "",
+    // Delay formatting of text field until focus leaves the field
+    formatOnBlur: false,
+    // Prevent users from inputing zero
+    allowZero:false,
+    // Prevent users from inputing negative values
+    allowNegative:true,
+    // Allow empty input values, so that when you delete the number it doesn't reset to 0.00.
+    allowEmpty: false,
+    // Select text in the input on double click
+    doubleClickSelection: true,
+    // Select all text in the input when the element fires the focus event.
+    selectAllOnFocus: false,
+    // The thousands separator
+    thousands: ',',
+    // The decimal separator
+    decimal: '.' ,
+    // How many decimal places are allowed
+    precision: 2,
+    // Set if the symbol will stay in the field after the user exits the field.
+    affixesStay : false,
+    // Place caret at the end of the input on focus
+    bringCaretAtEndOnFocus: true
+  });
+
+
+  $("#txtImporte").maskMoney({
+    // The symbol to be displayed before the value entered by the user
+    prefix:'MXN$ ',
+    // The suffix to be displayed after the value entered by the user(example: "1234.23 €").
+    suffix: "",
+    // Delay formatting of text field until focus leaves the field
+    formatOnBlur: false,
+    // Prevent users from inputing zero
+    allowZero:false,
+    // Prevent users from inputing negative values
+    allowNegative:true,
+    // Allow empty input values, so that when you delete the number it doesn't reset to 0.00.
+    allowEmpty: false,
+    // Select text in the input on double click
+    doubleClickSelection: true,
+    // Select all text in the input when the element fires the focus event.
+    selectAllOnFocus: false,
+    // The thousands separator
+    thousands: ',',
+    // The decimal separator
+    decimal: '.' ,
+    // How many decimal places are allowed
+    precision: 2,
+    // Set if the symbol will stay in the field after the user exits the field.
+    affixesStay : false,
+    // Place caret at the end of the input on focus
+    bringCaretAtEndOnFocus: true
+  });
 
 </script>
 
