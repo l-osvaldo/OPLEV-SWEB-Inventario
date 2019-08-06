@@ -63,6 +63,7 @@
 			</div>
 
 			<form>
+			<div class="card card-default" style="margin-top: 5px">
 				<div class="modal-body">
 					<div class="row">
 
@@ -87,13 +88,14 @@
 
 					</div>
 				</div>
-
+			</div>
 				<div class="modal-footer">
 					<button style="background-color: #E71096" class="btn btn-secondary float-right" id="editBtn" disabled>Actualizar</button>
 					<input type="hidden" name="Area" id="actualizarArea"> 
 					
 					
 				</div>
+
 			</form>
 
 		</div>

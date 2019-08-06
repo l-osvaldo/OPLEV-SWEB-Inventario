@@ -20,10 +20,10 @@
 	    <div class="row">
 	    	<div class="col-md-3">
 	    		<select class="form-control select2" id="selectReportes" style="width: 90%;">
-		    		<option value="0">Seleccione reporte</option>
+		    		<option value="0">Seleccione un reporte</option>
 		    		<option value="1">Bienes por partida</option>
-		    		<option value="2">Concentrado de bienes por área</option>
-		    		<option value="3">Concentrado de bienes por partida</option>
+		    		<option value="2">Concentrado de importes por área</option>
+		    		<option value="3">Concentrado de importes por partida</option>
 		    		<option value="4">Inventario por área</option>
 		    		<option value="5">Inventario por orden alfabético</option>
 		    		<option value="6">Resguardo por empleado</option>
@@ -63,12 +63,22 @@
 	</div>
 
 	<div id="cargando" style="display: none;">
-		
-		<div class="d-flex justify-content-center" >
-		  <div class="spinner-border" role="status">
-		    <span class="sr-only">Loading...</span>
-		  </div>
+
+		<div id="loader" class="hidden">
+			<div class="cubes">
+				<div class="sk-cube sk-cube1"></div>
+				<div class="sk-cube sk-cube2"></div>
+				<div class="sk-cube sk-cube3"></div>
+				<div class="sk-cube sk-cube4"></div>
+				<div class="sk-cube sk-cube5"></div>
+				<div class="sk-cube sk-cube6"></div>
+				<div class="sk-cube sk-cube7"></div>
+				<div class="sk-cube sk-cube8"></div>
+				<div class="sk-cube sk-cube9"></div>
+			</div>
 		</div>
+
+
 	</div>
 	<br>
 	<div class="col-12" id="divRespuesta" style="display: none;">     

@@ -313,7 +313,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group" align="right">
-                      <input type="checkbox" data-toggle="toggle" data-on="Visualizar" data-off="Edición" data-onstyle="default" data-offstyle="dark" data-width="100" id="activarEditar">
+                      <input type="checkbox" data-toggle="toggle" data-on="Desactivar edición" data-off="Activar edición" data-onstyle="default" data-offstyle="dark" data-width="170" id="activarEditar">
                     </div>
                   </div>
                 </div>

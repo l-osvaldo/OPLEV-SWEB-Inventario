@@ -74,7 +74,7 @@
             <div class="container-fluid">
               <form method="POST" action="{{ route('AgregarSub') }}">
                     @csrf                
-                <div class="card card-default">
+                <div class="card card-default" style="margin-top: 5px">
                   
                             <!-- /.card-header -->
                 <div class="card-body">
@@ -90,7 +90,7 @@
                           </select>
                           <label>Seleccione una Línea:</label>                 
                             <select class="form-control select2 validateDataDos" data-myTypeDos="select" data-errorDos= "8" data-validacionDos="1" id="lineaA" name="lineaA" style="width: 100%;">
-                              <option value="0" disabled="true" selected="true">Número de Línea</option>
+                              <option value="0" disabled="true" selected="true">Número de línea</option>
                             </select>
                       </div>
                     </div>      

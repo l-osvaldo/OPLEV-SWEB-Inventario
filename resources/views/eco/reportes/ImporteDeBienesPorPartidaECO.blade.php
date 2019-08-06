@@ -13,7 +13,10 @@
 		<br>
 		<table width="100%">
 			<tr>
-				<td width="100%" align="right">
+				<td>
+					<label><strong>CONCENTRADO DE IMPORTES POR PARTIDA</strong></label>
+				</td>
+				<td align="right">
 					<label style="margin-right: 80px"> <strong>TOTAL DE IMPORTE: $  </strong> {{ $totalImporte }} </label>
 				</td>
 			</tr>

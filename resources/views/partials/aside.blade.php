@@ -68,7 +68,7 @@
         </li>
         <li id="ople" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bienes','home','/','ople/alta','catalogos/reportes') ? 'menu-open' : '' !!}">
           <a class="{!! Request::is('catalogos/bienes','home','/','ople/alta') ? 'nav-link active' : 'nav-link' !!}">
-            <i class="nav-icon fa fa-desktop"></i>
+            <i class="nav-icon">O</i>
             <p>
               Bienes OPLE
               <i class="fa fa-angle-left right"></i>
@@ -91,7 +91,7 @@
         </li>
         <li id="eco" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bieneseco','catalogos/reportesECO') ? 'menu-open' : '' !!}">
           <a class="{!! Request::is('catalogos/bieneseco') ? 'nav-link active' : 'nav-link' !!}">
-            <i class="nav-icon fa fa-desktop"></i>
+            <i class="nav-icon">E</i>
             <p>
               Bienes ECO
               <i class="fa fa-angle-left right"></i>

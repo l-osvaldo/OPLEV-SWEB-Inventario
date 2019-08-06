@@ -6,10 +6,10 @@
 
   <div class="row topBar">
     <div class="col-sm-12 col-md-2 topLeftBar">
-      <div class="subTopL"><img src="{{ asset('images/siadmon.png') }}" height="50" width="125" style="margin-right: 1.5rem;" /></div>
+      <div class="subTopL"><img src="{{ asset('images/siadmon02.png') }}" height="80" width="155" style="margin-right: 1.5rem;" /></div>
     </div>
     <div class="col-sm-12 col-md-10 topRightBar">
-      <div class="subTopR" style="font-size: 18px;">Sistema Integral de Administración<br><span style="font-size: 15px; text-shadow: 2px 2px 2px #B9B9B9;">Dirección ejecutiva de administración</span></div>
+      <div class="subTopR" style="font-size: 18px;">Sistema Integral de Administración<br><span style="font-size: 15px; text-shadow: 2px 2px 2px #B9B9B9;">DIRECCIÓN EJECUTIVA DE ADMINISTRACIÓN</span></div>
     </div>
   </div>
 
@@ -62,7 +62,7 @@
       <img src="{{ asset('images/logoople.png') }}" class="imgLogin">
     </div>
     <div class="col-sm-12 col-md-4 text-center footerText">
-      Sistema Integral de Administración<br>Dirección ejecutiva de administración
+      Sistema Integral de Administración<br>DIRECCIÓN EJECUTIVA DE ADMINISTRACIÓN
     </div>
     <div class="col-sm-12 col-md-4">
 

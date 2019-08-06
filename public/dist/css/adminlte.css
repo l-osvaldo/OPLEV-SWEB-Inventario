@@ -13340,3 +13340,69 @@ a.text-muted:hover {
 
 /*# sourceMappingURL=adminlte.css.map */
 
+#loader{position: fixed;width: 100vw; height: 100vh;background: #f9f9f9; opacity: .8;top: 0;left: 0;z-index: 9999999999999;}
+.cubes {
+width: 40px;
+height: 40px;
+margin: 100px auto;z-index: 9999;
+position: absolute;
+top: 50%;
+left: 50%;
+margin-top: -40px; /* Half the height */
+margin-left: -40px; /* Half the width */
+}
+
+.cubes .sk-cube {
+width: 33%;
+height: 33%;
+background-color: #E71096;
+float: left;
+animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+}
+
+.cubes .sk-cube1 {
+animation-delay: 0.2s;
+}
+
+.cubes .sk-cube2 {
+animation-delay: 0.3s;
+}
+
+.cubes .sk-cube3 {
+animation-delay: 0.4s;
+}
+
+.cubes .sk-cube4 {
+animation-delay: 0.1s;
+}
+
+.cubes .sk-cube5 {
+animation-delay: 0.2s;
+}
+
+.cubes .sk-cube6 {
+animation-delay: 0.3s;
+}
+
+.cubes .sk-cube7 {
+animation-delay: 0s;
+}
+
+.cubes .sk-cube8 {
+animation-delay: 0.1s;
+}
+
+.cubes .sk-cube9 {
+animation-delay: 0.2s;
+}
+
+@keyframes sk-cubeGridScaleDelay {
+0%,
+70%,
+100% {
+transform: scale3D(1, 1, 1);
+}
+35% {
+transform: scale3D(0, 0, 1);
+}
+}

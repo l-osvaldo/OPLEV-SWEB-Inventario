@@ -63,7 +63,7 @@
             <div class="container-fluid">
               <form method="POST" action="{{ route('agregarLinea') }}">
                 @csrf               
-                <div class="card card-default">
+                <div class="card card-default" style="margin-top: 5px">
                                             <!-- /.card-header -->
                   <div class="card-body">
                     <div class="row">

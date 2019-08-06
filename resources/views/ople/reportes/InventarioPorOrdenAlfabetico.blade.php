@@ -14,7 +14,7 @@
 		<table width="100%">
 			<tr>
 				<td>
-					<label><strong>INVENTARIO POR ÁREA</strong></label>
+					<label><strong>INVENTARIO POR ORDEN ALFABÉTICO</strong></label>
 				</td>
 			</tr>
 			<tr>

@@ -20,7 +20,7 @@ $('#selectReportes').change(function() {
 		case '4':			
 			$('#divArea').css("display","block");
 			$('#segundaInstruccion').css("display","block");
-			$('#instruccion').html('2.- Seleccione una partida:');
+			$('#instruccion').html('2.- Seleccione una área:');
 			break;
 		case '5':
 			$('#seleccionSelect').css("display","none");
@@ -30,7 +30,7 @@ $('#selectReportes').change(function() {
 		case '6':			
 			$('#divEmpleado').css("display","block");
 			$('#segundaInstruccion').css("display","block");
-			$('#instruccion').html('2.- Seleccione una partida:');
+			$('#instruccion').html('2.- Seleccione un empleado:');
 			break;
 	}
 }); 

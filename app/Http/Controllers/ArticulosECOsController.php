@@ -200,6 +200,17 @@ class ArticulosECOsController extends Controller
 		$totalImporte = number_format($totalImporte,2);
 
 
+		// foreach ($nombrearea as $area) {
+		// 	$bandera = true;
+		// 	foreach ($areaAndImporteTotal as $areaImporte) {
+		// 		if ($area->idarea == $areaImporte->idarea){
+		// 			$bandera = false;
+		// 		}
+		// 	}
+			
+		// }
+
+
 		return view('eco.reportes.ImporteDeBienesPorAreaECO', compact('areaAndImporteTotal','totalImporte','nombreArea'));
 	}
 

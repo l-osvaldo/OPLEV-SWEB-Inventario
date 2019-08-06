@@ -93,7 +93,7 @@
 	  	</table>
 
 	  	<br>
-	  	<label><strong>INVENTARIO POR ÁREA</strong></label>
+	  	<label><strong>INVENTARIO POR ORDEN ALFABÉTICO</strong></label>
 	  	<br>
 	  	<label><strong>ÁREA:</strong></label> <label style="font-weight:lighter;"> <i> TODAS </i></label>
 

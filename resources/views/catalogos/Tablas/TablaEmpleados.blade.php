@@ -59,7 +59,7 @@
 						<div class="container-fluid">
 							<form method="POST" action="{{ route('agregarEmpleados') }}">
 								@csrf               
-								<div class="card card-default">
+								<div class="card card-default" style="margin-top: 5px">
 									<div class="card-body">
 					<div class="row">
 						<div class="col-md-4">
