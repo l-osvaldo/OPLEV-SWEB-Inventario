@@ -382,4 +382,6 @@ class ArticulosECOsController extends Controller
 		return $pdf->inline('InventarioPorArea-'.$request->nombreEmpleado.'.pdf');
 
 	}
+
+
 }
