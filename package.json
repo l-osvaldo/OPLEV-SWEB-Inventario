@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "cors": "^2.8.5",
         "sweetalert2": "^8.8.7"
     }
 }
