@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\articulos;
+use App\scanners;
 
 header('Access-Control-Allow-Origin: *');
 
-class APIController extends Controller
+class ScannerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class APIController extends Controller
      */
     public function index()
     {
-        $articulosOPLE = articulos::all();
+        $scanners = scanners::all();
 
-        return response()->json($articulosOPLE);
+        return response()->json($scanners);
     }
 
 
@@ -30,7 +30,12 @@ class APIController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $scanner = new scanners();
+
+        $scanner->numeroinventario = $request->numeroinventario;
+        $scanner->save();
+
+        return 'CODIGO DE BARRAS ESCANEADO CON EXITO';
     }
 
     /**
@@ -41,9 +46,7 @@ class APIController extends Controller
      */
     public function show($id)
     {
-        $articulo = articulos::where('numeroinv',$id)->get();
-
-        return response()->json($articulo);
+        //
     }
 
 
