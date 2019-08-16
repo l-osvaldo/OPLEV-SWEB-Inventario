@@ -31,10 +31,14 @@ class UserAPIController extends Controller
     {
         $usuario = User::where([['username', $request->usuario],['pass', $request->pass]])->get();
 
-        if ($usuario != null && $usuario != ''){
-            return 'usuario encontrado';
-        }else{
+        $prueba = json_decode($usuario, true)
+
+        //return $usuario;
+
+        if (empty($prueba)){
             return 'usuario no encontrado';
+        }else{
+            return 'usuario encontrado';
         }
     }
 
