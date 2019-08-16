@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\User;
 
 header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 
 class UserAPIController extends Controller
 {
@@ -31,14 +34,16 @@ class UserAPIController extends Controller
     {
         $usuario = User::where([['username', $request->usuario],['pass', $request->pass]])->get();
 
-        $prueba = json_decode($usuario, true)
+        $prueba = json_decode($usuario, true);
 
         //return $usuario;
 
         if (empty($prueba)){
-            return 'usuario no encontrado';
+            $res = [ "res" => 'usuario no encontrado' ];
+            return response()->json($res);
         }else{
-            return 'usuario encontrado';
+            $res = [ "res" => 'usuario encontrado' ];
+            return response()->json($res);
         }
     }
 
