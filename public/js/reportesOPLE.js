@@ -124,7 +124,7 @@ function bienesPorPartida(partida){
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
     	$('#btnGenerarPDF').css("display","block");
-    	$('#btnGenerarPDF').attr("href","/catalogos/reportes/BienesPorPartida/"+partidaNumNombre[0]+"/"+partidaNumNombre[1]);
+    	$('#btnGenerarPDF').attr("href","../catalogos/reportes/BienesPorPartida/"+partidaNumNombre[0]+"/"+partidaNumNombre[1]);
     	    	
     });
 }
@@ -157,7 +157,7 @@ function importeBienesPorArea(){
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
     	$('#btnGenerarPDF').css("display","block");
-    	$('#btnGenerarPDF').attr("href","/catalogos/reportes/importeBienesPorAreaPDF");
+    	$('#btnGenerarPDF').attr("href","../catalogos/reportes/importeBienesPorAreaPDF");
     	    	
     });
 
