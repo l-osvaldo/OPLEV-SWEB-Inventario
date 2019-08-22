@@ -142,6 +142,7 @@ function importeBienesPorAreaECO(){
 	    }
 	});
 
+
 	$.ajax({
       url: "importeBienesPorAreaECO",
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -161,6 +162,8 @@ function importeBienesPorAreaECO(){
     });
 
 }
+
+
 
 function importeBienesPorPartidaECO(){
 
