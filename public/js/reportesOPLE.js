@@ -191,7 +191,7 @@ function importeBienesPorPartida(){
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
     	$('#btnGenerarPDF').css("display","block");
-    	$('#btnGenerarPDF').attr("href","/catalogos/reportes/importeBienesPorPartidaPDF");
+    	$('#btnGenerarPDF').attr("href","../catalogos/reportes/importeBienesPorPartidaPDF");
     	    	
     });
 
@@ -228,7 +228,7 @@ function inventarioPorArea(area){
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
     	$('#btnGenerarPDF').css("display","block");
-    	$('#btnGenerarPDF').attr("href","/catalogos/reportes/inventarioPorAreaPDF/"+areaNumNombre[0]+"/"+areaNumNombre[1]);
+    	$('#btnGenerarPDF').attr("href","../catalogos/reportes/inventarioPorAreaPDF/"+areaNumNombre[0]+"/"+areaNumNombre[1]);
     	    	
     });
 
@@ -263,7 +263,7 @@ function inventarioPorOrdenAlfabetico(){
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
     	$('#btnGenerarPDF').css("display","block");
-    	$('#btnGenerarPDF').attr("href","/catalogos/reportes/inventarioPorOrdenAlfabeticoPDF");
+    	$('#btnGenerarPDF').attr("href","../catalogos/reportes/inventarioPorOrdenAlfabeticoPDF");
     	    	
     });
 
@@ -301,7 +301,7 @@ function ResguardoPorEmpleado(empleado){
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
     	$('#btnGenerarPDF').css("display","block");
-    	$('#btnGenerarPDF').attr("href","/catalogos/reportes/ResguardoPorEmpleadoPDF/"+empleadoNumNombre[0]+"/"+empleadoNumNombre[1]);
+    	$('#btnGenerarPDF').attr("href","../catalogos/reportes/ResguardoPorEmpleadoPDF/"+empleadoNumNombre[0]+"/"+empleadoNumNombre[1]);
     }); 
 
 } 

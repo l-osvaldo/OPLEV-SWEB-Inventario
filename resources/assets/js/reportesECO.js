@@ -123,7 +123,7 @@ function bienesPorPartidaECO(partida){
     	$('#respuestaReporteECO').html(response);
     	$('#cargandoECO').css("display","none");
     	$('#btnGenerarPDFECO').css("display","block");
-    	$('#btnGenerarPDFECO').attr("href","/catalogos/reportes/BienesPorPartidaECO/"+partidaNumNombre[0]+"/"+partidaNumNombre[1]);
+    	$('#btnGenerarPDFECO').attr("href","../catalogos/reportes/BienesPorPartidaECO/"+partidaNumNombre[0]+"/"+partidaNumNombre[1]);
     	    	
     });
 }
@@ -142,6 +142,7 @@ function importeBienesPorAreaECO(){
 	    }
 	});
 
+
 	$.ajax({
       url: "importeBienesPorAreaECO",
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -156,11 +157,13 @@ function importeBienesPorAreaECO(){
     	$('#respuestaReporteECO').html(response);
     	$('#cargandoECO').css("display","none");
     	$('#btnGenerarPDFECO').css("display","block");
-    	$('#btnGenerarPDFECO').attr("href","/catalogos/reportes/importeBienesPorAreaPDFECO");
+    	$('#btnGenerarPDFECO').attr("href","../catalogos/reportes/importeBienesPorAreaPDFECO");
     	    	
     });
 
 }
+
+
 
 function importeBienesPorPartidaECO(){
 
@@ -190,7 +193,7 @@ function importeBienesPorPartidaECO(){
     	$('#respuestaReporteECO').html(response);
     	$('#cargandoECO').css("display","none");
     	$('#btnGenerarPDFECO').css("display","block");
-    	$('#btnGenerarPDFECO').attr("href","/catalogos/reportes/importeBienesPorPartidaPDFECO");
+    	$('#btnGenerarPDFECO').attr("href","../catalogos/reportes/importeBienesPorPartidaPDFECO");
     	    	
     });
  
@@ -227,7 +230,7 @@ function inventarioPorAreaECO(area){
     	$('#respuestaReporteECO').html(response);
     	$('#cargandoECO').css("display","none");
     	$('#btnGenerarPDFECO').css("display","block");
-    	$('#btnGenerarPDFECO').attr("href","/catalogos/reportes/inventarioPorAreaPDFECO/"+areaNumNombre[0]+"/"+areaNumNombre[1]);
+    	$('#btnGenerarPDFECO').attr("href","../catalogos/reportes/inventarioPorAreaPDFECO/"+areaNumNombre[0]+"/"+areaNumNombre[1]);
     	    	
     });
 
@@ -261,7 +264,7 @@ function inventarioPorOrdenAlfabeticoECO(){
     	$('#respuestaReporteECO').html(response);
     	$('#cargandoECO').css("display","none");
     	$('#btnGenerarPDFECO').css("display","block");
-    	$('#btnGenerarPDFECO').attr("href","/catalogos/reportes/inventarioPorOrdenAlfabeticoPDFECO");
+    	$('#btnGenerarPDFECO').attr("href","../catalogos/reportes/inventarioPorOrdenAlfabeticoPDFECO");
     	    	
     });
 
@@ -299,7 +302,7 @@ function ResguardoPorEmpleadoECO(empleado){
     	$('#respuestaReporteECO').html(response);
     	$('#cargandoECO').css("display","none");
     	$('#btnGenerarPDFECO').css("display","block");
-    	$('#btnGenerarPDFECO').attr("href","/catalogos/reportes/ResguardoPorEmpleadoPDFECO/"+empleadoNumNombre[0]+"/"+empleadoNumNombre[1]);
+    	$('#btnGenerarPDFECO').attr("href","../catalogos/reportes/ResguardoPorEmpleadoPDFECO/"+empleadoNumNombre[0]+"/"+empleadoNumNombre[1]);
     }); 
 
 } 

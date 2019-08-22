@@ -72,8 +72,13 @@
   	@for ($i = 0; $i < $contadorBloques; $i++)	
   	
 		<table>
+<<<<<<< HEAD
 		    <tr>
 		      <td style="width: 120px;vertical-align: text-top"><img class="logo" src="{{ assets('images/logoople.png') }}" alt=""></td>
+=======
+		    <tr>		    	
+		      <td style="width: 120px;vertical-align: text-top"><img class="logo" src="{{ public_path('images/logoople.png') }}" alt=""></td>
+>>>>>>> a3ac6ee01cc82aff97a78008aad908a6fe37c523
 		      <td style="width: calc(100% - 240px);">
 		          <h2>
 		            <small>
