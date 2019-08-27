@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 
-
+header('Access-Control-Allow-Origin: *');
 
 class UserAPIController extends Controller
 {
