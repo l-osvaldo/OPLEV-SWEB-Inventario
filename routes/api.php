@@ -14,9 +14,11 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    Route::apiResource('articulos', 'APIController');
-	Route::apiResource('scanner', 'ScannerController');
-	Route::apiResource('usuario', 'UserAPIController');
+    
 });
 
+
+Route::apiResource('articulos', 'APIController');
+Route::apiResource('scanner', 'ScannerController');
+Route::apiResource('usuario', 'UserAPIController');
 
