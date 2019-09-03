@@ -23,11 +23,11 @@ use Illuminate\Http\Request;
 // 	Route::apiResource('usuario', 'UserAPIController');
 // });
 
-Route::middleware(['cors'])->group(function () {
-    Route::apiResource('articulos', 'APIController');
-	Route::apiResource('scanner', 'ScannerController');
-	Route::apiResource('usuario', 'UserAPIController');
-});
+// Route::middleware(['cors'])->group(function () {
+//     Route::apiResource('articulos', 'APIController');
+// 	Route::apiResource('scanner', 'ScannerController');
+// 	Route::apiResource('usuario', 'UserAPIController');
+// });
 
 
 
