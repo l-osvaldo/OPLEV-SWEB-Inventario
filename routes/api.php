@@ -13,11 +13,17 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
     
-});
+// });
 
-Route::group(['middleware' => ['cors']], function () {
+// Route::group(['middleware' => ['cors']], function () {
+//     Route::apiResource('articulos', 'APIController');
+// 	Route::apiResource('scanner', 'ScannerController');
+// 	Route::apiResource('usuario', 'UserAPIController');
+// });
+
+Route::middleware(['cors'])->group(function () {
     Route::apiResource('articulos', 'APIController');
 	Route::apiResource('scanner', 'ScannerController');
 	Route::apiResource('usuario', 'UserAPIController');
