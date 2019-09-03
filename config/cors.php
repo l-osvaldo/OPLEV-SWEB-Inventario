@@ -14,7 +14,7 @@ return [
    
     'supportsCredentials' => false,
     'allowedOrigins' => ['*'],
-    'allowedOriginsPatterns' => ['*'],
+    'allowedOriginsPatterns' => [],
     'allowedHeaders' => ['*'],
     'allowedMethods' => ['*'], // ex: ['GET', 'POST', 'PUT',  'DELETE']
     'exposedHeaders' => [],
