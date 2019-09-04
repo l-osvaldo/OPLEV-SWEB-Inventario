@@ -16,6 +16,7 @@
         "h4cc/wkhtmltopdf-amd64": "0.12.x",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
+        "spatie/laravel-cors": "^1.6",
         "uxweb/sweet-alert": "~1.4"
     },
     "require-dev": {

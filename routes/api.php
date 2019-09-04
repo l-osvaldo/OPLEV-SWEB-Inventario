@@ -31,4 +31,6 @@ use Illuminate\Http\Request;
 
 
 
-
+Route::apiResource('articulos', 'APIController');
+Route::apiResource('scanner', 'ScannerController');
+Route::apiResource('usuario', 'UserAPIController');
