@@ -30,6 +30,6 @@ use Illuminate\Http\Request;
 // });
 
 
-Route::apiResource('articulos', 'APIController');
-Route::apiResource('scanner', 'ScannerController');
-Route::apiResource('usuario', 'UserAPIController');
+Route::apiResource('articulos', 'APIController')->middleware(Cors::class);
+Route::apiResource('scanner', 'ScannerController')->middleware(Cors::class);
+Route::apiResource('usuario', 'UserAPIController')->middleware(Cors::class);
