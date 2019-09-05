@@ -9,6 +9,13 @@ header('Access-Control-Allow-Origin: *');
 
 class UserAPIController extends Controller
 {
+
+    public function __construct()
+  {
+      $this->middleware('cors');
+  }
+
+    
     /**
      * Display a listing of the resource.
      *
