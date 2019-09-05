@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "289ff5587cf5cf7ceae6d174865e5ccb",
+    "content-hash": "0f2f60ee60c1992035dbff4dc2895133",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -64,21 +64,21 @@
         },
         {
             "name": "barryvdh/laravel-snappy",
-            "version": "v0.4.4",
+            "version": "v0.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-snappy.git",
-                "reference": "4379153df99c04938946b8174337eb99a8852a8f"
+                "reference": "9be767fc7a082665a84945f36c70b0cbead91ce9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-snappy/zipball/4379153df99c04938946b8174337eb99a8852a8f",
-                "reference": "4379153df99c04938946b8174337eb99a8852a8f",
+                "url": "https://api.github.com/repos/barryvdh/laravel-snappy/zipball/9be767fc7a082665a84945f36c70b0cbead91ce9",
+                "reference": "9be767fc7a082665a84945f36c70b0cbead91ce9",
                 "shasum": ""
             },
             "require": {
-                "illuminate/filesystem": "5.5.x|5.6.x|5.7.x|5.8.x",
-                "illuminate/support": "5.5.x|5.6.x|5.7.x|5.8.x",
+                "illuminate/filesystem": "5.5.x|5.6.x|5.7.x|5.8.x|6.0.*",
+                "illuminate/support": "5.5.x|5.6.x|5.7.x|5.8.x|6.0.*",
                 "knplabs/knp-snappy": "^1",
                 "php": ">=7"
             },
@@ -121,7 +121,7 @@
                 "wkhtmltoimage",
                 "wkhtmltopdf"
             ],
-            "time": "2019-02-26T20:00:55+00:00"
+            "time": "2019-08-30T16:12:23+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -804,18 +804,6 @@
         },
         {
             "name": "laravel/framework",
-<<<<<<< HEAD
-            "version": "v5.8.34",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "c3a870b96c7afe5174f486af74768ccfddeec77b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/c3a870b96c7afe5174f486af74768ccfddeec77b",
-                "reference": "c3a870b96c7afe5174f486af74768ccfddeec77b",
-=======
             "version": "v5.8.35",
             "source": {
                 "type": "git",
@@ -826,7 +814,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/5a9e4d241a8b815e16c9d2151e908992c38db197",
                 "reference": "5a9e4d241a8b815e16c9d2151e908992c38db197",
->>>>>>> 2ed517476abdff5eed75c24c1a56ede021abc9a7
                 "shasum": ""
             },
             "require": {
@@ -961,11 +948,7 @@
                 "framework",
                 "laravel"
             ],
-<<<<<<< HEAD
-            "time": "2019-08-27T14:35:59+00:00"
-=======
             "time": "2019-09-03T16:44:30+00:00"
->>>>>>> 2ed517476abdff5eed75c24c1a56ede021abc9a7
         },
         {
             "name": "laravel/tinker",
@@ -1886,65 +1869,6 @@
                 "stylesheet"
             ],
             "time": "2016-07-19T19:14:21+00:00"
-        },
-        {
-            "name": "spatie/laravel-cors",
-            "version": "1.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-cors.git",
-                "reference": "d74099d57821d5a72ae21416c0be0dcd58779355"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-cors/zipball/d74099d57821d5a72ae21416c0be0dcd58779355",
-                "reference": "d74099d57821d5a72ae21416c0be0dcd58779355",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*|^6.0",
-                "php": "^7.2"
-            },
-            "require-dev": {
-                "orchestra/testbench": "3.5.*|3.6.*|3.7.*|3.8.*|^4.0",
-                "phpunit/phpunit": "^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Spatie\\Cors\\CorsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\Cors\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Send CORS headers in a Laravel or Lumen application",
-            "homepage": "https://github.com/spatie/laravel-cors",
-            "keywords": [
-                "ajax",
-                "api",
-                "cors",
-                "laravel-cors",
-                "request",
-                "spatie"
-            ],
-            "time": "2019-09-04T06:55:15+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4447,8 +4371,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Utility class for timing",
@@ -4578,8 +4502,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "The PHP Unit Testing framework.",
