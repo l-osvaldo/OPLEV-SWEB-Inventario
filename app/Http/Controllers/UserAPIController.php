@@ -15,7 +15,7 @@ class UserAPIController extends Controller
       $this->middleware('cors');
   }
 
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -35,11 +35,7 @@ class UserAPIController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-        
+    {        
         $usuario = User::where([['username', $request->usuario],['pass', $request->pass]])->get();
 
         $prueba = json_decode($usuario, true);
