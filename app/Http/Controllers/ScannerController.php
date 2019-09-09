@@ -10,10 +10,10 @@ header('Access-Control-Allow-Origin: *');
 class ScannerController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('cors');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('cors');
+    // }
 
     /**
      * Display a listing of the resource.
