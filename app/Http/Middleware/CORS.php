@@ -1,5 +1,6 @@
 <?php namespace App\Http\Middleware;
 
+use Illuminate\Support\Facades\Log;
 use Closure;
 
 class CORS {
@@ -19,7 +20,7 @@ class CORS {
        // hay que agregarle un die() aquí y subirlo para ver si esta entrando
 
        //die('cors');
-       Log::notice("valida");
+       Log::notice("Valida");
        return $next($request);
     }
 
