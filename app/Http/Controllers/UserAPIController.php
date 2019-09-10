@@ -10,14 +10,6 @@ header('Access-Control-Allow-Origin: *');
 class UserAPIController extends Controller
 {
 
-    public function __construct()
-  {
-       header('Access-Control-Allow-Origin: *');
-       header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-       header('Access-Control-Allow-Headers: Content-Type, Accept, Authorization, X-Requested-With, Application');
-  }
-
-
     /**
      * Display a listing of the resource.
      *
