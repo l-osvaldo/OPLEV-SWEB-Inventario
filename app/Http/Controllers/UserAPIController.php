@@ -36,6 +36,7 @@ class UserAPIController extends Controller
      */
     public function store(Request $request)
     {        
+        die('llegue');
         $usuario = User::where([['username', $request->usuario],['pass', $request->pass]])->get();
 
         $prueba = json_decode($usuario, true);
