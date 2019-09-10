@@ -22,11 +22,7 @@ use Illuminate\Http\Request;
 
 
 
-Route::group([
-        'middleware' => ['api', 'cors'],
-        
-        'prefix' => 'api',
-    ], function ($router) {
+Route::group(['middleware' => ['cors']], function () {
         Route::apiResource('articulos', 'APIController');
 		Route::apiResource('scanner', 'ScannerController');
 		Route::apiResource('usuario', 'UserAPIController');
