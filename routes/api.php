@@ -17,19 +17,21 @@ use Illuminate\Http\Request;
     
 // });
 
-// Route::group(['middleware' => ['cors']], function () {
-//     Route::apiResource('articulos', 'APIController');
-// 	Route::apiResource('scanner', 'ScannerController');
-// 	Route::apiResource('usuario', 'UserAPIController');
-// });
-
-// Route::middleware(['cors'])->group(function () {
-//     Route::apiResource('articulos', 'APIController');
-// 	Route::apiResource('scanner', 'ScannerController');
-// 	Route::apiResource('usuario', 'UserAPIController');
-// });
 
 
-Route::apiResource('articulos', 'APIController');
-Route::apiResource('scanner', 'ScannerController');
-Route::apiResource('usuario', 'UserAPIController');
+
+
+
+Route::group([
+        'middleware' => ['api', 'cors'],
+        
+        'prefix' => 'api',
+    ], function ($router) {
+        Route::apiResource('articulos', 'APIController');
+		Route::apiResource('scanner', 'ScannerController');
+		Route::apiResource('usuario', 'UserAPIController');
+    });
+
+
+
+
