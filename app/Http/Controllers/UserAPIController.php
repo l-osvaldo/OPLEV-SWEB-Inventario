@@ -10,10 +10,12 @@ header('Access-Control-Allow-Origin: *');
 class UserAPIController extends Controller
 {
 
-  //   public function __construct()
-  // {
-  //     $this->middleware('cors');
-  // }
+    public function __construct()
+  {
+       header('Access-Control-Allow-Origin: *');
+       header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+       header('Access-Control-Allow-Headers: Content-Type, Accept, Authorization, X-Requested-With, Application');
+  }
 
 
     /**
