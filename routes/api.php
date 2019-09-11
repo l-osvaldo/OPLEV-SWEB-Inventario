@@ -20,14 +20,14 @@ use Illuminate\Http\Request;
 
 
 
-
+/*
 
 Route::group(['middleware' => ['cors']], function () {
         Route::apiResource('articulos', 'APIController');
 		Route::apiResource('scanner', 'ScannerController');
 		Route::apiResource('usuario', 'UserAPIController');
     });
-
+*/
 
 
 
