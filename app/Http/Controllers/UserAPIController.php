@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\User;
 
 header('Access-Control-Allow-Origin: *');
@@ -31,6 +32,7 @@ class UserAPIController extends Controller
     public function store(Request $request)
     {        
         //die('llegue');
+        Log::notice("ValidaC");
         $usuario = User::where([['username', $request->usuario],['pass', $request->pass]])->get();
 
         $prueba = json_decode($usuario, true);
