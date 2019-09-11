@@ -14,7 +14,7 @@ class CORS {
      */
     public function handle($request, Closure $next)
     {
-        var_dump("antes de los headers");
+        //var_dump("antes de los headers");
 
 
         header('Access-Control-Allow-Origin: *');
@@ -22,9 +22,9 @@ class CORS {
         header('Access-Control-Allow-Headers: Content-Type, Accept, Authorization, X-Requested-With, Application');
         // hay que agregarle un die() aquí y subirlo para ver si esta entrando
 
-        var_dump("despues de los headers");
+        /*var_dump("despues de los headers");
         Log::notice("Antes del die");
-        die();       
+        die();       */
         return $next($request);
     }
 
