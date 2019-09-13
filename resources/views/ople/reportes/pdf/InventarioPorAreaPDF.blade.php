@@ -97,7 +97,7 @@
 	  	<br>
 	  	<label><strong>ÁREA:</strong></label> <label style="font-weight:lighter;"> <i> {{ $area->nombreArea }} </i></label>
 
-	  	<div style="height: 580px">
+	  	<div style="height: 570px">
 		  	<table style="margin-top: 15px;">
 			  <thead>
 			    <tr style="background-color: #ccc; border: solid 1px #000;">
