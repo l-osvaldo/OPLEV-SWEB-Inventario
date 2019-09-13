@@ -92,9 +92,8 @@
 		    </tr>
 	  	</table>
 
-	  	<br>
 	  	<label><strong>INVENTARIO POR ORDEN ALFABÉTICO</strong></label>
-	  	<br>
+
 	  	<label><strong>ÁREA:</strong></label> <label style="font-weight:lighter;"> <i> TODAS </i></label>
 
 	  	<div style="height: 580px">
