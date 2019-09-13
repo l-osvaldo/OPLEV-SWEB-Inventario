@@ -48,7 +48,7 @@
   </head>
   <body>
   	@php
-  		$bloques = 15;
+  		$bloques = 14;
   		$inicioBloque = 0;
   		$contadorBloques = 1;
   		$pagina = 1;
@@ -59,14 +59,14 @@
   		@if ($loop->index == ($bloques - 1) )
   		@php
   			$contadorBloques += 1;
-  			$bloques += 15;
+  			$bloques += 14;
   		@endphp
   			
   		@endif
   	@endforeach
 
   	@php
-  		$bloques = 15;
+  		$bloques = 14;
   	@endphp
 
   	@for ($i = 0; $i < $contadorBloques; $i++)	
@@ -93,7 +93,7 @@
 	  	</table>
 
 	  	<label><strong>INVENTARIO POR ORDEN ALFABÉTICO</strong></label>
-
+	  	<br>
 	  	<label><strong>ÁREA:</strong></label> <label style="font-weight:lighter;"> <i> TODAS </i></label>
 
 	  	<div style="height: 580px">
