@@ -168,7 +168,6 @@
   <br>
   <br>
   <br>
-  <br>
   <div class="row" align="right">
     <label>Página:   {{ $pagina }} </label>
     @php
