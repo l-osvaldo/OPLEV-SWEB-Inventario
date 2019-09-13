@@ -282,6 +282,7 @@
 				</strong>
 			</label>
 		</div>
+		<br>
 		<div class="row" align="right">
 		    <label>Página:   {{ $pagina }} </label>
 		    @php
