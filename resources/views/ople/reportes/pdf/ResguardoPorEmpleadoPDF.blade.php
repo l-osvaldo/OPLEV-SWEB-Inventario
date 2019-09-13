@@ -139,7 +139,7 @@
 	  	@endforeach
 
 	  	
-	  	<div style="height: 400px">
+	  	<div style="height: 390px">
 		  	<table style="margin-top: 15px;">
 			  <thead>
 			    <tr style="background-color: #ccc; border: solid 1px #000;">
