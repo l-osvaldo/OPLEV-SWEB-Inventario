@@ -97,7 +97,7 @@
 	  	<br>
 	  	<label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida->numPartida }} {{ $partida->nombrePartida }} </i></label>
 
-	  	<div style="height: 560px">
+	  	<div style="height: 570px">
 		  	<table style="margin-top: 15px;">
 			  <thead>
 			    <tr style="background-color: #ccc; border: solid 1px #000;">
