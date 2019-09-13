@@ -139,7 +139,7 @@
 	  	@endforeach
 
 	  	
-	  	<div style="height: 410px">
+	  	<div style="height: 400px">
 		  	<table style="margin-top: 15px;">
 			  <thead>
 			    <tr style="background-color: #ccc; border: solid 1px #000;">
@@ -282,7 +282,6 @@
 				</strong>
 			</label>
 		</div>
-		<br>
 		<div class="row" align="right">
 		    <label>Página:   {{ $pagina }} </label>
 		    @php
