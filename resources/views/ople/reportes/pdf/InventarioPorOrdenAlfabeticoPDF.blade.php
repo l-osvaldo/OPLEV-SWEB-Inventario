@@ -141,7 +141,7 @@
 
 			  	@php
 			  		$inicioBloque = $bloques;
-			  		$bloques += 15;
+			  		$bloques += 14;
 			  	@endphp
 
 			  	<tr>
