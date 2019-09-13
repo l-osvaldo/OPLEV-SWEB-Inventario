@@ -48,7 +48,7 @@
   </head>
   <body>
   	@php
-  		$bloques = 15;
+  		$bloques = 14;
   		$inicioBloque = 0;
   		$contadorBloques = 1;
   		$pagina = 1;
@@ -59,14 +59,14 @@
   		@if ($loop->index == ($bloques - 1) )
   		@php
   			$contadorBloques += 1;
-  			$bloques += 15;
+  			$bloques += 14;
   		@endphp
   			
   		@endif
   	@endforeach
 
   	@php
-  		$bloques = 15;
+  		$bloques = 14;
   	@endphp
 
   	@for ($i = 0; $i < $contadorBloques; $i++)	
@@ -142,7 +142,7 @@
 
 			  	@php
 			  		$inicioBloque = $bloques;
-			  		$bloques += 15;
+			  		$bloques += 14;
 			  	@endphp
 
 			  	<tr>
