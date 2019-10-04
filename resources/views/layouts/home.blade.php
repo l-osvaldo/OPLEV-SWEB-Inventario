@@ -8,21 +8,11 @@
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('images/logoople.png') }}">
 
-    <title>@yield('title') | SIADMON | OPLE Veracruz</title>
+    <title> Sistema Integral de Administración </title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Bootstrap 4.0-->
     <link rel="stylesheet" href="{{ asset('vendor_components/bootstrap/dist/css/bootstrap.css') }}">
-
-    <!-- Bootstrap extend-->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap-extend.css') }}">
-
-    <!-- theme style -->
-    <!--link rel="stylesheet" href="{{ asset('css/master_style.css') }}"-->
-
-    <!-- Lion_admin skins -->
-    <link rel="stylesheet" href="{{ asset('css/skins/_all-skins.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -34,8 +24,9 @@
 
   </head>
 
-  <body class="hold-transition bg-img" data-overlay="4">
+  <body class="d-flex flex-column h-100">
     @yield('content')
+
     <!-- jQuery 3 -->
     <script src="{{ URL::asset('vendor_components/jquery/dist/jquery.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
