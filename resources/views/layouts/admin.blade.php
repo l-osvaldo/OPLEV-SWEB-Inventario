@@ -426,7 +426,7 @@
           console.log(id,no);
           $.ajax({
              type:'POST',
-             url:'updatearea/',
+             url:'updatearea',
              data:{id:id, no:no},
             success:function(data){
                 swal({title: "Listo!", text: "Area actualizada", type: "success"},
