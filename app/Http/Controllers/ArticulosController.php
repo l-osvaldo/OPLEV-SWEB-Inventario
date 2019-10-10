@@ -349,9 +349,14 @@ class ArticulosController extends Controller
 				break;
 		}
 
-		$fecha = explode("-", $request->editarDateFechaCompra);
+		if ($request->editarDateFechaCompra === '' || $request->editarDateFechaCompra == null) {
+			$fechaOPLE = '- -';
+		}else {
+			$fecha = explode("-", $request->editarDateFechaCompra);
 
-		$fechaOPLE = $fecha[2].'/'.$fecha[1].'/'.$fecha[0];
+			$fechaOPLE = $fecha[2].'/'.$fecha[1].'/'.$fecha[0];
+		}
+		
 
 		$articulo = articulos::where('numeroinv',$request->numeroInventario)
 		->update([

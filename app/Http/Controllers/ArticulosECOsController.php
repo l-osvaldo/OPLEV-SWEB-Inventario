@@ -135,9 +135,15 @@ class ArticulosECOsController extends Controller
 				break;
 		}
 
-		$fecha = explode("-", $request->editarDateFechaCompraECO);
+		if ($request->editarDateFechaCompraECO === '' || $request->editarDateFechaCompraECO == null) {
+			$fechaOPLE = '- -';
+		}else {
+			$fecha = explode("-", $request->editarDateFechaCompraECO);
 
-		$fechaOPLE = $fecha[2].'/'.$fecha[1].'/'.$fecha[0];
+			$fechaOPLE = $fecha[2].'/'.$fecha[1].'/'.$fecha[0];
+		}
+
+		
 
 		//echo $request;
 
