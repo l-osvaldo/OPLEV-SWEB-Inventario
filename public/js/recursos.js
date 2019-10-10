@@ -104,7 +104,7 @@ $("#partidaA").change(function()
 
   //console.log(partida);
   $.ajax({
-    url: "/catalogos/obtenLineasAg",
+    url: "obtenLineasAg",
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
     type: 'GET',
     data: {partida: partida},
