@@ -137,6 +137,12 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('catalogos/ResguardoPorEmpleadoECO', 'ArticulosECOsController@ResguardoPorEmpleadoECO');
 	Route::get('catalogos/reportes/ResguardoPorEmpleadoPDFECO/{numEmpleado}/{nombreEmpleado}', 'ArticulosECOsController@ResguardoPorEmpleadoPDFECO');
 
+	// Depreciación 
+	Route::get('/catalogos/depreciacion', 'ArticulosController@depreciacion')->name('depreciacion');
+	Route::get('/catalogos/calculoDepreciacion', 'ArticulosController@calculoDepreciacion');
+
+
+
 });
 
 Route::get('/', function () {

@@ -161,6 +161,7 @@
 <script type="text/javascript" src="{{ asset('js/lineas.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/sublineas.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/depreciacion.js') }}"></script>
 
 <script src="{{ asset('/plugins/jquery-maskmoney-master/dist/jquery.maskMoney.js') }}"></script>
 

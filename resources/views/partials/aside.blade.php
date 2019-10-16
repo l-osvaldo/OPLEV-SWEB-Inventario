@@ -64,8 +64,8 @@
               </li>
             </ul>
         </li>
-        <li id="ople" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bienes','home','/','ople/alta','catalogos/reportes') ? 'menu-open' : '' !!}">
-          <a class="{!! Request::is('catalogos/bienes','home','/','ople/alta') ? 'nav-link active' : 'nav-link' !!}">
+        <li id="ople" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bienes','home','/','ople/alta','catalogos/reportes','catalogos/depreciacion') ? 'menu-open' : '' !!}">
+          <a class="{!! Request::is('catalogos/bienes','home','/','ople/alta','catalogos/depreciacion') ? 'nav-link active' : 'nav-link' !!}">
             <i class="nav-icon">O</i>
             <p>
               Bienes OPLE
@@ -83,6 +83,12 @@
               <a href="{{ route('reportes') }}" class="{!! Request::is('catalogos/reportes') ? 'nav-link active' : 'nav-link' !!}">
                 <i class="fa fa-file-pdf-o"></i>
                 <p style="margin-left: 10px;">Reportes</p>
+              </a>
+            </li>
+            <li class="nav-item" style="margin-left: 25px;">
+              <a href="{{ route('depreciacion') }}" class="{!! Request::is('catalogos/depreciacion') ? 'nav-link active' : 'nav-link' !!}">
+                <i class="fa fa-sort-amount-desc"></i>
+                <p style="margin-left: 10px;">Depreciación</p>
               </a>
             </li>
           </ul>

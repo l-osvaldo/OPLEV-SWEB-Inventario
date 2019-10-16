@@ -376,4 +376,23 @@ class ArticulosController extends Controller
         return redirect()->route('catalogos');
 	}
 
+	// ************ Depreciación ************
+
+	public function depreciacion(){
+		$usuario = auth()->user();
+		$partidas = DB::table('articulos')->select('partida','descpartida')->groupBy('partida','descpartida')->get(); 
+
+		return view('depreciacion.depreciacion',compact('usuario','partidas'));
+	}
+
+	public function calculoDepreciacion(Request $request){
+		$partida = $request;
+		$articulos = articulos::select('numeroinv','concepto','fechacomp','importe')->where('partida', $request->numPartida)->whereNotIn('fechacomp', ['  -   -'])->get();
+		$noDepreciacion = articulos::select('numeroinv','concepto','importe')->where([['partida', $request->numPartida],['fechacomp','=','  -   -']])->get();
+
+
+
+		return view('depreciacion.tablaDepreciacion',compact('partida','articulos','noDepreciacion'));
+	}
+
 }
