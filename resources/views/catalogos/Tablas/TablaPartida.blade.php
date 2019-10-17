@@ -121,6 +121,31 @@
                   <!-- /.col -->
                 </div>
                 <!-- /.row -->
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label style="margin-top: 10px;">¿Esta partida tendrá depreciación?</label>                      
+                      <input type="checkbox" data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="default" data-offstyle="dark" data-width="50" id="activarDepreciacion"> 
+                    </div>                    
+                  </div>
+                  <div id="divDepreciacion" style="display: none;" class="col-md-9">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label style="margin-top: 10px;">% de valor residual:</label>
+                          <input type="number" name="porcentajeDepreciacion" id="porcentajeDepreciacion" min="1" max="100" value="1" data-suffix="%" class="form-control" onKeyPress="return SoloNumerosLetras(event,'numero');" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                        </div>                    
+                      </div> 
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label style="margin-top: 10px;">Años de vida:</label>
+                          <input type="number" name="aniosVida" id="aniosVida" min="1" max="10" value="1" class="form-control" data-suffix="años" onKeyPress="return SoloNumerosLetras(event,'numero');" onkeyup="javascript:this.value=this.value.toUpperCase();">
+                        </div>                    
+                      </div> 
+                    </div>
+                  </div> 
+                                
+                </div>
               </div>
             </div>
             <!--Fin Agregar Partida -->

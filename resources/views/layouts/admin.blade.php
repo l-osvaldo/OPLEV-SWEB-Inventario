@@ -162,6 +162,7 @@
 <script type="text/javascript" src="{{ asset('js/sublineas.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/depreciacion.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/partidas.js') }}"></script>
 
 <script src="{{ asset('/plugins/jquery-maskmoney-master/dist/jquery.maskMoney.js') }}"></script>
 
@@ -297,32 +298,6 @@
       datosValidosDos(valor, error, id, tipo);
     });
   </script>
-  {{-- <script>
-    $(document).on("click", "#passwordGenerateA", function(){
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for ( var i = 0; i < 8; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-      document.getElementById("contPassA").value = result;
-      var valor = $('#contPassA').val();
-      var error = $('#contPassA').attr("data-error");
-      var id = $('#contPassA').attr("id");
-      var tipo = $('#contPassA').attr("data-myType");
-      datosValidos(valor, error, id, tipo);
-    });
-  
-    $(document).on("click", "#passwordGenerateEdit", function(){
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for ( var i = 0; i < 8; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-      document.getElementById("contPassEdit").value = result;
-    });
-  </script> --}}
   
   <script>
    $(document).on("click", "#passCopi", function(){
@@ -503,12 +478,6 @@
       }   
       });
   </script>
-
-
-
-
-
-
 
 <!--validacion-->
 
@@ -1312,24 +1281,6 @@ $(function () {
       timePickerIncrement: 30,
       format             : 'MM/DD/YYYY h:mm A'
     })
-    //Date range as a button
-    // $('#daterange-btn').daterangepicker(
-    //   {
-    //     ranges   : {
-    //       'Today'       : [moment(), moment()],
-    //       'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-    //       'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-    //       'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-    //       'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-    //       'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-    //     },
-    //     startDate: moment().subtract(29, 'days'),
-    //     endDate  : moment()
-    //   },
-    //   function (start, end) {
-    //     $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-    //   }
-    // )
 
     //iCheck for checkbox and radio inputs
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({

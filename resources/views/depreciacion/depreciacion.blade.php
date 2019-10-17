@@ -14,7 +14,7 @@
 	  		<div class="row">
 		    	<div class="col-md-3">
 		    		<select class="form-control select2" id="depreciacionPartida" style="width: 90%;">
-			    		<option value="0">Seleccione un reporte</option>
+			    		<option value="0">Seleccione una partida</option>
 			    		@foreach ($partidas as $partida)
 			    			<option value="{{ $partida->partida }}"> {{ $partida->partida }} | {{ $partida->descpartida }}</option>
 			    		@endforeach

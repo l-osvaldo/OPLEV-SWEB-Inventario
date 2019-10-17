@@ -389,6 +389,7 @@ class ArticulosController extends Controller
 		$partida = $request;
 		$articulos = articulos::select('numeroinv','concepto','fechacomp','importe')->where('partida', $request->numPartida)->whereNotIn('fechacomp', ['  -   -'])->get();
 		$noDepreciacion = articulos::select('numeroinv','concepto','importe')->where([['partida', $request->numPartida],['fechacomp','=','  -   -']])->get();
+		
 
 
 
