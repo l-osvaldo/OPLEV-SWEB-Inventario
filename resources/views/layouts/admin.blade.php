@@ -324,24 +324,7 @@
       modal.find('.modal-body #editClave').val(id);
       //console.log(area,id)
       
-    });
-
-    $('#btn-submit2').on('click',function(e){
-      e.preventDefault();
-      var form = $(this).parents('form');
-      swal({
-          title: "Registro de Partidas",
-          text: "¿Desea continuar?",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#0080FF",
-          confirmButtonText: "Sí",
-          closeOnConfirm: false
-      }, function(isConfirm){
-          if (isConfirm) form.submit();
-          
-      });
-    });
+    });    
 
     $('#btnActualizarArticulo').on('click',function(e){
       e.preventDefault();
@@ -480,8 +463,6 @@
   </script>
 
 <!--validacion-->
-
-
 <script>
   $('#btn-submit').on('click',function(e){
      e.preventDefault();
@@ -573,21 +554,7 @@ var validoNumeroPartida = true;
 </script>
 
    <script>
-   $( ".validateData" ).keyup(function() {
-       var valor = $(this).val();
-       var error = $(this).attr("data-error");
-       var id = $(this).attr("id");
-       var tipo = $(this).attr("data-myType");
-       datosValidos(valor, error, id, tipo);
-   });
    
-   // $( ".validateData" ).change(function() {
-   //     var valor = $(this).val();
-   //     var error = $(this).attr("data-error");
-   //     var id = $(this).attr("id");
-   //     var tipo = $(this).attr("data-myType");
-   //     datosValidos(valor, error, id, tipo);
-   // });
    
    $( ".validateDataDos" ).keyup(function() {    
        var valor = $(this).val();
@@ -704,65 +671,6 @@ var validoNumeroPartida = true;
     $('#ople').removeClass('menu-open');
     $('#eco').removeClass('menu-open');
    }
-   
-   function datosValidos(valor, error, id, tipo)
-   {
-       switch (tipo) {
-         case 'text':
-           if (valor.match(/^[0-9a-zA-ZÀ-ÿ.,-^'^"\u00f1\u00d1]+(\s*[0-9a-zA-ZÀ-ÿ.,-^'^"\u00f1\u00d1]*)*[0-9a-zA-ZÀ-ÿ.,-^'^"\u00f1\u00d1]*$/) && valor!=""){
-             $('.error'+ error).text("");
-             $('#'+id).attr("data-validacion", '0');
-             $('#'+id).removeClass('inputDanger');
-             $('#'+id).addClass('inputSuccess');
-           }else{
-             $('.error'+ error).text("Este campo no puede ir vacío o llevar caracteres especiales.");
-             $('#'+id).attr("data-validacion", '1');
-             $('#'+id).removeClass('inputSuccess');
-             $('#'+id).addClass('inputDanger');
-           }
-           break;
-         case 'int':
-           if (valor.match(/^[0-9]*$/) && valor!=""){
-            validarPartida(valor,error,id);        
-           }else{
-            $('.error'+ error).text("Solo numeros.");
-            $('#'+id).attr("data-validacion", '1');
-            $('#'+id).removeClass('inputSuccess');
-            $('#'+id).addClass('inputDanger'); 
-           }
-         break;
-         case 'password':
-           if (valor!=""){
-           $('.error'+ error).text("");
-           $('#'+id).attr("data-validacion", '0');
-           $('#'+id).removeClass('inputDanger');
-           $('#'+id).addClass('inputSuccess');
-         }else{
-           $('.error'+ error).text("La contraseña no puede ir vacía.");
-           $('#'+id).attr("data-validacion", '1');
-           $('#'+id).removeClass('inputSuccess');
-           $('#'+id).addClass('inputDanger'); 
-         }
-         break;
-         case 'select':
-           if (valor!=""){
-           $('.error'+ error).text("");
-           $('#'+id).attr("data-validacion", '0');
-           $('#'+id).removeClass('inputDanger');
-           $('#'+id).addClass('inputSuccess');
-         }else{
-           $('.error'+ error).text("Seleccione una opción.");
-           $('#'+id).attr("data-validacion", '1');
-           $('#'+id).removeClass('inputSuccess');
-           $('#'+id).addClass('inputDanger'); 
-         }
-         break;
-         default:
-         console.log('default');
-       }
-       enablebtn();
-   }
-
 
    function datosValidosDos(valor, error, id, tipo)
    {
@@ -1041,30 +949,6 @@ var validoNumeroPartida = true;
        }
        enablebtnArticuloEditar();
    } 
-
-   
-   function enablebtn()
-   {
-     var array = [];
-     var claserror = $('.validateData');
-   
-     for (var i = 0; i < claserror.length; i++) {
-       array.push(claserror[i].getAttribute('data-validacion'));
-     }
-
-     //console.log(array);
-   
-     if(array.includes('1'))
-     { 
-       $('#btn-submit2').prop("disabled", true);
-     }
-     else
-     {
-       $('#btn-submit2').prop("disabled", false);
-     }
-   
-       //console.log(array);
-   }
    
    function enablebtnDos()
    {
@@ -1128,8 +1012,6 @@ var validoNumeroPartida = true;
      {
        $('#btn-submitEm').prop("disabled", false);
      }
-   
-       
    }
 
    function enablebtnBusquedaLinea()
@@ -1242,15 +1124,9 @@ var validoNumeroPartida = true;
 
 <script>
 
-
-
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
-
- 
-
-
 
  $('#passwordModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget);
@@ -1429,8 +1305,5 @@ $(function () {
   });
 
 </script>
-
-
-
 </body>
 </html>

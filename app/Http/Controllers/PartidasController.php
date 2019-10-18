@@ -98,6 +98,14 @@ class PartidasController extends Controller
 		$linea = new lineas();
 		$sublinea = new sublineas();
 
+		if ($request->input('hiddendepreciacion') !== 'false'){
+			$partida->aniosvida = $request->input('aniosVida');
+			$partida->porcentajeDepreciacion = $request->input('porcentajeDepreciacion');
+		}else{
+			$partida->aniosvida = null;
+			$partida->porcentajeDepreciacion = null;
+		}
+
 		$partida->partida = $request->input('partidaI');
 		$partida->descpartida = $request->input('descpartida');
 		$linea->partida = $request->input('partidaI');

@@ -380,8 +380,9 @@ class ArticulosController extends Controller
 
 	public function depreciacion(){
 		$usuario = auth()->user();
-		$partidas = DB::table('articulos')->select('partida','descpartida')->groupBy('partida','descpartida')->get(); 
+		$partidas = partidas::select('partida','descpartida')->whereNotNull(['porcentajeDepreciacion','aniosvida'])->get();  
 
+		
 		return view('depreciacion.depreciacion',compact('usuario','partidas'));
 	}
 
@@ -389,11 +390,24 @@ class ArticulosController extends Controller
 		$partida = $request;
 		$articulos = articulos::select('numeroinv','concepto','fechacomp','importe')->where('partida', $request->numPartida)->whereNotIn('fechacomp', ['  -   -'])->get();
 		$noDepreciacion = articulos::select('numeroinv','concepto','importe')->where([['partida', $request->numPartida],['fechacomp','=','  -   -']])->get();
-		
+		$datosPartida= partidas::where('partida', $request->numPartida)->get();
+
+
+		foreach ($articulos as $value) {
+			$valorResidual = $value->importe * ($datosPartida[0]['porcentajeDepreciacion']/100);
+			$valorDelBienMenosValorResidual = $value->importe - $valorResidual;
+			
+			$prueba = strtotime($value->fechacomp);  
 
 
 
-		return view('depreciacion.tablaDepreciacion',compact('partida','articulos','noDepreciacion'));
+
+			array_add($value,'valorresidual',$valorResidual);
+			array_add($value,'bienmenosresidual',$valorDelBienMenosValorResidual);
+			array_add($value,'fechap',$prueba);
+		}
+
+		return view('depreciacion.tablaDepreciacion',compact('partida','articulos','noDepreciacion','datosPartida'));
 	}
 
 }

@@ -6,7 +6,9 @@ $('#exampleModal').on('hidden.bs.modal', function (e) {
   $('#partidaI').val("");
   $('#descpartida').val("");
   $('#desclinea').val("");
-  $('#descsub').val("");   
+  $('#descsub').val("");
+  $('#activarDepreciacion').prop("checked", false).change();
+  console.log('partida');   
 })
 
 $('#exampleModalLinea').on('hidden.bs.modal', function (e) {

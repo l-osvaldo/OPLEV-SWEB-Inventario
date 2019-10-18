@@ -8,21 +8,25 @@
 					<label><strong>NÚMERO DE LA PARTIDA:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida->numPartida }} </i></label>
 				</td>
 			</tr>
-			<tr>
-				<td width="70%"> 
-					<label><strong>DESCRIPCIÓN DE LA PARTIDA:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida->numPartida }} </i></label>
-				</td>
-			</tr>
-			<tr>
-				<td width="70%"> 
-					<label><strong>AÑOS DE VIDA:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida->numPartida }} </i></label>
-				</td>
-			</tr>
-			<tr>
-				<td width="70%"> 
-					<label><strong>% DE VALOR RESIDUAL:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida->numPartida }} </i></label>
-				</td>
-			</tr>
+			@foreach ($datosPartida as $element)
+				
+			
+				<tr>
+					<td width="70%"> 
+						<label><strong>DESCRIPCIÓN DE LA PARTIDA:</strong></label> <label style="font-weight:lighter;"> <i> {{ $element->descpartida }} </i></label>
+					</td>
+				</tr>
+				<tr>
+					<td width="70%"> 
+						<label><strong>AÑOS DE VIDA:</strong></label> <label style="font-weight:lighter;"> <i> {{ $element->aniosvida }} </i></label>
+					</td>
+				</tr>
+				<tr>
+					<td width="70%"> 
+						<label><strong>% DE VALOR RESIDUAL:</strong></label> <label style="font-weight:lighter;"> <i> {{ $element->porcentajeDepreciacion }} </i></label>
+					</td>
+				</tr>
+			@endforeach
 		</table>
 
 		<nav>
@@ -46,6 +50,9 @@
 							  <th style="text-align: center">Concepto</th>
 							  <th style="text-align: center">Fecha de compra</th>
 							  <th style="text-align: center">Valor del bien</th>
+							  <th style="text-align: center">Valor residual</th>
+							  <th style="text-align: center">Valor del bien menos valor residual</th>
+							  <th style="text-align: center">fechap</th>
 			                </tr>
 			              </thead>
 			              <tbody>
@@ -54,7 +61,10 @@
 				                	<td>{{ $articulo->numeroinv }}</td>
 						          	<td>{{ $articulo->concepto }}</td>
 						          	<td>{{ $articulo->fechacomp }}</td>
-						          	<td>{{ $articulo->importe }}</td>               
+						          	<td>$ {{ $articulo->importe }}</td>
+						          	<td>$ {{ $articulo->valorresidual }}</td>
+						          	<td>$ {{ $articulo->bienmenosresidual }}</td>  
+						          	<td> {{ $articulo->fechap }}</td>             
 				                </tr>
 			                  @endforeach
 			              </tbody>

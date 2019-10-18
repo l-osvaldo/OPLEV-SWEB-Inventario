@@ -125,7 +125,8 @@
                   <div class="col-md-3">
                     <div class="form-group">
                       <label style="margin-top: 10px;">¿Esta partida tendrá depreciación?</label>                      
-                      <input type="checkbox" data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="default" data-offstyle="dark" data-width="50" id="activarDepreciacion"> 
+                      <input type="checkbox" data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="default" data-offstyle="dark" data-width="50" id="activarDepreciacion" name="activarDepreciacion">
+                      <input type="hidden" name="hiddendepreciacion" id="hiddendepreciacion" value="false"> 
                     </div>                    
                   </div>
                   <div id="divDepreciacion" style="display: none;" class="col-md-9">
