@@ -392,22 +392,87 @@ class ArticulosController extends Controller
 		$noDepreciacion = articulos::select('numeroinv','concepto','importe')->where([['partida', $request->numPartida],['fechacomp','=','  -   -']])->get();
 		$datosPartida= partidas::where('partida', $request->numPartida)->get();
 
+		// Año anterior al año en curso
+		$anioAnterior = date('Y', strtotime('-1 year')) ;
+		$anioActual = date('Y') ;
+
 
 		foreach ($articulos as $value) {
-			$valorResidual = $value->importe * ($datosPartida[0]['porcentajeDepreciacion']/100);
-			$valorDelBienMenosValorResidual = $value->importe - $valorResidual;
+
+			// valor del bien por el porcentaje de depreciación
+			$valorResidual = round( ($value->importe * ($datosPartida[0]['porcentajeDepreciacion']/100)),2);
+
+			// VALOR DEL BIEN MENOS VALOR RESIDUAL
+			$valorDelBienMenosValorResidual = round( ($value->importe - $valorResidual),2);
+
+			//Depreciación anual ((VALOR DEL BIEN MENOS VALOR RESIDUAL) / (años de devaluación))
+			$depreciacionAnual = round( ($valorDelBienMenosValorResidual / $datosPartida[0]['aniosvida']), 2);
+
+			// Depreciación mensual (depreciación anual / 12)
+			$depreciacionMensual =  round(($depreciacionAnual / 12), 2); 
+
+			// clasificación por fecha
+			$fecha = str_replace('/', '-', $value->fechacomp);
+
+			$fecha = date("d-m-Y", strtotime($fecha."+ ".$datosPartida[0]['aniosvida']." year"));
+
 			
-			$prueba = strtotime($value->fechacomp);  
+			$anioArticulo = date('Y', strtotime($fecha)); // año del artículo mas los años de depreciación
 
 
+			if ($anioArticulo < $anioActual){
+				$eneroD 		= ' - ';
+				$febreroD 		= ' - ';
+				$marzoD 		= ' - ';
+				$abrilD 		= ' - ';
+				$mayoD 			= ' - ';
+				$junioD 		= ' - ';
+				$julioD 		= ' - ';
+				$agostoD 		= ' - ';
+				$septiembreD 	= ' - ';
+				$octubreD 		= ' - ';
+				$noviembreD 	= ' - ';
+				$diciembreD 	= ' - ';
+			}else{
+				$eneroD 		= $depreciacionMensual;
+				$febreroD 		= $depreciacionMensual;
+				$marzoD 		= $depreciacionMensual;
+				$abrilD 		= $depreciacionMensual;
+				$mayoD 			= $depreciacionMensual;
+				$junioD 		= $depreciacionMensual;
+				$julioD 		= $depreciacionMensual;
+				$agostoD 		= $depreciacionMensual;
+				$septiembreD 	= $depreciacionMensual;
+				$octubreD 		= $depreciacionMensual;
+				$noviembreD 	= $depreciacionMensual;
+				$diciembreD 	= $depreciacionMensual;
+			}
+
+			$fecha = str_replace('-', '/', $fecha);
 
 
+			// agregar los nuevos campos de los cálculos realizados al arreglo de los artículos
 			array_add($value,'valorresidual',$valorResidual);
 			array_add($value,'bienmenosresidual',$valorDelBienMenosValorResidual);
-			array_add($value,'fechap',$prueba);
+			array_add($value,'depreciacionMensual',$depreciacionMensual);
+			array_add($value,'depreciacionAnual',$depreciacionAnual);
+			array_add($value,'fechap',$fecha);
+
+			array_add($value,'eneroD',$eneroD);
+			array_add($value,'febreroD',$febreroD);
+			array_add($value,'marzoD',$marzoD);
+			array_add($value,'abrilD',$abrilD);
+			array_add($value,'mayoD',$mayoD);
+			array_add($value,'junioD',$junioD);
+			array_add($value,'julioD',$julioD);
+			array_add($value,'agostoD',$agostoD);
+			array_add($value,'septiembreD',$septiembreD);
+			array_add($value,'octubreD',$octubreD);
+			array_add($value,'noviembreD',$noviembreD);
+			array_add($value,'diciembreD',$diciembreD);
 		}
 
-		return view('depreciacion.tablaDepreciacion',compact('partida','articulos','noDepreciacion','datosPartida'));
+		return view('depreciacion.tablaDepreciacion',compact('partida','articulos','noDepreciacion','datosPartida','anioAnterior', 'anioActual'));
 	}
 
 }

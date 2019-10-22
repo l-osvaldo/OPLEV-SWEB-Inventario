@@ -13,17 +13,22 @@
 			
 				<tr>
 					<td width="70%"> 
-						<label><strong>DESCRIPCIÓN DE LA PARTIDA:</strong></label> <label style="font-weight:lighter;"> <i> {{ $element->descpartida }} </i></label>
+						<label><strong>DESCRIPCIÓN DE LA PARTIDA: </strong></label> <label style="font-weight:lighter;"> <i> {{ $element->descpartida }} </i></label>
 					</td>
 				</tr>
 				<tr>
 					<td width="70%"> 
-						<label><strong>AÑOS DE VIDA:</strong></label> <label style="font-weight:lighter;"> <i> {{ $element->aniosvida }} </i></label>
+						<label><strong>AÑOS DE VIDA: </strong></label> <label style="font-weight:lighter;"> <i> {{ $element->aniosvida }} </i></label>
 					</td>
 				</tr>
 				<tr>
 					<td width="70%"> 
-						<label><strong>% DE VALOR RESIDUAL:</strong></label> <label style="font-weight:lighter;"> <i> {{ $element->porcentajeDepreciacion }} </i></label>
+						<label><strong>% DE VALOR RESIDUAL: </strong></label> <label style="font-weight:lighter;"> <i> {{ $element->porcentajeDepreciacion }} </i></label>
+					</td>
+				</tr>
+				<tr>
+					<td width="70%"> 
+						<label><strong>AÑO: </strong></label> <label style="font-weight:lighter;"> <i> {{ $anioActual }} </i></label>
 					</td>
 				</tr>
 			@endforeach
@@ -43,7 +48,7 @@
 			      <div class="center-block">	      	
 			        <div class="card">
 			          <div class="card-body" >
-			            <table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
+			            <table id="example1" name="example1" class="table table-bordered table-striped display nowrap" style="width:100%">
 			              <thead>
 			                <tr>
 			                  <th style="text-align: center">Número de Inventario</th>
@@ -52,7 +57,48 @@
 							  <th style="text-align: center">Valor del bien</th>
 							  <th style="text-align: center">Valor residual</th>
 							  <th style="text-align: center">Valor del bien menos valor residual</th>
-							  <th style="text-align: center">fechap</th>
+							  <th style="text-align: center">fechap</th> 
+
+							  <th style="text-align: center">Saldo en libros al 31 de diciembre de {{ $anioAnterior }}  </th>
+							  <th style="text-align: center">Depreciación mensual</th> 
+							  <th style="text-align: center">Depreciacion anual</th>
+
+							  <th style="text-align: center">Depreciación Enero</th> 
+							  <th style="text-align: center">Saldo al 31 de Enero de {{ $anioActual }} </th>
+
+							  <th style="text-align: center">Depreciación Febrero</th> 
+							  <th style="text-align: center">Saldo al 28 de febrero de {{ $anioActual }} </th>
+
+							  <th style="text-align: center">Depreciación Marzo</th> 
+							  <th style="text-align: center"> Saldo al 31 de Marzo de {{ $anioActual }} </th>
+
+							  <th style="text-align: center">Depreciación Abril</th>
+							  <th style="text-align: center"> Saldo al 30 de Abril de {{ $anioActual }} </th>
+
+							  <th style="text-align: center">Depreciación Mayo</th> 
+							  <th style="text-align: center">Saldo al 31 de Mayo de {{ $anioActual }} </th>
+
+							  <th style="text-align: center">Depreciación Junio</th> 
+							  <th style="text-align: center">Saldo al 30 de Junio de {{ $anioActual }} </th>
+
+							  <th style="text-align: center">Depreciación Julio</th> 
+							  <th style="text-align: center"> Saldo al 31 de Julio de {{ $anioActual }} </th>
+
+							  <th style="text-align: center">Depreciación Agosto</th>
+							  <th style="text-align: center"> Saldo al 31 de Agosto de {{ $anioActual }} </th>
+
+							  <th style="text-align: center">Depreciación Septiembre</th> 
+							  <th style="text-align: center">Saldo al 30 de Septiembre de {{ $anioActual }} </th>
+
+							  <th style="text-align: center">Depreciación Octubre</th> 
+							  <th style="text-align: center">Saldo al 31 de Octubre de {{ $anioActual }} </th>
+
+							  <th style="text-align: center">Depreciación Noviembre</th> 
+							  <th style="text-align: center"> Saldo al 30 de Noviembre de {{ $anioActual }} </th>
+
+							  <th style="text-align: center">Depreciación Diciembre</th>
+							  <th style="text-align: center"> Saldo al 31 de Diciembre de {{ $anioActual }} </th>   
+
 			                </tr>
 			              </thead>
 			              <tbody>
@@ -64,7 +110,35 @@
 						          	<td>$ {{ $articulo->importe }}</td>
 						          	<td>$ {{ $articulo->valorresidual }}</td>
 						          	<td>$ {{ $articulo->bienmenosresidual }}</td>  
-						          	<td> {{ $articulo->fechap }}</td>             
+						          	<td> {{ $articulo->fechap }}</td>
+						          	<td> </td>
+						          	<td>$ {{ $articulo->depreciacionMensual }} </td>
+						          	<td>$ {{ $articulo->depreciacionAnual }} </td>
+
+						          	<td>$ {{ $articulo->eneroD }} </td>
+						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->febreroD }} </td>
+						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->marzoD }} </td>
+						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->abrilD }} </td>
+						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->mayoD }} </td>
+						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->junioD }} </td>
+						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->julioD }} </td>
+						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->agostoD }} </td>
+						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->septiembreD }} </td>
+						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->octubreD }} </td>
+						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->noviembreD }} </td>
+						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->diciembreD }} </td>
+						          	<td>$ {{ $articulo->valorresidual }} </td>
 				                </tr>
 			                  @endforeach
 			              </tbody>

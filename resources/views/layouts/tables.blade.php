@@ -68,6 +68,7 @@
     "deferRender": true,
     "retrieve": true,
     "processing": true,
+    "scrollX": true,
     "sSearch": "Filter Data",
     "dom":     "<'row'<'col-sm-1'l><'col-sm-3'f><'col-sm-8 text-right'B>>" +
     "<'row'<'col-sm-12'tr>>" +
