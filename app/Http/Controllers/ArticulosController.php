@@ -414,13 +414,19 @@ class ArticulosController extends Controller
 			// clasificación por fecha
 			$fecha = str_replace('/', '-', $value->fechacomp);
 
+			$anioCompra = date("Y", strtotime($fecha));
+
 			$fecha = date("d-m-Y", strtotime($fecha."+ ".$datosPartida[0]['aniosvida']." year"));
 
 			
-			$anioArticulo = date('Y', strtotime($fecha)); // año del artículo mas los años de depreciación
+			$anioArticuloDepreciacion = date('Y', strtotime($fecha)); // año del artículo mas los años de depreciación
+
+			$mesArticuloDepreciacion = date('m', strtotime($fecha));
+
+			$saldo = $value->importe;
 
 
-			if ($anioArticulo < $anioActual){
+			if ($anioArticuloDepreciacion < $anioActual){
 				$eneroD 		= ' - ';
 				$febreroD 		= ' - ';
 				$marzoD 		= ' - ';
@@ -433,6 +439,23 @@ class ArticulosController extends Controller
 				$octubreD 		= ' - ';
 				$noviembreD 	= ' - ';
 				$diciembreD 	= ' - ';
+
+				$eneroSaldo 		= $valorResidual;
+				$febreroSaldo 		= $valorResidual;
+				$marzoSaldo 		= $valorResidual;
+				$abrilSaldo 		= $valorResidual;
+				$mayoSaldo 			= $valorResidual;
+				$junioSaldo 		= $valorResidual;
+				$julioSaldo 		= $valorResidual;
+				$agostoSaldo 		= $valorResidual;
+				$septiembreSaldo 	= $valorResidual;
+				$octubreSaldo 		= $valorResidual;
+				$noviembreSaldo 	= $valorResidual;
+				$diciembreSaldo 	= $valorResidual;
+
+				$saldo = $valorResidual;
+
+
 			}else{
 				$eneroD 		= $depreciacionMensual;
 				$febreroD 		= $depreciacionMensual;
@@ -446,6 +469,36 @@ class ArticulosController extends Controller
 				$octubreD 		= $depreciacionMensual;
 				$noviembreD 	= $depreciacionMensual;
 				$diciembreD 	= $depreciacionMensual;
+
+
+				$aniosFaltaDepreciacion = $anioArticuloDepreciacion - $anioActual;
+				$aniosDepreciando = $anioActual - $anioCompra;
+
+				for ($i=0; $i < ($aniosDepreciando-1); $i++) {
+					$saldo = $saldo - $depreciacionAnual;					
+				}
+
+
+				if( $anioArticuloDepreciacion == $anioActual ){
+					for ($i=0; $i < 12 ; $i++) { 
+						if ($i < $mesArticuloDepreciacion){
+							
+						}
+					}
+				}else{
+					$eneroSaldo 		= $saldo - $depreciacionMensual;
+					$febreroSaldo 		= $eneroSaldo - $depreciacionMensual;
+					$marzoSaldo 		= $febreroSaldo - $depreciacionMensual;
+					$abrilSaldo 		= $marzoSaldo - $depreciacionMensual;
+					$mayoSaldo 			= $abrilSaldo - $depreciacionMensual;
+					$junioSaldo 		= $mayoSaldo - $depreciacionMensual;
+					$julioSaldo 		= $junioSaldo - $depreciacionMensual;
+					$agostoSaldo 		= $julioSaldo - $depreciacionMensual;
+					$septiembreSaldo 	= $agostoSaldo - $depreciacionMensual;
+					$octubreSaldo 		= $septiembreSaldo - $depreciacionMensual;
+					$noviembreSaldo 	= $octubreSaldo - $depreciacionMensual;
+					$diciembreSaldo 	= $noviembreSaldo - $depreciacionMensual;
+				}				
 			}
 
 			$fecha = str_replace('-', '/', $fecha);
@@ -454,6 +507,7 @@ class ArticulosController extends Controller
 			// agregar los nuevos campos de los cálculos realizados al arreglo de los artículos
 			array_add($value,'valorresidual',$valorResidual);
 			array_add($value,'bienmenosresidual',$valorDelBienMenosValorResidual);
+			array_add($value,'saldo',$saldo);
 			array_add($value,'depreciacionMensual',$depreciacionMensual);
 			array_add($value,'depreciacionAnual',$depreciacionAnual);
 			array_add($value,'fechap',$fecha);
@@ -470,6 +524,19 @@ class ArticulosController extends Controller
 			array_add($value,'octubreD',$octubreD);
 			array_add($value,'noviembreD',$noviembreD);
 			array_add($value,'diciembreD',$diciembreD);
+
+			array_add($value,'eneroSaldo',$eneroSaldo);
+			array_add($value,'febreroSaldo',$febreroSaldo);
+			array_add($value,'marzoSaldo',$marzoSaldo);
+			array_add($value,'abrilSaldo',$abrilSaldo);
+			array_add($value,'mayoSaldo',$mayoSaldo);
+			array_add($value,'junioSaldo',$junioSaldo);
+			array_add($value,'julioSaldo',$julioSaldo);
+			array_add($value,'agostoSaldo',$agostoSaldo);
+			array_add($value,'septiembreSaldo',$septiembreSaldo);
+			array_add($value,'octubreSaldo',$octubreSaldo);
+			array_add($value,'noviembreSaldo',$noviembreSaldo);
+			array_add($value,'diciembreSaldo',$diciembreSaldo);
 		}
 
 		return view('depreciacion.tablaDepreciacion',compact('partida','articulos','noDepreciacion','datosPartida','anioAnterior', 'anioActual'));

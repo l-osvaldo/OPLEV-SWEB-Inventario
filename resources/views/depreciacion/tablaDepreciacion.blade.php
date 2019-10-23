@@ -111,34 +111,45 @@
 						          	<td>$ {{ $articulo->valorresidual }}</td>
 						          	<td>$ {{ $articulo->bienmenosresidual }}</td>  
 						          	<td> {{ $articulo->fechap }}</td>
-						          	<td> </td>
+						          	<td>$ {{ $articulo->saldo }} </td>
 						          	<td>$ {{ $articulo->depreciacionMensual }} </td>
 						          	<td>$ {{ $articulo->depreciacionAnual }} </td>
 
 						          	<td>$ {{ $articulo->eneroD }} </td>
-						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->eneroSaldo }} </td>
+
 						          	<td>$ {{ $articulo->febreroD }} </td>
-						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->febreroSaldo }} </td>
+
 						          	<td>$ {{ $articulo->marzoD }} </td>
-						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->marzoSaldo }} </td>
+
 						          	<td>$ {{ $articulo->abrilD }} </td>
-						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->abrilSaldo }} </td>
+
 						          	<td>$ {{ $articulo->mayoD }} </td>
-						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->mayoSaldo }} </td>
+
 						          	<td>$ {{ $articulo->junioD }} </td>
-						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->junioSaldo }} </td>
+
 						          	<td>$ {{ $articulo->julioD }} </td>
-						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->julioSaldo }} </td>
+
 						          	<td>$ {{ $articulo->agostoD }} </td>
-						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->agostoSaldo }} </td>
+
 						          	<td>$ {{ $articulo->septiembreD }} </td>
-						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->septiembreSaldo }} </td>
+
 						          	<td>$ {{ $articulo->octubreD }} </td>
-						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->octubreSaldo }} </td>
+
 						          	<td>$ {{ $articulo->noviembreD }} </td>
-						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->noviembreSaldo }} </td>
+
 						          	<td>$ {{ $articulo->diciembreD }} </td>
-						          	<td>$ {{ $articulo->valorresidual }} </td>
+						          	<td>$ {{ $articulo->diciembreSaldo }} </td>
 				                </tr>
 			                  @endforeach
 			              </tbody>
