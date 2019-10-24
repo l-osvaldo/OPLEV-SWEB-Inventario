@@ -110,7 +110,7 @@
 						          	<td>$ {{ $articulo->importe }}</td>
 						          	<td>$ {{ $articulo->valorresidual }}</td>
 						          	<td>$ {{ $articulo->bienmenosresidual }}</td>  
-						          	<td> {{ $articulo->fechap }}</td>
+						          	<td> {{ $articulo->fechap }} -- {{ $articulo->mes }} </td>
 						          	<td>$ {{ $articulo->saldo }} </td>
 						          	<td>$ {{ $articulo->depreciacionMensual }} </td>
 						          	<td>$ {{ $articulo->depreciacionAnual }} </td>

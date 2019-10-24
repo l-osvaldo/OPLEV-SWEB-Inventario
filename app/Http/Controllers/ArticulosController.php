@@ -395,6 +395,8 @@ class ArticulosController extends Controller
 		// Año anterior al año en curso
 		$anioAnterior = date('Y', strtotime('-1 year')) ;
 		$anioActual = date('Y') ;
+		$mesActual = date('m') ;
+
 
 
 		foreach ($articulos as $value) {
@@ -455,50 +457,138 @@ class ArticulosController extends Controller
 
 				$saldo = $valorResidual;
 
-
+				
 			}else{
-				$eneroD 		= $depreciacionMensual;
-				$febreroD 		= $depreciacionMensual;
-				$marzoD 		= $depreciacionMensual;
-				$abrilD 		= $depreciacionMensual;
-				$mayoD 			= $depreciacionMensual;
-				$junioD 		= $depreciacionMensual;
-				$julioD 		= $depreciacionMensual;
-				$agostoD 		= $depreciacionMensual;
-				$septiembreD 	= $depreciacionMensual;
-				$octubreD 		= $depreciacionMensual;
-				$noviembreD 	= $depreciacionMensual;
-				$diciembreD 	= $depreciacionMensual;
 
 
-				$aniosFaltaDepreciacion = $anioArticuloDepreciacion - $anioActual;
-				$aniosDepreciando = $anioActual - $anioCompra;
-
-				for ($i=0; $i < ($aniosDepreciando-1); $i++) {
-					$saldo = $saldo - $depreciacionAnual;					
+				if ($mesActual >= $mesArticuloDepreciacion){
+					$mes = $mesActual;
 				}
+				else{
+					$mes = $mesArticuloDepreciacion;
+				}
+				for ($i = 0; $i < 12 ; $i++) {
+					if ($mes >=  ($i + 1)){
+						if ($i == 0){
+							$eneroD = $depreciacionMensual;
 
+							$aniosFaltaDepreciacion = $anioArticuloDepreciacion - $anioActual;
+							$aniosDepreciando = $anioActual - $anioCompra;
 
-				if( $anioArticuloDepreciacion == $anioActual ){
-					for ($i=0; $i < 12 ; $i++) { 
-						if ($i < $mesArticuloDepreciacion){
-							
+							for ($j=0; $j < ($aniosDepreciando-1); $j++) {
+								$saldo = $saldo - $depreciacionAnual;					
+							}
+
+							$eneroSaldo = $saldo - $depreciacionMensual;
+							$saldo = $eneroSaldo;
+						}
+						if ($i == 1){
+							$febreroD = $depreciacionMensual;
+							$febreroSaldo = $eneroSaldo - $depreciacionMensual;
+							$saldo = $febreroSaldo;
+						}
+						if ($i == 2){
+							$marzoD = $depreciacionMensual;
+							$marzoSaldo = $febreroSaldo - $depreciacionMensual;
+							$saldo= $marzoSaldo ;
+						}
+						if ($i == 3){
+							$abrilD = $depreciacionMensual;
+							$abrilSaldo = $marzoSaldo - $depreciacionMensual;
+							$saldo= $abrilSaldo ;
+						}
+						if ($i == 4){
+							$mayoD 	= $depreciacionMensual;
+							$mayoSaldo 	 = $abrilSaldo - $depreciacionMensual;
+							$saldo= $mayoSaldo ;
+						}
+						if ($i == 5){
+							$junioD = $depreciacionMensual;
+							$junioSaldo  = $mayoSaldo - $depreciacionMensual;
+							$saldo= $junioSaldo ;
+						}
+						if ($i == 6){
+							$julioD = $depreciacionMensual;
+							$julioSaldo  = $junioSaldo - $depreciacionMensual;
+							$saldo= $julioSaldo ;
+						}
+						if ($i == 7){
+							$agostoD = $depreciacionMensual;
+							$agostoSaldo  = $julioSaldo - $depreciacionMensual;
+							$saldo= $agostoSaldo ;
+						}
+						if ($i == 8){
+							$septiembreD = $depreciacionMensual;
+							$septiembreSaldo = $agostoSaldo - $depreciacionMensual;
+							$saldo= $septiembreSaldo ;
+						}
+						if ($i == 9){
+							$octubreD = $depreciacionMensual;
+							$octubreSaldo  = $septiembreSaldo - $depreciacionMensual;
+							$saldo= $octubreSaldo ;
+						}
+						if ($i == 10){
+							$noviembreD = $depreciacionMensual;
+							$noviembreSaldo = $octubreSaldo - $depreciacionMensual;
+							$saldo= $noviembreSaldo ;
+						}
+						if ($i == 11){
+							$diciembreD = $depreciacionMensual;
+							$diciembreSaldo = $noviembreSaldo - $depreciacionMensual;
+							$saldo= $diciembreSaldo ;
+						}
+					}else{
+						if ($i == 0){
+							$eneroD = ' - ';
+							$eneroSaldo = $saldo;
+						}
+						if ($i == 1){
+							$febreroD = ' - ';
+							$febreroSaldo = $saldo;
+						}
+						if ($i == 2){
+							$marzoD = ' - ';
+							$marzoSaldo = $saldo;
+						}
+						if ($i == 3){
+							$abrilD = ' - ';
+							$abrilSaldo = $saldo;
+						}
+						if ($i == 4){
+							$mayoD 	= ' - ';
+							$mayoSaldo 	 = $saldo;
+						}
+						if ($i == 5){
+							$junioD = ' - ';
+							$junioSaldo  = $saldo;
+						}
+						if ($i == 6){
+							$julioD = ' - ';
+							$julioSaldo  = $saldo;
+						}
+						if ($i == 7){
+							$agostoD = ' - ';
+							$agostoSaldo  = $saldo;
+						}
+						if ($i == 8){
+							$septiembreD = ' - ';
+							$septiembreSaldo = $saldo;
+						}
+						if ($i == 9){
+							$octubreD = ' - ';
+							$octubreSaldo  = $saldo;
+						}
+						if ($i == 10){
+							$noviembreD = ' - ';
+							$noviembreSaldo = $saldo;
+						}
+						if ($i == 11){
+							$diciembreD = ' - ';
+							$diciembreSaldo = $saldo;
 						}
 					}
-				}else{
-					$eneroSaldo 		= $saldo - $depreciacionMensual;
-					$febreroSaldo 		= $eneroSaldo - $depreciacionMensual;
-					$marzoSaldo 		= $febreroSaldo - $depreciacionMensual;
-					$abrilSaldo 		= $marzoSaldo - $depreciacionMensual;
-					$mayoSaldo 			= $abrilSaldo - $depreciacionMensual;
-					$junioSaldo 		= $mayoSaldo - $depreciacionMensual;
-					$julioSaldo 		= $junioSaldo - $depreciacionMensual;
-					$agostoSaldo 		= $julioSaldo - $depreciacionMensual;
-					$septiembreSaldo 	= $agostoSaldo - $depreciacionMensual;
-					$octubreSaldo 		= $septiembreSaldo - $depreciacionMensual;
-					$noviembreSaldo 	= $octubreSaldo - $depreciacionMensual;
-					$diciembreSaldo 	= $noviembreSaldo - $depreciacionMensual;
-				}				
+				}
+		
 			}
 
 			$fecha = str_replace('-', '/', $fecha);
@@ -515,15 +605,15 @@ class ArticulosController extends Controller
 			array_add($value,'eneroD',$eneroD);
 			array_add($value,'febreroD',$febreroD);
 			array_add($value,'marzoD',$marzoD);
-			array_add($value,'abrilD',$abrilD);
-			array_add($value,'mayoD',$mayoD);
-			array_add($value,'junioD',$junioD);
-			array_add($value,'julioD',$julioD);
-			array_add($value,'agostoD',$agostoD);
-			array_add($value,'septiembreD',$septiembreD);
-			array_add($value,'octubreD',$octubreD);
-			array_add($value,'noviembreD',$noviembreD);
-			array_add($value,'diciembreD',$diciembreD);
+			// array_add($value,'abrilD',$abrilD);
+			// array_add($value,'mayoD',$mayoD);
+			// array_add($value,'junioD',$junioD);
+			// array_add($value,'julioD',$julioD);
+			// array_add($value,'agostoD',$agostoD);
+			// array_add($value,'septiembreD',$septiembreD);
+			// array_add($value,'octubreD',$octubreD);
+			// array_add($value,'noviembreD',$noviembreD);
+			// array_add($value,'diciembreD',$diciembreD);
 
 			array_add($value,'eneroSaldo',$eneroSaldo);
 			array_add($value,'febreroSaldo',$febreroSaldo);
@@ -537,6 +627,8 @@ class ArticulosController extends Controller
 			array_add($value,'octubreSaldo',$octubreSaldo);
 			array_add($value,'noviembreSaldo',$noviembreSaldo);
 			array_add($value,'diciembreSaldo',$diciembreSaldo);
+
+			array_add($value,'mes',$mesArticuloDepreciacion);
 		}
 
 		return view('depreciacion.tablaDepreciacion',compact('partida','articulos','noDepreciacion','datosPartida','anioAnterior', 'anioActual'));
