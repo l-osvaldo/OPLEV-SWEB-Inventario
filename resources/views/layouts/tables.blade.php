@@ -63,6 +63,12 @@
 <script type="text/javascript" src="{{ asset('js/dataTables.responsive.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/responsive.bootstrap4.min.js') }}"></script>
 
+
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> 
+
+<script type="text/javascript" src="{{ asset('js/depreciacion.js') }}"></script>
+
 <script>
   $('#example1').DataTable( {
     "deferRender": true,
@@ -191,7 +197,13 @@
     $("#example1").DataTable();
     
   });
+
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 </script>
+
+
     
 </body>
 </html>

@@ -461,7 +461,7 @@ class ArticulosController extends Controller
 			}else{
 
 
-				if ($mesActual >= $mesArticuloDepreciacion){
+				if ($mesActual <= $mesArticuloDepreciacion  ){
 					$mes = $mesActual;
 				}
 				else{
@@ -592,7 +592,7 @@ class ArticulosController extends Controller
 			}
 
 			$fecha = str_replace('-', '/', $fecha);
-
+			set_time_limit(5000);
 
 			// agregar los nuevos campos de los cálculos realizados al arreglo de los artículos
 			array_add($value,'valorresidual',$valorResidual);
@@ -600,20 +600,19 @@ class ArticulosController extends Controller
 			array_add($value,'saldo',$saldo);
 			array_add($value,'depreciacionMensual',$depreciacionMensual);
 			array_add($value,'depreciacionAnual',$depreciacionAnual);
-			array_add($value,'fechap',$fecha);
-
+			
 			array_add($value,'eneroD',$eneroD);
 			array_add($value,'febreroD',$febreroD);
 			array_add($value,'marzoD',$marzoD);
-			// array_add($value,'abrilD',$abrilD);
-			// array_add($value,'mayoD',$mayoD);
-			// array_add($value,'junioD',$junioD);
-			// array_add($value,'julioD',$julioD);
-			// array_add($value,'agostoD',$agostoD);
-			// array_add($value,'septiembreD',$septiembreD);
-			// array_add($value,'octubreD',$octubreD);
-			// array_add($value,'noviembreD',$noviembreD);
-			// array_add($value,'diciembreD',$diciembreD);
+			array_add($value,'abrilD',$abrilD);
+			array_add($value,'mayoD',$mayoD);
+			array_add($value,'junioD',$junioD);
+			array_add($value,'julioD',$julioD);
+			array_add($value,'agostoD',$agostoD);
+			array_add($value,'septiembreD',$septiembreD);
+			array_add($value,'octubreD',$octubreD);
+			array_add($value,'noviembreD',$noviembreD);
+			array_add($value,'diciembreD',$diciembreD);
 
 			array_add($value,'eneroSaldo',$eneroSaldo);
 			array_add($value,'febreroSaldo',$febreroSaldo);
@@ -628,10 +627,37 @@ class ArticulosController extends Controller
 			array_add($value,'noviembreSaldo',$noviembreSaldo);
 			array_add($value,'diciembreSaldo',$diciembreSaldo);
 
-			array_add($value,'mes',$mesArticuloDepreciacion);
 		}
 
 		return view('depreciacion.tablaDepreciacion',compact('partida','articulos','noDepreciacion','datosPartida','anioAnterior', 'anioActual'));
+	}
+
+
+	public function HistorialDepreciacionArticulo(Request $request){
+		$articulo = articulos::select('numeroinv','concepto','fechacomp','importe')->where('numeroinv', $request->numInventario)->get();
+		$datosPartida= partidas::where('partida', $request->numPartida)->get();
+
+		$valorResidual = round( ($articulo[0]['importe'] * ($datosPartida[0]['porcentajeDepreciacion']/100)),2);
+		$valorDelBienMenosValorResidual = round( ($articulo[0]['importe'] - $valorResidual),2);
+
+		$depreciacionAnual = round( ($valorDelBienMenosValorResidual / $datosPartida[0]['aniosvida']), 2);
+		$depreciacionMensual =  round(($depreciacionAnual / 12), 2);
+
+		$fecha = str_replace('/', '-', $articulo[0]['fechacomp']);
+
+		$anioCompra = date("Y", strtotime($fecha));
+		$mesCompra = date("m", strtotime($fecha));
+
+
+		array_add($articulo[0],'valorResidual',$valorResidual);
+		array_add($articulo[0],'valorDelBienMenosValorResidual',$valorDelBienMenosValorResidual);
+		array_add($articulo[0],'anioCompra',$anioCompra);
+		array_add($articulo[0],'mesCompra',$mesCompra);
+		array_add($articulo[0],'aniosDepreciacion',$datosPartida[0]['aniosvida']);
+		array_add($articulo[0],'depreciacionAnual',$depreciacionAnual);
+		array_add($articulo[0],'depreciacionMensual',$depreciacionMensual);
+
+		return response()->json($articulo);;
 	}
 
 }

@@ -140,7 +140,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	// Depreciación 
 	Route::get('/catalogos/depreciacion', 'ArticulosController@depreciacion')->name('depreciacion');
 	Route::get('/catalogos/calculoDepreciacion', 'ArticulosController@calculoDepreciacion');
-
+	Route::get('/catalogos/HistorialDepreciacionArticulo', 'ArticulosController@HistorialDepreciacionArticulo')->name('HistorialDepreciacionArticulo');
 
 
 });
