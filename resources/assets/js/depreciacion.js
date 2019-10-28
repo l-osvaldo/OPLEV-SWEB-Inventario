@@ -72,6 +72,8 @@ function abrirModalHistorial(numInventario, numPartida){
     		$('#DepreciacionAnual').html('$ '+item['depreciacionAnual']); 
     		$('#DepreciacionMensual').html('$ '+item['depreciacionMensual']);  
 
+    		$('#DepreciacionMesActual').html('Depreciación del mes actual ('); 
+
     		
    //  		$('#editarMarca').val(item['marca']);
    //  		$('#editarModelo').val(item['modelo']);
@@ -129,4 +131,4 @@ $('#tablesHistorial').DataTable( {
       }
     },
    "buttons": ['excel']
-  });
+});

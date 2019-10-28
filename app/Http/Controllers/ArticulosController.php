@@ -11,6 +11,7 @@ use Alert;
 use PDF;
 use DB;
 use App;
+use DateTime;
 
 class ArticulosController extends Controller
 {
@@ -648,6 +649,11 @@ class ArticulosController extends Controller
 		$anioCompra = date("Y", strtotime($fecha));
 		$mesCompra = date("m", strtotime($fecha));
 
+		
+		$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+		$mesActual = date('m') ;
+		$mesActual = $meses[$mesActual-1];
+
 
 		array_add($articulo[0],'valorResidual',$valorResidual);
 		array_add($articulo[0],'valorDelBienMenosValorResidual',$valorDelBienMenosValorResidual);
@@ -656,6 +662,7 @@ class ArticulosController extends Controller
 		array_add($articulo[0],'aniosDepreciacion',$datosPartida[0]['aniosvida']);
 		array_add($articulo[0],'depreciacionAnual',$depreciacionAnual);
 		array_add($articulo[0],'depreciacionMensual',$depreciacionMensual);
+		array_add($articulo[0],'mesActual',$mesActual);
 
 		return response()->json($articulo);;
 	}

@@ -48,7 +48,7 @@
 			      <div class="center-block">	      	
 			        <div class="card">
 			          <div class="card-body" >
-			            <table id="example1" name="example1" class="table table-bordered table-striped display nowrap" style="width:100%">
+			            <table id="example1" name="example1" class="display responsive nowrap" style="width:100%">
 			              <thead>
 			                <tr>
 			                  <th style="text-align: center">Número de Inventario</th>
@@ -102,7 +102,7 @@
 			              </thead>
 			              <tbody>
 			                  @foreach ($articulos as $articulo)
-				                <tr data-toggle="tooltip" data-placement="top" title="Click para ver todo el desglose del artículo: {{ $articulo->concepto }}, Número de inventario: {{ $articulo->numeroinv }}" onclick="abrirModalHistorial('{{ $articulo->numeroinv }}','{{ $partida->numPartida }}');">
+				                <tr>
 				                	<td>{{ $articulo->numeroinv }}</td>
 						          	<td>{{ $articulo->concepto }}</td>
 						          	<td>{{ $articulo->fechacomp }}</td>
@@ -263,46 +263,14 @@
 	                      </div>                                         
 	                    </div>
 	                </div>
-	                <div class="row"> 
-	                	<div class="col-md-12">
-	                		<div class="form-group">
-	                			<table id="tablesHistorial" name="tablesHistorial" class="table table-bordered table-striped display nowrap" style="width:100%">
-	                				<thead>
-			                			<tr>
-			                				<th style="text-align: center">Saldo al 31 de Enero de {{ $anioActual }} </th>
-											<th style="text-align: center">Saldo al 28 de febrero de {{ $anioActual }} </th>
-											<th style="text-align: center"> Saldo al 31 de Marzo de {{ $anioActual }} </th>
-											<th style="text-align: center"> Saldo al 30 de Abril de {{ $anioActual }} </th>
-											<th style="text-align: center">Saldo al 31 de Mayo de {{ $anioActual }} </th>
-											<th style="text-align: center">Saldo al 30 de Junio de {{ $anioActual }} </th>
-											<th style="text-align: center"> Saldo al 31 de Julio de {{ $anioActual }} </th>
-											<th style="text-align: center"> Saldo al 31 de Agosto de {{ $anioActual }} </th>
-											<th style="text-align: center">Saldo al 30 de Septiembre de {{ $anioActual }} </th>
-											<th style="text-align: center">Saldo al 31 de Octubre de {{ $anioActual }} </th>
-											<th style="text-align: center"> Saldo al 30 de Noviembre de {{ $anioActual }} </th>
-											<th style="text-align: center"> Saldo al 31 de Diciembre de {{ $anioActual }} </th> 
-			                			</tr>
-			                		</thead>
-			                		<tbody>
-			                			<tr>
-			                				<td></td>
-			                				<td></td>
-			                				<td></td>
-			                				<td></td>
-			                				<td></td>
-			                				<td></td>
-			                				<td></td>
-			                				<td></td>
-			                				<td></td>
-			                				<td></td>
-			                				<td></td>
-			                				<td></td>
-			                			</tr>
-			                		</tbody>
-	                			</table>
-	                		</div>
-	                	</div>
+	                <div class="row">
+	                    <div class="col-md-6">
+	                      <div class="form-group">
+	                      	<label>Depreciación mensual:  <strong id="DepreciacionMesActual"></strong> </label> 
+	                      </div>                                         
+	                    </div>
 	                </div>
+	                
 	              </div>
 	           </div>
 	              <!--Fin Editar Partida -->

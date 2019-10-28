@@ -24,6 +24,10 @@
 
    <link rel="stylesheet" href="{{ asset('css/responsive.bootstrap4.min.css') }}">
 
+
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+
 </head>
 <body class="hold-transition sidebar-mini ">
   <div class="wrapper">
@@ -63,9 +67,13 @@
 <script type="text/javascript" src="{{ asset('js/dataTables.responsive.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/responsive.bootstrap4.min.js') }}"></script>
 
-
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> 
+
+
+
 
 <script type="text/javascript" src="{{ asset('js/depreciacion.js') }}"></script>
 
@@ -74,7 +82,6 @@
     "deferRender": true,
     "retrieve": true,
     "processing": true,
-    "scrollX": true,
     "sSearch": "Filter Data",
     "dom":     "<'row'<'col-sm-1'l><'col-sm-3'f><'col-sm-8 text-right'B>>" +
     "<'row'<'col-sm-12'tr>>" +
