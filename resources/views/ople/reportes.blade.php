@@ -27,6 +27,8 @@
 		    		<option value="4">Inventario por área</option>
 		    		<option value="5">Inventario por orden alfabético</option>
 		    		<option value="6">Resguardo por empleado</option>
+		    		<option value="7">Importe de bienes calendarizados por año de adquisición</option>
+		    		<option value="8">Bienes de un área ordenado por empleado</option>
 		    	</select>
 	    	</div>
 	    	<div class="col-md-3" id="seleccionSelect">
