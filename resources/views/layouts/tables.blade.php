@@ -25,10 +25,6 @@
    <link rel="stylesheet" href="{{ asset('css/responsive.bootstrap4.min.css') }}">
 
 
-   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
-   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.dataTables.min.css">
-
 </head>
 <body class="hold-transition sidebar-mini ">
   <div class="wrapper">
@@ -68,60 +64,14 @@
 <script type="text/javascript" src="{{ asset('js/dataTables.responsive.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/responsive.bootstrap4.min.js') }}"></script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> 
-
-<script src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script> 
-<script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.colVis.min.js"></script> 
-
 
 
 <script type="text/javascript" src="{{ asset('js/depreciacion.js') }}"></script>
 
 <script>
   $('#example1').DataTable( {
-    "deferRender": true,
-    "retrieve": true,
-    "processing": true,
-    "sSearch": "Filter Data",
-    "dom":     "<'row'<'col-sm-1'l><'col-sm-3'f><'col-sm-8 text-right'B>>" +
-    "<'row'<'col-sm-12'tr>>" +
-    "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-    "select": true,
-    "language": {
-      
-          "sProcessing":     "Procesando...",
-      "sLengthMenu":     "Mostrar _MENU_ registros",
-      "sZeroRecords":    "No se encontraron resultados",
-      "sEmptyTable":     "Ningún dato disponible en esta tabla",
-      "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
-      "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
-      "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-      "sInfoPostFix":    "",
-      "sSearch":         "Buscar:",
-      "sUrl":            "",
-      "sInfoThousands":  ",",
-      "sLoadingRecords": "Cargando...",
-      "oPaginate": {
-      "sFirst":    "Primero",
-      "sLast":     "Último",
-      "sNext":     "Siguiente",
-      "sPrevious": "Anterior"
-      },
-      "oAria": {
-        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-      }
-    },
-   "buttons": ['excel']
-  });
-
-</script>
-
-<script>
-  $('#example2').DataTable( {
     "deferRender": true,
     "retrieve": true,
     "processing": true,
