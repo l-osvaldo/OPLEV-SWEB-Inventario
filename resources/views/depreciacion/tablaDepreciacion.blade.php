@@ -48,7 +48,7 @@
 			      <div class="center-block">	      	
 			        <div class="card">
 			          <div class="card-body" >
-			            <table id="tableDepreciacion" name="tableDepreciacion" class="stripe row-border order-column" style="width:100%">
+			            <table id="tableDepreciacion" name="tableDepreciacion" class="table table-bordered table-striped" style="width:100%">
 			              <thead>
 			                <tr>
 			                  <th style="text-align: center">Número de Inventario</th>
@@ -199,7 +199,7 @@
 
 
 		<!-- Modal Historial Depreciación -->
-	    <div class="modal fade bd-example-modal-lg" id="historialDepreciacionModal" tabindex="-1" role="dialog" aria-labelledby="historialDepreciacionModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+	    {{-- <div class="modal fade bd-example-modal-lg" id="historialDepreciacionModal" tabindex="-1" role="dialog" aria-labelledby="historialDepreciacionModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
 	      <div class="modal-dialog modal-lg" role="document">
 	        <div class="modal-content">
 	          <div class="modal-header" style="background: #a90a6c; color:white">
@@ -282,7 +282,7 @@
 	          </div>
 	        </div>
 	      </div>
-	    </div>
+	    </div> --}}
 
 		
 	</section>
