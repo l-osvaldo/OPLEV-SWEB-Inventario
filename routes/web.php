@@ -97,6 +97,11 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('catalogos/ResguardoPorEmpleado', 'ArticulosController@ResguardoPorEmpleado');
 	Route::get('catalogos/reportes/ResguardoPorEmpleadoPDF/{numEmpleado}/{nombreEmpleado}', 'ArticulosController@ResguardoPorEmpleadoPDF');
 
+	// Importe de bienes candalerizados por año de adquisición
+	Route::get('catalogos/importeBienesAnioAdquisicion', 'ArticulosController@importeBienesAnioAdquisicion');
+	Route::get('catalogos/reportes/importeBienesAnioAdquisicionPDF/{anioAdquisicion}', 'ArticulosController@importeBienesAnioAdquisicionPDF');
+		
+
 	// Editar Artículo
 	Route::get('/catalogos/InformacionArticulo', 'ArticulosController@InformacionArticulo')->name('InformacionArticulo');
 	Route::post('/catalogos/EditarArticulos', 'ArticulosController@EditarArticulos')->name('EditarArticulos');

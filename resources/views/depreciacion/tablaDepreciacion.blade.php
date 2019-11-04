@@ -48,10 +48,10 @@
 			      <div class="center-block">	      	
 			        <div class="card">
 			          <div class="card-body" >
-			            <table id="tableDepreciacion" name="tableDepreciacion" class="table table-bordered table-striped" style="width:100%">
+			            <table id="tableDepreciacion" name="tableDepreciacion" class="table table-bordered table-striped" style="width:100%;">
 			              <thead>
 			                <tr>
-			                  <th style="text-align: center">Número de Inventario</th>
+			                  <th style="text-align: center" class="sticky-column">Número de Inventario</th>
 							  <th style="text-align: center">Concepto</th>
 							  <th style="text-align: center">Fecha de compra</th>
 							  <th style="text-align: center">Valor del bien</th>
@@ -103,7 +103,7 @@
 			              <tbody>
 			                  @foreach ($articulos as $articulo)
 				                <tr>
-				                	<td>{{ $articulo->numeroinv }}</td>
+				                	<td class="sticky-column">{{ $articulo->numeroinv }}</td>
 						          	<td>{{ $articulo->concepto }}</td>
 						          	<td>{{ $articulo->fechacomp }}</td>
 						          	<td>$ {{ $articulo->importe }}</td>

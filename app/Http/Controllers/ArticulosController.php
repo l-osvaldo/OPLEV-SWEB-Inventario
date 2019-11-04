@@ -184,6 +184,45 @@ class ArticulosController extends Controller
 		return view('ople.reportes.ResguardoPorEmpleado', compact('datosEmpleado','articulos','totalArticulos','totalImporte'));
 	}
 
+	public function importeBienesAnioAdquisicion(Request $request){
+		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
+		$anioAdquisicion = $request;
+
+		foreach ($partidas as $value) {
+			$articulos = DB::table('articulos')->select('fechacomp','importe')->where([['partida',$value->partida],['fechacomp','like','%'.$request->anioAdquisicion.'%']])->whereNotIn('fechacomp', ['  -   -'])->get();
+
+			$meses  = array("0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+							 	"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00"  );
+			$total = "0.00";
+
+			foreach ($articulos as $art) {
+				if (strpos($art->fechacomp, '-')){
+					$fecha = explode("-", $art->fechacomp);
+				}else{
+					$fecha = explode("/", $art->fechacomp);
+				}
+
+				$meses[$fecha[1]-1] = $meses[$fecha[1]-1] + $art->importe;
+				$total = $total + $art->importe;
+			}
+
+			array_add($value,'meses',$meses);
+			array_add($value,'total',$total);
+		}
+
+		return view('ople.reportes.ImporteDeBienesPorAnioAdquisicion', compact('partidas','anioAdquisicion'));
+	}
+
 	
 
 	// ************ generar reportes ************
@@ -298,6 +337,47 @@ class ArticulosController extends Controller
 		return $pdf->inline('InventarioPorArea-'.$request->nombreEmpleado.'.pdf');
 
 	}
+
+	public function importeBienesAnioAdquisicionPDF(Request $request){
+		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
+		$anioAdquisicion = $request;
+
+		foreach ($partidas as $value) {
+			$articulos = DB::table('articulos')->select('fechacomp','importe')->where([['partida',$value->partida],['fechacomp','like','%'.$request->anioAdquisicion.'%']])->whereNotIn('fechacomp', ['  -   -'])->get();
+
+			$meses  = array("0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+							 	"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00"  );
+			$total = "0.00";
+
+			foreach ($articulos as $art) {
+				if (strpos($art->fechacomp, '-')){
+					$fecha = explode("-", $art->fechacomp);
+				}else{
+					$fecha = explode("/", $art->fechacomp);
+				}
+
+				$meses[$fecha[1]-1] = $meses[$fecha[1]-1] + $art->importe;
+				$total = $total + $art->importe;
+			}
+
+			array_add($value,'meses',$meses);
+			array_add($value,'total',$total);
+		}
+
+		$pdf = PDF::loadView('ople.reportes.pdf.ImporteDeBienesPorAnioAdquisicionPDF', compact('partidas','anioAdquisicion'))->setPaper('letter', 'landscape');
+		return $pdf->inline('ImporteDeBienesPorAñoDeAdquisicion-'.$request->anioAdquisicion.'.pdf');
+	}
+
 
 	// ************ editar artículo ************
 	public function InformacionArticulo(Request $request){

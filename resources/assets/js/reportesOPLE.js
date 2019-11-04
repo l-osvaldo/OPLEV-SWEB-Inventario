@@ -32,6 +32,12 @@ $('#selectReportes').change(function() {
 			$('#segundaInstruccion').css("display","block");
 			$('#instruccion').html('2.- Seleccione un empleado:');
 			break;
+		case '7':
+			$('#divAnioAdquisicion').css("display","block");
+			$('#segundaInstruccion').css("display","block");
+			$('#instruccion').html('2.- Seleccione un año:');
+			break;
+
 	}
 }); 
 
@@ -68,6 +74,17 @@ $('#selectEmpleado').change(function(){
 	}
 });
 
+/******************** selección año de adquisición ***********************/
+$('#selectAnioAdquisicion').change(function(){
+	if ($(this).val() != 0 ){
+		importeBienesAnioAdquisicion($(this).val());
+	}else{
+		$('#btnGenerarPDF').css("display","none");
+		$('#divRespuesta').css("display","none");
+	}
+});
+
+
 /******************** funcion para reiniciar los componentes ***********************/
 function desactivarcampos(){
 
@@ -76,6 +93,7 @@ function desactivarcampos(){
 	$('#selectPartida').val("0").change();
 	$('#selectArea').val("0").change();
 	$('#selectEmpleado').val("0").change();
+	$('#selectAnioAdquisicion').val("0").change();
 
 
 	$('#seleccionSelect').css("display","block");
@@ -83,6 +101,9 @@ function desactivarcampos(){
 	$('#divPartida').css("display","none");
 	$('#divArea').css("display","none");
 	$('#divEmpleado').css("display","none");
+	$('#divAnioAdquisicion').css("display","none");
+
+	$('#segundaInstruccion').css("display","none");	
 
 	$('#btnGenerarPDF').css("display","none");
 
@@ -304,6 +325,38 @@ function ResguardoPorEmpleado(empleado){
     	$('#btnGenerarPDF').attr("href","../catalogos/reportes/ResguardoPorEmpleadoPDF/"+empleadoNumNombre[0]+"/"+empleadoNumNombre[1]);
     }); 
 
+}
+
+function importeBienesAnioAdquisicion(anioAdquisicion){
+
+	$('#cargando').css("display","block");
+	$('#divRespuesta').css("display","none");
+	$('#btnGenerarPDF').css("display","none");
+
+	$.ajaxSetup(
+	{
+		headers:
+		{ 
+    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+	$.ajax({
+      url: "importeBienesAnioAdquisicion",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      data: { anioAdquisicion: anioAdquisicion},
+      dataType: 'html',
+      contentType: 'application/json'
+
+    }).done(function(response) {
+    	//console.log(response);
+    	$('#divRespuesta').css("display","block");
+    	$('#respuestaReporte').html(response);
+    	$('#cargando').css("display","none");
+    	$('#btnGenerarPDF').css("display","block");
+    	$('#btnGenerarPDF').attr("href","../catalogos/reportes/importeBienesAnioAdquisicionPDF/"+anioAdquisicion);
+    }); 
 } 
 
 

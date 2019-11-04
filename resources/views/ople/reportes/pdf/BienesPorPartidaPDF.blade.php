@@ -88,7 +88,7 @@
 		          </h2>  
 		        </span>   
 		      </td>
-		      <td style="width: 120px; color:#fff">...</td>
+		      <td style="width: 120px; color:#fff">Importes de Bienes</td>
 		    </tr>
 	  	</table>
 
