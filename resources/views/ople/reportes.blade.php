@@ -80,6 +80,15 @@
 			    		<option value="2005"> 2005 </option>			    		
 			    	</select>
 	    		</div>  
+
+	    		<div class="form-group" style="display: none; width: 100%" id="divAreaR8">
+	    			<select class="form-control select2" id="selectAreaR8" style="width: 100%">
+			    		<option value="0">Seleccione una área </option>
+			    		@foreach ($areas as $area)
+			    			<option value="{{ $area->idarea }}*{{ $area->nombrearea }}"> {{ $area->idarea }} | {{ $area->nombrearea }} </option>
+			    		@endforeach
+			    	</select>
+	    		</div>
 	    	</div>    	  	
 	    	
 	    </div>

@@ -29,7 +29,7 @@
       td { 
         border: none;
         text-align: center;
-        height: 24px;
+        height: 23px;
       }
       td.border {
         border-bottom: solid 1px #ccc;

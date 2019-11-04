@@ -37,7 +37,11 @@ $('#selectReportes').change(function() {
 			$('#segundaInstruccion').css("display","block");
 			$('#instruccion').html('2.- Seleccione un año:');
 			break;
-
+		case '8':
+			$('#divAreaR8').css("display","block");
+			$('#segundaInstruccion').css("display","block");
+			$('#instruccion').html('2.- Seleccione una área:');
+			break;
 	}
 }); 
 
@@ -84,6 +88,17 @@ $('#selectAnioAdquisicion').change(function(){
 	}
 });
 
+/******************** selección de area para biene por área ordenado por empleado ***********************/
+$('#selectAreaR8').change(function(){
+	if ($(this).val() != 0 ){
+		bienesAreaOrdenadoEmpleado($(this).val());
+	}else{
+		$('#btnGenerarPDF').css("display","none");
+		$('#divRespuesta').css("display","none");
+	}
+	
+});
+
 
 /******************** funcion para reiniciar los componentes ***********************/
 function desactivarcampos(){
@@ -94,6 +109,7 @@ function desactivarcampos(){
 	$('#selectArea').val("0").change();
 	$('#selectEmpleado').val("0").change();
 	$('#selectAnioAdquisicion').val("0").change();
+	$('#selectAreaR8').val("0").change();
 
 
 	$('#seleccionSelect').css("display","block");
@@ -102,6 +118,7 @@ function desactivarcampos(){
 	$('#divArea').css("display","none");
 	$('#divEmpleado').css("display","none");
 	$('#divAnioAdquisicion').css("display","none");
+	$('#divAreaR8').css("display","none");
 
 	$('#segundaInstruccion').css("display","none");	
 
@@ -357,6 +374,39 @@ function importeBienesAnioAdquisicion(anioAdquisicion){
     	$('#btnGenerarPDF').css("display","block");
     	$('#btnGenerarPDF').attr("href","../catalogos/reportes/importeBienesAnioAdquisicionPDF/"+anioAdquisicion);
     }); 
+}
+
+
+function bienesAreaOrdenadoEmpleado(area){
+
+	$('#cargando').css("display","block");
+	$('#divRespuesta').css("display","none");
+	$('#btnGenerarPDF').css("display","none");
+
+	$.ajaxSetup(
+	{
+		headers:
+		{ 
+    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+	$.ajax({
+      url: "bienesAreaOrdenadoEmpleado",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      data: { area: area},
+      dataType: 'html',
+      contentType: 'application/json'
+
+    }).done(function(response) {
+    	//console.log(response);
+    	$('#divRespuesta').css("display","block");
+    	$('#respuestaReporte').html(response);
+    	$('#cargando').css("display","none");
+    	$('#btnGenerarPDF').css("display","block");
+    	//$('#btnGenerarPDF').attr("href","../catalogos/reportes/importeBienesAnioAdquisicionPDF/"+anioAdquisicion);
+    });
 } 
 
 
