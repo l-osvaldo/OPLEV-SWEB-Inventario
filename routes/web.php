@@ -100,7 +100,10 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	// Importe de bienes candalerizados por año de adquisición
 	Route::get('catalogos/importeBienesAnioAdquisicion', 'ArticulosController@importeBienesAnioAdquisicion');
 	Route::get('catalogos/reportes/importeBienesAnioAdquisicionPDF/{anioAdquisicion}', 'ArticulosController@importeBienesAnioAdquisicionPDF');
-		
+
+	// Bienes por área ordenado por empleados
+	Route::get('catalogos/bienesAreaOrdenadoEmpleado', 'ArticulosController@bienesAreaOrdenadoEmpleado');
+	Route::get('catalogos/reportes/bienesAreaOrdenadoEmpleadoPDF/{area}', 'ArticulosController@bienesAreaOrdenadoEmpleadoPDF');
 
 	// Editar Artículo
 	Route::get('/catalogos/InformacionArticulo', 'ArticulosController@InformacionArticulo')->name('InformacionArticulo');

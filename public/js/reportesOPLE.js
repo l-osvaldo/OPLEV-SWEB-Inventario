@@ -405,7 +405,7 @@ function bienesAreaOrdenadoEmpleado(area){
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
     	$('#btnGenerarPDF').css("display","block");
-    	//$('#btnGenerarPDF').attr("href","../catalogos/reportes/importeBienesAnioAdquisicionPDF/"+anioAdquisicion);
+    	$('#btnGenerarPDF').attr("href","../catalogos/reportes/bienesAreaOrdenadoEmpleadoPDF/"+area);
     });
 } 
 

@@ -223,7 +223,16 @@ class ArticulosController extends Controller
 		return view('ople.reportes.ImporteDeBienesPorAnioAdquisicion', compact('partidas','anioAdquisicion'));
 	}
 
-	
+	public function bienesAreaOrdenadoEmpleado(Request $request){
+		$area = explode("*", $request->area);
+
+		$idarea = $area[0];
+		$nombrearea = $area[1];
+
+		$articulos = DB::table('articulos')->select('numeroinv', 'concepto', 'numserie', 'marca', 'modelo', 'nombreemple', 'factura', 'importe', 'estado')->where('idarea', $idarea)->orderBy('nombreemple', 'ASC')->get();
+
+		return view('ople.reportes.BienesDeUnAreaOrdenadoPorEmpleado', compact('nombrearea','articulos'));
+	}
 
 	// ************ generar reportes ************
 	public function BienesPorPartida(Request $request){
@@ -376,6 +385,19 @@ class ArticulosController extends Controller
 
 		$pdf = PDF::loadView('ople.reportes.pdf.ImporteDeBienesPorAnioAdquisicionPDF', compact('partidas','anioAdquisicion'))->setPaper('letter', 'landscape');
 		return $pdf->inline('ImporteDeBienesPorAñoDeAdquisicion-'.$request->anioAdquisicion.'.pdf');
+	}
+
+	public function bienesAreaOrdenadoEmpleadoPDF(Request $request){
+		$area = explode("*", $request->area);
+
+		$idarea = $area[0];
+		$nombrearea = $area[1];
+
+		$articulos = DB::table('articulos')->select('numeroinv', 'concepto', 'numserie', 'marca', 'modelo', 'nombreemple', 'factura', 'importe', 'estado')->where('idarea', $idarea)->orderBy('nombreemple', 'ASC')->get();
+
+
+		$pdf = PDF::loadView('ople.reportes.pdf.BienesDeUnAreaOrdenadoPorEmpleadoPDF', compact('nombrearea','articulos'))->setPaper('letter', 'landscape');
+		return $pdf->inline('BienesDeUnAreaOrdenadoPorEmpleado-'.$nombrearea.'.pdf');
 	}
 
 

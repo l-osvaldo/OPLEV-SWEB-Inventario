@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Reporte | Bienes por Partida | OPLE Veracruz</title>
+    <title>Reporte | Bienes de un área ordenado por empleado | OPLE Veracruz</title>
     <link rel="stylesheet" type="text/css" src="css/normalize.css">
 
     <style type="text/css" media="all">
@@ -48,25 +48,25 @@
   </head>
   <body>
   	@php
-  		$bloques = 14;
+  		$bloques = 10;
   		$inicioBloque = 0;
   		$contadorBloques = 1;
   		$pagina = 1;
   		$tope = 0;
   	@endphp
 
-  	@foreach ($bienesPartida as $element)
+  	@foreach ($articulos as $element)
   		@if ($loop->index == ($bloques - 1) )
   		@php
   			$contadorBloques += 1;
-  			$bloques += 14;
+  			$bloques += 10;
   		@endphp
   			
   		@endif
   	@endforeach
 
   	@php
-  		$bloques = 14;
+  		$bloques = 10;
   	@endphp
 
   	@for ($i = 0; $i < $contadorBloques; $i++)	
@@ -85,16 +85,12 @@
 		                INVENTARIO DE ACTIVO FIJO
 		              </small>
 		            </small>
-		          </h2>   
+		          </h2>    
 		      </td>
-		      <td style="width: 120px; color:#fff">Importes de Bienes</td>
 		    </tr>
 	  	</table>
 
-	  	<br>
-	  	<label><strong>INVENTARIO POR PARTIDA</strong></label>
-	  	<br>
-	  	<label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida->numPartida }} {{ $partida->nombrePartida }} </i></label>
+	  	<label><strong>ÁREA:</strong></label> <label style="font-weight:lighter;"> <i> {{ $nombrearea }} </i></label>
 
 	  	<div style="height: 570px">
 		  	<table style="margin-top: 15px;">
@@ -112,7 +108,7 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  	@foreach ($bienesPartida as $bien)
+			  	@foreach ($articulos as $bien)
 		            @if ( $inicioBloque <= $loop->index and $bloques > $loop->index)
 			  			<tr>
 		                	<td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->numeroinv }}</td>
@@ -141,7 +137,7 @@
 
 			  	@php
 			  		$inicioBloque = $bloques;
-			  		$bloques += 14;
+			  		$bloques += 10;
 			  	@endphp
 
 			  	<tr>
@@ -149,7 +145,7 @@
 			  			&nbsp;
 			  		</td>
 			  	</tr>
-			  	@if ($tope == 1)
+			  {{-- 	@if ($tope == 1)
 				  	<tr>
 				  		<td style="text-align: right; padding: 15px" colspan="9">
 				  			<strong>
@@ -160,7 +156,7 @@
 						 	</strong> 
 				  		</td>
 				  	</tr>
-			  	@endif
+			  	@endif --}}
 			  </tbody>
 		  	</table>  		
 	  	</div>
@@ -218,6 +214,9 @@
 		      </tbody>
 		    </table>
 		</div>
+		<br>
+		<br>
+		<br>
 		<div class="row" align="right">
 		    <label>Página:   {{ $pagina }} </label>
 		    @php
@@ -228,4 +227,3 @@
 	@endfor
   </body>
 </html>
-
