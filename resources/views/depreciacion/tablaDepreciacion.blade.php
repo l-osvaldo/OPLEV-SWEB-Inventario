@@ -8,15 +8,11 @@
 					<label><strong>NÚMERO DE LA PARTIDA:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida->numPartida }} </i></label>
 				</td>
 			</tr>
-			@foreach ($datosPartida as $element)
-				
-			
+			@foreach ($datosPartida as $element)			
 				<tr>
 					<td width="70%"> 
 						<label><strong>DESCRIPCIÓN DE LA PARTIDA: </strong></label> <label style="font-weight:lighter;"> <i> {{ $element->descpartida }} </i></label>
 					</td>
-				</tr>
-				<tr>
 					<td width="70%"> 
 						<label><strong>AÑOS DE VIDA: </strong></label> <label style="font-weight:lighter;"> <i> {{ $element->aniosvida }} </i></label>
 					</td>
@@ -25,8 +21,6 @@
 					<td width="70%"> 
 						<label><strong>% DE VALOR RESIDUAL: </strong></label> <label style="font-weight:lighter;"> <i> {{ $element->porcentajeDepreciacion }} </i></label>
 					</td>
-				</tr>
-				<tr>
 					<td width="70%"> 
 						<label><strong>AÑO: </strong></label> <label style="font-weight:lighter;"> <i> {{ $anioActual }} </i></label>
 					</td>
@@ -48,10 +42,10 @@
 			      <div class="center-block">	      	
 			        <div class="card">
 			          <div class="card-body" >
-			            <table id="tableDepreciacion" name="tableDepreciacion" class="table table-bordered table-striped" style="width:100%;">
+			            <table id="tableDepreciacion" name="tableDepreciacion" class="table table-bordered table-striped display nowrap" style="width:100%">
 			              <thead>
 			                <tr>
-			                  <th style="text-align: center" class="sticky-column">Número de Inventario</th>
+			                  <th style="text-align: center">Número de Inventario</th>
 							  <th style="text-align: center">Concepto</th>
 							  <th style="text-align: center">Fecha de compra</th>
 							  <th style="text-align: center">Valor del bien</th>
@@ -103,7 +97,7 @@
 			              <tbody>
 			                  @foreach ($articulos as $articulo)
 				                <tr>
-				                	<td class="sticky-column">{{ $articulo->numeroinv }}</td>
+				                	<td>{{ $articulo->numeroinv }}</td>
 						          	<td>{{ $articulo->concepto }}</td>
 						          	<td>{{ $articulo->fechacomp }}</td>
 						          	<td>$ {{ $articulo->importe }}</td>
@@ -196,94 +190,6 @@
 
 		<br>
 		<br>
-
-
-		<!-- Modal Historial Depreciación -->
-	    {{-- <div class="modal fade bd-example-modal-lg" id="historialDepreciacionModal" tabindex="-1" role="dialog" aria-labelledby="historialDepreciacionModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-	      <div class="modal-dialog modal-lg" role="document">
-	        <div class="modal-content">
-	          <div class="modal-header" style="background: #a90a6c; color:white">
-	            <h5 class="modal-title" id="historialDepreciacionModalLabel"><b> </b></h5>
-	            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	              <span aria-hidden="true">&times;</span>
-	            </button>
-	          </div>
-	              <!--editar Partida -->
-	          <div class="container-fluid">
-	              @csrf
-	              <div class="card-body">
-	                <div class="row">
-	                  <div class="col-md-12">
-	                      <div class="form-group">
-	                        <input type="hidden" name="numeroInventarioD" id="numeroInventarioD" value="">
-	                        <label>Concepto:  <strong id="DepreciacionConcepto" style="background-color: #F694D0"></strong> </label> 	                                                 
-	                      </div>                                       
-	                  </div><!-- /.col -->
-	                </div> <!-- /.row -->
-	                <hr>
-	                <div class="row">
-	                    <div class="col-md-4">
-	                      <div class="form-group">
-	                      	<label>Fecha de Compra:  <strong id="DepreciacionFecha"></strong> </label> 
-	                      </div>                                         
-	                    </div>
-	                    <div class="col-md-4">
-	                      <div class="form-group">
-	                      	<label>Valor del bien:  <strong id="DepreciacionValorBien"></strong> </label>
-	                      </div>                                         
-	                    </div>
-	                    <div class="col-md-4">
-	                      <div class="form-group">
-	                      	<label>Valor residual:  <strong id="DepreciacionValorResidual"></strong> </label>
-	                      </div>                                         
-	                    </div>
-	                </div>
-	                <hr>
-	                <div class="row">
-	                    <div class="col-md-6">
-	                      <div class="form-group">
-	                      	<label>Valor del bien menos valor residual:  <strong id="DepreciacionBienMenosResidual"></strong> </label> 
-	                      </div>                                         
-	                    </div>
-	                    <div class="col-md-6">
-	                      <div class="form-group">
-	                      	<label>Saldo en libros al 31 de diciembre de {{ $anioAnterior }}:  <strong id="DepreciacionSaldoAnioAnterior"></strong> </label>
-	                      </div>                                         
-	                    </div>
-	                </div>
-	                <div class="row">
-	                    <div class="col-md-6">
-	                      <div class="form-group">
-	                      	<label>Depreciación mensual:  <strong id="DepreciacionMensual"></strong> </label> 
-	                      </div>                                         
-	                    </div>
-	                    <div class="col-md-6">
-	                      <div class="form-group">
-	                      	<label>Depreciación anual:  <strong id="DepreciacionAnual"></strong> </label>
-	                      </div>                                         
-	                    </div>
-	                </div>
-	                <div class="row">
-	                    <div class="col-md-6">
-	                      <div class="form-group">
-	                      	<label>Depreciación mensual:  <strong id="DepreciacionMesActual"></strong> </label> 
-	                      </div>                                         
-	                    </div>
-	                </div>
-	                
-	              </div>
-	           </div>
-	              <!--Fin Editar Partida -->
-	              
-	              
-	              <div class="card-footer">
-	                <button type="reset" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>	                  
-	              </div>
-	          </div>
-	        </div>
-	      </div>
-	    </div> --}}
-
 		
 	</section>
 
