@@ -7,44 +7,60 @@
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <meta name="csrf-token" content="{{ csrf_token() }}">
 
-	  {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-	  <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.3.0/css/fixedColumns.dataTables.min.css"> --}}
-	  {{-- <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.dataTables.min.css"> --}}
-
-	  {{-- <style type="text/css">
-	  	/* Ensure that the demo table scrolls */
-	    th, td { white-space: nowrap; }
-	    div.dataTables_wrapper {
-	        width: 800px;
-	        margin: 0 auto;
-	    }
-	 
-	    div.ColVis {
-	        float: left;
-	    }
-	  </style>
-
-
-
-	  	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/fc-3.3.0/fh-3.1.6/r-2.2.3/rg-1.1.1/rr-1.2.6/sc-2.0.1/datatables.min.css"/>
+	  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/fc-3.3.0/fh-3.1.6/r-2.2.3/sc-2.0.1/sl-1.3.1/datatables.min.css"/>
  
-		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/fc-3.3.0/fh-3.1.6/r-2.2.3/rg-1.1.1/rr-1.2.6/sc-2.0.1/datatables.min.js"></script> --}}
+	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/fc-3.3.0/fh-3.1.6/r-2.2.3/sc-2.0.1/sl-1.3.1/datatables.min.js"></script>
 
-		<!-- Font Awesome -->
-		  <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
-		 
-		  <!-- Select2 -->
-		  <link rel="stylesheet" href="{{ asset('plugins/select2/select2.min.css')}}">
-		  
-		  <!-- DataTables-->
-		  <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap4.css') }}">
-		  {{-- <link rel="stylesheet" href="{{ asset('plugins/datatables/buttons.bootstrap4.min.css') }}"> --}}
-		  <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css">
+	    <script type="text/javascript" src="{{ asset('js/depreciacion.js') }}"></script>
 
-		   <!-- Theme style -->
-		   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
+	    <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
 
-		   <link rel="stylesheet" href="{{ asset('css/responsive.bootstrap4.min.css') }}">
+	    <script type="text/javascript">
+	    	$(document).ready(function() {
+	    		var tableP = $('#tableDepreciacion').DataTable( {
+				  "deferRender": true,
+				  "retrieve": true,
+				  "processing": true,
+				  "scrollX": true,
+				  "sSearch": "Filter Data",
+				  "dom":     "<'row'<'col-sm-1'l><'col-sm-3'f><'col-sm-8 text-right'B>>" +
+				  "<'row'<'col-sm-12'tr>>" +
+				  "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+				  "select": true,
+				  "language": {
+				    
+				        "sProcessing":     "Procesando...",
+				    "sLengthMenu":     "Mostrar _MENU_ registros",
+				    "sZeroRecords":    "No se encontraron resultados",
+				    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+				    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+				    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+				    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+				    "sInfoPostFix":    "",
+				    "sSearch":         "Buscar:",
+				    "sUrl":            "",
+				    "sInfoThousands":  ",",
+				    "sLoadingRecords": "Cargando...",
+				    "oPaginate": {
+				    "sFirst":    "Primero",
+				    "sLast":     "Último",
+				    "sNext":     "Siguiente",
+				    "sPrevious": "Anterior"
+				    },
+				    "oAria": {
+				      "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+				      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+				    }
+				  },
+				 "buttons": ['excel']
+				});
+
+				new $.fn.dataTable.FixedColumns( tableP, {
+			        leftColumns: 1,
+			        rightColumns: 1
+			    } );
+	    	});
+	    </script>
 
 	  
 	</head>
@@ -57,45 +73,6 @@
 		    </div>		    
 		</div>
 
-
-		<!-- jQuery -->
-		{{-- <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script> --}}
-		<!-- Morris.js charts -->
-		<script src="{{ asset('plugins/morris/morris.min.js') }}"></script>
-		<!-- jQuery UI 1.11.4 -->
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-
-		<!-- Select2 -->
-		<script src="{{ asset('plugins/select2/select2.full.min.js')}}"></script>
-
-		<!-- AdminLTE App -->
-		<script src="{{ asset('dist/js/adminlte.js') }}"></script>
-
-		<!-- DataTables -->
-		<script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
-		<script src="{{ asset('plugins/datatables/dataTables.bootstrap4.js') }}"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-
-		<script type="text/javascript" src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('js/buttons.bootstrap4.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('js/buttons.html5.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('js/datatables.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('js/dataTables.select.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('js/dataTables.responsive.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('js/responsive.bootstrap4.min.js') }}"></script>
-
-
-		<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-
-
-		<script type="text/javascript" src="{{ asset('js/depreciacion.js') }}"></script>
-
-	 {{--  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-	  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-	  <script src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script> --}}
-	 {{--  <script src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
-	  <script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.colVis.min.js"></script> --}}
-
-	  
+			  
 	</body>
 </html>
