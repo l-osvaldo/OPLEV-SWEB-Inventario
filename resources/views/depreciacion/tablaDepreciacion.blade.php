@@ -42,11 +42,11 @@
 			      <div class="center-block">	      	
 			        <div class="card">
 			          <div class="card-body" >
-			            <table id="tableDepreciacion" name="tableDepreciacion" class="table table-bordered table-striped display nowrap" style="width:100%">
+			            <table id="tableDepreciacion" name="tableDepreciacion" class="table table-striped table-bordered nowrap" style="width:100%">
 			              <thead>
 			                <tr>
-			                  <th style="text-align: center">Número de Inventario</th>
-							  <th style="text-align: center">Concepto</th>
+			                  <th style="text-align: center;">Número de Inventario</th>
+							  <th style="text-align: center;">Concepto</th>
 							  <th style="text-align: center">Fecha de compra</th>
 							  <th style="text-align: center">Valor del bien</th>
 							  <th style="text-align: center">Valor residual</th>

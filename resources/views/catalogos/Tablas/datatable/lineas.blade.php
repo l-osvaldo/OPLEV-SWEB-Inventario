@@ -14,7 +14,7 @@
 			    </h5>
 			</div>
 			<div class="card-body">
-			  	<table id="example1" name="example1" class="table table-bordered table-striped" style="width:100%">
+			  	<table id="tableCatalogo" name="tableCatalogo" class="table table-bordered table-striped" style="width:100%">
 					<thead>
 					  <tr>
 					    <th style="text-align: center">Número de Línea</th>
