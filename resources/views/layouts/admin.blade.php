@@ -20,10 +20,14 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Didact+Gothic&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Quicksand:500&display=swap" rel="stylesheet">
+
+
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"/>
+
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.3.0/css/fixedColumns.bootstrap4.min.css"/>
-  
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.dataTables.min.css"/>
+
 
   <!-- Select2 -->
   <link rel="stylesheet" href="{{ asset('plugins/select2/select2.min.css')}}">
@@ -52,7 +56,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap-toggle.min.css') }}">
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.dataTables.min.css"/>
+
 
 </head>
 <body class="hold-transition sidebar-mini sidebar-collapse" onload="cerrarMenus();">
@@ -81,7 +85,9 @@
 <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
 
-
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.bootstrap4.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
 <!-- Morris.js charts -->
 {{-- <script src="{{ asset('plugins/morris/morris.min.js') }}"></script> --}}
 <!-- jQuery UI 1.11.4 -->
@@ -148,10 +154,6 @@
 
 <script src="{{ asset('/plugins/jquery-maskmoney-master/dist/jquery.maskMoney.js') }}"></script>
 
-
-
-{{-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.bootstrap4.min.js"></script> --}}
-
 <script>
     $ ("input[type='number']").inputSpinner();
 </script>
@@ -162,9 +164,9 @@
     "retrieve": true,
     "processing": true,
     "sSearch": "Filter Data",
-    "dom":     "<'row'<'col-sm-1'l><'col-sm-3'f><'col-sm-8'B>>" +
-    "<'row'<'col-sm-12'tr>>" +
-    "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+    "dom":      "<'row'<'col-sm-1'l><'col-sm-3'f><'col-sm-8 text-right'B>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
     "select": true,
     "language": {
       
@@ -191,7 +193,9 @@
         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
       }
     },
-   "buttons": ['excel']
+   "buttons": [
+              'excel'
+              ]
 } );
 </script>
 
