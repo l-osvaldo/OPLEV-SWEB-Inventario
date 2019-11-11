@@ -77,18 +77,7 @@
       button.dt-button,
       div.dt-button,
       a.dt-button {
-        position: relative;
-        display: inline-block;
-        box-sizing: border-box;
-        margin-right: 0.333em;
-        margin-bottom: 0.333em;
-        padding: 0.5em 1em;
-        border: 1px solid #999;
-        border-radius: 2px;
-        cursor: pointer;
-        font-size: 0.88em;
-        line-height: 1.6em;
-        color: red;
+        color: #e600ac;
                
       }
     </style>
