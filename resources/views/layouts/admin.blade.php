@@ -29,6 +29,8 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.dataTables.min.css"/>
 
 
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css"/>
+
   <!-- Select2 -->
   <link rel="stylesheet" href="{{ asset('plugins/select2/select2.min.css')}}">
   <!-- iCheck -->
@@ -55,6 +57,41 @@
    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap-toggle.min.css') }}">
+
+    <style type="text/css">
+      .dataTables_wrapper .dt-buttons {
+        float:right;
+      }
+
+      button.dt-button.active {
+        background: red !important;
+        color: black !important;
+      }
+
+      div.dt-button-collection {
+          width: 100%;
+          background-color: white;
+
+      }
+
+      button.dt-button,
+      div.dt-button,
+      a.dt-button {
+        position: relative;
+        display: inline-block;
+        box-sizing: border-box;
+        margin-right: 0.333em;
+        margin-bottom: 0.333em;
+        padding: 0.5em 1em;
+        border: 1px solid #999;
+        border-radius: 2px;
+        cursor: pointer;
+        font-size: 0.88em;
+        line-height: 1.6em;
+        color: red;
+               
+      }
+    </style>
 
 
 
@@ -88,6 +125,9 @@
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.bootstrap4.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
+
+
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.colVis.min.js"></script>
 <!-- Morris.js charts -->
 {{-- <script src="{{ asset('plugins/morris/morris.min.js') }}"></script> --}}
 <!-- jQuery UI 1.11.4 -->
@@ -149,8 +189,8 @@
 <script type="text/javascript" src="{{ asset('js/lineas.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/sublineas.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/depreciacion.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/partidas.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/depreciacionA.js') }}"></script>
 
 <script src="{{ asset('/plugins/jquery-maskmoney-master/dist/jquery.maskMoney.js') }}"></script>
 
@@ -164,7 +204,7 @@
     "retrieve": true,
     "processing": true,
     "sSearch": "Filter Data",
-    "dom":      "<'row'<'col-sm-1'l><'col-sm-3'f><'col-sm-8 text-right'B>>" +
+    "dom":      "<'row'<'col-sm-1'l><'col-sm-3'f><'col-sm-8'B>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
     "select": true,

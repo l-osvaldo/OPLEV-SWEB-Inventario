@@ -8,11 +8,11 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	  	
-	  	<script type="text/javascript" src="{{ asset('js/depreciacion.js') }}"></script>
+	  	
 
 	  	<script type="text/javascript">
 	  		$(document).ready(function() {
-	  			var table = $('#tableDepreciacion').DataTable( {
+	  			var table = $('#tableDepreciacion01').DataTable( {
 
 	  				"scrollX":        true,
 	  				"scrollCollapse": true,
@@ -51,9 +51,12 @@
 				      "oAria": {
 				        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
 				        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-				      }
+				      },
+				      "buttons": {
+		                "colvis": "Ver columnas"
+		              }
 				    },
-				   "buttons": ['excel']
+				   "buttons": ['excel','colvis']
 	  			} );
 	  		} );
 

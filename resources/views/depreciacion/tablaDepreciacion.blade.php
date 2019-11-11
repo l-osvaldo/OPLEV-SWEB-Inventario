@@ -42,7 +42,7 @@
 			      <div class="center-block">	      	
 			        <div class="card">
 			          <div class="card-body" >
-			            <table id="tableDepreciacion" name="tableDepreciacion" class="table table-striped table-bordered nowrap" style="width:100%">
+			            <table id="tableDepreciacion01" name="tableDepreciacion01" class="table table-striped table-bordered nowrap display" style="width:100%">
 			              <thead>
 			                <tr>
 			                  <th style="text-align: center;">Número de Inventario</th>

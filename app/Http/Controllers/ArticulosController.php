@@ -486,7 +486,7 @@ class ArticulosController extends Controller
 		$partidas = partidas::select('partida','descpartida')->whereNotNull(['porcentajeDepreciacion','aniosvida'])->get();  
 
 		
-		return view('depreciacion.depreciacion',compact('usuario','partidas'));
+		return view('depreciacion.depreciacionMenu',compact('usuario','partidas'));
 	}
 
 	public function calculoDepreciacion(Request $request){

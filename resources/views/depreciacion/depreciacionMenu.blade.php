@@ -2,7 +2,7 @@
 @section('title', 'Depreciación de Artículos OPLE')
 
 @section('content')
-	@include('partials.header',['tituloEncabezado' => 'Depreciación'])
+	@include('partials.header',['tituloEncabezado' => 'Depreciación '])
 
 	<div class="card">
 	  	<div class="card-body" >
@@ -13,13 +13,15 @@
 	  		</div>
 	  		<div class="row">
 		    	<div class="col-md-3">
-		    		<select class="form-control select2" id="depreciacionPartida" style="width: 90%;">
+		    		<select class="form-control select2" id="selectdepreciacionPartida" name="selectdepreciacionPartida" style="width: 90%;">
 			    		<option value="0">Seleccione una partida</option>
 			    		@foreach ($partidas as $partida)
 			    			<option value="{{ $partida->partida }}"> {{ $partida->partida }} | {{ $partida->descpartida }}</option>
 			    		@endforeach
 			    	</select>
+			    	
 		    	</div>
+
 		    </div>
 		    <br>
 
