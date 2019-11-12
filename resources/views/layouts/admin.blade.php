@@ -28,6 +28,8 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.3.0/css/fixedColumns.bootstrap4.min.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.0/css/buttons.dataTables.min.css"/>
 
+    
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"/>
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css"/>
 
@@ -63,24 +65,20 @@
         float:right;
       }
 
-      button.dt-button.active {
-        background: red !important;
-        color: black !important;
-      }
-
       div.dt-button-collection {
-          width: 100%;
-          background-color: white;
+          width: 100px;
+          background-color: black;
 
       }
 
       button.dt-button,
       div.dt-button,
       a.dt-button {
-        color: #e600ac;
-               
+        color: #e600ac;               
       }
-    </style>
+
+      
+     </style>
 
 
 

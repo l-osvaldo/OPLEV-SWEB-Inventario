@@ -214,8 +214,10 @@ class ArticulosController extends Controller
 
 				$meses[$fecha[1]-1] = $meses[$fecha[1]-1] + $art->importe;
 				$total = $total + $art->importe;
-			}
 
+
+			}
+			$total = number_format($total,2);
 			array_add($value,'meses',$meses);
 			array_add($value,'total',$total);
 		}
@@ -231,7 +233,35 @@ class ArticulosController extends Controller
 
 		$articulos = DB::table('articulos')->select('numeroinv', 'concepto', 'numserie', 'marca', 'modelo', 'nombreemple', 'factura', 'importe', 'estado')->where('idarea', $idarea)->orderBy('nombreemple', 'ASC')->get();
 
+		foreach ($articulos as $articulo) {
+			$articulo->importe = number_format($articulo->importe,2);
+		}
+
+
 		return view('ople.reportes.BienesDeUnAreaOrdenadoPorEmpleado', compact('nombrearea','articulos'));
+	}
+
+	public function inventarioPorOrdenAlfabeticoNuevo(){
+
+		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
+
+		foreach ($partidas as $partida) {
+			$articulos = DB::table('articulos')->select('numeroinv','concepto','numserie','marca','modelo','factura','importe')->where('partida', $partida->partida)->orderBy('concepto','ASC')->get();
+			$totalImporte = 0;
+			foreach ($articulos as $key => $articulo) {
+				$totalImporte += $articulo->importe;
+				$articulo->importe = number_format($articulo->importe,2);
+			}
+
+			$totalImporte = number_format($totalImporte,2);
+
+			array_add($partida,'totalImportePartida',$totalImporte);
+			array_add($partida,'articulos',$articulos);
+		}
+
+		//echo $partidas;
+		
+		return view('ople.reportes.inventarioPorOrdenAlfabeticoNuevo', compact('partidas'));
 	}
 
 	// ************ generar reportes ************
@@ -398,6 +428,27 @@ class ArticulosController extends Controller
 
 		$pdf = PDF::loadView('ople.reportes.pdf.BienesDeUnAreaOrdenadoPorEmpleadoPDF', compact('nombrearea','articulos'))->setPaper('letter', 'landscape');
 		return $pdf->inline('BienesDeUnAreaOrdenadoPorEmpleado-'.$nombrearea.'.pdf');
+	}
+
+	public function inventarioPorOrdenAlfabeticoNuevoPDF(){
+		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
+
+		foreach ($partidas as $partida) {
+			$articulos = DB::table('articulos')->select('numeroinv','concepto','numserie','marca','modelo','factura','importe')->where('partida', $partida->partida)->orderBy('concepto','ASC')->get();
+			$totalImporte = 0;
+			foreach ($articulos as $key => $articulo) {
+				$totalImporte += $articulo->importe;
+				$articulo->importe = number_format($articulo->importe,2);
+			}
+
+			$totalImporte = number_format($totalImporte,2);
+
+			array_add($partida,'totalImportePartida',$totalImporte);
+			array_add($partida,'articulos',$articulos);
+		}
+
+		$pdf = PDF::loadView('ople.reportes.pdf.InventarioPorOrdenAlfabeticoNuevoPDF', compact('partidas'))->setPaper('letter', 'landscape');
+		return $pdf->inline('InventarioPorOrdenAlfabeticoNuevo.pdf');
 	}
 
 

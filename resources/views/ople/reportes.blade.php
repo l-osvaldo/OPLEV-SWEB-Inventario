@@ -27,6 +27,7 @@
 		    		<option value="3">Concentrado de importes por partida</option>
 		    		<option value="4">Inventario por área</option>
 		    		<option value="5">Inventario por orden alfabético</option>
+		    		<option value="9">Inventario por orden alfabético nuevo</option>
 		    		<option value="7">Importe de bienes calendarizados por año de adquisición</option>
 		    		<option value="6">Resguardo por empleado</option>		    		
 		    		

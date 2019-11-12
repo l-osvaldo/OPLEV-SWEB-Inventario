@@ -14,7 +14,7 @@
 						<label><strong>DESCRIPCIÓN DE LA PARTIDA: </strong></label> <label style="font-weight:lighter;"> <i> {{ $element->descpartida }} </i></label>
 					</td>
 					<td width="70%"> 
-						<label><strong>AÑOS DE VIDA: </strong></label> <label style="font-weight:lighter;"> <i> {{ $element->aniosvida }} </i></label>
+						<label><strong>AÑOS QUE SE DEPRECIA EL ARTÍCULO: </strong></label> <label style="font-weight:lighter;"> <i> {{ $element->aniosvida }} </i></label>
 					</td>
 				</tr>
 				<tr>

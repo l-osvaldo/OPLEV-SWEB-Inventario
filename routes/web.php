@@ -105,6 +105,11 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('catalogos/bienesAreaOrdenadoEmpleado', 'ArticulosController@bienesAreaOrdenadoEmpleado');
 	Route::get('catalogos/reportes/bienesAreaOrdenadoEmpleadoPDF/{area}', 'ArticulosController@bienesAreaOrdenadoEmpleadoPDF');
 
+	// inventario Por Orden Alfabético Nuevo
+	Route::get('catalogos/inventarioPorOrdenAlfabeticoNuevo', 'ArticulosController@inventarioPorOrdenAlfabeticoNuevo');
+	Route::get('catalogos/reportes/inventarioPorOrdenAlfabeticoNuevoPDF', 'ArticulosController@inventarioPorOrdenAlfabeticoNuevoPDF');
+
+	
 	// Editar Artículo
 	Route::get('/catalogos/InformacionArticulo', 'ArticulosController@InformacionArticulo')->name('InformacionArticulo');
 	Route::post('/catalogos/EditarArticulos', 'ArticulosController@EditarArticulos')->name('EditarArticulos');
