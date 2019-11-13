@@ -78,7 +78,9 @@
             <td style="width: 120px; color:#fff">...</td>
           </tr>
         </table>
-        <label>PARTIDA: {{ $partida->descpartida }}</label>        
+        <label>NÚMERO DE PARTIDA: {{ $partida->partida }}</label>
+        <br>          
+        <label>PARTIDA: {{ $partida->descpartida }}</label>   
       
 
     		<div style="height: 700px">
@@ -137,7 +139,7 @@
             $pagina += 1;
           @endphp
         </div>
-        <div style="page-break-after:always;"></div>
+        <div style="page-break-after:auto;"></div>
       @endwhile  	  
   	@endforeach
   </body>
