@@ -244,10 +244,11 @@ class ArticulosController extends Controller
 	public function inventarioPorOrdenAlfabeticoNuevo(){
 
 		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
-
+		
 		foreach ($partidas as $partida) {
 			$articulos = DB::table('articulos')->select('numeroinv','concepto','numserie','marca','modelo','factura','importe')->where('partida', $partida->partida)->orderBy('concepto','ASC')->get();
 			$totalImporte = 0;
+
 			foreach ($articulos as $key => $articulo) {
 				$totalImporte += $articulo->importe;
 				$articulo->importe = number_format($articulo->importe,2);
@@ -432,9 +433,11 @@ class ArticulosController extends Controller
 
 	public function inventarioPorOrdenAlfabeticoNuevoPDF(){
 		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
+		$numPartidas = partidas::count();
 
 		foreach ($partidas as $partida) {
 			$articulos = DB::table('articulos')->select('numeroinv','concepto','numserie','marca','modelo','factura','importe')->where('partida', $partida->partida)->orderBy('concepto','ASC')->get();
+			$numArticulosPartida = articulos::where('partida', $partida->partida)->count();
 			$totalImporte = 0;
 			foreach ($articulos as $key => $articulo) {
 				$totalImporte += $articulo->importe;
@@ -445,9 +448,10 @@ class ArticulosController extends Controller
 
 			array_add($partida,'totalImportePartida',$totalImporte);
 			array_add($partida,'articulos',$articulos);
+			array_add($partida,'numeroArticulos',$numArticulosPartida);
 		}
 
-		$pdf = PDF::loadView('ople.reportes.pdf.InventarioPorOrdenAlfabeticoNuevoPDF', compact('partidas'))->setPaper('letter', 'landscape');
+		$pdf = PDF::loadView('ople.reportes.pdf.InventarioPorOrdenAlfabeticoNuevoPDF', compact('partidas','numPartidas'))->setPaper('letter', 'landscape');
 		return $pdf->inline('InventarioPorOrdenAlfabeticoNuevo.pdf');
 	}
 
