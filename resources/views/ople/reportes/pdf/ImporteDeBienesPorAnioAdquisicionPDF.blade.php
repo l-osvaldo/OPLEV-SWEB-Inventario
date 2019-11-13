@@ -123,7 +123,7 @@
         </tbody>
       </table>
       <div class="row">
-        <table style="margin-top: 10px;">
+        <table style="margin-top: 18px;">
           <thead>
             <tr>
               <td align="center">
