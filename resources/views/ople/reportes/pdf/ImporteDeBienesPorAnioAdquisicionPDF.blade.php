@@ -85,7 +85,7 @@
           </tr>
           <tr style="background-color: #ccc; border: solid 1px #000;">
               <th style="text-align: center; padding: 15px">Partida</th>
-              <th style="text-align: center; padding: 15px" width="35%">Clasificación del bien</th>
+              <th style="text-align: center; padding: 15px" width="40%">Clasificación del bien</th>
               <th style="text-align: center; padding: 15px">Ene</th>
               <th style="text-align: center; padding: 15px">Feb</th>
               <th style="text-align: center; padding: 15px">Mar</th>
