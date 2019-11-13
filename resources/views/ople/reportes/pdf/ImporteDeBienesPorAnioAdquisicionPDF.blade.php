@@ -50,7 +50,7 @@
     <table>
         <tr>          
           <td style="width: 120px;vertical-align: text-top"><img class="logo" src="{{ public_path('images/logoople.png') }}" alt=""></td>
-          <td style="width: calc(100% - 240px);">
+          <td style="width: calc(100% - 200px);">
               <h2>
                 <small>
                   ORGANISMO PÚBLICO LOCAL ELECTORAL 
@@ -64,7 +64,6 @@
               </h2>  
             </span>   
           </td>
-          <td style="width: 120px; color:#fff">...</td>
         </tr>
         <tr>
           <td colspan="3">
@@ -124,7 +123,7 @@
         </tbody>
       </table>
       <div class="row">
-        <table style="margin-top: 15px;">
+        <table style="margin-top: 10px;">
           <thead>
             <tr>
               <td align="center">
