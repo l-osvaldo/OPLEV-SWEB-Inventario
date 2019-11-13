@@ -262,7 +262,7 @@ class ArticulosController extends Controller
 
 		//echo $partidas;
 		
-		return view('ople.reportes.inventarioPorOrdenAlfabeticoNuevo', compact('partidas'));
+		return view('ople.reportes.InventarioPorOrdenAlfabeticoNuevo', compact('partidas'));
 	}
 
 	// ************ generar reportes ************
