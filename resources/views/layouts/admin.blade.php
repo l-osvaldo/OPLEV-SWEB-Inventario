@@ -50,7 +50,7 @@
   <!-- Bootstrap Color Picker -->
   {{-- <link rel="stylesheet" href="{{ asset('plugins/colorpicker/bootstrap-colorpicker.min.css') }}"> --}}
   <!-- Bootstrap time Picker -->
-  {{-- <link rel="stylesheet" href="{{ asset('plugins/timepicker/bootstrap-timepicker.min.css')}}"> --}}
+  {<link rel="stylesheet" href="{{ asset('plugins/timepicker/bootstrap-timepicker.min.css')}}">
    <!-- Theme style -->
    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
 
@@ -182,7 +182,7 @@
 <script src="{{ asset('/plugins/jquery-maskmoney-master/dist/jquery.maskMoney.js') }}"></script>
 
 <script>
-    $ ("input[type='number']").inputSpinner();
+    $("input[type='number']").inputSpinner();
 </script>
 
 <script>

@@ -115,6 +115,7 @@ $('#sublineaAltaArticulo').change(function(){
 });
 
 $('#numberNumBienes').change(function(){
+	console.log($(this).val());
 	generarNumeroInventario($(this).val());
 	setTimeout(generarNumeroInventario($(this).val()),2500);
 });

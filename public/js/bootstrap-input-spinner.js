@@ -248,7 +248,7 @@
                 var thousandSeparator = numberFormat.format(1111).replace(/1/g, '')
                 var decimalSeparator = numberFormat.format(1.1).replace(/1/g, '')
                 return parseFloat(stringNumber
-                    .replace(new RegExp('\\' + thousandSeparator, 'g'), '')
+                    .replace(new RegExp('\\\\' + thousandSeparator, 'g'), '')
                     .replace(new RegExp('\\' + decimalSeparator), '.')
                 )
             }
