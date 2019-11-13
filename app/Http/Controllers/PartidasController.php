@@ -68,9 +68,19 @@ class PartidasController extends Controller
     public function index()
 	{
 		$usuario = auth()->user();
-		$partida = partidas::distinct()->orderBy('partida', 'DESC')->get(['partida', 'descpartida']);
-		//var_dump($partida[0]);
-		//dd();
+		$partida = partidas::distinct()->orderBy('partida', 'DESC')->get(['partida', 'descpartida','aniosvida','porcentajeDepreciacion']);
+		
+
+		foreach ($partida as $value) {
+			if ($value->aniosvida == null){
+				$value->aniosvida = 'No se Desprecia esta partida';
+			}
+			if ($value->porcentajeDepreciacion == null){
+				$value->porcentajeDepreciacion = 'No se Desprecia esta partida';
+			}else{
+				$value->porcentajeDepreciacion = $value->porcentajeDepreciacion.' %';
+			}
+		}
 
 		return view('catalogos.Tablas.TablaPartida', compact('partida', 'usuario'));
 

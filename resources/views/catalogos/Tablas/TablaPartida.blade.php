@@ -26,6 +26,8 @@
                 <tr>
                   <th style="text-align: center">Número de la Partida</th>
                   <th style="text-align: center">Descripción de la Partida</th>
+                  <th style="text-align: center">Años de vida (Depreciación)</th>
+                  <th style="text-align: center">% de depreciación</th>
                 </tr>
               </thead>
               <tbody>
@@ -33,7 +35,8 @@
                 <tr>
                   <td>{{ $partida->partida }}</td>
                   <td>{{ $partida->descpartida }}</td>
-                  
+                  <td>{{ $partida->aniosvida}} </td>
+                  <td>{{ $partida->porcentajeDepreciacion}}</td>
                 </tr>
                   @endforeach
               </tbody>
