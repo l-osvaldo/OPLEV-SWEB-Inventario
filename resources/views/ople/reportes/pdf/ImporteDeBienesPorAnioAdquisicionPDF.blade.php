@@ -10,7 +10,7 @@
       font-family: Arial, Helvetica, sans-serif;
       }
       body {
-        font-size: 12px;
+        font-size: 11px;
       }
       .row:after {
         content: "";
