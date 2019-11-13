@@ -23,13 +23,13 @@
       }
       table{
         width: 100%;
-        margin: 0 0 20px 0;
+        margin: 0 0 10px 0;
         border-spacing: 0;
       }
       td { 
         border: none;
         text-align: center;
-        height: 23px;
+        height: 20px;
       }
       td.border {
         border-bottom: solid 1px #ccc;
