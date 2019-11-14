@@ -42,11 +42,6 @@ $('#selectReportes').change(function() {
 			$('#segundaInstruccion').css("display","block");
 			$('#instruccion').html('2.- Seleccione una área:');
 			break;
-		case '9':
-			$('#seleccionSelect').css("display","none");
-			$('#segundaInstruccion').css("display","none");
-			inventarioPorOrdenAlfabeticoNuevo();	 
-			break;
 	}
 }); 
 
@@ -412,38 +407,6 @@ function bienesAreaOrdenadoEmpleado(area){
     	$('#btnGenerarPDF').css("display","block");
     	$('#btnGenerarPDF').attr("href","../catalogos/reportes/bienesAreaOrdenadoEmpleadoPDF/"+area);
     });
-}
-
-function inventarioPorOrdenAlfabeticoNuevo (){
-	$('#cargando').css("display","block");
-	$('#divRespuesta').css("display","none");
-	$('#btnGenerarPDF').css("display","none");
-
-	$.ajaxSetup(
-	{
-		headers:
-		{ 
-    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	    }
-	});
-
-	$.ajax({
-      url: "inventarioPorOrdenAlfabeticoNuevo",
-      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-      type: 'GET',
-      dataType: 'html',
-      async: true,
-      contentType: 'application/json'
-
-    }).done(function(response) {
-    	//console.log(response);
-    	$('#divRespuesta').css("display","block");
-    	$('#respuestaReporte').html(response);
-    	$('#cargando').css("display","none");
-    	$('#btnGenerarPDF').css("display","block");
-    	$('#btnGenerarPDF').attr("href","../catalogos/reportes/inventarioPorOrdenAlfabeticoNuevoPDF");
-    	    	
-    });
-}
+} 
 
 

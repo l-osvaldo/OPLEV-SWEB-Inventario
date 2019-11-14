@@ -52,11 +52,21 @@
 				        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
 				        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
 				      },
-				      "buttons": {
-		                "colvis": "Ver columnas"
-		              }
 				    },
-				   "buttons": ['excel','colvis']
+				   "buttons": [{
+		                    extend: 'collection',
+		                    text: 'Control',
+		                    orientation: 'landscape',
+		                    buttons: [
+		                        'excel'
+		                    ]
+		                },
+		                {
+		                    extend: 'colvis',
+		                    text: 'Ver columnas',
+		                    collectionLayout: 'fixed three-column'
+		                }
+		            ],
 	  			} );
 	  		} );
 
