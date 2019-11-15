@@ -116,6 +116,15 @@
             </li>
           </ul>
         </li>
+
+        <li id="cancelacionResguardo" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/cancelacionResguardo') ? 'menu-open' : '' !!}">
+          <a href="{{ route('cancelacionResguardo') }}" class="{!! Request::is('catalogos/cancelacionResguardo') ? 'nav-link active' : 'nav-link' !!}">
+            <i class="nav-icon fa fa-ban"></i>
+            <p>
+              Cancelación de resguardo
+            </p>
+          </a>          
+        </li>
         
         <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}"

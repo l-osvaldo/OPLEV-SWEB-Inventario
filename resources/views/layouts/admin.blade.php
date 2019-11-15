@@ -84,7 +84,7 @@
       }
 
       .dropdown-item.active{
-        color: #e600ac !important;
+        color: black !important;
       }
 
       div.dt-button-collection a.dt-button.active:not(.disabled){
@@ -161,6 +161,7 @@
 <script type="text/javascript" src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/partidas.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/depreciacionA.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/cancelacionResguardo.js') }}"></script>
 
 <script src="{{ asset('/plugins/jquery-maskmoney-master/dist/jquery.maskMoney.js') }}"></script>
 
