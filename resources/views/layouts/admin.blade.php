@@ -65,7 +65,7 @@
       button.dt-button,
       div.dt-button,
       a.dt-button {
-        color: #e600ac;
+        color: black;
         border: 1px solid #F5ECF2 !important;
         background-color: #F5ECF2;
         background-image: linear-gradient(to bottom, #F5ECF2 0%, #F5ECF2 100%);               
@@ -84,7 +84,7 @@
       }
 
       .dropdown-item.active{
-        color: black !important;
+        color: #e600ac !important;
       }
 
       div.dt-button-collection a.dt-button.active:not(.disabled){

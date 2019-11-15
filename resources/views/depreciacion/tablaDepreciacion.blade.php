@@ -22,7 +22,7 @@
 						<label><strong>% DE VALOR RESIDUAL: </strong></label> <label style="font-weight:lighter;"> <i> {{ $element->porcentajeDepreciacion }} </i></label>
 					</td>
 					<td width="70%"> 
-						<label><strong>AÑO: </strong></label> <label style="font-weight:lighter;"> <i> {{ $anioActual }} </i></label>
+						<label><strong>AÑO EN CURSO: </strong></label> <label style="font-weight:lighter;"> <i> {{ $anioActual }} </i></label>
 					</td>
 				</tr>
 			@endforeach
