@@ -117,8 +117,8 @@
           </ul>
         </li>
 
-        <li id="ople" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/cancelacionResguardo') ? 'menu-open' : '' !!}">
-          <a class="{!! Request::is('catalogos/cancelacionResguardo') ? 'nav-link active' : 'nav-link' !!}">
+        <li id="CancelacionesR" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/cancelacionResguardo','catalogos/revision') ? 'menu-open' : '' !!}">
+          <a class="{!! Request::is('catalogos/cancelacionResguardo','catalogos/revision') ? 'nav-link active' : 'nav-link' !!}">
             <i class="nav-icon fa fa-ban"></i>
             <p>
               Cancelaciones
@@ -133,22 +133,13 @@
               </a>
             </li>
             <li class="nav-item" style="margin-left: 25px;">
-              <a href="{{ route('cancelacionResguardo') }}" class="{!! Request::is('catalogos/cancelacionResguardo') ? 'nav-link active' : 'nav-link' !!}">
+              <a href="{{ route('revision') }}" class="{!! Request::is('catalogos/revision') ? 'nav-link active' : 'nav-link' !!}">
                 <i class="fa fa-list-ol"></i>
                 <p style="margin-left: 10px;">Revisión</p>
               </a>
             </li>
           </ul>
         </li>
-
-        {{-- <li id="cancelacionResguardo" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/asignacion') ? 'menu-open' : '' !!}">
-          <a href="{{ route('asignacion') }}" class="{!! Request::is('catalogos/asignacion') ? 'nav-link active' : 'nav-link' !!}">
-            <i class="nav-icon fa fa-check-square-o"></i>
-            <p>
-              Asignación
-            </p>
-          </a>          
-        </li> --}}
         
         <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}"

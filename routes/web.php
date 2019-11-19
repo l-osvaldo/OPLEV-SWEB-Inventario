@@ -23,7 +23,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('/catalogos/bieneseco', 'CatalogosController@bieneseco')->name('catalogoeco');
 	Route::get('/catalogos/lista', 'CatalogosController@lista')->name('lista');
 	Route::get('/catalogos/cancelacionResguardo', 'CancelacionResguardoController@index')->name('cancelacionResguardo');
-	//Route::get('/catalogos/asignacion', 'AsignacionController@index')->name('asignacion');
+	Route::get('/catalogos/revision', 'RevisionController@index')->name('revision');
 
 	//rutas del partidas
 	Route::get('/catalogos/TablaPartida', 'PartidasController@index')->name('Tabla-Partida');
