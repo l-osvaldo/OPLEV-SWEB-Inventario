@@ -163,6 +163,9 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::post('/catalogos/cancelacionResguardoconfirmado', 'CancelacionResguardoController@cancelacionResguardoconfirmado');
 	Route::get('catalogos/reportes/cancelacionResguardoPDF/{id_cancelacion}', 'CancelacionResguardoController@cancelacionResguardoPDF');
 
+	// Asignación
+	Route::get('/catalogos/bienesCancelados', 'AsignacionController@bienesCancelados');
+	
 
 });
 

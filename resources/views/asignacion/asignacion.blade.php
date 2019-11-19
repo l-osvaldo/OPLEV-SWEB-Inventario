@@ -20,7 +20,7 @@
 		    		<select class="form-control select2" id="empleadoAsignacion" name="empleadoAsignacion" style="width: 90%;">
 			    		<option value="0">Seleccione un empleado</option>
 			    		@foreach ($cancelaciones as $cancelacion)
-			    			<option value="{{ $cancelacion->id }}*{{ $cancelacion->nombreempleado }}"> {{ $cancelacion->nombreempleado }}</option>
+			    			<option value="{{ $cancelacion->Id }}*{{ $cancelacion->nombreempleado }}"> {{ $cancelacion->nombreempleado }}</option>
 			    		@endforeach
 			    	</select>			    	
 		    	</div>

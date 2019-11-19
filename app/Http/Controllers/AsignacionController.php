@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\cancelacionresguardos;
+use App\bitacoracancelaciones;
+use App\articulos;
+use App\articulosecos;
 
 class AsignacionController extends Controller
 {
@@ -26,69 +29,28 @@ class AsignacionController extends Controller
         return view('asignacion.asignacion', compact('usuario','cancelaciones'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function bienesCancelados(Request $request){
+        $bienes = bitacoracancelaciones::where([['id_cancelacion', $request->idCancelacion],['asignado','']])->get();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        foreach ($bienes as $bien) {
+            $infoBien = articulos::select('concepto','importe','numserie')->where('numeroinv',$bien->numeroinventario)->get();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+            
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+            if (sizeof($infoBien) != 0 ){
+                array_add($bien,'concepto',$infoBien[0]['concepto']);
+                array_add($bien,'importe',$infoBien[0]['importe']);
+                array_add($bien,'numserie',$infoBien[0]['numserie']);
+            }else{
+                $infoBien = articulosecos::select('concepto','importe','numeroserie')->where('numeroinventario',$bien->numeroinventario)->get();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+                array_add($bien,'concepto',$infoBien[0]['concepto']);
+                array_add($bien,'importe',$infoBien[0]['importe']);
+                array_add($bien,'numserie',$infoBien[0]['numeroserie']);
+            }
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+
+        return view('asignacion.tableAsignacion',compact('bienes'));
     }
 }
