@@ -2,14 +2,16 @@
 @section('content')
 
 	<section class="content" style="margin-top: 2vh;">
-		<div class="row">
-			<div class="col-md-12" align="right">
-	    		<a style="background-color: #E71096; width: 10%;" class="btn btn-secondary" id="btnCancelarResguardo" target="_blank">
-			        <i class="fa fa fa-ban"></i> 
-			        Cancelar Resguardo        
-			    </a>
-	    	</div>
-		</div>
+		@if ($validarBtnCancelacion == 1)		
+			<div class="row">			
+				<div class="col-md-12" align="right">
+		    		<a style="background-color: #E71096; width: 15%;color: white;" class="btn btn-secondary" id="btnCancelarResguardo" onclick="confirmacionCancelacion()">
+				        <i class="fa fa fa-ban"></i> 
+				        Cancelar Resguardo        
+				    </a>
+		    	</div>
+			</div>
+		@endif
 		<nav>
 		  <div class="nav nav-tabs" id="nav-tab" role="tablist">
 		    <a class="nav-item nav-link active" id="nav-OPLE-tab" data-toggle="tab" href="#nav-OPLE" role="tab" aria-controls="nav-OPLE" aria-selected="true" style="color: #e600ac;">Bienes OPLE</a>
@@ -68,9 +70,9 @@
 				              </thead>
 				              	@foreach ($bienesECO as $bienE)
 					                <tr>
-					                	<td>{{ $bienE->numeroinv }}</td>
+					                	<td>{{ $bienE->numeroinventario }}</td>
 							          	<td>{{ $bienE->concepto }}</td>
-							          	<td>{{ $bienE->numserie }}</td>
+							          	<td>{{ $bienE->numeroserie }}</td>
 							          	<td>$ {{ $bienE->importe }}</td>             
 					                </tr>
 				                @endforeach

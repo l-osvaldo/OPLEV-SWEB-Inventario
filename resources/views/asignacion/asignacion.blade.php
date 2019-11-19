@@ -1,10 +1,10 @@
 @extends('layouts.admin')
-@section('title', 'Cancelación de resguardo')
+@section('title', 'Asignación de resguardo')
 
 @section('content')
 
 	<!-- Navbar -->
-	@include('partials.header',['tituloEncabezado' => 'Cancelación de Resguardo'])
+	@include('partials.header',['tituloEncabezado' => 'Asignación de Resguardo'])
 
 	@include('sweet::alert')
 
@@ -17,10 +17,10 @@
 	  		</div>
 	  		<div class="row">
 		    	<div class="col-md-3">
-		    		<select class="form-control select2" id="empleadoCR" name="empleadoCR" style="width: 90%;">
+		    		<select class="form-control select2" id="empleadoAsignacion" name="empleadoAsignacion" style="width: 90%;">
 			    		<option value="0">Seleccione un empleado</option>
-			    		@foreach ($empleados as $empleado)
-			    			<option value="{{ $empleado->numemple }}*{{ $empleado->nombre }}"> {{ $empleado->nombre }}</option>
+			    		@foreach ($cancelaciones as $cancelacion)
+			    			<option value="{{ $cancelacion->id }}*{{ $cancelacion->nombreempleado }}"> {{ $cancelacion->nombreempleado }}</option>
 			    		@endforeach
 			    	</select>			    	
 		    	</div>
@@ -29,7 +29,7 @@
 		</div>
 	</div>
 
-	<div id="cargandoCR" style="display: none;">
+	<div id="cargandoAsignacion" style="display: none;">
 
 		<div id="loader" class="hidden">
 			<div class="cubes">
@@ -46,12 +46,12 @@
 		</div>
 	</div>
 	<br>
-	<div class="col-12" id="divRespuestaCR" style="display: none;">     
+	<div class="col-12" id="divRespuestaAsignacion" style="display: none;">     
       <div class="center-block">
         <div class="card">
 
           <div class="card-body" >
-            <div id="respuestaCR">
+            <div id="respuestaAsignacion">
 		
 			</div>
           </div>

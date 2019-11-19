@@ -125,6 +125,15 @@
             </p>
           </a>          
         </li>
+
+        <li id="cancelacionResguardo" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/asignacion') ? 'menu-open' : '' !!}">
+          <a href="{{ route('asignacion') }}" class="{!! Request::is('catalogos/asignacion') ? 'nav-link active' : 'nav-link' !!}">
+            <i class="nav-icon fa fa-check-square-o"></i>
+            <p>
+              Asignación
+            </p>
+          </a>          
+        </li>
         
         <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}"

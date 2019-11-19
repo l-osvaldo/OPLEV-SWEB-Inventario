@@ -23,6 +23,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('/catalogos/bieneseco', 'CatalogosController@bieneseco')->name('catalogoeco');
 	Route::get('/catalogos/lista', 'CatalogosController@lista')->name('lista');
 	Route::get('/catalogos/cancelacionResguardo', 'CancelacionResguardoController@index')->name('cancelacionResguardo');
+	Route::get('/catalogos/asignacion', 'AsignacionController@index')->name('asignacion');
 
 	//rutas del partidas
 	Route::get('/catalogos/TablaPartida', 'PartidasController@index')->name('Tabla-Partida');
@@ -159,7 +160,9 @@ Route::group(['middleware' => 'disablepreventback'],function()
 
 	// Cancelación de resguardo
 	Route::get('/catalogos/bienesDelEmpleado', 'CancelacionResguardoController@bienesDelEmpleado');
-	
+	Route::post('/catalogos/cancelacionResguardoconfirmado', 'CancelacionResguardoController@cancelacionResguardoconfirmado');
+	Route::get('catalogos/reportes/cancelacionResguardoPDF/{id_cancelacion}', 'CancelacionResguardoController@cancelacionResguardoPDF');
+
 
 });
 

@@ -4,7 +4,7 @@ $('#empleadoCR').change(function() {
 		$('#cargandoCR').css("display","block");
 		$('#divRespuestaCR').css("display","none");
 		$('#btnCancelarResguardo').css("display","block");
-
+		$('#divBtnCancelar').css("display","block");
 		bienesDelEmpleado($(this).val());
 	}else{
 		$('#divRespuestaCR').css("display","none");
@@ -37,5 +37,44 @@ function bienesDelEmpleado(empleado){
   	$('#divRespuestaCR').css("display","block");
   	$('#respuestaCR').html(response);
   	$('#cargandoCR').css("display","none");
+  	//  $('#btnCancelarResguardo').attr("href","../catalogos/reportes/cancelacionResguardoPDF/"+empleadoNumNombre[0]);
   });
-} 
+}
+
+
+function confirmacionCancelacion (){
+	var empleadoNumNombre = $('#empleadoCR').val().split('*');
+	swal({
+         title: "Cancelar el resguardo del empleado "+empleadoNumNombre[1],
+         text: "¿Desea continuar?",
+         type: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#0080FF",
+         confirmButtonText: "Sí",
+         closeOnConfirm: true
+     }, function(isConfirm){
+
+	    if (isConfirm) {
+	          $.ajax({
+	             type:'POST',
+	             url:'cancelacionResguardoconfirmado',
+	             data:{ numEmpleado: empleadoNumNombre[0] },
+	            success:function(data){
+	            	console.log(data);
+
+	                swal({title: "Listo!", text: "Cancelacion de resguardo realizada", type: "success"},
+	                   function(){
+	                   	   window.open('../catalogos/reportes/cancelacionResguardoPDF/'+data,'_blank');
+	                       location.reload();
+	                   }
+	                )
+	              },
+	          error: function (xhr, ajaxOptions, thrownError) {
+	            swal("Error!", "Por favor intentelo de nuevo!", "error");
+	          }
+	          });
+        } else {
+          swal("Error!", "Por favor intentelo de nuevo", "error");
+        }
+     });
+}
