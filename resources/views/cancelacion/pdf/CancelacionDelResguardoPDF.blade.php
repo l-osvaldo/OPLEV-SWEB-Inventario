@@ -219,7 +219,7 @@
       $inicioBloque = 0;
       $contador = 0;  
     @endphp
-    @while ($contador < $numArticulosOPLE)
+    @while ($contador < $numArticulosECO)
       <table>
         <tr>          
           <td style="width: 120px;vertical-align: text-top"><img class="logo" src="{{ public_path('images/logoople.png') }}" alt=""></td>

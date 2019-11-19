@@ -37,7 +37,6 @@ function bienesDelEmpleado(empleado){
   	$('#divRespuestaCR').css("display","block");
   	$('#respuestaCR').html(response);
   	$('#cargandoCR').css("display","none");
-  	//  $('#btnCancelarResguardo').attr("href","../catalogos/reportes/cancelacionResguardoPDF/"+empleadoNumNombre[0]);
   });
 }
 

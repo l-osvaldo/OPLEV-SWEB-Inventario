@@ -100,12 +100,15 @@ class CancelacionResguardoController extends Controller
     }
 
     public function cancelacionResguardoPDF(Request $request){
+
         $articulosOPLE = bitacoracancelaciones::where([['id_cancelacion', $request->id_cancelacion],['numeroinventario','like','%OPLEV%']])->orWhere('numeroinventario','like','%IEV%')->get();
 
         $articulosECO = bitacoracancelaciones::where([['id_cancelacion', $request->id_cancelacion],['numeroinventario','like','%ECO%']])->get();
 
         $totalImporteOPLE = 0;
         $totalImporteECO = 0;
+
+
 
         foreach ($articulosOPLE as $ople) {
             $bienOPlE = articulos::select('concepto','importe','numserie')->where('numeroinv',$ople->numeroinventario)->get();
