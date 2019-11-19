@@ -60,4 +60,40 @@ class RevisionController extends Controller
 
         return view('revision.revision', compact('usuario','cancelaciones'));
     }
+
+    public function detalleOPLE(Request $request){
+    	$articulosOPLE = bitacoracancelaciones::where([['id_cancelacion', $request->id_cancelacion],['numeroinventario','like','%OPLEV%']])->orWhere('numeroinventario','like','%IEV%')->get();
+
+    	if (sizeof($articulosOPLE) > 0){
+    		foreach ($articulosOPLE as $articuloOPLE) {
+    			$articulo = articulos::select('importe','concepto','numserie')->where('numeroinv',$articuloOPLE->numeroinventario)->get();
+
+    			array_add($articuloOPLE,'concepto',$articulo[0]['concepto']);
+            	array_add($articuloOPLE,'importe',$articulo[0]['importe']);
+            	array_add($articuloOPLE,'numserie',$articulo[0]['numserie']);
+    		}
+    		return response()->json($articulosOPLE);
+    	}else{
+    		return 0;
+    	}    	
+    }
+
+
+    public function detalleECO(Request $request){
+    	$articulosECO = bitacoracancelaciones::where([['id_cancelacion', $request->id_cancelacion],['numeroinventario','like','%ECO%']])->get();
+
+    	if (sizeof($articulosECO) > 0){
+    		foreach ($articulosECO as $articuloECO) {
+    			$articulo = articulosecos::select('importe','concepto','numeroserie')->where('numeroinventario',$articuloECO->numeroinventario)->get();
+
+    			array_add($articuloECO,'concepto',$articulo[0]['concepto']);
+            	array_add($articuloECO,'importe',$articulo[0]['importe']);
+            	array_add($articuloECO,'numserie',$articulo[0]['numeroserie']);
+    		}
+    		return response()->json($articulosECO);
+    	}else{
+    		return 0;
+    	}    	
+    }
+
 }

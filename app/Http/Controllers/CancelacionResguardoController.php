@@ -108,8 +108,6 @@ class CancelacionResguardoController extends Controller
         $totalImporteOPLE = 0;
         $totalImporteECO = 0;
 
-
-
         foreach ($articulosOPLE as $ople) {
             $bienOPlE = articulos::select('concepto','importe','numserie')->where('numeroinv',$ople->numeroinventario)->get();
 
