@@ -11,6 +11,12 @@
 				    </a>
 		    	</div>
 			</div>
+		@else
+			<div class="row">			
+				<div class="col-md-12" align="right">
+		    		<strong>ESTE USUARIO NO TIENE ARTÍCULOS A SU RESGUARDO</strong>
+		    	</div>
+			</div>
 		@endif
 		<nav>
 		  <div class="nav nav-tabs" id="nav-tab" role="tablist">

@@ -111,7 +111,8 @@ function detalleOPLE(id_cancelacion,nombreEmpleado) {
 		            item['numeroinventario'],
 		            item['concepto'],
 		            item['numserie'],
-		            item['importe']		            
+		            '$'+item['importe'],
+		            item['nombreemple']		            
 		        ] ).draw( false );
 			});
     		$('#detalleOPLE').modal('show'); 
@@ -160,7 +161,8 @@ function detalleECO(id_cancelacion,nombreEmpleado) {
 		            item['numeroinventario'],
 		            item['concepto'],
 		            item['numserie'],
-		            item['importe']		            
+		            '$ '+item['importe'],
+		            item['nombreemple']		            
 		        ] ).draw( false );
 			});
     		$('#detalleECO').modal('show'); 

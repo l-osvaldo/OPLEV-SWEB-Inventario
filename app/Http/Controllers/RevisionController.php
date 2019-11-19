@@ -66,11 +66,12 @@ class RevisionController extends Controller
 
     	if (sizeof($articulosOPLE) > 0){
     		foreach ($articulosOPLE as $articuloOPLE) {
-    			$articulo = articulos::select('importe','concepto','numserie')->where('numeroinv',$articuloOPLE->numeroinventario)->get();
+    			$articulo = articulos::select('importe','concepto','numserie','nombreemple')->where('numeroinv',$articuloOPLE->numeroinventario)->get();
 
     			array_add($articuloOPLE,'concepto',$articulo[0]['concepto']);
             	array_add($articuloOPLE,'importe',$articulo[0]['importe']);
             	array_add($articuloOPLE,'numserie',$articulo[0]['numserie']);
+            	array_add($articuloOPLE,'nombreemple',$articulo[0]['nombreemple']);
     		}
     		return response()->json($articulosOPLE);
     	}else{
@@ -84,11 +85,12 @@ class RevisionController extends Controller
 
     	if (sizeof($articulosECO) > 0){
     		foreach ($articulosECO as $articuloECO) {
-    			$articulo = articulosecos::select('importe','concepto','numeroserie')->where('numeroinventario',$articuloECO->numeroinventario)->get();
+    			$articulo = articulosecos::select('importe','concepto','numeroserie','nombreempleado')->where('numeroinventario',$articuloECO->numeroinventario)->get();
 
     			array_add($articuloECO,'concepto',$articulo[0]['concepto']);
             	array_add($articuloECO,'importe',$articulo[0]['importe']);
             	array_add($articuloECO,'numserie',$articulo[0]['numeroserie']);
+            	array_add($articuloECO,'nombreemple',$articulo[0]['nombreempleado']);
     		}
     		return response()->json($articulosECO);
     	}else{

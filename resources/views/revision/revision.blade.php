@@ -95,6 +95,7 @@
 									  <th style="text-align: center">Descripción del bien</th>
 									  <th style="text-align: center">Número de serie</th>
 									  <th style="text-align: center">Importe de adquisición</th>
+									  <th style="text-align: center">Asignado a</th>
 					                </tr>
 					              </thead>
 					              <tbody>
@@ -141,6 +142,7 @@
 									  <th style="text-align: center">Descripción del bien</th>
 									  <th style="text-align: center">Número de serie</th>
 									  <th style="text-align: center">Importe de adquisición</th>
+									  <th style="text-align: center">Asignado a</th>
 					                </tr>
 					              </thead>
 					              <tbody>
@@ -155,6 +157,51 @@
 		      </div>
 		    </div>
 		</div>
+
+		<!-- Modal asignación -->
+	    {{-- <div class="modal fade bd-example-modal-lg" id="modalAsignación" tabindex="-1" role="dialog" aria-labelledby="AsignacionModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+	      <div class="modal-dialog modal-lg" role="document">
+	        <div class="modal-content" style="width: 150%">
+	          <div class="modal-header" style="background: #a90a6c; color:white">
+	            <h5 class="modal-title" id="AsignacionModal"><b>Detalle de artículos ECO</b></h5>
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	              <span aria-hidden="true">&times;</span>
+	            </button>
+	          </div>
+	          <div class="container-fluid">
+	              @csrf
+	              <div class="card-body">
+	                <div class="row">
+	                  <div class="col-md-12">
+	                      <div class="form-group">
+	                      	<label><small> Cancelación de resguardo del empleado: </small> <u><strong id="nombreEmpleadoAsignacion">  </strong> </u> </label>         
+	                      </div>                                       
+	                  </div>
+	                </div> <!-- /.row -->
+	                <div class="row">
+	                	<div class="col-md-12">
+	                		<div class="form-group">
+	                			<table id="detallesE" name="detallesE" class="table table-bordered table-striped" style="width:100%">
+					              <thead>
+					                <tr>
+					                  <th style="text-align: center">Número de inventario</th>
+									  <th style="text-align: center">Descripción del bien</th>
+									  <th style="text-align: center">Número de serie</th>
+									  <th style="text-align: center">Importe de adquisición</th>
+					                </tr>
+					              </thead>
+					              <tbody>
+					                  
+					              </tbody>
+					            </table>
+	                		</div>	                		
+	                	</div>
+	                </div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		</div> --}}
 	</section>
 
 @endsection
