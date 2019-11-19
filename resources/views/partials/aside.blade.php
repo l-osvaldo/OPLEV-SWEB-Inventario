@@ -128,8 +128,14 @@
           <ul class="nav nav-treeview">
             <li class="nav-item" style="margin-left: 25px;">
               <a href="{{ route('cancelacionResguardo') }}" class="{!! Request::is('catalogos/cancelacionResguardo') ? 'nav-link active' : 'nav-link' !!}">
-                <i class="fa fa-list"></i>
+                <i class="fa fa-list-alt"></i>
                 <p style="margin-left: 10px;">Resguardo</p>
+              </a>
+            </li>
+            <li class="nav-item" style="margin-left: 25px;">
+              <a href="{{ route('cancelacionResguardo') }}" class="{!! Request::is('catalogos/cancelacionResguardo') ? 'nav-link active' : 'nav-link' !!}">
+                <i class="fa fa-list-ol"></i>
+                <p style="margin-left: 10px;">Revisión</p>
               </a>
             </li>
           </ul>
