@@ -211,7 +211,12 @@
           $pagina += 1;
         @endphp
       </div>
-      <div style="page-break-after:always;"></div>
+      @if ($numArticulosECO != 0 || $contador < $numArticulosOPLE)
+        <div style="page-break-after:always;"></div>
+      @else
+        <div style="page-break-after:auto;"></div>
+      @endif
+      
     @endwhile
     @php
       $pagina = 1;
@@ -377,7 +382,12 @@
           $pagina += 1;
         @endphp
       </div>
-      <div style="page-break-after:auto;"></div>
+      @if ($contador < $numArticulosECO)
+        <div style="page-break-after:always;"></div>
+      @else
+        <div style="page-break-after:auto;"></div>
+      @endif
+      
     @endwhile  
   </body>
 </html>

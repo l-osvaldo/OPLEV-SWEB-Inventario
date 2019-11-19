@@ -65,8 +65,8 @@
             </ul>
         </li>
         <li id="ople" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bienes','home','/','ople/alta','catalogos/reportes','catalogos/depreciacion') ? 'menu-open' : '' !!}">
-          <a class="{!! Request::is('catalogos/bienes','home','/','ople/alta','catalogos/depreciacion') ? 'nav-link active' : 'nav-link' !!}">
-            <i class="nav-icon">O</i>
+          <a class="{!! Request::is('catalogos/bienes','home','/','ople/alta','catalogos/reportes','catalogos/depreciacion') ? 'nav-link active' : 'nav-link' !!}">
+            <i class="nav-icon fa">O</i>
             <p>
               Bienes OPLE
               <i class="fa fa-angle-left right"></i>
@@ -94,8 +94,8 @@
           </ul>
         </li>
         <li id="eco" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bieneseco','catalogos/reportesECO') ? 'menu-open' : '' !!}">
-          <a class="{!! Request::is('catalogos/bieneseco') ? 'nav-link active' : 'nav-link' !!}">
-            <i class="nav-icon">E</i>
+          <a class="{!! Request::is('catalogos/bieneseco','catalogos/reportesECO') ? 'nav-link active' : 'nav-link' !!}">
+            <i class="nav-icon fa">E</i>
             <p>
               Bienes ECO
               <i class="fa fa-angle-left right"></i>
@@ -117,23 +117,32 @@
           </ul>
         </li>
 
-        <li id="cancelacionResguardo" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/cancelacionResguardo') ? 'menu-open' : '' !!}">
-          <a href="{{ route('cancelacionResguardo') }}" class="{!! Request::is('catalogos/cancelacionResguardo') ? 'nav-link active' : 'nav-link' !!}">
+        <li id="ople" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/cancelacionResguardo') ? 'menu-open' : '' !!}">
+          <a class="{!! Request::is('catalogos/cancelacionResguardo') ? 'nav-link active' : 'nav-link' !!}">
             <i class="nav-icon fa fa-ban"></i>
             <p>
-              Cancelación de resguardo
+              Cancelaciones
+              <i class="fa fa-angle-left right"></i>
             </p>
-          </a>          
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item" style="margin-left: 25px;">
+              <a href="{{ route('cancelacionResguardo') }}" class="{!! Request::is('catalogos/cancelacionResguardo') ? 'nav-link active' : 'nav-link' !!}">
+                <i class="fa fa-list"></i>
+                <p style="margin-left: 10px;">Resguardo</p>
+              </a>
+            </li>
+          </ul>
         </li>
 
-        <li id="cancelacionResguardo" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/asignacion') ? 'menu-open' : '' !!}">
+        {{-- <li id="cancelacionResguardo" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/asignacion') ? 'menu-open' : '' !!}">
           <a href="{{ route('asignacion') }}" class="{!! Request::is('catalogos/asignacion') ? 'nav-link active' : 'nav-link' !!}">
             <i class="nav-icon fa fa-check-square-o"></i>
             <p>
               Asignación
             </p>
           </a>          
-        </li>
+        </li> --}}
         
         <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}"
