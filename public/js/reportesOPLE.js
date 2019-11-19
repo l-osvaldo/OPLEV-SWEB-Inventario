@@ -442,7 +442,7 @@ function inventarioPorOrdenAlfabeticoNuevo(){
     	$('#respuestaReporte').html(response);
     	$('#cargando').css("display","none");
     	$('#btnGenerarPDF').css("display","block");
-    	//$('#btnGenerarPDF').attr("href","../catalogos/reportes/inventarioPorOrdenAlfabeticoPDF");
+    	$('#btnGenerarPDF').attr("href","../catalogos/reportes/inventarioPorOrdenAlfabeticoNuevoPDF");
     	    	
     });
 
