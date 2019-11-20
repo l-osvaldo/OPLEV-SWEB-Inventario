@@ -350,19 +350,35 @@ function cambioCheckBox(){
  //      console.log($(data).find('input').prop('checked'));
 	// });
 
+	var activos = [];
+	var contador = 0;
+	var total = 0;
+
 	var data = tab.rows().nodes();
 	$.each(data, function (index, value) {
 	  //console.log($(this).find('input').prop('checked'));
+	  total ++;
 	  if ($(this).find('input').prop('checked')){
-	  	validar[0] = 0;
-	  	activarBtnAsignar();
-	  	console.log(index + ' - '+value);
+	  	validar[0] = 0;	  	
+	  	contador ++;
+	  	if (!activos.includes(index)){
+	  		activos.push(index);
+	  	}
 	  }
 
-	  if ($(this).find('input').prop('checked') == false){
-
-	  }
 	});
+
+	if (activos.length == 0){
+		validar[0] = 1;
+	}
+
+	if (contador < total){
+		$("#selectAll").prop('checked', false);
+	}else{
+		$("#selectAll").prop('checked', true);
+	}
+	activarBtnAsignar();
+	//console.log(contador +' - '+total);
 }
 
 $('#btnAsignarArticulos').on('click',function(e){
