@@ -71,6 +71,42 @@ var ta = $('#detallesE').DataTable( {
     }
 } );
 
+var tab = $('#detallesAsignacion').DataTable( {
+    "deferRender": true,
+    "retrieve": true,
+    "processing": true,
+    "sSearch": "Filter Data",
+    "dom":      "<'row'<'col-sm-4'l><'col-sm-8 text-right'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+    "select": true,
+    "language": {
+      
+      "sProcessing":     "Procesando...",
+      "sLengthMenu":     "Mostrar _MENU_ registros",
+      "sZeroRecords":    "No se encontraron resultados",
+      "sEmptyTable":     "Ningún dato disponible en esta tabla",
+      "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+      "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+      "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+      "sInfoPostFix":    "",
+      "sSearch":         "Buscar:",
+      "sUrl":            "",
+      "sInfoThousands":  ",",
+      "sLoadingRecords": "Cargando...",
+      "oPaginate": {
+      "sFirst":    "Primero",
+      "sLast":     "Último",
+      "sNext":     "Siguiente",
+      "sPrevious": "Anterior"
+      },
+      "oAria": {
+        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+      }
+    }
+} );
+
 function detalleOPLE(id_cancelacion,nombreEmpleado) {
 	//console.log(id_cancelacion);
 
@@ -157,7 +193,7 @@ function detalleECO(id_cancelacion,nombreEmpleado) {
 
     		$.each(response, function(i, item) {
 			    console.log(item);
-			    ta.row.add( [
+			    ta.row.add( [ 
 		            item['numeroinventario'],
 		            item['concepto'],
 		            item['numserie'],
@@ -168,6 +204,59 @@ function detalleECO(id_cancelacion,nombreEmpleado) {
     		$('#detalleECO').modal('show'); 
     	}   	
     	    	    	
+    }); 
+}
+
+function articulosAsignables(id_cancelacion) {
+  //console.log(id_cancelacion);
+
+  $.ajaxSetup(
+  {
+    headers:
+    { 
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
+  $.ajax({
+      url: "articulosAsignables",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      data: { id_cancelacion: id_cancelacion },
+      dataType: 'json',
+      async: true,
+      contentType: 'application/json'
+
+    }).done(function(response) {
+      // console.log(response);
+
+      if (response == 0 ){
+        swal({
+        title: "Todos los artículos de este lote ya estan asignados a un empleado",
+        text: "Vea detalle OPLE y detalle ECO",
+        icon: "info",
+      });
+      }else{
+
+        tab.clear().draw();
+
+        $.each(response, function(i, item) {
+          console.log(item);
+          tab.row.add( [
+                '<div class="form-check" align="center">'+
+                  '<label class="form-check-label">'+
+                    '<input type="checkbox" class="form-check-input" value="'+item['numeroinventario']+'">'+
+                  '</label>'+
+                '</div>',
+                item['numeroinventario'],
+                item['concepto'],
+                item['numserie'],
+                '$ '+item['importe']               
+            ] ).draw( false );
+      });
+        $('#modalAsignación').modal('show'); 
+      }     
+                  
     }); 
 }
 

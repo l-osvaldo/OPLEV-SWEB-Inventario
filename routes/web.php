@@ -166,6 +166,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	// revision
 	Route::get('/catalogos/detalleOPLE', 'RevisionController@detalleOPLE');
 	Route::get('/catalogos/detalleECO', 'RevisionController@detalleECO');
+	Route::get('/catalogos/articulosAsignables', 'RevisionController@articulosAsignables');
 	
 
 });

@@ -48,7 +48,7 @@
 									     <div class="dropdown-divider"></div>
 									    <a class="dropdown-item" href="../catalogos/reportes/cancelacionResguardoPDF/{{ $cancelacion->Id }}" target="_black">Reporte</a>
 									     <div class="dropdown-divider"></div>
-									    <a class="dropdown-item" href="#">Reasignar bienes</a>
+									    <a class="dropdown-item" onclick="articulosAsignables({{ $cancelacion->Id }});">Reasignar bienes</a>
 									  </div>
 									</div>
 					          	</td>          
@@ -67,8 +67,8 @@
 
 		<!-- Modal detalle OPLE -->
 	    <div class="modal fade bd-example-modal-lg" id="detalleOPLE" tabindex="-1" role="dialog" aria-labelledby="detalleOPLEModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-	      <div class="modal-dialog modal-lg" role="document">
-	        <div class="modal-content" style="width: 150%">
+	      <div class="modal-dialog" style="max-width: 1100px!important;" role="document">
+	        <div class="modal-content">
 	          <div class="modal-header" style="background: #a90a6c; color:white">
 	            <h5 class="modal-title" id="detalleOPLEModal"><b>Detalle de artículos OPLE</b></h5>
 	            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -114,8 +114,8 @@
 
 		<!-- Modal detalle ECO -->
 	    <div class="modal fade bd-example-modal-lg" id="detalleECO" tabindex="-1" role="dialog" aria-labelledby="detalleECOModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-	      <div class="modal-dialog modal-lg" role="document">
-	        <div class="modal-content" style="width: 150%">
+	      <div class="modal-dialog" style="max-width: 1100px!important;" role="document">
+	        <div class="modal-content">
 	          <div class="modal-header" style="background: #a90a6c; color:white">
 	            <h5 class="modal-title" id="detalleECOModal"><b>Detalle de artículos ECO</b></h5>
 	            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -159,11 +159,11 @@
 		</div>
 
 		<!-- Modal asignación -->
-	    {{-- <div class="modal fade bd-example-modal-lg" id="modalAsignación" tabindex="-1" role="dialog" aria-labelledby="AsignacionModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-	      <div class="modal-dialog modal-lg" role="document">
-	        <div class="modal-content" style="width: 150%">
+	    <div class="modal fade bd-example-modal-lg" id="modalAsignación" tabindex="-1" role="dialog" aria-labelledby="AsignacionModal" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+	      <div class="modal-dialog" style="max-width: 1150px!important;" role="document">
+	        <div class="modal-content">
 	          <div class="modal-header" style="background: #a90a6c; color:white">
-	            <h5 class="modal-title" id="AsignacionModal"><b>Detalle de artículos ECO</b></h5>
+	            <h5 class="modal-title" id="AsignacionModal"><b>Asignación de artículos</b></h5>
 	            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	              <span aria-hidden="true">&times;</span>
 	            </button>
@@ -172,18 +172,18 @@
 	              @csrf
 	              <div class="card-body">
 	                <div class="row">
-	                  <div class="col-md-12">
-	                      <div class="form-group">
-	                      	<label><small> Cancelación de resguardo del empleado: </small> <u><strong id="nombreEmpleadoAsignacion">  </strong> </u> </label>         
-	                      </div>                                       
-	                  </div>
-	                </div> <!-- /.row -->
-	                <div class="row">
 	                	<div class="col-md-12">
 	                		<div class="form-group">
-	                			<table id="detallesE" name="detallesE" class="table table-bordered table-striped" style="width:100%">
+	                			<table id="detallesAsignacion" name="detallesAsignacion" class="table table-bordered table-striped" style="width:100%">
 					              <thead>
 					                <tr>
+					                  <th style="text-align: center">
+					                  	<div class="form-check">
+										  <label class="form-check-label">
+										    <input type="checkbox" class="form-check-input" value="todos">Asignación
+										  </label>
+										</div>
+					                  </th>
 					                  <th style="text-align: center">Número de inventario</th>
 									  <th style="text-align: center">Descripción del bien</th>
 									  <th style="text-align: center">Número de serie</th>
@@ -201,7 +201,7 @@
 		        </div>
 		      </div>
 		    </div>
-		</div> --}}
+		</div>
 	</section>
 
 @endsection

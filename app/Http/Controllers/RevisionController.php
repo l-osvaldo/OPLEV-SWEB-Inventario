@@ -68,6 +68,8 @@ class RevisionController extends Controller
     		foreach ($articulosOPLE as $articuloOPLE) {
     			$articulo = articulos::select('importe','concepto','numserie','nombreemple')->where('numeroinv',$articuloOPLE->numeroinventario)->get();
 
+                $articulo[0]['importe'] = number_format($articulo[0]['importe'],2);
+
     			array_add($articuloOPLE,'concepto',$articulo[0]['concepto']);
             	array_add($articuloOPLE,'importe',$articulo[0]['importe']);
             	array_add($articuloOPLE,'numserie',$articulo[0]['numserie']);
@@ -87,6 +89,8 @@ class RevisionController extends Controller
     		foreach ($articulosECO as $articuloECO) {
     			$articulo = articulosecos::select('importe','concepto','numeroserie','nombreempleado')->where('numeroinventario',$articuloECO->numeroinventario)->get();
 
+                $articulo[0]['importe'] = number_format($articulo[0]['importe'],2);
+
     			array_add($articuloECO,'concepto',$articulo[0]['concepto']);
             	array_add($articuloECO,'importe',$articulo[0]['importe']);
             	array_add($articuloECO,'numserie',$articulo[0]['numeroserie']);
@@ -96,6 +100,35 @@ class RevisionController extends Controller
     	}else{
     		return 0;
     	}    	
+    }
+
+    public function articulosAsignables(Request $request){
+        $articulos = bitacoracancelaciones::where([['id_cancelacion',$request->id_cancelacion],['asignado','']])->get();
+
+        if (sizeof($articulos) > 0){
+            foreach ($articulos as $articulo) {
+                $info = articulos::select('importe','concepto','numserie')->where('numeroinv',$articulo->numeroinventario)->get();
+
+                if (sizeof($info) > 0 ){
+                    $info[0]['importe'] = number_format($info[0]['importe'],2);
+
+                    array_add($articulo,'concepto',$info[0]['concepto']);
+                    array_add($articulo,'importe',$info[0]['importe']);
+                    array_add($articulo,'numserie',$info[0]['numserie']);
+                }else{
+                    $info = articulosecos::select('importe','concepto','numeroserie')->where('numeroinventario',$articulo->numeroinventario)->get();
+
+                    $info[0]['importe'] = number_format($info[0]['importe'],2);
+
+                    array_add($articulo,'concepto',$info[0]['concepto']);
+                    array_add($articulo,'importe',$info[0]['importe']);
+                    array_add($articulo,'numserie',$info[0]['numeroserie']);
+                }
+            }
+            return response()->json($articulos);
+        }else{
+            return 0; 
+        }
     }
 
 }
