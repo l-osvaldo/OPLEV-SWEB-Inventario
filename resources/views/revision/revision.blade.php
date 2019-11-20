@@ -15,7 +15,7 @@
 		      <div class="center-block">	      	
 		        <div class="card">
 		          <div class="card-body" >
-		            <table id="tableCatalogo" name="tableCatalogo" class="table table-bordered table-striped" style="width:100%">
+		            <table id="tableRevision" name="tableRevision" class="table table-bordered table-striped" style="width:100%">
 		              <thead>
 		                <tr>
 		                  <th style="text-align: center">Número de cancelación</th>
@@ -177,19 +177,18 @@
 	                		<label>1.- Seleccione los artículos a asignar:</label>
 	                	</div>
 	                </div>
+	                <div class="form-check">
+					  <label class="form-check-label">
+					    <input type="checkbox" class="form-check-input" value="todos" id="selectAll">Seleccionar todos
+					  </label>
+					</div>
 	                <div class="row">
 	                	<div class="col-md-12">
 	                		<div class="form-group">
-	                			<table id="detallesAsignacion" name="detallesAsignacion" class="table table-bordered table-striped" style="width:100%">
+	                			<table id="detallesAsignacion" name="detallesAsignacion" class="table table-bordered table-striped nowrap" style="width:100%">
 					              <thead>
 					                <tr>
-					                  <th style="text-align: center">
-					                  	<div class="form-check">
-										  <label class="form-check-label">
-										    <input type="checkbox" class="form-check-input" value="todos" id="selectAll">Asignar
-										  </label>
-										</div>
-					                  </th>
+					                  <th style="text-align: center">Asignar</th>
 					                  <th style="text-align: center">Número de inventario</th>
 									  <th style="text-align: center">Descripción del bien</th>
 									  <th style="text-align: center">Número de serie</th>
@@ -197,7 +196,7 @@
 					                </tr>
 					              </thead>
 					              <tbody>
-					                  
+					              	
 					              </tbody>
 					            </table>
 	                		</div>	                		

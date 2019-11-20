@@ -7,7 +7,9 @@ use App\articulos;
 use App\articulosecos;
 use App\cancelacionresguardos;
 use App\bitacoracancelaciones;
+use App\bitacoramovimientos;
 use App\empleados;
+use Alert;
 
 class RevisionController extends Controller
 {
@@ -133,7 +135,55 @@ class RevisionController extends Controller
     }
 
     public function confirmacionAsignacion(Request $request){
-        
+        $datosEmpleado	= explode("*", $request->empleadosAsignacion);
+
+        $empleado = empleados::where('numemple', $datosEmpleado[0])->get();
+
+        $arregloNumeroInventario = $request->articuloSeleccionado;
+
+        for ($i=0; $i < sizeof($arregloNumeroInventario) ; $i++) { 
+        	
+
+        	// actualizar tabla bitacora cancelaciones
+
+        	$bitacoracancelaciones = bitacoracancelaciones::where('numeroinventario',$arregloNumeroInventario[$i])
+                ->update([
+                    'asignado'    => $datosEmpleado[1]
+                ]);
+
+            // actualizar tabla articulos 
+            if (strpos($bitacoracancelaciones, 'OPLEV') || strpos($bitacoracancelaciones, 'IEV')){
+            	$actualizarArticulo = articulos::where('numeroinv',$arregloNumeroInventario[$i])->update([
+                    'numemple'      => $datosEmpleado[0], 
+                    'nombreemple'   => $datosEmpleado[1],
+                    'idarea'        => $empleado[0]['idarea'],
+                    'nombrearea'    => $empleado[0]['nombrearea'],
+                ]);
+            }else{
+            	$actualizarArticulo = articulosecos::where('numeroinventario',$arregloNumeroInventario[$i])
+                ->update([
+                    'numeroempleado'    => $datosEmpleado[0],  
+                    'nombreempleado'    => $datosEmpleado[1],
+                    'idarea'            => $empleado[0]['idarea'],
+                    'nombrearea'        => $empleado[0]['nombrearea'],
+                ]);
+            }
+
+            // actualizar bitacora movimientos
+            $bitacoramovimientos = new bitacoramovimientos();
+
+            $bitacoramovimientos->numeroinventario = $arregloNumeroInventario[$i];
+            $bitacoramovimientos->numeroempleado = $datosEmpleado[0];
+            $bitacoramovimientos->nombreempleado = $datosEmpleado[1];
+            $bitacoramovimientos->idarea = $empleado[0]['idarea'];
+            $bitacoramovimientos->nombrearea = $empleado[0]['nombrearea'];
+            $bitacoramovimientos->save();
+            
+        }
+
+        Alert::success('Artículo(s) asignados', 'Registro Exitoso')->autoclose(2500);
+        return redirect()->route('revision');
+
     }
 
 }

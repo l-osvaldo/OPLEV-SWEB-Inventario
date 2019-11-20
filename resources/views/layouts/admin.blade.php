@@ -94,6 +94,12 @@
         background-image: linear-gradient(to bottom, #fff 0%, #fff 100%);
       }
 
+      /*div.ex1 {
+          
+        height: 400px;
+        width: 100%;
+        overflow-y: scroll;
+      }*/
      </style>
 
 

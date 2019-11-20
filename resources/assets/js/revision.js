@@ -75,8 +75,50 @@ var tab = $('#detallesAsignacion').DataTable( {
     "deferRender": true,
     "retrieve": true,
     "processing": true,
+    "scrollY":        "300px",
+    "scrollCollapse": true,
+    "paging": false,
+    "order": [[ 2, "asc" ]],
     "sSearch": "Filter Data",
-    "dom":      "<'row'<'col-sm-4'l><'col-sm-8 text-right'f>>" +
+    "dom":      "<'row'<'col-sm-12 text-right'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+    "select": true,
+    "language": {
+      
+      "sProcessing":     "Procesando...",
+      "sLengthMenu":     "Mostrar _MENU_ registros",
+      "sZeroRecords":    "No se encontraron resultados",
+      "sEmptyTable":     "Ningún dato disponible en esta tabla",
+      "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+      "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+      "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+      "sInfoPostFix":    "",
+      "sSearch":         "Buscar:",
+      "sUrl":            "",
+      "sInfoThousands":  ",",
+      "sLoadingRecords": "Cargando...",
+      "oPaginate": {
+      "sFirst":    "Primero",
+      "sLast":     "Último",
+      "sNext":     "Siguiente",
+      "sPrevious": "Anterior"
+      },
+      "oAria": {
+        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+      }
+    }
+});
+
+
+$('#tableRevision').DataTable( {
+    "deferRender": true,
+    "retrieve": true,
+    "processing": true,
+    "paging": false,
+    "sSearch": "Filter Data",
+    "dom":      "<'row'<'col-sm-12 text-right'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
     "select": true,
@@ -240,12 +282,13 @@ function articulosAsignables(id_cancelacion) {
 
         tab.clear().draw();
 
+
         $.each(response, function(i, item) {
           //console.log(item);
           tab.row.add( [
                 '<div class="form-check" align="center">'+
                   '<label class="form-check-label">'+
-                    '<input type="checkbox" class="form-check-input" name="articuloSeleccionado" value="'+item['numeroinventario']+'">'+
+                    '<input type="checkbox" class="form-check-input mycheckbox" onchange="cambioCheckBox()" name="articuloSeleccionado[]" value="'+item['numeroinventario']+'" style="margin-top: -0.8rem;">'+
                   '</label>'+
                 '</div>',
                 item['numeroinventario'],
@@ -254,6 +297,7 @@ function articulosAsignables(id_cancelacion) {
                 '$ '+item['importe']               
             ] ).draw();
       });
+        //tab.columns.adjust().draw();
         $('#modalAsignación').modal('show'); 
       }     
                   
@@ -286,26 +330,10 @@ $('#empleadosAsignacion').change(function() {
   activarBtnAsignar();
 });
 
-$('input[type=checkbox]').on('change', function() {
-    if ($(this).is(':checked') ) {
-        console.log("Checkbox " + $(this).prop("id") +  " (" + $(this).val() + ") => Seleccionado");
-    } else {
-        console.log("Checkbox " + $(this).prop("id") +  " (" + $(this).val() + ") => Deseleccionado");
-    }
+$('#modalAsignación').on('shown.bs.modal', function() {
+   $($.fn.dataTable.tables(true)).DataTable()
+      .columns.adjust();
 });
-
-
-
-// $('.micheckbox').on( 'click', function() {
-//   console.log('tracy');
-//     if( $(this).is(':checked') ){
-//         // Hacer algo si el checkbox ha sido seleccionado
-//         alert("El checkbox con valor " + $(this).val() + " ha sido seleccionado");
-//     } else {
-//         // Hacer algo si el checkbox ha sido deseleccionado
-//         alert("El checkbox con valor " + $(this).val() + " ha sido deseleccionado");
-//     }
-// });
 
 function activarBtnAsignar(){
   if (validar[0] == 0 && validar[1] == 0){
@@ -313,4 +341,42 @@ function activarBtnAsignar(){
   }else{
     $('#btnAsignarArticulos').prop("disabled", true);
   }
-} 
+  //console.log(validar);
+}
+
+function cambioCheckBox(){
+	// tab.rows().every(function (rowIdx, tableLoop, rowLoop) {
+ //      var data = this.node();
+ //      console.log($(data).find('input').prop('checked'));
+	// });
+
+	var data = tab.rows().nodes();
+	$.each(data, function (index, value) {
+	  //console.log($(this).find('input').prop('checked'));
+	  if ($(this).find('input').prop('checked')){
+	  	validar[0] = 0;
+	  	activarBtnAsignar();
+	  	console.log(index + ' - '+value);
+	  }
+
+	  if ($(this).find('input').prop('checked') == false){
+
+	  }
+	});
+}
+
+$('#btnAsignarArticulos').on('click',function(e){
+     e.preventDefault();
+     var form = $(this).parents('form');
+     swal({
+         title: "Asignar estos artículos",
+         text: "¿Desea continuar?",
+         type: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#0080FF",
+         confirmButtonText: "Sí",
+         closeOnConfirm: false
+     }, function(isConfirm){
+         if (isConfirm) form.submit();
+     });
+ }); 
