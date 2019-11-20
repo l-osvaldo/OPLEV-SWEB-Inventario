@@ -7,6 +7,7 @@ use App\articulos;
 use App\articulosecos;
 use App\cancelacionresguardos;
 use App\bitacoracancelaciones;
+use App\empleados;
 
 class RevisionController extends Controller
 {
@@ -16,7 +17,7 @@ class RevisionController extends Controller
 
     public function index(){
         $usuario = auth()->user();
-
+        $empleados = empleados::orderBy('nombre', 'ASC')->get();
         $cancelaciones = cancelacionresguardos::orderBy('nombreempleado', 'ASC')->get();
 
         foreach ($cancelaciones as $cancelacion) {
@@ -58,7 +59,7 @@ class RevisionController extends Controller
         	array_add($cancelacion,'totalImporteECO',$totalImporteECO); 
         }
 
-        return view('revision.revision', compact('usuario','cancelaciones'));
+        return view('revision.revision', compact('usuario','cancelaciones','empleados'));
     }
 
     public function detalleOPLE(Request $request){
@@ -129,6 +130,10 @@ class RevisionController extends Controller
         }else{
             return 0; 
         }
+    }
+
+    public function confirmacionAsignacion(Request $request){
+        
     }
 
 }

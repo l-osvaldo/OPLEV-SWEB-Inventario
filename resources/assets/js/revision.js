@@ -1,4 +1,4 @@
-
+var validar = [1,1];
 var t = $('#detalles').DataTable( {
     "deferRender": true,
     "retrieve": true,
@@ -142,7 +142,7 @@ function detalleOPLE(id_cancelacion,nombreEmpleado) {
     		t.clear().draw();
 
     		$.each(response, function(i, item) {
-			    console.log(item);
+			    //console.log(item);
 			    t.row.add( [
 		            item['numeroinventario'],
 		            item['concepto'],
@@ -192,7 +192,7 @@ function detalleECO(id_cancelacion,nombreEmpleado) {
     		ta.clear().draw();
 
     		$.each(response, function(i, item) {
-			    console.log(item);
+			    //console.log(item);
 			    ta.row.add( [ 
 		            item['numeroinventario'],
 		            item['concepto'],
@@ -241,18 +241,18 @@ function articulosAsignables(id_cancelacion) {
         tab.clear().draw();
 
         $.each(response, function(i, item) {
-          console.log(item);
+          //console.log(item);
           tab.row.add( [
                 '<div class="form-check" align="center">'+
                   '<label class="form-check-label">'+
-                    '<input type="checkbox" class="form-check-input" value="'+item['numeroinventario']+'">'+
+                    '<input type="checkbox" class="form-check-input micheckbox" name="'+item['numeroinventario']+'" value="'+item['numeroinventario']+'">'+
                   '</label>'+
                 '</div>',
                 item['numeroinventario'],
                 item['concepto'],
                 item['numserie'],
                 '$ '+item['importe']               
-            ] ).draw( false );
+            ] ).draw();
       });
         $('#modalAsignación').modal('show'); 
       }     
@@ -260,3 +260,57 @@ function articulosAsignables(id_cancelacion) {
     }); 
 }
 
+$("#selectAll").click(function(){
+  $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+  if ( $(this).prop('checked')){
+    validar[0] = 0; 
+  }else{
+    validar[0] = 1; 
+  }
+  activarBtnAsignar();  
+});
+
+$('#modalAsignación').on('hidden.bs.modal', function (e) {
+  $('#selectAll').prop('checked', false);
+  $('#empleadosAsignacion').val("0").change();
+  validar[0] = 1;
+  validar[1] = 1;
+})
+
+$('#empleadosAsignacion').change(function() {
+  if ($(this).val() != 0){
+    validar[1] = 0;
+  }else{
+    validar[1] = 1;
+  }
+  activarBtnAsignar();
+});
+
+$('input[type=checkbox]').on('change', function() {
+    if ($(this).is(':checked') ) {
+        console.log("Checkbox " + $(this).prop("id") +  " (" + $(this).val() + ") => Seleccionado");
+    } else {
+        console.log("Checkbox " + $(this).prop("id") +  " (" + $(this).val() + ") => Deseleccionado");
+    }
+});
+
+
+
+// $('.micheckbox').on( 'click', function() {
+//   console.log('tracy');
+//     if( $(this).is(':checked') ){
+//         // Hacer algo si el checkbox ha sido seleccionado
+//         alert("El checkbox con valor " + $(this).val() + " ha sido seleccionado");
+//     } else {
+//         // Hacer algo si el checkbox ha sido deseleccionado
+//         alert("El checkbox con valor " + $(this).val() + " ha sido deseleccionado");
+//     }
+// });
+
+function activarBtnAsignar(){
+  if (validar[0] == 0 && validar[1] == 0){
+    $('#btnAsignarArticulos').prop("disabled", false);
+  }else{
+    $('#btnAsignarArticulos').prop("disabled", true);
+  }
+} 

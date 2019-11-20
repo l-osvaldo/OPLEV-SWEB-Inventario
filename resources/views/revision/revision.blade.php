@@ -169,8 +169,14 @@
 	            </button>
 	          </div>
 	          <div class="container-fluid">
-	              @csrf
+	          	<form method="POST" action="{{ route('confirmacionAsignacion') }}">
+	          	  @csrf
 	              <div class="card-body">
+	              	<div class="row">
+	                	<div class="col-md-4">
+	                		<label>1.- Seleccione los artículos a asignar:</label>
+	                	</div>
+	                </div>
 	                <div class="row">
 	                	<div class="col-md-12">
 	                		<div class="form-group">
@@ -180,7 +186,7 @@
 					                  <th style="text-align: center">
 					                  	<div class="form-check">
 										  <label class="form-check-label">
-										    <input type="checkbox" class="form-check-input" value="todos">Asignación
+										    <input type="checkbox" class="form-check-input" value="todos" id="selectAll">Asignar
 										  </label>
 										</div>
 					                  </th>
@@ -197,7 +203,28 @@
 	                		</div>	                		
 	                	</div>
 	                </div>
+	                <div class="row">
+	                	<div class="col-md-4">
+	                		<label>2.- Seleccione un empleado:</label>
+	                	</div>
+	                </div>
+	                <div class="col-md-4">
+			    		<select class="form-control select2" id="empleadosAsignacion" name="empleadosAsignacion" style="width: 90%;">
+				    		<option value="0">Seleccione un empleado</option>
+				    		@foreach ($empleados as $empleado)
+				    			<option value="{{ $empleado->numemple }}*{{ $empleado->nombre }}"> {{ $empleado->nombre }}</option>
+				    		@endforeach
+				    	</select>			    	
+			    	</div>
 		          </div>
+		          <div class="card-footer">
+	                <button type="reset" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>
+	                <button type="submit" id="btnAsignarArticulos" style="background-color: #E71096" class="btn btn-secondary float-right" disabled>
+	                    {{ __('Asignar') }}
+	                </button>
+	              </div>
+	          	</form>
+	              
 		        </div>
 		      </div>
 		    </div>
