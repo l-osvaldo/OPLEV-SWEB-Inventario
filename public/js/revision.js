@@ -245,7 +245,7 @@ function articulosAsignables(id_cancelacion) {
           tab.row.add( [
                 '<div class="form-check" align="center">'+
                   '<label class="form-check-label">'+
-                    '<input type="checkbox" class="form-check-input micheckbox" name="'+item['numeroinventario']+'" value="'+item['numeroinventario']+'">'+
+                    '<input type="checkbox" class="form-check-input" name="articuloSeleccionado" value="'+item['numeroinventario']+'">'+
                   '</label>'+
                 '</div>',
                 item['numeroinventario'],
