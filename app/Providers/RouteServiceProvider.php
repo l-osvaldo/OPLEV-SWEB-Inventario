@@ -75,7 +75,8 @@ class RouteServiceProvider extends ServiceProvider
           Route::apiResource('/usuario','UserAPIController');
           Route::apiResource('/articulos', 'APIController');
           Route::apiResource('/scanner', 'ScannerController');
-          Route::apiResource('/empleados', 'EmpleadosAPIController');            
+          Route::apiResource('/empleados', 'EmpleadosAPIController'); 
+          Route::apiResource('/lote', 'LoteAPIController');            
       });
 
     }

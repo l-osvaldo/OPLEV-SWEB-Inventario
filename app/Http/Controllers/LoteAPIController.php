@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\empleados;
+use App\lotes;
 
-class EmpleadosAPIController extends Controller
+class LoteAPIController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +14,8 @@ class EmpleadosAPIController extends Controller
      */
     public function index()
     {
-        $empleados = empleados::all();
-
-        return response()->json($empleados);
+        //
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -28,7 +25,13 @@ class EmpleadosAPIController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $lote = new lotes();
+        $lote->nombre = $request->nombre;
+        $lote->numeroempleado = $request->numeroempleado;
+        $lote->descripcion = $request->descripcion;
+        $lote->save();
+
+        return 'LOTE CREADO CON EXITO';
     }
 
     /**
@@ -41,7 +44,6 @@ class EmpleadosAPIController extends Controller
     {
         //
     }
-
 
     /**
      * Update the specified resource in storage.
