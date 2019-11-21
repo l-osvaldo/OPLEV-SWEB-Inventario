@@ -26,6 +26,7 @@ class LoteAPIController extends Controller
     public function store(Request $request)
     {
         $lote = new lotes();
+        
         $lote->nombre = $request->nombre;
         $lote->numeroempleado = $request->numeroempleado;
         $lote->descripcion = $request->descripcion;
