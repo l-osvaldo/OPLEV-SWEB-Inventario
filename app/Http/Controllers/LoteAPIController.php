@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\lotes;
 
+header('Access-Control-Allow-Origin: *');
+
 class LoteAPIController extends Controller
 {
     /**
@@ -14,7 +16,8 @@ class LoteAPIController extends Controller
      */
     public function index()
     {
-        //
+        $lotes = lotes::all();
+
     }
 
     /**
@@ -26,7 +29,7 @@ class LoteAPIController extends Controller
     public function store(Request $request)
     {
         $lote = new lotes();
-        
+
         $lote->nombre = $request->nombre;
         $lote->numeroempleado = $request->numeroempleado;
         $lote->descripcion = $request->descripcion;
