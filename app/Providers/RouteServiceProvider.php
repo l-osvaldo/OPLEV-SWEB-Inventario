@@ -74,7 +74,8 @@ class RouteServiceProvider extends ServiceProvider
            //Add you routes here, for example:
           Route::apiResource('/usuario','UserAPIController');
           Route::apiResource('/articulos', 'APIController');
-          Route::apiResource('/scanner', 'ScannerController');           
+          Route::apiResource('/scanner', 'ScannerController');
+          Route::apiResource('/empleados', 'EmpleadosAPIController');            
       });
 
     }
