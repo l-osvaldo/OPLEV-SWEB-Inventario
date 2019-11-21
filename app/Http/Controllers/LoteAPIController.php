@@ -16,7 +16,6 @@ class LoteAPIController extends Controller
      */
     public function index()
     {
-        $lotes = lotes::all();
 
     }
 
@@ -36,7 +35,7 @@ class LoteAPIController extends Controller
         $lote->estado = $request->estado;
         $lote->save();
 
-        return 'LOTE CREADO CON EXITO';
+        return response()->json($lote);
     }
 
     /**
