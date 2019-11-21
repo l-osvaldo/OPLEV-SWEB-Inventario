@@ -29,6 +29,7 @@ class LoteAPIController extends Controller
         $lote->nombre = $request->nombre;
         $lote->numeroempleado = $request->numeroempleado;
         $lote->descripcion = $request->descripcion;
+        $lote->estado = $request->estado;
         $lote->save();
 
         return 'LOTE CREADO CON EXITO';

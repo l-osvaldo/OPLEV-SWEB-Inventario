@@ -10,6 +10,7 @@ class lotes extends Model
 		'Id',
 		'nombre',
 		'numeroempleado',
-		'descripcion'
+		'descripcion',
+		'estado'
 	];
 }
