@@ -17,7 +17,9 @@ class LoteAPIController extends Controller
      */
     public function index()
     {
+        $lotes = lotes::all();
 
+        return response()->json($lotes);
     }
 
     /**
