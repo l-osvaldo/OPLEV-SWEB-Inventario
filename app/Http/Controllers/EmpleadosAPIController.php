@@ -39,7 +39,9 @@ class EmpleadosAPIController extends Controller
      */
     public function show($id)
     {
-        //
+        $empleado = empleados::where('numemple',$id)->get();
+
+        return response()->json($empleado);
     }
 
 
