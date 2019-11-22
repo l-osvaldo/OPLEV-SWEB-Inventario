@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\bitacoralotes;
 
 class BitacoraLotesAPIController extends Controller
 {
@@ -24,7 +25,14 @@ class BitacoraLotesAPIController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $bitacoralote =  new bitacoralotes();
+
+        $bitacoralote->id_lote = $request->id_lote;
+        $bitacoralote->numeroinventario = $request->numeroinventario;
+        $bitacoralote->save();
+
+        return response()->json($bitacoralote);
     }
 
     /**
