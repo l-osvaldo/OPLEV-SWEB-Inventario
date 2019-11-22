@@ -14,7 +14,7 @@ class BitacoraLotesAPIController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -43,7 +43,9 @@ class BitacoraLotesAPIController extends Controller
      */
     public function show($id)
     {
-        //
+        $bitacoralote = bitacoralotes::where('numeroinventario',$id)->get();
+
+        return response()->json($bitacoralote);
     }
 
     /**
