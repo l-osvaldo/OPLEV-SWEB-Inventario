@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\lotes;
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-
-class LoteAPIController extends Controller
+class BitacoraLotesAPIController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +13,7 @@ class LoteAPIController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -28,15 +24,7 @@ class LoteAPIController extends Controller
      */
     public function store(Request $request)
     {
-        $lote = new lotes();
-
-        $lote->nombre = $request->nombre;
-        $lote->numeroempleado = $request->numeroempleado;
-        $lote->descripcion = $request->descripcion;
-        $lote->estado = $request->estado;
-        $lote->save();
-
-        return response()->json($lote);
+        //
     }
 
     /**
@@ -59,13 +47,7 @@ class LoteAPIController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-
-        $lote = lotes::find($id);
-        $lote->estado = $reques->estado;
-        $lote->save();
-
-        return response()->json($lote);
+        //
     }
 
     /**
