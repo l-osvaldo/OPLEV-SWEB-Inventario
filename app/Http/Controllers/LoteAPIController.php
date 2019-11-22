@@ -62,7 +62,7 @@ class LoteAPIController extends Controller
         
 
         $lote = lotes::find($id);
-        $lote->estado = $reques->estado;
+        $lote->estado = $request->estado;
         $lote->save();
 
         return response()->json($lote);
