@@ -49,7 +49,9 @@ class LoteAPIController extends Controller
      */
     public function show($id)
     {
-        //
+        $lote = lotes::where('Id',$id)->get();
+
+        return response()->json($lote);
     }
 
     /**
