@@ -174,7 +174,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('/catalogos/levantamientoInventarioDetalleEsp', 'LevantamientoController@levantamientoInventarioDetalleEsp');
 	Route::get('/catalogos/levantamientoInventarioDetalleGral', 'LevantamientoController@levantamientoInventarioDetalleGral');
 	Route::get('/catalogos/levantamientoInventarioDetalleGral', 'LevantamientoController@levantamientoInventarioDetalleGral');
-	Route::get('/catalogos/levantamientoInventarioDetallePDF/{id_lote}/{tipo}', 'LevantamientoController@levantamientoInventarioDetallePDF');
+	Route::get('/catalogos/reportes/levantamientoInventarioDetallePDF/{id_lote}/{tipo}', 'LevantamientoController@levantamientoInventarioDetallePDF');
 
 });
 

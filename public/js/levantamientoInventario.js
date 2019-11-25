@@ -172,7 +172,7 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo) {
                 item['nombreemple']             
             ] ).draw();
         });
-        //levantamientoEsp.columns.adjust().draw();
+        $('#btnDetalleEspPDF').attr("href","../catalogos/reportes/levantamientoInventarioDetallePDF/"+id_lote+"/"+tipo);
         $('#detalleLoteEspecifico').modal('show');    
                   
       }); 
@@ -213,7 +213,7 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo) {
                 item['nombreemple']             
             ] ).draw();
         });
-        //levantamientoEsp.columns.adjust().draw();
+        $('#btnDetalleGralPDF').attr("href","../catalogos/reportes/levantamientoInventarioDetallePDF/"+id_lote+"/"+tipo);
         $('#detalleLoteGeneral').modal('show');    
                   
       }); 
@@ -231,8 +231,5 @@ $('#detalleLoteGeneral').on('shown.bs.modal', function() {
       .columns.adjust();
 });
 
-function generarPDF(id_lote,tipo){
-  
-}
   
 
