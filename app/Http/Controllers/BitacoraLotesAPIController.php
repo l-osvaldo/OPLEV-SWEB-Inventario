@@ -68,7 +68,12 @@ class BitacoraLotesAPIController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $bitacoralote = bitacoralotes::where('numeroinventario',$id)->get();
+
+        //return response()->json($bitacoralote);
+        $bitacoralote->delete();
+
+        return 1;
     }
 
     public function allBitacorasId($id){

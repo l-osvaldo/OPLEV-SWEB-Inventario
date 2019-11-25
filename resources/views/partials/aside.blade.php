@@ -140,6 +140,15 @@
             </li>
           </ul>
         </li>
+
+        <li id="CancelacionesR" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/levantamientoInventario') ? 'menu-open' : '' !!}">
+          <a href="{{ route('levantamientoInventario') }}" class="{!! Request::is('catalogos/levantamientoInventario') ? 'nav-link active' : 'nav-link' !!}">
+            <i class="nav-icon fa fa-check-square-o"></i>
+            <p>
+              Levantamiento de inventario
+            </p>
+          </a>
+        </li>
         
         <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}"

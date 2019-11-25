@@ -24,6 +24,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('/catalogos/lista', 'CatalogosController@lista')->name('lista');
 	Route::get('/catalogos/cancelacionResguardo', 'CancelacionResguardoController@index')->name('cancelacionResguardo');
 	Route::get('/catalogos/revision', 'RevisionController@index')->name('revision');
+	Route::get('/catalogos/levantamientoInventario', 'LevantamientoController@index')->name('levantamientoInventario');
 
 	//rutas del partidas
 	Route::get('/catalogos/TablaPartida', 'PartidasController@index')->name('Tabla-Partida');
@@ -168,6 +169,10 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('/catalogos/detalleECO', 'RevisionController@detalleECO');
 	Route::get('/catalogos/articulosAsignables', 'RevisionController@articulosAsignables');
 	Route::post('/catalogos/confirmacionAsignacion', 'RevisionController@confirmacionAsignacion')->name('confirmacionAsignacion');
+
+	// levantamiento de inventario
+	Route::get('/catalogos/levantamientoInventarioDetalleEsp', 'LevantamientoController@levantamientoInventarioDetalleEsp');
+	Route::get('/catalogos/levantamientoInventarioDetalleGral', 'LevantamientoController@levantamientoInventarioDetalleGral');
 	
 
 });

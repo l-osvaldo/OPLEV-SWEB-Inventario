@@ -174,10 +174,10 @@ function detalleOPLE(id_cancelacion,nombreEmpleado) {
 
     	if (response == 0 ){
     		swal({
-			  title: "Información",
-			  text: "Esta cancelacion No tiene artículos OPLE",
-			  icon: "info",
-			});
+  			  title: "Información",
+  			  text: "Esta cancelacion No tiene artículos OPLE",
+  			  icon: "info",
+  			});
     	}else{
     		$('#nombreEmpleadoDOPLE').html(nombreEmpleado);
 

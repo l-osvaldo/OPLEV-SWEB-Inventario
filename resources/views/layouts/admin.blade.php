@@ -169,6 +169,7 @@
 <script type="text/javascript" src="{{ asset('js/depreciacionA.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/cancelacionResguardo.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/revision.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/levantamientoInventario.js') }}"></script>
 
 
 <script src="{{ asset('/plugins/jquery-maskmoney-master/dist/jquery.maskMoney.js') }}"></script>
