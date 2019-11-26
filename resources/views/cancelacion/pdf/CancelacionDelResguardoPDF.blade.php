@@ -102,7 +102,7 @@
           </tr>
         </tbody>
       </table>
-      <div style="height: 450px">
+      <div style="height: 430px">
         <table style="margin-top: 15px;">
           <thead>
             <tr style="background-color: #ccc; border: solid 1px #000;">
@@ -272,7 +272,7 @@
           </tr>
         </tbody>
       </table>
-      <div style="height: 450px">
+      <div style="height: 430px">
         <table style="margin-top: 15px;">
           <thead>
             <tr style="background-color: #ccc; border: solid 1px #000;">
