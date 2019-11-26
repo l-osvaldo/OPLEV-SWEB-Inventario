@@ -26,7 +26,12 @@
 			                  
 			                  	<td> {{ $lote->Id }} </td>
 			                  	<td align="center"> {{ $lote->fecha }} </td>
-			                  	<td> {{ $lote->estado }} </td>
+			                  	@if ( $lote->estado === 'Abierto')
+			                  		<td align="center"> <span class="badge badge-success">{{ $lote->estado }}</span> </td> 
+			                  	@else
+			                  		<td align="center"> <span class="badge badge-info" style="background: #f44611">{{ $lote->estado }}</span> </td>
+			                  	@endif
+			                  	
 			                  	<td align="center">
 			                  		<button type="button" class="btn btn-secondary btn-sm" onclick="verDetalleLote( {{ $lote->Id }}, {{ $lote->totalOPLE }}, {{ $lote->totalECO }}, '{{ $lote->nombre }}', '{{ $lote->tipoLote }}' , '{{ $lote->estado }}' )">
 									    Ver

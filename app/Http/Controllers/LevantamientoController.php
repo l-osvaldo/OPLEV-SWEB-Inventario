@@ -48,6 +48,8 @@ class LevantamientoController extends Controller
                 if ($lote->nombre == null){
                     $empleado = empleados::where('numemple',$lote->numeroempleado)->get();
                     $lote->nombre = $empleado[0]['nombre'];
+                }else {
+                    $lote->nombre = $lote->nombre.' - '.$lote->descripcion;
                 }
 
                 $newfecha = date("d/m/Y", strtotime($lote->created_at));
@@ -273,6 +275,8 @@ class LevantamientoController extends Controller
                 if ($lote->nombre == null){
                     $empleado = empleados::where('numemple',$lote->numeroempleado)->get();
                     $lote->nombre = $empleado[0]['nombre'];
+                }else {
+                    $lote->nombre = $lote->nombre.' - '.$lote->descripcion;
                 }
 
                 $newfecha = date("d/m/Y", strtotime($lote->created_at));

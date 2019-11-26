@@ -15,9 +15,9 @@
 		        <div class="card">
 		          <div class="card-body">
 		          	<div align="center">
-		          		<button class="btn" onclick="actualizar()">
+		          		<button class="btn" onclick="actualizar()" style="background: #EA0D94">
 		          			<i class="fa fa-refresh" aria-hidden="true"></i>
-		          			 Actualizar
+		          			 Actualizar Información
 		          		</button>
 		          	</div>
 		          	<div id="lotesRespues">
@@ -45,7 +45,11 @@
 				                  
 				                  	<td> {{ $lote->Id }} </td>
 				                  	<td align="center"> {{ $lote->fecha }} </td>
-				                  	<td> {{ $lote->estado }} </td>
+				                  	@if ( $lote->estado === 'Abierto')
+				                  		<td align="center"> <span class="badge badge-success">{{ $lote->estado }}</span> </td> 
+				                  	@else
+				                  		<td align="center"> <span class="badge badge-info" style="background: #f44611">{{ $lote->estado }}</span> </td> 
+				                  	@endif
 				                  	<td align="center">
 				                  		<button type="button" class="btn btn-secondary btn-sm" onclick="verDetalleLote( {{ $lote->Id }}, {{ $lote->totalOPLE }}, {{ $lote->totalECO }}, '{{ $lote->nombre }}', '{{ $lote->tipoLote }}' , '{{ $lote->estado }}' )">
 										    Ver
@@ -84,11 +88,21 @@
 	                <div class="row">
 	                  <div class="col-md-4">
 	                      <div class="form-group">
-	                      	<label><small> Nombre del empleado:  </small> <u><strong id="nombreEmpleadoDetalleLote">  </strong> </u> </label>         
+	                      	<div class="col-md-12">
+	                      		<label><small> Nombre del empleado:  </small></label>
+	                      	</div>
+	                      	<div class="col-md-12">
+	                      		<u><strong id="nombreEmpleadoDetalleLote">  </strong> </u>
+	                      	</div>	                      	         
 	                      </div>                                       
 	                  </div>
 	                  <div class="col-md-4" align="center">
-	                  	<label> <small>Estado del lote</small> <strong id="detalleEstadoEsp"></strong> </label>
+	                  	<div class="col-md-12">
+	                  		<label> <small>Estado del lote: </small> </label>
+	                  	</div>
+	                  	<div class="col-md-12">
+	                  		<span id="detalleEstadoEsp"></span>
+	                  	</div>
 	                  </div>
 	                  <div class="col-md-4" align="right">
 	                  	<a style="background-color: #E71096; width: 50%;" class="btn btn-secondary" id="btnDetalleEspPDF" target="_blank">
@@ -105,10 +119,10 @@
 					              <thead>
 					                <tr>
 					                  <th style="text-align: center">Tipo del bien</th>
-									  <th style="text-align: center">Nùmero de inventario</th>
+									  <th style="text-align: center">Número de inventario</th>
 									  <th style="text-align: center">Concepto</th>
-									  <th style="text-align: center">Semaforo</th>
-									  <th style="text-align: center">Asignado</th>
+									  <th style="text-align: center">Conciliación</th>
+									  <th style="text-align: center">Asignado a</th>
 									  <th style="text-align: center">Fecha de captura</th>
 					                </tr>
 					              </thead>
@@ -141,11 +155,21 @@
 	                <div class="row">
 	                  <div class="col-md-4">
 	                      <div class="form-group">
-	                      	<label><small> Nombre del lote:  </small> <u><strong id="nombreDetalleLote">  </strong> </u> </label>         
+	                      	<div class="col-md-12">
+	                      		<label><small> Nombre del lote:  </small>  </label>
+	                      	</div>
+	                      	<div>
+	                      		<u><strong id="nombreDetalleLote">  </strong> </u>
+	                      	</div>     
 	                      </div>                                       
 	                  </div>
 	                  <div class="col-md-4" align="center">
-	                  	<label> <small>Estado del lote</small> <strong id="detalleEstadoGral"></strong> </label>
+	                  	<div class="col-md-12">
+	                  		<label> <small>Estado del lote</small>  </label>
+	                  	</div>
+	                  	<div class="col-md-12">
+	                  		<span id="detalleEstadoGral"></span>
+	                  	</div>	                  	
 	                  </div>
 	                  <div class="col-md-4" align="right">
 	                  	<a style="background-color: #E71096; width: 50%;" class="btn btn-secondary" id="btnDetalleGralPDF" target="_blank">
@@ -162,9 +186,9 @@
 					              <thead>
 					                <tr>
 					                  <th style="text-align: center">Tipo del bien</th>
-									  <th style="text-align: center">Nùmero de inventario</th>
+									  <th style="text-align: center">Número de inventario</th>
 									  <th style="text-align: center">Concepto</th>
-									  <th style="text-align: center">Asignado</th>
+									  <th style="text-align: center">Asignado a</th>
 									  <th style="text-align: center">Fecha de captura</th>
 					                </tr>
 					              </thead>

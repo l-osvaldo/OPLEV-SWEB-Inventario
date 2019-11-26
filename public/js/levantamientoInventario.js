@@ -39,12 +39,8 @@ var levantamientoEsp = $('#detalleLote02').DataTable( {
     "deferRender": true,
     "retrieve": true,
     "processing": true,
-    "scrollY":        "300px",
-    "scrollCollapse": true,
-    "paging": false,
-    "order": [[ 2, "asc" ]],
     "sSearch": "Filter Data",
-    "dom":      "<'row'<'col-sm-12 text-right'f>>" +
+    "dom":      "<'row'<'col-sm-4'l><'col-sm-8 text-right'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
     "select": true,
@@ -79,12 +75,8 @@ var levantamientoGral = $('#detalleLote03').DataTable( {
     "deferRender": true,
     "retrieve": true,
     "processing": true,
-    "scrollY":        "300px",
-    "scrollCollapse": true,
-    "paging": false,
-    "order": [[ 2, "asc" ]],
     "sSearch": "Filter Data",
-    "dom":      "<'row'<'col-sm-12 text-right'f>>" +
+    "dom":      "<'row'<'col-sm-4'l><'col-sm-8 text-right'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
     "select": true,
@@ -149,6 +141,15 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
 
           $('#detalleEstadoEsp').html(estado);
 
+          $('#detalleEstadoEsp').removeClass();
+          if (estado == 'Abierto'){
+            $('#detalleEstadoEsp').addClass('badge badge-success');
+          }
+          if (estado == 'Cerrado'){
+            $('#detalleEstadoEsp').addClass('badge badge-info');
+            $('#detalleEstadoEsp').css('background','#f44611');
+          }
+
         levantamientoEsp.clear().draw();
 
         $.each(response, function(i, item) {
@@ -204,6 +205,15 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
 
           $('#nombreDetalleLote').html(nombre);
           $('#detalleEstadoGral').html(estado);
+
+          $('#detalleEstadoGral').removeClass();
+          if (estado == 'Abierto'){
+            $('#detalleEstadoGral').addClass('badge badge-success');
+          }
+          if (estado == 'Cerrado'){
+            $('#detalleEstadoGral').addClass('badge badge-info');
+            $('#detalleEstadoGral').css('background','#f44611');
+          }
 
         levantamientoGral.clear().draw();
 
