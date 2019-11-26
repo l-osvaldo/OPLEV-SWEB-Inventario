@@ -137,7 +137,7 @@ class CancelacionResguardoController extends Controller
         $hoy = getdate();
         $fecha = $hoy['mday'].'/'.$hoy['mon'].'/'.$hoy['year'];
 
-        $pdf = PDF::loadView('cancelacion.pdf.CancelacionDelResguardoPDF', compact('articulosOPLE','articulosECO','datosEmpleado','fecha','numArticulosOPLE','numArticulosECO','totalImporteOPLE','totalImporteECO'))->setPaper('letter', 'portrait');
+        $pdf = PDF::loadView('cancelacion.pdf.CancelacionDelResguardoPDF', compact('articulosOPLE','articulosECO','datosEmpleado','fecha','numArticulosOPLE','numArticulosECO','totalImporteOPLE','totalImporteECO'))->setPaper('letter', 'landscape');
 
         return $pdf->inline('CancelacionDeResguardo-'.$datosEmpleado[0]['nombreempleado'].'.pdf');
     }

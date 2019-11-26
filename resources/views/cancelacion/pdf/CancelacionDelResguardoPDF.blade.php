@@ -49,7 +49,7 @@
   <body>
     @php
       $pagina = 1;
-      $corte = 15;
+      $corte = 10;
       $inicioBloque = 0;
       $contador = 0;  
     @endphp
@@ -102,7 +102,7 @@
           </tr>
         </tbody>
       </table>
-      <div style="height: 700px">
+      <div style="height: 450px">
         <table style="margin-top: 15px;">
           <thead>
             <tr style="background-color: #ccc; border: solid 1px #000;">
@@ -128,7 +128,7 @@
             @endforeach
             @php
               $inicioBloque = $corte;
-              $corte +=15;                  
+              $corte +=10;                  
             @endphp
             @if ($contador == $numArticulosOPLE)
               <tr>
@@ -204,7 +204,6 @@
         </label>
       </div>
       <br>
-      <br>
       <div class="row" align="right">
         <label>Página:   {{ $pagina }} </label>
         @php
@@ -220,7 +219,7 @@
     @endwhile
     @php
       $pagina = 1;
-      $corte = 15;
+      $corte = 10;
       $inicioBloque = 0;
       $contador = 0;  
     @endphp
@@ -273,7 +272,7 @@
           </tr>
         </tbody>
       </table>
-      <div style="height: 700px">
+      <div style="height: 450px">
         <table style="margin-top: 15px;">
           <thead>
             <tr style="background-color: #ccc; border: solid 1px #000;">
@@ -299,7 +298,7 @@
             @endforeach
             @php
               $inicioBloque = $corte;
-              $corte +=15;                  
+              $corte +=10;                  
             @endphp
             @if ($contador == $numArticulosECO)
               <tr>

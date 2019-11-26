@@ -115,7 +115,7 @@ var levantamientoGral = $('#detalleLote03').DataTable( {
     }
 });
 
-function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo) {
+function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
   if (totalOPLE == 0 && totalECO == 0){
     swal({
       title: "Información",
@@ -147,6 +147,8 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo) {
 
           $('#nombreEmpleadoDetalleLote').html(nombre);
 
+          $('#detalleEstadoEsp').html(estado);
+
         levantamientoEsp.clear().draw();
 
         $.each(response, function(i, item) {
@@ -169,7 +171,8 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo) {
                 item['numeroinventario'],
                 item['concepto'],
                 $semaforo,
-                item['nombreemple']             
+                item['nombreemple'],
+                item['fecha']             
             ] ).draw();
         });
         $('#btnDetalleEspPDF').attr("href","../catalogos/reportes/levantamientoInventarioDetallePDF/"+id_lote+"/"+tipo);
@@ -200,6 +203,7 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo) {
           console.log(response);
 
           $('#nombreDetalleLote').html(nombre);
+          $('#detalleEstadoGral').html(estado);
 
         levantamientoGral.clear().draw();
 
@@ -210,7 +214,8 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo) {
                 item['tipo'],
                 item['numeroinventario'],
                 item['concepto'],
-                item['nombreemple']             
+                item['nombreemple'],
+                item['fecha']              
             ] ).draw();
         });
         $('#btnDetalleGralPDF').attr("href","../catalogos/reportes/levantamientoInventarioDetallePDF/"+id_lote+"/"+tipo);
@@ -230,6 +235,34 @@ $('#detalleLoteGeneral').on('shown.bs.modal', function() {
    $($.fn.dataTable.tables(true)).DataTable()
       .columns.adjust();
 });
+
+
+function actualizar(){
+  // $('#lotesRespues').css('display', 'none');
+  $.ajaxSetup(
+  {
+    headers:
+    { 
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
+  $.ajax({
+      url: "actualizar",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      dataType: 'html',
+      async: true,
+      contentType: 'application/json'
+
+    }).done(function(response) {
+      $('#lotesRespues').css("display","block");
+      $('#lotesRespues').html(response);
+          
+    });
+}
+
+
 
   
 

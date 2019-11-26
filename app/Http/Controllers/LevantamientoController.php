@@ -27,7 +27,7 @@ class LevantamientoController extends Controller
     public function index()
     {
         $usuario = auth()->user();
-        $lotes = lotes::all();
+        $lotes = lotes::whereNotIn('estado', ['Cancelado'])->get();
 
         //print_r($lotes);
 
@@ -49,6 +49,10 @@ class LevantamientoController extends Controller
                     $empleado = empleados::where('numemple',$lote->numeroempleado)->get();
                     $lote->nombre = $empleado[0]['nombre'];
                 }
+
+                $newfecha = date("d/m/Y", strtotime($lote->created_at));
+
+                array_add($lote,'fecha',$newfecha);
 
                 $bitacoralotes = bitacoralotes::where('id_lote', $lote->Id)->get();
 
@@ -117,6 +121,10 @@ class LevantamientoController extends Controller
                     array_add($bl,'concepto','No esta registrado');
                 }
             }
+            $fecha = date("d/m/Y", strtotime($bl->created_at));
+
+            array_add($bl,'fecha',$fecha);
+
         }
 
         return response()->json($bitacoralotes);
@@ -161,6 +169,10 @@ class LevantamientoController extends Controller
                     array_add($bl,'concepto','No esta registrado');
                 }
             }
+
+            $fecha = date("d/m/Y", strtotime($bl->created_at));
+
+            array_add($bl,'fecha',$fecha);
         }
 
         return response()->json($bitacoralotes);
@@ -229,12 +241,66 @@ class LevantamientoController extends Controller
         //echo $empleado[0]['nombre'];
 
         if ($request->tipo == 'Especifico'){
-            $pdf = PDF::loadView('levantamientoInventario.pdf.detalleEspecificoPDF', compact('bitacoralotes','empleado','numeroArticulos','fecha','totalImporte'))->setPaper('letter', 'portrait');
+            $pdf = PDF::loadView('levantamientoInventario.pdf.detalleEspecificoPDF', compact('bitacoralotes','empleado','numeroArticulos','fecha','totalImporte'))->setPaper('letter', 'landscape');
             return $pdf->inline('DetalleEspecificoPDF'. $empleado[0]['nombre'].'.pdf');
         }else{
             $lote = lotes::where('Id', $request->id_lote )->get();
-            $pdf = PDF::loadView('levantamientoInventario.pdf.detalleGeneralPDF', compact('bitacoralotes','lote','numeroArticulos','fecha','totalImporte'))->setPaper('letter', 'portrait');
+            $pdf = PDF::loadView('levantamientoInventario.pdf.detalleGeneralPDF', compact('bitacoralotes','lote','numeroArticulos','fecha','totalImporte'))->setPaper('letter', 'landscape');
             return $pdf->inline('DetalleGeneralPDF'.$lote[0]['nombre'] .'.pdf');
         }
+    }
+
+    public function actualizar()
+    {
+        $lotes = lotes::whereNotIn('estado', ['Cancelado'])->get();
+
+        //print_r($lotes);
+
+        $totalOPLE = 0;
+        $totalECO = 0;
+
+        if (sizeof($lotes) > 0){
+            foreach ($lotes as $lote) {
+                if ($lote->numeroempleado != null){
+                    $empleado = empleados::where('numemple',$lote->numeroempleado)->get();
+                    array_add($lote,'area',$empleado[0]['nombrearea']);
+                    array_add($lote,'tipoLote','Especifico');
+                }else {
+                    array_add($lote,'area',' - - ');
+                    array_add($lote,'tipoLote','General');
+                }
+
+                if ($lote->nombre == null){
+                    $empleado = empleados::where('numemple',$lote->numeroempleado)->get();
+                    $lote->nombre = $empleado[0]['nombre'];
+                }
+
+                $newfecha = date("d/m/Y", strtotime($lote->created_at));
+
+                array_add($lote,'fecha',$newfecha);
+
+                $bitacoralotes = bitacoralotes::where('id_lote', $lote->Id)->get();
+
+                if (sizeof($bitacoralotes) != 0 ){
+                    foreach ($bitacoralotes as $bitacora) {
+                        $articulosOPLE = articulos::where('numeroinv', $bitacora->numeroinventario)->count();
+                        $totalOPLE += $articulosOPLE;
+
+                        $articulosECO = articulosecos::where('numeroinventario', $bitacora->numeroinventario)->count();
+                        $totalECO += $articulosECO;
+                    }
+                    array_add($lote,'totalOPLE',$totalOPLE);
+                    array_add($lote,'totalECO',$totalECO);
+                } else {
+                    array_add($lote,'totalOPLE','0');
+                    array_add($lote,'totalECO','0');
+                }
+
+                $totalOPLE = 0;
+                $totalECO = 0;
+            }
+        }        
+        //print_r($lotes);
+        return view('levantamientoInventario.actualizarTabla', compact('lotes'));
     }
 }
