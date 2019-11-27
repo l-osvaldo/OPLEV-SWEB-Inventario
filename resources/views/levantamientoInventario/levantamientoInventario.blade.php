@@ -48,7 +48,7 @@
 				                  	@if ( $lote->estado === 'Abierto')
 				                  		<td align="center"> <span class="badge badge-success">{{ $lote->estado }}</span> </td> 
 				                  	@else
-				                  		<td align="center"> <span class="badge badge-info" style="background: #f44611">{{ $lote->estado }}</span> </td> 
+				                  		<td align="center"> <span class="badge badge-info" style="background: #f44611" >{{ $lote->estado }}</span> </td> 
 				                  	@endif
 				                  	<td align="center">
 				                  		<button type="button" class="btn btn-secondary btn-sm" onclick="verDetalleLote( {{ $lote->Id }}, {{ $lote->totalOPLE }}, {{ $lote->totalECO }}, '{{ $lote->nombre }}', '{{ $lote->tipoLote }}' , '{{ $lote->estado }}' )">
@@ -118,7 +118,7 @@
 	                	<div class="col-md-2">
 	                		<label><small>Total de Bienes ECO: </small><strong id="totalEcoDetalleEsp"></strong></label>
 	                	</div>
-	                	<div class="col-md-8" align="right">
+	                	<div class="col-md-8" align="right" id="divSelectAllOPLEECO">
 	                		<div class="form-check">
 							  <label class="form-check-label">
 							    <input type="checkbox" class="form-check-input" value="todos" id="selectAllOPLEECO">Seleccionar todos (OPLE y ECO)
@@ -154,6 +154,7 @@
 														  <th style="text-align: center">Asignado a</th>
 														  <th style="text-align: center">Fecha de captura</th>
 														  <th style="text-align: center">Asignar</th>
+														  <th style="text-align: center">Eliminar</th>
 										                </tr>
 										              </thead>
 										              <tbody>
@@ -184,6 +185,7 @@
 														  <th style="text-align: center">Asignado a</th>
 														  <th style="text-align: center">Fecha de captura</th>
 														  <th style="text-align: center">Asignar</th>
+														  <th style="text-align: center">Eliminar</th>
 										                </tr>
 										              </thead>
 										              <tbody>
@@ -284,6 +286,7 @@
 													  <th style="text-align: center">Concepto</th>
 													  <th style="text-align: center">Asignado a</th>
 													  <th style="text-align: center">Fecha de captura</th>
+													  <th style="text-align: center">Eliminar</th>
 									                </tr>
 									              </thead>
 									              <tbody>
@@ -313,6 +316,7 @@
 													  <th style="text-align: center">Concepto</th>
 													  <th style="text-align: center">Asignado a</th>
 													  <th style="text-align: center">Fecha de captura</th>
+													  <th style="text-align: center">Eliminar</th>
 									                </tr>
 									              </thead>
 									              <tbody>

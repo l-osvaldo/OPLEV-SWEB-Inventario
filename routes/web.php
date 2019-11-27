@@ -177,6 +177,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('/catalogos/reportes/levantamientoInventarioDetallePDF/{id_lote}/{tipo}', 'LevantamientoController@levantamientoInventarioDetallePDF');
 	Route::get('/catalogos/actualizar', 'LevantamientoController@actualizar');
 	Route::post('/catalogos/confirmacionAsignacionL', 'LevantamientoController@confirmacionAsignacionL')->name('confirmacionAsignacionL');
+	Route::post('/catalogos/eliminarArticuloLevantamiento', 'LevantamientoController@eliminarArticuloLevantamiento');
 
 });
 

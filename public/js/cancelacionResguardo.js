@@ -48,7 +48,7 @@ function confirmacionCancelacion (){
          text: "¿Desea continuar?",
          type: "warning",
          showCancelButton: true,
-         confirmButtonColor: "#0080FF",
+         confirmButtonColor: "#E71096",
          confirmButtonText: "Sí",
          closeOnConfirm: true
      }, function(isConfirm){

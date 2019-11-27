@@ -338,7 +338,7 @@
           text: "¿Desea continuar?",
           type: "warning",
           showCancelButton: true,
-          confirmButtonColor: "#0080FF",
+          confirmButtonColor: "#E71096",
           confirmButtonText: "Sí",
           closeOnConfirm: false
       }, function(isConfirm){
@@ -359,7 +359,7 @@
           text: "¿Desea continuar?",
           type: "warning",
           showCancelButton: true,
-          confirmButtonColor: "#0080FF",
+          confirmButtonColor: "#E71096",
           confirmButtonText: "Sí",
           closeOnConfirm: false
       }, function(isConfirm){
@@ -379,7 +379,7 @@
         text: "¿Desea continuar?",
         type: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#0080FF",
+        confirmButtonColor: "#E71096",
         confirmButtonText: "Sí",
         closeOnConfirm: true
     }, function(isConfirm){
@@ -476,7 +476,7 @@
          text: "¿Desea continuar?",
          type: "warning",
          showCancelButton: true,
-         confirmButtonColor: "#0080FF",
+         confirmButtonColor: "#E71096",
          confirmButtonText: "Sí",
          closeOnConfirm: false
      }, function(isConfirm){
@@ -494,7 +494,7 @@
            text: "¿Desea continuar?",
            type: "warning",
            showCancelButton: true,
-           confirmButtonColor: "#0080FF",
+           confirmButtonColor: "#E71096",
            confirmButtonText: "Sí",
            closeOnConfirm: false
        }, function(isConfirm){
@@ -514,7 +514,7 @@ var validoNumeroPartida = true;
          text: "¿Desea continuar?",
          type: "warning",
          showCancelButton: true,
-         confirmButtonColor: "#0080FF",
+         confirmButtonColor: "#E71096",
          confirmButtonText: "Sí",
          closeOnConfirm: false
      }, function(isConfirm){
@@ -532,7 +532,7 @@ var validoNumeroPartida = true;
          text: "¿Desea continuar?",
          type: "warning",
          showCancelButton: true,
-         confirmButtonColor: "#0080FF",
+         confirmButtonColor: "#E71096",
          confirmButtonText: "Sí",
          closeOnConfirm: false
      }, function(isConfirm){
@@ -548,7 +548,7 @@ var validoNumeroPartida = true;
          text: "¿Desea continuar?",
          type: "warning",
          showCancelButton: true,
-         confirmButtonColor: "#0080FF",
+         confirmButtonColor: "#E71096",
          confirmButtonText: "Sí",
          closeOnConfirm: false
      }, function(isConfirm){

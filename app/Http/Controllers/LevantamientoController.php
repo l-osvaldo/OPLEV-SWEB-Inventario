@@ -376,4 +376,11 @@ class LevantamientoController extends Controller
         return redirect()->route('levantamientoInventario');
 
     }
+
+    public function eliminarArticuloLevantamiento(Request $request){
+        $numeroinventario = $request->numeroinventario;
+
+        $bitacoralote = bitacoralotes::where('numeroinventario',$numeroinventario)->delete();
+        return 1;
+    }
 }

@@ -277,8 +277,9 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
               break;
           }
 
-          if (item['semaforo'] == 'si' || item['semaforo'] == '?') {
-            $asignar = '';
+          if (item['semaforo'] == 'si' || item['semaforo'] == '?' || estado== 'Cerrado') {
+            $asignar = '<div align="center"><i class="fa fa-ban" aria-hidden="true" style="color: #ff0000;"></i></div> ';
+            eliminar = '<div align="center"><i class="fa fa-ban" aria-hidden="true" style="color: #ff0000;"></i></div> ';
           }else {
             $asignar = '<div class="form-check" align="center">'+
                           '<label class="form-check-label">'+
@@ -286,6 +287,9 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
                              +item['tipo']+'[]" value="'+item['numeroinventario']+'" style="margin-top: -0.8rem;">'+
                           '</label>'+
                         '</div>';
+            eliminar = '<div align="center"><button type="button" class="btn btn-danger btn-sm" onclick="eliminarArticuloLevantamiento(\''+ item['numeroinventario'] + '\')">'+
+                        '<i class="fa fa-trash-o" aria-hidden="true"></i>'+
+                       '</button></div>';
           } 
 
           if (item['semaforo'] == 'no' || item['semaforo'] == '?') {
@@ -294,6 +298,12 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
             }else{
               asignablesECO++;
             }
+          }
+
+          if (asignablesOPLE == 0 && asignablesECO == 0){
+            $('#divSelectAllOPLEECO').css('display','none');
+          }else {
+            $('#divSelectAllOPLEECO').css('display','block');
           }         
 
           if (item['tipo'] === 'OPLE'){
@@ -304,7 +314,8 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
                 $semaforo,
                 item['nombreemple'],
                 item['fecha'],
-                $asignar            
+                $asignar,
+                eliminar            
             ] ).draw();
           }else{
             levantamientoEspECO.row.add( [
@@ -314,7 +325,8 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
                 $semaforo,
                 item['nombreemple'],
                 item['fecha'],
-                $asignar            
+                $asignar,
+                eliminar            
             ] ).draw();
           }
 
@@ -346,7 +358,7 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
           contentType: 'application/json'
 
       }).done(function(response) {
-          console.log(response);
+          // console.log(response);
 
           $('#nombreDetalleLote').html(nombre);
           $('#detalleEstadoGral').html(estado);
@@ -363,11 +375,21 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
           $('#totalOpleDetalleGral').html(totalOPLE);
           $('#totalEcoDetalleGral').html(totalECO);
 
+           
+
         levantamientoGral.clear().draw();
         levantamientoGralECO.clear().draw();
 
         $.each(response, function(i, item) {
-          console.log(item);         
+          //console.log(item);
+
+          if (estado == 'Cerrado') {
+            eliminar = '<div align="center"><i class="fa fa-ban" aria-hidden="true" style="color: #ff0000;"></i></div> ';
+          }else {
+            eliminar = '<div align="center"><button type="button" class="btn btn-danger btn-sm" onclick="eliminarArticuloLevantamiento(\''+ item['numeroinventario'] + '\'+)">'+
+                        '<i class="fa fa-trash-o" aria-hidden="true"></i>'+
+                       '</button></div>';
+          }         
 
           if (item['tipo'] === 'OPLE'){
             levantamientoGral.row.add( [
@@ -375,7 +397,8 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
                 item['numeroinventario'],
                 item['concepto'],
                 item['nombreemple'],
-                item['fecha']              
+                item['fecha'],
+                eliminar              
             ] ).draw();
           }else{
             levantamientoGralECO.row.add( [
@@ -383,7 +406,8 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
                 item['numeroinventario'],
                 item['concepto'],
                 item['nombreemple'],
-                item['fecha']              
+                item['fecha'],
+                eliminar              
             ] ).draw();
           }
           
@@ -537,3 +561,38 @@ $('#btnAsignarArticulosL').on('click',function(e){
 
   
 
+function eliminarArticuloLevantamiento(numeroinventario){
+    // console.log(numeroinventario);
+  swal({
+         title: "Eliminar artículo "+numeroinventario + " de este lote",
+         text: "¿Desea continuar?",
+         type: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#E71096",
+         confirmButtonText: "Sí",
+         closeOnConfirm: true
+     }, function(isConfirm){
+
+      if (isConfirm) {
+            $.ajax({
+               type:'POST',
+               url:'eliminarArticuloLevantamiento',
+               data:{ numeroinventario: numeroinventario},
+              success:function(data){
+                console.log(data);
+
+                  swal({title: "Listo!", text: "Se elimino el artículo con numero de inventario "+  numeroinventario + "de este lote", type: "success"},
+                     function(){
+                         location.reload();
+                     }
+                  )
+                },
+            error: function (xhr, ajaxOptions, thrownError) {
+              swal("Error!", "Por favor intentelo de nuevo!", "error");
+            }
+            });
+        } else {
+          swal("Error!", "Por favor intentelo de nuevo", "error");
+        }
+     });
+}
