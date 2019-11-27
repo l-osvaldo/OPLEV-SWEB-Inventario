@@ -111,28 +111,100 @@
 					    </a>
 	                  </div>
 	                </div> <!-- /.row -->
-	                <br>
 	                <div class="row">
-	                	<div class="col-md-12">
-	                		<div class="form-group">
-	                			<table id="detalleLote02" name="detalleLote02" class="table table-bordered table-striped" style="width:100%">
-					              <thead>
-					                <tr>
-					                  <th style="text-align: center">Tipo del bien</th>
-									  <th style="text-align: center">Número de inventario</th>
-									  <th style="text-align: center">Concepto</th>
-									  <th style="text-align: center">Conciliación</th>
-									  <th style="text-align: center">Asignado a</th>
-									  <th style="text-align: center">Fecha de captura</th>
-					                </tr>
-					              </thead>
-					              <tbody>
-					                  
-					              </tbody>
-					            </table>
-	                		</div>	                		
+	                	<div class="col-md-2">
+	                		<label><small>Total de Bienes OPLE: </small> <strong id="totalOpleDetalleEsp"></strong></label>
+	                	</div>
+	                	<div class="col-md-2">
+	                		<label><small>Total de Bienes ECO: </small><strong id="totalEcoDetalleEsp"></strong></label>
+	                	</div>
+	                	<div class="col-md-8" align="right">
+	                		<div class="form-check">
+							  <label class="form-check-label">
+							    <input type="checkbox" class="form-check-input" value="todos" id="selectAllOPLEECO">Seleccionar todos
+							  </label>
+							</div>
 	                	</div>
 	                </div>
+	                <br>
+	                <form method="POST" action="{{ route('confirmacionAsignacionL') }}">
+	                	@csrf
+	                	<nav>
+						  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+						    <a class="nav-item nav-link active" id="nav-OPLE-tab" data-toggle="tab" href="#nav-OPLE" role="tab" aria-controls="nav-OPLE" aria-selected="true" style="color: #e600ac;">Bienes OPLE</a>
+						    <a class="nav-item nav-link" id="nav-ECO-tab" data-toggle="tab" href="#nav-ECO" role="tab" aria-controls="nav-ECO" aria-selected="false" style="color: #e600ac;">Bienes ECO</a>
+						  </div>
+						</nav>
+		                <div class="tab-content" id="nav-tabContent">
+				  			<div class="tab-pane fade show active" id="nav-OPLE" role="tabpanel" aria-labelledby="nav-OPLE-tab">
+				                <div class="row">
+				                	<div class="col-md-12">
+				                		<div class="center-block">	      	
+									        <div class="card">
+									          <div class="card-body" >
+						                		<div class="form-group">
+						                			<table id="detalleLote02" name="detalleLote02" class="table table-bordered table-striped" style="width:100%">
+										              <thead>
+										                <tr>
+										                  <th style="text-align: center">Tipo del bien</th>
+														  <th style="text-align: center">Número de inventario</th>
+														  <th style="text-align: center">Concepto</th>
+														  <th style="text-align: center">Conciliación</th>
+														  <th style="text-align: center">Asignado a</th>
+														  <th style="text-align: center">Fecha de captura</th>
+														  <th style="text-align: center">Asignar</th>
+										                </tr>
+										              </thead>
+										              <tbody>
+										                  
+										              </tbody>
+										            </table>
+						                		</div>
+						                	   </div>
+						                	</div>
+						               	</div>	                		
+				                	</div>
+				                </div>
+				            </div>
+				            <div class="tab-pane fade" id="nav-ECO" role="tabpanel" aria-labelledby="nav-ECO-tab">
+				            	<div class="row">
+				                	<div class="col-md-12">
+				                		<div class="center-block">	      	
+									        <div class="card">
+									          <div class="card-body" >
+						                		<div class="form-group">
+						                			<table id="detalleLote02ECO" name="detalleLote02ECO" class="table table-bordered table-striped" style="width:100%">
+										              <thead>
+										                <tr>
+										                  <th style="text-align: center">Tipo del bien</th>
+														  <th style="text-align: center">Número de inventario</th>
+														  <th style="text-align: center">Concepto</th>
+														  <th style="text-align: center">Conciliación</th>
+														  <th style="text-align: center">Asignado a</th>
+														  <th style="text-align: center">Fecha de captura</th>
+														  <th style="text-align: center">Asignar</th>
+										                </tr>
+										              </thead>
+										              <tbody>
+										                  
+										              </tbody>
+										            </table>
+						                		</div>
+						                	   </div>
+						                	</div>
+						               	</div>	                		
+				                	</div>
+				                </div>
+				        	</div>
+				        </div>
+				        <div class="card-footer" id="opcionesAsignarLevantamiento" style="display: none;">
+			                <button type="reset" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>
+			                <button type="submit" id="btnAsignarArticulosL" style="background-color: #E71096" class="btn btn-secondary float-right" disabled>
+			                    {{ __('Asignar') }}
+			                </button>
+			            </div>
+	                </form>
+	                
 		          </div>
 		        </div>
 		      </div>
@@ -178,27 +250,82 @@
 					    </a>
 	                  </div>
 	                </div> <!-- /.row -->
-	                <br>
 	                <div class="row">
-	                	<div class="col-md-12">
-	                		<div class="form-group">
-	                			<table id="detalleLote03" name="detalleLote03" class="table table-bordered table-striped" style="width:100%">
-					              <thead>
-					                <tr>
-					                  <th style="text-align: center">Tipo del bien</th>
-									  <th style="text-align: center">Número de inventario</th>
-									  <th style="text-align: center">Concepto</th>
-									  <th style="text-align: center">Asignado a</th>
-									  <th style="text-align: center">Fecha de captura</th>
-					                </tr>
-					              </thead>
-					              <tbody>
-					                  
-					              </tbody>
-					            </table>
-	                		</div>	                		
+	                	<div class="col-md-2">
+	                		<label><small>Total de Bienes OPLE: </small> <strong id="totalOpleDetalleGral"></strong></label>
+	                	</div>
+	                	<div class="col-md-2">
+	                		<label><small>Total de Bienes ECO: </small><strong id="totalEcoDetalleGral"></strong></label>
 	                	</div>
 	                </div>
+	                <br>
+
+	                <nav>
+					  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+					    <a class="nav-item nav-link active" id="nav-OPLEG-tab" data-toggle="tab" href="#nav-OPLEG" role="tab" aria-controls="nav-OPLEG" aria-selected="true" style="color: #e600ac;">Bienes OPLE</a>
+					    <a class="nav-item nav-link" id="nav-ECOG-tab" data-toggle="tab" href="#nav-ECOG" role="tab" aria-controls="nav-ECOG" aria-selected="false" style="color: #e600ac;">Bienes ECO</a>
+					  </div>
+					</nav>
+	                <div class="tab-content" id="nav-tabContent">
+			  			<div class="tab-pane fade show active" id="nav-OPLEG" role="tabpanel" aria-labelledby="nav-OPLE-tab">
+			                <div class="row">
+			                	<div class="col-md-12">
+			                		<div class="center-block">	      	
+								        <div class="card">
+								          <div class="card-body" >
+					                		<div class="form-group">
+					                			
+					                			<table id="detalleLote03" name="detalleLote03" class="table table-bordered table-striped" style="width:100%">
+									              <thead>
+									                <tr>
+									                  <th style="text-align: center">Tipo del bien</th>
+													  <th style="text-align: center">Número de inventario</th>
+													  <th style="text-align: center">Concepto</th>
+													  <th style="text-align: center">Asignado a</th>
+													  <th style="text-align: center">Fecha de captura</th>
+									                </tr>
+									              </thead>
+									              <tbody>
+									                  
+									              </tbody>
+									            </table>
+					                		</div>	
+					                	   </div>
+					                	</div>
+					                </div>                		
+			                	</div>
+			                </div>
+			            </div>
+			            <div class="tab-pane fade" id="nav-ECOG" role="tabpanel" aria-labelledby="nav-ECO-tab">
+			            	<div class="row">
+			                	<div class="col-md-12">
+			                		<div class="center-block">	      	
+								        <div class="card">
+								          <div class="card-body" >
+					                		<div class="form-group">
+					                			
+					                			<table id="detalleLote03ECO" name="detalleLote03ECO" class="table table-bordered table-striped" style="width:100%">
+									              <thead>
+									                <tr>
+									                  <th style="text-align: center">Tipo del bien</th>
+													  <th style="text-align: center">Número de inventario</th>
+													  <th style="text-align: center">Concepto</th>
+													  <th style="text-align: center">Asignado a</th>
+													  <th style="text-align: center">Fecha de captura</th>
+									                </tr>
+									              </thead>
+									              <tbody>
+									                  
+									              </tbody>
+									            </table>
+					                		</div>	
+					                	   </div>
+					                	</div>
+					                </div>                		
+			                	</div>
+			                </div>
+			        	</div>
+			        </div>
 		          </div>
 		        </div>
 		      </div>

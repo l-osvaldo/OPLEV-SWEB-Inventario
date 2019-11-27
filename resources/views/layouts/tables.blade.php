@@ -228,6 +228,7 @@
   "deferRender": true,
   "retrieve": true,
   "processing": true,
+  "order": [[ 1, "desc" ]],
   "sSearch": "Filter Data",
   "dom":      "<'row'<'col-sm-4'l><'col-sm-8 text-right'f>>" +
               "<'row'<'col-sm-12'tr>>" +

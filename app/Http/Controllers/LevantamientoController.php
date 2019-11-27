@@ -82,7 +82,9 @@ class LevantamientoController extends Controller
     }
 
     public function levantamientoInventarioDetalleEsp(Request $request){
-        $numeroempleado = lotes::select('numeroempleado')->where('Id', $request->id_lote)->get();
+        $numeroempleado = lotes::select('numeroempleado')->where('Id', $request->id_lote)->first();
+
+        // echo $numeroempleado->numeroempleado;
 
         $empleado = empleados::where('numemple', $numeroempleado)->get();
 
@@ -94,13 +96,15 @@ class LevantamientoController extends Controller
                 $articuloOPLE = articulos::select('concepto','numemple','nombreemple')->where('numeroinv', $bl->numeroinventario)->get();
 
                 if (sizeof($articuloOPLE) != 0){
-                    if ($numeroempleado == $articuloOPLE[0]['numemple']){
+                    if ($numeroempleado->numeroempleado === $articuloOPLE[0]['numemple']){
                         array_add($bl,'semaforo','si');
+                        array_add($bl,'nombreemple','');
                     }else{
                         array_add($bl,'semaforo','no');
+                        array_add($bl,'nombreemple',$articuloOPLE[0]['nombreemple']);
                     }
                     array_add($bl,'concepto',$articuloOPLE[0]['concepto']);
-                    array_add($bl,'nombreemple',$articuloOPLE[0]['nombreemple']);
+                    
                 }else{
                     array_add($bl,'semaforo','?');
                     array_add($bl,'concepto','No esta registrado');
@@ -112,15 +116,18 @@ class LevantamientoController extends Controller
                 $articuloECO = articulosecos::select('concepto','numeroempleado','nombreempleado')->where('numeroinventario', $bl->numeroinventario)->get();
 
                 if (sizeof($articuloECO) != 0){
-                    if ($numeroempleado == $articuloECO[0]['numeroempleado']){
+                    if ($numeroempleado->numeroempleado == $articuloECO[0]['numeroempleado']){
                         array_add($bl,'semaforo','si');
+                        array_add($bl,'nombreemple','');
                     }else{
                         array_add($bl,'semaforo','no');
+                        array_add($bl,'nombreemple',$articuloECO[0]['nombreempleado']);
                     }
                     array_add($bl,'concepto',$articuloECO[0]['concepto']);
                 }else{
                     array_add($bl,'semaforo','?');
                     array_add($bl,'concepto','No esta registrado');
+                    array_add($bl,'nombreemple','No esta registrado');
                 }
             }
             $fecha = date("d/m/Y", strtotime($bl->created_at));
@@ -133,7 +140,7 @@ class LevantamientoController extends Controller
     }
 
     public function levantamientoInventarioDetalleGral(Request $request){
-        $numeroempleado = lotes::select('numeroempleado')->where('Id', $request->id_lote)->get();
+        $numeroempleado = lotes::select('numeroempleado')->where('Id', $request->id_lote)->first();
 
         $empleado = empleados::where('numemple', $numeroempleado)->get();
 
@@ -145,7 +152,8 @@ class LevantamientoController extends Controller
                 $articuloOPLE = articulos::select('concepto','numemple','nombreemple')->where('numeroinv', $bl->numeroinventario)->get();
 
                 if (sizeof($articuloOPLE) != 0){
-                    if ($numeroempleado == $articuloOPLE[0]['numemple']){
+                    if ($numeroempleado->numeroempleado == $articuloOPLE[0]['numemple']){
+
                     }else{
                     }
                     array_add($bl,'concepto',$articuloOPLE[0]['concepto']);
@@ -160,15 +168,17 @@ class LevantamientoController extends Controller
                 $articuloECO = articulosecos::select('concepto','numeroempleado','nombreempleado')->where('numeroinventario', $bl->numeroinventario)->get();
 
                 if (sizeof($articuloECO) != 0){
-                    if ($numeroempleado == $articuloECO[0]['numeroempleado']){
+                    if ($numeroempleado->numeroempleado == $articuloECO[0]['numeroempleado']){
                         array_add($bl,'semaforo','si');
                     }else{
                         array_add($bl,'semaforo','no');
                     }
                     array_add($bl,'concepto',$articuloECO[0]['concepto']);
+                    array_add($bl,'nombreemple',$articuloECO[0]['nombreempleado']);
                 }else{
                     array_add($bl,'semaforo','?');
                     array_add($bl,'concepto','No esta registrado');
+                    array_add($bl,'nombreemple','No esta registrado');
                 }
             }
 
