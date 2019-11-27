@@ -211,6 +211,12 @@ var asignablesECO = 0;
 var globalNombre = '';
 
 function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
+  $('#infoAsignacion').css('display','none');
+  $('#infoAsignacionMSJ').html('');
+
+  $('#infoAsignacion2').css('display','none');
+  $('#infoAsignacionMSJ2').html('');
+
   if (totalOPLE == 0 && totalECO == 0){
     swal({
       title: "Información",
@@ -238,7 +244,7 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
           contentType: 'application/json'
 
       }).done(function(response) {
-          console.log(response);
+          //console.log(response);
 
           $('#nombreEmpleadoDetalleLote').html(nombre);
 
@@ -261,7 +267,7 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
         levantamientoEspECO.clear().draw();
 
         $.each(response, function(i, item) {
-          console.log(item);
+          //console.log(item);
 
           $('#hiddenNumeroEmpleado').val(item['numeroEmpleado']);
 
@@ -304,12 +310,22 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
             $('#divSelectAllOPLEECO').css('display','none');
           }else {
             $('#divSelectAllOPLEECO').css('display','block');
-          }         
+          }
+
+          if (item['estatus'] === 'AsignadoDesdeLevantamientoInventario'){
+            numInv =  '<span class="badge badge-info">'+ item['numeroinventario'] +'</span>';
+            $('#infoAsignacion').css('display','block');
+            $('#infoAsignacionMSJ').html('Artículo(s) asignados desde este módulo al usuario: '+ nombre);
+            $('#infoAsignacion2').css('display','block');
+            $('#infoAsignacionMSJ2').html('Artículo(s) asignados desde este módulo al usuario: '+ nombre);
+          } else{
+            numInv = item['numeroinventario'];
+          }        
 
           if (item['tipo'] === 'OPLE'){
-            levantamientoEsp.row.add( [
+            var prueba = levantamientoEsp.row.add( [
                 item['tipo'],
-                item['numeroinventario'],
+                numInv,
                 item['concepto'],
                 $semaforo,
                 item['nombreemple'],
@@ -320,7 +336,7 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
           }else{
             levantamientoEspECO.row.add( [
                 item['tipo'],
-                item['numeroinventario'],
+                numInv,
                 item['concepto'],
                 $semaforo,
                 item['nombreemple'],
@@ -329,7 +345,6 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
                 eliminar            
             ] ).draw();
           }
-
           
         });
         globalNombre = nombre;

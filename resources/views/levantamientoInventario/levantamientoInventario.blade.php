@@ -162,6 +162,11 @@
 										              </tbody>
 										            </table>
 						                		</div>
+						                		<div class="row" id="infoAsignacion" style="display: none;">
+										        	<div class="col-md-12" align="right">
+										        		<label style="background: #17a2b8; border-radius: 15px"> <small style="margin-left: 5px;margin-right: 5px" id="infoAsignacionMSJ"></small></label>
+										        	</div>
+										        </div>
 						                	   </div>
 						                	</div>
 						               	</div>	                		
@@ -194,12 +199,19 @@
 										            </table>
 						                		</div>
 						                	   </div>
+						                	   <div class="row" id="infoAsignacion2" style="display: none;">
+										        	<div class="col-md-12" align="right">
+										        		<label style="background: #17a2b8; border-radius: 15px"> <small style="margin-left: 5px;margin-right: 5px" id="infoAsignacionMSJ2"></small></label>
+										        	</div>
+										        </div>
 						                	</div>
 						               	</div>	                		
 				                	</div>
 				                </div>
 				        	</div>
+				        	
 				        </div>
+				        
 				        <div class="card-footer" id="opcionesAsignarLevantamiento" style="display: none;">
 			                <button type="reset" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>
 			                <button type="submit" id="btnAsignarArticulosL" style="background-color: #E71096" class="btn btn-secondary float-right">

@@ -8,6 +8,7 @@ class bitacoralotes extends Model
 {
     protected $fillable = [
 		'id_lote',
-		'numeroinventario'
+		'numeroinventario',
+		'estatus'
 	];
 }

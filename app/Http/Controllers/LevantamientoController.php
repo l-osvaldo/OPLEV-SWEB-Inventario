@@ -135,6 +135,7 @@ class LevantamientoController extends Controller
 
             array_add($bl,'fecha',$fecha);
             array_add($bl,'numeroEmpleado',$numeroempleado->numeroempleado);
+
         }
 
         return response()->json($bitacoralotes);
@@ -345,7 +346,12 @@ class LevantamientoController extends Controller
                 $bitacoramovimientos->idarea = $empleado[0]['idarea'];
                 $bitacoramovimientos->nombrearea = $empleado[0]['nombrearea'];
                 $bitacoramovimientos->save();
+
+                $bitacoralote = bitacoralotes::where('numeroinventario', $OPLE[$i])->update([
+                    'estatus' => 'AsignadoDesdeLevantamientoInventario'
+                ]);
             }
+
 
             
         }
@@ -369,6 +375,10 @@ class LevantamientoController extends Controller
                 $bitacoramovimientos->idarea = $empleado[0]['idarea'];
                 $bitacoramovimientos->nombrearea = $empleado[0]['nombrearea'];
                 $bitacoramovimientos->save();
+
+                $bitacoralote = bitacoralotes::where('numeroinventario', $ECO[$i])->update([
+                    'estatus' => 'AsignadoDesdeLevantamientoInventario'
+                ]);
             }
         }
 
