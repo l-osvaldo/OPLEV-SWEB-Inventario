@@ -206,6 +206,10 @@ var levantamientoGralECO = $('#detalleLote03ECO').DataTable( {
     ]
 });
 
+var asignablesOPLE = 0;
+var asignablesECO = 0;
+var globalNombre = '';
+
 function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
   if (totalOPLE == 0 && totalECO == 0){
     swal({
@@ -259,6 +263,8 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
         $.each(response, function(i, item) {
           console.log(item);
 
+          $('#hiddenNumeroEmpleado').val(item['numeroEmpleado']);
+
           switch (item['semaforo']) {
             case 'si':
               $semaforo = '<div align="center"><i class="fa fa-check" aria-hidden="true"></i></div> ';
@@ -280,7 +286,15 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
                              +item['tipo']+'[]" value="'+item['numeroinventario']+'" style="margin-top: -0.8rem;">'+
                           '</label>'+
                         '</div>';
-          }          
+          } 
+
+          if (item['semaforo'] == 'no' || item['semaforo'] == '?') {
+            if (item['tipo'] === 'OPLE'){
+              asignablesOPLE ++ ;
+            }else{
+              asignablesECO++;
+            }
+          }         
 
           if (item['tipo'] === 'OPLE'){
             levantamientoEsp.row.add( [
@@ -306,6 +320,7 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
 
           
         });
+        globalNombre = nombre;
         $('#btnDetalleEspPDF').attr("href","../catalogos/reportes/levantamientoInventarioDetallePDF/"+id_lote+"/"+tipo);
         $('#detalleLoteEspecifico').modal('show');    
                   
@@ -441,6 +456,9 @@ $("#selectAllOPLEECO").click(function(){
 $('#detalleLoteEspecifico').on('hidden.bs.modal', function (e) {
   $('#selectAllOPLEECO').prop('checked', false);
   validar = 1;
+  asignablesOPLE = 0;
+  asignablesECO = 0;
+  activarBtnAsignarL();
 });
 
 function activarBtnAsignarL(){
@@ -452,7 +470,70 @@ function activarBtnAsignarL(){
   //console.log(validar);
 }
 
+function cambioCheckBoxLevantamiento(){
 
+  var activos = [];
+  var activos2 = [];
+  var contador = 0;
+  var contador2 = 0;
+
+  // console.log(asignablesOPLE + ' - - '+ asignablesECO);
+
+  var data = levantamientoEsp.rows().nodes();
+  $.each(data, function (index, value) {
+    //console.log($(this).find('input').prop('checked'));
+    if ($(this).find('input').prop('checked')){
+      validar = 0;     
+      contador ++;
+      if (!activos.includes(index)){
+        activos.push(index);
+      }
+    }
+
+  });
+
+
+  var data = levantamientoEspECO.rows().nodes();
+  $.each(data, function (index, value) {
+    //console.log($(this).find('input').prop('checked'));
+    if ($(this).find('input').prop('checked')){
+      validar = 0;     
+      contador2 ++;
+      if (!activos2.includes(index)){
+        activos2.push(index);
+      }
+    }
+
+  });
+
+  if (activos2.length == 0 && activos.length == 0){
+    validar = 1;
+  }
+
+  if (contador == asignablesOPLE && contador2 == asignablesECO ){
+    $("#selectAllOPLEECO").prop('checked', true);
+  }else{
+    $("#selectAllOPLEECO").prop('checked', false);
+  }
+  activarBtnAsignarL();
+  //console.log(contador +' - '+total);
+}
+
+$('#btnAsignarArticulosL').on('click',function(e){
+     e.preventDefault();
+     var form = $(this).parents('form');
+     swal({
+         title: "Asignar estos artículos a "+globalNombre,
+         text: "¿Desea continuar?",
+         type: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#E71096",
+         confirmButtonText: "Sí",
+         closeOnConfirm: false
+     }, function(isConfirm){
+         if (isConfirm) form.submit();
+     });
+ }); 
 
   
 

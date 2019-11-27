@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\lotes;
 use App\bitacoralotes;
+use App\bitacoramovimientos;
 use App\articulos;
 use App\articulosecos;
 use App\empleados;
@@ -133,7 +134,7 @@ class LevantamientoController extends Controller
             $fecha = date("d/m/Y", strtotime($bl->created_at));
 
             array_add($bl,'fecha',$fecha);
-
+            array_add($bl,'numeroEmpleado',$numeroempleado->numeroempleado);
         }
 
         return response()->json($bitacoralotes);
@@ -316,5 +317,63 @@ class LevantamientoController extends Controller
         }        
         //print_r($lotes);
         return view('levantamientoInventario.actualizarTabla', compact('lotes'));
+    }
+
+    public function confirmacionAsignacionL(Request $request){
+        $empleado = empleados::where('numemple', $request->hiddenNumeroEmpleado)->get();
+
+        $input = $request->all();
+
+        //print_r($input['articuloSeleccionadoLOPLE']);
+
+        if (array_key_exists('articuloSeleccionadoLOPLE', $input)) {
+            $OPLE = $input['articuloSeleccionadoLOPLE'];
+
+            for ($i=0; $i < sizeof($OPLE) ; $i++) { 
+                $articulo = articulos::where('numeroinv', $OPLE[$i])->update([
+                    'numemple'      => $empleado[0]['numemple'], 
+                    'nombreemple'   => $empleado[0]['nombre'],
+                    'idarea'        => $empleado[0]['idarea'],
+                    'nombrearea'    => $empleado[0]['nombrearea'],
+                ]);
+
+                $bitacoramovimientos = new bitacoramovimientos();
+
+                $bitacoramovimientos->numeroinventario = $OPLE[$i];
+                $bitacoramovimientos->numeroempleado = $empleado[0]['numemple'];
+                $bitacoramovimientos->nombreempleado = $empleado[0]['nombre'];
+                $bitacoramovimientos->idarea = $empleado[0]['idarea'];
+                $bitacoramovimientos->nombrearea = $empleado[0]['nombrearea'];
+                $bitacoramovimientos->save();
+            }
+
+            
+        }
+
+        if (array_key_exists('articuloSeleccionadoLECO', $input)) {
+            $ECO = $input['articuloSeleccionadoLECO'];
+
+            for ($i=0; $i < sizeof($OPLE) ; $i++) { 
+                $articulo = articulosecos::where('numeroinventario', $ECO[$i])->update([
+                    'numeroempleado'      => $empleado[0]['numemple'], 
+                    'nombreempleado'   => $empleado[0]['nombre'],
+                    'idarea'        => $empleado[0]['idarea'],
+                    'nombrearea'    => $empleado[0]['nombrearea'],
+                ]);
+
+                $bitacoramovimientos = new bitacoramovimientos();
+
+                $bitacoramovimientos->numeroinventario = $ECO[$i];
+                $bitacoramovimientos->numeroempleado = $empleado[0]['numemple'];
+                $bitacoramovimientos->nombreempleado = $empleado[0]['nombre'];
+                $bitacoramovimientos->idarea = $empleado[0]['idarea'];
+                $bitacoramovimientos->nombrearea = $empleado[0]['nombrearea'];
+                $bitacoramovimientos->save();
+            }
+        }
+
+        Alert::success('Artículo(s) asignados a '.$empleado[0]['nombre'], 'Asignación Exitosa')->autoclose(2500);
+        return redirect()->route('levantamientoInventario');
+
     }
 }

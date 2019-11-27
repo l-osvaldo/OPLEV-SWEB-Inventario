@@ -121,7 +121,7 @@
 	                	<div class="col-md-8" align="right">
 	                		<div class="form-check">
 							  <label class="form-check-label">
-							    <input type="checkbox" class="form-check-input" value="todos" id="selectAllOPLEECO">Seleccionar todos
+							    <input type="checkbox" class="form-check-input" value="todos" id="selectAllOPLEECO">Seleccionar todos (OPLE y ECO)
 							  </label>
 							</div>
 	                	</div>
@@ -129,6 +129,7 @@
 	                <br>
 	                <form method="POST" action="{{ route('confirmacionAsignacionL') }}">
 	                	@csrf
+	                	<input type="hidden" name="hiddenNumeroEmpleado" id="hiddenNumeroEmpleado">
 	                	<nav>
 						  <div class="nav nav-tabs" id="nav-tab" role="tablist">
 						    <a class="nav-item nav-link active" id="nav-OPLE-tab" data-toggle="tab" href="#nav-OPLE" role="tab" aria-controls="nav-OPLE" aria-selected="true" style="color: #e600ac;">Bienes OPLE</a>
@@ -199,7 +200,7 @@
 				        </div>
 				        <div class="card-footer" id="opcionesAsignarLevantamiento" style="display: none;">
 			                <button type="reset" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>
-			                <button type="submit" id="btnAsignarArticulosL" style="background-color: #E71096" class="btn btn-secondary float-right" disabled>
+			                <button type="submit" id="btnAsignarArticulosL" style="background-color: #E71096" class="btn btn-secondary float-right">
 			                    {{ __('Asignar') }}
 			                </button>
 			            </div>
