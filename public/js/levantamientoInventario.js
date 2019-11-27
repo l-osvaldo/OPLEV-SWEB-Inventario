@@ -43,7 +43,7 @@ var levantamientoEsp = $('#detalleLote02').DataTable( {
     "scrollY":        "300px",
     "scrollCollapse": true,
     "paging": false,
-    "order": [[ 2, "desc" ]],
+    "order": [[ 2, "asc" ]],
     "sSearch": "Filter Data",
     "dom":      "<'row'<'col-sm-12 text-right'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
@@ -83,7 +83,7 @@ var levantamientoEspECO = $('#detalleLote02ECO').DataTable( {
     "scrollY":        "300px",
     "scrollCollapse": true,
     "paging": false,
-    "order": [[ 2, "desc" ]],
+    "order": [[ 2, "asc" ]],
     "bAutoWidth": false,
     "sSearch": "Filter Data",
     "dom":      "<'row'<'col-sm-12 text-right'f>>" +
@@ -129,7 +129,7 @@ var levantamientoGral = $('#detalleLote03').DataTable( {
     "scrollY":        "300px",
     "scrollCollapse": true,
     "paging": false,
-    "order": [[ 2, "desc" ]],
+    "order": [[ 2, "asc" ]],
     "sSearch": "Filter Data",
     "dom":      "<'row'<'col-sm-12 text-right'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
@@ -169,7 +169,7 @@ var levantamientoGralECO = $('#detalleLote03ECO').DataTable( {
     "scrollY":        "300px",
     "scrollCollapse": true,
     "paging": false,
-    "order": [[ 2, "desc" ]],
+    "order": [[ 2, "asc" ]],
     "bAutoWidth": false,
     "sSearch": "Filter Data",
     "dom":      "<'row'<'col-sm-12 text-right'f>>" +
