@@ -16,8 +16,8 @@
 		          <div class="card-body">
 		          	<div align="center">
 		          		<button class="btn" onclick="actualizar()" style="background: #EA0D94">
-		          			<i class="fa fa-refresh" aria-hidden="true"></i>
-		          			 Actualizar Información
+		          			<i class="fa fa-refresh" aria-hidden="true" style="color: white"></i>
+		          			<label style="color: white">Actualizar Información</label>		          			 
 		          		</button>
 		          	</div>
 		          	<div id="lotesRespues">

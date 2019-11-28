@@ -267,7 +267,12 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
         levantamientoEspECO.clear().draw();
 
         $.each(response, function(i, item) {
-          //console.log(item);
+          console.log(item['anterior']);
+
+          if (item['anterior'] !== null){
+            $tooltip = 'data-toggle="tooltip" data-placement="top" title=" "';
+
+          }
 
           $('#hiddenNumeroEmpleado').val(item['numeroEmpleado']);
 

@@ -11,6 +11,7 @@ class bitacoramovimientos extends Model
 		'numeroempleado',
 		'nombreempleado',
 		'idarea',
-		'nombrearea'
+		'nombrearea',
+		'anterior'
 	];
 }

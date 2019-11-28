@@ -92,6 +92,13 @@ class LevantamientoController extends Controller
         $bitacoralotes = bitacoralotes::where('id_lote',$request->id_lote)->get();
 
         foreach ($bitacoralotes as $bl) {
+            $anterior = DB::table('bitacoramovimientos')->select('anterior', DB::raw('MAX(created_at)'))->where('numeroinventario',$bl->numeroinventario)->groupBy('anterior')->get();
+
+            array_add($bl,'anterior',$anterior);
+
+            //$anteriorNombre = empleados::
+
+
             if (strpos($bl->numeroinventario,'PLE') != false || strpos($bl->numeroinventario,'EV') != false){
                 array_add($bl,'tipo','OPLE');
                 $articuloOPLE = articulos::select('concepto','numemple','nombreemple')->where('numeroinv', $bl->numeroinventario)->get();
@@ -330,7 +337,9 @@ class LevantamientoController extends Controller
         if (array_key_exists('articuloSeleccionadoLOPLE', $input)) {
             $OPLE = $input['articuloSeleccionadoLOPLE'];
 
-            for ($i=0; $i < sizeof($OPLE) ; $i++) { 
+            for ($i=0; $i < sizeof($OPLE) ; $i++) {
+                $numeroempleadoAnterior = articulos::select('numemple')->where('numeroinv',$OPLE[$i])->first();
+
                 $articulo = articulos::where('numeroinv', $OPLE[$i])->update([
                     'numemple'      => $empleado[0]['numemple'], 
                     'nombreemple'   => $empleado[0]['nombre'],
@@ -345,7 +354,10 @@ class LevantamientoController extends Controller
                 $bitacoramovimientos->nombreempleado = $empleado[0]['nombre'];
                 $bitacoramovimientos->idarea = $empleado[0]['idarea'];
                 $bitacoramovimientos->nombrearea = $empleado[0]['nombrearea'];
+                $bitacoramovimientos->anterior = $numeroempleadoAnterior->numemple;
                 $bitacoramovimientos->save();
+
+                // echo $bitacoramovimientos;
 
                 $bitacoralote = bitacoralotes::where('numeroinventario', $OPLE[$i])->update([
                     'estatus' => 'AsignadoDesdeLevantamientoInventario'
@@ -359,7 +371,9 @@ class LevantamientoController extends Controller
         if (array_key_exists('articuloSeleccionadoLECO', $input)) {
             $ECO = $input['articuloSeleccionadoLECO'];
 
-            for ($i=0; $i < sizeof($OPLE) ; $i++) { 
+            for ($i=0; $i < sizeof($ECO) ; $i++) {
+                $numeroempleadoAnterior = articulosecos::select('numeroempleado')->where('numeroinventario',$ECO[$i])->first();
+
                 $articulo = articulosecos::where('numeroinventario', $ECO[$i])->update([
                     'numeroempleado'      => $empleado[0]['numemple'], 
                     'nombreempleado'   => $empleado[0]['nombre'],
@@ -374,6 +388,7 @@ class LevantamientoController extends Controller
                 $bitacoramovimientos->nombreempleado = $empleado[0]['nombre'];
                 $bitacoramovimientos->idarea = $empleado[0]['idarea'];
                 $bitacoramovimientos->nombrearea = $empleado[0]['nombrearea'];
+                $bitacoramovimientos->anterior = $numeroempleadoAnterior->numeroempleado;
                 $bitacoramovimientos->save();
 
                 $bitacoralote = bitacoralotes::where('numeroinventario', $ECO[$i])->update([
