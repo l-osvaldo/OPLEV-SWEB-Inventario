@@ -164,7 +164,7 @@
 						                		</div>
 						                		<div class="row" id="infoAsignacion" style="display: none;">
 										        	<div class="col-md-12" align="right">
-										        		<label style="background: #17a2b8; border-radius: 15px"> <small style="margin-left: 5px;margin-right: 5px" id="infoAsignacionMSJ"></small></label>
+										        		<label style="background: #17a2b8; border-radius: 15px"> <strong style="margin-left: 5px;margin-right: 5px; font-size: 13px" id="infoAsignacionMSJ"></strong></label>
 										        	</div>
 										        </div>
 						                	   </div>
@@ -201,7 +201,7 @@
 						                	   </div>
 						                	   <div class="row" id="infoAsignacion2" style="display: none;">
 										        	<div class="col-md-12" align="right">
-										        		<label style="background: #17a2b8; border-radius: 15px"> <small style="margin-left: 5px;margin-right: 5px" id="infoAsignacionMSJ2"></small></label>
+										        		<label style="background: #17a2b8; border-radius: 15px"> <strong style="margin-left: 5px;margin-right: 5px; font-size: 13px" id="infoAsignacionMSJ2"></strong></b></label>
 										        	</div>
 										        </div>
 						                	</div>
