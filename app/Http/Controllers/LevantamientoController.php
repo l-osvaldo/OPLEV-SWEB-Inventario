@@ -94,10 +94,27 @@ class LevantamientoController extends Controller
         foreach ($bitacoralotes as $bl) {
             $anterior = DB::table('bitacoramovimientos')->select('anterior', DB::raw('MAX(created_at)'))->where('numeroinventario',$bl->numeroinventario)->groupBy('anterior')->get();
 
-            array_add($bl,'anterior',$anterior);
+            if (sizeof($anterior) > 0){
+                foreach ($anterior as $value) {
 
-            //$anteriorNombre = empleados::
+                    if ($value->anterior === '999'){
+                        array_add($bl,'anterior','BODEGA');
+                    }else{
+                        if ($value->anterior === null){
+                            array_add($bl,'anterior','');
+                        }else{
+                            $nombreEmpleado = empleados::where('numemple',$value->anterior)->get();
 
+                            foreach ($nombreEmpleado as $key => $emp) {
+                                array_add($bl,'anterior',$emp->nombre);
+                            } 
+                        }                                       
+                    }
+                    
+                } 
+            }else{
+                array_add($bl,'anterior','');
+            }              
 
             if (strpos($bl->numeroinventario,'PLE') != false || strpos($bl->numeroinventario,'EV') != false){
                 array_add($bl,'tipo','OPLE');
@@ -200,7 +217,10 @@ class LevantamientoController extends Controller
     }
 
     public function levantamientoInventarioDetallePDF(Request $request){
+
         $numeroempleado = lotes::select('numeroempleado')->where('Id', $request->id_lote)->get();
+
+        $numeroempleado2 = lotes::select('numeroempleado')->where('Id', $request->id_lote)->first();
 
         $empleado = empleados::where('numemple', $numeroempleado[0]->numeroempleado)->get();
 
@@ -216,10 +236,12 @@ class LevantamientoController extends Controller
                 $articuloOPLE = articulos::select('concepto','numemple','nombreemple','importe')->where('numeroinv', $bl->numeroinventario)->get();
 
                 if (sizeof($articuloOPLE) != 0){
-                    if ($numeroempleado == $articuloOPLE[0]['numemple']){
+                    if ($numeroempleado2->numeroempleado == $articuloOPLE[0]['numemple']){
                         array_add($bl,'semaforo','si');
+                        array_add($bl,'nombreemple','');
                     }else{
                         array_add($bl,'semaforo','no');
+                        array_add($bl,'nombreemple',$articuloOPLE[0]['nombreemple']);
                     }
                     array_add($bl,'concepto',$articuloOPLE[0]['concepto']);
                     array_add($bl,'nombreemple',$articuloOPLE[0]['nombreemple']);
@@ -237,10 +259,12 @@ class LevantamientoController extends Controller
                 $articuloECO = articulosecos::select('concepto','numeroempleado','nombreempleado','importe')->where('numeroinventario', $bl->numeroinventario)->get();
 
                 if (sizeof($articuloECO) != 0){
-                    if ($numeroempleado == $articuloECO[0]['numeroempleado']){
+                    if ($numeroempleado2->numeroempleado == $articuloECO[0]['numeroempleado']){
                         array_add($bl,'semaforo','si');
+                        array_add($bl,'nombreemple','');
                     }else{
                         array_add($bl,'semaforo','no');
+                        array_add($bl,'nombreemple',$articuloECO[0]['nombreempleado']);
                     }
                     array_add($bl,'concepto',$articuloECO[0]['concepto']);
                     array_add($bl,'nombreemple',$articuloECO[0]['nombreempleado']);

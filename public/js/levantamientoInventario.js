@@ -267,10 +267,14 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
         levantamientoEspECO.clear().draw();
 
         $.each(response, function(i, item) {
-          console.log(item['anterior']);
+          $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+          })
 
-          if (item['anterior'] !== null){
-            $tooltip = 'data-toggle="tooltip" data-placement="top" title=" "';
+          tooltip = '';
+
+          if (item['anterior'] !== ''){
+            tooltip = 'data-toggle="tooltip" data-placement="top" title="Asignado anteriormente a: '+ item['anterior'] +' "';
 
           }
 
@@ -318,7 +322,7 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
           }
 
           if (item['estatus'] === 'AsignadoDesdeLevantamientoInventario'){
-            numInv =  '<span class="badge badge-info">'+ item['numeroinventario'] +'</span>';
+            numInv =  '<span class="badge badge-info" '+ tooltip +' >'+ item['numeroinventario'] +'</span>';
             $('#infoAsignacion').css('display','block');
             $('#infoAsignacionMSJ').html('Artículo(s) asignados desde este módulo al usuario: '+ nombre);
             $('#infoAsignacion2').css('display','block');
@@ -402,6 +406,8 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
 
         $.each(response, function(i, item) {
           //console.log(item);
+
+
 
           if (estado == 'Cerrado') {
             eliminar = '<div align="center"><i class="fa fa-ban" aria-hidden="true" style="color: #ff0000;"></i></div> ';
@@ -616,3 +622,4 @@ function eliminarArticuloLevantamiento(numeroinventario){
         }
      });
 }
+

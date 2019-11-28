@@ -37,6 +37,12 @@
       .logo {
         width: 120px;
       }
+
+      .cociliacion {
+        width: 10px;
+        height: 10px;
+      }
+
       .text-center {
         text-align: center;
       }
@@ -69,11 +75,6 @@
                   </small>
                 </small>
               </h2>   
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2" align="center">
-            <label><strong>Lote Específico</strong></label>
           </td>
         </tr>
       </table>
@@ -110,30 +111,33 @@
               <th style="text-align: left; padding: 15px">Nùmero de inventario</th>
               <th style="text-align: left; padding: 15px">Concepto</th>
               <th style="text-align: left; padding: 15px">Importe</th>
+              <th style="text-align: left; padding: 15px">Conciliación</th>
               <th style="text-align: left; padding: 15px">Asignado</th>                    
             </tr>
           </thead>
           <tbody>
             @foreach ($bitacoralotes as $bitacoralote)
-              @if ( $inicioBloque <= $loop->index and $loop->index < $corte)
-                @php
-                  switch ($bitacoralote->semaforo) {
-                    case 'si':
-                      $semaforo = '<div align="center"><i class="fa fa-check" aria-hidden="true"></i></div> ';
-                      break;
-                    case 'no':
-                      $semaforo = '<div align="center"><i class="fa fa-times" aria-hidden="true"></i></div>';
-                      break;
-                    case '?':
-                      $semaforo = '<div align="center"><i class="fa fa-question" aria-hidden="true"></i></div>';
-                      break;
-                  } 
-                @endphp                  
+              @if ( $inicioBloque <= $loop->index and $loop->index < $corte)                                
                 <tr>
-                  <td style="text-align: left; padding: 2px 12px" class="border">{{ $bitacoralote->tipo }}</td>
-                  <td style="text-align: left; padding: 2px 12px" class="border">{{ $bitacoralote->numeroinventario }}</td>
+                  <td style="text-align: center; padding: 2px 12px" class="border">{{ $bitacoralote->tipo }}</td>
+                  @if ($bitacoralote->estatus == 'AsignadoDesdeLevantamientoInventario')
+                    <td style="text-align: left; padding: 2px 12px" class="border"><b><u>{{ $bitacoralote->numeroinventario }}</u></b></td>
+                  @else
+                    <td style="text-align: left; padding: 2px 12px" class="border">{{ $bitacoralote->numeroinventario }}</td>
+                  @endif                  
                   <td style="text-align: left; padding: 2px 12px" class="border">{{ $bitacoralote->concepto }}</td>
                   <td style="text-align: left; padding: 2px 12px" class="border"> {{$bitacoralote->importe }}</td>
+                  @switch($bitacoralote->semaforo)
+                      @case('si')
+                          <td style="text-align: center; padding: 2px 12px" class="border"><img class="cociliacion" src="{{ public_path('images/check.png') }}"></i></td>
+                          @break
+                      @case('no')
+                          <td style="text-align: center; padding: 2px 12px" class="border"><img class="cociliacion" src="{{ public_path('images/times.png') }}"></i></td>
+                          @break
+                      @case('?')
+                          <td style="text-align: center; padding: 2px 12px" class="border"><img class="cociliacion" src="{{ public_path('images/question.png') }}"></i></td>
+                          @break                      
+                  @endswitch  
                   <td style="text-align: left; padding: 2px 12px" class="border">{{ $bitacoralote->nombreemple }}</td>            
                 </tr>
                 @php
