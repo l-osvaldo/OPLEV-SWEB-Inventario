@@ -17,7 +17,7 @@ class LoteAPIController extends Controller
      */
     public function index()
     {
-        $lotes = lotes::all();
+        $lotes = lotes::whereNotIn('estado',['Cancelado','Cerrado'])->orderBy('created_at','desc')->get();
 
         return response()->json($lotes);
     }
