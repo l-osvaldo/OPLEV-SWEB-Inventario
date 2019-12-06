@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\lotes;
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+//header('Access-Control-Allow-Origin: *');
+//header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
 
 class LoteAPIController extends Controller
 {
@@ -78,5 +78,12 @@ class LoteAPIController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function lotesCerrados(){
+
+        $lotes = lotes::where('estado','Cerrado')->get();
+
+        return response()->json($lotes);
     }
 }

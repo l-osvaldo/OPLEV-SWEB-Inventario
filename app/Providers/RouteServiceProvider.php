@@ -76,9 +76,11 @@ class RouteServiceProvider extends ServiceProvider
           Route::apiResource('/articulos', 'APIController');
           Route::apiResource('/scanner', 'ScannerController');
           Route::apiResource('/empleados', 'EmpleadosAPIController'); 
-          Route::apiResource('/lote', 'LoteAPIController'); 
+          Route::apiResource('/lote', 'LoteAPIController');
+          Route::post('/lote/lotesCerrados','LoteAPIController@lotesCerrados'); 
           Route::apiResource('/bitacoralotes', 'BitacoraLotesAPIController'); 
           Route::get('/bitacoralotes/allBitacorasId/{id}','BitacoraLotesAPIController@allBitacorasId');
+
       });
 
     }
