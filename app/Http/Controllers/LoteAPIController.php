@@ -80,9 +80,16 @@ class LoteAPIController extends Controller
         //
     }
 
-    public function lotesCerrados(){
+    public function lotesCerradosEmpleado(){
 
-        $lotes = lotes::where('estado','Cerrado')->get();
+        $lotes = lotes::where([['estado','Cerrado'],['nombre', null]])->get();
+
+        return response()->json($lotes);
+    }
+
+    public function lotesCerradosGral(){
+
+        $lotes = lotes::where([['estado','Cerrado'],['numeroempleado', null]])->get();
 
         return response()->json($lotes);
     }
