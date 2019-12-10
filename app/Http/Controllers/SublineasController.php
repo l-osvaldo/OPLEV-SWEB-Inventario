@@ -200,7 +200,8 @@ class SublineasController extends Controller
       $sublinea->linea = $request->input('lineaA');
       $sublinea->sublinea = $request->input('sublinea');
       $sublinea->descsub = $request->input('descsub');
-      $sublinea->total = $request->input('total');
+      $sublinea->totalople = $request->input('total');
+      $sublinea->totaleco = $request->input('total');
       $sublinea->save();
 
       $usuario = auth()->user();

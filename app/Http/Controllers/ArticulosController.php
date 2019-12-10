@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\articulos;
+use App\articulosecos;
 use App\partidas;
 use App\areas;
 use App\empleados;
@@ -22,11 +23,27 @@ class ArticulosController extends Controller
     
     public function numeroInventarioMax(Request $request){
 
-    	$numeroInventarioMax = articulos::where([['partida',$request->partida],['linea', $request->linea],['sublinea',$request->sublinea]])->max('consecutivo');
+    	$numeroInventarioMaxOPLE = articulos::where([['partida',$request->partida],['linea', $request->linea],['sublinea',$request->sublinea]])->max('consecutivo');
+
+    	$numeroInventarioMaxECO = articulosecos::where([['partida',$request->partida],['linea', $request->linea],['sublinea',$request->sublinea]])->max('consecutivo');
 
 
-    	if ($numeroInventarioMax == null){
+    	if ($numeroInventarioMaxOPLE == null && $numeroInventarioMaxECO == null){
     		$numeroInventarioMax = 0;
+    	}else{
+    		if ($numeroInventarioMaxOPLE == null){
+    			$numeroInventarioMax = $numeroInventarioMaxECO;
+    		}else{
+    			if ($numeroInventarioMaxECO == null){
+    				$numeroInventarioMax = $numeroInventarioMaxOPLE;
+    			}else{
+    				if ($numeroInventarioMaxOPLE < $numeroInventarioMaxECO){
+    					$numeroInventarioMax = $numeroInventarioMaxECO;  
+    				}else{
+    					$numeroInventarioMax = $numeroInventarioMaxOPLE;
+    				}
+    			}
+    		}
     	}
 
     	return response()->json($numeroInventarioMax);

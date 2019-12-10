@@ -128,7 +128,8 @@ class PartidasController extends Controller
 		$sublinea->desclinea = $request->input('desclinea');
 		$sublinea->sublinea = $request->input('sublinea');
 		$sublinea->descsub = $request->input('descsub');
-		$sublinea->total = $request->input('total');
+		$sublinea->totalople = $request->input('total');
+		$sublinea->totaleco = $request->input('total');
 		$partida->save();
 		$linea->save();
 		$sublinea->save();

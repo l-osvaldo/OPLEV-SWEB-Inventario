@@ -14,7 +14,8 @@ class sublineas extends Model
         'linea',
         'desclinea',
         'descsub',
-        'total',
+        'totalople',
+        'totaleco'
       ];
       public function partidas()
       {

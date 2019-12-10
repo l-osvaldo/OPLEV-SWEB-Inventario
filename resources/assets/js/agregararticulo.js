@@ -180,7 +180,7 @@ function generarNumeroInventario(cantidadArticulos){
 	  }else{
 	  	$('#numberNumBienes').val("1");
 	  	generarNumeroInventario(1);
-	  }
+	  } 
 
 	
 }
