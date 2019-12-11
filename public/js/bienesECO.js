@@ -34,6 +34,13 @@ $('#selectLineaEcoCat').change(function() {
 	if ($(this).val() != 0 ){
 		$('#cargando').css('display','block');
 		llenarTablePartidasLineasCatECO($(this).val());
+	}else{
+		var partidaNumNombre = $('#selectPartidaECOCat').val().split('*');
+		if (partidaNumNombre[0] === '51100001'){
+			$('#divRespuestaECOcat').css('display','none');
+		}else{
+			llenarTablePartidasCatECO($('#selectPartidaECOCat').val());
+		}
 	}
 });
 
