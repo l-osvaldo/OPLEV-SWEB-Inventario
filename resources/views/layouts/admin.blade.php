@@ -151,6 +151,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
 
+<script type="text/javascript" src="{{ asset('js/bienesECO.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/recursos.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/validaciones.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/cancelar.js') }}"></script>
@@ -170,6 +171,7 @@
 <script type="text/javascript" src="{{ asset('js/cancelacionResguardo.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/revision.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/levantamientoInventario.js') }}"></script>
+
 
 
 <script src="{{ asset('/plugins/jquery-maskmoney-master/dist/jquery.maskMoney.js') }}"></script>

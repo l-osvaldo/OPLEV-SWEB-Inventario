@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Catálogo de artículos OPLE')
 
 @section('content')
 

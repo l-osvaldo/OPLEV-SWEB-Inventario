@@ -406,5 +406,30 @@ class ArticulosECOsController extends Controller
 
 	}
 
+	public function llenarTablePartidasCat(Request $request){
+		set_time_limit(5000);
+		$articulos = articulosecos::select('numeroinventario', 'concepto', 'factura', 'fechacompra','importe')->where('partida', $request->partida)->get();
+		$numPartida = 'Número de partida: ' . $request->partida;
+		$nombrePartida = 'Nombre de la partida: ' . $request->nombrePartida;
+
+		$numLinea = '';
+		$nombreLinea = '';
+
+		return view('catalogos.Tablas.TablaBienesECO', compact('articulos','numPartida','nombrePartida','numLinea','nombreLinea'));
+	}
+
+
+	public function llenarTablePartidasLineasCatECO (Request $request){
+		set_time_limit(5000);
+		$articulos = articulosecos::select('numeroinventario', 'concepto', 'factura', 'fechacompra','importe')->where([['partida', $request->partida],['linea',  $request->linea]])->get();
+		$numPartida = 'Número de partida: ' . $request->partida;
+		$nombrePartida = 'Nombre de la partida: ' . $request->nombrePartida;
+
+		$numLinea = 'Número de línea: ' . $request->linea;
+		$nombreLinea = 'Nombre de la línea: ' . $request->nombreLinea;
+
+		return view('catalogos.Tablas.TablaBienesECO', compact('articulos','numPartida','nombrePartida','numLinea','nombreLinea'));
+	}
+
 
 }

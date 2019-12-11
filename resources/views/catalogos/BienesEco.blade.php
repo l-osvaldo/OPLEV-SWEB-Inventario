@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Catálogo de artículos ECO')
 
 @section('content')
 
@@ -10,49 +11,73 @@
 
 <div class="card">
   <div class="card-body" >
-    <a href="" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#altasECOModal">
-        <i class="fa fa-plus"></i> 
-        Alta del bien          
-    </a>
+    <div class="row">
+      <div class="col-md-12" align="right">
+        <a href="" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#altasECOModal">
+          <i class="fa fa-plus"></i> 
+          Alta del bien          
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label>1.- Seleccione una partida: </label>
+      </div>
+      <div class="col-md-4" id="instruccionLineaECOCat" style="display: none">
+        <label>2.- Seleccione un línea (Opcional): </label>
+      </div>         
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <select class="form-control select2" id="selectPartidaECOCat" style="width: 100%">
+          <option value="0">Seleccione una partida </option>
+              @foreach ($partidas as $partida)
+                <option value="{{ $partida->partida }}*{{ $partida->descpartida }}"> {{ $partida->partida }} | {{ $partida->descpartida }} </option>
+              @endforeach
+        </select>
+      </div>
+      <div class="col-md-4" id="divSelectLineaEcoCat" style="display: none;">
+        <select class="form-control select2" id="selectLineaEcoCat" style="width: 100%">
+        </select>
+      </div>
+    </div>
   </div>
 </div>
 
-<section class="content" style="margin-top: 2vh;">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="car-body">
-                    <br>
-                    <table id="tableCatalogo" name="tableCatalogo" class="table table-bordered table-striped" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th style="text-align: center">Número de Inventario</th>
-                                <th style="text-align: center">Concepto</th>
-                                <th style="text-align: center">Factura</th>
-                                <th style="text-align: center">Fecha Compra</th>
-                                <th style="text-align: center">Importe</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                          @foreach ($articulosecos as $articulo)
-                            <tr data-toggle="tooltip" data-placement="top" title="Click para ver toda la información del artículo: {{ $articulo->concepto }}, Número de inventario: {{ $articulo->numeroinv }} " onclick="abrirModalEditarECO('{{ $articulo->numeroinventario }}');">
-                              <td> {{ $articulo->numeroinventario }} </td>
-                              <td> {{ $articulo->concepto }} </td>
-                              <td> {{ $articulo->factura }} </td>
-                              <td> {{ $articulo->fechacompra }} </td>
-                              <td> $ {{ $articulo->importe }} </td>
-                            </tr>
-                             
-                          @endforeach
-                            
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+
+<div id="cargando" style="display: none;">
+
+    <div id="loader" class="hidden">
+      <div class="cubes">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+      </div>
     </div>
 
 
+</div>
+
+<br>
+<div class="col-12" id="divRespuestaECOcat" style="display: none;">     
+  <div class="center-block">
+    <div class="card">
+      <div class="card-body" >
+        <div id="respuestaReporteECOcat">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@endsection
 
 
     <!-- Modal altas eco-->
@@ -446,7 +471,3 @@
     </div>
 
 
-
-</section>
-
-@endsection  

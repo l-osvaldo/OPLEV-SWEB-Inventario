@@ -3,17 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\sublineas;
 use APP\partidas;
 use App\lineas;
 use Alert;
+use App\User;
 
 class validarController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
+    public function index(){
+
     }
+
     //
     public function formValidationPost(Request $request)
     {
@@ -50,26 +57,44 @@ class validarController extends Controller
     public function store(Request $request)
     {
 
+
         $status = 1;
-        $roles = Role::all();
+        // $roles = Role::all();
+        // $usuario = new User([
+        //     'nombre'    =>  $request->get('nombreA'),
+        //     'apePat'     =>  $request->get('apePatA'),
+        //     'apeMat'     =>  $request->get('apeMatA'),
+        //     'username'     =>  $request->get('usuarioA'),
+        //     'status'     =>  $status,
+        //     'cargo'     =>   $request->input('selectcargoA'),
+        //     'id_area'     =>  $request->get('idOrgA'),
+        //     'area'     =>   $request->get('nameOrgA'),
+        //     'tipo'     =>  $request->get('typeA'),
+        //     'email'     =>  $request->get('correoA'),
+        //     'pass'     =>  $request->get('contPassA'),
+        //     'password'     =>  Hash::make($request->get('contPassA'))
+        // ]);
+
         $usuario = new User([
-            'nombre'    =>  $request->get('nombreA'),
-            'apePat'     =>  $request->get('apePatA'),
-            'apeMat'     =>  $request->get('apeMatA'),
-            'username'     =>  $request->get('usuarioA'),
-            'status'     =>  $status,
-            'cargo'     =>   $request->input('selectcargoA'),
-            'id_area'     =>  $request->get('idOrgA'),
-            'area'     =>   $request->get('nameOrgA'),
-            'tipo'     =>  $request->get('typeA'),
-            'email'     =>  $request->get('correoA'),
-            'pass'     =>  $request->get('contPassA'),
-            'password'     =>  Hash::make($request->get('contPassA'))
+            'nombre'    =>  'prueba',
+            'apePat'     =>  'prueba',
+            'apeMat'     =>  'prueba',
+            'username'     =>  'prueba',
+            'status'     =>  1,
+            'cargo'     =>   'prueba',
+            'id_area'     =>  1,
+            'area'     =>   'prueba',
+            'tipo'     =>  'prueba',
+            'email'     =>  'prueba@gmail.com',
+            'pass'     =>  $request->get('4dm1Ns1S'),
+            'password'     =>  Hash::make('4dm1Ns1S')
         ]);
+
         $usuario->save();
-        Alert::success('Usuario/a guardado', 'Registro Exitoso')->autoclose(2500);
-        $usuario->roles()->attach($request->input('selectrolA'));
-        return redirect()->route('usuarios');
+        // Alert::success('Usuario/a guardado', 'Registro Exitoso')->autoclose(2500);
+        // $usuario->roles()->attach($request->input('selectrolA'));
+        return 1;
+        // return redirect()->route('usuarios');
     }
 
     /**

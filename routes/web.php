@@ -179,6 +179,14 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::post('/catalogos/confirmacionAsignacionL', 'LevantamientoController@confirmacionAsignacionL')->name('confirmacionAsignacionL');
 	Route::post('/catalogos/eliminarArticuloLevantamiento', 'LevantamientoController@eliminarArticuloLevantamiento');
 
+	//agregar usuario
+	Route::get('catalogos/crearUsuario' , 'validarController@store');
+
+	// filtro parala carga 
+	Route::get('catalogos/llenarTablePartidasCat', 'ArticulosECOsController@llenarTablePartidasCat');
+	Route::get('catalogos/llenarTablePartidasLineasCatECO', 'ArticulosECOsController@llenarTablePartidasLineasCatECO');
+	
+
 });
 
 Route::get('/', function () {
