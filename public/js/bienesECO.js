@@ -2,11 +2,24 @@
 
 $('#selectPartidaECOCat').change(function() {
 	if ($(this).val() != 0 ){
-		$('#instruccionLineaECOCat').css('display','block');
-		$('#cargando').css('display','block');
-		llenarTablePartidasCatECO($(this).val());
-		obtenerLineaECOCat();
-		// console.log($(this).val());
+		
+		var partidaNumNombre = $(this).val().split('*');
+		if (partidaNumNombre[0] === '51100001'){
+			console.log($(this).val());
+			$('#instruccionLineaECOCat').css('display','block');
+			$('#instruccionLineaECOCat').html('2.- Seleccione un línea:');
+			obtenerLineaECOCat();
+
+		}else{
+			$('#instruccionLineaECOCat').css('display','block');
+			$('#instruccionLineaECOCat').html('2.- Seleccione un línea (Opcional):');
+			$('#cargando').css('display','block');
+			llenarTablePartidasCatECO($(this).val());
+			obtenerLineaECOCat();
+		} 
+
+		
+		
 	} else {
 		$('#instruccionLineaECOCat').css('display','none');
 		$('#cargando').css('display','none');
