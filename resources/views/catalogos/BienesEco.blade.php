@@ -24,7 +24,7 @@
         <label>1.- Seleccione una partida: </label>
       </div>
       <div class="col-md-4" id="instruccionLineaECOCat" style="display: none">
-        <label>2.- Seleccione un línea (Opcional): </label>
+        <label id="labelInstruciionECOcat">2.- Seleccione un línea (Opcional): </label>
       </div>         
     </div>
     <div class="row">

@@ -7,12 +7,12 @@ $('#selectPartidaECOCat').change(function() {
 		if (partidaNumNombre[0] === '51100001'){
 			console.log($(this).val());
 			$('#instruccionLineaECOCat').css('display','block');
-			$('#instruccionLineaECOCat').html('2.- Seleccione un línea:');
+			$('#labelInstruciionECOcat').html('2.- Seleccione un línea:');
 			obtenerLineaECOCat();
 
 		}else{
 			$('#instruccionLineaECOCat').css('display','block');
-			$('#instruccionLineaECOCat').html('2.- Seleccione un línea (Opcional):');
+			$('#labelInstruciionECOcat').html('2.- Seleccione un línea (Opcional):');
 			$('#cargando').css('display','block');
 			llenarTablePartidasCatECO($(this).val());
 			obtenerLineaECOCat();
