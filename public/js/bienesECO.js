@@ -8,6 +8,7 @@ $('#selectPartidaECOCat').change(function() {
 			console.log($(this).val());
 			$('#instruccionLineaECOCat').css('display','block');
 			$('#labelInstruciionECOcat').html('2.- Seleccione un línea:');
+			$('#divRespuestaECOcat').css('display','none');
 			obtenerLineaECOCat();
 
 		}else{
