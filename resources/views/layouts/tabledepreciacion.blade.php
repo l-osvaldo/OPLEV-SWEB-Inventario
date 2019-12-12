@@ -55,7 +55,7 @@
 				    },
 				   "buttons": [{
 		                    extend: 'collection',
-		                    text: 'Control',
+		                    text: 'Exportar',
 		                    orientation: 'landscape',
 		                    buttons: [
 		                        'excel'

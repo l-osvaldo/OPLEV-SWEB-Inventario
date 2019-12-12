@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/select2/select2.min.css')}}">
   
   <!-- Bootstrap time Picker -->
-  {<link rel="stylesheet" href="{{ asset('plugins/timepicker/bootstrap-timepicker.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('plugins/timepicker/bootstrap-timepicker.min.css')}}">
    <!-- Theme style -->
    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
 
@@ -46,6 +46,8 @@
    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap-toggle.min.css') }}">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 
     <style type="text/css">
       .dataTables_wrapper .dt-buttons {
@@ -151,6 +153,13 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
 
+
+{{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --}}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script type="text/javascript" src="{{ asset('js/es.js') }}"></script>
+
 <script type="text/javascript" src="{{ asset('js/bienesECO.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/recursos.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/validaciones.js') }}"></script>
@@ -171,6 +180,8 @@
 <script type="text/javascript" src="{{ asset('js/cancelacionResguardo.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/revision.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/levantamientoInventario.js') }}"></script>
+
+
 
 
 

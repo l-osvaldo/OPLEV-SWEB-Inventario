@@ -156,8 +156,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	// Depreciación 
 	Route::get('/catalogos/depreciacion', 'ArticulosController@depreciacion')->name('depreciacion');
 	Route::get('/catalogos/calculoDepreciacion', 'ArticulosController@calculoDepreciacion');
-	Route::get('/catalogos/HistorialDepreciacionArticulo', 'ArticulosController@HistorialDepreciacionArticulo')->name('HistorialDepreciacionArticulo');
-
+	Route::get('/catalogos/reportePDFDepreciacion', 'ArticulosController@reportePDFDepreciacion')->name('reportePDFDepreciacion');
 
 	// Cancelación de resguardo
 	Route::get('/catalogos/bienesDelEmpleado', 'CancelacionResguardoController@bienesDelEmpleado');

@@ -808,37 +808,10 @@ class ArticulosController extends Controller
 	}
 
 
-	public function HistorialDepreciacionArticulo(Request $request){
-		$articulo = articulos::select('numeroinv','concepto','fechacomp','importe')->where('numeroinv', $request->numInventario)->get();
-		$datosPartida= partidas::where('partida', $request->numPartida)->get();
-
-		$valorResidual = round( ($articulo[0]['importe'] * ($datosPartida[0]['porcentajeDepreciacion']/100)),2);
-		$valorDelBienMenosValorResidual = round( ($articulo[0]['importe'] - $valorResidual),2);
-
-		$depreciacionAnual = round( ($valorDelBienMenosValorResidual / $datosPartida[0]['aniosvida']), 2);
-		$depreciacionMensual =  round(($depreciacionAnual / 12), 2);
-
-		$fecha = str_replace('/', '-', $articulo[0]['fechacomp']);
-
-		$anioCompra = date("Y", strtotime($fecha));
-		$mesCompra = date("m", strtotime($fecha));
-
-		
-		$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-		$mesActual = date('m') ;
-		$mesActual = $meses[$mesActual-1];
+	public function reportePDFDepreciacion(Request $request){
 
 
-		array_add($articulo[0],'valorResidual',$valorResidual);
-		array_add($articulo[0],'valorDelBienMenosValorResidual',$valorDelBienMenosValorResidual);
-		array_add($articulo[0],'anioCompra',$anioCompra);
-		array_add($articulo[0],'mesCompra',$mesCompra);
-		array_add($articulo[0],'aniosDepreciacion',$datosPartida[0]['aniosvida']);
-		array_add($articulo[0],'depreciacionAnual',$depreciacionAnual);
-		array_add($articulo[0],'depreciacionMensual',$depreciacionMensual);
-		array_add($articulo[0],'mesActual',$mesActual);
-
-		return response()->json($articulo);;
+		return 1;
 	}
 
 }
