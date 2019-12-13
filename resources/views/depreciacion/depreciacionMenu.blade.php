@@ -108,13 +108,9 @@
 	            <!--Fin Agregar Partida -->
 	            <div class="card-footer">
 	                <button type="reset" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>
-	                <button type="button" id="btnGenerarPDFDepreciacion" style="background-color: #E71096" class="btn btn-secondary float-right" target="_black" onclick="generarReportePDFDepreciacion()">
+	                <button type="button" id="btnGenerarPDFDepreciacion" style="background-color: #E71096" class="btn btn-secondary float-right" onclick="generarReportePDFDepreciacion()">
 	                    {{ __('Generar') }}
 	                </button>
-	                <a style="background-color: #E71096; width: 10%; color: white" class="btn btn-secondary" id="btnGenerarPDF" onclick="generarReportePDFDepreciacion()" target="_black">
-				        <i class="fa fa-file-pdf-o"></i> 
-				        Generar PDF        
-				    </a>
 	            </div>
 	          </div>
           </div>

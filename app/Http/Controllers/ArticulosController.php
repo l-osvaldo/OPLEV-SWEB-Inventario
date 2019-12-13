@@ -810,8 +810,79 @@ class ArticulosController extends Controller
 
 	public function reportePDFDepreciacion(Request $request){
 
+		$fecha = explode("-", $request->fecha);
+		$meses = array('ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE');
 
-		return 1;
+		$mes = $fecha[1];
+		$anio = $fecha[2];
+
+		$totalDiasMes = cal_days_in_month(CAL_GREGORIAN, $mes , $anio);
+		$nombreMes = $meses[$mes-1];
+
+		if ($anio < 2000){
+			$anio = ' DE ' . $anio;
+		}else{
+			$anio = ' DEL ' . $anio;
+		}
+
+		if ($mes != 1){
+			$mesAnterior = $meses[$mes-2];
+		}else {
+			$anio2 = $fecha[2];
+			$anioAnterior = intval($anio2) - 1;
+		 	$mesAnterior = $meses[11].' ('. $anioAnterior .')';
+		}
+
+		$partidas = DB::table('articulos')->select('partida','descpartida', DB::raw('ROUND(SUM(importe),2) as totalimporte'))->whereNotIn('partida',['56900001'])->orderBy('partida')->groupBy('partida', 'descpartida')->get();
+
+		// $count = count($partidas);
+		// echo $count;
+
+		$array = json_decode(json_encode($partidas), true); 
+		// print_r($array);
+		// exit;
+
+		// foreach ($array as $partida) {
+			//print_r($partida);
+			//echo $partida['partida'];
+
+			// array_push($partida, $partida['partida'] );
+			// array_push($partida, $partida['partida'] );
+
+			// //array_add($partida, 'prueba', $partida['partida']);
+			// print_r($partida);
+			// exit;
+			
+		// }
+		
+
+		foreach ($partidas as $key => $partida) {
+
+		 	$datosPartida= partidas::where('partida', $partidas[$key]->partida)->get();
+
+		 	if ($datosPartida[0]->aniosvida !== null && $datosPartida[0]->porcentajeDepreciacion !== null){
+
+		 		$articulosDeLaPartida = articulos::select('fechacomp','importe')->where('partida',$partidas[$key]->partida)->whereNotIn('fechacomp', ['  -   -'])->get();
+		 	}else{
+		 	}
+
+		 	 
+
+		 	// $datosPartida[0]->aniosvida;
+
+		 	// array_add($datosPartida[0], 'prueba', $partidas[$key]->partida);
+
+		 	// print_r($partidas);
+		 	// exit;
+
+		 } 
+
+
+		//print_r($array);
+		 //exit;
+
+		$pdf = PDF::loadView('depreciacion.pdf.DepreciacionPDF',compact('totalDiasMes','nombreMes','anio','mesAnterior','array'))->setPaper('letter', 'landscape');
+		return $pdf->inline('DEPRECIACIÓN '.$nombreMes.$anio.'.pdf');
 	}
 
 }

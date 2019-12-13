@@ -36,20 +36,10 @@ function depreciacionCalculo(partida){
 }
 
 function generarPDFDepreciacion(){
-	//console.log('ok');
 
 	$('#ModalDepreciacionPDF').modal('show');
 } 
 
-
-// $ ( '#datetimepicker' ). datetimepicker ({
-//     format: 'mm/yyyy',
-//     minViewMode: '3',
-//     maxViewMode: '2',
-//     startView: '3', 
-//     todayBtn: true,
-//     language: 'es',
-// });
 
 $(function () {
     $('#datetimepicker13').datetimepicker({
@@ -99,6 +89,14 @@ function generarReportePDFDepreciacion(){
 	var date = $('#datetimepicker13').datetimepicker('viewDate');
   	var fecha = date._d.toJSON().split('-');
 	console.log('01/'+fecha[1]+'/'+fecha[0]);
+
+	var fechaReporte = '01-'+fecha[1]+'-'+fecha[0];
+
+	$('#ModalDepreciacionPDF').modal('hide');
+
+	window.open('../catalogos/reportePDFDepreciacion/'+fechaReporte,'_blank');
+
+	
 }
 
 
