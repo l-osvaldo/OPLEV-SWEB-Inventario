@@ -872,8 +872,8 @@ class ArticulosController extends Controller
 
 		 	// array_add($datosPartida[0], 'prueba', $partidas[$key]->partida);
 
-		 	// print_r($partidas);
-		 	// exit;
+		 	print_r($partidas);
+		 	exit;
 
 		 } 
 

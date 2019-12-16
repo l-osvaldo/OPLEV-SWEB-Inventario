@@ -39,7 +39,9 @@ class RevisionController extends Controller
         		foreach ($articulosOPLE as $articulo) {
         			$importe = articulos::select('importe')->where('numeroinv',$articulo->numeroinventario)->get();
 
-        			$totalImporteOPLE += $importe[0]['importe'];
+                    if (count($importe) > 0){
+                        $totalImporteOPLE += $importe[0]['importe'];
+                    }
         		}
         		$totalImporteOPLE = number_format($totalImporteOPLE,2);
         	}
@@ -52,7 +54,9 @@ class RevisionController extends Controller
         		foreach ($articulosECO as $articuloE) {
         			$importe = articulosecos::select('importe')->where('numeroinventario',$articuloE->numeroinventario)->get();
 
-        			$totalImporteECO += $importe[0]['importe'];
+                    if (count($importe) > 0){
+                        $totalImporteECO += $importe[0]['importe'];
+                    }
         		}
         		$totalImporteECO = number_format($totalImporteECO,2);
 
