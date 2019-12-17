@@ -12,33 +12,41 @@ use App\articulosecos;
 class AreasController extends Controller
 {
 
+	// Funcion para el módulo de áreas
+	// Constructor  de la clase, sirve para mantener este controlador con la autentificación del logueo del usuario
+	// No recibe parámetros
+	// No regresa nada
 	public function __construct()
     {
         $this->middleware('auth');
     }
-		//
-		
-	public function formValidationPost(Request $request)
-	{
-		$this->validate($request,[
+	
+	// Funcion para el módulo de áreas	
+	// public function formValidationPost(Request $request)
+	// {
+	// 	$this->validate($request,[
 
-				'idarea'    =>  'required|numeric',
-				'nombrearea'       =>  'required|min:1|max:250',
+	// 			'idarea'    =>  'required|numeric',
+	// 			'nombrearea'       =>  'required|min:1|max:250',
 				
 
-				],[
+	// 			],[
 						
-		'idarea.required'     => 'La :attribute es obligatoria.',
-		'idarea.integer'      => 'La :attribute debe ser un entero.',
+	// 	'idarea.required'     => 'La :attribute es obligatoria.',
+	// 	'idarea.integer'      => 'La :attribute debe ser un entero.',
 
-		'nombrearea.required'   => 'La :attribute es obligatoria.',
-		'nombrearea.min'        => 'La :attribute debe contener mas de una letra.',
-		'nombrearea.max'        => 'La :attribute debe contener max 30 letras.',
-				]);
+	// 	'nombrearea.required'   => 'La :attribute es obligatoria.',
+	// 	'nombrearea.min'        => 'La :attribute debe contener mas de una letra.',
+	// 	'nombrearea.max'        => 'La :attribute debe contener max 30 letras.',
+	// 			]);
 
-		Alert::error('Revise sus campos', '¡Error!')->autoclose(2000);
-	} 
+	// 	Alert::error('Revise sus campos', '¡Error!')->autoclose(2000);
+	// }
 
+	// Funcion para el módulo de áreas
+	// Obtiene todas las áreas que se tienen registradas
+	// No recibe parámetros
+	// Regresa la vista de TablaArea.blade.php
     public function index()
 	{
 		$usuario = auth()->user();
@@ -48,6 +56,11 @@ class AreasController extends Controller
 
 		return view('catalogos.Tablas.TablaArea', compact('area','usuario'));
 	}
+
+	// Funcion para el módulo de áreas
+	// Actualiza el nombre del área en las tablas areas, articulos y articulosecos
+	// Los parámetros que recibe son el id del área y el nuevo nombre del área
+	// regresa un json
 	public function updaArea(Request $request)
 	{
 		$clave = $request->input('id');
