@@ -63,6 +63,7 @@
 			</div>
 
 			<form>
+				@csrf
 			<div class="card card-default" style="margin-top: 5px">
 				<div class="modal-body">
 					<div class="row">

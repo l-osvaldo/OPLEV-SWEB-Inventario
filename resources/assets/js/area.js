@@ -39,7 +39,7 @@ $('#editModal').on('show.bs.modal', function (event) {
 $('#editBtn').on('click',function(e){
     e.preventDefault();
     swal({
-        title: "Edición de datos",
+        title: "Editar el nombre de está área",
         text: "¿Desea continuar?",
         type: "warning",
         showCancelButton: true,
@@ -51,6 +51,14 @@ $('#editBtn').on('click',function(e){
           var id = $('#editClave').val();
           var no = $('#depto').val();
           console.log(id,no);
+          $.ajaxSetup(
+          {
+            headers:
+            { 
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
+          
           $.ajax({
              type:'POST',
              url:'updatearea',
