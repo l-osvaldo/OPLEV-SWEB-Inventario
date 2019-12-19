@@ -50,4 +50,33 @@ $('#exampleModalLinea').on('hidden.bs.modal', function (e) {
   $('#LineaMax').val("0"); 
   $('#desclinea').val(""); 
   $('#descsub').val("");         
-})
+});
+
+$("#partida").change(function() 
+{   
+  $('#LineaMax').html('');    
+  var partida = $('#partida').find(':selected').val();;
+  $.ajax({
+    url: "obtenMaxLineas",
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    type: 'GET',
+    data: {partida: partida},
+    dataType: 'json',
+    contentType: 'application/json'
+    }).done(function(response) {
+      //console.log(response.length);
+
+      if (response.length != 0){
+        var b = response.length+1;
+        if (b < 10){
+          b = '0' + b; 
+        }
+        console.log(b);
+        $('#LineaMax').val(b);
+      }else{
+        $('#LineaMax').val("0");
+        $('#LineaMax').html("0");
+      } 
+
+    }); 
+});

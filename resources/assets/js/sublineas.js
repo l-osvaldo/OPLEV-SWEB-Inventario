@@ -24,6 +24,8 @@ $('#Linea').change(function (){
     	$('#sublineaRespuesta').html(response); 
     	    	    	
     });
+  }else{
+    $('#sublineaRespuesta').css("display","none");
   }
 });
 
@@ -218,4 +220,50 @@ $("#lineaA").change(function() {
   }else{
     $('#sublineaA').val("0").change();
   }      
-}); 
+});
+
+
+$("#Partidas").change(function() 
+{
+  console.log($(this).val());   
+  $('#Linea').val("0").change();      
+  var partida = $('#Partidas').find(':selected').val();
+  //console.log(partida);
+  if (partida != 0){
+    
+    $.ajax({
+    url: "obtenLineas",
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    type: 'GET',
+    data: {partida: partida},
+    dataType: 'json',
+    contentType: 'application/json'
+    }).done(function(response) {
+      // console.log(response);
+
+      
+        // console.log('123');
+        // $('#Linea').val("Seleccione una Línea").change();
+        
+        comboLineas = "<option value='0'>Número de Línea</option>";
+        $.each(response, function(index, value){
+          var cadena = value['linea'] + " - " + value['desclinea'];
+          comboLineas += "<option value='"+value['linea']+"'>"+ cadena +"</option>";
+        });
+
+        $('#Linea').html(comboLineas);
+      
+        $('#Linea').prop("disabled", false);
+
+        $('#sublineaRespuesta').css("display","none");
+
+        //console.log('prueba');
+                
+    });
+  }else{
+    comboLineas = "<option value='0'>Seleccione Linea...</option>";
+    $('#Linea').html(comboLineas);
+    $('#Linea').attr("disabled", true);
+    $('#sublineaRespuesta').css("display","none");
+  }    
+});

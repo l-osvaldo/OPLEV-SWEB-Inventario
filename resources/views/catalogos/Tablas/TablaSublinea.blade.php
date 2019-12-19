@@ -19,7 +19,7 @@
               <div class="col-md-12">
                 <label>1.- Seleccione una Partida:</label>
                 <select id="Partidas" name="Partidas" class="form-control select2">    
-                  <option selected="selected">Número de Partida</option>
+                  <option selected="selected" value="0" >Número de Partida</option>
                   @foreach ($sublineaSe as $sublineaSe)
                     <option value="{{ $sublineaSe->partida }}">{{ $sublineaSe->partida }} | {{ $sublineaSe->descpartida }}</option>   
                   @endforeach
