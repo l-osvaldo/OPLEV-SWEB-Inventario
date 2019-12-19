@@ -26,3 +26,19 @@ $('#Linea').change(function (){
     });
   }
 });
+
+$('#btn-submit').on('click',function(e){
+     e.preventDefault();
+     var form = $(this).parents('form');
+     swal({
+         title: "Registro de Sublíneas",
+         text: "¿Desea continuar?",
+         type: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#E71096",
+         confirmButtonText: "Sí",
+         closeOnConfirm: false
+     }, function(isConfirm){
+         if (isConfirm) form.submit();
+     });
+ });

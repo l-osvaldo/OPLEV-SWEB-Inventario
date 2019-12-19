@@ -54,11 +54,6 @@
         float:right;
       }
 
-      /*div.dt-button-collection {
-          width: 1550px;
-          background-color: #F5ECF2;
-      }*/
-
       div.dt-button-collection.three-column {
         width: 750px;
         background-color: #F5ECF2;
@@ -95,13 +90,6 @@
         background-color: #fff;
         background-image: linear-gradient(to bottom, #fff 0%, #fff 100%);
       }
-
-      /*div.ex1 {
-          
-        height: 400px;
-        width: 100%;
-        overflow-y: scroll;
-      }*/
      </style>
 
 
@@ -160,6 +148,8 @@
 
 <script type="text/javascript" src="{{ asset('js/es.js') }}"></script>
 
+<script type="text/javascript" src="{{ asset('js/area.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/funcionesGenerales.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bienesECO.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/recursos.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/validaciones.js') }}"></script>
@@ -176,20 +166,13 @@
 <script type="text/javascript" src="{{ asset('js/sublineas.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/partidas.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/empleados.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/depreciacionA.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/cancelacionResguardo.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/revision.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/levantamientoInventario.js') }}"></script>
 
-
-
-
-
 <script src="{{ asset('/plugins/jquery-maskmoney-master/dist/jquery.maskMoney.js') }}"></script>
-
-<script>
-    $("input[type='number']").inputSpinner();
-</script>
 
 <script>
   $('#tableCatalogo').DataTable( {
@@ -230,272 +213,13 @@
               'excel'
               ]
 } );
+
+  $("input[type='number']").inputSpinner();  
 </script>
-
-
-<!-- tables -->
-<script>
-  $(function () {
-    $('#example2').DataTable({
-      "paging": false,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-  });
-</script>
-
-
-<script>
-  $(document).ready(function(){
-    $("#nombre, #apePat").change(function(){
-      var value1 = document.getElementById('nombre').value;
-      //var value2 = document.getElementById('apePat').value;
-      var value3 = value1.replace(/\s+/g, '').replace(/[á]/, 'a').replace(/[é]/, 'e').replace(/[í]/, 'i').replace(/[ó]/, 'o').replace(/[ú]/, 'u');
-      //var value4 = value2.replace(/\s+/g, '').replace(/[á]/, 'a').replace(/[é]/, 'e').replace(/[í]/, 'i').replace(/[ó]/, 'o').replace(/[ú]/, 'u');
-      var value5 = value3;
-      var value6 = value5.toLowerCase();
-      //validarNombreOple(value6);
-      //document.getElementById('usuario').value = value6;
-  
-    })
-  });
-  </script>
-  <script>
-  $(document).ready(function(){
-    $("#nombreA, #apePatA").change(function(){
-      var value1 = document.getElementById('nombreA').value;
-      var value2 = document.getElementById('apePatA').value;
-      var value3 = value1.replace(/\s+/g, '').replace(/[á]/, 'a').replace(/[é]/, 'e').replace(/[í]/, 'i').replace(/[ó]/, 'o').replace(/[ú]/, 'u');
-      var value4 = value2.replace(/\s+/g, '').replace(/[á]/, 'a').replace(/[é]/, 'e').replace(/[í]/, 'i').replace(/[ó]/, 'o').replace(/[ú]/, 'u');
-      var value5 = value3 + "." + value4;
-      var value6 = value5.toLowerCase();
-      validarNombre(value6);
-      document.getElementById('usuarioA').value = value6;
-    })
-  });
-  </script>
-  <script>
-  $(document).ready(function(){
-    $("#selectareaA").change(function(){
-      var value1 = $("#selectareaA").val();
-      var text = $("#selectareaA :selected").text();
-      document.getElementById('idOrgA').value = value1;
-      document.getElementById('nameOrgA').value = text;
-  
-    })
-  });
-  </script>
-  <script>
-  $(document).ready(function(){
-    $("#selectareaO").change(function(){
-      var value1 = $("#selectareaO").val();
-      var text = $("#selectareaO :selected").text();
-      document.getElementById('idOrgO').value = value1;
-      document.getElementById('nameOrgO').value = text;
-  
-    })
-  });
-  </script>
-  <script>
-    $(document).on("click", "#passwordGenerate", function(){
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for ( var i = 0; i < 8; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-      document.getElementById("contPass").value = result;
-      var valor = $('#contPass').val();
-      var error = $('#contPass').attr("data-errorDos");
-      var id = $('#contPass').attr("id");
-      var tipo = $('#contPass').attr("data-myTypeDos");
-      datosValidosDos(valor, error, id, tipo);
-    });
-  </script>
-  
-  <script>
-   $(document).on("click", "#passCopi", function(){
-     var copyText = document.getElementById("contPass");
-     copyText.select();
-     document.execCommand("copy");
-     swal({
-             type: "info",
-             title: "Password",
-             text: 'Contraseña copiada: '+ copyText.value,
-              showConfirmButton: true,
-              confirmButtonText: "Cerrar"
-          });
-    });
-  </script>
-  <script>
-
-    $('#editModal').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget);
-      var area = button.data('area');
-      var id = button.data("areaid");
-      var modal = $(this)
-      modal.find('.modal-body #depto').val(area);
-      modal.find('.modal-body #editClave').val(id);
-      //console.log(area,id)
-      
-    });    
-
-    $('#btnActualizarArticulo').on('click',function(e){
-      e.preventDefault();
-      var form = $(this).parents('form');
-      swal({
-          title: "Actualización de Datos de Artículo",
-          text: "¿Desea continuar?",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#E71096",
-          confirmButtonText: "Sí",
-          closeOnConfirm: false
-      }, function(isConfirm){
-          if (isConfirm) {
-            form.submit();
-          }else {
-            swal("Error!", "Por favor intentelo de nuevo", "error");
-          }
-          
-      });
-    });
-
-    $('#btnActualizarArticuloECO').on('click',function(e){
-      e.preventDefault();
-      var form = $(this).parents('form');
-      swal({
-          title: "Actualización de Datos de Artículo ECO",
-          text: "¿Desea continuar?",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#E71096",
-          confirmButtonText: "Sí",
-          closeOnConfirm: false
-      }, function(isConfirm){
-          if (isConfirm) {
-            form.submit();
-          }else {
-            swal("Error!", "Por favor intentelo de nuevo", "error");
-          }
-          
-      });
-    });
-
-    $('#editBtn').on('click',function(e){
-    e.preventDefault();
-    swal({
-        title: "Edición de datos",
-        text: "¿Desea continuar?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#E71096",
-        confirmButtonText: "Sí",
-        closeOnConfirm: true
-    }, function(isConfirm){
-       if (isConfirm) {
-          var id = $('#editClave').val();
-          var no = $('#depto').val();
-          console.log(id,no);
-          $.ajax({
-             type:'POST',
-             url:'updatearea',
-             data:{id:id, no:no},
-            success:function(data){
-                swal({title: "Listo!", text: "Area actualizada", type: "success"},
-                   function(){ 
-                       location.reload();
-                   }
-                )
-              },
-              error: function (xhr, ajaxOptions, thrownError) {
-                swal("Error!", "Por favor intentelo de nuevo!", "error");
-              }
-          });
-        } else {
-          swal("Error!", "Por favor intentelo de nuevo", "error");
-        }
-    });
-});
-  </script>
-
-  <script>
-   $(document).on("click", "#passCopiA", function(){
-     var copyText = document.getElementById("contPassA");
-     copyText.select();
-     document.execCommand("copy");
-     swal({
-             type: "info",
-             title: "Password",
-             text: 'Contraseña copiada: '+ copyText.value,
-              showConfirmButton: true,
-              confirmButtonText: "Cerrar"
-          });
-    });
-  
-   $(document).on("click", "#passCopiEdit", function(){
-     var copyText = document.getElementById("contPassEdit");
-     copyText.select();
-     document.execCommand("copy");
-     swal({
-             type: "info",
-             title: "Password",
-             text: 'Contraseña copiada: '+ copyText.value,
-              showConfirmButton: true,
-              confirmButtonText: "Cerrar"
-          });
-    });
-  </script>
-  <script>
-   $(document).on("click", "#showPass", function(){
-     var x = document.getElementById("contPass");
-      if (x.type === "password") {
-      x.type = "text";
-      } else {
-      x.type = "password";
-      }   
-      });
-  </script>
-  <script>
-   $(document).on("click", "#showPassA", function(){
-     var x = document.getElementById("contPassA");
-      if (x.type === "password") {
-      x.type = "text";
-      } else {
-      x.type = "password";
-      }   
-      });
-  
-   $(document).on("click", "#showPassEdit", function(){
-     var x = document.getElementById("contPassEdit");
-      if (x.type === "password") {
-      x.type = "text";
-      } else {
-      x.type = "password";
-      }   
-      });
-  </script>
 
 <!--validacion-->
 <script>
-  $('#btn-submit').on('click',function(e){
-     e.preventDefault();
-     var form = $(this).parents('form');
-     swal({
-         title: "Registro de Sublíneas",
-         text: "¿Desea continuar?",
-         type: "warning",
-         showCancelButton: true,
-         confirmButtonColor: "#E71096",
-         confirmButtonText: "Sí",
-         closeOnConfirm: false
-     }, function(isConfirm){
-         if (isConfirm) form.submit();
-     });
- });
+  
  </script>
 
 <script>
@@ -519,56 +243,9 @@
 <script>
 
 var validoNumeroPartida = true;
-  $('#btn-submitEm').on('click',function(e){
-     e.preventDefault();
-     var form = $(this).parents('form');
-     swal({
-         title: "Registro de Empleados",
-         text: "¿Desea continuar?",
-         type: "warning",
-         showCancelButton: true,
-         confirmButtonColor: "#E71096",
-         confirmButtonText: "Sí",
-         closeOnConfirm: false
-     }, function(isConfirm){
-         if (isConfirm) form.submit();
-     });
- });
+  
  </script>
 
- <script>
-  $('#btnGuardarArticulo').on('click',function(e){
-     e.preventDefault();
-     var form = $(this).parents('form');
-     swal({
-         title: "Registro(s) de Articulo(s)",
-         text: "¿Desea continuar?",
-         type: "warning",
-         showCancelButton: true,
-         confirmButtonColor: "#E71096",
-         confirmButtonText: "Sí",
-         closeOnConfirm: false
-     }, function(isConfirm){
-         if (isConfirm) form.submit();
-     });
-   });
-
-  $('#btnGuardarArticuloECO').on('click',function(e){
-     e.preventDefault();
-     var form = $(this).parents('form');
-     swal({
-         title: "Registro(s) de Articulo(s) ECO",
-         text: "¿Desea continuar?",
-         type: "warning",
-         showCancelButton: true,
-         confirmButtonColor: "#E71096",
-         confirmButtonText: "Sí",
-         closeOnConfirm: false
-     }, function(isConfirm){
-         if (isConfirm) form.submit();
-     });
-   });
-</script>
 
    <script>
    
@@ -1144,17 +821,10 @@ var validoNumeroPartida = true;
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
-})
-
- $('#passwordModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget);
-  var id = button.data("id");
-  var modal = $(this)
-  modal.find('#editPassword').val(id);
-})
+});
 
 </script>
-<!-- advanced elements -->
+
 <script>
   $(function () {
     //Initialize Select2 Elements
@@ -1168,126 +838,6 @@ $(function () {
     $('[data-mask]').inputmask()
 
   });
-
-  $("#editarImporte").maskMoney({
-    // The symbol to be displayed before the value entered by the user
-    prefix:'MXN$ ',
-    // The suffix to be displayed after the value entered by the user(example: "1234.23 €").
-    suffix: "",
-    // Delay formatting of text field until focus leaves the field
-    formatOnBlur: false,
-    // Prevent users from inputing zero
-    allowZero:false,
-    // Prevent users from inputing negative values
-    allowNegative:true,
-    // Allow empty input values, so that when you delete the number it doesn't reset to 0.00.
-    allowEmpty: false,
-    // Select text in the input on double click
-    doubleClickSelection: true,
-    // Select all text in the input when the element fires the focus event.
-    selectAllOnFocus: false,
-    // The thousands separator
-    thousands: ',',
-    // The decimal separator
-    decimal: '.' ,
-    // How many decimal places are allowed
-    precision: 2,
-    // Set if the symbol will stay in the field after the user exits the field.
-    affixesStay : false,
-    // Place caret at the end of the input on focus
-    bringCaretAtEndOnFocus: true
-  });
-
-  $("#editarImporteECO").maskMoney({
-    // The symbol to be displayed before the value entered by the user
-    prefix:'MXN$ ',
-    // The suffix to be displayed after the value entered by the user(example: "1234.23 €").
-    suffix: "",
-    // Delay formatting of text field until focus leaves the field
-    formatOnBlur: false,
-    // Prevent users from inputing zero
-    allowZero:false,
-    // Prevent users from inputing negative values
-    allowNegative:true,
-    // Allow empty input values, so that when you delete the number it doesn't reset to 0.00.
-    allowEmpty: false,
-    // Select text in the input on double click
-    doubleClickSelection: true,
-    // Select all text in the input when the element fires the focus event.
-    selectAllOnFocus: false,
-    // The thousands separator
-    thousands: ',',
-    // The decimal separator
-    decimal: '.' ,
-    // How many decimal places are allowed
-    precision: 2,
-    // Set if the symbol will stay in the field after the user exits the field.
-    affixesStay : false,
-    // Place caret at the end of the input on focus
-    bringCaretAtEndOnFocus: true
-  });
-
-
-  
-  $("#txtImporteECO").maskMoney({
-    // The symbol to be displayed before the value entered by the user
-    prefix:'MXN$ ',
-    // The suffix to be displayed after the value entered by the user(example: "1234.23 €").
-    suffix: "",
-    // Delay formatting of text field until focus leaves the field
-    formatOnBlur: false,
-    // Prevent users from inputing zero
-    allowZero:false,
-    // Prevent users from inputing negative values
-    allowNegative:true,
-    // Allow empty input values, so that when you delete the number it doesn't reset to 0.00.
-    allowEmpty: false,
-    // Select text in the input on double click
-    doubleClickSelection: true,
-    // Select all text in the input when the element fires the focus event.
-    selectAllOnFocus: false,
-    // The thousands separator
-    thousands: ',',
-    // The decimal separator
-    decimal: '.' ,
-    // How many decimal places are allowed
-    precision: 2,
-    // Set if the symbol will stay in the field after the user exits the field.
-    affixesStay : false,
-    // Place caret at the end of the input on focus
-    bringCaretAtEndOnFocus: true
-  });
-
-
-  $("#txtImporte").maskMoney({
-    // The symbol to be displayed before the value entered by the user
-    prefix:'MXN$ ',
-    // The suffix to be displayed after the value entered by the user(example: "1234.23 €").
-    suffix: "",
-    // Delay formatting of text field until focus leaves the field
-    formatOnBlur: false,
-    // Prevent users from inputing zero
-    allowZero:false,
-    // Prevent users from inputing negative values
-    allowNegative:true,
-    // Allow empty input values, so that when you delete the number it doesn't reset to 0.00.
-    allowEmpty: false,
-    // Select text in the input on double click
-    doubleClickSelection: true,
-    // Select all text in the input when the element fires the focus event.
-    selectAllOnFocus: false,
-    // The thousands separator
-    thousands: ',',
-    // The decimal separator
-    decimal: '.' ,
-    // How many decimal places are allowed
-    precision: 2,
-    // Set if the symbol will stay in the field after the user exits the field.
-    affixesStay : false,
-    // Place caret at the end of the input on focus
-    bringCaretAtEndOnFocus: true
-  });
-
 </script>
 </body>
 </html>
