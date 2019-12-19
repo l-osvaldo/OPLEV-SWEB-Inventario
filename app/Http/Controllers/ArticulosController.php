@@ -14,13 +14,30 @@ use DB;
 use App;
 use DateTime;
 
+/*************** Funciones para el módulo de Bienes OPLE *****************************/
 class ArticulosController extends Controller
 {
+	/* **********************************************************************************
+ 
+    Funcionalidad: Constructor  de la clase, sirve para mantener este controlador con la autentificación del logueo del usuario
+    Parámetros: No recibe parámetros
+    Retorna: No regresa nada
+
+    ********************************************************************************** */
 	public function __construct()
     {
         $this->middleware('auth');
     }
-    
+
+    /* **********************************************************************************
+ 
+    Funcionalidad: Obtiene el número maximo del campo consecutivo de la tabla de artículos 
+				   y la tabla articulosecos para obtener el mayor y sumarle uno para obtener
+				   el numero de inventario para asignar al nuevo artículo
+    Parámetros: partida, linea y sublinea
+    Retorna: Numero consecutivo maximo de ambas tablas en formato JSON
+
+    ********************************************************************************** */    
     public function numeroInventarioMax(Request $request){
 
     	$numeroInventarioMaxOPLE = articulos::where([['partida',$request->partida],['linea', $request->linea],['sublinea',$request->sublinea]])->max('consecutivo');
@@ -49,6 +66,14 @@ class ArticulosController extends Controller
     	return response()->json($numeroInventarioMax);
     }
 
+	/* **********************************************************************************
+    Funcionalidad: Registra uno y varios artículos en la tabla articulos
+    Parámetros: partida, descpartida, linea, desclinea, sublinea, descsublinea, consecutivo, numeroinv,
+				concepto, marca, importe, colores, fechacomp, idarea, nombrearea, numemple, nombreemple,
+				numserie, medidas, modelo, material, clvestado, estado, factura
+    Retorna: Un Alert de registro exitoso y redirecciona a la vista de Benes.blade.php
+
+    ********************************************************************************** */ 
     public function store(Request $request)
 	{
 		//print_r($request);
@@ -103,6 +128,13 @@ class ArticulosController extends Controller
 	}
 
 	// ************ vista de reportes ************
+
+	/* **********************************************************************************
+    Funcionalidad: Vista principal del módulo de reportes
+    Parámetros: No recibe parámetros
+    Retorna: Una vista con las opciones de los reportes que puede ejegir, reportes.blade.php
+
+    ********************************************************************************** */ 
 	public function reportes(){
 		$usuario = auth()->user();
 		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
@@ -113,6 +145,14 @@ class ArticulosController extends Controller
 	}
 
 	// ************ vista previa de reportes ************
+
+	/* **********************************************************************************
+
+    Funcionalidad: Vista previa del reporte bienes por partida
+    Parámetros: partida
+    Retorna: Una vista con la vista previa del reporte, BienesPorPartida.blade.php
+
+    ********************************************************************************** */ 
 	public function BienesXPartida(Request $request){
 
 		$partida = $request;

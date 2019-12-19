@@ -7,15 +7,17 @@ use App\articulos;
 
 header('Access-Control-Allow-Origin: *');
 
+/*************** Funciones para los web service de la aplicación  *****************************/
 class APIController extends Controller
 {
 
     /* **********************************************************************************
-
-    Función para los web service de la aplicación 
     Funcionalidad: Obtiene todos los artículos OPLE de la base de datos
     Parámetros: No recibe parámetros
-    Retorna: regresa un json con todos los artículos OPLE de la tabla de articulos
+    Retorna: regresa un json con todos los artículos OPLE de la tabla de articulos y todos sus columnas:
+                partida, descpartida, linea, desclinea, sublinea, descsublinea, consecutivo, numeroinv,
+                concepto, marca, importe, colores, fechacomp, idarea, nombrearea, numemple, nombreemple,
+                numserie, medidas, modelo, material, clvestado, estado, factura
 
     ********************************************************************************** */
     /**
@@ -43,16 +45,12 @@ class APIController extends Controller
         
     }
 
-    // Función para los web service de la aplicación
-    // Obtiene un artículo en especial de artículos OPLE de la base de datos de acuerdo al numero de inventario 
-    // Recibe como parámetro un id, en este caso es el numero de inventario a buscar
-    // regresa un json con todos los datos del artículo o null si no lo encuentra
     /* **********************************************************************************
 
     Función para los web service de la aplicación 
-    Funcionalidad: Obtiene un artículo en especial de artículos OPLE de la base de datos de acuerdo al numero de inventario 
+    Funcionalidad: Obtiene un artículo en especial de artículos OPLE de la base de datos de acuerdo al numero de inventario que recibe
     Parámetros: Recibe como parámetro un id, en este caso es el numero de inventario a buscar
-    Retorna: Regresa un json con todos los datos del artículo o null si no lo encuentra
+    Retorna: Regresa un json con todos los datos del artículo o null si no lo encuentra o no existe
 
     ********************************************************************************** */
     /**
