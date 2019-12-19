@@ -214,57 +214,13 @@
               ]
 } );
 
-  $("input[type='number']").inputSpinner();  
+  $("input[type='number']").inputSpinner(); 
+
+  var validoNumeroPartida = true; 
 </script>
 
 <!--validacion-->
-<script>
-  
- </script>
-
-<script>
-    $('#btn-submit3').on('click',function(e){
-       e.preventDefault();
-       var form = $(this).parents('form');
-       swal({
-           title: "Registro de Líneas",
-           text: "¿Desea continuar?",
-           type: "warning",
-           showCancelButton: true,
-           confirmButtonColor: "#E71096",
-           confirmButtonText: "Sí",
-           closeOnConfirm: false
-       }, function(isConfirm){
-           if (isConfirm) form.submit();
-       });
-   });
-</script>
-
-<script>
-
-var validoNumeroPartida = true;
-  
- </script>
-
-
-   <script>
-   
-   
-   $( ".validateDataDos" ).keyup(function() {    
-       var valor = $(this).val();
-       var error = $(this).attr("data-errorDos");
-       var id = $(this).attr("id");
-       var tipo = $(this).attr("data-myTypeDos");
-       datosValidosDos(valor, error, id, tipo);
-   });
-   
-   $( ".validateDataDos" ).change(function() {
-       var valor = $(this).val();
-       var error = $(this).attr("data-errorDos");
-       var id = $(this).attr("id");
-       var tipo = $(this).attr("data-myTypeDos");
-       datosValidosDos(valor, error, id, tipo);
-   });
+   <script>  
 
    $( ".validateDataLi" ).keyup(function() {
        var valor = $(this).val();
@@ -367,68 +323,7 @@ var validoNumeroPartida = true;
     $('#CancelacionesR').removeClass('menu-open');
    }
 
-   function datosValidosDos(valor, error, id, tipo)
-   {
-       switch (tipo) {
-         case 'text':
-           if (valor.match(/^[0-9a-zA-ZÀ-ÿ.,-^'^"\u00f1\u00d1]+(\s*[0-9a-zA-ZÀ-ÿ.,-^'^"\u00f1\u00d1]*)*[0-9a-zA-ZÀ-ÿ.,-^'^"\u00f1\u00d1]*$/) && valor!=""){
-             $('.error'+ error).text("");
-             $('#'+id).attr("data-validacionDos", '0');
-             $('#'+id).removeClass('inputDanger');
-             $('#'+id).addClass('inputSuccess');
-           }else{
-             $('.error'+ error).text("Este campo no puede ir vacío o llevar caracteres especiales.");
-             $('#'+id).attr("data-validacionDos", '1');
-             $('#'+id).removeClass('inputSuccess');
-             $('#'+id).addClass('inputDanger');
-           }
-           break;
-         case 'int':
-           if (valor.match(/^[0-9]*$/) && valor!=""){
-           $('.error'+ error).text("");
-           $('#'+id).attr("data-validacionDos", '0');
-           $('#'+id).removeClass('inputDanger');
-           $('#'+id).addClass('inputSuccess');
-         }else{
-           $('.error'+ error).text("Solo numeros.");
-           $('#'+id).attr("data-validacionDos", '1');
-           $('#'+id).removeClass('inputSuccess');
-           $('#'+id).addClass('inputDanger'); 
-         }
-         break;
-         case 'password':
-           if (valor!=""){
-           $('.error'+ error).text("");
-           $('#'+id).attr("data-validacionDos", '0');
-           $('#'+id).removeClass('inputDanger');
-           $('#'+id).addClass('inputSuccess');
-         }else{
-           $('.error'+ error).text("La contraseña no puede ir vacía.");
-           $('#'+id).attr("data-validacionDos", '1');
-           $('#'+id).removeClass('inputSuccess');
-           $('#'+id).addClass('inputDanger'); 
-         }
-         break;
-         case 'select':
-           if (valor!=""){
-           $('.error'+ error).text("");
-           $('#'+id).attr("data-validacionDos", '0');
-           $('#'+id).removeClass('inputDanger');
-           $('#'+id).addClass('inputSuccess');
-         }else{
-           $('.error'+ error).text("Seleccione una opción.");
-           $('#'+id).attr("data-validacionDos", '1');
-           $('#'+id).removeClass('inputSuccess');
-           $('#'+id).addClass('inputDanger'); 
-         }
-         break;
-         default:
-         //console.log('default');
-       }
-       enablebtnDos();
-   } 
-
-
+   
    function datosValidosLi(valor, error, id, tipo)
    {
        switch (tipo) {
@@ -645,26 +540,7 @@ var validoNumeroPartida = true;
        enablebtnArticuloEditar();
    } 
    
-   function enablebtnDos()
-   {
-     var array = [];
-     var claserror = $('.validateDataDos');
    
-     for (var i = 0; i < claserror.length; i++) {
-       array.push(claserror[i].getAttribute('data-validacionDos'));
-     }
-   
-     if(array.includes('1'))
-     { 
-       $('#btn-submit').prop("disabled", true);
-     }
-     else
-     {
-       $('#btn-submit').prop("disabled", false);
-     }
-   
-       //console.log(array);
-   }
 
    function enablebtnLi()
    {
@@ -837,6 +713,122 @@ $(function () {
     //Money Euro
     $('[data-mask]').inputmask()
 
+  });
+
+  $("#txtImporteECO").maskMoney({
+    // The symbol to be displayed before the value entered by the user
+    prefix:'MXN$gf ',
+    // The suffix to be displayed after the value entered by the user(example: "1234.23 €").
+    suffix: "",
+    // Delay formatting of text field until focus leaves the field
+    formatOnBlur: false,
+    // Prevent users from inputing zero
+    allowZero:false,
+    // Prevent users from inputing negative values
+    allowNegative:true,
+    // Allow empty input values, so that when you delete the number it doesn't reset to 0.00.
+    allowEmpty: false,
+    // Select text in the input on double click
+    doubleClickSelection: true,
+    // Select all text in the input when the element fires the focus event.
+    selectAllOnFocus: false,
+    // The thousands separator
+    thousands: ',',
+    // The decimal separator
+    decimal: '.' ,
+    // How many decimal places are allowed
+    precision: 2,
+    // Set if the symbol will stay in the field after the user exits the field.
+    affixesStay : false,
+    // Place caret at the end of the input on focus
+    bringCaretAtEndOnFocus: true
+  });
+
+  $("#txtImporte").maskMoney({
+    // The symbol to be displayed before the value entered by the user
+    prefix:'MXN$ ',
+    // The suffix to be displayed after the value entered by the user(example: "1234.23 €").
+    suffix: "",
+    // Delay formatting of text field until focus leaves the field
+    formatOnBlur: false,
+    // Prevent users from inputing zero
+    allowZero:false,
+    // Prevent users from inputing negative values
+    allowNegative:true,
+    // Allow empty input values, so that when you delete the number it doesn't reset to 0.00.
+    allowEmpty: false,
+    // Select text in the input on double click
+    doubleClickSelection: true,
+    // Select all text in the input when the element fires the focus event.
+    selectAllOnFocus: false,
+    // The thousands separator
+    thousands: ',',
+    // The decimal separator
+    decimal: '.' ,
+    // How many decimal places are allowed
+    precision: 2,
+    // Set if the symbol will stay in the field after the user exits the field.
+    affixesStay : false,
+    // Place caret at the end of the input on focus
+    bringCaretAtEndOnFocus: true
+  });
+
+  $("#editarImporte").maskMoney({
+    // The symbol to be displayed before the value entered by the user
+    prefix:'MXN$ ',
+    // The suffix to be displayed after the value entered by the user(example: "1234.23 €").
+    suffix: "",
+    // Delay formatting of text field until focus leaves the field
+    formatOnBlur: false,
+    // Prevent users from inputing zero
+    allowZero:false,
+    // Prevent users from inputing negative values
+    allowNegative:true,
+    // Allow empty input values, so that when you delete the number it doesn't reset to 0.00.
+    allowEmpty: false,
+    // Select text in the input on double click
+    doubleClickSelection: true,
+    // Select all text in the input when the element fires the focus event.
+    selectAllOnFocus: false,
+    // The thousands separator
+    thousands: ',',
+    // The decimal separator
+    decimal: '.' ,
+    // How many decimal places are allowed
+    precision: 2,
+    // Set if the symbol will stay in the field after the user exits the field.
+    affixesStay : false,
+    // Place caret at the end of the input on focus
+    bringCaretAtEndOnFocus: true
+  });
+
+  $("#editarImporteECO").maskMoney({
+    // The symbol to be displayed before the value entered by the user
+    prefix:'MXN$ ',
+    // The suffix to be displayed after the value entered by the user(example: "1234.23 €").
+    suffix: "",
+    // Delay formatting of text field until focus leaves the field
+    formatOnBlur: false,
+    // Prevent users from inputing zero
+    allowZero:false,
+    // Prevent users from inputing negative values
+    allowNegative:true,
+    // Allow empty input values, so that when you delete the number it doesn't reset to 0.00.
+    allowEmpty: false,
+    // Select text in the input on double click
+    doubleClickSelection: true,
+    // Select all text in the input when the element fires the focus event.
+    selectAllOnFocus: false,
+    // The thousands separator
+    thousands: ',',
+    // The decimal separator
+    decimal: '.' ,
+    // How many decimal places are allowed
+    precision: 2,
+    // Set if the symbol will stay in the field after the user exits the field.
+    affixesStay : false,
+    // Place caret at the end of the input on focus
+    bringCaretAtEndOnFocus: true
   });
 </script>
 </body>

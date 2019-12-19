@@ -90,40 +90,54 @@ $( ".validateData" ).keyup(function() {
    }
 
 function enablebtn()
-   {
-     var array = [];
-     var claserror = $('.validateData');
-   
-     for (var i = 0; i < claserror.length; i++) {
-       array.push(claserror[i].getAttribute('data-validacion'));
-     }
+{
+ var array = [];
+ var claserror = $('.validateData');
 
-     //console.log(array);
-   
-     if(array.includes('1'))
-     { 
-       $('#btn-submit2').prop("disabled", true);
-     }
-     else
-     {
-       $('#btn-submit2').prop("disabled", false);
-     }
-   
-   }
+ for (var i = 0; i < claserror.length; i++) {
+   array.push(claserror[i].getAttribute('data-validacion'));
+ }
 
-   $('#btn-submit2').on('click',function(e){
-      e.preventDefault();
-      var form = $(this).parents('form');
-      swal({
-          title: "Registro de Partidas",
-          text: "¿Desea continuar?",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#0080FF",
-          confirmButtonText: "Sí",
-          closeOnConfirm: false
-      }, function(isConfirm){
-          if (isConfirm) form.submit();
-          
-      });
-    });
+ // console.log(array);
+
+ if(array.includes('1'))
+ { 
+   $('#btn-submit2').prop("disabled", true);
+ }
+ else
+ {
+   $('#btn-submit2').prop("disabled", false);
+ }
+
+}
+
+$('#btn-submit2').on('click',function(e){
+  e.preventDefault();
+  var form = $(this).parents('form');
+  swal({
+      title: "Registro de Partidas",
+      text: "¿Desea continuar?",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#0080FF",
+      confirmButtonText: "Sí",
+      closeOnConfirm: false
+  }, function(isConfirm){
+      if (isConfirm) form.submit();
+      
+  });
+});
+
+$('#exampleModal').on('hidden.bs.modal', function (e) {
+  $(this).find('.validateData').removeClass('inputSuccess');
+  $(this).find('.validateData').removeClass('inputDanger');
+  $(this).find('.validateData').attr("data-validacion",'1');
+  $(this).find('.text-danger').text('');
+  $('#partidaI').val("");
+  $('#descpartida').val("");
+  $('#desclinea').val("");
+  $('#descsub').val("");
+  $('#activarDepreciacion').prop("checked", false).change();
+  //console.log('partida');
+  enablebtn();   
+})

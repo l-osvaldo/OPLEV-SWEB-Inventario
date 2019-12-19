@@ -83,21 +83,21 @@
                       <div class="form-group">
                         <label>Seleccione una Partida:</label>
                           <select id="partidaA" name="partidaA" class="form-control select2 validateDataDos" data-myTypeDos="select" data-errorDos= "8" data-validacionDos="1" style="width: 100%;">
-                            <option  value="0" selected="selected">Número de partida</option>
+                            <option  value="0">Número de partida</option>
                               @foreach ($sublineaAgt as $sublineaAgt)
                             <option value="{{ $sublineaAgt->partida}}">{{ $sublineaAgt->partida }} | {{ $sublineaAgt->descpartida }}</option>
                               @endforeach
                           </select>
                           <label>Seleccione una Línea:</label>                 
-                            <select class="form-control select2 validateDataDos" data-myTypeDos="select" data-errorDos= "8" data-validacionDos="1" id="lineaA" name="lineaA" style="width: 100%;">
-                              <option value="0" disabled="true" selected="true">Número de línea</option>
+                            <select class="form-control select2 validateDataDos" data-myTypeDos="select" data-errorDos= "8" data-validacionDos="1" id="lineaA" name="lineaA" style="width: 100%;" disabled>
+                              <option value="0">Número de línea</option>
                             </select>
                       </div>
                     </div>      
                     <div class="col-md-3"> 
                     	<div class="form-group">
                         <label>Número de Sublínea:</label>
-                        <input type="text" class="form-control" readonly id="sublinea" name="sublinea" value="0">
+                        <input type="text" class="form-control" readonly id="sublineaA" name="sublineaA" value="0">
                           @if ($errors->has('sublinea'))
                         <small class="form-text text-danger">{{ $errors->first('sublinea') }}</small>
                           @endif
