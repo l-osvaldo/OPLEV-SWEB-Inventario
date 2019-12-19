@@ -79,7 +79,7 @@
                         <div class="form-group">
                           <label>2.- Área:</label>
                           <select id="clvdepto" name="clvdepto" class="form-control select2 validateDataEm" data-myTypeEm="select" data-errorEm= "5" data-validacionEm="1" style="width: 100%;" disabled>
-                            <option value="0" selected="selected">Área</option>
+                            <option value="0">Área</option>
                              @foreach ($area as $area)																 
                             <option value="{{ $area->idarea}}"> {{ $area->idarea }} | {{ $area->nombrearea }} </option>
 														@endforeach                                      

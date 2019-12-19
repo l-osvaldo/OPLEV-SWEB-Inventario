@@ -57,7 +57,7 @@
 		<div class="modal-content">
 			<div class="modal-header" style="background: #a90a6c; color:white">
 				<h5 class="modal-title" id="exampleModalLabel">Editar Area</h5>
-				<button type="button" onClick="cerrar();" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -77,10 +77,10 @@
 						</div>
 						<div class="col-sm-9">
 								<div class="form-group {{ $errors->has('nombrearea') ? 'has-error' : '' }}">
-										<label for="nombre"><b>Nombre del área</b></label>
-										<div class="input-group-prepend">   
-											<input class="form-control form-control validateDataArea" data-myTypeArea="text" data-errorArea= "1" data-validacionArea="1" type="text" id="depto" name="depto" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'area');" onkeyup="javascript:this.value=this.value.toUpperCase();">		
-											
+									<label for="nombre"><b>Nombre del área</b></label>
+									<div class="input-group-prepend">   
+										<input class="form-control form-control validateDataArea" data-myTypeArea="text" data-errorArea= "1" data-validacionArea="1" type="text" id="depto" name="depto" style="text-transform:uppercase;" onKeyPress="return SoloNumerosLetras(event,'area');" onkeyup="javascript:this.value=this.value.toUpperCase();">		
+										
 									</div>
 									<span class="text-danger error1"></span>
 								</div>

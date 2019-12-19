@@ -1,3 +1,29 @@
+function datosValidosArea(valor, error, id, tipo)
+{
+  // console.log(valor);
+ switch (tipo) {
+  case 'text':
+    //console.log(valor);
+    if (valor.match(/^[0-9a-zA-ZÀ-ÿ.\u00f1\u00d1]+(\s*[0-9a-zA-ZÀ-ÿ.\u00f1\u00d1]*)*[0-9a-zA-ZÀ-ÿ.\u00f1\u00d1]*$/) && valor!=""){
+     $('.error'+ error).text("");
+     $('#'+id).attr("data-validacionArea", '0');
+     $('#'+id).removeClass('inputDanger');
+     $('#'+id).addClass('inputSuccess');
+     // console.log(valor);
+    }else{
+     $('.error'+ error).text("Este campo no puede ir vacío o llevar caracteres especiales.");
+     $('#'+id).attr("data-validacionArea", '1');
+     $('#'+id).removeClass('inputSuccess');
+     $('#'+id).addClass('inputDanger');
+    }
+    break;
+   
+  default:
+   console.log('default');
+ }
+ enablebtnArea();
+}
+
 $('#editModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget);
   var area = button.data('area');
@@ -44,4 +70,47 @@ $('#editBtn').on('click',function(e){
           swal("Error!", "Por favor intentelo de nuevo", "error");
         }
     });
+});
+
+
+$( ".validateDataArea" ).keyup(function() {
+   var valor = $.trim($(this).val());
+   var error = $(this).attr("data-errorArea");
+   var id = $(this).attr("id");
+   var tipo = $(this).attr("data-myTypeArea");
+   // console.log(valor,error,id,tipo);
+   datosValidosArea(valor, error, id, tipo);
+});
+
+
+
+function enablebtnArea()
+{
+ var array = [];
+ var claserror = $('.validateDataArea');
+
+ for (var i = 0; i < claserror.length; i++) {
+   array.push(claserror[i].getAttribute('data-validacionArea'));
+ }
+
+//console.log(array);
+
+ if(array.includes('1'))
+ { 
+   $('#editBtn').prop("disabled", true);
+ }
+ else
+ {
+   $('#editBtn').prop("disabled", false);
+ }
+
+};
+
+
+$('#editModal').on('hidden.bs.modal', function (e) {
+  $(this).find('.validateDataArea').removeClass('inputSuccess');
+  $(this).find('.validateDataArea').removeClass('inputDanger');
+  $(this).find('.validateDataArea').attr("data-validacionArea",'1');
+  $(this).find('.text-danger').text('');
+  enablebtnArea();         
 }); 

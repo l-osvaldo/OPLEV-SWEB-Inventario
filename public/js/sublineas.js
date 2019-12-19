@@ -47,7 +47,7 @@ $('#btn-submit').on('click',function(e){
 
 
 $( ".validateDataDos" ).keyup(function() {    
-   var valor = $(this).val();
+   var valor = $.trim($(this).val());
    var error = $(this).attr("data-errorDos");
    var id = $(this).attr("id");
    var tipo = $(this).attr("data-myTypeDos");
@@ -55,7 +55,7 @@ $( ".validateDataDos" ).keyup(function() {
 });
    
 $( ".validateDataDos" ).change(function() {
-   var valor = $(this).val();
+   var valor = $.trim($(this).val());
    var error = $(this).attr("data-errorDos");
    var id = $(this).attr("id");
    var tipo = $(this).attr("data-myTypeDos");

@@ -15,7 +15,7 @@ $('#activarDepreciacion').change(function() {
 // validación 
 
 $( ".validateData" ).keyup(function() {
-       var valor = $(this).val();
+       var valor = $.trim($(this).val());
        var error = $(this).attr("data-error");
        var id = $(this).attr("id");
        var tipo = $(this).attr("data-myType");
