@@ -9,8 +9,17 @@ use App\sublineas;
 use App\partidas;
 use Alert;
 
+/*************** Funciones para el módulo de líneas *****************************/
 class LineasController extends Controller
 {
+
+  /* **********************************************************************************
+ 
+    Funcionalidad: Constructor  de la clase, sirve para mantener este controlador con la autentificación del logueo del usuario
+    Parámetros: No recibe parámetros
+    Retorna: No regresa nada
+
+    ********************************************************************************** */
   public function __construct()
   {
       $this->middleware('auth');
@@ -57,10 +66,15 @@ class LineasController extends Controller
 
         Alert::error('Revise sus campos', '¡Error!')->autoclose(2000);
     }
-    /*
-    funcion para mostrar los datos de la tabla lineas
-    en la vista TablaPartida
-    */
+
+    /* **********************************************************************************
+ 
+    Funcionalidad: Obtiene las partidas que se tienen registradas para la vista principal de este módulo
+    Parámetros: No recibe parámetros
+    Retorna: Vista principal del módulo, Tablalineas.blade.php
+
+    ********************************************************************************** */
+
     public function index()
       {
           $linea = partidas::join('lineas', 'partidas.partida','=','lineas.partida')
@@ -71,24 +85,28 @@ class LineasController extends Controller
 
       }
 
+
+
     /*
     funcion para llamar a la venta de agregar lineas 
      */
-    public function create()
-      {
+    // public function create()
+    //   {
         
-        $linea = lineas::distinct()->get(['partida', 'descpartida']);
-        $usuario = auth()->user();
-        return view('catalogos.Agregar.AgregaLineas', compact('linea','usuario'));
+    //     $linea = lineas::distinct()->get(['partida', 'descpartida']);
+    //     $usuario = auth()->user();
+    //     return view('catalogos.Agregar.AgregaLineas', compact('linea','usuario'));
         
-      }
+    //   }
 
     
-    /*
-    funcion para agregar una partida a la base de datos
-    la variable partida recibe los datos y los envia al modelo 
-    para despues guardarlos en la base de datos.
-     */
+    /* **********************************************************************************
+ 
+    Funcionalidad: Se crea una nueva línea dentro de una partida seleccionda y una sublínea para esta nueva línea
+    Parámetros: partida
+    Retorna: Un Alert con el mensaje Registro Exitoso y redirecciona a la vista principal.
+
+    ********************************************************************************** */
     
     public function store(Request $request)
       {
@@ -123,6 +141,14 @@ class LineasController extends Controller
         return redirect()->route('show-lineas');
 
       }
+
+    /* **********************************************************************************
+ 
+    Funcionalidad: Se crea una nueva línea dentro de una partida seleccionda y una sublínea para esta nueva línea
+    Parámetros: partida
+    Retorna: Un Alert con el mensaje Registro Exitoso y redirecciona a la vista principal.
+
+    ********************************************************************************** */
     
     public function show(Request $request)
       {

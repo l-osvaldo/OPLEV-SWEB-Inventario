@@ -71,7 +71,7 @@ class ArticulosController extends Controller
     Parámetros: partida, descpartida, linea, desclinea, sublinea, descsublinea, consecutivo, numeroinv,
 				concepto, marca, importe, colores, fechacomp, idarea, nombrearea, numemple, nombreemple,
 				numserie, medidas, modelo, material, clvestado, estado, factura
-    Retorna: Un Alert de registro exitoso y redirecciona a la vista de Benes.blade.php
+    Retorna: Un Alert de registro exitoso y redirecciona a la vista de Bienes.blade.php
 
     ********************************************************************************** */ 
     public function store(Request $request)
@@ -148,9 +148,9 @@ class ArticulosController extends Controller
 
 	/* **********************************************************************************
 
-    Funcionalidad: Vista previa del reporte bienes por partida
+    Funcionalidad: Vista previa del reporte bienes por partida, de una partida en especial desplegara todos los bienes de esa partida.
     Parámetros: partida
-    Retorna: Una vista con la vista previa del reporte, BienesPorPartida.blade.php
+    Retorna: Una vista previa del reporte, BienesPorPartida.blade.php
 
     ********************************************************************************** */ 
 	public function BienesXPartida(Request $request){
@@ -170,6 +170,14 @@ class ArticulosController extends Controller
 		return view('ople.reportes.BienesPorPartida', compact('partida','bienesPartida','totalImporte'));
 	}
 
+
+	/* **********************************************************************************
+
+    Funcionalidad: Vista previa del reporte concentrado de bienes por área, 
+    Parámetros: No recibe parámetros
+    Retorna: Una vista previa del reporte, ImporteDeBienesPorArea.blade.php
+
+    ********************************************************************************** */
 	public function importeBienesPorArea(){
 
 		$areaAndImporteTotal = DB::table('articulos')->select('idarea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('idarea')->groupBy('idarea')->get();
@@ -184,6 +192,13 @@ class ArticulosController extends Controller
 		return view('ople.reportes.ImporteDeBienesPorArea', compact('areaAndImporteTotal','totalImporte','nombreArea'));
 	}
 
+	/* **********************************************************************************
+
+    Funcionalidad: Vista previa del reporte concentrado de bienes por partida
+    Parámetros: No recibe parámetros
+    Retorna: Una vista previa del reporte, ImporteDeBienesPorPartida.blade.php
+
+    ********************************************************************************** */
 	public function importeBienesPorPartida(){
 
 		$partidaAndImporteTotal = DB::table('articulos')->select('partida','descpartida', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->groupBy('partida','descpartida')->get();
@@ -196,6 +211,14 @@ class ArticulosController extends Controller
 
 		return view('ople.reportes.ImporteDeBienesPorPartida', compact('partidaAndImporteTotal','totalImporte'));
 	}
+
+	/* **********************************************************************************
+
+    Funcionalidad: Vista previa del reporte inventario por área
+    Parámetros: numArea
+    Retorna: Una vista previa del reporte, InventarioPorArea.blade.php
+
+    ********************************************************************************** */
 
 	public function inventarioPorArea(Request $request){
 
@@ -212,6 +235,14 @@ class ArticulosController extends Controller
 		return view('ople.reportes.InventarioPorArea',compact('area','bienesArea','totalImporte'));
 	}
 
+	/* **********************************************************************************
+
+    Funcionalidad: Vista previa del reporte inventario por orden alfabetico, donde muestra todos lo artículos que existen en la tabla articulos por orden alfabetico
+    Parámetros: No recibe parámetros
+    Retorna: Una vista previa del reporte, InventarioPorOrdenAlfabetico.blade.php
+
+    ********************************************************************************** */
+
 	public function inventarioPorOrdenAlfabetico(){
 
 		$bienesAlfabetico = articulos::orderBy('concepto', 'DESC')->get();
@@ -225,6 +256,14 @@ class ArticulosController extends Controller
 
 		return view('ople.reportes.InventarioPorOrdenAlfabetico',compact('bienesAlfabetico','totalImporte'));
 	}
+
+	/* **********************************************************************************
+
+    Funcionalidad: Vista previa del reporte resguado por empleado, donde muestra todos lo artículos que un empleado a su resguardo
+    Parámetros: numEmpleado
+    Retorna: Una vista previa del reporte, ResguardoPorEmpleado.blade.php
+
+    ********************************************************************************** */
 
 	public function ResguardoPorEmpleado(Request $request){		
 
@@ -240,6 +279,14 @@ class ArticulosController extends Controller
 
 		return view('ople.reportes.ResguardoPorEmpleado', compact('datosEmpleado','articulos','totalArticulos','totalImporte'));
 	}
+
+	/* **********************************************************************************
+
+    Funcionalidad: Vista previa del reporte importe de bienes por año de adquisición, donde muestra todos las partidas y su importe total por el año que se seleccione.
+    Parámetros: anioAdquisicón
+    Retorna: Una vista previa del reporte, ImporteDeBienesPorAnioAdquisicion.blade.php
+
+    ********************************************************************************** */
 
 	public function importeBienesAnioAdquisicion(Request $request){
 		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
@@ -282,6 +329,14 @@ class ArticulosController extends Controller
 		return view('ople.reportes.ImporteDeBienesPorAnioAdquisicion', compact('partidas','anioAdquisicion'));
 	}
 
+	/* **********************************************************************************
+
+    Funcionalidad: Vista previa del reporte bienes por área y ordenado por empleado, donde muestra todos los bienes que cuenta un área en especifico ordenado por el empleado que lo tiene en su resguardo
+    Parámetros: area
+    Retorna: Una vista previa del reporte, BienesDeUnAreaOrdenadoPorEmpleado.blade.php
+
+    ********************************************************************************** */
+
 	public function bienesAreaOrdenadoEmpleado(Request $request){
 		$area = explode("*", $request->area);
 
@@ -298,6 +353,13 @@ class ArticulosController extends Controller
 		return view('ople.reportes.BienesDeUnAreaOrdenadoPorEmpleado', compact('nombrearea','articulos'));
 	}
 
+	/* **********************************************************************************
+
+    Funcionalidad: Vista previa del reporte inventario por orden alfabetico nuevo, donde muestra todos los artículos ordenados por partida y luego por orden alfabetico
+    Parámetros: No recibe parámetros
+    Retorna: Una vista previa del reporte, InventarioPorOrdenAlfabeticoNuevo.blade.php
+
+    ********************************************************************************** */
 	public function inventarioPorOrdenAlfabeticoNuevo(){
 
 		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
@@ -323,6 +385,15 @@ class ArticulosController extends Controller
 	}
 
 	// ************ generar reportes ************
+
+
+	/* **********************************************************************************
+
+    Funcionalidad: Genera la vista del reporte PDF de bienes por partida, donde muentra todos los bienes que tiene una partida en especifico.
+    Parámetros: numPartida
+    Retorna: Retorna un pdf, BienesPorPartidaPDF.pdf
+
+    ********************************************************************************** */
 	public function BienesPorPartida(Request $request){
 
 		$partida = $request;
@@ -345,6 +416,13 @@ class ArticulosController extends Controller
 		return $pdf->inline('BienesPorPartida-'.$request->nombrePartida.'.pdf');
 	}
 
+	/* **********************************************************************************
+
+    Funcionalidad: Genera la vista del reporte PDF de concentrado de bienes por área, donde muentra todas las áreas y su total de importe de todos los artículos de esa área
+    Parámetros: no recibe parámetros
+    Retorna: Retorna un pdf, ImporteDeBienesPorArea.pdf
+
+    ********************************************************************************** */
 	public function importeBienesPorAreaPDF(){
 		$areaAndImporteTotal = DB::table('articulos')->select('idarea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('idarea')->groupBy('idarea')->get();
 		$nombreArea = areas::all();
@@ -363,7 +441,13 @@ class ArticulosController extends Controller
 		return $pdf->inline('ImporteDeBienesPorArea.pdf');
 	}
 
+	/* **********************************************************************************
 
+    Funcionalidad: Genera la vista del reporte PDF de concentrado de bienes por partida, donde muentra todas las partidas y su total de importe de todos los artículos de esas partidas
+    Parámetros: no recibe parámetros
+    Retorna: Retorna un pdf, ImporteBienesPorPartida.pdf
+
+    ********************************************************************************** */
 	public function importeBienesPorPartidaPDF(){
 
 		$partidaAndImporteTotal = DB::table('articulos')->select('partida','descpartida', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->groupBy('partida','descpartida')->get();
@@ -382,6 +466,13 @@ class ArticulosController extends Controller
 		return $pdf->inline('ImporteBienesPorPartida.pdf');
 	}
 
+	/* **********************************************************************************
+
+    Funcionalidad: Genera la vista del reporte PDF de inventario por área, donde muestra todos los artículos de una área en especial.
+    Parámetros: numArea.
+    Retorna: Retorna un pdf, InventarioPorArea.pdf
+
+    ********************************************************************************** */
 	public function inventarioPorAreaPDF(Request $request){
 		$area = $request;
 		$bienesArea = articulos::where('idarea', $request->numArea)->orderBy('concepto')->get();
@@ -397,6 +488,13 @@ class ArticulosController extends Controller
 		return $pdf->inline('InventarioPorArea-'.$request->nombreArea.'.pdf');
 	}
 
+	/* **********************************************************************************
+
+    Funcionalidad: Genera la vista del reporte PDF de inventario por orden alfabético , donde muestra todos los artículos la base de datos, de la tabla articulos ordenados alfabeticamente.
+    Parámetros: No recibe parámetros
+    Retorna: Retorna un pdf, inventarioPorOrdenAlfabetico.pdf
+
+    ********************************************************************************** */
 	public function inventarioPorOrdenAlfabeticoPDF(){
 
 		$bienesAlfabetico = articulos::orderBy('concepto', 'ASC')->get();
@@ -414,6 +512,13 @@ class ArticulosController extends Controller
 
 	}
 
+	/* **********************************************************************************
+
+    Funcionalidad: Genera la vista del reporte PDF del resguardo por empleado , donde muestra todos los artículos que tiene en su resguardo un empleado es especifico.
+    Parámetros: numEmpleado
+    Retorna: Retorna un pdf, ResguardoPorEmpleado.pdf
+
+    ********************************************************************************** */
 	public function ResguardoPorEmpleadoPDF(Request $request){
 
 		$datosEmpleado = empleados::select('numemple','nombre','nombrearea','cargo')->where('numemple', $request->numEmpleado)->get();
@@ -431,10 +536,17 @@ class ArticulosController extends Controller
 		$fecha = $hoy['mday'].'/'.$hoy['mon'].'/'.$hoy['year'];
 
 		$pdf = PDF::loadView('ople.reportes.pdf.ResguardoPorEmpleadoPDF', compact('datosEmpleado','articulos','totalArticulos','totalImporte','fecha'))->setPaper('letter', 'landscape');
-		return $pdf->inline('InventarioPorArea-'.$request->nombreEmpleado.'.pdf');
+		return $pdf->inline('ResguardoPorEmpleado-'.$request->nombreEmpleado.'.pdf');
 
 	}
 
+	/* **********************************************************************************
+
+    Funcionalidad: Genera la vista del reporte PDF del importe de bienes por año de adquisición, donde muestra todos las partidas y su importe total por el año que se seleccione.
+    Parámetros: anioAdquisicón
+    Retorna: Retorna un pdf, ImporteDeBienesPorAñoDeAdquisicion.pdf
+
+    ********************************************************************************** */
 	public function importeBienesAnioAdquisicionPDF(Request $request){
 		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
 		$anioAdquisicion = $request;
@@ -475,6 +587,14 @@ class ArticulosController extends Controller
 		return $pdf->inline('ImporteDeBienesPorAñoDeAdquisicion-'.$request->anioAdquisicion.'.pdf');
 	}
 
+	/* **********************************************************************************
+
+    Funcionalidad: Genera la vista del reporte PDF de bienes por área ordenados por empleados, donde muestra todos los artículos de un área ordenados por empleado
+    Parámetros: area
+    Retorna: Retorna un pdf, BienesDeUnAreaOrdenadoPorEmpleado.pdf
+
+    ********************************************************************************** */
+
 	public function bienesAreaOrdenadoEmpleadoPDF(Request $request){
 		$area = explode("*", $request->area);
 
@@ -488,6 +608,13 @@ class ArticulosController extends Controller
 		return $pdf->inline('BienesDeUnAreaOrdenadoPorEmpleado-'.$nombrearea.'.pdf');
 	}
 
+	/* **********************************************************************************
+
+    Funcionalidad: Genera la vista del reporte PDF de inventario por orden alfabético nuevo, donde muestra todos los artículos del sistema de la tabla articulos, ordenados por partida y luego por orden alfabético.
+    Parámetros: No recibe parámetros
+    Retorna: Retorna un pdf, InventarioPorOrdenAlfabeticoNuevo.pdf
+
+    ********************************************************************************** */
 	public function inventarioPorOrdenAlfabeticoNuevoPDF(){
 		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
 		$numPartidas = partidas::count();
@@ -514,6 +641,17 @@ class ArticulosController extends Controller
 
 
 	// ************ editar artículo ************
+
+	/* **********************************************************************************
+
+    Funcionalidad: Obtiene toda la información de un artículo en especial, obtenida por el numeroinv de este
+    Parámetros: numeroinv
+    Retorna: Regresa con un JSON con toda la información obtenida del artículo en la base de datos:
+    			partida, descpartida, linea, desclinea, sublinea, descsublinea, consecutivo, numeroinv,
+				concepto, marca, importe, colores, fechacomp, idarea, nombrearea, numemple, nombreemple,
+				numserie, medidas, modelo, material, clvestado, estado, factura
+
+    ********************************************************************************** */
 	public function InformacionArticulo(Request $request){
 
 		$infoArticulo = articulos::where('numeroinv',$request->numInventario)->get();
@@ -539,6 +677,14 @@ class ArticulosController extends Controller
 
 		return response()->json($infoArticulo);
 	}
+
+	/* **********************************************************************************
+
+    Funcionalidad: Actualiza la información de un artículo en especial. 
+    Parámetros: estado, clvestado, medidas, material, colores, numserie, modelo, marca, fechacomp, importe, factura
+    Retorna: Regresa un Alert con el mensaje de actualización exitosa y redirecciona a la vista de Bienes OPLE
+
+    ********************************************************************************** */
 
 	public function EditarArticulos(Request $request){
 		
@@ -593,6 +739,14 @@ class ArticulosController extends Controller
 
 	// ************ Depreciación ************
 
+
+	/* **********************************************************************************
+
+    Funcionalidad: Obtiene todas las partidas para la vista principal del módulo de depreciación 
+    Parámetros: No recibe parámetros
+    Retorna: Vista del menu de depreciación, depreciacionMenu.blade.php
+
+    ********************************************************************************** */
 	public function depreciacion(){
 		$usuario = auth()->user();
 		$partidas = partidas::select('partida','descpartida')->whereNotNull(['porcentajeDepreciacion','aniosvida'])->get();  
@@ -600,6 +754,14 @@ class ArticulosController extends Controller
 		
 		return view('depreciacion.depreciacionMenu',compact('usuario','partidas'));
 	}
+
+	/* **********************************************************************************
+
+    Funcionalidad: Calcula de depreciación de los artículos de una partida en especial
+    Parámetros: numPartida
+    Retorna: Vista del resultado de la depreciación, tablaDepreciacion.blade.php
+
+    ********************************************************************************** */
 
 	public function calculoDepreciacion(Request $request){
 		$partida = $request;
@@ -847,6 +1009,13 @@ class ArticulosController extends Controller
 		return view('depreciacion.tablaDepreciacion',compact('partida','articulos','noDepreciacion','datosPartida','anioAnterior', 'anioActual'));
 	}
 
+	/* **********************************************************************************
+
+    Funcionalidad: Muestra de depreciación de un mes en especifico, de todas las partidas su total y su depreciación mensual.
+    Parámetros: fecha
+    Retorna: Un reporte en pdf, DEPRECIACIÓN.pdf
+
+    ********************************************************************************** */
 
 	public function reportePDFDepreciacion(Request $request){
 
@@ -912,8 +1081,8 @@ class ArticulosController extends Controller
 
 		 	// array_add($datosPartida[0], 'prueba', $partidas[$key]->partida);
 
-		 	print_r($partidas);
-		 	exit;
+		 	// print_r($partidas);
+		 	 //exit;
 
 		 } 
 

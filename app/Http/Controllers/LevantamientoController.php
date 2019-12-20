@@ -14,12 +14,29 @@ use PDF;
 use DB;
 use DateTime;
 
+/*************** Funciones para el módulo de levantamiento de inventario *****************************/
 class LevantamientoController extends Controller
 {
+
+    /* **********************************************************************************
+ 
+    Funcionalidad: Constructor  de la clase, sirve para mantener este controlador con la autentificación del logueo del usuario
+    Parámetros: No recibe parámetros
+    Retorna: No regresa nada
+
+    ********************************************************************************** */
     public function __construct()
     {
         $this->middleware('auth');
     }
+
+    /* **********************************************************************************
+ 
+    Funcionalidad: Obtiene todos los lotes en estado cerrado o abiertos de la tabla lotes de la base de datos
+    Parámetros: No recibe parámetros
+    Retorna: La vista principal de este módulo, levantamientoInventario.blade.php
+
+    ********************************************************************************** */
     /**
      * Display a listing of the resource.
      *
@@ -82,6 +99,13 @@ class LevantamientoController extends Controller
         return view('levantamientoInventario.levantamientoInventario', compact('usuario','lotes'));
     }
 
+    /* **********************************************************************************
+ 
+    Funcionalidad: Obtiene el detalle de los artículos que tiene un lote de un empleado
+    Parámetros: id_lote
+    Retorna: Un JSON con todos los detalles de la bitacoralotes y la información de cada artículo
+
+    ********************************************************************************** */
     public function levantamientoInventarioDetalleEsp(Request $request){
         $numeroempleado = lotes::select('numeroempleado')->where('Id', $request->id_lote)->first();
 
@@ -165,6 +189,14 @@ class LevantamientoController extends Controller
         return response()->json($bitacoralotes);
     }
 
+    /* **********************************************************************************
+ 
+    Funcionalidad: Obtiene el detalle de los artículos que tiene un lote en general
+    Parámetros: id_lote
+    Retorna: Un JSON con todos los detalles de la bitacoralotes y la información de cada artículo
+
+    ********************************************************************************** */
+
     public function levantamientoInventarioDetalleGral(Request $request){
         $numeroempleado = lotes::select('numeroempleado')->where('Id', $request->id_lote)->first();
 
@@ -215,6 +247,14 @@ class LevantamientoController extends Controller
 
         return response()->json($bitacoralotes);
     }
+
+    /* **********************************************************************************
+ 
+    Funcionalidad: Genera un reporte en pdf del detalle del lote, ya sea especial o general
+    Parámetros: id_lote
+    Retorna: Un reporte en pdf, DetalleEspecificoPDF.pdf o DetalleGeneralPDF.pdf
+
+    ********************************************************************************** */
 
     public function levantamientoInventarioDetallePDF(Request $request){
 
@@ -295,6 +335,13 @@ class LevantamientoController extends Controller
         }
     }
 
+    /* **********************************************************************************
+ 
+    Funcionalidad: Obtiene de nuevo la información de los lotes en estado cerrado o abiertos de la tabla lotes de la base de datos
+    Parámetros: No recibe parámetros
+    Retorna: La vista principal de este módulo, actualizarTabla.blade.php 
+
+    ********************************************************************************** */
     public function actualizar()
     {
         $lotes = lotes::whereNotIn('estado', ['Cancelado'])->get();
@@ -350,6 +397,14 @@ class LevantamientoController extends Controller
         //print_r($lotes);
         return view('levantamientoInventario.actualizarTabla', compact('lotes'));
     }
+
+    /* **********************************************************************************
+ 
+    Funcionalidad: Se asigna un artículo al empleado que se le fue levantado el inventario 
+    Parámetros: numeroEmpleado, numeroinv
+    Retorna: Un Alert con el mensaje Asignación exitosa y redirecciona a la vista principal 
+
+    ********************************************************************************** */
 
     public function confirmacionAsignacionL(Request $request){
         $empleado = empleados::where('numemple', $request->hiddenNumeroEmpleado)->get();
@@ -425,6 +480,14 @@ class LevantamientoController extends Controller
         return redirect()->route('levantamientoInventario');
 
     }
+
+    /* **********************************************************************************
+ 
+    Funcionalidad: Se elimina un artículo de la lista del inventario. 
+    Parámetros: numeroinventario
+    Retorna: Regresa 1
+
+    ********************************************************************************** */
 
     public function eliminarArticuloLevantamiento(Request $request){
         $numeroinventario = $request->numeroinventario;

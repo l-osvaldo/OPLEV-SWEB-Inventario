@@ -8,58 +8,67 @@ use APP\partidas;
 use App\lineas;
 use Alert;
 
+/*************** Funciones para el módulo de sublíneas *****************************/
 class SublineasController extends Controller
 {
+
+  /* **********************************************************************************
+ 
+    Funcionalidad: Constructor  de la clase, sirve para mantener este controlador con la autentificación del logueo del usuario
+    Parámetros: No recibe parámetros
+    Retorna: No regresa nada
+
+    ********************************************************************************** */
   public function __construct()
   {
       $this->middleware('auth');
   }
 
-  public function formValidationPost(Request $request)
-  {
-    $this->validate($request,[
+  // public function formValidationPost(Request $request)
+  // {
+  //   $this->validate($request,[
 
-        'partidaA'           =>  'required|numeric',
-        'descpartida'       =>  'required|min:1|max:250',
-        'lineaA'             =>  'required|numeric',
-        'LineaMax'             =>  'required|numeric',
-        'desclinea'         =>  'required|min:1|max:250',
-        'sublinea'          =>  'required|numeric',
-        'descsub'           =>  'required|min:1|max:250',
-        'total'             =>  'required|numeric',
+  //       'partidaA'           =>  'required|numeric',
+  //       'descpartida'       =>  'required|min:1|max:250',
+  //       'lineaA'             =>  'required|numeric',
+  //       'LineaMax'             =>  'required|numeric',
+  //       'desclinea'         =>  'required|min:1|max:250',
+  //       'sublinea'          =>  'required|numeric',
+  //       'descsub'           =>  'required|min:1|max:250',
+  //       'total'             =>  'required|numeric',
 
-        ],[
+  //       ],[
             
-    'partidaA.required'     => 'La :attribute es obligatoria.',
-    'partidaA.integer'      => 'La :attribute debe ser un entero.',
+  //   'partidaA.required'     => 'La :attribute es obligatoria.',
+  //   'partidaA.integer'      => 'La :attribute debe ser un entero.',
 
-    'descpartida.required'   => 'La :attribute es obligatoria.',
-    'descpartida.min'        => 'La :attribute debe contener mas de una letra.',
-    'descpartida.max'        => 'La :attribute debe contener max 30 letras.',
+  //   'descpartida.required'   => 'La :attribute es obligatoria.',
+  //   'descpartida.min'        => 'La :attribute debe contener mas de una letra.',
+  //   'descpartida.max'        => 'La :attribute debe contener max 30 letras.',
 
-    'lineaA.required'     => 'La :attribute es obligatoria.',
-    'lineaA.integer'      => 'La :attribute debe ser un entero.',
+  //   'lineaA.required'     => 'La :attribute es obligatoria.',
+  //   'lineaA.integer'      => 'La :attribute debe ser un entero.',
 
-    'LineaMax.required'     => 'La :attribute es obligatoria.',
-    'LineaMax.integer'      => 'La :attribute debe ser un entero.',
+  //   'LineaMax.required'     => 'La :attribute es obligatoria.',
+  //   'LineaMax.integer'      => 'La :attribute debe ser un entero.',
 
-    'desclinea.required'   => 'La :attribute es obligatoria.',
-    'desclinea.min'        => 'La :attribute debe contener mas de una letra.',
-    'desclinea.max'        => 'La :attribute debe contener max 30 letras.',
+  //   'desclinea.required'   => 'La :attribute es obligatoria.',
+  //   'desclinea.min'        => 'La :attribute debe contener mas de una letra.',
+  //   'desclinea.max'        => 'La :attribute debe contener max 30 letras.',
     
-    'sublinea.required'     => 'La :attribute es obligatoria.',
-    'sublinea.integer'      => 'La :attribute debe ser un entero.',
+  //   'sublinea.required'     => 'La :attribute es obligatoria.',
+  //   'sublinea.integer'      => 'La :attribute debe ser un entero.',
 
-    'descsub.required'   => 'La :attribute es obligatoria.',
-    'descsub.min'        => 'La :attribute debe contener mas de una letra.',
-    'descsub.max'        => 'La :attribute debe contener max 30 letras.',
+  //   'descsub.required'   => 'La :attribute es obligatoria.',
+  //   'descsub.min'        => 'La :attribute debe contener mas de una letra.',
+  //   'descsub.max'        => 'La :attribute debe contener max 30 letras.',
 
-    'total.required'     => 'La :attribute es obligatoria.',
-    'total.integer'      => 'La :attribute debe ser un entero.',
-        ]);
+  //   'total.required'     => 'La :attribute es obligatoria.',
+  //   'total.integer'      => 'La :attribute debe ser un entero.',
+  //       ]);
 
-    Alert::error('Revise sus campos', '¡Error!')->autoclose(2000);
-  }
+  //   Alert::error('Revise sus campos', '¡Error!')->autoclose(2000);
+  // }
 
 
   public function show(Request $request)

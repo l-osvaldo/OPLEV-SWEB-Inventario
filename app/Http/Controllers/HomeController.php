@@ -8,9 +8,17 @@ use App\partidas;
 use Alert;
 use Auth;
 
-
+/*************** Funciones para el módulo de inicio *****************************/
 class HomeController extends Controller
 {
+
+    /* **********************************************************************************
+ 
+    Funcionalidad: Constructor  de la clase, sirve para mantener este controlador con la autentificación del logueo del usuario
+    Parámetros: No recibe parámetros
+    Retorna: No regresa nada
+
+    ********************************************************************************** */
     /**
      * Create a new controller instance.
      *
@@ -26,20 +34,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index2()
-    {
-        $usuario = auth()->user();
 
-        if (Auth::check()){
+    /* **********************************************************************************
+ 
+    Funcionalidad: Verifica que el usuario este autentificado y envia a la vista principal Bienes OPLE, si no esta autentificado regresa a la vista de Login
+    Parámetros: Datos del usuario autentificado
+    Retorna: Vista Bienes OPLE o vista Login
 
-            return view('catalogos.bienes', compact('usuario'));   
-        }
-        else
-        {
-          return redirect()->route('auth.login');
-        }
-    }
-
+    ********************************************************************************** */
 
     public function index(Request $request)
     {

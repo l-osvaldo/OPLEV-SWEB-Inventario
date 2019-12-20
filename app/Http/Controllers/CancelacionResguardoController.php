@@ -10,13 +10,29 @@ use App\cancelacionresguardos;
 use App\bitacoracancelaciones;
 use PDF;
 
+/*************** Funciones para el módulo de Cancelación de resguardo *****************************/
 class CancelacionResguardoController extends Controller
 {
+    /* **********************************************************************************
+ 
+    Funcionalidad: Constructor  de la clase, sirve para mantener este controlador con la autentificación del logueo del usuario
+    Parámetros: No recibe parámetros
+    Retorna: No regresa nada
 
+    ********************************************************************************** */
     public function __construct()
     {
         $this->middleware('auth');
     }
+
+
+    /* **********************************************************************************
+ 
+    Funcionalidad: Obtiene el nombre de todos los empleados.
+    Parámetros: No recibe parámetros
+    Retorna: Vista principal del módulo de cancelación de resguardo, cancelacionResguardo.blade.php
+
+    ********************************************************************************** */
     /**
      * Display a listing of the resource.
      *
@@ -31,6 +47,13 @@ class CancelacionResguardoController extends Controller
         return view('cancelacion.cancelacionResguardo', compact('usuario','empleados'));
     }
 
+    /* **********************************************************************************
+ 
+    Funcionalidad: Obtiene todos los artículos que esten al resguardo de un empleado en especial, de las tablas articulos y articulosecos
+    Parámetros: numEmpleado
+    Retorna: Vista de los articulos de un empleado, tableBienesEmpleado.blade.php
+
+    ********************************************************************************** */
 
     public function bienesDelEmpleado(Request $request){
         $bienesOPLE = articulos::where('numemple',$request->numEmpleado)->get();
@@ -44,6 +67,14 @@ class CancelacionResguardoController extends Controller
 
         return view('cancelacion.tableBienesEmpleado', compact('bienesOPLE','bienesECO','validarBtnCancelacion'));
     }
+
+    /* **********************************************************************************
+ 
+    Funcionalidad: Cambia los registros de numemple, nombreemple, idarea, nombrearea de las tablas articulos y articulosecos a BODEGA 
+    Parámetros: numEmpleado
+    Retorna: Regresa el id de la cancelación
+
+    ********************************************************************************** */
 
     public function cancelacionResguardoconfirmado(Request $request){
         $bienesOPLE = articulos::where('numemple',$request->numEmpleado)->get();
@@ -99,6 +130,13 @@ class CancelacionResguardoController extends Controller
         return $cancelacion->id;
     }
 
+    /* **********************************************************************************
+ 
+    Funcionalidad: Genera el reporte en pdf de los articulos que fueron asignados a BODEGA despúes de la cancelación del resguardo
+    Parámetros: id_cancelacion
+    Retorna: Regresa un pdf, CancelacionDeResguardo.pdf
+
+    ********************************************************************************** */
     public function cancelacionResguardoPDF(Request $request){
 
         $articulosOPLE = bitacoracancelaciones::where([['id_cancelacion', $request->id_cancelacion],['numeroinventario','like','%OPLEV%']])->orWhere('numeroinventario','like','%IEV%')->get();

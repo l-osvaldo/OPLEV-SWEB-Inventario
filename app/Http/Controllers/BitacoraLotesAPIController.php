@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\bitacoralotes;
 
+/*************** Funciones para los web service de la aplicación  *****************************/
 class BitacoraLotesAPIController extends Controller
 {
     /**
@@ -16,6 +17,14 @@ class BitacoraLotesAPIController extends Controller
     {
         
     }
+
+    /* **********************************************************************************
+
+    Funcionalidad: Crea el registro de una bitacora de un lote 
+    Parámetros: id_lote y numeroinventario
+    Retorna: Un JSON con la información de una bitacoralotes: idlote ,numeroinventario
+
+    ********************************************************************************** */
 
     /**
      * Store a newly created resource in storage.
@@ -34,6 +43,15 @@ class BitacoraLotesAPIController extends Controller
 
         return response()->json($bitacoralote);
     }
+
+
+    /* **********************************************************************************
+
+    Funcionalidad: Obtiene la información de una bitacora de acuerdo al id enviado 
+    Parámetros: numeroinventario
+    Retorna: Un JSON con la información de una bitacoralotes: idlote ,numeroinventario
+
+    ********************************************************************************** */
 
     /**
      * Display the specified resource.
@@ -60,6 +78,14 @@ class BitacoraLotesAPIController extends Controller
         //
     }
 
+    /* **********************************************************************************
+
+    Funcionalidad: Elimina un registro de la tabla bitacoralotes 
+    Parámetros: numeroinventario
+    Retorna: Un JSON con la información de una bitacoralotes: idlote ,numeroinventario
+
+    ********************************************************************************** */
+
     /**
      * Remove the specified resource from storage.
      *
@@ -75,6 +101,14 @@ class BitacoraLotesAPIController extends Controller
 
         return response()->json($bitacoralote);;
     }
+
+    /* **********************************************************************************
+
+    Funcionalidad: obtiene todos los registros de un id_lote en especial
+    Parámetros: id_lote
+    Retorna: Un JSON con la información de una bitacoralotes: idlote ,numeroinventario
+
+    ********************************************************************************** */
 
     public function allBitacorasId($id){
         $bitacoralote = bitacoralotes::where('id_lote',$id)->get();

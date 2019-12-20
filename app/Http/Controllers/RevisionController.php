@@ -11,11 +11,27 @@ use App\bitacoramovimientos;
 use App\empleados;
 use Alert;
 
+/*************** Funciones para el módulo de revisión *****************************/
 class RevisionController extends Controller
 {
+    /* **********************************************************************************
+ 
+    Funcionalidad: Constructor  de la clase, sirve para mantener este controlador con la autentificación del logueo del usuario
+    Parámetros: No recibe parámetros
+    Retorna: No regresa nada
+
+    ********************************************************************************** */
     public function __construct(){
         $this->middleware('auth');
     }
+
+    /* **********************************************************************************
+ 
+    Funcionalidad: obtiene todas las cancelaciones de resguardo que se tienen registradas
+    Parámetros: No recibe parámetros
+    Retorna: Vista principal del módulo, revision.blade.php
+
+    ********************************************************************************** */
 
     public function index(){
         $usuario = auth()->user();
@@ -68,6 +84,14 @@ class RevisionController extends Controller
         return view('revision.revision', compact('usuario','cancelaciones','empleados'));
     }
 
+    /* **********************************************************************************
+ 
+    Funcionalidad: obtiene todas los artículos OPLE de la cancelación para mostrar más a detalle su información
+    Parámetros: id_cancelacion
+    Retorna: Un JSON con la información de los articulos OPLE
+
+    ********************************************************************************** */
+
     public function detalleOPLE(Request $request){
     	$articulosOPLE = bitacoracancelaciones::where([['id_cancelacion', $request->id_cancelacion],['numeroinventario','like','%OPLEV%']])->orWhere('numeroinventario','like','%IEV%')->get();
 
@@ -87,6 +111,14 @@ class RevisionController extends Controller
     		return 0;
     	}    	
     }
+
+    /* **********************************************************************************
+ 
+    Funcionalidad: obtiene todos los artículos ECO de la cancelación para mostrar más a detalle su información
+    Parámetros: id_cancelacion
+    Retorna: Un JSON con la información de los articulos ECO
+
+    ********************************************************************************** */
 
 
     public function detalleECO(Request $request){
@@ -108,6 +140,14 @@ class RevisionController extends Controller
     		return 0;
     	}    	
     }
+
+    /* **********************************************************************************
+ 
+    Funcionalidad: obtiene todos los artículos ECO y OPLE de la cancelación para asignarlos a un empleado
+    Parámetros: id_cancelacion
+    Retorna: Un JSON con todos los artículos asignables
+
+    ********************************************************************************** */
 
     public function articulosAsignables(Request $request){
         $articulos = bitacoracancelaciones::where([['id_cancelacion',$request->id_cancelacion],['asignado','']])->get();
@@ -137,6 +177,14 @@ class RevisionController extends Controller
             return 0; 
         }
     }
+
+    /* **********************************************************************************
+ 
+    Funcionalidad: Asigna uno o varios artículos a un empleado seleccionado
+    Parámetros: numemple, numeroinv[]
+    Retorna: Un Alert con un mensaje de Registro Exitoso y redirecciona a la pagina principal del módulo
+
+    ********************************************************************************** */
 
     public function confirmacionAsignacion(Request $request){
         $datosEmpleado	= explode("*", $request->empleadosAsignacion);

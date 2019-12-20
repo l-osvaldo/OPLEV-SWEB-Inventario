@@ -8,8 +8,16 @@ use App\lotes;
 //header('Access-Control-Allow-Origin: *');
 //header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
 
+/*************** Funciones para los web service de la aplicación  *****************************/
 class LoteAPIController extends Controller
 {
+
+    /* **********************************************************************************
+    Funcionalidad: Obtiene todos los lotes que tengan estado abierto
+    Parámetros: No recibe parámetros
+    Retorna: regresa un json con todos los lotes que estan registrados.
+
+    ********************************************************************************** */
     /**
      * Display a listing of the resource.
      *
@@ -21,6 +29,14 @@ class LoteAPIController extends Controller
 
         return response()->json($lotes);
     }
+
+
+    /* **********************************************************************************
+    Funcionalidad: Crea un nuevo registro en el sistema
+    Parámetros: nombre, numeroempleado, descripcion y estado
+    Retorna: regresa un json del lote registrado
+
+    ********************************************************************************** */
 
     /**
      * Store a newly created resource in storage.
@@ -41,6 +57,13 @@ class LoteAPIController extends Controller
         return response()->json($lote);
     }
 
+    /* **********************************************************************************
+    Funcionalidad: Obtiene la información de un lote en especifico
+    Parámetros: Id
+    Retorna: regresa un json del lote solicitado
+
+    ********************************************************************************** */
+
     /**
      * Display the specified resource.
      *
@@ -53,6 +76,13 @@ class LoteAPIController extends Controller
 
         return response()->json($lote);
     }
+
+    /* **********************************************************************************
+    Funcionalidad: Actualiza el estado de un lote en especifico
+    Parámetros: Id, estado
+    Retorna: regresa un json del lote actualizado
+
+    ********************************************************************************** */
 
     /**
      * Update the specified resource in storage.
@@ -80,12 +110,26 @@ class LoteAPIController extends Controller
         //
     }
 
+    /* **********************************************************************************
+    Funcionalidad: obtiene los lotes con estado cerrado y de un empleado en especifico
+    Parámetros: No recibe parámetros
+    Retorna: regresa un json de lotes
+
+    ********************************************************************************** */
+
     public function lotesCerradosEmpleado(){
 
         $lotes = lotes::where([['estado','Cerrado'],['nombre', null]])->get();
 
         return response()->json($lotes);
     }
+
+    /* **********************************************************************************
+    Funcionalidad: obtiene los lotes con estado cerrado y de un lote general
+    Parámetros: No recibe parámetros
+    Retorna: regresa un json de lotes
+
+    ********************************************************************************** */
 
     public function lotesCerradosGral(){
 

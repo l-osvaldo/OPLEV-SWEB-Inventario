@@ -8,9 +8,16 @@ use App\User;
 
 header('Access-Control-Allow-Origin: *');
 
+/*************** Funciones para los web service de la aplicación  *****************************/
 class UserAPIController extends Controller
 {
 
+    /* **********************************************************************************
+    Funcionalidad: Obtiene todos los usuarios del sistema
+    Parámetros: No recibe parámetros
+    Retorna: regresa un json con todos los usuarios del sistema
+
+    ********************************************************************************** */
     /**
      * Display a listing of the resource.
      *
@@ -22,6 +29,13 @@ class UserAPIController extends Controller
 
         return response()->json($usuarios);
     }
+
+    /* **********************************************************************************
+    Funcionalidad: Login de la aplicación, verifica si existe el usuario y su password
+    Parámetros: usuario y pass
+    Retorna: regresa un json con la respuesta
+
+    ********************************************************************************** */
 
     /**
      * Store a newly created resource in storage.

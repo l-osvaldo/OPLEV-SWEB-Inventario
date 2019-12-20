@@ -5,8 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\empleados;
 
+/*************** Funciones para los web service de la aplicación  *****************************/
 class EmpleadosAPIController extends Controller
 {
+
+    /* **********************************************************************************
+    Funcionalidad: todos los empleados registrados en el sistema
+    Parámetros: No recibe parámetros
+    Retorna: regresa un JSON con todos los empleados del sistema: numemple, nombreemple, idarea, nombrearea
+
+    ********************************************************************************** */
     /**
      * Display a listing of the resource.
      *
@@ -30,6 +38,13 @@ class EmpleadosAPIController extends Controller
     {
         
     }
+
+    /* **********************************************************************************
+    Funcionalidad: Obtiene un empleado en especial
+    Parámetros: numemple
+    Retorna: regresa un JSON con el empleado seleccionado: numemple, nombreemple, idarea, nombrearea
+
+    ********************************************************************************** */
 
     /**
      * Display the specified resource.
