@@ -1,5 +1,17 @@
 
 
+/********************************** funciones para el modal de bienes ECO, filtros para la presentación de los bienes *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Función que espera un cambio el menu de partidas, si su valor cambia diferente a cero y la partida es diferente a la 51100001 muestra los bienes de esa partida, 
+    				mandando a llamar la función llenarTablePartidasCatECO() y obtiene las líneas de esa partida mediante la función obtenerLineaECOCat(), si la partida es la 51100001
+    				solo obtiene las líneas por la función obtenerLineaECOCat(), ya que esta partida cuenta con muchos bienes, se debe seleccionar también la línea para mostrar sus bienes, 
+    				si el valor regresa a cero, oculta los bienes y las líneas
+    Parámetros: Valor del select 
+    Retorna: Un selector con las líneas de la partida, los bienes de la partida 
+
+********************************************************************************** */
+
 $('#selectPartidaECOCat').change(function() {
 	if ($(this).val() != 0 ){
 		
@@ -30,6 +42,15 @@ $('#selectPartidaECOCat').change(function() {
 
 });
 
+
+/* **********************************************************************************
+    Funcionalidad: Función que espera un cambio el selector de línea para mandar a llamar la función llenarTablePartidasLineasCatECO(), este selector es un segundo filtro 
+    				para mostrar los bienes de una partida
+    Parámetros: Valor del select 
+    Retorna: Los bienes de la partia y línea selecionada
+
+********************************************************************************** */
+
 $('#selectLineaEcoCat').change(function() {
 	if ($(this).val() != 0 ){
 		$('#cargando').css('display','block');
@@ -43,6 +64,13 @@ $('#selectLineaEcoCat').change(function() {
 		}
 	}
 });
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene todos bienes ECO de una partida seleccionada
+    Parámetros: partida
+    Retorna: Un html con un datatable con los bienes de una partida
+
+********************************************************************************** */
 
 function llenarTablePartidasCatECO(partida){
 	// console.log(partida);
@@ -73,6 +101,13 @@ function llenarTablePartidasCatECO(partida){
 
     });
 }
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene todas las líneas de una partida seleccionada
+    Parámetros: partida
+    Retorna: Un selector con todas las líneas de una partida seleccionda
+
+********************************************************************************** */
 
 function obtenerLineaECOCat(){
 
@@ -108,6 +143,13 @@ function obtenerLineaECOCat(){
     });
 
 }
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene todos bienes ECO de una partida y una línea seleccionada
+    Parámetros: partida y línea
+    Retorna: Un html con un datatable con los bienes de una partida y una línea seleccionada
+
+********************************************************************************** */
 
 function llenarTablePartidasLineasCatECO(linea){
 

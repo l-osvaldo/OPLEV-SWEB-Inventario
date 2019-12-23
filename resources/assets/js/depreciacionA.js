@@ -1,3 +1,13 @@
+
+/********************************** funciones para el módulo de depreciación  *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Función que espera un cambio del selector de partida para mandar a llamar la función de depreciacionCalculo(), si el valor es cero, oculta toda la información 
+    Parámetros: Valor del selector 
+    Retorna: No regresa nada
+
+********************************************************************************** */
+
 $('#selectdepreciacionPartida').change(function() {
 	if ( $(this).val() != 0){
 
@@ -10,6 +20,12 @@ $('#selectdepreciacionPartida').change(function() {
 	}
 });
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene toda la depreciación que sufren los bienes de una partida seleccionada 
+    Parámetros: partida
+    Retorna: Un html con un datatable con la depreciación de todos los bienes OPLE de esa partida
+
+********************************************************************************** */
 
 function depreciacionCalculo(partida){
 	$.ajaxSetup(
@@ -35,11 +51,24 @@ function depreciacionCalculo(partida){
   });
 }
 
+/* **********************************************************************************
+    Funcionalidad: Abre un modal para seleccionar la fecha que se requiere la depreciación 
+    Parámetros: No recibe parametros
+    Retorna: Modal
+
+********************************************************************************** */
+
 function generarPDFDepreciacion(){
 
 	$('#ModalDepreciacionPDF').modal('show');
 } 
 
+/* **********************************************************************************
+    Funcionalidad: Configuración del datetimepicker, este sirve para que el usuario seleccione la fecha del reporte de depreciación
+    Parámetros: No recibe parametros
+    Retorna: Calendario
+
+********************************************************************************** */
 
 $(function () {
     $('#datetimepicker13').datetimepicker({
@@ -54,6 +83,13 @@ $(function () {
 
     
 });
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene la fecha que el usuario requiere para el reporte de depreciación
+    Parámetros: No recibe parametros
+    Retorna: Fecha seleccionada
+
+********************************************************************************** */
 
 $('#datetimepicker13').on("change.datetimepicker", function (e) {
   // console.log(e.date);
@@ -75,15 +111,27 @@ $('#datetimepicker13').on("change.datetimepicker", function (e) {
   //console.log(date._d.toString() );
 });
 
+/* **********************************************************************************
+    Funcionalidad: Cierra el modal y regresa sus valores al estado predeterminado 
+    Parámetros: No recibe parametros
+    Retorna: Cierra modal
+
+********************************************************************************** */
 
 $('#ModalDepreciacionPDF').on('hidden.bs.modal', function (e) {
-	console.log('ok modal off');
+	// console.log('ok modal off');
 	var fechaActual = new Date();
 	var fecha = fechaActual.getMonth()+1 + '/01/' + fechaActual.getFullYear();
 	console.log(fecha);
 	$('#datetimepicker13').datetimepicker('date', moment(fecha, 'MM/DD/YYYY'));
 })
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene el reporte de depreciación en pdf y lo abre en una nueva ventana 
+    Parámetros: fecha
+    Retorna: Reporte en formato PDF
+
+********************************************************************************** */
 
 function generarReportePDFDepreciacion(){
 	var date = $('#datetimepicker13').datetimepicker('viewDate');
