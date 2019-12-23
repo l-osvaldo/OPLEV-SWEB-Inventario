@@ -1,3 +1,14 @@
+
+/********************************** funciones para el módulo de área *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Función que espera un cambio el menu de partidas, manda a llamar a la funcion de filtroLineasECO, si el valor es el inicial reinicia el modal
+            llamando ala funcion reiniciarmodalECO 
+    Parámetros: Valor del select 
+    Retorna: No regresa nada
+
+********************************************************************************** */
+
 function datosValidosArea(valor, error, id, tipo)
 {
   // console.log(valor);

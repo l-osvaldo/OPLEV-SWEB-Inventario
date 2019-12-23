@@ -1,3 +1,13 @@
+
+/********************************** funciones para el modal de alta de nuevo bien de los artículos ECO *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Función que espera un cambio el menu de partidas, manda a llamar a la funcion de filtroLineasECO, si el valor es el inicial reinicia el modal
+    				llamando ala funcion reiniciarmodalECO 
+    Parámetros: Valor del select 
+    Retorna: No regresa nada
+
+********************************************************************************** */
 $('#partidaAltaArticuloECO').change(function() {
 	if ($(this).val() != 0){
 
@@ -11,6 +21,13 @@ $('#partidaAltaArticuloECO').change(function() {
 	}
 });
 
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene todas las líneas de la partida solicitada y las presenta en un menu
+    Parámetros: partida
+    Retorna: todas las líneas de la partida solicitada
+
+********************************************************************************** */
 
 function filtroLineasECO(partida){
 	$.ajaxSetup(
@@ -44,6 +61,14 @@ function filtroLineasECO(partida){
 }
 
 
+/* **********************************************************************************
+    Funcionalidad: Función que espera un cambio el menu de línea, si el valor deja de ser 0 manda a llamar la funcion filtroSublineaECO(),
+    				si el menú regresa a ser 0 manda a llamar la funcion reiniciarmodalECO()
+    Parámetros: valor del select de líneas
+    Retorna: No regresa nada
+
+********************************************************************************** */
+
 $('#lineaAltaArticuloECO').change(function(){
 	if ($(this).val() != 0 && $(this).val() != null){
 		$('#sublineaAltaArticuloECO').val("0").change();
@@ -54,6 +79,13 @@ $('#lineaAltaArticuloECO').change(function(){
 		reiniciarmodalECO($(this).attr("id"));
 	}
 });
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene todas las sublíneas de la partida y línea solicitada y las presenta en un menu
+    Parámetros: línea
+    Retorna: todas las sublíneas de la partida y línea solicitada
+
+********************************************************************************** */
 
 function filtroSublineaECO(linea){
 
@@ -88,6 +120,14 @@ function filtroSublineaECO(linea){
       }); 
 }
 
+/* **********************************************************************************
+    Funcionalidad: Función que espera un cambio el menu de sublínea, si el valor deja de ser 0 manda a llamar la funcion generarNumeroInventarioECO()
+    				y cambia de estado los campos que no se pueden modficar a editables, si el menú regresa a ser 0 manda a llamar la funcion reiniciarmodalECO()
+    Parámetros: valor del select de sublíneas
+    Retorna: Hace que los campos con estado disabled se puedan modificar
+
+********************************************************************************** */
+
 $('#sublineaAltaArticuloECO').change(function(){
 	if ($(this).val() != 0 && $(this).val() != null){
 		var lineaCompleta = 	$('#lineaAltaArticuloECO').val().split('*');
@@ -114,11 +154,24 @@ $('#sublineaAltaArticuloECO').change(function(){
 	}
 });
 
+/* **********************************************************************************
+    Funcionalidad: Función que espera un cambio del selector de número de bienes a registrar, manda a llamar a la función generarNumeroInventarioECO 
+    Parámetros: valor del select de cantidad de bienes
+    Retorna: No regresa nada 
+
+********************************************************************************** */
+
 $('#numberNumBienesECO').change(function(){
 	generarNumeroInventarioECO($(this).val());
 	setTimeout(generarNumeroInventarioECO($(this).val()),2500);
 });
 
+/* **********************************************************************************
+    Funcionalidad: Genera los número de inventarios que se le asignarán a los artículos registrados
+    Parámetros: cantidad de artículos a registrar
+    Retorna: los numeros de inventarios que serán registrados
+
+********************************************************************************** */
 
 function generarNumeroInventarioECO(cantidadArticulos){
 
@@ -181,9 +234,17 @@ function generarNumeroInventarioECO(cantidadArticulos){
 	  	generarNumeroInventarioECO(1);
 	  }
 
-	
 }
 
+
+/* **********************************************************************************
+    Funcionalidad: El modal esta validado, si el valor del selector de partida cambia a cero, todo los valores del formulario del registro vuelven a su estado original,
+    				si es el de línea el que vuelve a cero, se reinicia todo excepto el selector de partidas, de igual forma si el valor del selector de sublineas cambia a cero
+    				se reinicia el modal excepto los selectores de partidas y líneas
+    Parámetros: campo, desde donde se reiniciara el modal, partidas, lineas o sublineas 
+    Retorna: No regresa nada
+
+********************************************************************************** */
 
 function reiniciarmodalECO(campo){
 	switch(campo){
@@ -254,6 +315,14 @@ function reiniciarmodalECO(campo){
 	}
 }
 
+/* **********************************************************************************
+    Funcionalidad: Espera que el usuario de click sobre el boton de guardar artículo, esta función 
+    				lanza un alerta de confirmación para registrar los artículos
+    Parámetros: Los valores del formulario de registro de un nuevo bien 
+    Retorna: No regresa nada
+
+********************************************************************************** */
+
 $('#btnGuardarArticuloECO').on('click',function(e){
  e.preventDefault();
  var form = $(this).parents('form');
@@ -270,10 +339,27 @@ $('#btnGuardarArticuloECO').on('click',function(e){
  });
 });
 
+/* **********************************************************************************
+
+    Funcionalidad: Función que espera que el usuario presione el boton de cancelar o cierre el modal a traves de la x que esta en la parte superior izquierda del modal,
+    				esto desaparece el modal y cambio el valor de la partida a cero, esto automaticamente reinicia todos los valores del modal a los valores iniciales
+    Parámetros: no recibe parámetros
+    Retorna: Cancela el modal
+
+********************************************************************************** */
+
 $('#altasECOModal').on('hidden.bs.modal', function (e) {
   //reiniciarmodal('partidaAltaArticulo');
   $('#partidaAltaArticuloECO').val("0").change();
 });
+
+/* **********************************************************************************
+
+    Funcionalidad: Mascara para el campo de precio unitario, esta función hace que se muestre siempre un prefijo en el campo, antes del valor se muestra 'MXN$ '
+    Parámetros: no recibe parámetros
+    Retorna: Una mascara para el campo de texto de precio unitario, se muestra siempre un prefijo antes de la cantidad 'MXN$ '
+
+********************************************************************************** */
 
 $("#txtImporteECO").maskMoney({
 	// The symbol to be displayed before the value entered by the user

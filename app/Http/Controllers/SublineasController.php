@@ -71,6 +71,15 @@ class SublineasController extends Controller
   // }
 
 
+  /* **********************************************************************************
+ 
+    Funcionalidad: Obtiene las sublíneas de una partida y una línea en especifico
+    Parámetros: partida, línea
+    Retorna: Vista de sublíneas, TablaSublinea.blade.php
+
+  ********************************************************************************** */
+
+
   public function show(Request $request)
   {          
     $partida = $request->get('Partidas');
@@ -98,6 +107,14 @@ class SublineasController extends Controller
     
   }
 
+  /* **********************************************************************************
+ 
+    Funcionalidad: Obtiene todas las líneas de la partida seleccionada
+    Parámetros: partida
+    Retorna: Un JSON con todas las líneas de la partida solicitada
+
+  ********************************************************************************** */
+
   public function obtenLineas(Request $request)
   {
     $partida = $request->partida;
@@ -105,7 +122,13 @@ class SublineasController extends Controller
     return response()->json($lineas);
   }
       
-      //Agregar Sublinea -- linea
+  /* **********************************************************************************
+ 
+    Funcionalidad: Obtiene todas las líneas de la partida seleccionada
+    Parámetros: partida
+    Retorna: Un JSON con todas las líneas de la partida solicitada
+
+  ********************************************************************************** */
   public function obtenLineasAg(Request $request)
   {
     $partida = $request->partida;
@@ -113,7 +136,13 @@ class SublineasController extends Controller
     return response()->json($lineas);
   }
       
-      //Agregar Sublinea -- sublinea
+  /* **********************************************************************************
+ 
+    Funcionalidad: Obtiene el número maximo de las sublineas de una partida y una línea y suma uno para proporcionarlo a la nueva sublinea
+    Parámetros: partida
+    Retorna: Un JSON con todas las líneas de la partida solicitada
+
+  ********************************************************************************** */
   public function obtenSublineas(Request $request)
   {
     $partida = $request->partida;
@@ -128,7 +157,13 @@ class SublineasController extends Controller
     return response()->json($numsublinea);
   }
 
-      //obtiene las sublineas para agregar un artículo
+  /* **********************************************************************************
+ 
+    Funcionalidad: Obtiene todas las sublíneas de una partida y una línea en especifico
+    Parámetros: partida y línea
+    Retorna: Un JSON con todas las sublíneas de la partida y línea solicitada
+
+  ********************************************************************************** */
   public function obtenSublineas2(Request $request)
   {
     $partida = $request->partida;
@@ -138,7 +173,13 @@ class SublineasController extends Controller
     return response()->json($sublineas);
   }
       
-      //ultima linea +1
+  /* **********************************************************************************
+ 
+    Funcionalidad: Obtiene todas las líneas de una partida en especifico
+    Parámetros: partida
+    Retorna: Un JSON con todas las líneas de la partida solicitada
+
+  ********************************************************************************** */
   public function obtenMaxLineas(Request $request)
   {
 
@@ -149,42 +190,49 @@ class SublineasController extends Controller
   }
 
 
+  // public function ajaxRequest()
+  // {
+  //   $usuario = auth()->user();
+  //   $sublinea = sublineas::distinct()->get(['partida', 'descpartida']);				
+  //   return view('catalogos.Sublineas', compact('sublinea','usuario'));
+  // }
 
-  public function ajaxRequest()
-  {
-    $usuario = auth()->user();
-    $sublinea = sublineas::distinct()->get(['partida', 'descpartida']);				
-    return view('catalogos.Sublineas', compact('sublinea','usuario'));
-  }
 
-
-  public function ajaxRequestPost(Request $request)
-  {
-    $input = $request->all();
-    $sublinea = sublineas::where('partida',$request->partida)->distinct()
-        ->orderBy('linea', 'ASC')
-            ->get(['linea','desclinea']);
-    return response()->json($sublinea);
-  }
+  // public function ajaxRequestPost(Request $request)
+  // {
+  //   $input = $request->all();
+  //   $sublinea = sublineas::where('partida',$request->partida)->distinct()
+  //       ->orderBy('linea', 'ASC')
+  //           ->get(['linea','desclinea']);
+  //   return response()->json($sublinea);
+  // }
   
 
   //ajax para crear lineas
-  public function ajaxRequestLineas()
-  {
-    $sublinea = sublineas::distinct()->get(['partida', 'descpartida']);
-    return view('catalogos.Agregar.AgregaLineas', compact('sublinea'));
-  }
+  // public function ajaxRequestLineas()
+  // {
+  //   $sublinea = sublineas::distinct()->get(['partida', 'descpartida']);
+  //   return view('catalogos.Agregar.AgregaLineas', compact('sublinea'));
+  // }
 
-  public function ajaxRequestLineasPost(Request $request)
-  {
-    $input = $request->all();
-    $sublinea = sublineas::where('partida',$request->partida)->distinct()
-            ->max('linea')
-            ->get(['linea']);
-    return response()->json($sublinea);
-  }
+  // public function ajaxRequestLineasPost(Request $request)
+  // {
+  //   $input = $request->all();
+  //   $sublinea = sublineas::where('partida',$request->partida)->distinct()
+  //           ->max('linea')
+  //           ->get(['linea']);
+  //   return response()->json($sublinea);
+  // }
 
   //sublineas controller
+
+  /* **********************************************************************************
+ 
+    Funcionalidad: Crea una nueva sublínea en una partida y línea seleccionada
+    Parámetros: partida y línea
+    Retorna: Alerta de registro exitoso y redirección a la vista de sublíneas
+
+  ********************************************************************************** */
 
   public function Agregasublineastore(Request $request)
   {
@@ -222,23 +270,31 @@ class SublineasController extends Controller
   /*funcion para mostrar las partidas 
   tanto en agregar linea como en catalogo de linea
   */ 
-  public function SublineaNueva()
-  {
-    $usuario = auth()->user();
-    $sublinea = sublineas::distinct()->get(['partida', 'descpartida']);
-    return view('catalogos.Agregar.AgregaSublineas', compact('sublinea','usuario'));
+  // public function SublineaNueva()
+  // {
+  //   $usuario = auth()->user();
+  //   $sublinea = sublineas::distinct()->get(['partida', 'descpartida']);
+  //   return view('catalogos.Agregar.AgregaSublineas', compact('sublinea','usuario'));
 
   }
   //vista de sublineas 
-  public function MostrarSubLineas()
-  {
-    $usuario = auth()->user();
-    $sublinea = sublineas::distinct()->get(['partida', 'descpartida']);
-    $sublineaAg = sublineas::distinct()->get(['partida', 'descpartida']);   
-    $sublineasTb = sublineas::distinct()->get(['partida', 'descpartida']);    
-    return view('catalogos.Sublineas', compact('sublinea','sublineasTb','sublineaAg','usuario'));
-  }
+  // public function MostrarSubLineas()
+  // {
+  //   $usuario = auth()->user();
+  //   $sublinea = sublineas::distinct()->get(['partida', 'descpartida']);
+  //   $sublineaAg = sublineas::distinct()->get(['partida', 'descpartida']);   
+  //   $sublineasTb = sublineas::distinct()->get(['partida', 'descpartida']);    
+  //   return view('catalogos.Sublineas', compact('sublinea','sublineasTb','sublineaAg','usuario'));
+  // }
 
+
+  /* **********************************************************************************
+ 
+    Funcionalidad: Obtiene todas las sublíneas de una partida y una línea seleccionada
+    Parámetros: partida y línea
+    Retorna: Vista de todas las sublíneas de una partida y línea en especial
+
+  ********************************************************************************** */
 
   public function datosSublinea (Request $request){
     $partida = $request->get('Partida');
