@@ -1,3 +1,13 @@
+
+
+/********************************** funciones para el módulo de empleados *************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Alerta de confirmación de registro de un nuevo empleado
+    Parámetros: Formulario de registro de nuevo empleado
+    Retorna: No regresa nada
+
+********************************************************************************** */
 $('#btn-submitEm').on('click',function(e){
  e.preventDefault();
  var form = $(this).parents('form');
@@ -14,6 +24,13 @@ $('#btn-submitEm').on('click',function(e){
  });
 });
 
+/* **********************************************************************************
+    Funcionalidad: Cierra el modal de registro de un nuevo empleado
+    Parámetros: No recibe parámetros
+    Retorna: Cierra modal
+
+********************************************************************************** */
+
 $('#exampleModalEmpleado').on('hidden.bs.modal', function (e) {
   $(this).find('.validateDataEm').removeClass('inputSuccess');
   $(this).find('.validateDataEm').removeClass('inputDanger');
@@ -29,6 +46,14 @@ $('#exampleModalEmpleado').on('hidden.bs.modal', function (e) {
   $('#clvdepto').attr("disabled",true);
 });
 
+/* **********************************************************************************
+    Funcionalidad: Cuando el usuario suelta una tecla en el teclado comienza a validar los campos,
+                    manda a llamar la función datosValidosEm()
+    Parámetros: No recibe parámetros
+    Retorna: Cierra modal
+
+********************************************************************************** */
+
 $( ".validateDataEm" ).keyup(function() {
    var valor = $.trim($(this).val());
    var error = $(this).attr("data-errorEm");
@@ -36,6 +61,14 @@ $( ".validateDataEm" ).keyup(function() {
    var tipo = $(this).attr("data-myTypeEm");
    datosValidosEm(valor, error, id, tipo);
 });
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene el valor del selector de área, cuando obtiene un cambio el selector manda a llamar 
+                    la función datosValidosEm().
+    Parámetros: No recibe parámetros
+    Retorna: Cierra modal
+
+********************************************************************************** */
 
 $( "#clvdepto" ).change(function() {
    var valor = $.trim($(this).val());
@@ -45,6 +78,13 @@ $( "#clvdepto" ).change(function() {
    //console.log(valor);
    datosValidosEm(valor, error, id, tipo);
 });
+
+/* **********************************************************************************
+    Funcionalidad: Valida que los campos de registro de empleado cumplan con las validaciones requeridas
+    Parámetros: Valor del campo, error, id del campo, tipo
+    Retorna: cambia las clases success o danger de acuerdo a la validación
+
+********************************************************************************** */
 
 function datosValidosEm(valor, error, id, tipo)
 {
@@ -109,6 +149,14 @@ function datosValidosEm(valor, error, id, tipo)
    enablebtnEm();
 }
 
+/* **********************************************************************************
+    Funcionalidad: Valida que el arreglo de validación este lleno de ceros para activar el boton de registrar,
+                    si el arreglo contiene por lo menos un 1, no activa el boton
+    Parámetros: No recibe parámetros
+    Retorna: Activa o desactiva el boton de registrar
+
+********************************************************************************** */
+
 function enablebtnEm()
 {
  var array = [];
@@ -118,7 +166,7 @@ function enablebtnEm()
    array.push(claserror[i].getAttribute('data-validacionEm'));
  }
 
-console.log(array);
+//console.log(array);
  if(array.includes('1'))
  { 
    $('#btn-submitEm').prop("disabled", true);

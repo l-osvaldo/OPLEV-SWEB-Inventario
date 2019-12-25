@@ -1,3 +1,15 @@
+
+/********************************** funciones para el módulo de reportes ECO *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene el reporte seleccionado por el usuario y de acuerdo al valor toma una opción de reporte,
+    				algunos reportes deben seleccionar otra opción, como la partida, línea o empleado, otros solo
+    				seleccionando el reporte
+    Parámetros: Valor del selector de reporte 
+    Retorna: No regresa nada
+
+********************************************************************************** */
+
 /******************** Menu de reportes ***********************/
 $('#selectReportesECO').change(function() {
 	desactivarcamposECO();
@@ -36,6 +48,12 @@ $('#selectReportesECO').change(function() {
 });
 
 /******************** selección de partida, area y empleado ***********************/
+/* **********************************************************************************
+    Funcionalidad: Obtiene la partida del selector para obtener el reporte requerido
+    Parámetros: Valor del selector de partida
+    Retorna: No regresa nada
+
+********************************************************************************** */
 $('#selectPartidaECO').change(function(){
 	if ($(this).val() != 0 ){		
 		bienesPorPartidaECO($(this).val());
@@ -48,6 +66,13 @@ $('#selectPartidaECO').change(function(){
 	
 });
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene el área del selector para obtener el reporte requerido
+    Parámetros: Valor del selector de área
+    Retorna: No regresa nada
+
+********************************************************************************** */
+
 $('#selectAreaECO').change(function(){
 	if ($(this).val() != 0 ){
 		inventarioPorAreaECO($(this).val());
@@ -58,6 +83,12 @@ $('#selectAreaECO').change(function(){
 	
 });
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene el empleado del selector para obtener el reporte requerido
+    Parámetros: Valor del selector de empleado
+    Retorna: No regresa nada
+
+********************************************************************************** */
 
 $('#selectEmpleadoECO').change(function(){
 	if ($(this).val() != 0 ){
@@ -69,6 +100,14 @@ $('#selectEmpleadoECO').change(function(){
 });
 
 /******************** funcion para reiniciar los componentes ***********************/
+/* **********************************************************************************
+    Funcionalidad: Si el valor del reporte se vuelve cero, opción de inicio (default), se regresan los valores
+    				predeterminados de los selectores de área, partida y empleado, se oculta cualquier información
+    				desplegada y la vista vuelve a su estado inicial 
+    Parámetros: Valor del selector de reporte
+    Retorna: No regresa nada
+
+********************************************************************************** */
 function desactivarcamposECO(){
 
 	$('#cargandoECO').css("display","none");
@@ -93,6 +132,12 @@ function desactivarcamposECO(){
 }
 
 /******************** Funciones ajax para la consulta de los reportes ***********************/
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte bienes por partida
+    Parámetros: partida
+    Retorna: Unhtml con un datatable de la vista preliminar del reporte
+
+********************************************************************************** */
 function bienesPorPartidaECO(partida){
 
 	$('#cargandoECO').css("display","block");
@@ -127,6 +172,13 @@ function bienesPorPartidaECO(partida){
     	    	
     });
 }
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte concentrado de bienes por área
+    Parámetros: No recibe parámetros
+    Retorna: Un html con un datatable de la vista preliminar del reporte
+
+********************************************************************************** */
 
 function importeBienesPorAreaECO(){
 
@@ -163,7 +215,12 @@ function importeBienesPorAreaECO(){
 
 }
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte concentrado de bienes por partida
+    Parámetros: No recibe parámetros
+    Retorna: Un html con un datatable de la vista preliminar del reporte
 
+********************************************************************************** */
 
 function importeBienesPorPartidaECO(){
 
@@ -198,6 +255,13 @@ function importeBienesPorPartidaECO(){
     });
  
 }
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte inventario por área
+    Parámetros: area
+    Retorna: Un html con un datatable de la vista preliminar del reporte
+
+********************************************************************************** */
 
 function inventarioPorAreaECO(area){
 
@@ -236,6 +300,13 @@ function inventarioPorAreaECO(area){
 
 }
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte inventario por orden alfabético
+    Parámetros: no recibe parámetros
+    Retorna: Un html con un datatable de la vista preliminar del reporte
+
+********************************************************************************** */
+
 function inventarioPorOrdenAlfabeticoECO(){
 
 	$('#cargandoECO').css("display","block");
@@ -269,6 +340,13 @@ function inventarioPorOrdenAlfabeticoECO(){
     });
 
 }
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte resguardo por empleado
+    Parámetros: empleado
+    Retorna: Un html con un datatable de la vista preliminar del reporte
+
+********************************************************************************** */
 
 function ResguardoPorEmpleadoECO(empleado){
 

@@ -1,3 +1,16 @@
+
+
+/********************************** funciones que se utilizan enmás de un módulo o vista del sistema *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Cuando el usuario suelta una tecla en el teclado en algún campo de los modales nuevo artículo OPLE o ECO
+                    , comienza la validación de los mismos, mandando a llamar la función 
+                    datosValidosArticulo
+    Parámetros: El valor ingresado al campo 
+    Retorna: Activa o desactiva el botón actualizar
+
+********************************************************************************** */
+
 $( ".validateDataArticulo" ).keyup(function() {
 
    var valor = $.trim($(this).val());
@@ -7,6 +20,15 @@ $( ".validateDataArticulo" ).keyup(function() {
    //console.log(valor,error,id,tipo);
    datosValidosArticulo(valor, error, id, tipo);
 });
+
+/* **********************************************************************************
+    Funcionalidad: Cuando sufre un cambio algún campo de los modales nuevo artículo OPLE o ECO
+                    , comienza la validación de los mismos, mandando a llamar la función 
+                    datosValidosArticulo
+    Parámetros: El valor ingresado al campo 
+    Retorna: Activa o desactiva el botón actualizar
+
+********************************************************************************** */
 
 $( ".validateDataArticulo" ).change(function() {
 
@@ -18,6 +40,14 @@ $( ".validateDataArticulo" ).change(function() {
    datosValidosArticulo(valor, error, id, tipo);
 });
 
+/* **********************************************************************************
+    Funcionalidad: Cuando el usuario suelta una tecla en el teclado en algún campo de los modales editar artículo OPLE o ECO
+                    , comienza la validación de los mismos, mandando a llamar la función 
+                    datosValidosArticuloEditar()
+    Parámetros: El valor ingresado al campo 
+    Retorna: Activa o desactiva el botón actualizar
+
+********************************************************************************** */
 
 $( ".validateDataArticuloEditar" ).keyup(function() {
 
@@ -29,6 +59,15 @@ $( ".validateDataArticuloEditar" ).keyup(function() {
    datosValidosArticuloEditar(valor, error, id, tipo);
 });
 
+/* **********************************************************************************
+    Funcionalidad: Cuando sufre un cambio algún campo de los modales editar artículo OPLE o ECO
+                    , comienza la validación de los mismos, mandando a llamar la función 
+                    datosValidosArticulo
+    Parámetros: El valor ingresado al campo 
+    Retorna: Activa o desactiva el botón actualizar
+
+********************************************************************************** */
+
 $( ".validateDataArticuloEditar" ).change(function() {
 
    var valor = $.trim($(this).val());
@@ -38,6 +77,14 @@ $( ".validateDataArticuloEditar" ).change(function() {
    //console.log(valor,error,id,tipo);
    datosValidosArticuloEditar(valor, error, id, tipo);
 });
+
+/* **********************************************************************************
+    Funcionalidad: Función que valida que algún campo de los modales nuevo artículo OPLE o ECO, cumpla con lo requerido, 
+                    no debe estar vacio y no tener caracteres especiales 
+    Parámetros: Valor del campo a validar, error, su id del elemento, tipo
+    Retorna: Valido o no valido el elemento
+
+********************************************************************************** */
 
 function datosValidosArticulo(valor, error, id, tipo)
 {
@@ -75,6 +122,14 @@ function datosValidosArticulo(valor, error, id, tipo)
    enablebtnArticulo();
 }
 
+/* **********************************************************************************
+    Funcionalidad: Función que valida que algún campo de los modales editar artículo OPLE o ECO, cumpla con lo requerido, 
+                    no debe estar vacio y no tener caracteres especiales 
+    Parámetros: Valor del campo a validar, error, su id del elemento, tipo
+    Retorna: Valido o no valido el elemento
+
+********************************************************************************** */
+
 function datosValidosArticuloEditar(valor, error, id, tipo)
 {
    switch (tipo) {
@@ -111,6 +166,17 @@ function datosValidosArticuloEditar(valor, error, id, tipo)
    enablebtnArticuloEditar();
 }
 
+
+/* **********************************************************************************
+
+    Funcionalidad: Función que activa el boton de guardar artículo (OPLE y ECO) si el arreglo de 
+                    validaciones cuenta con solos ceros, si llegara a tener un uno por lo menos
+                    quiere decir que un campo esta vacio o no cumple con las especificaciones 
+    Parámetros: No recibe parámetros
+    Retorna: activa o desactiva el boton de guardar artículo
+
+********************************************************************************** */
+
 function enablebtnArticulo()
 {
  var array = [];
@@ -134,6 +200,16 @@ console.log(array);
  }
 
 }
+
+/* **********************************************************************************
+
+    Funcionalidad: Función que activa el boton de actualizar artículo (OPLE y ECO) si el arreglo de 
+                    validaciones cuenta con solos ceros, si llegara a tener un uno por lo menos
+                    quiere decir que un campo esta vacio o no cumple con las especificaciones 
+    Parámetros: No recibe parámetros
+    Retorna: activa o desactiva el boton de guardar artículo
+
+********************************************************************************** */
 
 function enablebtnArticuloEditar()
 {
@@ -164,6 +240,14 @@ function enablebtnArticuloEditar()
 
 }
 
+/* **********************************************************************************
+
+    Funcionalidad: cierra o abre las opciones del menu principal 
+    Parámetros: No recibe parámetros
+    Retorna: activa o desactiva las opciones del menu despegable de la izquierda
+
+********************************************************************************** */
+
 function cerrarMenus(){
 	$('#cat').removeClass('menu-open');
 	$('#ople').removeClass('menu-open');
@@ -171,12 +255,35 @@ function cerrarMenus(){
 	$('#CancelacionesR').removeClass('menu-open');
 }
 
+/* **********************************************************************************
+
+    Funcionalidad: Configuraución inicial de los tooltip
+    Parámetros: No recibe parámetros
+    Retorna: No regresa nada
+
+********************************************************************************** */
+
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 });
 
+/* **********************************************************************************
+
+    Funcionalidad: Configuraución inicial de los inputSpinner
+    Parámetros: No recibe parámetros
+    Retorna: No regresa nada
+
+********************************************************************************** */
+
 $("input[type='number']").inputSpinner(); 
 
+/* **********************************************************************************
+
+    Funcionalidad: Configuraución inicial de los inputmask, 
+    Parámetros: No recibe parámetros
+    Retorna: No regresa nada
+
+********************************************************************************** */
 
 $(function () {
   //Initialize Select2 Elements

@@ -1,4 +1,13 @@
 
+/********************************** funciones para el módulo de levantamiento de inventario *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable de detalle de lote específico de Bienes OPLE
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
+
 var levantamientoEsp = $('#detalleLote02').DataTable( {
     "deferRender": true,
     "retrieve": true,
@@ -38,6 +47,13 @@ var levantamientoEsp = $('#detalleLote02').DataTable( {
       }
     }
 });
+
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable de detalle de lote específico de Bienes OPLE
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
 
 var levantamientoEspECO = $('#detalleLote02ECO').DataTable( {
     "deferRender": true,
@@ -83,7 +99,12 @@ var levantamientoEspECO = $('#detalleLote02ECO').DataTable( {
     ]
 });
 
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable de detalle de lote general Bienes OPLE
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
 
+********************************************************************************** */
 
 var levantamientoGral = $('#detalleLote03').DataTable( {
     "deferRender": true,
@@ -124,6 +145,13 @@ var levantamientoGral = $('#detalleLote03').DataTable( {
       }
     }
 });
+
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable de detalle de lote general Bienes ECO
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
 
 var levantamientoGralECO = $('#detalleLote03ECO').DataTable( {
     "deferRender": true,
@@ -172,6 +200,13 @@ var levantamientoGralECO = $('#detalleLote03ECO').DataTable( {
 var asignablesOPLE = 0;
 var asignablesECO = 0;
 var globalNombre = '';
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene la información de los bienes del lote que se quiere ver, ya sea general o de un empleado
+    Parámetros: id_lote, totalOPLE, totalECO, nombre, tipo, estado
+    Retorna: Modal de detalle
+
+********************************************************************************** */
 
 function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
   $('#infoAsignacion').css('display','none');
@@ -409,11 +444,25 @@ function verDetalleLote(id_lote, totalOPLE, totalECO, nombre, tipo, estado) {
   }
 }
 
+/* **********************************************************************************
+    Funcionalidad: Ajusta el tamaño de las columnas del datatable en el modal de detalle de un lote de empleado
+    Parámetros: No recibe parámetros
+    Retorna: Ajusta las columnas del datatable
+
+********************************************************************************** */
+
 $('#detalleLoteEspecifico').on('shown.bs.modal', function() {
    $($.fn.dataTable.tables(true)).DataTable()
       .columns.adjust();
 
 });
+
+/* **********************************************************************************
+    Funcionalidad: Ajusta el tamaño de las columnas del datatable en el modal de detalle de un lote general
+    Parámetros: No recibe parámetros
+    Retorna: Ajusta las columnas del datatable
+
+********************************************************************************** */
 
 $('#detalleLoteGeneral').on('shown.bs.modal', function() {
    $($.fn.dataTable.tables(true)).DataTable()
@@ -421,6 +470,12 @@ $('#detalleLoteGeneral').on('shown.bs.modal', function() {
       levantamientoGralECO.columns.adjust();
 });
 
+/* **********************************************************************************
+    Funcionalidad: Ajusta el tamaño de las columnas del datatable para los data-toggle
+    Parámetros: No recibe parámetros
+    Retorna: Ajusta las columnas del datatable
+
+********************************************************************************** */
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     $.fn.dataTable
@@ -428,6 +483,12 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         .columns.adjust();
 });
 
+/* **********************************************************************************
+    Funcionalidad: Actualiza la información del datatable principal
+    Parámetros: No recibe parámetros
+    Retorna: Un html con un datatable y la información de los levantamientos
+
+********************************************************************************** */
 
 function actualizar(){
   // $('#lotesRespues').css('display', 'none');
@@ -456,6 +517,13 @@ function actualizar(){
 
 var validar = 1;
 
+/* **********************************************************************************
+    Funcionalidad: Función que selecciona todos los bienes para su asignación, activa todos los check disponibles
+    Parámetros: No recibe parámetros
+    Retorna: Selecciona todos los artículos
+
+********************************************************************************** */
+
 $("#selectAllOPLEECO").click(function(){
   $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
   if ( $(this).prop('checked')){
@@ -466,6 +534,13 @@ $("#selectAllOPLEECO").click(function(){
   activarBtnAsignarL();  
 });
 
+/* **********************************************************************************
+    Funcionalidad: Cierra el modal de detalle y regresa los valores a su estado predeterminado
+    Parámetros: No recibe parámetros
+    Retorna: Cierra el modal de detalle del lote
+
+********************************************************************************** */
+
 $('#detalleLoteEspecifico').on('hidden.bs.modal', function (e) {
   $('#selectAllOPLEECO').prop('checked', false);
   validar = 1;
@@ -473,6 +548,14 @@ $('#detalleLoteEspecifico').on('hidden.bs.modal', function (e) {
   asignablesECO = 0;
   activarBtnAsignarL();
 });
+
+/* **********************************************************************************
+    Funcionalidad: Activa o desactiva el botón de asignar bien, cuando esta seleccionado por lo menos un check
+                    de un bien 
+    Parámetros: No recibe parámetros
+    Retorna: Activa o desactiva el botón de asignar 
+
+********************************************************************************** */
 
 function activarBtnAsignarL(){
   if (validar == 1){
@@ -482,6 +565,13 @@ function activarBtnAsignarL(){
   }
   //console.log(validar);
 }
+
+/* **********************************************************************************
+    Funcionalidad: Valida que este por lo menos un check seleccionado para asignar el bien 
+    Parámetros: No recibe parámetros
+    Retorna: Activa o desactiva el botón de asignar 
+
+********************************************************************************** */
 
 function cambioCheckBoxLevantamiento(){
 
@@ -532,6 +622,13 @@ function cambioCheckBoxLevantamiento(){
   //console.log(contador +' - '+total);
 }
 
+/* **********************************************************************************
+    Funcionalidad: Alerta de confirmación para asignar uno o varios bienes a un empleado 
+    Parámetros: información del formulario de asignación de bienes a un empleado
+    Retorna: No regresa nada
+
+********************************************************************************** */
+
 $('#btnAsignarArticulosL').on('click',function(e){
      e.preventDefault();
      var form = $(this).parents('form');
@@ -548,7 +645,12 @@ $('#btnAsignarArticulosL').on('click',function(e){
      });
  }); 
 
-  
+/* **********************************************************************************
+    Funcionalidad: Alerta de confirmación para eliminar un artículo de la lista de levantamiento
+    Parámetros: numero de inventario
+    Retorna: Mensaje de confirmación o mensaje de error 
+
+********************************************************************************** */  
 
 function eliminarArticuloLevantamiento(numeroinventario){
     // console.log(numeroinventario);
