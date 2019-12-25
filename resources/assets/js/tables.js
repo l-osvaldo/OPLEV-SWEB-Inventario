@@ -1,3 +1,14 @@
+/********************************** Configuraciones de los datatables generales del sistema *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable de los catálogos Bienes OPLE, bienes OPLE de un empleado de una cancelación, 
+                    , bienes ECO partidas, líneas, sublíneas,
+                    área y empleado
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
+
 $('#tableCatalogo').DataTable( {
     "deferRender": true,
     "retrieve": true,
@@ -37,6 +48,17 @@ $('#tableCatalogo').DataTable( {
               ]
 } );
 
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable de los catálogos bienes ECO de un empleado de una cancelación, 
+                    , reportes bienes por partida OPLE y ECO, inventario por área OPLE y ECO, 
+                    inventario por orden alfabetico OPLE ECO, resguardo por empleado OPLE y ECO,
+                    importe de bienes por anos adquisicion OPLE, inventario por orden alfabetico nuevo OPLE
+                    área y empleado
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
+
 $('#example1').DataTable( {
   "deferRender": true,
   "retrieve": true,
@@ -74,6 +96,12 @@ $('#example1').DataTable( {
  "buttons": ['excel']
 });
 
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable del  inventario por orden alfabetico nuevo OPLE todas las pestañas
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
 
 $('.tableR9').DataTable( {
   "deferRender": true,
@@ -113,6 +141,13 @@ $('.tableR9').DataTable( {
  "buttons": ['excel']
 });
 
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable de los reportes importe de bienes por area OPLE y ECO,
+                    importe de bienes por partida OPLE y ECO
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
 
 $('#tableReporte').DataTable( {
     "deferRender": true,
@@ -152,6 +187,12 @@ $('#tableReporte').DataTable( {
    "buttons": ['excel']
 } );
 
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable del reporte bienes de un area ordenado por empleado
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
 
 $('#tableR8').DataTable( {
   "deferRender": true,
@@ -191,6 +232,13 @@ $('#tableR8').DataTable( {
  "buttons": ['excel']
 });
 
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable de levantamiento de inventario
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
+
 $('#tableLevantamiento').DataTable( {
   "deferRender": true,
   "retrieve": true,
@@ -228,6 +276,12 @@ $('#tableLevantamiento').DataTable( {
   }
 } );
 
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable de Bienes ECO
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
 
 $('#tableCatalogoECO').DataTable( {
     "deferRender": true,
@@ -268,6 +322,13 @@ $('#tableCatalogoECO').DataTable( {
               ]
 } );
 
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable de Depreciación, bienes sin fecha de compra
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
+
 $('#example2').DataTable( {
   "deferRender": true,
   "retrieve": true,
@@ -305,6 +366,12 @@ $('#example2').DataTable( {
   "buttons": ['excel']
 });
 
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable de Depreciación de bienes
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
 
 $(document).ready(function() {
   $('#tableDepreciacion01').DataTable( {

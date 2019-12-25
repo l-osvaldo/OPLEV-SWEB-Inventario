@@ -1,3 +1,13 @@
+
+/********************************** funciones para el módulo de revición de cancelación de resguardo *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable de detalle de los artículos OPLE de una cancelación
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
+
 var validar = [1,1];
 var t = $('#detalles').DataTable( {
     "deferRender": true,
@@ -35,6 +45,13 @@ var t = $('#detalles').DataTable( {
     }
 } );
 
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable de detalle de los artículos ECO de una cancelación
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
+
 var ta = $('#detallesE').DataTable( {
     "deferRender": true,
     "retrieve": true,
@@ -70,6 +87,13 @@ var ta = $('#detallesE').DataTable( {
       }
     }
 } );
+
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable de reasignación de bienes de una cancelación 
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
 
 var tab = $('#detallesAsignacion').DataTable( {
     "deferRender": true,
@@ -111,6 +135,12 @@ var tab = $('#detallesAsignacion').DataTable( {
     }
 });
 
+/* **********************************************************************************
+    Funcionalidad: Configuración del datatable principal de la vista, presenta las cancelaciones de resguardo realizadas
+    Parámetros: Configuración para este datatable
+    Retorna: DataTable
+
+********************************************************************************** */
 
 $('#tableRevision').DataTable( {
     "deferRender": true,
@@ -148,6 +178,13 @@ $('#tableRevision').DataTable( {
       }
     }
 } );
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene toda la información de todos los bienes OPLE de la cancelación 
+    Parámetros: id de la cancelación y nombre del empleado
+    Retorna: Modal del detalle de bienes OPLE de la cancelación, si no cuenta con bienes OPLE mand aun alerta
+
+********************************************************************************** */
 
 function detalleOPLE(id_cancelacion,nombreEmpleado) {
 	//console.log(id_cancelacion);
@@ -199,6 +236,13 @@ function detalleOPLE(id_cancelacion,nombreEmpleado) {
     }); 
 }
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene toda la información de todos los bienes ECO de la cancelación 
+    Parámetros: id de la cancelación y nombre del empleado
+    Retorna: Modal del detalle de bienes ECO de la cancelación, si no cuenta con bienes ECO mand aun alerta
+
+********************************************************************************** */
+
 function detalleECO(id_cancelacion,nombreEmpleado) {
 	//console.log(id_cancelacion);
 
@@ -248,6 +292,14 @@ function detalleECO(id_cancelacion,nombreEmpleado) {
     	    	    	
     }); 
 }
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene toda la información de todos los bienes OPLE Y ECO de la cancelación para su reasignación
+                    a un empleado
+    Parámetros: id de la cancelación
+    Retorna: Modal de reasignación de bienes
+
+********************************************************************************** */
 
 function articulosAsignables(id_cancelacion) {
   //console.log(id_cancelacion);
@@ -304,6 +356,14 @@ function articulosAsignables(id_cancelacion) {
     }); 
 }
 
+/* **********************************************************************************
+    Funcionalidad: Selecciona a todos los check de los bienes para su asignación
+                    o los deselecciona a todos
+    Parámetros: true o false
+    Retorna: Selecciona todos los check de los bienes o los desactiva a todos
+
+********************************************************************************** */
+
 $("#selectAll").click(function(){
   $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
   if ( $(this).prop('checked')){
@@ -314,12 +374,27 @@ $("#selectAll").click(function(){
   activarBtnAsignar();  
 });
 
+/* **********************************************************************************
+    Funcionalidad: Cierra el modal de reasignación de bienes y vuelve a todos sus valores al estado inicial
+    Parámetros: No recibe parámetros
+    Retorna: Cierra el modal de reasignación de bienes
+
+********************************************************************************** */
+
 $('#modalAsignación').on('hidden.bs.modal', function (e) {
   $('#selectAll').prop('checked', false);
   $('#empleadosAsignacion').val("0").change();
   validar[0] = 1;
   validar[1] = 1;
-})
+});
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene el valor del selector de empleado para activar el botón de asignación,
+                    si regresa a cero el valor se vuelve 1 para la validación y desactivar el boton
+    Parámetros: El valor del selector de empleados del modal de reasignación de bienes
+    Retorna: No regresa nada
+
+********************************************************************************** */
 
 $('#empleadosAsignacion').change(function() {
   if ($(this).val() != 0){
@@ -330,10 +405,25 @@ $('#empleadosAsignacion').change(function() {
   activarBtnAsignar();
 });
 
+/* **********************************************************************************
+    Funcionalidad: Ajusta el tamaño de las columnas del datatable en el modal de reasignación de bienes
+    Parámetros: No recibe parámetros
+    Retorna: Ajusta las columnas del datatable
+
+********************************************************************************** */
+
 $('#modalAsignación').on('shown.bs.modal', function() {
    $($.fn.dataTable.tables(true)).DataTable()
       .columns.adjust();
 });
+
+/* **********************************************************************************
+    Funcionalidad: Activa o desactiva el botón de asignación de bienes, de acuerdo al arreglo de validar
+                    se debe tener selecionado un bien y al empleado para que sea valido
+    Parámetros: No recibe parámetros
+    Retorna: Activa o desactiva el botón de asignación de bienes
+
+********************************************************************************** */
 
 function activarBtnAsignar(){
   if (validar[0] == 0 && validar[1] == 0){
@@ -343,6 +433,13 @@ function activarBtnAsignar(){
   }
   //console.log(validar);
 }
+
+/* **********************************************************************************
+    Funcionalidad: Valida que este por lo menos un check seleccionado para asignar el bien 
+    Parámetros: No recibe parámetros
+    Retorna: Valida que este seleccionado por lo menos un bien 
+
+********************************************************************************** */
 
 function cambioCheckBox(){
 	// tab.rows().every(function (rowIdx, tableLoop, rowLoop) {
@@ -380,6 +477,13 @@ function cambioCheckBox(){
 	activarBtnAsignar();
 	//console.log(contador +' - '+total);
 }
+
+/* **********************************************************************************
+    Funcionalidad: Alerta de confirmación de reasignación de bienes  
+    Parámetros: Información del formulario de asignación de bienes
+    Retorna: Alerta de confirmación 
+
+********************************************************************************** */
 
 $('#btnAsignarArticulos').on('click',function(e){
      e.preventDefault();
