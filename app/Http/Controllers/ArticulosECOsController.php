@@ -392,6 +392,7 @@ class ArticulosECOsController extends Controller
 
     ********************************************************************************** */
 	public function BienesPorPartidaECO(Request $request){
+		set_time_limit(5000);
 
 		$partida = $request;
 		$bienesPartida = articulosecos::where('partida', $request->numPartida)->orderBy('concepto')->get();
