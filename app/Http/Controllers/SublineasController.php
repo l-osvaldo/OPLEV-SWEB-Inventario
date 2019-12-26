@@ -276,7 +276,7 @@ class SublineasController extends Controller
   //   $sublinea = sublineas::distinct()->get(['partida', 'descpartida']);
   //   return view('catalogos.Agregar.AgregaSublineas', compact('sublinea','usuario'));
 
-  }
+  // }
   //vista de sublineas 
   // public function MostrarSubLineas()
   // {
