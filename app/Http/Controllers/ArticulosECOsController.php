@@ -400,10 +400,12 @@ class ArticulosECOsController extends Controller
 
 
 		foreach ($totalImporte as  $value) {
+			set_time_limit(5000);
 			$value->total = number_format($value->total,2);
 		}
 
 		foreach ($bienesPartida as $value) {
+			set_time_limit(5000);
 			$value->importe = number_format($value->importe,2);
 		}
 		
@@ -500,6 +502,7 @@ class ArticulosECOsController extends Controller
 
 		$bienesAlfabetico = articulosecos::orderBy('concepto', 'ASC')->get();
 		$totalImporte = 0;
+		set_time_limit(5000);
 		foreach ($bienesAlfabetico as $value) {
 			$totalImporte += $value->importe;
 			$value->importe = number_format($value->importe,2);
