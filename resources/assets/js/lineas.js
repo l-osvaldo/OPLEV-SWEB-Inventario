@@ -36,7 +36,7 @@ $('#PartidasL').change(function (){
   }else{
     $('#lineaRespuesta').css('display', 'none');
   }
-});|
+});
 
 /* **********************************************************************************
     Funcionalidad: Alerta de confirmación para registrar una nueva línea

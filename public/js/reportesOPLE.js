@@ -1,3 +1,15 @@
+
+/********************************** funciones para el módulo de reportes OPLE *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene el reporte seleccionado por el usuario y de acuerdo al valor toma una opción de reporte,
+    				algunos reportes deben seleccionar otra opción, como la partida, línea o empleado, otros solo
+    				seleccionando el reporte
+    Parámetros: Valor del selector de reporte 
+    Retorna: No regresa nada
+
+********************************************************************************** */
+
 /******************** Menu de reportes ***********************/
 $('#selectReportes').change(function() {
 	desactivarcampos();
@@ -51,6 +63,12 @@ $('#selectReportes').change(function() {
 }); 
 
 /******************** selección de partida, area y empleado ***********************/
+/* **********************************************************************************
+    Funcionalidad: Obtiene la partida del selector para obtener el reporte requerido
+    Parámetros: Valor del selector de partida
+    Retorna: No regresa nada
+
+********************************************************************************** */
 $('#selectPartida').change(function(){
 	if ($(this).val() != 0 ){		
 		bienesPorPartida($(this).val());
@@ -63,6 +81,13 @@ $('#selectPartida').change(function(){
 	
 });
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene el área del selector para obtener el reporte requerido
+    Parámetros: Valor del selector de área
+    Retorna: No regresa nada
+
+********************************************************************************** */
+
 $('#selectArea').change(function(){
 	if ($(this).val() != 0 ){
 		inventarioPorArea($(this).val());
@@ -73,6 +98,12 @@ $('#selectArea').change(function(){
 	
 });
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene el empleado del selector para obtener el reporte requerido
+    Parámetros: Valor del selector de empleado
+    Retorna: No regresa nada
+
+********************************************************************************** */
 
 $('#selectEmpleado').change(function(){
 	if ($(this).val() != 0 ){
@@ -84,6 +115,12 @@ $('#selectEmpleado').change(function(){
 });
 
 /******************** selección año de adquisición ***********************/
+/* **********************************************************************************
+    Funcionalidad: Obtiene el año de adquisición del selector para obtener el reporte requerido
+    Parámetros: Valor del selector de año de adquisición
+    Retorna: No regresa nada
+
+********************************************************************************** */
 $('#selectAnioAdquisicion').change(function(){
 	if ($(this).val() != 0 ){
 		importeBienesAnioAdquisicion($(this).val());
@@ -94,6 +131,12 @@ $('#selectAnioAdquisicion').change(function(){
 });
 
 /******************** selección de area para biene por área ordenado por empleado ***********************/
+/* **********************************************************************************
+    Funcionalidad: Obtiene el área del selector para obtener el reporte requerido
+    Parámetros: Valor del selector de área
+    Retorna: No regresa nada
+
+********************************************************************************** */
 $('#selectAreaR8').change(function(){
 	if ($(this).val() != 0 ){
 		bienesAreaOrdenadoEmpleado($(this).val());
@@ -106,6 +149,14 @@ $('#selectAreaR8').change(function(){
 
 
 /******************** funcion para reiniciar los componentes ***********************/
+/* **********************************************************************************
+    Funcionalidad: Si el valor del reporte se vuelve cero, opción de inicio (default), se regresan los valores
+    				predeterminados de los selectores de área, partida y empleado, se oculta cualquier información
+    				desplegada y la vista vuelve a su estado inicial 
+    Parámetros: Valor del selector de reporte
+    Retorna: No regresa nada
+
+********************************************************************************** */
 function desactivarcampos(){
 
 	$('#cargando').css("display","none");
@@ -137,6 +188,12 @@ function desactivarcampos(){
 
 
 /******************** Funciones ajax para la consulta de los reportes ***********************/
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte bienes por partida
+    Parámetros: partida
+    Retorna: Un html con un datatable de la vista preliminar del reporte
+
+********************************************************************************** */
 function bienesPorPartida(partida){
 
 	$('#cargando').css("display","block");
@@ -172,6 +229,13 @@ function bienesPorPartida(partida){
     });
 }
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte concentrado de bienes por área
+    Parámetros: No recibe parámetros
+    Retorna: Un html con un datatable de la vista preliminar del reporte
+
+********************************************************************************** */
+
 function importeBienesPorArea(){
 
 	$('#cargando').css("display","block");
@@ -206,6 +270,13 @@ function importeBienesPorArea(){
 
 }
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte concentrado de bienes por partida
+    Parámetros: No recibe parámetros
+    Retorna: Un html con un datatable de la vista preliminar del reporte
+
+********************************************************************************** */
+
 function importeBienesPorPartida(){
 
 	$('#cargando').css("display","block");
@@ -239,6 +310,13 @@ function importeBienesPorPartida(){
     });
 
 }
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte inventario por área
+    Parámetros: area
+    Retorna: Un html con un datatable de la vista preliminar del reporte
+
+********************************************************************************** */
 
 function inventarioPorArea(area){
 
@@ -275,8 +353,14 @@ function inventarioPorArea(area){
     	    	
     });
 
-} 
+}
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte inventario por orden alfabético
+    Parámetros: no recibe parámetros
+    Retorna: Un html con un datatable de la vista preliminar del reporte
+
+********************************************************************************** */
 
 function inventarioPorOrdenAlfabetico(){
 
@@ -311,6 +395,13 @@ function inventarioPorOrdenAlfabetico(){
     });
 
 }
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte resguardo por empleado
+    Parámetros: empleado
+    Retorna: Un html con un datatable de la vista preliminar del reporte
+
+********************************************************************************** */
 
 function ResguardoPorEmpleado(empleado){
 
@@ -349,6 +440,13 @@ function ResguardoPorEmpleado(empleado){
 
 }
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte importe de bienes por año de adquisición
+    Parámetros: año de adquisición
+    Retorna: Un html con un datatable de la vista preliminar del reporte
+
+********************************************************************************** */
+
 function importeBienesAnioAdquisicion(anioAdquisicion){
 
 	$('#cargando').css("display","block");
@@ -381,6 +479,12 @@ function importeBienesAnioAdquisicion(anioAdquisicion){
     }); 
 }
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte bienes por área ordenado por empleado
+    Parámetros: área
+    Retorna: Un html con un datatable de la vista preliminar del reporte
+
+********************************************************************************** */
 
 function bienesAreaOrdenadoEmpleado(area){
 
@@ -413,6 +517,13 @@ function bienesAreaOrdenadoEmpleado(area){
     	$('#btnGenerarPDF').attr("href","../catalogos/reportes/bienesAreaOrdenadoEmpleadoPDF/"+area);
     });
 } 
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte inventario por orden alfabético nuevo
+    Parámetros: No recibe parámetros
+    Retorna: Un html con un datatable de la vista preliminar del reporte
+
+********************************************************************************** */
 
 function inventarioPorOrdenAlfabeticoNuevo(){
 

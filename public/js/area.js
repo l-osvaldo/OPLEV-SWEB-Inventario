@@ -1,3 +1,13 @@
+
+/********************************** funciones para el módulo de área *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Función que valida que el campo para editar el nombre de un área cumpla con lo requerido, no debe estar vacio y no tener caracteres especiales 
+    Parámetros: Valor del campo a validar, error, su id del elemento, tipo
+    Retorna: Valido o no valido el elemento
+
+********************************************************************************** */
+
 function datosValidosArea(valor, error, id, tipo)
 {
   // console.log(valor);
@@ -24,6 +34,14 @@ function datosValidosArea(valor, error, id, tipo)
  enablebtnArea();
 }
 
+/* **********************************************************************************
+
+    Funcionalidad: Función que abre el modal de editar el nombre del área
+    Parámetros: id del área y su nombre
+    Retorna: Abre el modal
+
+********************************************************************************** */
+
 $('#editModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget);
   var area = button.data('area');
@@ -35,6 +53,13 @@ $('#editModal').on('show.bs.modal', function (event) {
   
 });
 
+/* **********************************************************************************
+
+    Funcionalidad: Abre un alerta para confirmar que se quiere actualizar el nombre del área seleccionada, se ser aceptada actualiza el nombre y cierra el modal, de lo contrario solo se cierra el alerta 
+    Parámetros: El id del área y el nombre nuevo del área
+    Retorna: Alerta con el mensaje "Area actualizada"
+
+********************************************************************************** */
 
 $('#editBtn').on('click',function(e){
     e.preventDefault();
@@ -80,6 +105,13 @@ $('#editBtn').on('click',function(e){
     });
 });
 
+/* **********************************************************************************
+
+    Funcionalidad: Cuando el usuario suelta una tecla en el teclado comienza a validar el campo, manda llamar a la función datosValidosArea()
+    Parámetros: El valor ingresado al campo
+    Retorna: No regresa nada 
+
+********************************************************************************** */
 
 $( ".validateDataArea" ).keyup(function() {
    var valor = $.trim($(this).val());
@@ -90,7 +122,13 @@ $( ".validateDataArea" ).keyup(function() {
    datosValidosArea(valor, error, id, tipo);
 });
 
+/* **********************************************************************************
 
+    Funcionalidad: Función que activa el boton de actualizar si el nombre a actualizar es valido
+    Parámetros: El valor ingresado al campo
+    Retorna: activa el boton de actualizar si los datos son validos 
+
+********************************************************************************** */
 
 function enablebtnArea()
 {
@@ -114,6 +152,14 @@ function enablebtnArea()
 
 };
 
+/* **********************************************************************************
+
+    Funcionalidad: Función que espera que el usuario presione el boton de cancelar o cierre el modal a traves de la x que esta en la parte superior izquierda del modal,
+                    esto cierra el modal y regresa sus valores predeterminados
+    Parámetros: No recibe parámetros
+    Retorna: Cierra el modal
+
+********************************************************************************** */
 
 $('#editModal').on('hidden.bs.modal', function (e) {
   $(this).find('.validateDataArea').removeClass('inputSuccess');

@@ -1,3 +1,13 @@
+
+/********************************** funciones para el módulo de cancelación de resguardo *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Función que espera un cambio en el selector de empleado, si el valor es diferente de cero, la función manda a llamar a bienesDelEmpleado()
+    Parámetros: Valor del selector 
+    Retorna: No regresa nada
+
+********************************************************************************** */
+
 $('#empleadoCR').change(function() {
 	if ( $(this).val() != 0){
 
@@ -12,6 +22,12 @@ $('#empleadoCR').change(function() {
 	}
 });
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene todos los bienes OPLE Y ECO de un empleado seleccionado
+    Parámetros: empleado
+    Retorna: Un html con un datatable con los bienes que tiene a su resguardo el empleado seleccionado
+
+********************************************************************************** */
 
 function bienesDelEmpleado(empleado){
 
@@ -40,6 +56,12 @@ function bienesDelEmpleado(empleado){
   });
 }
 
+/* **********************************************************************************
+    Funcionalidad: Alerta de confirmación sobre la cancelación de resguardo
+    Parámetros: empleado
+    Retorna: Alerta con el mensaje de "Cancelacion de resguardo realizada" si fue exitoso la cancelación, si no manda el mensaje "Error!", "Por favor intentelo de nuevo!", "error" y un reporte en PDF
+
+********************************************************************************** */
 
 function confirmacionCancelacion (){
 	var empleadoNumNombre = $('#empleadoCR').val().split('*');

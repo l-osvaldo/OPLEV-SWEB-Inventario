@@ -1,3 +1,13 @@
+
+/********************************** funciones para el módulo de partidas *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene el cambio del check para ingresar si la partida a registrar cuenta con depreciación
+    Parámetros: true o false
+    Retorna: campos de años de depreciación y % de depreciación
+
+********************************************************************************** */
+
 $('#activarDepreciacion').change(function() {
 	if ($(this).is(':checked') ){
 		$('#divDepreciacion').css("display","block");
@@ -12,7 +22,13 @@ $('#activarDepreciacion').change(function() {
 });
 
 
-// validación 
+/* **********************************************************************************
+    Funcionalidad: Cuando el usuario suelta una tecla en el teclado en algún campo del formulario de
+                    registro de nueva partida, comienza a validar llamando a la función datosValidos()
+    Parámetros: El valor ingresado al campo 
+    Retorna: No regresa nada
+
+********************************************************************************** */
 
 $( ".validateData" ).keyup(function() {
        var valor = $.trim($(this).val());
@@ -30,6 +46,13 @@ $( ".validateData" ).keyup(function() {
    //     datosValidos(valor, error, id, tipo);
    // });
 
+   /* **********************************************************************************
+    Funcionalidad: Función que valida el campo enviado, que cuente con lo requerido, no debe estar 
+                    vacio y no tener caracteres especiales 
+    Parámetros: Valor del campo a validar, error, su id del elemento, tipo
+    Retorna: Valido o no valido el elemento
+
+  ********************************************************************************** */
 
    function datosValidos(valor, error, id, tipo)
    {
@@ -89,6 +112,16 @@ $( ".validateData" ).keyup(function() {
        enablebtn();
    }
 
+/* **********************************************************************************
+
+    Funcionalidad: Función que activa o desactiva el boton de rgistrar nueva partida, si el arreglo de validación
+                    no cuenta con ningun uno, activa el boton pero si tieen por lo menos un uno lo desactiva,
+                    ya que algún campo contiene algo que no es valido
+    Parámetros: Arreglo de validación
+    Retorna: activa o desactiva el bótón de registar nueva partida
+
+********************************************************************************** */
+
 function enablebtn()
 {
  var array = [];
@@ -111,6 +144,13 @@ function enablebtn()
 
 }
 
+/* **********************************************************************************
+    Funcionalidad: Alerta de confirmación para registrar una nueva partida
+    Parámetros: Información del formulario de registro de nueva partida
+    Retorna: No regresa nada
+
+********************************************************************************** */
+
 $('#btn-submit2').on('click',function(e){
   e.preventDefault();
   var form = $(this).parents('form');
@@ -127,6 +167,13 @@ $('#btn-submit2').on('click',function(e){
       
   });
 });
+
+/* **********************************************************************************
+    Funcionalidad: Cierra el modal de registro de nueva partida y regresa sus valores al estado predeterminado
+    Parámetros: No recibe parámetros
+    Retorna: Cierra el modal de registro de nueva partida
+
+********************************************************************************** */
 
 $('#exampleModal').on('hidden.bs.modal', function (e) {
   $(this).find('.validateData').removeClass('inputSuccess');

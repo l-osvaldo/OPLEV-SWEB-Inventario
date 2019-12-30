@@ -8,7 +8,8 @@
 
 ********************************************************************************** */
 
-var validar = [1,1];
+var validarRevision = [1,1];
+console.log(validarRevision);
 var t = $('#detalles').DataTable( {
     "deferRender": true,
     "retrieve": true,
@@ -367,9 +368,9 @@ function articulosAsignables(id_cancelacion) {
 $("#selectAll").click(function(){
   $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
   if ( $(this).prop('checked')){
-    validar[0] = 0; 
+    validarRevision[0] = 0; 
   }else{
-    validar[0] = 1; 
+    validarRevision[0] = 1; 
   }
   activarBtnAsignar();  
 });
@@ -384,8 +385,8 @@ $("#selectAll").click(function(){
 $('#modalAsignación').on('hidden.bs.modal', function (e) {
   $('#selectAll').prop('checked', false);
   $('#empleadosAsignacion').val("0").change();
-  validar[0] = 1;
-  validar[1] = 1;
+  validarRevision[0] = 1;
+  validarRevision[1] = 1;
 });
 
 /* **********************************************************************************
@@ -398,9 +399,9 @@ $('#modalAsignación').on('hidden.bs.modal', function (e) {
 
 $('#empleadosAsignacion').change(function() {
   if ($(this).val() != 0){
-    validar[1] = 0;
+    validarRevision[1] = 0;
   }else{
-    validar[1] = 1;
+    validarRevision[1] = 1;
   }
   activarBtnAsignar();
 });
@@ -426,12 +427,13 @@ $('#modalAsignación').on('shown.bs.modal', function() {
 ********************************************************************************** */
 
 function activarBtnAsignar(){
-  if (validar[0] == 0 && validar[1] == 0){
+
+  if (validarRevision[0] == 0 && validarRevision[1] == 0){
     $('#btnAsignarArticulos').prop("disabled", false);
   }else{
     $('#btnAsignarArticulos').prop("disabled", true);
   }
-  //console.log(validar);
+  console.log(validarRevision);
 }
 
 /* **********************************************************************************
@@ -456,7 +458,7 @@ function cambioCheckBox(){
 	  //console.log($(this).find('input').prop('checked'));
 	  total ++;
 	  if ($(this).find('input').prop('checked')){
-	  	validar[0] = 0;	  	
+	  	validarRevision[0] = 0;	  	
 	  	contador ++;
 	  	if (!activos.includes(index)){
 	  		activos.push(index);
@@ -466,7 +468,7 @@ function cambioCheckBox(){
 	});
 
 	if (activos.length == 0){
-		validar[0] = 1;
+		validarRevision[0] = 1;
 	}
 
 	if (contador < total){

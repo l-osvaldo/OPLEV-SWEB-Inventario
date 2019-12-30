@@ -1,3 +1,13 @@
+
+/********************************** funciones para el módulo de líneas *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene todas las líneas de una partida seleccionada 
+    Parámetros: partida
+    Retorna: un html con un datatable con la información de las líneas de una partida
+
+********************************************************************************** */
+
 $('#PartidasL').change(function (){
   if ( $(this).val() != 0){
     $.ajaxSetup(
@@ -28,6 +38,13 @@ $('#PartidasL').change(function (){
   }
 });
 
+/* **********************************************************************************
+    Funcionalidad: Alerta de confirmación para registrar una nueva línea
+    Parámetros: Información del formulario de registro de nueva línea
+    Retorna: No regresa nada
+
+********************************************************************************** */
+
 $('#btn-submit3').on('click',function(e){
    e.preventDefault();
    var form = $(this).parents('form');
@@ -44,6 +61,13 @@ $('#btn-submit3').on('click',function(e){
    });
 });
 
+/* **********************************************************************************
+    Funcionalidad: Cierra el modal de registro de nueva línea y regresa sus valores al estado predeterminado
+    Parámetros: No recibe parámetros
+    Retorna: Cierra el modal de registro de nueva línea
+
+********************************************************************************** */
+
 $('#exampleModalLinea').on('hidden.bs.modal', function (e) {
   $(this).find('.validateDataLi').removeClass('inputSuccess');
   $(this).find('.validateDataLi').removeClass('inputDanger');
@@ -54,6 +78,14 @@ $('#exampleModalLinea').on('hidden.bs.modal', function (e) {
   $('#desclinea').val(""); 
   $('#descsub').val("");         
 });
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene el valor maximo de líneas de una partida y suma uno a ese valor para asignarlo
+                    a la nueva línea
+    Parámetros: partida
+    Retorna: El número maximo de líneas sumar uno y asignar ese valor a la nueva línea
+
+********************************************************************************** */
 
 $("#partida").change(function() 
 {   
@@ -84,6 +116,13 @@ $("#partida").change(function()
     }); 
 });
 
+/* **********************************************************************************
+    Funcionalidad: Cuando el usuario suelta una tecla en el teclado en algún campo del formulario de
+                    registro de nueva línea, comienza a validar llamando a la función datosValidosLi()
+    Parámetros: El valor ingresado al campo 
+    Retorna: No regresa nada
+
+********************************************************************************** */
 
 $( ".validateDataLi" ).keyup(function() {
    var valor = $.trim($(this).val());
@@ -95,6 +134,14 @@ $( ".validateDataLi" ).keyup(function() {
 
 });
 
+/* **********************************************************************************
+    Funcionalidad: Cuando se registra algún cambio de algún campo del formulario de
+                    registro de nueva línea, comienza a validar llamando a la función datosValidosLi()
+    Parámetros: El valor ingresado al campo 
+    Retorna: No regresa nada
+
+********************************************************************************** */
+
 $( ".validateDataLi" ).change(function() {
    var valor = $.trim($(this).val());
    var error = $(this).attr("data-errorLi");
@@ -103,6 +150,14 @@ $( ".validateDataLi" ).change(function() {
    //console.log(valor,error,id,tipo);
    datosValidosLi(valor, error, id, tipo);
 });
+
+/* **********************************************************************************
+    Funcionalidad: Función que valida el campo enviado cuente con lo requerido, no debe estar 
+                    vacio y no tener caracteres especiales 
+    Parámetros: Valor del campo a validar, error, su id del elemento, tipo
+    Retorna: Valido o no valido el elemento
+
+********************************************************************************** */
 
 function datosValidosLi(valor, error, id, tipo)
 {
@@ -164,6 +219,16 @@ function datosValidosLi(valor, error, id, tipo)
    }
    enablebtnLi();
 }
+
+/* **********************************************************************************
+
+    Funcionalidad: Función que activa o desactiva el boton de rgistrar nueva línea, si el arreglo de validación
+                    no cuenta con ningun uno, activa el boton pero si tieen por lo menos un uno lo desactiva,
+                    ya que algún campo contiene algo que no es valido
+    Parámetros: Arreglo de validación
+    Retorna: activa o desactiva el bótón de registar nueva línea
+
+********************************************************************************** */
 
 function enablebtnLi()
 {

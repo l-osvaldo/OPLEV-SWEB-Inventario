@@ -1,3 +1,14 @@
+
+/********************************** funciones para el modal de editar un artículo OPLE *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene toda la información de un bien y la mustra en un modal, con la opción de editar 
+    				ciertos campos de este como: factura, precio, fecha de compra, marca, modelo, número de serie,
+    				color, material, medidas y estado
+    Parámetros: numero de inventario  
+    Retorna: Modal de editar
+
+********************************************************************************** */
  
  function abrirModalEditar(numInventario) {
 
@@ -71,10 +82,24 @@
     }); 	
  }
 
+ /* **********************************************************************************
+    Funcionalidad: Función que cierra el modal de editar y regresa a sus valores predeterminados todos los 
+    				campos editables
+    Parámetros: No recibe parámetros 
+    Retorna: Cerrar modal
+
+********************************************************************************** */
+
 $('#editarModal').on('hidden.bs.modal', function (e) {
   $('#activarEditar').prop("checked", false).change();
-})
+});
 
+/* **********************************************************************************
+    Funcionalidad: Obtiene el valor de un check, que el usuario activa o no para editar alguna información del bien
+    Parámetros: No recibe parámetros 
+    Retorna: Activa o desactiva los campos editables
+
+********************************************************************************** */
  $('#activarEditar').change(function(){
     	if( $('#activarEditar').is(':checked') ) {
 		    $('#editarFactura').prop("disabled", false);
@@ -162,26 +187,63 @@ $('#editarModal').on('hidden.bs.modal', function (e) {
     	
     });
 
+/* **********************************************************************************
+    Funcionalidad: Cuando el usuario suelta una tecla en el teclado en el campo de editar color,
+    				 comienza a validar el campo
+    Parámetros: El valor ingresado al campo 
+    Retorna: Activa o desactiva el botón actualizar
+
+********************************************************************************** */
 
  $('#editarColor').keyup(function(){
  	$('#btnActualizarArticulo').prop("disabled", false);
 	$('#btnActualizarArticulo').css("display","block");
  });
 
+ /* **********************************************************************************
+    Funcionalidad: Cuando el usuario suelta una tecla en el teclado en el campo de editar material,
+    				 comienza a validar el campo
+    Parámetros: El valor ingresado al campo 
+    Retorna: Activa o desactiva el botón actualizar
+
+********************************************************************************** */
+
  $('#editarMaterial').keyup(function(){
  	$('#btnActualizarArticulo').prop("disabled", false);
 	$('#btnActualizarArticulo').css("display","block");
  });
+
+ /* **********************************************************************************
+    Funcionalidad: Cuando el usuario suelta una tecla en el teclado en el campo de editar Medidas,
+    				 comienza a validar el campo
+    Parámetros: El valor ingresado al campo 
+    Retorna: Activa o desactiva el botón actualizar
+
+********************************************************************************** */
 
  $('#editarMedidas').keyup(function(){
  	$('#btnActualizarArticulo').prop("disabled", false);
 	$('#btnActualizarArticulo').css("display","block");
  });
 
+  /* **********************************************************************************
+    Funcionalidad: Obtiene el valor del selector de estado
+    Parámetros: El valor del selector de estado
+    Retorna: Activa o desactiva el botón actualizar
+
+********************************************************************************** */
+
   $('#editarEstado').change(function(){
  	$('#btnActualizarArticulo').prop("disabled", false);
 	$('#btnActualizarArticulo').css("display","block");
  });
+
+/* **********************************************************************************
+    Funcionalidad: Alerta de confirmación para la actualización de los campos de un bien
+    Parámetros: Formulario de los datos que se pueden actualizar
+    Retorna: Alerta de confirmación cpn el mensaje "Actualización de Datos de este Artículo"
+
+********************************************************************************** */
 
  $('#btnActualizarArticulo').on('click',function(e){
   e.preventDefault();
@@ -203,6 +265,14 @@ $('#editarModal').on('hidden.bs.modal', function (e) {
       
   });
 });
+
+ /* **********************************************************************************
+
+    Funcionalidad: Mascara para el campo de precio unitario, esta función hace que se muestre siempre un prefijo en el campo, antes del valor se muestra 'MXN$ '
+    Parámetros: no recibe parámetros
+    Retorna: Una mascara para el campo de texto de precio unitario, se muestra siempre un prefijo antes de la cantidad 'MXN$ '
+
+********************************************************************************** */
 
 $("#editarImporte").maskMoney({
 	// The symbol to be displayed before the value entered by the user

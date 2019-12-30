@@ -1,3 +1,13 @@
+
+/********************************** funciones para validar algúnos campos del sistema *******************************************************/
+
+/* **********************************************************************************
+    Funcionalidad: Valida que el número de partida no exista ya en el sistema 
+    Parámetros: valor, error e id
+    Retorna: Campo valido o no 
+
+********************************************************************************** */
+
 function validarPartida(valor,error,id){
   if (valor.length == 8){
     $.ajaxSetup(
@@ -38,10 +48,15 @@ function validarPartida(valor,error,id){
     $('#'+id).attr("data-validacion", '1');
     $('#'+id).removeClass('inputSuccess');
     $('#'+id).addClass('inputDanger'); 
-  }
-  
-	
+  }	
 }
+
+/* **********************************************************************************
+    Funcionalidad: Valida que el número de empleado no exista ya en el sistema 
+    Parámetros: valor, error e id
+    Retorna: Campo valido o no 
+
+********************************************************************************** */
 
 function validarNumeroEmpleado(valor,error,id){
   $.ajaxSetup(
@@ -87,6 +102,13 @@ function validarNumeroEmpleado(valor,error,id){
     }); 
 }
 
+/* **********************************************************************************
+    Funcionalidad: Validar que solo pueda ingresar letras o números el usuario a un campo
+    Parámetros: evento y tipo de validación (solo letras o solo números)
+    Retorna: true o false 
+
+********************************************************************************** */
+
 
 function SoloNumerosLetras(evt, tipovalidacion){
  if(SoloNumeros(evt)){
@@ -100,6 +122,13 @@ function SoloNumerosLetras(evt, tipovalidacion){
   }  
  }
 }
+
+/* **********************************************************************************
+    Funcionalidad: Validar que solo pueda ingresar letras y los caracteres necesario para el campo indicado
+    Parámetros: evento y tipo de validación (solo letras)
+    Retorna: true o false 
+
+********************************************************************************** */
 
 function soloLetras(e,tipovalidacion) {
   key = e.keyCode || e.which;
@@ -150,7 +179,12 @@ function soloLetras(e,tipovalidacion) {
   }
 }
 
-//Se utiliza para que el campo de texto solo acepte numeros
+/* **********************************************************************************
+    Funcionalidad: Validar que solo pueda ingresar números en los campos númericos
+    Parámetros: evento
+    Retorna: true o false 
+
+********************************************************************************** */
 function SoloNumeros(evt){
  if(window.event){//asignamos el valor de la tecla a keynum
   keynum = evt.keyCode; //IE
@@ -167,6 +201,12 @@ function SoloNumeros(evt){
  }
 }
 
+/* **********************************************************************************
+    Funcionalidad: Validar que solo pueda ingresar números y dos decimales despúes del punto
+    Parámetros: evento, valor del campo
+    Retorna: true o false 
+
+********************************************************************************** */
 
 function valorPrecio(e, field) {
   key = e.keyCode ? e.keyCode : e.which
