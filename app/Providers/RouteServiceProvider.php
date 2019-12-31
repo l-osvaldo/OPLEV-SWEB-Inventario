@@ -74,6 +74,7 @@ class RouteServiceProvider extends ServiceProvider
            //Add you routes here, for example:
           Route::apiResource('/usuario','UserAPIController');
           Route::apiResource('/articulos', 'APIController');
+          Route::apiResource('/articulosecos', 'ArtECOsAPIController');
           Route::apiResource('/scanner', 'ScannerController');
           Route::apiResource('/empleados', 'EmpleadosAPIController'); 
           Route::apiResource('/lote', 'LoteAPIController');
@@ -81,6 +82,7 @@ class RouteServiceProvider extends ServiceProvider
           Route::post('/lote/lotesCerradosGral','LoteAPIController@lotesCerradosGral');  
           Route::apiResource('/bitacoralotes', 'BitacoraLotesAPIController'); 
           Route::get('/bitacoralotes/allBitacorasId/{id}','BitacoraLotesAPIController@allBitacorasId');
+
 
       });
 
