@@ -81,7 +81,7 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  	@foreach ($array as $partida)
+			  	@foreach ($partidas as $partida)
 		  			<tr>
 	                	<td style="text-align: left; padding: 2px 12px" class="border">{{ $partida['descpartida'] }}</td>
 			          	<td style="text-align: left; padding: 2px 12px" class="border"> {{-- {{ $partida->aniosvida }} --}}  </td>

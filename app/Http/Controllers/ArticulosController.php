@@ -1042,55 +1042,21 @@ class ArticulosController extends Controller
 		 	$mesAnterior = $meses[11].' ('. $anioAnterior .')';
 		}
 
-		$partidas = DB::table('articulos')->select('partida','descpartida', DB::raw('ROUND(SUM(importe),2) as totalimporte'))->whereNotIn('partida',['56900001'])->orderBy('partida')->groupBy('partida', 'descpartida')->get();
+		$partidas = articulos::select('partida','descpartida', DB::raw('ROUND(SUM(importe),2) as totalimporte'))->whereNotIn('partida',['56900001'])->orderBy('partida')->groupBy('partida', 'descpartida')->get();
 
-		// $count = count($partidas);
-		// echo $count;
-
-		$array = json_decode(json_encode($partidas), true); 
-		// print_r($array);
-		// exit;
-
-		// foreach ($array as $partida) {
-			//print_r($partida);
-			//echo $partida['partida'];
-
-			// array_push($partida, $partida['partida'] );
-			// array_push($partida, $partida['partida'] );
-
-			// //array_add($partida, 'prueba', $partida['partida']);
-			// print_r($partida);
-			// exit;
-			
-		// }
 		
 
-		foreach ($partidas as $key => $partida) {
+		foreach ($partidas as $value) {
+				//echo $value.'  ';
+				array_add($value,'diciembreSaldo','prueba');
+		}	
 
-		 	$datosPartida= partidas::where('partida', $partidas[$key]->partida)->get();
+		//print_r($partidas);
+		//exit;
 
-		 	if ($datosPartida[0]->aniosvida !== null && $datosPartida[0]->porcentajeDepreciacion !== null){
+		
 
-		 		$articulosDeLaPartida = articulos::select('fechacomp','importe')->where('partida',$partidas[$key]->partida)->whereNotIn('fechacomp', ['  -   -'])->get();
-		 	}else{
-		 	}
-
-		 	 
-
-		 	// $datosPartida[0]->aniosvida;
-
-		 	// array_add($datosPartida[0], 'prueba', $partidas[$key]->partida);
-
-		 	// print_r($partidas);
-		 	 //exit;
-
-		 } 
-
-
-		//print_r($array);
-		 //exit;
-
-		$pdf = PDF::loadView('depreciacion.pdf.DepreciacionPDF',compact('totalDiasMes','nombreMes','anio','mesAnterior','array'))->setPaper('letter', 'landscape');
+		$pdf = PDF::loadView('depreciacion.pdf.DepreciacionPDF',compact('totalDiasMes','nombreMes','anio','mesAnterior','partidas'))->setPaper('letter', 'landscape');
 		return $pdf->inline('DEPRECIACIÓN '.$nombreMes.$anio.'.pdf');
 	}
 
