@@ -9265,12 +9265,12 @@ body,
 
 .sidebar-dark-primary .nav-treeview > .nav-item > .nav-link:hover {
   color: #ffffff;
-  background-color: #EA0D94;
+  background-color: #505050;
 }
 
 .sidebar-dark-primary .nav-treeview > .nav-item > .nav-link.active, .sidebar-dark-primary .nav-treeview > .nav-item > .nav-link.active:hover {
   color: #ffffff;
-  background-color: #EA0D94;
+  background-color: #505050;
 }
 
 .sidebar-light-primary {

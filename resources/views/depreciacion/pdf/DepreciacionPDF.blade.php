@@ -84,9 +84,9 @@
 			  	@foreach ($partidas as $partida)
 		  			<tr>
 	                	<td style="text-align: left; padding: 2px 12px" class="border">{{ $partida['descpartida'] }}</td>
-			          	<td style="text-align: left; padding: 2px 12px" class="border"> {{-- {{ $partida->aniosvida }} --}}  </td>
-			          	<td style="text-align: left; padding: 2px 12px" class="border"></td>
-			          	<td style="text-align: left; padding: 2px 12px" class="border"></td>             
+			          	<td style="text-align: left; padding: 2px 12px" class="border">$ {{ $partida->totalPorPartida }}   </td>
+			          	<td style="text-align: left; padding: 2px 12px" class="border">$ {{ $partida->totalDepreciacionPartida }} </td>
+			          	<td style="text-align: left; padding: 2px 12px" class="border">$ {{ $partida->registroPasadoMenosDepreciacion }} </td>             
 	                </tr>
 			  	@endforeach
 			  		<tr>
@@ -97,9 +97,9 @@
 			  		</tr>
 			  		<tr>
 			  			<td style="text-align: left; padding: 2px 12px; background-color: #ccc; text-align: center;" class="border"><strong>TOTAL</strong></td>
-			          	<td style="text-align: left; padding: 2px 12px; background-color: #ccc;" class="border"></td>
-			          	<td style="text-align: left; padding: 2px 12px; background-color: #ccc;" class="border"></td>
-			          	<td style="text-align: left; padding: 2px 12px; background-color: #ccc;" class="border"></td>
+			          	<td style="text-align: left; padding: 2px 12px; background-color: #ccc;" class="border"> $ {{ $totalPartidaRegistroPasado }} </td>
+			          	<td style="text-align: left; padding: 2px 12px; background-color: #ccc;" class="border"> $ {{ $totaldepreciacionActual }} </td>
+			          	<td style="text-align: left; padding: 2px 12px; background-color: #ccc;" class="border"> $ {{ $totalDelMes }} </td>
 			  		</tr>
 			  </tbody>
 		  	</table>  		

@@ -95,7 +95,7 @@
 
 
 </head>
-<body class="hold-transition sidebar-mini sidebar-collapse" onload="cerrarMenus();">
+<body class="hold-transition sidebar-mini sidebar-open" onload="cerrarMenus();">
   <div class="wrapper">
    
   

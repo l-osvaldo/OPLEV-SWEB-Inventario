@@ -1044,19 +1044,125 @@ class ArticulosController extends Controller
 
 		$partidas = articulos::select('partida','descpartida', DB::raw('ROUND(SUM(importe),2) as totalimporte'))->whereNotIn('partida',['56900001'])->orderBy('partida')->groupBy('partida', 'descpartida')->get();
 
-		
+		$anioActual = date('Y') ;	
+		$mesActual = $mes;	
 
-		foreach ($partidas as $value) {
-				//echo $value.'  ';
-				array_add($value,'diciembreSaldo','prueba');
-		}	
+		$totalPartidaRegistroPasado = 0;
+		$totaldepreciacionActual = 0;
+		$totalDelMes = 0;
+
+		$totalesPartidas = array();
+		$totalesDepreciacion = array();
+		$totalesTotal = array();
+
+		foreach ($partidas as $partida) {
+			// echo $partida['partida'];
+			// exit;
+
+			$articulos = articulos::select('numeroinv','fechacomp','importe')->where('partida', $partida['partida'])->whereNotIn('fechacomp', ['  -   -'])->get(); 
+
+			$datosPartida= partidas::where('partida', $partida['partida'])->get();
+
+			$totalPorPartida = 0;
+
+			$totalDepreciacionPartida = 0;
+
+			$registroPasadoMenosDepreciacion = 0;
+
+			foreach ($articulos as $articulo) {
+
+				if ($datosPartida[0]['porcentajeDepreciacion'] !== null ){
+					// valor del bien por el porcentaje de depreciación
+					$valorResidual = round( ($articulo->importe * ($datosPartida[0]['porcentajeDepreciacion']/100)),2);
+
+					// VALOR DEL BIEN MENOS VALOR RESIDUAL
+					$valorDelBienMenosValorResidual = round( ($articulo->importe - $valorResidual),2);
+
+					//Depreciación anual ((VALOR DEL BIEN MENOS VALOR RESIDUAL) / (años de devaluación))
+					$depreciacionAnual = round( ($valorDelBienMenosValorResidual / $datosPartida[0]['aniosvida']), 2);
+
+					// Depreciación mensual (depreciación anual / 12)
+					$depreciacionMensual =  round(($depreciacionAnual / 12), 2);
+
+					// clasificación por fecha
+					$fecha = str_replace('/', '-', $articulo->fechacomp);
+
+					$anioCompra = date("Y", strtotime($fecha));
+
+					$fecha = date("d-m-Y", strtotime($fecha."+ ".$datosPartida[0]['aniosvida']." year"));
+
+					
+					$anioArticuloDepreciacion = date('Y', strtotime($fecha)); // año del artículo mas los años de depreciación
+
+					$mesArticuloDepreciacion = date('m', strtotime($fecha));
+
+					$saldo = $articulo->importe;
+
+					if ($anioArticuloDepreciacion < $anioActual){
+
+						$saldo = $valorResidual;
+						
+					}else{
+
+						$totalDepreciacionPartida +=  $depreciacionMensual;
+
+						if ($mesActual <= $mesArticuloDepreciacion  ){
+							$mes = $mesActual;
+						}
+						else{
+							$mes = $mesArticuloDepreciacion;
+						}
+						for ($i = 0; $i < 12 ; $i++) {
+							if ($mes >=  ($i + 1)){
+
+								$saldo -= $depreciacionMensual;									
+							}
+						}
+				
+					}
+				}
+				$totalPorPartida += $saldo;
+				
+			}
+
+			$registroPasadoMenosDepreciacion =  $totalPorPartida - $totalDepreciacionPartida;
+
+			// dd(is_float($totalPorPartida));
+
+			array_push($totalesPartidas, $totalPorPartida);
+			array_push($totalesDepreciacion, $totalDepreciacionPartida);
+			array_push($totalesTotal, $registroPasadoMenosDepreciacion);
+
+			$totalPorPartida 					= number_format($totalPorPartida,2);
+			$totalDepreciacionPartida 			= number_format($totalDepreciacionPartida,2);
+			$registroPasadoMenosDepreciacion	= number_format($registroPasadoMenosDepreciacion,2);
+
+			array_add($partida,'totalPorPartida',$totalPorPartida);
+			array_add($partida,'totalDepreciacionPartida',$totalDepreciacionPartida);
+			array_add($partida,'registroPasadoMenosDepreciacion',$registroPasadoMenosDepreciacion);
+			//echo $datosPartida[0]['porcentajeDepreciacion'] . '  ';
+
+		}
+
+		foreach ($totalesPartidas as $value) {
+			$totalPartidaRegistroPasado += $value;
+		}
+
+		foreach ($totalesDepreciacion as $value) {
+			$totaldepreciacionActual += $value;
+		}
+
+		$totalDelMes = $totalPartidaRegistroPasado - $totaldepreciacionActual;
 
 		//print_r($partidas);
 		//exit;
 
-		
+		$totalPartidaRegistroPasado 	= number_format($totalPartidaRegistroPasado,2);
+		$totaldepreciacionActual 		= number_format($totaldepreciacionActual,2);
+		$totalDelMes 					= number_format($totalDelMes,2);		
 
-		$pdf = PDF::loadView('depreciacion.pdf.DepreciacionPDF',compact('totalDiasMes','nombreMes','anio','mesAnterior','partidas'))->setPaper('letter', 'landscape');
+		$pdf = PDF::loadView('depreciacion.pdf.DepreciacionPDF',
+					compact('totalDiasMes','nombreMes','anio','mesAnterior','partidas','totalPartidaRegistroPasado','totaldepreciacionActual','totalDelMes'))->setPaper('letter', 'landscape');
 		return $pdf->inline('DEPRECIACIÓN '.$nombreMes.$anio.'.pdf');
 	}
 
