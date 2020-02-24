@@ -112,6 +112,10 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('catalogos/inventarioPorOrdenAlfabeticoNuevo', 'ArticulosController@inventarioPorOrdenAlfabeticoNuevo');
 	Route::get('catalogos/reportes/inventarioPorOrdenAlfabeticoNuevoPDF', 'ArticulosController@inventarioPorOrdenAlfabeticoNuevoPDF');
 
+	// inventario de la bodega 
+	Route::get('catalogos/inventarioDeLaBodega', 'ArticulosController@inventarioDeLaBodega');
+	Route::get('catalogos/reportes/inventarioDeLaBodegaPDF', 'ArticulosController@inventarioDeLaBodegaPDF');
+
 	
 	// Editar Artículo
 	Route::get('/catalogos/InformacionArticulo', 'ArticulosController@InformacionArticulo')->name('InformacionArticulo');

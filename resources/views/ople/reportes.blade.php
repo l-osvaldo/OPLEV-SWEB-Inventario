@@ -20,16 +20,19 @@
 	    <div class="row">
 	    	<div class="col-md-3">
 	    		<select class="form-control select2" id="selectReportes" style="width: 90%;">
+	    			{{-- los valores del selector no estan ordenados por que se han ido agregando reportes --}}
 		    		<option value="0">Seleccione un reporte</option>
 		    		<option value="8">1.- Bienes de un área ordenado por empleado</option>
 		    		<option value="1">2.- Bienes por partida</option>
 		    		<option value="2">3.- Concentrado de importes por área</option>
 		    		<option value="3">4.- Concentrado de importes por partida</option>
-		    		<option value="4">5.- Inventario por área</option>
-		    		<option value="5">6.- Inventario por orden alfabético</option>
-		    		<option value="9">7.- Inventario por orden alfabético nuevo</option>
-		    		<option value="7">8.- Importe de bienes calendarizados por año de adquisición</option>
-		    		<option value="6">9.- Resguardo por empleado</option>		    		
+		    		<option value="11">5.- Inventario de la bodega</option>
+		    		<option value="4">6.- Inventario por área</option>
+		    		<option value="5">7.- Inventario por orden alfabético</option>
+		    		<option value="9">8.- Inventario por orden alfabético nuevo</option>
+		    		<option value="10">9.- Inventario ordenado por año, partida y factura</option>
+		    		<option value="7">10.- Importe de bienes calendarizados por año de adquisición</option>
+		    		<option value="6">11.- Resguardo por empleado</option>		    		
 		    		
 		    	</select>
 	    	</div>

@@ -384,6 +384,17 @@ class ArticulosController extends Controller
 		return view('ople.reportes.InventarioPorOrdenAlfabeticoNuevo', compact('partidas'));
 	}
 
+	public function inventarioDeLaBodega(){
+
+		$articulos = articulos::select('numeroinv','concepto','numserie','marca','modelo','medidas','factura','importe','estado')->where('idarea','15')->get();	
+
+		$totalImporte = articulos::select( DB::raw('SUM(importe) as total'))->where('idarea','15')->get();
+
+		$totalImporte = number_format($totalImporte[0]->total,2);
+		
+		return view('ople.reportes.InventarioDeLaBodega', compact('articulos','totalImporte'));
+	}
+
 	// ************ generar reportes ************
 
 
@@ -637,6 +648,18 @@ class ArticulosController extends Controller
 
 		$pdf = PDF::loadView('ople.reportes.pdf.InventarioPorOrdenAlfabeticoNuevoPDF', compact('partidas','numPartidas'))->setPaper('letter', 'landscape');
 		return $pdf->inline('InventarioPorOrdenAlfabeticoNuevo.pdf');
+	}
+
+
+	public function inventarioDeLaBodegaPDF(){
+		$articulos = articulos::select('numeroinv','concepto','numserie','marca','modelo','medidas','factura','importe','estado')->where('idarea','15')->get();	
+
+		$totalImporte = articulos::select( DB::raw('SUM(importe) as total'))->where('idarea','15')->get();
+
+		$totalImporte = number_format($totalImporte[0]->total,2);
+		
+		$pdf = PDF::loadView('ople.reportes.pdf.InventarioDeLaBodegaDPF', compact('articulos','totalImporte'))->setPaper('letter', 'landscape');
+		return $pdf->inline('InventarioDeLaBodegaDPF.pdf');
 	}
 
 

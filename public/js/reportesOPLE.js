@@ -59,6 +59,13 @@ $('#selectReportes').change(function() {
 			$('#segundaInstruccion').css("display","none");
 			inventarioPorOrdenAlfabeticoNuevo();	
 			break;
+		case '10':
+			break;
+		case '11':
+			$('#seleccionSelect').css("display","none");
+			$('#segundaInstruccion').css("display","none");
+			inventarioDeLaBodega();
+			break;
 	}
 }); 
 
@@ -554,6 +561,39 @@ function inventarioPorOrdenAlfabeticoNuevo(){
     	$('#cargando').css("display","none");
     	$('#btnGenerarPDF').css("display","block");
     	$('#btnGenerarPDF').attr("href","../catalogos/reportes/inventarioPorOrdenAlfabeticoNuevoPDF");
+    	    	
+    });
+
+}
+
+function inventarioDeLaBodega(){
+
+	$('#cargando').css("display","block");
+	$('#divRespuesta').css("display","none");
+	$('#btnGenerarPDF').css("display","none");
+
+	$.ajaxSetup(
+	{
+		headers:
+		{ 
+    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+	$.ajax({
+      url: "inventarioDeLaBodega",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      dataType: 'html',
+      contentType: 'application/json'
+
+    }).done(function(response) {
+    	//console.log(response);
+    	$('#divRespuesta').css("display","block");
+    	$('#respuestaReporte').html(response);
+    	$('#cargando').css("display","none");
+    	$('#btnGenerarPDF').css("display","block");
+    	$('#btnGenerarPDF').attr("href","../catalogos/reportes/inventarioDeLaBodegaPDF");
     	    	
     });
 
