@@ -248,12 +248,12 @@ function enablebtnArticuloEditar()
 
 ********************************************************************************** */
 
-function cerrarMenus(){
-	$('#cat').removeClass('menu-open');
-	$('#ople').removeClass('menu-open');
-	$('#eco').removeClass('menu-open');
-	$('#CancelacionesR').removeClass('menu-open');
-}
+// function cerrarMenus(){
+// 	$('#cat').removeClass('menu-open');
+// 	$('#ople').removeClass('menu-open');
+// 	$('#eco').removeClass('menu-open');
+// 	$('#CancelacionesR').removeClass('menu-open');
+// }
 
 /* **********************************************************************************
 
