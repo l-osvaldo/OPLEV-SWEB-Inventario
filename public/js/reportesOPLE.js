@@ -60,6 +60,7 @@ $('#selectReportes').change(function() {
 			inventarioPorOrdenAlfabeticoNuevo();	
 			break;
 		case '10':
+			$('#instruccion').html('2.- Seleccione un año:');
 			break;
 		case '11':
 			$('#seleccionSelect').css("display","none");
@@ -598,5 +599,3 @@ function inventarioDeLaBodega(){
     });
 
 }
-
-

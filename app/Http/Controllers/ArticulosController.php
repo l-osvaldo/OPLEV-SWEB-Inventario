@@ -655,10 +655,12 @@ class ArticulosController extends Controller
 		$articulos = articulos::select('numeroinv','concepto','numserie','marca','modelo','medidas','factura','importe','estado')->where('idarea','15')->get();	
 
 		$totalImporte = articulos::select( DB::raw('SUM(importe) as total'))->where('idarea','15')->get();
+		$totalBienes = articulos::where('idarea','15')->count();
 
 		$totalImporte = number_format($totalImporte[0]->total,2);
+		$totalBienes = number_format($totalBienes);
 		
-		$pdf = PDF::loadView('ople.reportes.pdf.InventarioDeLaBodegaDPF', compact('articulos','totalImporte'))->setPaper('letter', 'landscape');
+		$pdf = PDF::loadView('ople.reportes.pdf.InventarioDeLaBodegaDPF', compact('articulos','totalImporte','totalBienes'))->setPaper('letter', 'landscape');
 		return $pdf->inline('InventarioDeLaBodegaDPF.pdf');
 	}
 
