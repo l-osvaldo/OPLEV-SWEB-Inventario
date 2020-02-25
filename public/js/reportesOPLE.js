@@ -1,6 +1,8 @@
 
 /********************************** funciones para el módulo de reportes OPLE *******************************************************/
 
+var banderaSelectAnio = 'default'; // variable para que el sistema tome el año para el reporte 9 o 10, de acuerdo a lo el usuario necesite
+
 /* **********************************************************************************
     Funcionalidad: Obtiene el reporte seleccionado por el usuario y de acuerdo al valor toma una opción de reporte,
     				algunos reportes deben seleccionar otra opción, como la partida, línea o empleado, otros solo
@@ -48,6 +50,7 @@ $('#selectReportes').change(function() {
 			$('#divAnioAdquisicion').css("display","block");
 			$('#segundaInstruccion').css("display","block");
 			$('#instruccion').html('2.- Seleccione un año:');
+			banderaSelectAnio = 'reporte10';
 			break;
 		case '8':
 			$('#divAreaR8').css("display","block");
@@ -60,7 +63,10 @@ $('#selectReportes').change(function() {
 			inventarioPorOrdenAlfabeticoNuevo();	
 			break;
 		case '10':
+			$('#divAnioAdquisicion').css("display","block");
+			$('#segundaInstruccion').css("display","block");
 			$('#instruccion').html('2.- Seleccione un año:');
+			banderaSelectAnio = 'reporte9';
 			break;
 		case '11':
 			$('#seleccionSelect').css("display","none");
@@ -130,10 +136,36 @@ $('#selectEmpleado').change(function(){
 
 ********************************************************************************** */
 $('#selectAnioAdquisicion').change(function(){
+	if (banderaSelectAnio === 'reporte10'){
+		if ($(this).val() != 0 ){
+			importeBienesAnioAdquisicion($(this).val());
+		}else{
+			$('#btnGenerarPDF').css("display","none");
+			$('#divRespuesta').css("display","none");
+		}
+	}else {
+		if (banderaSelectAnio === 'reporte9'){
+			if ($(this).val() != 0 ){
+				$('#divPartida02').css("display","block");
+				$('#terceraInstruccion').css("display","block");
+				$('#instruccion02').html('3.- Seleccione una partida:');
+			}else {
+				$('#terceraInstruccion').css("display","none");
+				$('#divPartida02').css("display","none");
+			}
+
+			
+		}
+	}
+
+	
+});
+
+
+$('#selectPartida02').change(function(){
 	if ($(this).val() != 0 ){
-		importeBienesAnioAdquisicion($(this).val());
-	}else{
-		$('#btnGenerarPDF').css("display","none");
+		inventarioAnioPartidaFactura($('#selectAnioAdquisicion').val(), $(this).val());
+	}else {
 		$('#divRespuesta').css("display","none");
 	}
 });
@@ -595,6 +627,43 @@ function inventarioDeLaBodega(){
     	$('#cargando').css("display","none");
     	$('#btnGenerarPDF').css("display","block");
     	$('#btnGenerarPDF').attr("href","../catalogos/reportes/inventarioDeLaBodegaPDF");
+    	    	
+    });
+
+}
+
+function inventarioAnioPartidaFactura(anio, partida) {
+	console.log(anio + ' - ' + partida);
+
+	$('#cargando').css("display","block");
+	$('#divRespuesta').css("display","none");
+	$('#btnGenerarPDF').css("display","none");
+
+	var partidaDatos = partida.split('*');
+
+	$.ajaxSetup(
+	{
+		headers:
+		{ 
+    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+	$.ajax({
+      url: "inventarioAnioPartidaFactura",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      dataType: 'html',
+      data: { anio: anio, partida: partidaDatos[0], descpartida: partidaDatos[1]},
+      contentType: 'application/json'
+
+    }).done(function(response) {
+    	//console.log(response);
+    	$('#divRespuesta').css("display","block");
+    	$('#respuestaReporte').html(response);
+    	$('#cargando').css("display","none");
+    	$('#btnGenerarPDF').css("display","block");
+    	$('#btnGenerarPDF').attr("href","../catalogos/reportes/inventarioAnioPartidaFacturaPDF/"+ anio + "/" + partidaDatos[0] + "/" + partidaDatos[1] );
     	    	
     });
 

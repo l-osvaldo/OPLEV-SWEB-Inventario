@@ -14,7 +14,10 @@
 	  			<label>1.- Seleccione un Reporte:</label>
 	  		</div>
 	  		<div class="col-md-3" id="segundaInstruccion" style="display: none;">
-	  			<label id="instruccion">2.- Seleccione un Reporte:</label>
+	  			<label id="instruccion"></label>
+	  		</div>
+	  		<div class="col-md-3" id="terceraInstruccion" style="display: none;">
+	  			<label id="instruccion02"></label>
 	  		</div>
 	  	</div>
 	    <div class="row">
@@ -26,12 +29,12 @@
 		    		<option value="1">2.- Bienes por partida</option>
 		    		<option value="2">3.- Concentrado de importes por área</option>
 		    		<option value="3">4.- Concentrado de importes por partida</option>
-		    		<option value="11">5.- Inventario de la bodega</option>
-		    		<option value="4">6.- Inventario por área</option>
-		    		<option value="5">7.- Inventario por orden alfabético</option>
-		    		<option value="9">8.- Inventario por orden alfabético nuevo</option>
-		    		<option value="10">9.- Inventario ordenado por año, partida y factura</option>
-		    		<option value="7">10.- Importe de bienes calendarizados por año de adquisición</option>
+		    		<option value="7">5.- Importe de bienes calendarizados por año de adquisición</option>
+		    		<option value="11">6.- Inventario de la bodega</option>
+		    		<option value="10">7.- Inventario ordenado por año, partida y factura</option>
+		    		<option value="4">8.- Inventario por área</option>
+		    		<option value="5">9.- Inventario por orden alfabético</option>
+		    		<option value="9">10.- Inventario por orden alfabético nuevo</option>		    		
 		    		<option value="6">11.- Resguardo por empleado</option>		    		
 		    		
 		    	</select>
@@ -66,22 +69,10 @@
 
 	    		<div class="form-group" style="display: none; width: 100%" id="divAnioAdquisicion">
 	    			<select class="form-control select2" id="selectAnioAdquisicion" style="width: 100%">
-			    		<option value="0">Seleccione un año </option>			    		
-			    		<option value="2019"> 2019 </option>
-			    		<option value="2018"> 2018 </option>
-			    		<option value="2017"> 2017 </option>
-			    		<option value="2016"> 2016 </option>
-			    		<option value="2015"> 2015 </option>
-			    		<option value="2014"> 2014 </option>
-			    		<option value="2013"> 2013 </option>
-			    		<option value="2012"> 2012 </option>
-			    		<option value="2011"> 2011 </option>
-			    		<option value="2010"> 2010 </option>
-			    		<option value="2009"> 2009 </option>
-			    		<option value="2008"> 2008 </option>
-			    		<option value="2007"> 2007 </option>
-			    		<option value="2006"> 2006 </option>
-			    		<option value="2005"> 2005 </option>			    		
+			    		<option value="0">Seleccione un año </option>	
+			    		@for ($i = 0; $i <  (date ('Y') - 2004) ; $i++)
+			    			<option value="{{ date ('Y') - $i}}"> {{ date ('Y') - $i}} </option>
+			    		@endfor					    		
 			    	</select>
 	    		</div>  
 
@@ -93,7 +84,18 @@
 			    		@endforeach
 			    	</select>
 	    		</div>
-	    	</div>    	  	
+	    	</div>  
+
+	    	<div class="col-md-3" id="seleccionSelect3">
+	    		<div class="form-group" style="display: none; width: 100%" id="divPartida02">
+	    			<select class="form-control select2" id="selectPartida02" style="width: 100%">
+			    		<option value="0">Seleccione una partida </option>
+			    		@foreach ($partidas as $partida)
+			    			<option value="{{ $partida->partida }}*{{ $partida->descpartida }}"> {{ $partida->partida }} | {{ $partida->descpartida }} </option>
+			    		@endforeach
+			    	</select>
+	    		</div>
+	    	</div>	  	
 	    	
 	    </div>
 	  </div>

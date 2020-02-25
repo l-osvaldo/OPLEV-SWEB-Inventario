@@ -395,6 +395,24 @@ class ArticulosController extends Controller
 		return view('ople.reportes.InventarioDeLaBodega', compact('articulos','totalImporte'));
 	}
 
+	public function inventarioAnioPartidaFactura(Request $request){
+		$articulos = articulos::select('numeroinv', 'concepto', 'numserie', 'marca', 'modelo', 'nombreemple', 'factura', 'importe', 'estado')
+								->where([['fechacomp','like','%'.$request->anio.'%'],['partida',$request->partida]])
+								->orderBy('factura', 'ASC')
+								->get();
+
+		$totalImporte = articulos::select( DB::raw('SUM(importe) as total'))
+								   ->where([['fechacomp','like','%'.$request->anio.'%'],['partida',$request->partida]])->get();
+
+		$totalImporte = number_format($totalImporte[0]->total,2);
+
+		$anio = $request->anio;
+		$partida = $request->partida;
+		$descpartida = $request->descpartida;
+
+		return view('ople.reportes.InventarioOrdenadoPorAnioPartidaFactura', compact('articulos','totalImporte','anio','partida','descpartida'));
+	}
+
 	// ************ generar reportes ************
 
 
@@ -662,6 +680,27 @@ class ArticulosController extends Controller
 		
 		$pdf = PDF::loadView('ople.reportes.pdf.InventarioDeLaBodegaDPF', compact('articulos','totalImporte','totalBienes'))->setPaper('letter', 'landscape');
 		return $pdf->inline('InventarioDeLaBodegaDPF.pdf');
+	}
+
+	public function inventarioAnioPartidaFacturaPDF(Request $request){
+		$articulos = articulos::select('numeroinv', 'concepto', 'numserie', 'marca', 'modelo', 'nombreemple', 'factura', 'importe', 'estado')
+								->where([['fechacomp','like','%'.$request->anio.'%'],['partida',$request->partida]])
+								->orderBy('factura', 'ASC')
+								->get();
+
+		$totalImporte = articulos::select( DB::raw('SUM(importe) as total'))
+								   ->where([['fechacomp','like','%'.$request->anio.'%'],['partida',$request->partida]])->get();
+
+		$totalImporte = number_format($totalImporte[0]->total,2);
+
+		$anio = $request->anio;
+		$partida = $request->partida;
+		$descpartida = $request->descpartida;
+
+		$pdf = PDF::loadView('ople.reportes.pdf.InventarioOrdenadoPorAnioPartidaFacturaPDF', compact('articulos','totalImporte','anio','partida','descpartida'))->setPaper('letter', 'landscape');
+
+
+		return $pdf->inline('InventarioOrdenadoPorAñoPartidaFacturaPDF.pdf');
 	}
 
 

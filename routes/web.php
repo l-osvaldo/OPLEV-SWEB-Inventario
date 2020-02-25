@@ -116,6 +116,9 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('catalogos/inventarioDeLaBodega', 'ArticulosController@inventarioDeLaBodega');
 	Route::get('catalogos/reportes/inventarioDeLaBodegaPDF', 'ArticulosController@inventarioDeLaBodegaPDF');
 
+	// Inventario ordenado por año, partida y factura
+	Route::get('catalogos/inventarioAnioPartidaFactura', 'ArticulosController@inventarioAnioPartidaFactura');
+	Route::get('catalogos/reportes/inventarioAnioPartidaFacturaPDF/{anio}/{partida}/{descpartida}', 'ArticulosController@inventarioAnioPartidaFacturaPDF');
 	
 	// Editar Artículo
 	Route::get('/catalogos/InformacionArticulo', 'ArticulosController@InformacionArticulo')->name('InformacionArticulo');
