@@ -160,6 +160,14 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('catalogos/ResguardoPorEmpleadoECO', 'ArticulosECOsController@ResguardoPorEmpleadoECO');
 	Route::get('catalogos/reportes/ResguardoPorEmpleadoPDFECO/{numEmpleado}/{nombreEmpleado}', 'ArticulosECOsController@ResguardoPorEmpleadoPDFECO');
 
+	// Bienes por área ordenado por empleados ECO
+	Route::get('catalogos/bienesAreaOrdenadoEmpleadoECO', 'ArticulosECOsController@bienesAreaOrdenadoEmpleadoECO');
+	Route::get('catalogos/reportes/bienesAreaOrdenadoEmpleadoPDFECO/{area}', 'ArticulosECOsController@bienesAreaOrdenadoEmpleadoPDFECO');
+
+	// Importe de bienes candalerizados por año de adquisición ECO
+	Route::get('catalogos/importeBienesAnioAdquisicionECO', 'ArticulosECOsController@importeBienesAnioAdquisicionECO');
+	Route::get('catalogos/reportes/importeBienesAnioAdquisicionPDFECO/{anioAdquisicion}', 'ArticulosECOsController@importeBienesAnioAdquisicionPDFECO');
+
 	// Depreciación 
 	Route::get('/catalogos/depreciacion', 'ArticulosController@depreciacion')->name('depreciacion');
 	Route::get('/catalogos/calculoDepreciacion', 'ArticulosController@calculoDepreciacion');

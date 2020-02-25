@@ -1,6 +1,8 @@
 
 /********************************** funciones para el módulo de reportes ECO *******************************************************/
 
+var banderaSelectAnio = 'default'; // variable para que el sistema tome el año para el reporte 9 o 10, de acuerdo a lo el usuario necesite
+
 /* **********************************************************************************
     Funcionalidad: Obtiene el reporte seleccionado por el usuario y de acuerdo al valor toma una opción de reporte,
     				algunos reportes deben seleccionar otra opción, como la partida, línea o empleado, otros solo
@@ -44,6 +46,19 @@ $('#selectReportesECO').change(function() {
 			$('#segundaInstruccionECO').css("display","block");
 			$('#instruccionECO').html('2.- Seleccione un empleado:');
 			break;
+    case '7':
+      $('#divAreaR7ECO').css("display","block");
+      $('#segundaInstruccionECO').css("display","block");
+      $('#instruccionECO').html('2.- Seleccione una área:');
+      break;
+    case '8':
+      $('#divAnioAdquisicionECO').css("display","block");
+      $('#segundaInstruccionECO').css("display","block");
+      $('#instruccionECO').html('2.- Seleccione un año:');
+      banderaSelectAnio = 'reporte08';
+      break;
+    case '9':
+      break;
 	}
 });
 
@@ -99,6 +114,33 @@ $('#selectEmpleadoECO').change(function(){
 	}
 });
 
+/******************** selección de area para biene por área ordenado por empleado ***********************/
+/* **********************************************************************************
+    Funcionalidad: Obtiene el área del selector para obtener el reporte requerido
+    Parámetros: Valor del selector de área
+    Retorna: No regresa nada
+
+********************************************************************************** */
+$('#selectAreaR7ECO').change(function(){
+  console.log('entre');
+  if ($(this).val() != 0 ){
+    bienesAreaOrdenadoEmpleadoECO($(this).val());
+  }else{
+    $('#btnGenerarPDFECO').css("display","none");
+    $('#divRespuestaECO').css("display","none");
+  }
+  
+});
+
+$('#selectAnioAdquisicionECO').change(function(){
+  if ($(this).val() != 0 ){
+    importeBienesAnioAdquisicionECO($(this).val());
+  }else{
+    $('#btnGenerarPDF').css("display","none");
+    $('#divRespuesta').css("display","none");
+  }  
+});
+
 /******************** funcion para reiniciar los componentes ***********************/
 /* **********************************************************************************
     Funcionalidad: Si el valor del reporte se vuelve cero, opción de inicio (default), se regresan los valores
@@ -122,6 +164,9 @@ function desactivarcamposECO(){
 	$('#divPartidaECO').css("display","none");
 	$('#divAreaECO').css("display","none");
 	$('#divEmpleadoECO').css("display","none");
+  $('#selectAnioAdquisicionECO').val("0").change();
+  $('#selectAreaR7ECO').val("0").change();
+  $('#selectPartida02ECO').val("0").change();
 
 	$('#btnGenerarPDFECO').css("display","none");
 
@@ -129,6 +174,14 @@ function desactivarcamposECO(){
 	$('#btnGenerarPDFECO').attr("href","");
 
 	$('#divRespuestaECO').css("display","none");
+
+  $('#divAreaECO').css("display","none");
+  $('#divEmpleadoECO').css("display","none");
+  $('#divAnioAdquisicionECO').css("display","none");
+  $('#divAreaR7ECO').css("display","none");
+
+  $('#segundaInstruccionECO').css("display","none"); 
+
 }
 
 /******************** Funciones ajax para la consulta de los reportes ***********************/
@@ -383,4 +436,76 @@ function ResguardoPorEmpleadoECO(empleado){
     	$('#btnGenerarPDFECO').attr("href","../catalogos/reportes/ResguardoPorEmpleadoPDFECO/"+empleadoNumNombre[0]+"/"+empleadoNumNombre[1]);
     }); 
 
-} 
+}
+
+function bienesAreaOrdenadoEmpleadoECO(area){
+
+  $('#cargandoECO').css("display","block");
+  $('#divRespuestaECO').css("display","none");
+  $('#btnGenerarPDFECO').css("display","none");
+
+  $.ajaxSetup(
+  {
+    headers:
+    { 
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
+  $.ajax({
+      url: "bienesAreaOrdenadoEmpleadoECO",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      data: { area: area},
+      dataType: 'html',
+      contentType: 'application/json'
+
+    }).done(function(response) {
+      //console.log(response);
+      $('#divRespuestaECO').css("display","block");
+      $('#respuestaReporteECO').html(response);
+      $('#cargandoECO').css("display","none");
+      $('#btnGenerarPDFECO').css("display","block");
+      $('#btnGenerarPDFECO').attr("href","../catalogos/reportes/bienesAreaOrdenadoEmpleadoPDFECO/"+area);
+    });
+}  
+
+
+/* **********************************************************************************
+    Funcionalidad: Obtiene la vista preliminar del reporte importe de bienes por año de adquisición
+    Parámetros: año de adquisición
+    Retorna: Un html con un datatable de la vista preliminar del reporte
+
+********************************************************************************** */
+
+function importeBienesAnioAdquisicionECO(anioAdquisicion){
+
+  $('#cargandoECO').css("display","block");
+  $('#divRespuestaECO').css("display","none");
+  $('#btnGenerarPDFECO').css("display","none");
+
+  $.ajaxSetup(
+  {
+    headers:
+    { 
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
+  $.ajax({
+      url: "importeBienesAnioAdquisicionECO",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      data: { anioAdquisicion: anioAdquisicion},
+      dataType: 'html',
+      contentType: 'application/json'
+
+    }).done(function(response) {
+      //console.log(response);
+      $('#divRespuestaECO').css("display","block");
+      $('#respuestaReporteECO').html(response);
+      $('#cargandoECO').css("display","none");
+      $('#btnGenerarPDFECO').css("display","block");
+      $('#btnGenerarPDFECO').attr("href","../catalogos/reportes/importeBienesAnioAdquisicionPDFECO/"+anioAdquisicion);
+    }); 
+}

@@ -382,6 +382,79 @@ class ArticulosECOsController extends Controller
 		return view('eco.reportes.ResguardoPorEmpleadoECO', compact('datosEmpleado','articulos','totalArticulos','totalImporte'));
 	}
 
+	/* **********************************************************************************
+
+    Funcionalidad: Vista previa del reporte bienes por área y ordenado por empleado, donde muestra todos los bienes que cuenta un área en especifico ordenado por el empleado que lo tiene en su resguardo
+    Parámetros: area
+    Retorna: Una vista previa del reporte, BienesDeUnAreaOrdenadoPorEmpleadoECO.blade.php
+
+    ********************************************************************************** */
+
+	public function bienesAreaOrdenadoEmpleadoECO(Request $request){
+		$area = explode("*", $request->area);
+
+		$idarea = $area[0];
+		$nombrearea = $area[1];
+
+		$articulos = DB::table('articulosecos')->select('numeroinventario', 'concepto', 'numeroserie', 'marca', 'modelo', 'nombreempleado', 'factura', 'importe', 'estado')->where('idarea', $idarea)->orderBy('nombreempleado', 'ASC')->get();
+
+		foreach ($articulos as $articulo) {
+			$articulo->importe = number_format($articulo->importe,2);
+		}
+
+
+		return view('eco.reportes.BienesDeUnAreaOrdenadoPorEmpleadoECO', compact('nombrearea','articulos'));
+	}
+
+	/* **********************************************************************************
+
+    Funcionalidad: Vista previa del reporte importe de bienes por año de adquisición, donde muestra todos las partidas y su importe total por el año que se seleccione.
+    Parámetros: anioAdquisicón
+    Retorna: Una vista previa del reporte, ImporteDeBienesPorAnioAdquisicion.blade.php
+
+    ********************************************************************************** */
+
+	public function importeBienesAnioAdquisicionECO(Request $request){
+		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
+		$anioAdquisicion = $request;
+
+		foreach ($partidas as $value) {
+			$articulos = DB::table('articulosecos')->select('fechacompra','importe')->where([['partida',$value->partida],['fechacompra','like','%'.$request->anioAdquisicion.'%']])->whereNotIn('fechacompra', ['  -   -'])->get();
+
+			$meses  = array("0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+							 	"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00"  );
+			$total = "0.00";
+
+			foreach ($articulos as $art) {
+				if (strpos($art->fechacompra, '-')){
+					$fecha = explode("-", $art->fechacompra);
+				}else{
+					$fecha = explode("/", $art->fechacompra);
+				}
+
+				$meses[$fecha[1]-1] = $meses[$fecha[1]-1] + $art->importe;
+				$total = $total + $art->importe;
+
+
+			}
+			$total = number_format($total,2);
+			array_add($value,'meses',$meses);
+			array_add($value,'total',$total);
+		}
+
+		return view('eco.reportes.ImporteDeBienesPorAnioAdquisicionECO', compact('partidas','anioAdquisicion'));
+	}
+
 	// ************ generar reportes ************
 
 	/* **********************************************************************************
@@ -544,6 +617,77 @@ class ArticulosECOsController extends Controller
 		return $pdf->inline('ResguardoPorEmpleadoECO-'.$request->nombreEmpleado.'.pdf');
 
 	}
+
+	/* **********************************************************************************
+
+    Funcionalidad: Genera la vista del reporte PDF de bienes por área ordenados por empleados, donde muestra todos los artículos de un área ordenados por empleado
+    Parámetros: area
+    Retorna: Retorna un pdf, BienesDeUnAreaOrdenadoPorEmpleado.pdf
+
+    ********************************************************************************** */
+
+	public function bienesAreaOrdenadoEmpleadoPDFECO(Request $request){
+		$area = explode("*", $request->area);
+
+		$idarea = $area[0];
+		$nombrearea = $area[1];
+
+		$articulos = DB::table('articulosecos')->select('numeroinventario', 'concepto', 'numeroserie', 'marca', 'modelo', 'nombreempleado', 'factura', 'importe', 'estado')->where('idarea', $idarea)->orderBy('nombreempleado', 'ASC')->get();
+
+		set_time_limit(5000);
+
+		$pdf = PDF::loadView('eco.reportes.pdf.BienesDeUnAreaOrdenadoPorEmpleadoPDFECO', compact('nombrearea','articulos'))->setPaper('letter', 'landscape');
+		return $pdf->inline('BienesDeUnAreaOrdenadoPorEmpleadoECO-'.$nombrearea.'.pdf');
+	}
+
+
+	/* **********************************************************************************
+
+    Funcionalidad: Genera la vista del reporte PDF del importe de bienes por año de adquisición, donde muestra todos las partidas y su importe total por el año que se seleccione.
+    Parámetros: anioAdquisicón
+    Retorna: Retorna un pdf, ImporteDeBienesPorAñoDeAdquisicion.pdf
+
+    ********************************************************************************** */
+	public function importeBienesAnioAdquisicionPDFECO(Request $request){
+		$partidas = partidas::distinct()->orderBy('partida', 'ASC')->get(['partida', 'descpartida']);
+		$anioAdquisicion = $request;
+
+		foreach ($partidas as $value) {
+			$articulos = DB::table('articulosecos')->select('fechacompra','importe')->where([['partida',$value->partida],['fechacompra','like','%'.$request->anioAdquisicion.'%']])->whereNotIn('fechacompra', ['  -   -'])->get();
+
+			$meses  = array("0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+							 	"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00" ,
+								"0.00"  );
+			$total = "0.00";
+
+			foreach ($articulos as $art) {
+				if (strpos($art->fechacompra, '-')){
+					$fecha = explode("-", $art->fechacompra);
+				}else{
+					$fecha = explode("/", $art->fechacompra);
+				}
+
+				$meses[$fecha[1]-1] = $meses[$fecha[1]-1] + $art->importe;
+				$total = $total + $art->importe;
+			}
+
+			array_add($value,'meses',$meses);
+			array_add($value,'total',$total);
+		}
+
+		$pdf = PDF::loadView('eco.reportes.pdf.ImporteDeBienesPorAnioAdquisicionPDFECO', compact('partidas','anioAdquisicion'))->setPaper('letter', 'landscape');
+		return $pdf->inline('ImporteDeBienesPorAñoDeAdquisicionECO-'.$request->anioAdquisicion.'.pdf');
+	}
+
 
 
 	/* **********************************************************************************

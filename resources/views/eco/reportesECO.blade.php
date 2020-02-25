@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Reportes de Artículos OPLE')
+@section('title', 'Reportes de Artículos ECO')
 
 @section('content')
 
@@ -21,12 +21,16 @@
 	    	<div class="col-md-3">
 	    		<select class="form-control select2" id="selectReportesECO" style="width: 90%;">
 		    		<option value="0">Seleccione un reporte</option>
-		    		<option value="1">Bienes por partida</option>
-		    		<option value="2">Concentrado de importes por área</option>
-		    		<option value="3">Concentrado de importes por partida</option>
-		    		<option value="4">Inventario por área</option>
-		    		<option value="5">Inventario por orden alfabético</option>
-		    		<option value="6">Resguardo por empleado</option>
+		    		<option value="7">1.- Bienes de un área ordenado por empleado</option>
+		    		<option value="1">2.- Bienes por partida</option>		    		
+		    		<option value="2">3.- Concentrado de importes por área</option>
+		    		<option value="3">4.- Concentrado de importes por partida</option>
+		    		<option value="8">5.- Importe de bienes calendarizado por año de adquisición</option>
+		    		<option value="9">6.- Inventario de la bodega</option>
+		    		<option value="10">7.- Inventario ordenado por año, partida y factura</option>
+		    		<option value="4">8.- Inventario por área</option>
+		    		{{-- <option value="5">Inventario por orden alfabético</option> --}}
+		    		<option value="6">9.- Resguardo por empleado</option>
 		    	</select>
 	    	</div>
 	    	<div class="col-md-3" id="seleccionSelectECO">
@@ -55,7 +59,26 @@
 			    			<option value="{{ $empleado->numemple }}*{{ $empleado->nombre }}"> {{ $empleado->nombre }} </option>
 			    		@endforeach
 			    	</select>
-	    		</div>	  
+	    		</div>	
+
+	    		<div class="form-group" style="display: none; width: 100%" id="divAnioAdquisicionECO">
+	    			<select class="form-control select2" id="selectAnioAdquisicionECO" style="width: 100%">
+			    		<option value="0">Seleccione un año </option>	
+			    		@for ($i = 0; $i <  (date ('Y') - 2004) ; $i++)
+			    			<option value="{{ date ('Y') - $i}}"> {{ date ('Y') - $i}} </option>
+			    		@endfor					    		
+			    	</select>
+	    		</div>   
+
+	    		<div class="form-group" style="display: none; width: 100%" id="divAreaR7ECO">
+	    			<select class="form-control select2" id="selectAreaR7ECO" style="width: 100%">
+			    		<option value="0">Seleccione una área </option>
+			    		@foreach ($areas as $area)
+			    			<option value="{{ $area->idarea }}*{{ $area->nombrearea }}"> {{ $area->idarea }} | {{ $area->nombrearea }} </option>
+			    		@endforeach
+			    	</select>
+	    		</div>
+
 	    	</div>    	  	
 	    	
 	    </div>

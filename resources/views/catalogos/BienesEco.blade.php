@@ -77,7 +77,6 @@
   </div>
 </div>
 
-@endsection
 
 
     <!-- Modal altas eco-->
@@ -471,3 +470,4 @@
     </div>
 
 
+@endsection

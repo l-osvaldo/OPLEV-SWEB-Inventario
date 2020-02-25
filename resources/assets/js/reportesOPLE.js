@@ -146,10 +146,16 @@ $('#selectAnioAdquisicion').change(function(){
 	}else {
 		if (banderaSelectAnio === 'reporte9'){
 			if ($(this).val() != 0 ){
-				$('#divPartida02').css("display","block");
-				$('#terceraInstruccion').css("display","block");
-				$('#instruccion02').html('3.- Seleccione una partida:');
+				if ($('#selectPartida02').val() != 0){
+					inventarioAnioPartidaFactura($('#selectAnioAdquisicion').val(), $('#selectPartida02').val());
+				}else{
+					$('#divPartida02').css("display","block");
+					$('#terceraInstruccion').css("display","block");
+					$('#instruccion02').html('3.- Seleccione una partida:');
+				}
+				
 			}else {
+				$('#selectPartida02').val("0").change();
 				$('#terceraInstruccion').css("display","none");
 				$('#divPartida02').css("display","none");
 			}
@@ -206,6 +212,7 @@ function desactivarcampos(){
 	$('#selectEmpleado').val("0").change();
 	$('#selectAnioAdquisicion').val("0").change();
 	$('#selectAreaR8').val("0").change();
+	$('#selectPartida02').val("0").change();
 
 
 	$('#seleccionSelect').css("display","block");
