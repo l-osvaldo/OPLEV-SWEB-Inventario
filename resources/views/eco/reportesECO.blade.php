@@ -79,7 +79,18 @@
 			    	</select>
 	    		</div>
 
-	    	</div>    	  	
+	    	</div>    
+
+	    	<div class="col-md-3" id="seleccionSelect3ECO">
+	    		<div class="form-group" style="display: none; width: 100%" id="divPartida02ECO">
+	    			<select class="form-control select2" id="selectPartida02ECO" style="width: 100%">
+			    		<option value="0">Seleccione una partida </option>
+			    		@foreach ($partidas as $partida)
+			    			<option value="{{ $partida->partida }}*{{ $partida->descpartida }}"> {{ $partida->partida }} | {{ $partida->descpartida }} </option>
+			    		@endforeach
+			    	</select>
+	    		</div>
+	    	</div>		  	
 	    	
 	    </div>
 	  </div>

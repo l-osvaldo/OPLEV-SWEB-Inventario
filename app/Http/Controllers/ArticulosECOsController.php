@@ -455,6 +455,27 @@ class ArticulosECOsController extends Controller
 		return view('eco.reportes.ImporteDeBienesPorAnioAdquisicionECO', compact('partidas','anioAdquisicion'));
 	}
 
+
+	public function inventarioDeLaBodegaECO(){
+
+		$articulos = articulosecos::select('numeroinventario','concepto','numeroserie','marca','modelo','medidas','factura','importe','estado')->where('idarea','15')->get();
+
+		$totalArticulos = articulosecos::where('idarea','15')->count();
+
+		$numeroBotonGenerarPDF = 1;
+
+		while ( $totalArticulos > 10000) {
+			$numeroBotonGenerarPDF ++;
+			$totalArticulos -= 10000;
+		}
+
+		$totalImporte = articulosecos::select( DB::raw('SUM(importe) as total'))->where('idarea','15')->get();
+
+		$totalImporte = number_format($totalImporte[0]->total,2);
+		
+		return view('eco.reportes.InventarioDeLaBodegaECO', compact('articulos','totalImporte','numeroBotonGenerarPDF'));
+	}
+
 	// ************ generar reportes ************
 
 	/* **********************************************************************************
@@ -686,6 +707,49 @@ class ArticulosECOsController extends Controller
 
 		$pdf = PDF::loadView('eco.reportes.pdf.ImporteDeBienesPorAnioAdquisicionPDFECO', compact('partidas','anioAdquisicion'))->setPaper('letter', 'landscape');
 		return $pdf->inline('ImporteDeBienesPorAñoDeAdquisicionECO-'.$request->anioAdquisicion.'.pdf');
+	}
+
+
+	public function inventarioDeLaBodegaPDFECO(Request $request){
+
+		$bloque = $request->bloque;
+
+		$topeArticulos = 10007;
+
+		$totalArticulos = articulosecos::where('idarea','15')->count();
+
+		$bloqueFinal = 1;
+
+		while ( $totalArticulos > 10000) {
+			$bloqueFinal ++;
+			$totalArticulos -= 10000;
+		}
+
+		set_time_limit(5000);
+
+		if ($bloque == 1){
+			$articulos = articulosecos::select('numeroinventario','concepto','numeroserie','marca','modelo','medidas','factura','importe','estado')
+										->where('idarea','15')->take($topeArticulos)->get();	
+		}else{
+			if ($bloque != $bloqueFinal){
+				$articulos = articulosecos::select('numeroinventario','concepto','numeroserie','marca','modelo','medidas','factura','importe','estado')
+										->where('idarea','15')->skip( $topeArticulos * ($bloque - 1) )->take(10007)->get();	
+			}else{
+				$articulos = articulosecos::select('numeroinventario','concepto','numeroserie','marca','modelo','medidas','factura','importe','estado')
+										->where('idarea','15')->skip( $topeArticulos * ($bloque - 1) )->take($totalArticulos - 1)->get();
+			}
+			
+		}
+		
+
+		$totalImporte = articulosecos::select( DB::raw('SUM(importe) as total'))->where('idarea','15')->get();
+		$totalBienes = articulosecos::where('idarea','15')->count();
+
+		$totalImporte = number_format($totalImporte[0]->total,2);
+		$totalBienes = number_format($totalBienes);
+		
+		$pdf = PDF::loadView('eco.reportes.pdf.InventarioDeLaBodegaDPFECO', compact('articulos','totalImporte','totalBienes','bloque','bloqueFinal'))->setPaper('letter', 'landscape');
+		return $pdf->inline('InventarioDeLaBodegaDPFECO.pdf');
 	}
 
 

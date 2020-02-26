@@ -168,6 +168,12 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('catalogos/importeBienesAnioAdquisicionECO', 'ArticulosECOsController@importeBienesAnioAdquisicionECO');
 	Route::get('catalogos/reportes/importeBienesAnioAdquisicionPDFECO/{anioAdquisicion}', 'ArticulosECOsController@importeBienesAnioAdquisicionPDFECO');
 
+	// inventario de la bodega ECO
+	Route::get('catalogos/inventarioDeLaBodegaECO', 'ArticulosECOsController@inventarioDeLaBodegaECO');
+	Route::get('catalogos/reportes/inventarioDeLaBodegaPDFECO/{bloque}', 'ArticulosECOsController@inventarioDeLaBodegaPDFECO');
+
+	/* ****************************************************************************************************************** */
+
 	// Depreciación 
 	Route::get('/catalogos/depreciacion', 'ArticulosController@depreciacion')->name('depreciacion');
 	Route::get('/catalogos/calculoDepreciacion', 'ArticulosController@calculoDepreciacion');

@@ -1,7 +1,7 @@
 
 /********************************** funciones para el módulo de reportes ECO *******************************************************/
 
-var banderaSelectAnio = 'default'; // variable para que el sistema tome el año para el reporte 9 o 10, de acuerdo a lo el usuario necesite
+var banderaSelectAnioECO = 'default'; // variable para que el sistema tome el año para el reporte 9 o 10, de acuerdo a lo el usuario necesite
 
 /* **********************************************************************************
     Funcionalidad: Obtiene el reporte seleccionado por el usuario y de acuerdo al valor toma una opción de reporte,
@@ -55,9 +55,14 @@ $('#selectReportesECO').change(function() {
       $('#divAnioAdquisicionECO').css("display","block");
       $('#segundaInstruccionECO').css("display","block");
       $('#instruccionECO').html('2.- Seleccione un año:');
-      banderaSelectAnio = 'reporte08';
+      banderaSelectAnioECO = 'reporte08';
       break;
     case '9':
+      $('#seleccionSelectECO').css("display","none");
+      $('#segundaInstruccionECO').css("display","none");
+      inventarioDeLaBodegaECO();
+      break;
+    case '10':
       break;
 	}
 });
@@ -508,4 +513,37 @@ function importeBienesAnioAdquisicionECO(anioAdquisicion){
       $('#btnGenerarPDFECO').css("display","block");
       $('#btnGenerarPDFECO').attr("href","../catalogos/reportes/importeBienesAnioAdquisicionPDFECO/"+anioAdquisicion);
     }); 
+}
+
+function inventarioDeLaBodegaECO(){
+
+  $('#cargandoECO').css("display","block");
+  $('#divRespuestaECO').css("display","none");
+  $('#btnGenerarPDFECO').css("display","none");
+
+  $.ajaxSetup(
+  {
+    headers:
+    { 
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
+  $.ajax({
+      url: "inventarioDeLaBodegaECO",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      dataType: 'html',
+      contentType: 'application/json'
+
+    }).done(function(response) {
+      //console.log(response);
+      $('#divRespuestaECO').css("display","block");
+      $('#respuestaReporteECO').html(response);
+      $('#cargandoECO').css("display","none");
+      $('.botonDisplay').css("display","block");
+      //$('#btnGenerarPDFECO').attr("href","../catalogos/reportes/inventarioDeLaBodegaPDFECO");
+            
+    });
+
 }
