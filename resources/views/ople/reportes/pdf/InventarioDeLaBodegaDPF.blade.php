@@ -226,7 +226,7 @@
           $pagina += 1;
         @endphp
     </div>
-
+    <div style="page-break-after:auto;"></div>
   @endfor
   </body>
 </html>
