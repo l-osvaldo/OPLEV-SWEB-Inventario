@@ -94,7 +94,7 @@
       <br>
       <label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida }} | {{ $descpartida }} </i></label>
       
-      <div style="height: 560px">
+      <div style="height: 540px">
         <table style="margin-top: 15px;">
         <thead>
           <tr style="background-color: #ccc; border: solid 1px #000;">
@@ -225,7 +225,7 @@
           $pagina += 1;
         @endphp
     </div>
-
+    <div style="page-break-after:auto;"></div>
   @endfor
   </body>
 </html>
