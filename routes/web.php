@@ -172,6 +172,10 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('catalogos/inventarioDeLaBodegaECO', 'ArticulosECOsController@inventarioDeLaBodegaECO');
 	Route::get('catalogos/reportes/inventarioDeLaBodegaPDFECO/{bloque}', 'ArticulosECOsController@inventarioDeLaBodegaPDFECO');
 
+	// Inventario ordenado por año, partida y factura ECO
+	Route::get('catalogos/inventarioAnioPartidaFacturaECO', 'ArticulosECOsController@inventarioAnioPartidaFacturaECO');
+	Route::get('catalogos/reportes/inventarioAnioPartidaFacturaPDFECO/{anio}/{partida}/{descpartida}', 'ArticulosECOsController@inventarioAnioPartidaFacturaPDFECO');
+
 	/* ****************************************************************************************************************** */
 
 	// Depreciación 

@@ -55,7 +55,7 @@ $('#selectReportesECO').change(function() {
       $('#divAnioAdquisicionECO').css("display","block");
       $('#segundaInstruccionECO').css("display","block");
       $('#instruccionECO').html('2.- Seleccione un año:');
-      banderaSelectAnioECO = 'reporte08';
+      banderaSelectAnioECO = 'reporte05';
       break;
     case '9':
       $('#seleccionSelectECO').css("display","none");
@@ -63,6 +63,10 @@ $('#selectReportesECO').change(function() {
       inventarioDeLaBodegaECO();
       break;
     case '10':
+      $('#divAnioAdquisicionECO').css("display","block");
+      $('#segundaInstruccionECO').css("display","block");
+      $('#instruccionECO').html('2.- Seleccione un año:');
+      banderaSelectAnioECO = 'reporte07';
       break;
 	}
 });
@@ -137,14 +141,46 @@ $('#selectAreaR7ECO').change(function(){
   
 });
 
+
 $('#selectAnioAdquisicionECO').change(function(){
-  if ($(this).val() != 0 ){
-    importeBienesAnioAdquisicionECO($(this).val());
-  }else{
-    $('#btnGenerarPDF').css("display","none");
-    $('#divRespuesta').css("display","none");
-  }  
+  if (banderaSelectAnioECO === 'reporte05'){
+    if ($(this).val() != 0 ){
+      importeBienesAnioAdquisicionECO($(this).val());
+    }else{
+      $('#btnGenerarPDFECO').css("display","none");
+      $('#divRespuestaECO').css("display","none");
+    }
+  }else {
+    if (banderaSelectAnioECO === 'reporte07'){
+      if ($(this).val() != 0 ){
+        if ($('#selectPartida02ECO').val() != 0){
+          inventarioAnioPartidaFacturaECO($('#selectAnioAdquisicionECO').val(), $('#selectPartida02ECO').val());
+        }else{
+          $('#divPartida02ECO').css("display","block");
+          $('#terceraInstruccionECO').css("display","block");
+          $('#instruccion02ECO').html('3.- Seleccione una partida:');
+        }
+        
+      }else {
+        $('#selectPartida02ECO').val("0").change();
+        $('#terceraInstruccionECO').css("display","none");
+        $('#divPartida02ECO').css("display","none");
+      }
+
+      
+    }
+  }
 });
+
+
+$('#selectPartida02ECO').change(function(){
+  if ($(this).val() != 0 ){
+    inventarioAnioPartidaFacturaECO($('#selectAnioAdquisicionECO').val(), $(this).val());
+  }else {
+    $('#divRespuestaECO').css("display","none");
+  }
+});
+
 
 /******************** funcion para reiniciar los componentes ***********************/
 /* **********************************************************************************
@@ -543,6 +579,44 @@ function inventarioDeLaBodegaECO(){
       $('#cargandoECO').css("display","none");
       $('.botonDisplay').css("display","block");
       //$('#btnGenerarPDFECO').attr("href","../catalogos/reportes/inventarioDeLaBodegaPDFECO");
+            
+    });
+
+}
+
+
+function inventarioAnioPartidaFacturaECO(anio, partida) {
+  console.log(anio + ' - ' + partida);
+
+  $('#cargandoECO').css("display","block");
+  $('#divRespuestaECO').css("display","none");
+  $('#btnGenerarPDFECO').css("display","none");
+
+  var partidaDatos = partida.split('*');
+
+  $.ajaxSetup(
+  {
+    headers:
+    { 
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
+  $.ajax({
+      url: "inventarioAnioPartidaFacturaECO",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      dataType: 'html',
+      data: { anio: anio, partida: partidaDatos[0], descpartida: partidaDatos[1]},
+      contentType: 'application/json'
+
+    }).done(function(response) {
+      //console.log(response);
+      $('#divRespuestaECO').css("display","block");
+      $('#respuestaReporteECO').html(response);
+      $('#cargandoECO').css("display","none");
+      $('#btnGenerarPDFECO').css("display","block");
+      $('#btnGenerarPDFECO').attr("href","../catalogos/reportes/inventarioAnioPartidaFacturaPDFECO/"+ anio + "/" + partidaDatos[0] + "/" + partidaDatos[1] );
             
     });
 

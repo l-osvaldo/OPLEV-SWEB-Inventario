@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Reporte | Inventario de la bodega | OPLE Veracruz</title>
+    <title>Reporte | Inventario ordenado por año, partida y factura | OPLE Veracruz</title>
     <link rel="stylesheet" type="text/css" src="css/normalize.css">
 
     <style type="text/css" media="all">
@@ -51,14 +51,7 @@
       $bloques = 12;
       $inicioBloque = 0;
       $contadorBloques = 1;
-
-      if ($bloque == 1){
-        $pagina = 1;
-        $contadorBloques = 1;
-      }else{
-        $pagina = 835 * ($bloque -1);
-        $contadorBloques = 0;
-      }      
+      $pagina = 1;
       $tope = 0;
     @endphp
 
@@ -88,14 +81,20 @@
                   <br>
                   Dirección Ejecutiva de Administración 
                 </small>
+                <small>
+                  <br>
+                  INVENTARIO DE ACTIVO FIJO
+                </small>
               </h2>    
           </td>
         </tr>
       </table>
 
-      <label><strong>INVENTARIO DE LA BODEGA:</strong></label> 
-
-      <div style="height: 550px">
+      <label><strong>AÑO:</strong> {{ $anio }} </label>
+      <br>
+      <label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida }} | {{ $descpartida }} </i></label>
+      
+      <div style="height: 560px">
         <table style="margin-top: 15px;">
         <thead>
           <tr style="background-color: #ccc; border: solid 1px #000;">
@@ -104,7 +103,7 @@
             <th style="text-align: left; padding: 15px">NÚMERO DE SERIE</th>
             <th style="text-align: left; padding: 15px">MARCA</th>
             <th style="text-align: left; padding: 15px">MODELO</th>
-            <th style="text-align: left; padding: 15px">MEDIDAS</th>
+            <th style="text-align: left; padding: 15px">NOMBRE DEL RESPONSABLE</th>
             <th style="text-align: left; padding: 15px">No. DE FACTURA</th>
             <th style="text-align: left; padding: 15px">IMPORTE DE ADQUISICIÓN</th>
             <th style="text-align: left; padding: 15px">ESTADO DEL BIEN</th>                      
@@ -112,14 +111,14 @@
         </thead>
         <tbody>
           @foreach ($articulos as $bien)
-              @if ( $inicioBloque <= $loop->index and $bloques > $loop->index)
+                @if ( $inicioBloque <= $loop->index and $bloques > $loop->index)
               <tr>
                       <td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->numeroinventario }}</td>
                     <td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->concepto }}</td>
                     <td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->numeroserie }}</td>
                     <td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->marca }}</td>
                     <td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->modelo }}</td>
-                    <td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->medidas }}</td>
+                    <td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->nombreempleado }}</td>
                     <td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->factura }}</td>
                     <td style="text-align: left; padding: 2px 12px" class="border">$ {{ $bien->importe }}</td>
                     <td style="text-align: left; padding: 2px 12px" class="border">{{ $bien->estado }} </td>               
@@ -148,22 +147,14 @@
               &nbsp;
             </td>
           </tr>
-          @if ($tope == 1 && $bloque == $bloqueFinal)
+          @if ($tope == 1)
             <tr>
-              <td style="text-align: right;" colspan="9">
-                <strong>
-                  TOTAL DE BIENES:  {{ $totalBienes }}
-              </strong> 
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align: right;" colspan="9">
+              <td style="text-align: right; padding: 15px" colspan="9">
                 <strong>
                   TOTAL DEL IMPORTE: $  {{ $totalImporte }}
               </strong> 
               </td>
             </tr>
-            <tr>
           @endif
         </tbody>
         </table>      
@@ -234,7 +225,7 @@
           $pagina += 1;
         @endphp
     </div>
-    <div style="page-break-after:auto;"></div>
+
   @endfor
   </body>
 </html>

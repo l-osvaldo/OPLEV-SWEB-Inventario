@@ -16,6 +16,9 @@
 	  		<div class="col-md-3" id="segundaInstruccionECO" style="display: none;">
 	  			<label id="instruccionECO">2.- Seleccione un Reporte:</label>
 	  		</div>
+	  		<div class="col-md-3" id="terceraInstruccionECO" style="display: none;">
+	  			<label id="instruccion02ECO"></label>
+	  		</div>
 	  	</div>
 	    <div class="row">
 	    	<div class="col-md-3">

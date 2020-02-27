@@ -476,6 +476,24 @@ class ArticulosECOsController extends Controller
 		return view('eco.reportes.InventarioDeLaBodegaECO', compact('articulos','totalImporte','numeroBotonGenerarPDF'));
 	}
 
+	public function inventarioAnioPartidaFacturaECO(Request $request){
+		$articulos = articulosecos::select('numeroinventario', 'concepto', 'numeroserie', 'marca', 'modelo', 'nombreempleado', 'factura', 'importe', 'estado')
+								->where([['fechacompra','like','%'.$request->anio.'%'],['partida',$request->partida]])
+								->orderBy('factura', 'ASC')
+								->get();
+
+		$totalImporte = articulosecos::select( DB::raw('SUM(importe) as total'))
+								   ->where([['fechacompra','like','%'.$request->anio.'%'],['partida',$request->partida]])->get();
+
+		$totalImporte = number_format($totalImporte[0]->total,2);
+
+		$anio = $request->anio;
+		$partida = $request->partida;
+		$descpartida = $request->descpartida;
+
+		return view('eco.reportes.InventarioOrdenadoPorAnioPartidaFacturaECO', compact('articulos','totalImporte','anio','partida','descpartida'));
+	}
+
 	// ************ generar reportes ************
 
 	/* **********************************************************************************
@@ -731,25 +749,41 @@ class ArticulosECOsController extends Controller
 			$articulos = articulosecos::select('numeroinventario','concepto','numeroserie','marca','modelo','medidas','factura','importe','estado')
 										->where('idarea','15')->take($topeArticulos)->get();	
 		}else{
-			if ($bloque != $bloqueFinal){
-				$articulos = articulosecos::select('numeroinventario','concepto','numeroserie','marca','modelo','medidas','factura','importe','estado')
+			$articulos = articulosecos::select('numeroinventario','concepto','numeroserie','marca','modelo','medidas','factura','importe','estado')
 										->where('idarea','15')->skip( $topeArticulos * ($bloque - 1) )->take(10007)->get();	
-			}else{
-				$articulos = articulosecos::select('numeroinventario','concepto','numeroserie','marca','modelo','medidas','factura','importe','estado')
-										->where('idarea','15')->skip( $topeArticulos * ($bloque - 1) )->take($totalArticulos - 1)->get();
-			}
+			
 			
 		}
-		
 
 		$totalImporte = articulosecos::select( DB::raw('SUM(importe) as total'))->where('idarea','15')->get();
 		$totalBienes = articulosecos::where('idarea','15')->count();
 
 		$totalImporte = number_format($totalImporte[0]->total,2);
 		$totalBienes = number_format($totalBienes);
-		
+
 		$pdf = PDF::loadView('eco.reportes.pdf.InventarioDeLaBodegaDPFECO', compact('articulos','totalImporte','totalBienes','bloque','bloqueFinal'))->setPaper('letter', 'landscape');
-		return $pdf->inline('InventarioDeLaBodegaDPFECO.pdf');
+		return $pdf->inline('InventarioDeLaBodegaDPFECO'.$bloque.'.pdf');
+	}
+
+	public function inventarioAnioPartidaFacturaPDFECO(Request $request){
+		$articulos = articulosecos::select('numeroinventario', 'concepto', 'numeroserie', 'marca', 'modelo', 'nombreempleado', 'factura', 'importe', 'estado')
+								->where([['fechacompra','like','%'.$request->anio.'%'],['partida',$request->partida]])
+								->orderBy('factura', 'ASC')
+								->get();
+
+		$totalImporte = articulosecos::select( DB::raw('SUM(importe) as total'))
+								   ->where([['fechacompra','like','%'.$request->anio.'%'],['partida',$request->partida]])->get();
+
+		$totalImporte = number_format($totalImporte[0]->total,2);
+
+		$anio = $request->anio;
+		$partida = $request->partida;
+		$descpartida = $request->descpartida;
+
+		$pdf = PDF::loadView('eco.reportes.pdf.InventarioOrdenadoPorAnioPartidaFacturaPDFECO', compact('articulos','totalImporte','anio','partida','descpartida'))->setPaper('letter', 'landscape');
+
+
+		return $pdf->inline('InventarioOrdenadoPorAñoPartidaFacturaPDFECO-'.$anio.'-'.$partida.'-'.$descpartida.'.pdf');
 	}
 
 

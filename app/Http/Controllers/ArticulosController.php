@@ -700,7 +700,7 @@ class ArticulosController extends Controller
 		$pdf = PDF::loadView('ople.reportes.pdf.InventarioOrdenadoPorAnioPartidaFacturaPDF', compact('articulos','totalImporte','anio','partida','descpartida'))->setPaper('letter', 'landscape');
 
 
-		return $pdf->inline('InventarioOrdenadoPorAñoPartidaFacturaPDF.pdf');
+		return $pdf->inline('InventarioOrdenadoPorAñoPartidaFacturaPDF-'.$anio.'-'.$partida.'-'.$descpartida.'.pdf');
 	}
 
 
