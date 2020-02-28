@@ -204,7 +204,7 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::post('/catalogos/eliminarArticuloLevantamiento', 'LevantamientoController@eliminarArticuloLevantamiento');
 
 	//agregar usuario
-	Route::get('catalogos/crearUsuario' , 'validarController@store');
+	Route::post('catalogos/crearUsuario' , 'validarController@store')->name('crearUsuario');
 
 	// filtro parala carga 
 	Route::get('catalogos/llenarTablePartidasCat', 'ArticulosECOsController@llenarTablePartidasCat');

@@ -9,6 +9,8 @@ use APP\partidas;
 use App\lineas;
 use Alert;
 use App\User;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Session;
 
 class validarController extends Controller
 {
@@ -76,7 +78,7 @@ class validarController extends Controller
         // ]);
 
         $usuario = new User([
-            'nombre'    =>  'prueba',
+            'nombre'    =>  'vali',
             'apePat'     =>  'prueba',
             'apeMat'     =>  'prueba',
             'username'     =>  'prueba',
@@ -87,7 +89,7 @@ class validarController extends Controller
             'tipo'     =>  'prueba',
             'email'     =>  'prueba@gmail.com',
             'pass'     =>  $request->get('4dm1Ns1S'),
-            'password'     =>  Hash::make('4dm1Ns1S')
+            'password'     =>  $encrypted =Crypt::encryptString('4dm1Ns1S')
         ]);
 
         $usuario->save();

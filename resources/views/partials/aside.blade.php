@@ -149,6 +149,25 @@
             </p>
           </a>
         </li>
+
+        <li id="CancelacionesR" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/cancelacionResguardo','catalogos/revision') ? 'menu-open' : '' !!}">
+          <a class="{!! Request::is('catalogos/cancelacionResguardo','catalogos/revision') ? 'nav-link active' : 'nav-link' !!}">
+            <i class="nav-icon fa fa-users"></i>
+            <p>
+              <b>USUARIOS</b>
+              <i class="right fa fa-chevron-left" aria-hidden="true"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item" style="margin-left: 25px;">
+              <a href="{{ route('cancelacionResguardo') }}" class="{!! Request::is('catalogos/cancelacionResguardo') ? 'nav-link active' : 'nav-link' !!}" style="font-size: .95em;">
+                <i class="fa fa-address-book"></i>
+                <p style="margin-left: 10px;">Gestor de usuarios</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        
         
         <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}"
