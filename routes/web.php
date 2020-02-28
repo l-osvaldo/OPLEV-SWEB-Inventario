@@ -209,6 +209,10 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	// filtro parala carga 
 	Route::get('catalogos/llenarTablePartidasCat', 'ArticulosECOsController@llenarTablePartidasCat');
 	Route::get('catalogos/llenarTablePartidasLineasCatECO', 'ArticulosECOsController@llenarTablePartidasLineasCatECO');
+
+
+	// usuarios
+	Route::get('usuarios', 'UsuariosController@usuarios')->name('usuarios');
 	
 
 });

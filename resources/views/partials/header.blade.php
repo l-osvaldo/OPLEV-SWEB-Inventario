@@ -13,7 +13,7 @@
 	</ul>
 		<ul class="navbar-nav ml-auto float-sm-right">   
 			<li class="nav-item">
-				<a class="nav-link" ><h5 style="color:#EA0D94"><b>Inventario de Bienes</b></h5></a>
+				<a class="nav-link" ><h5 style="color:#EA0D94"><b> {{ ($tituloEncabezado !== 'Gestor de Usuarios') ? 'Inventario de Bienes' : 'Usuarios' }} </b></h5></a>
 			</li>
 		</ul>    
 </nav>
