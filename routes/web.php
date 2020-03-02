@@ -210,9 +210,20 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	Route::get('catalogos/llenarTablePartidasCat', 'ArticulosECOsController@llenarTablePartidasCat');
 	Route::get('catalogos/llenarTablePartidasLineasCatECO', 'ArticulosECOsController@llenarTablePartidasLineasCatECO');
 
+	/* ************************************************************************************************************* */
 
 	// usuarios
 	Route::get('usuarios', 'UsuariosController@usuarios')->name('usuarios');
+
+	// validar email de registro del nuevo usuario
+	Route::post('validarEmail' , 'UsuariosController@email')->name('validarEmail');
+
+	// validar si el username ya existe
+	Route::post('validarUsername' , 'UsuariosController@username')->name('validarUsername');
+
+	Route::post('registroUsuario' , 'UsuariosController@registroUsuario')->name('registroUsuario');
+
+	
 	
 
 });
