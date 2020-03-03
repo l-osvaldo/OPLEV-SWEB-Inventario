@@ -345,6 +345,30 @@ legend {
   white-space: normal;
 }
 
+/* fieldset 
+  {
+    border: 1px solid #ddd !important;
+    margin: 0;
+    xmin-width: 0;
+    padding: 10px;       
+    position: relative;
+    border-radius:4px;
+    background-color:#ffffff;
+    padding-left:10px!important;
+  } 
+  
+    legend
+    {
+      font-size:14px;
+      font-weight:bold;
+      margin-bottom: 0px; 
+      width: auto; 
+      border: 1px solid #ddd;
+      border-radius: 4px; 
+      padding: 5px 5px 5px 10px; 
+      background-color: #ffffff;
+    }*/
+
 progress {
   vertical-align: baseline;
 }
@@ -2438,7 +2462,7 @@ fieldset:disabled a.btn {
     border-color: #FF59C2;
   }
 
-  .btn-secondary2:focus, .btn-secondary.focus {
+  .btn-secondary2:focus, .btn-secondary2.focus {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
   }
 

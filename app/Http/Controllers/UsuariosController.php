@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use App\User;
+use App\empleados;
 use Alert;
 
 class UsuariosController extends Controller
@@ -61,6 +62,17 @@ class UsuariosController extends Controller
 
     public function registroUsuario(Request $request)
     {
+
+      // $areaEmpleado = empleados::select('idarea', 'nombrearea')
+      //               ->where([['nombre','like','%'.$request->get('nombre').'%'],
+      //                        ['nombre','like','%'.$request->get('apePat').'%'],
+      //                        ['nombre','like','%'.$request->get('apeMat').'%']])->get();
+
+
+
+
+      // print_r($areaEmpleado[0]->nombrearea);exit;
+
       $status = 1;
       $encrypted =Crypt::encryptString($request->get('contPass'));
       $usuario = new User([
@@ -100,4 +112,85 @@ class UsuariosController extends Controller
         Alert::success('Usuario/a guardado', 'Registro Exitoso')->autoclose(2500);
         return redirect()->route('usuarios');
     }
+
+      /**********************************************************+**********
+      Funcionalidad: Activa o desactiva al usuario seleccionado según corresponda.
+      Parámetros: estatus del usuario.
+      Respuesta: Estatus del usuario actualizado en la base de datos.
+      *********************************************************************/
+      public function estatususer(Request $request)
+      {
+        $id = $request->input('id');
+        $data = $request->input('data');
+
+        $data === '1' ? $newstatus = 0 : $newstatus = 1;
+
+        $update = User::find($id);
+        $update->status=$newstatus;
+
+        // $user = User::find($id);
+        // $tipo_nuevo = $user->tipo;
+        // $nom = $user->nombre;
+        // $apeP = $user->apePat;
+        // $apeM = $user->apeMat;
+        // $nombre_evento = 'Actualización de Status';
+        // $user_id = Auth::id();
+        // $evento = new Event([
+        //   'id_user'    =>  $user_id,
+        //   'ape'    =>  $user->id_area,
+        //   'event'     =>  $nombre_evento,
+        //   'nombre'    =>  $nom,
+        //   'apePat'     =>  $apeP,
+        //   'apeMat'     =>  $apeM,
+        //   'tipo'     =>  $tipo_nuevo
+        // ]);
+
+        // $evento->save();
+
+        $update->save();
+        return response()->json(['success']);
+      }
+
+    /*******************************************************************
+    Funcionalidad: Actualiza al usuario APES
+    Parámetros: id, nombre, apellido paterno, apellido materno, email.
+    Respuesta: Cambios registrados en la base de datos users.
+    *******************************************************************/
+    public function updateUsuario(Request $request)
+    {
+      $id = $request->input('id');
+      $nombre = $request->input('nombre');
+      $apePat = $request->input('apePat');
+      $apeMat = $request->input('apeMat');
+      $email = $request->input('email');
+      $update = User::find($id);
+      $update->nombre=$nombre;
+      $update->apePat=$apePat;
+      $update->apeMat=$apeMat;
+      $update->email=$email;
+
+        /*******************************
+        Registra el evento en la tabla de events.
+        ********************************/
+
+        // $user = User::find($id);
+        // $tipo_nuevo = $user->tipo;
+        // $nombre_evento = 'Edición de Usuario/a';
+        // $user_id = Auth::id();
+        // $evento = new Event([
+        //   'id_user'    =>  $user_id,
+        //   'event'     =>  $nombre_evento,
+        //   'nombre'    =>  $nombre,
+        //   'apePat'     =>  $apePat,
+        //   'apeMat'     =>  $apeMat,
+        //   'tipo'     =>  $tipo_nuevo
+        // ]);
+
+        // $evento->save();
+
+        $update->save();
+        return response()->json(['success']);
+    }
 }
+
+

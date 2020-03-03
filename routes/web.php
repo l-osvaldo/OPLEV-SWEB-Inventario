@@ -221,10 +221,17 @@ Route::group(['middleware' => 'disablepreventback'],function()
 	// validar si el username ya existe
 	Route::post('validarUsername' , 'UsuariosController@username')->name('validarUsername');
 
+	// Registro de usuarios
 	Route::post('registroUsuario' , 'UsuariosController@registroUsuario')->name('registroUsuario');
 
+	// Cambio de estatus de usuario activado / desactivado
+	Route::post('estatususer' , 'UsuariosController@estatususer')->name('estatususer'); 
+
+	// ediatar usuario registrado
+	Route::post('updateUsuario' , 'UsuariosController@updateUsuario')->name('updateUsuario'); 
 	
-	
+
+		
 
 });
 

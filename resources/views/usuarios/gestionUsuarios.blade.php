@@ -24,7 +24,6 @@
             <th>Nombre Completo</th>
             <th>Usuario</th>
             <th>Área</th>
-            <th>Cargo</th>
             <th>E-Mail</th>
             <th>Status</th>
             <th>Acciones</th>
@@ -35,16 +34,15 @@
           <td>{{ $users->nombre }} {{ $users->apePat }} {{ $users->apeMat }}</td>
           <td>{{ $users->username }}</td>
           <td>{{ $users->area }}</td>
-          <td>{{ $users->cargo }}</td>
           <td>{{ $users->email }}</td> 
           <!--Status-->
           <td align="center">
-            <button class="btn {{ $users->status === 1 ? 'btn-success' : 'btn-danger' }} btn-sm" style="border-radius: 0 !important; font-size: 0.780rem !important;" data-idUsuario= "{{ $users->user_id }}" data-estadoUsuario="{{ $users->status }}">
+            <button class="btn {{ $users->status === 1 ? 'btn-success' : 'btn-danger' }} btn-sm estatusBtn" style="border-radius: 0 !important; font-size: 0.780rem !important;" data-idUsuario= "{{ $users->id }}" data-estadoUsuario="{{ $users->status }}">
               {{ $users->status === 1 ? 'Activado' : 'Desactivado' }}
             </button>
           </td> 
           <!--Status-->
-          <td>
+          <td align="center">
             <div class="dropdown">
               <button class="btn btn-secondary2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-reorder"></i>
               </button>
@@ -52,18 +50,15 @@
                 <div class="btn-group" role="group" aria-label="Basic example">
                   
                   <button class="btn btn-success" 
-                  data-id="{{ $users->user_id }}" 
+                  data-id="{{ $users->id }}" 
                   data-area="{{ $users->area }}"
                   data-areaid="{{ $users->id_area }}" 
-                  data-cargo="{{ $users->cargo }}"
-                  data-rol="{{ $users->description }}"
-                  data-rolid="{{ $users->role_id }}"
                   data-nombre="{{ $users->nombre }}"
                   data-ap="{{ $users->apePat }}"
                   data-am="{{ $users->apeMat }}"
                   data-email="{{ $users->email }}"
                   data-usuario="{{ $users->username }}"
-                  data-toggle="modal" data-target="#editModal">
+                  data-toggle="modal" data-target="#editModalUsuario">
                   <a href="#" data-toggle="tooltip" data-placement="top" title="Editar" style="color: #fff;">
                     <i class="fa fa-pencil"></i>
                   </a>
@@ -89,7 +84,7 @@
 </div>
 </section>
 
-
+{{--  modal para crear un usuario --}}
 <div class="modal fade bd-example-modal-lg" id="modalCrearUsuario" tabindex="-1" role="dialog" aria-labelledby="modalCrearUsuarioLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
       <form method="POST" action="{{ route('registroUsuario') }}" id="form">
         {{ csrf_field()}}
@@ -163,12 +158,13 @@
                               <a class="btnsm btn-pass2" id="passwordGenerate" name="passwordGenerate"><i class="fa fa-key" style="color: #FFFFFF;"></i></a>
                               <a class="btnsm btn-danger" id="showPass" name="showPass"><i class="fa fa-eye" style="color: #FFFFFF;"></i></a>
                               <a class="btnsm btn-warning" id="passCopi" name="passCopi"><i class="fa fa-clipboard" style="color: #FFFFFF;"></i></a>
-                         </div>
+                            </div>
                         </div>
                         <span class="text-danger error16"></span>
                     </div>
                 </div>  
-              </div>     
+              </div>
+                                 
            </form>  
           </div>
             <div class="card-footer">
@@ -179,6 +175,69 @@
       </div>
     </div>
 
+
+{{-- modal para editar usuario --}}
+<div class="modal fade bd-example-modal-lg" id="editModalUsuario" tabindex="-1" role="dialog" aria-labelledby="ediatarUsuarioLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background: #a90a6c; color:white">
+        <h5 class="modal-title" id="ediatarUsuarioLabel">Editar Usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+             <div class="form-group">
+              <label for="nombre"><b>Nombre/s</b></label>
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-address-book"></i></span>    
+                <input class="form-control form-control-sm valEdit" type="text" id="editNombreUsuario" name="editNombreUsuario" data-myType="text" data-error= "1" data-validacion="0">
+              </div>
+              <span class="text-danger errorEdit1"></span>
+            </div>
+          </div>
+          <div class="col">
+           <div class="form-group">
+            <label for="apePat"><b>Apellido Paterno</b></label>
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-address-book"></i></span>    
+              <input class="form-control form-control-sm valEdit" type="text" id="editApUsuario" name="editApUsuario" data-myType="text" data-error="2" data-validacion="0">
+            </div>
+            <span class="text-danger errorEdit2"></span>
+          </div>
+        </div>
+        <div class="col">
+         <div class="form-group">
+          <label for="apeMat"><b>Apellido Materno</b></label>
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-address-book"></i></span>    
+            <input class="form-control form-control-sm valEdit" type="text" id="editAmUsuario" name="editAmUsuario" name="editAp" data-myType="text" data-error="3" data-validacion="0">
+          </div>
+          <span class="text-danger errorEdit3"></span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="correo"><b>E-mail</b></label>
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fa fa-at"></i></span>    
+        <input class="form-control form-control-sm valEdit" type="text" id="editEmailUsuario" name="editEmailUsuario" name="editAp" data-myType="email" data-error="4" data-validacion="0">
+      </div>
+      <span class="text-danger errorEdit4"></span>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" id="editBtnUsuario" class="btnp btn-personalizado float-right">Actualizar</button>
+    <input type="hidden" name="userId" id="actualizarUsuario">
+  </div>
+</form>
+</div>
+</div>
+</div>
 
 
 @endsection

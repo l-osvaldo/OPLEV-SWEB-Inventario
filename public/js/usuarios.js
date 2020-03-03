@@ -162,6 +162,7 @@ $('#modalCrearUsuario').on('hidden.bs.modal', function (e) {
   $('#apeMat').val("");  
   $('#correo').val(""); 
   $('#usuario').val(""); 
+  $('#contPass').val(""); 
   enablebtnUsuario();   
 });
 
@@ -218,7 +219,7 @@ Une los campos del nombre y del apellido paterno
 para formar el campo del usuario 
 ************************************************/
 $(document).ready(function(){
-  $("#nombre, #apePat").change(function(){
+  $("#nombre, #apePat, #apeMat").change(function(){
     var value1 = document.getElementById('nombre').value;
     var value2 = document.getElementById('apePat').value;
     var value3 = value1.replace(/\s+/g, '').replace(/[á]/, 'a').replace(/[é]/, 'e').replace(/[í]/, 'i').replace(/[ó]/, 'o').replace(/[ú]/, 'u');
@@ -260,12 +261,27 @@ function validarNombre(usuario){
       }
       else
       {
-        $(".error17").text('Nombre de usuario no disponible');
-        $("#usuario").val("");
-        $('#usuario').attr("data-validacionUsuario", '1');
-        $('#usuario').removeClass('inputSuccess');
-        $('#usuario').addClass('inputDanger');
-        $("#usuario").attr("readonly",false);
+        var value = document.getElementById('apeMat').value;
+
+        if (value != ""){
+          var value2 = value.substring(0,2);
+          $("#usuario").val(usuario+value2);
+
+          $(".error17").text('');
+          $('#usuario').attr("data-validacionUsuario", '0');
+          $('#usuario').removeClass('inputDanger');
+          $('#usuario').addClass('inputSuccess');
+        }else{
+          $(".error17").text('Nombre de usuario no disponible. Ingrese el apellido Materno');
+          $('#usuario').attr("data-validacionUsuario", '1');
+          $('#usuario').removeClass('inputSuccess');
+          $('#usuario').addClass('inputDanger');
+          $("#usuario").attr("readonly",false);
+        }
+        
+
+        console.log(value2);
+
       }
       enablebtnUsuario();
     }  
@@ -329,20 +345,6 @@ $(document).on("click", "#passCopi", function(){
 $('#btnCrearUsuario').on('click',function(e){
   e.preventDefault();
   var form = $(this).parents('form');
-  // swal({
-  //   title: "Registrar Usuario",
-  //   text: "¿Desea continuar?",
-  //   type: 'warning',
-  //   showCancelButton: true,
-  //   confirmButtonColor: '#3085d6',
-  //   cancelButtonColor: '#d33',
-  //   confirmButtonText: 'Sí, deseo continuar',
-  //   cancelButtonText: 'Cancelar'
-  // }).then((result) => {
-  //   if (result.value) {
-  //     form.submit();
-  //   }
-  // })
 
   swal({
       title: "Registrar Usuario",
@@ -360,4 +362,258 @@ $('#btnCrearUsuario').on('click',function(e){
       }
       
   });
+});
+
+
+/*****************************************************************
+Funcionalidad: Botón que actualiza el status del usuario
+seleccionado.
+Parámetros: status.
+Respuesta: status guardado en la base de datos.
+******************************************************************/
+$('.estatusBtn').on('click',function(e){
+  e.preventDefault();0
+  var data = $(this).attr("data-estadoUsuario");
+  var id = $(this).attr("data-idUsuario");
+  
+  var text;
+  data === '1' ? text = "El usuario será desactivado" : text = "El usuario será activado";
+  swal({
+    title: text,
+    text: "¿Desea continuar?",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, deseo continuar',
+    cancelButtonText: 'Cancelar'
+  }, function(isConfirm){
+      if (isConfirm) {
+        $.ajaxSetup(
+        {
+          headers:
+          { 
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+           type:'POST',
+           url:'estatususer',
+           data:{id:id, data:data},
+           success:function(data){
+            swal({
+              title: 'Gestor de Usuarios',
+              text: 'Status actualizado',
+              type: 'success',
+            }, function(result) {
+              location.reload();
+            });
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+            swal("Error", "Por favor inténtelo mas tarde", "error");
+          }
+        });
+      }else {
+        swal("Error!", "Por favor intentelo de nuevo", "error");
+      }
+    });
+});
+
+/*****************************************************************
+Funcionalidad: Carga del modal de edición de datos con los datos
+del usuario seleccionado.
+Parámetros: id, username, email, apellido paterno, apellido materno,
+nombre del usuario, rol, id del rol, cargo y área u asociación.
+Respuesta: Modal con los datos cargados previamente mencionados.
+******************************************************************/
+$('#editModalUsuario').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget);
+  var area = button.data('area');
+  var nombre = button.data('nombre');
+  var ap = button.data('ap');
+  var am = button.data('am');
+  var email = button.data('email');
+  var usuario = button.data('usuario');
+  var id = button.data("id");
+
+  var modal = $(this)
+  modal.find('#editNombreUsuario').val(nombre);
+  modal.find('#editApUsuario').val(ap);
+  modal.find('#editAmUsuario').val(am);
+  modal.find('#editEmailUsuario').val(email);
+  modal.find('#actualizarUsuario').val(id);
+});
+
+/*****************************************************************
+Funcionalidad: Botón que edita los datos del usuario seleccionado.
+Parámetros: id, nombre, apellido paterno, apellido materno, email.
+Respuesta: campos guardados en la base de datos.
+******************************************************************/
+$('#editBtnUsuario').on('click',function(e){
+  e.preventDefault();
+  swal({
+    title: "Edición de Usuarios",
+    text: "¿Desea continuar?",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, deseo continuar',
+    cancelButtonText: 'Cancelar'
+  }, function(isConfirm){
+    if (isConfirm) {
+      var id = $('#actualizarUsuario').val();
+      var nombre = $('#editNombreUsuario').val();
+      var ap = $('#editApUsuario').val();
+      var am = $('#editAmUsuario').val();
+      var em = $('#editEmailUsuario').val();
+      $.ajaxSetup(
+      {
+        headers:
+        { 
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+      //console.log(id,no,ap,am,em);
+      $.ajax({
+       type:'POST',
+       url:'updateUsuario',
+       data:{id:id, nombre:nombre, apePat:ap, apeMat:am, email:em},
+       success:function(data){
+        swal({title: "Edición de Usuarios", text: "Usuario actualizado", type: "success"
+        }, function(result) {
+          location.reload();
+        })
+       },
+       error: function (xhr, ajaxOptions, thrownError) {
+        swal("¡Error!", "Por favor intentelo de nuevo!", "error");
+       }
+      });
+
+    } else {
+      swal("¡Error!", "Por favor intentelo de nuevo", "error");
+    }
+  })
+}); 
+
+
+/*****************************************************************
+Funcionalidad: Validación de los datos del usuario en el modal
+de edición.
+Parámetros: valor, error, tipo, id.
+Respuesta: Campos validados.
+******************************************************************/
+$( ".valEdit" ).keyup(function() {
+  var valor = $.trim($(this).val());
+  var error = $(this).attr("data-error");
+  var id = $(this).attr("id");
+  var tipo = $(this).attr("data-myType");
+  valEditDataUsuario(valor, error, id, tipo);
+});
+
+function enablebtnEditUsuario()
+{
+  var array = [];
+  var claserror = $('.valEdit');
+  for (var i = 0; i < claserror.length; i++) {
+    array.push(claserror[i].getAttribute('data-validacion'));
+  }
+  array.includes('1') ? $('#editBtnUsuario').prop("disabled", true) : $('#editBtnUsuario').prop("disabled", false);
+}
+
+function valEditDataUsuario(valor, error, id, tipo)
+{
+  switch (tipo) {
+    case 'text':
+    if (valor.match(/^[a-zA-Z\s ñ á é í ó ú]*$/) && valor!=""){
+      $('.errorEdit'+ error).text("");
+      $('#'+id).attr("data-validacion", '0');
+      $('#'+id).removeClass('inputDanger');
+      $('#'+id).addClass('inputSuccess');
+    }else{
+      $('.errorEdit'+ error).text("Este campo no puede ir vacío o llevar caracteres especiales.");
+      $('#'+id).attr("data-validacion", '1');
+      $('#'+id).removeClass('inputSuccess');
+      $('#'+id).addClass('inputDanger');
+    }
+    break;
+    case 'email':
+    if (/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(valor) && valor!=""){
+      $('.errorEdit'+ error).text("");
+      $('#'+id).attr("data-validacion", '0');
+      $('#'+id).removeClass('inputDanger');
+      $('#'+id).addClass('inputSuccess');
+    }else{
+      $('.errorEdit'+ error).text("Ingrese un e-mail válido.");
+      $('#'+id).attr("data-validacion", '1');
+      $('#'+id).removeClass('inputSuccess');
+      $('#'+id).addClass('inputDanger'); 
+    }
+    break;
+    default:
+    console.log('default');
+  }
+  enablebtnEditUsuario();
+} 
+
+
+$(document).ready(function(){
+  $("#editEmailUsuario").keyup(function(){
+    var email = document.getElementById('editEmailUsuario').value;
+    validarEmailEditar(email);
+    document.getElementById('editEmailUsuario').value = email;
+  })
+});
+
+function validarEmailEditar(email){
+  console.log(email)
+  status = $('#editEmailUsuario').attr("data-validacion");
+  console.log(status)
+  if (status === '0'){
+
+    $.ajaxSetup(
+    {
+      headers:
+      { 
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+      type:'POST',
+      url:'validarEmail',
+      data: {email:email},
+      success: function(data){
+        if(data.success.popo === '0'){
+          $(".errorEdit4").text('');
+          $('#editEmailUsuario').attr("data-validacion", '0');
+          $('#editEmailUsuario').removeClass('inputDanger');
+          $('#editEmailUsuario').addClass('inputSuccess');
+        }
+        else
+        {
+          $(".errorEdit4").text('Ya exite un usuario/a registrado con este correo electrónico: ' + email);
+          $("#editEmailUsuario").val("");
+          $('#editEmailUsuario').attr("data-validacion", '1');
+          $('#editEmailUsuario').removeClass('inputSuccess');
+          $('#editEmailUsuario').addClass('inputDanger');
+          $("#editEmailUsuario").attr("readonly",false);
+        }
+        enablebtnEditUsuario();
+      }  
+    })
+  }  
+}
+
+$('#editModalUsuario').on('hidden.bs.modal', function (e) {
+  $('.modal-body').find('.valEdit').val('');
+  $('.modal-body').find('.valEdit').attr("data-validacion", '0');
+  $('.modal-body').find('.valEdit').removeClass('inputSuccess');
+  $('.modal-body').find('.valEdit').removeClass('inputDanger');
+  $('.modal-body').find('.text-danger').text('');
+  $('#editNombreUsuario').val(""); 
+  $('#editApUsuario').val("");  
+  $('#editAmUsuario').val("");  
+  $('#editEmailUsuario').val(""); 
+  $('#actualizarUsuario').val(""); 
+  enablebtnEditUsuario();   
 });
