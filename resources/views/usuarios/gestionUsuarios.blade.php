@@ -66,25 +66,25 @@
                     <!--Status-->
                     <td align="center">
                         <div class="dropdown">
-                            <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary2 dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" type="button">
+                            <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary2 dropdown-toggle btnPersonalizado" data-toggle="dropdown" id="dropdownMenuButton" type="button">
                                 <i class="fa fa-reorder">
                                 </i>
                             </button>
-                            <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+                            <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropmenuPersonalizado">
                                 <div aria-label="Basic example" class="btn-group" role="group">
-                                    <button class="btn btn-success" data-am="{{ $users->apeMat }}" data-ap="{{ $users->apePat }}" data-area="{{ $users->area }}" data-areaid="{{ $users->id_area }}" data-email="{{ $users->email }}" data-id="{{ $users->id }}" data-nombre="{{ $users->nombre }}" data-target="#editModalUsuario" data-toggle="modal" data-usuario="{{ $users->username }}">
+                                    <button class="btn btn-success btnPersonalizado2" data-am="{{ $users->apeMat }}" data-ap="{{ $users->apePat }}" data-area="{{ $users->area }}" data-areaid="{{ $users->id_area }}" data-email="{{ $users->email }}" data-id="{{ $users->id }}" data-nombre="{{ $users->nombre }}" data-target="#editModalUsuario" data-toggle="modal" data-usuario="{{ $users->username }}">
                                         <a data-placement="top" data-toggle="tooltip" href="#" style="color: #fff;" title="Editar">
                                             <i class="fa fa-pencil">
                                             </i>
                                         </a>
                                     </button>
-                                    <button class="btn btn-warning" data-id="{{ $users->id }}" data-target="#passwordModalUsuario" data-toggle="modal">
+                                    <button class="btn btn-warning btnPersonalizado2" data-id="{{ $users->id }}" data-target="#passwordModalUsuario" data-toggle="modal">
                                         <a data-placement="top" data-toggle="tooltip" href="#" style="color: #fff;" title="Cambiar Contraseña">
                                             <i class="fa fa-key">
                                             </i>
                                         </a>
                                     </button>
-                                    <button class="btn btn-danger deleteUser" data-id="{{ $users->id }}" data-name="{{ $users->nombre }} {{ $users->apePat }} {{ $users->apeMat }}">
+                                    <button class="btn btn-danger deleteUser btnPersonalizado2" data-id="{{ $users->id }}" data-name="{{ $users->nombre }} {{ $users->apePat }} {{ $users->apeMat }}">
                                         <a data-placement="top" data-toggle="tooltip" href="#" style="color: #fff;" title="Eliminar">
                                             <i class="fa fa-times">
                                             </i>
@@ -367,7 +367,7 @@
     </div>
 </div>
 <!-- Modal cambiar contraseña-->
-<div aria-hidden="true" aria-labelledby="LabelPassUsuario" class="modal fade" id="passwordModalUsuario" role="dialog" tabindex="-1">
+<div aria-hidden="true" aria-labelledby="LabelPassUsuario" class="modal fade" data-backdrop="static" id="passwordModalUsuario" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background: #a90a6c; color:white">
@@ -388,7 +388,7 @@
                                 <i class="fa fa-key">
                                 </i>
                             </span>
-                            <input class="form-control form-control-sm valEditPassword" data-error="1" data-mytype="password" data-validacion="1" id="contPassEditUsuario" name="contPassEditUsuario" type="text">
+                            <input class="form-control form-control-sm valEditPassword" data-error="1" data-mytype="password" data-validacion="1" id="contPassEditUsuario" name="contPassEditUsuario" readonly="" type="text">
                                 <input id="editPasswordUsuario" name="editPasswordUsuario" type="hidden">
                                     <div class="btn-group" role="group">
                                         <a class="btnsm btn-pass2" id="passwordGenerateEditUsuario" name="passwordGenerateEditUsuario">

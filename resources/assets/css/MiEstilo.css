@@ -1,25 +1,33 @@
 .bordediv {
-
-	border-top-style: dotted;
-	border-bottom-style: dotted;
-	border-left-style: dotted;
-	border-right-style: dotted; 
-    border-width: 1px; 
+    border-top-style: dotted;
+    border-bottom-style: dotted;
+    border-left-style: dotted;
+    border-right-style: dotted;
+    border-width: 1px;
 }
-
 .bordediv2 {
-
-	border-left-style: dotted;
-	border-right-style: dotted;
-	border-bottom-style: dotted; 
-    border-width: 1px; 
+    border-left-style: dotted;
+    border-right-style: dotted;
+    border-bottom-style: dotted;
+    border-width: 1px;
 }
-
-
-.cabeceraTable{
-	background-color: #CFC9C5;
+.cabeceraTable {
+    background-color: #CFC9C5;
 }
-
-
-.dollars:before { content:'$'; }
-
+.dollars:before {
+    content: '$';
+}
+.dropmenuPersonalizado {
+    background-color: #1a1a1a;
+    text-align: center;
+    min-width: 8rem;
+}
+.btnPersonalizado {
+    padding: 0.184rem 0.64rem;
+}
+.btnPersonalizado2 {
+    padding: 0.216rem 0.65rem;
+}
+.iconPersonalizado {
+    padding: 0.08rem 0.75rem !important;
+}
