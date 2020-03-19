@@ -12,7 +12,7 @@
             <div class="col-12">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             <div class="form-group">
                                 <label>
                                     1.- Seleccione una Partida
@@ -29,17 +29,21 @@
                                         </option>
                                         @endforeach
                                     </select>
-                                    <div class="col-md-4 float-right">
-                                        @include('sweet::alert')
-                                        <div class="btn-group ">
-                                            <a class="btn btn-secondary float-right" data-target="#exampleModalLinea" data-toggle="modal" href="#" style="background-color: #E71096">
-                                                <i class="fa fa-plus">
-                                                </i>
-                                                Nueva Línea
-                                            </a>
-                                        </div>
-                                    </div>
                                 </form>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="col-md-3 float-right">
+                                    @include('sweet::alert')
+                                    <div class="btn-group" style="margin-top: 15px;">
+                                        <a class="btn btn-secondary float-right" data-target="#exampleModalLinea" data-toggle="modal" href="#" style="background-color: #E71096; ">
+                                            <i class="fa fa-plus">
+                                            </i>
+                                            Nueva Línea
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
