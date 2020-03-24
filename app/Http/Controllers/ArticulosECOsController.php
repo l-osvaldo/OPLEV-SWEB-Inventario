@@ -280,17 +280,25 @@ class ArticulosECOsController extends Controller
     public function importeBienesPorAreaECO()
     {
 
-        $areaAndImporteTotal = DB::table('articulosecos')->select('idarea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('idarea')->groupBy('idarea')->get();
+        $areaAndImporteTotal = areas::select('idarea','nombrearea')->orderBy('idarea','asc')->get();
 
-        $nombreArea   = areas::all();
-        $totalImporte = 0;
+        $totalImporte        = 0;
+
         foreach ($areaAndImporteTotal as $value) {
-            $totalImporte += $value->importetotal;
-            $value->importetotal = number_format($value->importetotal, 2);
+            $importe= articulosecos::select(DB::raw('SUM(importe) as importetotal'))->where('idarea', $value->idarea)->get();
+
+            if ($importe[0]->importetotal != null){
+                $totalImporte += $importe[0]->importetotal;
+                $importeFormat = number_format($importe[0]->importetotal, 2);
+                array_add($value, 'importeTotalArea', $importeFormat);
+            }else {
+                array_add($value, 'importeTotalArea', '0.00');
+            } 
         }
+
         $totalImporte = number_format($totalImporte, 2);
 
-        return view('eco.reportes.ImporteDeBienesPorAreaECO', compact('areaAndImporteTotal', 'totalImporte', 'nombreArea'));
+        return view('eco.reportes.ImporteDeBienesPorAreaECO', compact('areaAndImporteTotal', 'totalImporte'));
     }
 
     /* **********************************************************************************
@@ -304,11 +312,20 @@ class ArticulosECOsController extends Controller
     public function importeBienesPorPartidaECO()
     {
 
-        $partidaAndImporteTotal = DB::table('articulosecos')->select('partida', 'descripcionpartida', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->groupBy('partida', 'descripcionpartida')->get();
+        $partidaAndImporteTotal = partidas::select('partida','descpartida')->orderBy('partida','asc')->get();
+
         $totalImporte           = 0;
+
         foreach ($partidaAndImporteTotal as $value) {
-            $totalImporte += $value->importetotal;
-            $value->importetotal = number_format($value->importetotal, 2);
+            $importe= articulosecos::select(DB::raw('SUM(importe) as importetotal'))->where('partida', $value->partida)->get();
+
+            if ($importe[0]->importetotal != null){
+                $totalImporte += $importe[0]->importetotal;
+                $importeFormat = number_format($importe[0]->importetotal, 2);
+                array_add($value, 'importeTotalPartida', $importeFormat);
+            }else {
+                array_add($value, 'importeTotalPartida', '0.00');
+            }
         }
         $totalImporte = number_format($totalImporte, 2);
 
@@ -539,19 +556,28 @@ class ArticulosECOsController extends Controller
 
     public function importeBienesPorAreaPDFECO()
     {
-        $areaAndImporteTotal = DB::table('articulosecos')->select('idarea', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->orderBy('idarea')->groupBy('idarea')->get();
-        $nombreArea          = areas::all();
+        $areaAndImporteTotal = areas::select('idarea','nombrearea')->orderBy('idarea','asc')->get();
+
         $totalImporte        = 0;
+
         foreach ($areaAndImporteTotal as $value) {
-            $totalImporte += $value->importetotal;
-            $value->importetotal = number_format($value->importetotal, 2);
+            $importe= articulosecos::select(DB::raw('SUM(importe) as importetotal'))->where('idarea', $value->idarea)->get();
+
+            if ($importe[0]->importetotal != null){
+                $totalImporte += $importe[0]->importetotal;
+                $importeFormat = number_format($importe[0]->importetotal, 2);
+                array_add($value, 'importeTotalArea', $importeFormat);
+            }else {
+                array_add($value, 'importeTotalArea', '0.00');
+            } 
         }
+
         $totalImporte = number_format($totalImporte, 2);
         $hoy          = getdate();
 
         $fecha = $hoy['mday'] . '/' . $hoy['mon'] . '/' . $hoy['year'];
 
-        $pdf = PDF::loadView('eco.reportes.pdf.ImporteDeBienesPorAreaPDFECO', compact('fecha', 'totalImporte', 'areaAndImporteTotal', 'nombreArea'))->setPaper('letter', 'portrait');
+        $pdf = PDF::loadView('eco.reportes.pdf.ImporteDeBienesPorAreaPDFECO', compact('fecha', 'totalImporte', 'areaAndImporteTotal'))->setPaper('letter', 'portrait');
         return $pdf->inline('ImporteDeBienesPorAreaECO.pdf');
     }
 
@@ -566,11 +592,20 @@ class ArticulosECOsController extends Controller
     public function importeBienesPorPartidaPDFECO()
     {
 
-        $partidaAndImporteTotal = DB::table('articulosecos')->select('partida', 'descripcionpartida', DB::raw('TRUNCATE(SUM(importe),2) as importetotal'))->groupBy('partida', 'descripcionpartida')->get();
+        $partidaAndImporteTotal = partidas::select('partida','descpartida')->orderBy('partida','asc')->get();
+
         $totalImporte           = 0;
+
         foreach ($partidaAndImporteTotal as $value) {
-            $totalImporte += $value->importetotal;
-            $value->importetotal = number_format($value->importetotal, 2);
+            $importe= articulosecos::select(DB::raw('SUM(importe) as importetotal'))->where('partida', $value->partida)->get();
+
+            if ($importe[0]->importetotal != null){
+                $totalImporte += $importe[0]->importetotal;
+                $importeFormat = number_format($importe[0]->importetotal, 2);
+                array_add($value, 'importeTotalPartida', $importeFormat);
+            }else {
+                array_add($value, 'importeTotalPartida', '0.00');
+            }
         }
         $totalImporte = number_format($totalImporte, 2);
 

@@ -181,16 +181,25 @@ class ArticulosController extends Controller
     public function importeBienesPorArea()
     {
 
-        $areaAndImporteTotal = DB::table('articulos')->select('idarea', DB::raw('SUM(importe) as importetotal'))->orderBy('idarea')->groupBy('idarea')->get();
-        $nombreArea          = areas::all();
+        $areaAndImporteTotal = areas::select('idarea','nombrearea')->orderBy('idarea','asc')->get();
+
         $totalImporte        = 0;
+
         foreach ($areaAndImporteTotal as $value) {
-            $totalImporte += $value->importetotal;
-            $value->importetotal = number_format($value->importetotal, 2);
+            $importe= articulos::select(DB::raw('SUM(importe) as importetotal'))->where('idarea', $value->idarea)->get();
+
+            if ($importe[0]->importetotal != null){
+                $totalImporte += $importe[0]->importetotal;
+                $importeFormat = number_format($importe[0]->importetotal, 2);
+                array_add($value, 'importeTotalPartida', $importeFormat);
+            }else {
+                array_add($value, 'importeTotalPartida', '0.00');
+            } 
         }
+
         $totalImporte = number_format($totalImporte, 2);
 
-        return view('ople.reportes.ImporteDeBienesPorArea', compact('areaAndImporteTotal', 'totalImporte', 'nombreArea'));
+        return view('ople.reportes.ImporteDeBienesPorArea', compact('areaAndImporteTotal', 'totalImporte'));
     }
 
     /* **********************************************************************************
@@ -202,13 +211,22 @@ class ArticulosController extends Controller
      ********************************************************************************** */
     public function importeBienesPorPartida()
     {
+        $partidaAndImporteTotal = partidas::select('partida','descpartida')->orderBy('partida','asc')->get();
 
-        $partidaAndImporteTotal = DB::table('articulos')->select('partida', 'descpartida', DB::raw('SUM(importe) as importetotal'))->groupBy('partida', 'descpartida')->get();
         $totalImporte           = 0;
+
         foreach ($partidaAndImporteTotal as $value) {
-            $totalImporte += $value->importetotal;
-            $value->importetotal = number_format($value->importetotal, 2);
+            $importe= articulos::select(DB::raw('SUM(importe) as importetotal'))->where('partida', $value->partida)->get();
+
+            if ($importe[0]->importetotal != null){
+                $totalImporte += $importe[0]->importetotal;
+                $importeFormat = number_format($importe[0]->importetotal, 2);
+                array_add($value, 'importeTotalPartida', $importeFormat);
+            }else {
+                array_add($value, 'importeTotalPartida', '0.00');
+            }
         }
+
         $totalImporte = number_format($totalImporte, 2);
 
         return view('ople.reportes.ImporteDeBienesPorPartida', compact('partidaAndImporteTotal', 'totalImporte'));
@@ -459,27 +477,28 @@ class ArticulosController extends Controller
      ********************************************************************************** */
     public function importeBienesPorAreaPDF()
     {
-        $areaAndImporteTotal = DB::table('articulos')->select('idarea', DB::raw('SUM(importe) as importetotal'))->orderBy('idarea')->groupBy('idarea')->get();
-        $nombreArea          = areas::orderBy('idarea', 'asc')->get();
+        $areaAndImporteTotal = areas::select('idarea','nombrearea')->orderBy('idarea','asc')->get();
 
-        //print_r($nombreArea);exit;
+        $totalImporte        = 0;
 
-        // foreach ($areaAndImporteTotal as $value) {
-        //     print_r($value);
-        // }
-
-        // exit;
-        $totalImporte = 0;
         foreach ($areaAndImporteTotal as $value) {
-            $totalImporte += $value->importetotal;
-            $value->importetotal = number_format($value->importetotal, 2);
+            $importe= articulos::select(DB::raw('SUM(importe) as importetotal'))->where('idarea', $value->idarea)->get();
+
+            if ($importe[0]->importetotal != null){
+                $totalImporte += $importe[0]->importetotal;
+                $importeFormat = number_format($importe[0]->importetotal, 2);
+                array_add($value, 'importeTotalPartida', $importeFormat);
+            }else {
+                array_add($value, 'importeTotalPartida', '0.00');
+            } 
         }
+
         $totalImporte = number_format($totalImporte, 2);
         $hoy          = getdate();
 
         $fecha = $hoy['mday'] . '/' . $hoy['mon'] . '/' . $hoy['year'];
 
-        $pdf = PDF::loadView('ople.reportes.pdf.ImporteDeBienesPorAreaPDF', compact('fecha', 'totalImporte', 'areaAndImporteTotal', 'nombreArea'))->setPaper('letter', 'portrait');
+        $pdf = PDF::loadView('ople.reportes.pdf.ImporteDeBienesPorAreaPDF', compact('fecha', 'totalImporte', 'areaAndImporteTotal'))->setPaper('letter', 'portrait');
         return $pdf->inline('ImporteDeBienesPorArea.pdf');
     }
 
@@ -493,12 +512,22 @@ class ArticulosController extends Controller
     public function importeBienesPorPartidaPDF()
     {
 
-        $partidaAndImporteTotal = DB::table('articulos')->select('partida', 'descpartida', DB::raw('SUM(importe) as importetotal'))->groupBy('partida', 'descpartida')->get();
+        $partidaAndImporteTotal = partidas::select('partida','descpartida')->orderBy('partida','asc')->get();
+
         $totalImporte           = 0;
+
         foreach ($partidaAndImporteTotal as $value) {
-            $totalImporte += $value->importetotal;
-            $value->importetotal = number_format($value->importetotal, 2);
+            $importe= articulos::select(DB::raw('SUM(importe) as importetotal'))->where('partida', $value->partida)->get();
+
+            if ($importe[0]->importetotal != null){
+                $totalImporte += $importe[0]->importetotal;
+                $importeFormat = number_format($importe[0]->importetotal, 2);
+                array_add($value, 'importeTotalPartida', $importeFormat);
+            }else {
+                array_add($value, 'importeTotalPartida', '0.00');
+            }
         }
+
         $totalImporte = number_format($totalImporte, 2);
 
         $hoy = getdate();

@@ -87,9 +87,9 @@ class validarController extends Controller
             'id_area'     =>  1,
             'area'     =>   'prueba',
             'tipo'     =>  'prueba',
-            'email'     =>  'prueba@gmail.com',
+            'email'     =>  'prueba02@gmail.com',
             'pass'     =>  $request->get('4dm1Ns1S'),
-            'password'     =>  $encrypted =Crypt::encryptString('4dm1Ns1S')
+            'password'     => Crypt::encryptString('4dm1Ns1S'), 
         ]);
 
         $usuario->save();

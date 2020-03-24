@@ -100,7 +100,7 @@
 
           <tr>
             <td style="text-align: left; padding: 2px 12px" class="border">            
-              {{ mb_strtoupper( $nombreArea->where('idarea', $area->idarea)->first()->nombrearea  ) }}              
+              {{ mb_strtoupper( $area->nombrearea  ) }}              
             </td>
             <td class="border">
               @if ($signoPesos == 1)
@@ -111,15 +111,36 @@
                 $signoPesos = 0;
               @endphp  
             </td>
-            <td style="text-align: right; padding-right: 50px" class="border"> {{ $area->importetotal }} </td>                                                
+            <td style="text-align: right; padding-right: 50px" class="border"> {{ $area->importeTotalPartida }} </td>                                                
           </tr>
         @endforeach
+        <tr>
+          <td colspan="4">
+            &nbsp;
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4" style="text-align: right; padding-right: 15px;">
+            <strong>Total del Importe: $ {{ $totalImporte }} </strong> 
+          </td>
+        </tr> 
       </tbody>
     </table>
   </div>
-  <br>
-  <br>
-  <br>
+
+  <div class="row">
+    <table>
+      <tbody>
+        <tr>
+          <td style="text-align: center;">
+            <label style="font-weight:lighter; text-align: center;">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - FIN DEL REPORTE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</label>
+          </td>
+        </tr>  
+        
+      </tbody>
+    </table>
+  </div>
+
   <br>
   <br>
   <div class="row">
@@ -164,9 +185,7 @@
       </tbody>
     </table>
   </div>
-  <br>
-  <br>
-  <br>
+
   <br>
   <div class="row" align="right">
     <label>Página:   {{ $pagina }} </label>

@@ -37,8 +37,8 @@
 		              </thead>
 		              	@foreach ($areaAndImporteTotal as $areaImporte)
 			                <tr>
-			                	<td>{{ mb_strtoupper( $nombreArea->where('idarea', $areaImporte->idarea)->first()->nombrearea  ) }} </td>
-					          	<td>$ {{ $areaImporte->importetotal }}</td>              
+			                	<td>{{ mb_strtoupper( $areaImporte->nombrearea  ) }} </td>
+					          	<td>$ {{ $areaImporte->importeTotalArea }}</td>              
 			                </tr>
 		                @endforeach
 		              <tbody>

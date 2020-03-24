@@ -103,7 +103,7 @@
               {{ mb_strtoupper($partida->partida) }}              
             </td>
             <td style="text-align: left; padding: 2px 12px" class="border">            
-              {{ mb_strtoupper($partida->descripcionpartida) }}              
+              {{ mb_strtoupper($partida->descpartida) }}              
             </td>
             <td class="border">
               @if ($signoPesos == 1)
@@ -114,7 +114,7 @@
                 $signoPesos = 0
               @endphp  
             </td>
-            <td style="text-align: right; padding-right: 15px;" class="border"> {{ $partida->importetotal }} </td>                                                
+            <td style="text-align: right; padding-right: 15px;" class="border"> {{ $partida->importeTotalPartida }} </td>                                                
           </tr>
         @endforeach
         <tr>

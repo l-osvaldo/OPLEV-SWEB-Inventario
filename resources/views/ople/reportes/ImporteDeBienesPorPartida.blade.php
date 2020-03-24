@@ -39,7 +39,7 @@
 			                <tr>
 			                	<td>{{ $partidaImporte->partida }}</td>
 			                	<td>{{ $partidaImporte->descpartida }}</td>
-					          	<td>$ {{ $partidaImporte->importetotal }}</td>              
+					          	<td>$ {{ $partidaImporte->importeTotalPartida }}</td>              
 			                </tr>
 		                @endforeach
 		              <tbody>

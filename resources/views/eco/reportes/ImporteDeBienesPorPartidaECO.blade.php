@@ -38,8 +38,8 @@
 		              	@foreach ($partidaAndImporteTotal as $partidaImporte)
 			                <tr>
 			                	<td>{{ $partidaImporte->partida }}</td>
-			                	<td>{{ $partidaImporte->descripcionpartida }}</td>
-					          	<td>$ {{ $partidaImporte->importetotal }}</td>              
+			                	<td>{{ $partidaImporte->descpartida }}</td>
+					          	<td>$ {{ $partidaImporte->importeTotalPartida }}</td>              
 			                </tr>
 		                @endforeach
 		              <tbody>

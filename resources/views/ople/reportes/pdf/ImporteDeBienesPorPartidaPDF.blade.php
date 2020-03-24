@@ -114,7 +114,7 @@
                 $signoPesos = 0
               @endphp  
             </td>
-            <td style="text-align: right; padding-right: 15px;" class="border"> {{ $partida->importetotal }} </td>                                                
+            <td style="text-align: right; padding-right: 15px;" class="border"> {{ $partida->importeTotalPartida }} </td>                                                
           </tr>
         @endforeach
         <tr>
