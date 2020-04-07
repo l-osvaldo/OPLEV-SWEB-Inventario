@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\articulos;
+use App\articulosecos;
 
 header('Access-Control-Allow-Origin: *');
 
@@ -63,7 +64,15 @@ class APIController extends Controller
     {
         $articulo = articulos::where('numeroinv',$id)->get();
 
-        return response()->json($articulo);
+        if (count($articulo)){
+            return response()->json($articulo);
+        }else {
+            $articulo = articulosecos::where('numeroinventario',$id)->get();
+
+            return response()->json($articulo);
+        }
+
+        
     }
 
     // Función para los web service de la aplicación
