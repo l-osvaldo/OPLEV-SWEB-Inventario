@@ -99,4 +99,15 @@ class APIController extends Controller
     {
         //
     }
+
+    public function getArticulo(Request $request){
+        $articulo = articulos::where('numeroinv',$request->numeroinv)->get();
+        if (count($articulo)){
+            return response()->json($articulo);
+        }else {
+            $articulo = articulosecos::where('numeroinventario',$request->numeroinv)->get();
+
+            return response()->json($articulo);
+        }
+    }
 }
