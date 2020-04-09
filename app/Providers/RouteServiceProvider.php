@@ -86,7 +86,14 @@ class RouteServiceProvider extends ServiceProvider
           // articulos 
           Route::post('/articulos/getArticulo','APIController@getArticulo');
 
+          //partidas
+          Route::post('/recursosGeneralesWS/getPartidas','RecursosGeneralesWSController@getPartidas');
 
+          //lineas
+          Route::post('/recursosGeneralesWS/getLineas','RecursosGeneralesWSController@getLineas');
+
+          //sublineas
+          Route::post('/recursosGeneralesWS/getSublinea','RecursosGeneralesWSController@getSublinea');
       });
 
     }
