@@ -22,7 +22,7 @@ class EmpleadosAPIController extends Controller
      */
     public function index()
     {
-        $empleados = empleados::all();
+        $empleados = empleados::get();
 
         return response()->json($empleados);
     }
@@ -36,7 +36,9 @@ class EmpleadosAPIController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $empleados = empleados::all();
+
+        return response()->json($empleados);
     }
 
     /* **********************************************************************************
