@@ -72,7 +72,7 @@ class LoteAPIController extends Controller
      */
     public function show($id)
     {
-        $lote = lotes::where('Id',$id)->get();
+        $lote = lotes::where('id',$id)->get();
 
         return response()->json($lote);
     }
@@ -153,7 +153,7 @@ class LoteAPIController extends Controller
     }
 
     public function getLote(Request $request){
-        $lote = lotes::where('Id',$request->id)->get();
+        $lote = lotes::where('id',$request->id)->get();
 
         return response()->json($lote);
     }
