@@ -36,9 +36,6 @@ class EmpleadosAPIController extends Controller
      */
     public function store(Request $request)
     {
-        $empleados = empleados::all();
-
-        return response()->json($empleados);
     }
 
     /* **********************************************************************************

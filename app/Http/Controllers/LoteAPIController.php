@@ -119,7 +119,7 @@ class LoteAPIController extends Controller
 
     public function lotesCerradosEmpleado(){
 
-        $lotes = lotes::where([['estado','Cerrado'],['nombre', null]])->get();
+        $lotes = lotes::where([['estado','Cerrado'],['descripcion', null]])->get();
 
         return response()->json($lotes);
     }
@@ -134,6 +134,20 @@ class LoteAPIController extends Controller
     public function lotesCerradosGral(){
 
         $lotes = lotes::where([['estado','Cerrado'],['numeroempleado', null]])->get();
+
+        return response()->json($lotes);
+    }
+
+    public function lotesAbiertosEmpleado(){
+        $lotes = lotes::where([['estado','Abierto'],['descripcion', null]])->get();
+
+        return response()->json($lotes);
+
+    }
+
+    public function lotesAbiertosGral(){
+
+        $lotes = lotes::where([['estado','Abierto'],['numeroempleado', null]])->get();
 
         return response()->json($lotes);
     }
