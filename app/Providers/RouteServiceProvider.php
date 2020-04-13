@@ -81,7 +81,8 @@ class RouteServiceProvider extends ServiceProvider
           Route::post('/lote/lotesCerradosEmpleado','LoteAPIController@lotesCerradosEmpleado');
           Route::post('/lote/lotesCerradosGral','LoteAPIController@lotesCerradosGral'); 
           Route::post('/lote/lotesAbiertosEmpleado','LoteAPIController@lotesAbiertosEmpleado'); 
-          Route::post('/lote/lotesAbiertosGral','LoteAPIController@lotesAbiertosGral');  
+          Route::post('/lote/lotesAbiertosGral','LoteAPIController@lotesAbiertosGral');
+          Route::post('/lote/getLote','LoteAPIController@getLote');  
           Route::apiResource('/bitacoralotes', 'BitacoraLotesAPIController'); 
           Route::get('/bitacoralotes/allBitacorasId/{id}','BitacoraLotesAPIController@allBitacorasId');
 

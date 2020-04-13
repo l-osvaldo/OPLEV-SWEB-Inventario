@@ -151,4 +151,10 @@ class LoteAPIController extends Controller
 
         return response()->json($lotes);
     }
+
+    public function getLote(Request $request){
+        $lote = lotes::where('Id',$request->id)->get();
+
+        return response()->json($lote);
+    }
 }
