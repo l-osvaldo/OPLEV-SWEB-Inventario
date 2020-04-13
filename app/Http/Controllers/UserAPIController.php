@@ -60,6 +60,7 @@ class UserAPIController extends Controller
         }else{
             if ($usuario->status == 1){
                 if (Crypt::decryptString($usuario->password) === $decrypted) {
+                    $usuario = User::select("id","nombre","apePat","apeMat","username","status","cargo","id_area","area","email")->where('username', $request->usuario)->first();
                     return response()->json($usuario);
                 }else{
                     $res = [ "res" => 'password inconrrecta' ];
