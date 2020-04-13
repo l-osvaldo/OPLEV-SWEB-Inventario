@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Session;
 use App\User;
 
 header('Access-Control-Allow-Origin: *');
@@ -46,19 +49,27 @@ class UserAPIController extends Controller
     public function store(Request $request)
     {        
         //die('llegue');
-        Log::notice("ValidaC");
-        $usuario = User::where([['username', $request->usuario],['pass', $request->pass]])->get();
+        $decrypted = $request->password;
+        $usuario = User::where('username', $request->usuario)->first();
 
-        $prueba = json_decode($usuario, true);
+        //return response()->json($usuario);
 
-        //return $usuario;
-
-        if (empty($prueba)){
+        if (empty($usuario)){
             $res = [ "res" => 'usuario no encontrado' ];
             return response()->json($res);
         }else{
-            $res = [ "res" => 'usuario encontrado' ];
-            return response()->json($res);
+            if ($usuario->status == 1){
+                if (Crypt::decryptString($usuario->password) === $decrypted) {
+                    return response()->json($usuario);
+                }else{
+                    $res = [ "res" => 'password inconrrecta' ];
+                    return response()->json($res);
+                }
+            }else{
+                $res = [ "res" => 'usuario inhabilitado' ];
+                return response()->json($res);
+            }
+            
         }
     }
 
