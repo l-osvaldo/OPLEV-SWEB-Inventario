@@ -88,6 +88,7 @@ class RouteServiceProvider extends ServiceProvider
 
           // articulos 
           Route::post('/articulos/getArticulo','APIController@getArticulo');
+          Route::post('/articulos/getArticuloLote','APIController@getArticuloLote');
 
           //partidas
           Route::post('/recursosGeneralesWS/getPartidas','RecursosGeneralesWSController@getPartidas');

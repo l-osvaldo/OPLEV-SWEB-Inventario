@@ -110,4 +110,15 @@ class APIController extends Controller
             return response()->json($articulo);
         }
     }
+
+    public function getArticuloLote(Request $request){
+        $articulo = articulos::select('numeroinv', 'concepto','nombreemple')->where('numeroinv',$request->numeroinv)->get();
+        if (count($articulo)){
+            return response()->json($articulo);
+        }else {
+            $articulo = articulosecos::select('numeroinventario', 'concepto','nombreempleado')->where('numeroinventario',$request->numeroinv)->get();
+
+            return response()->json($articulo);
+        }
+    }
 }
