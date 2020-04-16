@@ -84,4 +84,10 @@ class EmpleadosAPIController extends Controller
     {
         //
     }
+
+    public function getInformacionEmpleado(Request $request){
+        $empleado = empleados::where('numemple',$request->numeroempleado)->first();
+
+        return response()->json($empleado);
+    }
 }

@@ -98,6 +98,9 @@ class RouteServiceProvider extends ServiceProvider
 
           //sublineas
           Route::post('/recursosGeneralesWS/getSublinea','RecursosGeneralesWSController@getSublinea');
+
+          //empleados
+          Route::post('/empleados/getInformacionEmpleado','EmpleadosAPIController@getInformacionEmpleado');
       });
 
     }
