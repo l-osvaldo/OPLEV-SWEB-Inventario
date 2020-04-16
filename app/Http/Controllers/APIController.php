@@ -112,11 +112,11 @@ class APIController extends Controller
     }
 
     public function getArticuloLote(Request $request){
-        $articulo = articulos::select('numeroinv', 'concepto','nombreemple')->where('numeroinv',$request->numeroinv)->get();
-        if (count($articulo)){
+        $articulo = articulos::select('numeroinv', 'concepto','nombreemple')->where('numeroinv',$request->numeroinv)->first();
+        if ($articulo !== null){
             return response()->json($articulo);
         }else {
-            $articulo = articulosecos::select('numeroinventario', 'concepto','nombreempleado')->where('numeroinventario',$request->numeroinv)->get();
+            $articulo = articulosecos::select('numeroinventario', 'concepto','nombreempleado')->where('numeroinventario',$request->numeroinv)->first();
 
             return response()->json($articulo);
         }
