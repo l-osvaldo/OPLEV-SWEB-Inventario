@@ -101,6 +101,9 @@ class RouteServiceProvider extends ServiceProvider
 
           //empleados
           Route::post('/empleados/getInformacionEmpleado','EmpleadosAPIController@getInformacionEmpleado');
+
+          //bitacoralote
+          Route::post('/bitacoralotes/getArticuloBitacoraLote','BitacoraLotesAPIController@getArticuloBitacoraLote');
       });
 
     }

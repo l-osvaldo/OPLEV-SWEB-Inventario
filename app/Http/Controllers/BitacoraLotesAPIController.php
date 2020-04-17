@@ -115,4 +115,13 @@ class BitacoraLotesAPIController extends Controller
 
         return response()->json($bitacoralote);
     }
+
+    public function getArticuloBitacoraLote(Request $request){
+        $existe = bitacoralotes::where([['id_lote',$request->id_lote],['numeroinventario', $request->numeroinventario]])->first();
+        if ($existe !== null ){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 }
