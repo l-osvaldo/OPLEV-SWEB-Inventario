@@ -157,4 +157,11 @@ class LoteAPIController extends Controller
 
         return response()->json($lote);
     }
+
+    public function updateEstadoLote(Request $request){
+        $lote = lotes::where('id',$request->id)->update(['estado' => $request->estado]);
+        $lote = lotes::find($request->id);
+
+        return response()->json($lote);           
+    }
 }
