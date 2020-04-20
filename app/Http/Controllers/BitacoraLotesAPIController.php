@@ -110,8 +110,8 @@ class BitacoraLotesAPIController extends Controller
 
     ********************************************************************************** */
 
-    public function allBitacorasId($id){
-        $bitacoralote = bitacoralotes::where('id_lote',$id)->get();
+    public function allBitacorasId(Request $request){
+        $bitacoralote = bitacoralotes::where('id_lote',$request->id)->get();
 
         return response()->json($bitacoralote);
     }
