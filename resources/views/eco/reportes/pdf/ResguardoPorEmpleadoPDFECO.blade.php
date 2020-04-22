@@ -10,7 +10,7 @@
       font-family: Arial, Helvetica, sans-serif;
       }
       body {
-        font-size: 12px;
+        font-size: 11px;
       }
       .row:after {
         content: "";
@@ -139,7 +139,7 @@
 	  	@endforeach
 
 	  	
-	  	<div style="height: 410px">
+	  	<div style="height: 400px">
 		  	<table style="margin-top: 15px;">
 			  <thead>
 			    <tr style="background-color: #ccc; border: solid 1px #000;">
