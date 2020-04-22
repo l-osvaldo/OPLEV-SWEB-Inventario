@@ -140,7 +140,6 @@
       </tbody>
     </table>
   </div>
-  <br>
   <div class="row">
     <table style="margin-top: 15px;">
       <thead>
@@ -183,7 +182,6 @@
       </tbody>
     </table>
   </div>
-  <br>
   <br>
   <div class="row" align="right">
     <label>Página:   {{ $pagina }} </label>
