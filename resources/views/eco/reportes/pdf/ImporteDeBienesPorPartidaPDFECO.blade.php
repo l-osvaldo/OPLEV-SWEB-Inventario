@@ -153,9 +153,6 @@
   <br>
   <br>
   <br>
-  <br>
-  <br>
-  <br>
   <div class="row">
     <table>
       <thead>
@@ -218,7 +215,6 @@
       </tbody>
     </table>
   </div>
-  <br>
   <br>
   <br>
   <br>
