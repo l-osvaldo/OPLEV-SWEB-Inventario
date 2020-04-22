@@ -70,7 +70,7 @@
           </h2>  
         </span>   
       </td>
-      <td style="width: 120px; color:#fff">...</td>
+      <td style="width: 100px; color:#fff">...</td>
     </tr>
     <tr>
       <td colspan="3">
@@ -87,7 +87,7 @@
   
 
   <div class="row">
-    <table style="margin-top: 15px;">
+    <table style="margin-top: 10px;">
       <thead>
         <tr style="background-color: #ccc; border: solid 1px #000;">
           <th style="text-align: left; padding: 15px" width="75%">Nombre del Área</th>
