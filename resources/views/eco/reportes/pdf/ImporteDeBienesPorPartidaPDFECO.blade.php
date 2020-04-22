@@ -152,7 +152,6 @@
   <br>
   <br>
   <br>
-  <br>
   <div class="row">
     <table>
       <thead>
