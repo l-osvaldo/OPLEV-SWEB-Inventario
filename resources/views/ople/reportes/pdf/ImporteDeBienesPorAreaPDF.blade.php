@@ -141,9 +141,8 @@
     </table>
   </div>
 
-  <br>
   <div class="row">
-    <table style="margin-top: 15px;">
+    <table style="margin-top: 10px;">
       <thead>
         <tr>
           <td align="center">
