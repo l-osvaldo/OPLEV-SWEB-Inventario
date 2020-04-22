@@ -10,7 +10,7 @@
       font-family: Arial, Helvetica, sans-serif;
       }
       body {
-        font-size: 12px;
+        font-size: 11px;
       }
       .row:after {
         content: "";
@@ -70,7 +70,7 @@
     @endphp
 
     @for ($i = 0; $i < $contadorBloques; $i++)  
-    
+    @if ($tope == 0)
     <table>
         <tr>          
           <td style="width: 120px;vertical-align: text-top"><img class="logo" src="{{ public_path('images/logoople.png') }}" alt=""></td>
@@ -225,6 +225,7 @@
           $pagina += 1;
         @endphp
     </div>
+    @endif
   @endfor
   </body>
 </html>
