@@ -10,7 +10,7 @@
       font-family: Arial, Helvetica, sans-serif;
       }
       body {
-        font-size: 12px;
+        font-size: 11px;
       }
       .row:after {
         content: "";
@@ -141,7 +141,7 @@
     </table>
   </div>
   <div class="row">
-    <table style="margin-top: 15px;">
+    <table style="margin-top: 10px;">
       <thead>
         <tr>
           <td align="center">
@@ -182,7 +182,6 @@
       </tbody>
     </table>
   </div>
-  <br>
   <div class="row" align="right">
     <label>Página:   {{ $pagina }} </label>
     @php
