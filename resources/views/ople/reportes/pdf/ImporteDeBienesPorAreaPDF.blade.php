@@ -75,7 +75,7 @@
     <tr>
       <td colspan="3">
         <h2>
-          <small>Concentrado de Importes por Área02</small>
+          <small>Concentrado de Importes por Área</small>
         </h2>
       </td>
     </tr>
@@ -83,8 +83,7 @@
   
   <div class="row">    
       <strong> <i> Fecha de Impresión: &nbsp; {{ $fecha }} </i> </strong> <br>    
-  </div>
-  
+  </div>  
 
   <div class="row">
     <table style="margin-top: 10px;">
@@ -142,7 +141,7 @@
   </div>
 
   <div class="row">
-    <table style="margin-top: 10px;">
+    <table style="margin-top: 1px;">
       <thead>
         <tr>
           <td align="center">
@@ -190,8 +189,6 @@
       $pagina += 1;
     @endphp
   </div>
-    
-
 
   </body>
 </html>
