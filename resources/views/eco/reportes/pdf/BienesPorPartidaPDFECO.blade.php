@@ -92,7 +92,6 @@
 		    </tr>
 	  	</table>
 
-	  	<br>
 	  	<label><strong>INVENTARIO POR PARTIDA</strong></label>
 	  	<br>
 	  	<label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida->numPartida }} {{ $partida->nombrePartida }} </i></label>
