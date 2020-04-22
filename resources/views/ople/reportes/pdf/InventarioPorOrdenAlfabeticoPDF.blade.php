@@ -70,7 +70,7 @@
   	@endphp
 
   	@for ($i = 0; $i < $contadorBloques; $i++)	
-  	
+  		@if ($tope == 0)
 		<table>
 		    <tr>
 		      <td style="width: 120px;vertical-align: text-top"><img class="logo" src="{{ public_path('images/logoople.png') }}" alt=""></td>
@@ -96,7 +96,7 @@
 	  	<br>
 	  	<label><strong>ÁREA:</strong></label> <label style="font-weight:lighter;"> <i> TODAS </i></label>
 
-	  	<div style="height: 570px">
+	  	<div style="height: 580px">
 		  	<table style="margin-top: 15px;">
 			  <thead>
 			    <tr style="background-color: #ccc; border: solid 1px #000;">
@@ -221,7 +221,7 @@
 		      $pagina += 1;
 		    @endphp
 		</div>
-
+		@endif
 	@endfor
   </body>
 </html>
