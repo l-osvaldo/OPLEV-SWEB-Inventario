@@ -75,7 +75,7 @@
     <tr>
       <td colspan="3">
         <h2>
-          <small>Concentrado de Importes por Área</small>
+          <small>Concentrado de Importes por Área02</small>
         </h2>
       </td>
     </tr>
