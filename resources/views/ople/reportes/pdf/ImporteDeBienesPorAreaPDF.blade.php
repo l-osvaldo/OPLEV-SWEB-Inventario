@@ -55,7 +55,7 @@
 
   <table>
     <tr>
-      <td style="width: 120px;vertical-align: text-top"><img class="logo" src="{{ public_path('images/logoople.png') }}" alt=""></td>
+      <td style="width: 100px;vertical-align: text-top"><img class="logo" src="{{ public_path('images/logoople.png') }}" alt=""></td>
       <td style="width: calc(100% - 240px);">
           <h2>
             <small>
@@ -189,6 +189,5 @@
       $pagina += 1;
     @endphp
   </div>
-  <div style="page-break-after:always;"></div>
   </body>
 </html>
