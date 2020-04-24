@@ -9,6 +9,7 @@ use App\articulos;
 use App\articulosecos;
 use App\empleados;
 use App\partidas;
+use App\lineas;
 use DB;
 use Illuminate\Http\Request;
 use PDF;
@@ -474,25 +475,34 @@ class ArticulosECOsController extends Controller
         return view('eco.reportes.ImporteDeBienesPorAnioAdquisicionECO', compact('partidas', 'anioAdquisicion'));
     }
 
-    public function inventarioDeLaBodegaECO()
+    public function inventarioDeLaBodegaECO(Request $request)
     {
 
-        $articulos = articulosecos::select('numeroinventario', 'concepto', 'numeroserie', 'marca', 'modelo', 'medidas', 'factura', 'importe', 'estado')->where('idarea', '15')->get();
-
-        $totalArticulos = articulosecos::where('idarea', '15')->count();
-
+        $partida = $request->partida;
+        $linea = $request->linea;
         $numeroBotonGenerarPDF = 1;
 
-        while ($totalArticulos > 10000) {
-            $numeroBotonGenerarPDF++;
-            $totalArticulos -= 10000;
-        }
+        if ($partida == "51100001"){
+            $articulos = articulosecos::select('numeroinventario', 'concepto', 'numeroserie', 'marca', 'modelo', 'medidas', 'factura', 'importe', 'estado')->where([['idarea', '15'],['partida', $partida],['linea',$linea]])->get();
+            $totalImporte = articulosecos::select(DB::raw('SUM(importe) as total'))->where([['idarea', '15'],['partida', $partida],['linea',$linea]])->get();            
+        }else{
+            $articulos = articulosecos::select('numeroinventario', 'concepto', 'numeroserie', 'marca', 'modelo', 'medidas', 'factura', 'importe', 'estado')->where([['idarea', '15'],['partida', $partida]])->get();
 
-        $totalImporte = articulosecos::select(DB::raw('SUM(importe) as total'))->where('idarea', '15')->get();
+            $totalImporte = articulosecos::select(DB::raw('SUM(importe) as total'))->where([['idarea', '15'],['partida', $partida]])->get();
+        }        
+
+        $totalArticulos = count($articulos);
+
+        if ($linea == "24"){
+            while ($totalArticulos > 5000) {
+                $numeroBotonGenerarPDF++;
+                $totalArticulos -= 5000;
+            }
+        }
 
         $totalImporte = number_format($totalImporte[0]->total, 2);
 
-        return view('eco.reportes.InventarioDeLaBodegaECO', compact('articulos', 'totalImporte', 'numeroBotonGenerarPDF'));
+        return view('eco.reportes.InventarioDeLaBodegaECO', compact('articulos', 'totalImporte', 'numeroBotonGenerarPDF','partida','linea'));
     }
 
     public function inventarioAnioPartidaFacturaECO(Request $request)
@@ -768,35 +778,45 @@ class ArticulosECOsController extends Controller
 
     public function inventarioDeLaBodegaPDFECO(Request $request)
     {
-
+        $partida = $request->partida;
+        $linea = $request->linea;
         $bloque = $request->bloque;
+        set_time_limit(5000);
+        if ($bloque == 1) {
+            if ($partida == "51100001"){
+                $articulos = articulosecos::select('numeroinventario', 'concepto', 'numeroserie', 'marca', 'modelo', 'medidas', 'factura', 'importe', 'estado')->where([['idarea', '15'],['partida', $partida],['linea',$linea]])->take(5000)->get();
+                $totalImporte = articulosecos::select(DB::raw('SUM(importe) as total'))->where([['idarea', '15'],['partida', $partida],['linea',$linea]])->get(); 
 
-        $topeArticulos = 10007;
+                $totalArticulos = articulosecos::where([['idarea', '15'],['partida', $partida],['linea',$linea]])->count();      
+            }else{
+                $articulos = articulosecos::select('numeroinventario', 'concepto', 'numeroserie', 'marca', 'modelo', 'medidas', 'factura', 'importe', 'estado')->where([['idarea', '15'],['partida', $partida]])->take(5000)->get();
 
-        $totalArticulos = articulosecos::where('idarea', '15')->count();
+                $totalImporte = articulosecos::select(DB::raw('SUM(importe) as total'))->where([['idarea', '15'],['partida', $partida]])->get();
+
+                $totalArticulos = articulosecos::where([['idarea', '15'],['partida', $partida]])->count(); 
+            }  
+        }else{
+            $articulos = articulosecos::select('numeroinventario', 'concepto', 'numeroserie', 'marca', 'modelo', 'medidas', 'factura', 'importe', 'estado')->where([['idarea', '15'],['partida', $partida],['linea',$linea]])->skip(5000 * ($bloque - 1))->take(5000)->get();
+            $totalImporte = articulosecos::select(DB::raw('SUM(importe) as total'))->where([['idarea', '15'],['partida', $partida],['linea',$linea]])->get();   
+
+            $totalArticulos = articulosecos::where([['idarea', '15'],['partida', $partida],['linea',$linea]])->count();          
+            
+        }
+        
+        set_time_limit(5000);
+        $totalBienes  = $totalArticulos;
+        
+        $totalImporte = number_format($totalImporte[0]->total, 2);
+
+        $topeArticulos = 5000;
 
         $bloqueFinal = 1;
 
-        while ($totalArticulos > 10000) {
+        while ($totalArticulos > 5000) {
             $bloqueFinal++;
-            $totalArticulos -= 10000;
+            $totalArticulos -= 5000;
         }
 
-        set_time_limit(5000);
-
-        if ($bloque == 1) {
-            $articulos = articulosecos::select('numeroinventario', 'concepto', 'numeroserie', 'marca', 'modelo', 'medidas', 'factura', 'importe', 'estado')
-                ->where('idarea', '15')->take($topeArticulos)->get();
-        } else {
-            $articulos = articulosecos::select('numeroinventario', 'concepto', 'numeroserie', 'marca', 'modelo', 'medidas', 'factura', 'importe', 'estado')
-                ->where('idarea', '15')->skip($topeArticulos * ($bloque - 1))->take(10007)->get();
-
-        }
-
-        $totalImporte = articulosecos::select(DB::raw('SUM(importe) as total'))->where('idarea', '15')->get();
-        $totalBienes  = articulosecos::where('idarea', '15')->count();
-
-        $totalImporte = number_format($totalImporte[0]->total, 2);
         $totalBienes  = number_format($totalBienes);
 
         $pdf = PDF::loadView('eco.reportes.pdf.InventarioDeLaBodegaDPFECO', compact('articulos', 'totalImporte', 'totalBienes', 'bloque', 'bloqueFinal'))->setPaper('letter', 'landscape');

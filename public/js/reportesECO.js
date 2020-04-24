@@ -58,9 +58,11 @@ $('#selectReportesECO').change(function() {
       banderaSelectAnioECO = 'reporte05';
       break;
     case '9':
-      $('#seleccionSelectECO').css("display","none");
-      $('#segundaInstruccionECO').css("display","none");
-      inventarioDeLaBodegaECO();
+      //$('#seleccionSelectECO').css("display","none");
+      //$('#segundaInstruccionECO').css("display","none");
+      $('#divPartidaECO').css("display","block");
+      $('#segundaInstruccionECO').css("display","block");
+      $('#instruccionECO').html('2.- Seleccione una partida:');
       break;
     case '10':
       $('#divAnioAdquisicionECO').css("display","block");
@@ -79,13 +81,33 @@ $('#selectReportesECO').change(function() {
 
 ********************************************************************************** */
 $('#selectPartidaECO').change(function(){
-	if ($(this).val() != 0 ){		
-		bienesPorPartidaECO($(this).val());
-		var partidaNumNombre = $(this).val().split('*');		
+	if ($(this).val() != 0 ){
+    if ($('#selectReportesECO').val() == 1){
+      bienesPorPartidaECO($(this).val());
+      var partidaNumNombre = $(this).val().split('*');
+    }		
+		if ($('#selectReportesECO').val() == 9){
+      var partidaNumNombre = $(this).val().split('*');
+      if (partidaNumNombre[0] !== "51100001" ){
+        $('#terceraInstruccionECO').css("display","none");
+        $('#selectLinea02ECO').val("0").change();
+        $('#divLineaECO').css("display","none");
+        inventarioDeLaBodegaECO(partidaNumNombre[0], "No");
+      }else{ 
+        $('#btnGenerarPDFECO').css("display","none");
+        $('#divRespuestaECO').css("display","none");            
+        obtenerLineas(partidaNumNombre[0]);
+
+      }      
+    }
 
 	}else{
 		$('#btnGenerarPDFECO').css("display","none");
 		$('#divRespuestaECO').css("display","none");
+    $('#divLineaECO').css("display","none");
+    $('#terceraInstruccionECO').css("display","none");
+    $('#selectLinea02ECO').val("0").change();
+    $('#divLineaECO').css("display","none");
 	}
 	
 });
@@ -131,7 +153,7 @@ $('#selectEmpleadoECO').change(function(){
 
 ********************************************************************************** */
 $('#selectAreaR7ECO').change(function(){
-  console.log('entre');
+  //console.log('entre');
   if ($(this).val() != 0 ){
     bienesAreaOrdenadoEmpleadoECO($(this).val());
   }else{
@@ -208,6 +230,7 @@ function desactivarcamposECO(){
   $('#selectAnioAdquisicionECO').val("0").change();
   $('#selectAreaR7ECO').val("0").change();
   $('#selectPartida02ECO').val("0").change();
+  $('#selectLinea02ECO').val("0").change();
 
 	$('#btnGenerarPDFECO').css("display","none");
 
@@ -551,7 +574,7 @@ function importeBienesAnioAdquisicionECO(anioAdquisicion){
     }); 
 }
 
-function inventarioDeLaBodegaECO(){
+function inventarioDeLaBodegaECO(partida, linea){
 
   $('#cargandoECO').css("display","block");
   $('#divRespuestaECO').css("display","none");
@@ -570,6 +593,7 @@ function inventarioDeLaBodegaECO(){
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
       dataType: 'html',
+      data: { partida: partida, linea: linea},
       contentType: 'application/json'
 
     }).done(function(response) {
@@ -621,3 +645,48 @@ function inventarioAnioPartidaFacturaECO(anio, partida) {
     });
 
 }
+
+function obtenerLineas(partida){
+  $('#divLineaECO').css("display","block");
+  $('#terceraInstruccionECO').css("display","block");
+  $('#instruccion02ECO').html('3.- Seleccione una línea:');
+
+  $.ajaxSetup(
+  {
+    headers:
+    { 
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
+  $.ajax({
+      url: "obtenLineas",
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      data: {partida: partida},
+      dataType: 'json',
+      contentType: 'application/json'
+    }).done(function(response) {
+
+      // console.log(response);
+
+      comboLineas = "<option value='0'>Seleccione una línea</option>";
+      $.each(response, function(index, value){
+        var cadena = value['linea'] + " | " + value['desclinea'];
+          comboLineas += "<option value='"+value['linea']+"*"+value['desclinea']+"'>"+ cadena +"</option>";
+      });
+
+      $('#selectLinea02ECO').html(comboLineas);
+      
+    });
+}
+
+$('#selectLinea02ECO').change(function(){
+  if ($(this).val() != 0 ){
+    var partidaNumNombre = $('#selectPartidaECO').val().split('*');
+    var lineaNumNombre = $(this).val().split('*');
+    inventarioDeLaBodegaECO(partidaNumNombre[0], lineaNumNombre[0]);
+  }else{
+
+  }
+});

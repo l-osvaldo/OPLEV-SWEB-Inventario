@@ -9,7 +9,7 @@
 ********************************************************************************** */
 
 var validarRevision = [1,1];
-console.log(validarRevision);
+// console.log(validarRevision);
 var t = $('#detalles').DataTable( {
     "deferRender": true,
     "retrieve": true,

@@ -56,7 +56,7 @@
         $pagina = 1;
         $contadorBloques = 1;
       }else{
-        $pagina = 835 * ($bloque -1);
+        $pagina = 418 * ($bloque -1);
         $contadorBloques = 0;
       }      
       $tope = 0;
@@ -77,7 +77,7 @@
     @endphp
 
     @for ($i = 0; $i < $contadorBloques; $i++)  
-    
+    @if ($tope == 0)
     <table>
         <tr>          
           <td style="width: 120px;vertical-align: text-top"><img class="logo" src="{{ public_path('images/logoople.png') }}" alt=""></td>
@@ -152,7 +152,7 @@
             <tr>
               <td style="text-align: right;" colspan="9">
                 <strong>
-                  TOTAL DE BIENES:  {{ $totalBienes }}
+                  TOTAL DE BIENES:  {{ $totalBienes }} 
               </strong> 
               </td>
             </tr>
@@ -231,10 +231,11 @@
     <div class="row" align="right">
         <label>Página:   {{ $pagina }} </label>
         @php
-          $pagina += 1;
+          $pagina += 1 ;
         @endphp
     </div>
     <div style="page-break-after:auto;"></div>
+    @endif
   @endfor
   </body>
 </html>

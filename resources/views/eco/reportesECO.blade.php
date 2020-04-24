@@ -93,6 +93,12 @@
 			    		@endforeach
 			    	</select>
 	    		</div>
+
+	    		<div class="form-group" style="display: none; width: 100%" id="divLineaECO">
+	    			<select class="form-control select2" id="selectLinea02ECO" style="width: 100%">
+			    		<option value="0">Seleccione una línea </option>
+			    	</select>
+	    		</div>
 	    	</div>		  	
 	    	
 	    </div>

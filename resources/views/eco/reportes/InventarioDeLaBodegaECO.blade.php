@@ -6,9 +6,13 @@
 
 			@for ($i = 0; $i < $numeroBotonGenerarPDF ; $i++)
 				<div>
-					<a style="background-color: #E71096; display: none; width: 100%;" class="btn btn-secondary botonDisplay" id="btnGenerarPDFECO{{ $i + 1 }}" href="../catalogos/reportes/inventarioDeLaBodegaPDFECO/{{ $i + 1 }}" target="_blank">
-				        <i class="fa fa-file-pdf-o"></i> 
-				        Generar PDF - parte {{ $i + 1 }}     
+					<a style="background-color: #E71096; display: none; width: 100%;" class="btn btn-secondary botonDisplay" id="btnGenerarPDFECO{{ $i + 1 }}" href="../catalogos/reportes/inventarioDeLaBodegaPDFECO/{{ $i + 1 }}/{{ $partida }}/{{ $linea }}" target="_blank">
+				        <i class="fa fa-file-pdf-o"></i>
+				        @if ($numeroBotonGenerarPDF > 1) 
+				        	Generar PDF - parte {{ $i + 1 }}
+				        @else
+				        	Generar PDF
+				        @endif     
 				    </a>
 				</div>
 				&nbsp;
