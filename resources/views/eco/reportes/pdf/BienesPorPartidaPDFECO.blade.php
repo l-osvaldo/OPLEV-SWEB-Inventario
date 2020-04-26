@@ -51,8 +51,15 @@
   		$bloques = 14;
   		$inicioBloque = 0;
   		$contadorBloques = 1;
-  		$pagina = 1;
   		$tope = 0;
+
+  		if ($bloque == 1){
+        $pagina = 1;
+        $contadorBloques = 1;
+      }else{
+        $pagina = 358 * ($bloque -1);
+        $contadorBloques = 1;
+      }  
   	@endphp
 
   	@foreach ($bienesPartida as $element)
@@ -70,7 +77,7 @@
   	@endphp
 
   	@for ($i = 0; $i < $contadorBloques; $i++)	
-  	
+  	@if ($tope == 0)
 		<table>
 		    <tr>
 		      <td style="width: 120px;vertical-align: text-top"><img class="logo" src="{{ public_path('images/logoople.png') }}" alt=""></td>
@@ -94,7 +101,7 @@
 
 	  	<label><strong>INVENTARIO POR PARTIDA</strong></label>
 	  	<br>
-	  	<label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida->numPartida }} {{ $partida->nombrePartida }} </i></label>
+	  	<label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida }} - {{ $descripcionpartida }} </i></label>
 
 	  	<div style="height: 580px">
 		  	<table style="margin-top: 15px;">
@@ -149,7 +156,7 @@
 			  			&nbsp;
 			  		</td>
 			  	</tr>
-			  	@if ($tope == 1)
+			  	@if ($tope == 1 && $bloque == $bloqueFinal)
 				  	<tr>
 				  		<td style="text-align: right; padding: 15px" colspan="9">
 				  			<strong>
@@ -219,12 +226,12 @@
 		    </table>
 		</div>
 		<div class="row" align="right">
-		    <label>Página:   {{ $pagina }} </label>
+		    <label>Página:   {{ $pagina }}</label>
 		    @php
 		      $pagina += 1;
 		    @endphp
 		</div>
-
+		@endif
 	@endfor
   </body>
 </html>

@@ -136,7 +136,7 @@ Route::group(['middleware' => 'disablepreventback'], function () {
 
     // Bienes por Partida ECO
     Route::get('catalogos/BienesXPartidaECO', 'ArticulosECOsController@BienesXPartidaECO');
-    Route::get('catalogos/reportes/BienesPorPartidaECO/{numPartida}/{nombrePartida}', 'ArticulosECOsController@BienesPorPartidaECO');
+    Route::get('catalogos/reportes/BienesPorPartidaECO/{bloque}/{numPartida}/{nombrePartida}/{linea}', 'ArticulosECOsController@BienesPorPartidaECO');
 
     // Importe de Bienes Por área ECO
     Route::get('catalogos/importeBienesPorAreaECO', 'ArticulosECOsController@importeBienesPorAreaECO');

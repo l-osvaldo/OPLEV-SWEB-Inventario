@@ -2,13 +2,21 @@
 @section('content')
 
 	<section class="content" style="margin-top: 2vh;">
-		<div class="row">
-			<div class="col-md-12" align="right">
-	    		<a style="background-color: #E71096; margin-left: 15px; display: none; width: 10%;" class="btn btn-secondary" id="btnGenerarPDFECO" target="_blank">
-			        <i class="fa fa-file-pdf-o"></i> 
-			        Generar PDF        
-			    </a>
-	    	</div>
+		<div class="row justify-content-end" align="right">
+
+			@for ($i = 0; $i < $numeroBotonGenerarPDF ; $i++)
+				<div>
+					<a style="background-color: #E71096; display: none; width: 100%;" class="btn btn-secondary botonDisplay" id="btnGenerarPDFECO{{ $i + 1 }}" href="../catalogos/reportes/BienesPorPartidaECO/{{ $i + 1 }}/{{ $partida }}/{{ $descripcionpartida }}/{{ $linea }}" target="_blank">
+				        <i class="fa fa-file-pdf-o"></i>
+				        @if ($numeroBotonGenerarPDF > 1) 
+				        	Generar PDF - parte {{ $i + 1 }}
+				        @else
+				        	Generar PDF
+				        @endif     
+				    </a>
+				</div>
+				&nbsp;
+			@endfor
 		</div>
 		<br>
 		<table width="100%">
@@ -17,7 +25,7 @@
 			</tr>
 			<tr>
 				<td width="70%"> 
-					<label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida->numPartida }} {{ $partida->nombrePartida }} </i></label>
+					<label><strong>CLASIFICACIÓN:</strong></label> <label style="font-weight:lighter;"> <i> {{ $partida }} - {{ $descripcionpartida }} </i></label>
 				</td>
 				<td width="30%" align="right">
 					<label style="margin-right: 80px"> <strong>TOTAL DE IMPORTE: $ </strong>

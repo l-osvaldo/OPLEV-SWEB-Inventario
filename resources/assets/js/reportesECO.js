@@ -83,8 +83,18 @@ $('#selectReportesECO').change(function() {
 $('#selectPartidaECO').change(function(){
 	if ($(this).val() != 0 ){
     if ($('#selectReportesECO').val() == 1){
-      bienesPorPartidaECO($(this).val());
       var partidaNumNombre = $(this).val().split('*');
+      if (partidaNumNombre[0] !== "51100001" ){
+        $('#terceraInstruccionECO').css("display","none");
+        $('#selectLinea02ECO').val("0").change();
+        $('#divLineaECO').css("display","none");
+        bienesPorPartidaECO($(this).val(),"No");
+      }else{
+        $('#btnGenerarPDFECO').css("display","none");
+        $('#divRespuestaECO').css("display","none");            
+        obtenerLineas(partidaNumNombre[0]);
+      }     
+      
     }		
 		if ($('#selectReportesECO').val() == 9){
       var partidaNumNombre = $(this).val().split('*');
@@ -255,7 +265,7 @@ function desactivarcamposECO(){
     Retorna: Unhtml con un datatable de la vista preliminar del reporte
 
 ********************************************************************************** */
-function bienesPorPartidaECO(partida){
+function bienesPorPartidaECO(partida,linea){
 
 	$('#cargandoECO').css("display","block");
 	$('#divRespuestaECO').css("display","none");
@@ -275,7 +285,7 @@ function bienesPorPartidaECO(partida){
       url: "BienesXPartidaECO",
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
-      data: { numPartida: partidaNumNombre[0], nombrePartida: partidaNumNombre[1]},
+      data: { numPartida: partidaNumNombre[0], nombrePartida: partidaNumNombre[1], linea, linea},
       dataType: 'html',
       async: true,
       contentType: 'application/json'
@@ -284,8 +294,8 @@ function bienesPorPartidaECO(partida){
     	$('#divRespuestaECO').css("display","block");
     	$('#respuestaReporteECO').html(response);
     	$('#cargandoECO').css("display","none");
-    	$('#btnGenerarPDFECO').css("display","block");
-    	$('#btnGenerarPDFECO').attr("href","../catalogos/reportes/BienesPorPartidaECO/"+partidaNumNombre[0]+"/"+partidaNumNombre[1]);
+    	$('.botonDisplay').css("display","block");
+    	//$('#btnGenerarPDFECO').attr("href","../catalogos/reportes/BienesPorPartidaECO/"+partidaNumNombre[0]+"/"+partidaNumNombre[1]);
     	    	
     });
 }
@@ -685,8 +695,15 @@ $('#selectLinea02ECO').change(function(){
   if ($(this).val() != 0 ){
     var partidaNumNombre = $('#selectPartidaECO').val().split('*');
     var lineaNumNombre = $(this).val().split('*');
-    inventarioDeLaBodegaECO(partidaNumNombre[0], lineaNumNombre[0]);
+    if ($('#selectReportesECO').val() != 9){
+      bienesPorPartidaECO($('#selectPartidaECO').val(), lineaNumNombre[0]);
+    }else{
+      
+      inventarioDeLaBodegaECO(partidaNumNombre[0], lineaNumNombre[0]);
+    }
+    
   }else{
-
+    $('#btnGenerarPDFECO').css("display","none");
+    $('#divRespuestaECO').css("display","none");
   }
 });

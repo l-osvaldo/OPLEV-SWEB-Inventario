@@ -95,7 +95,7 @@
 
       <label><strong>INVENTARIO DE LA BODEGA:</strong></label> 
 
-      <div style="height: 550px">
+      <div style="height: 545px">
         <table style="margin-top: 15px;">
         <thead>
           <tr style="background-color: #ccc; border: solid 1px #000;">
