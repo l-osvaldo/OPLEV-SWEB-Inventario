@@ -178,7 +178,7 @@
             <strong>LIC. JOSÉ LAURO VILLAS RIVAS</strong>
           </td>
           <td>
-            <strong>MTRA. ERIKA CAROLINA MALPICA ALCÁNTARA</strong>
+            <strong>LIC. JOSÉ LUIS OSORIO RODRÍGUEZ</strong>
           </td>
         </tr>
         <tr>
@@ -186,7 +186,7 @@
             <strong>DIRECTOR EJECUTIVO DE ADMINISTRACIÓN</strong>
           </td>
           <td>
-            <strong>JEFA DEL DEPARTAMENTO DE RECURSOS </strong>
+            <strong>JEFE DEL DEPARTAMENTO DE RECURSOS </strong>
             <br>
             <strong>MATERIALES Y SERVICIOS GENERALES</strong>
           </td>

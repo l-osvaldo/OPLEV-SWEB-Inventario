@@ -1,9 +1,11 @@
-<?php namespace App\Http\Middleware;
+<?php
 
-use Illuminate\Support\Facades\Log;
+namespace App\Http\Middleware;
+
 use Closure;
 
-class CORS {
+class CORS
+{
 
     /**
      * Handle an incoming request.
@@ -15,7 +17,6 @@ class CORS {
     public function handle($request, Closure $next)
     {
         //var_dump("antes de los headers");
-
 
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
