@@ -12,7 +12,7 @@ use App\partidas;
 use DB;
 use Illuminate\Http\Request;
 use PDF;
-
+use Log;
 /*************** Funciones para el módulo de Bienes OPLE *****************************/
 class ArticulosController extends Controller
 {
@@ -143,6 +143,30 @@ class ArticulosController extends Controller
 
         return view('ople.reportes', compact('usuario', 'partidas', 'areas', 'empleados'));
     }
+
+
+    /// BAJAS [ALX]
+
+    // ************ vista de bajas ************
+
+    /* **********************************************************************************
+
+    Funcionalidad: Vista de articulos en bodega.
+    Parámetros: /
+    Retorna: Una vista con una tabla con los bienes que se encuentran en bodega, Bajas.blade.php
+
+     ********************************************************************************** */
+    public function Bajas()
+    {
+
+        $bienesBodega = articulos::where('nombrearea', 'BODEGA')->get();
+        dd($bienesBodega);
+        return view('catalogos.Bajas', compact('bienesBodega'));
+    }
+
+
+
+
 
     // ************ vista previa de reportes ************
 
@@ -765,27 +789,28 @@ class ArticulosController extends Controller
     public function InformacionArticulo(Request $request)
     {
 
-        $infoArticulo = articulos::where('numeroinv', $request->numInventario)->get();
+$infoArticulo = articulos::where('numeroinv', $request->numInventario)->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
 
-        foreach ($infoArticulo as $value) {
-            if ($value->fechacomp == '  -   -') {
+        /*foreach ($infoArticulo as $value) {
+            if ($value->fechacomp === '  -   -') {
                 $value->fechacomp = '0';
+                Log::debug("Error xhr: ");
             } else {
                 if (strpos($value->fechacomp, '/')) {
-
+                    
                     $fecha = explode("/", $value->fechacomp);
                     if (strlen($fecha[2]) == 4) {
                         $dia  = $fecha[0];
                         $mes  = $fecha[1];
                         $anio = $fecha[2];
-
+                       
                         $value->fechacomp = $anio . '-' . $mes . '-' . $dia;
                     }
                 }
 
             }
-        }
-
+        }*/
+        
         return response()->json($infoArticulo);
     }
 

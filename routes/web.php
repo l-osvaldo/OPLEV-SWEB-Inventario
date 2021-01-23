@@ -174,6 +174,11 @@ Route::group(['middleware' => 'disablepreventback'], function () {
     Route::get('catalogos/inventarioAnioPartidaFacturaECO', 'ArticulosECOsController@inventarioAnioPartidaFacturaECO');
     Route::get('catalogos/reportes/inventarioAnioPartidaFacturaPDFECO/{anio}/{partida}/{descpartida}', 'ArticulosECOsController@inventarioAnioPartidaFacturaPDFECO');
 
+
+    // BAJAS [ALX]
+    Route::get('/catalogos/Bajas', 'ArticulosController@Bajas')->name('Bajas');
+
+
     /* ****************************************************************************************************************** */
 
     // Depreciación
@@ -195,7 +200,7 @@ Route::group(['middleware' => 'disablepreventback'], function () {
     // levantamiento de inventario
     Route::get('/catalogos/levantamientoInventarioDetalleEsp', 'LevantamientoController@levantamientoInventarioDetalleEsp');
     Route::get('/catalogos/levantamientoInventarioDetalleGral', 'LevantamientoController@levantamientoInventarioDetalleGral');
-    Route::get('/catalogos/levantamientoInventarioDetalleGral', 'LevantamientoController@levantamientoInventarioDetalleGral');
+    //Route::get('/catalogos/levantamientoInventarioDetalleGral', 'LevantamientoController@levantamientoInventarioDetalleGral');
     Route::get('/catalogos/reportes/levantamientoInventarioDetallePDF/{id_lote}/{tipo}', 'LevantamientoController@levantamientoInventarioDetallePDF');
     Route::get('/catalogos/actualizar', 'LevantamientoController@actualizar');
     Route::post('/catalogos/confirmacionAsignacionL', 'LevantamientoController@confirmacionAsignacionL')->name('confirmacionAsignacionL');

@@ -330,7 +330,6 @@ Respuesta: status guardado en la base de datos.
 ******************************************************************/
 $('.estatusBtn').on('click', function(e) {
     e.preventDefault();
-    0
     var data = $(this).attr("data-estadoUsuario");
     var id = $(this).attr("data-idUsuario");
     var text;
