@@ -224,8 +224,19 @@
                 <div class="row">
                   <div class="col-md-12">
                       <div class="form-group">
-                        <input type="hidden" name="numeroInventario" id="numeroInventario" value="">
-                        <label>Número de inventario: <strong id="editarNoInventario" style="background-color: #F694D0"></strong> </label> 
+                        <!--input type="hidden" name="numeroInventario" id="numeroInventario" value=""-->
+                        <div class="row">
+                          <div class="col-md-6" style="text-align: left;">
+                            <label>Número de inventario: <strong id="editarNoInventario" style="background-color: #F694D0"></strong> </label>
+                          </div>
+                          <div class="col-md-6" style="text-align: right;" id="btnBajaArt">
+                            <div style="background-color: #E71096" class="btn btn-secondary" type="button"  onclick="confirmBajaArt()">
+                                <i class="fa fa-minus"></i> 
+                                Dar de Baja       
+                            </div>
+                          </div>
+                        </div>
+            
                         <hr>
                         <br>
                         <table width="100%" class="table">
@@ -445,6 +456,60 @@
         </div>
       </div>
     </div>
+
+
+
+    <!--div class="modal fade bd-example-modal-lg" id="bajasModal" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="background: #a90a6c; color:white">
+            <h5 class="modal-title" id="editarModalLabel"><b>Confirmar Baja de Artículo(s) </b></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+              
+          <div class="container-fluid">
+            <form method="POST" action="{{ route('EditarArticulos') }}" id="formEditar">
+
+              @csrf
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group">
+                       
+                        <div class="row">
+                          <div class="col-md-6" style="text-align: left;">
+                            <label>Número de inventario: <strong id="editarNoInventario" style="background-color: #F694D0"></strong> </label>
+                          </div>
+                        </div>
+                                               
+                                                
+                      </div>                                       
+                  </div><!- /.col ->
+                </div> <!- /.row ->
+
+                <div class="row">
+                    <div class="col-md-12">
+                                                               
+                    </div>
+                </div>
+              </div>
+              <!-Fin Editar Partida ->
+              
+              
+              <div class="card-footer">
+                <button type="reset" class="btn btn-danger" data-dismiss="modal" >Cancelar</button>
+                  <button type="submit" id="btnBajaArticulo" style="background-color: #E71096; display: auto" class="btn btn-secondary float-right">
+                      {{ __('Dar De Baja') }}
+                  </button>
+                  
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div!-->
 
 </section>
 

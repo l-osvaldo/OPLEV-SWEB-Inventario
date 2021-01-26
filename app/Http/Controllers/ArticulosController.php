@@ -156,15 +156,28 @@ class ArticulosController extends Controller
     Retorna: Una vista con una tabla con los bienes que se encuentran en bodega, Bajas.blade.php
 
      ********************************************************************************** */
-    public function Bajas()
+
+    public function bajaArticulo(Request $request)
     {
 
-        $bienesBodega = articulos::where('nombrearea', 'BODEGA')->get();
-        dd($bienesBodega);
-        return view('catalogos.Bajas', compact('bienesBodega'));
+    $infoArticulo = articulos::where('numeroinv', $request->numInv)->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
+
+        
+
+        
+        return response()->json($infoArticulo);
     }
 
 
+    public function bodega()
+    {
+        $usuario  = auth()->user();
+        $partidas = partidas::select('partida', 'descpartida')->whereNotNull(['porcentajeDepreciacion', 'aniosvida'])->get();
+
+        $articulos = articulos::where('nombrearea', 'BODEGA')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
+
+        return view('catalogos.Bodega', compact('usuario', 'partidas','articulos'));
+    }
 
 
 
@@ -824,7 +837,7 @@ $infoArticulo = articulos::where('numeroinv', $request->numInventario)->select('
 
     public function EditarArticulos(Request $request)
     {
-
+        //dd('dsadfsd');
         $nombreEstado = '';
 
         switch ($request->editarEstado) {

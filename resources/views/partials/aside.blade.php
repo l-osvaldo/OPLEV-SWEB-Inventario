@@ -64,8 +64,8 @@
               </li>
             </ul>
         </li>
-        <li id="ople" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bienes','home','/','ople/alta','catalogos/reportes','catalogos/depreciacion') ? 'menu-open' : '' !!}">
-          <a class="{!! Request::is('catalogos/bienes','home','/','ople/alta','catalogos/reportes','catalogos/depreciacion') ? 'nav-link active' : 'nav-link' !!}">
+        <li id="ople" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bienes','home','/','ople/alta','catalogos/reportes','catalogos/depreciacion','catalogos/bodega') ? 'menu-open' : '' !!}">
+          <a class="{!! Request::is('catalogos/bienes','home','/','ople/alta','catalogos/reportes','catalogos/depreciacion','catalogos/bodega') ? 'nav-link active' : 'nav-link' !!}">
             <i class="nav-icon fa">O</i>
             <p>
               <b>BIENES OPLE</b>
@@ -89,6 +89,12 @@
               <a href="{{ route('depreciacion') }}" class="{!! Request::is('catalogos/depreciacion') ? 'nav-link active' : 'nav-link' !!}" style="font-size: .95em;">
                 <i class="fa fa-sort-amount-desc"></i>
                 <p style="margin-left: 10px;">Depreciación</p>
+              </a>
+            </li>
+            <li class="nav-item" style="margin-left: 25px;">
+              <a href="{{ route('bodega') }}" class="{!! Request::is('catalogos/bodega') ? 'nav-link active' : 'nav-link' !!}" style="font-size: .95em;">
+                <i class="fa fa-check-circle"></i>
+                <p style="margin-left: 10px;">Bodega</p>
               </a>
             </li>
           </ul>

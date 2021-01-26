@@ -176,7 +176,8 @@ Route::group(['middleware' => 'disablepreventback'], function () {
 
 
     // BAJAS [ALX]
-    Route::get('/catalogos/Bajas', 'ArticulosController@Bajas')->name('Bajas');
+    Route::get('/catalogos/bajaArticulo', 'ArticulosController@bajaArticulo')->name('bajaArticulo');
+    Route::get('/catalogos/bodega', 'ArticulosController@bodega')->name('bodega');
 
 
     /* ****************************************************************************************************************** */

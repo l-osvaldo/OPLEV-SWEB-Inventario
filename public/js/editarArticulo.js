@@ -11,7 +11,7 @@
 ********************************************************************************** */
  
  function abrirModalEditar(numInventario) {
-
+ 	var baja = document.getElementById('btnBajaArt');
  	$.ajaxSetup(
 	{
 		headers:
@@ -35,7 +35,8 @@
 
     	$.each(response, function(i, item) {
     		//console.log(item['partida 
-
+    		//alert(item['nombrearea']);
+    		item['nombrearea'] == 'BODEGA' ? $('#btnBajaArt').addClass('d-none') :  $('#btnBajaArt').removeClass('d-none');
 
     		$('#editarPartida').html(item['partida']);
     		$('#editarLinea').html(item['linea']);
@@ -55,6 +56,7 @@
 
     		if (item['fechacomp'] === '0'){
     			console.log('entre');
+    			
     			//$('#editarDateFechaCompra').val("2001-05-05");
     			//$('#editarDateFechaCompra').val("DD-MM-YYYY");
     			//$('#editarDateFechaCompra').val("YYYY-MM-DD");
@@ -306,4 +308,93 @@ $("#editarImporte").maskMoney({
 
  
 
+
+ /* **********************************************************************************
+    Funcionalidad: Función para confirmar la baja del artículo y hacer el update en la tabla de articulos
+    Parámetros: No recibe parámetros 
+    Retorna: Confirmación de baja de artículo
+
+********************************************************************************** */
+
+function confirmBajaArt(){
+	var numInv = document.getElementById('editarNoInventario').textContent;
+	var area = document.getElementById('editarArea').textContent;
+
+	swal({
+	      title: area =='BODEGA' ?  "Este artículo SERÁ DADO DE BAJA DEFINITIVAMENTE" : "Este artículo SERÁ ENVIADO A BODEGA",
+	      text: "¿Desea continuar?",
+	      type: "warning",
+	      showCancelButton: true,
+	      confirmButtonColor: "#E71096",
+	      confirmButtonText: "Sí",
+	      closeOnConfirm: false
+	  }, function(isConfirm){
+	      if (isConfirm) {
+	        
+	        $.ajax({
+	          type:'get',
+	          url:'./bajaArticulo',
+	          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+	          data:{numInv:numInv},
+	          success:function(data){
+	            console.log(data);
+	            swal({
+	              position: 'center',
+	              type:'success',
+	              title: area =='BODEGA' ? 'El artículo HA SIDO DADO DE BAJA DEFINITIVAMENTE' : 'Este artículo HA SIDO ENVIADO A BODEGA',
+	              showConfirmButton: false,
+	              timer: 1800
+	            })
+	           //location.reload();
+	          },
+	          error: function (xhr, ajaxOptions, thrownError) {
+	              //alert('error');
+	          }
+	        });
+		
+	      }else {
+	        swal("Cancelado!", "El artículo no se dio de baja", "error");
+	      }
+	      
+	  });
+
+}
+
+
+
+ /* **********************************************************************************
+    Funcionalidad: Función para buscar un artículo y llenar la tabla de articulos de baja
+    Parámetros: No recibe parámetros 
+    Retorna: Confirmación o negación de búsqueda de artículo
+
+********************************************************************************** */
+
+function buscaArt(){
+	var numInv = document.getElementById('numeroinvArt').value;
+	
+	alert(numInv);
+	$.ajax({
+          type:'POST', 
+          url:'./buscaArt',
+          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+          data:{numInv:numInv},
+         success:function(data){
+            document.getElementById('loader').classList.add('o-hidden-loader');
+            console.log(data+' regreso');
+            swal({
+              position: 'center',
+              type:'success',
+              title: 'Inconsistencia Subsanada Correctamente' ,
+              showConfirmButton: false,
+              timer: 3000
+            });
+
+            //location.reload();
+            
+           },
+           error: function (xhr, ajaxOptions, thrownError) {
+            console.log('err')
+           }
+        });
+}
 
