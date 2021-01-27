@@ -15,7 +15,7 @@
         <i class="fa fa-plus"></i> 
         Alta del bien        
     </a!-->
-    <a href="" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#altasModal">
+    <a href="{{ route('bajasDefinitivas') }}" style="background-color: #E71096" class="btn btn-secondary" >
         <i class="fa fa-minus"></i> 
         Baja Definitiva        
     </a>
@@ -81,11 +81,11 @@
                       <label style="width: 100%;">Buscar artículo:</label>
                     <div class="row">
                       <div class="col-md-5">
-                        <input type="text" name="numeroinvArt" id="numeroinvArt" placeholder="Número de inventario:" class="form-control" onkeyup="buscaArt()">
+                        <input type="text" name="numeroinvArt" id="numeroinvArt" placeholder="Número de inventario:" class="form-control">
                       </div>
-                      <div style="background-color: #E71096" class="btn btn-secondary" type="button">
-                        <i class="fa fa-plus"></i> 
-                          Agregar artículo       
+                      <div style="background-color: #E71096" class="btn btn-secondary" type="button" id="buscaArtDef" onclick="buscaArt()">
+                        <i class="fa fa-search"></i> 
+                          Buscar      
                       </div>
                     </div>
                 </div> <!-- /.row -->

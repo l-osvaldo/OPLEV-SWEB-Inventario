@@ -179,6 +179,13 @@ Route::group(['middleware' => 'disablepreventback'], function () {
     Route::get('/catalogos/bajaArticulo', 'ArticulosController@bajaArticulo')->name('bajaArticulo');
     Route::get('/catalogos/bodega', 'ArticulosController@bodega')->name('bodega');
 
+    Route::post('/catalogos/buscaArt', 'ArticulosController@buscaArt')->name('buscaArt');
+
+    Route::get('/catalogos/bajasDefinitivas', 'ArticulosController@bajasDefinitivas')->name('bajasDefinitivas');
+
+    Route::post('/catalogos/articulosBajaDefinitiva', 'ArticulosController@articulosBajaDefinitiva')->name('articulosBajaDefinitiva');
+
+
 
     /* ****************************************************************************************************************** */
 

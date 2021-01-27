@@ -372,22 +372,45 @@ function confirmBajaArt(){
 function buscaArt(){
 	var numInv = document.getElementById('numeroinvArt').value;
 	
-	alert(numInv);
-	$.ajax({
+	var ievopl = numInv.split('-');
+	//alert(ievopl[0]);
+	
+	//Validación de que no pongan el mismo número de articulo en inventario
+	
+	
+	if (ievopl[0] == 'IEV' || ievopl[0] == 'iev' || ievopl[0] == 'OPLEV' || ievopl[0] == 'oplev') {
+		
+		$.ajax({
           type:'POST', 
           url:'./buscaArt',
           headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
           data:{numInv:numInv},
          success:function(data){
-            document.getElementById('loader').classList.add('o-hidden-loader');
-            console.log(data+' regreso');
-            swal({
-              position: 'center',
-              type:'success',
-              title: 'Inconsistencia Subsanada Correctamente' ,
-              showConfirmButton: false,
-              timer: 3000
-            });
+            //document.getElementById('loader').classList.add('o-hidden-loader');
+            console.log(data.length );
+
+            if (data.length >= 1) {
+            	//Llamar modal con los datos
+
+            	$("#agregaArt").modal()
+
+
+            	document.getElementById('numInvBdef').innerHTML= numInv;
+            	document.getElementById('concepBdef').innerHTML=data[0].concepto;
+            	document.getElementById('facturaBdef').innerHTML=data[0].factura;
+            	document.getElementById('fechaCBdef').innerHTML=data[0].fechacomp;
+            	document.getElementById('importeBdef').innerHTML='$ '+data[0].importe;
+
+            }else{
+	            swal({
+		            position: 'center',
+		            type:'error',
+		            title: 'El artículo ingresado no se encuentra en la bodea' ,
+		            showConfirmButton: false,
+		            timer: 3000
+	            });
+            }
+
 
             //location.reload();
             
@@ -396,5 +419,120 @@ function buscaArt(){
             console.log('err')
            }
         });
+
+	}else{
+		swal({
+              position: 'center',
+              type:'warning',
+              title: 'Verifique el número de inventario escrito' ,
+              showConfirmButton: false,
+              timer: 3000
+            });
+	}
+
 }
+
+
+function agregaArtBajDef(){
+
+	document.getElementById('tableBajasDef').classList.remove('d-none');
+	document.getElementById('btnEnvArtBajDef').classList.remove('d-none');
+
+	var numInvBdef=document.getElementById('numInvBdef').textContent;
+	var concepBdef =document.getElementById('concepBdef').textContent;
+	var facturaBdef =document.getElementById('facturaBdef').textContent;
+	var fechaCBdef =document.getElementById('fechaCBdef').textContent;
+	var importeBdef =document.getElementById('importeBdef').textContent;
+
+	//alert(numInvBdef+concepBdef+facturaBdef+fechaCBdef+importeBdef);
+
+	var tablaInconsis = document.getElementById('tableBajasDef');
+
+    var datoInconsis = document.createElement('tr');
+        datoInconsis.id = numInvBdef;
+
+    var numInv = document.createElement('td');
+        numInv.textContent = numInvBdef;
+        numInv.className = 'artIdInvt';
+        datoInconsis.appendChild(numInv);
+
+    var conceptBajaD = document.createElement('td');
+        conceptBajaD.textContent = concepBdef;
+        datoInconsis.appendChild(conceptBajaD);
+
+    var factBajDef = document.createElement('td');
+        factBajDef.textContent = facturaBdef;
+        datoInconsis.appendChild(factBajDef);
+
+    var fechCompBDef = document.createElement('td');
+        fechCompBDef.textContent = fechaCBdef;
+        datoInconsis.appendChild(fechCompBDef);
+
+    var importBajDef = document.createElement('td');
+        importBajDef.textContent = importeBdef;
+        importBajDef.className = 'importArtInvt';
+        datoInconsis.appendChild(importBajDef);
+
+    tablaInconsis.appendChild(datoInconsis);
+
+
+    var importArts = document.getElementsByClassName('importArtInvt');
+
+	 var arrImportArticulos = [];
+
+        for (var i = 0; i < importArts.length; i++) {
+           importArts[i].textContent;
+           arrImportArticulos.push(importArts[i].textContent);
+           console.log(importArts[i].textContent);
+           var total = parseInt(importArts[i].textContent);
+           
+           console.log(total);
+        }
+
+	$("#agregaArt").modal('hide');
+
+	document.getElementById('importeTotalArts').classList.remove('d-none');
+	document.getElementById('importeTotBajDef').textContent = total;
+
+	//importeTotalArts
+     
+}
+
+
+function enviaArtBajaDefinit(){
+	 var articulosBDef = document.getElementsByClassName('artIdInvt');
+
+	 var arrArticulos = [];
+
+        for (var i = 0; i < articulosBDef.length; i++) {
+           articulosBDef[i].textContent;
+           arrArticulos.push(articulosBDef[i].textContent);
+           console.log(articulosBDef[i].textContent);
+
+        }
+
+        console.log(arrArticulos);
+
+   
+		$.ajax({
+          type:'POST', 
+          url:'./articulosBajaDefinitiva',
+          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+          data:{arrArticulos:arrArticulos},
+         success:function(data){
+            //document.getElementById('loader').classList.add('o-hidden-loader');
+            console.log(data);
+
+            //location.reload();
+            
+           },
+           error: function (xhr, ajaxOptions, thrownError) {
+            console.log('err')
+           }
+        });
+
+
+}
+
+
 

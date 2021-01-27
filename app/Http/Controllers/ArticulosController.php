@@ -151,9 +151,11 @@ class ArticulosController extends Controller
 
     /* **********************************************************************************
 
-    Funcionalidad: Vista de articulos en bodega.
-    Parámetros: /
-    Retorna: Una vista con una tabla con los bienes que se encuentran en bodega, Bajas.blade.php
+    Funcionalidad: Confirma la baja de un artículo. Cambia de área a un artículo y lo pasa
+                   al área de bodega
+    Parámetros: numInv - Numero de inventario para consultar el articulo, obtener sus datos
+                y hacer el update
+    Retorna: Alert de confirmación de baja
 
      ********************************************************************************** */
 
@@ -162,12 +164,23 @@ class ArticulosController extends Controller
 
     $infoArticulo = articulos::where('numeroinv', $request->numInv)->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
 
-        
-
+        articulos::where('numeroinv', $request->numInv)->update([
+                'concilFelix'    => 1,
+                'nombrearea' => 'BODEGA',
+                'idarea'   => 15,
+                ]);
         
         return response()->json($infoArticulo);
     }
 
+
+     /* **********************************************************************************
+
+    Funcionalidad: Vista de articulos en bodega.
+    Parámetros: /
+    Retorna: Una vista con una tabla con los bienes que se encuentran en bodega, Bajas.blade.php
+
+     ********************************************************************************** */
 
     public function bodega()
     {
@@ -177,6 +190,63 @@ class ArticulosController extends Controller
         $articulos = articulos::where('nombrearea', 'BODEGA')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
 
         return view('catalogos.Bodega', compact('usuario', 'partidas','articulos'));
+    }
+
+
+
+    /* **********************************************************************************
+
+    Funcionalidad: Busca los articulos para baja definitiva partiendo de los articulos que se encuentran en bodega.
+    Parámetros: Recibe el numero de inventario articulo ingresado en el cuadro de búsqueda
+    Retorna: El número de total de articulos que encontró con el parámetro y un arreglo con las caractertísticas del
+            artículo.
+
+     ********************************************************************************** */
+
+
+    public function buscaArt(Request $request)
+    {
+
+        $numeroinv = $request->numInv;
+
+        $usuario  = auth()->user();
+
+        $articulo = articulos::where('numeroinv', $numeroinv)->where('nombrearea', 'BODEGA')->select('concepto','factura','fechacomp','importe')->get();
+        $totalArt = count($articulo);
+
+        return response()->json($articulo);
+    }
+
+
+
+    public function bajasDefinitivas(Request $request)
+    {
+
+        $numeroinv = $request->numInv;
+
+        $usuario  = auth()->user();
+
+        $articulo = articulos::where('numeroinv', $numeroinv)->where('nombrearea', 'BODEGA')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
+        $totalArt = count($articulo);
+
+        return view('catalogos.bajasDefinitivas', compact('usuario','articulo'));
+
+    }
+
+    public function articulosBajaDefinitiva(Request $request)
+    {
+
+        $articulosBDef = $request->arrArticulos;
+
+
+     
+        //$numeroinv = $request->numInv;
+        //$usuario  = auth()->user();
+        //$articulo = articulos::where('numeroinv', $numeroinv)->where('nombrearea', 'BODEGA')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
+        //$totalArt = count($articulo);
+
+        return response()->json($request);
+
     }
 
 
