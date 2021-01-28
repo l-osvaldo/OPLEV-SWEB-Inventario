@@ -165,8 +165,9 @@ class ArticulosController extends Controller
     $infoArticulo = articulos::where('numeroinv', $request->numInv)->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
 
         articulos::where('numeroinv', $request->numInv)->update([
-                'concilFelix'    => 1,
+                    'concilFelix'    => 1,
                 'nombrearea' => 'BODEGA',
+                'nombreemple' => 'BODEGA',
                 'idarea'   => 15,
                 ]);
         
@@ -229,26 +230,89 @@ class ArticulosController extends Controller
         $articulo = articulos::where('numeroinv', $numeroinv)->where('nombrearea', 'BODEGA')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
         $totalArt = count($articulo);
 
-        return view('catalogos.bajasDefinitivas', compact('usuario','articulo'));
+        $folioMov = DB::table('mov_bajas_definitivas')->select('movimiento')->orderBy('movimiento','desc')->first();
+        $folio =  str_pad($folioMov->movimiento+1, 5, "0", STR_PAD_LEFT);
+        return view('catalogos.bajasDefinitivas', compact('usuario','articulo','folio'));
 
     }
 
     public function articulosBajaDefinitiva(Request $request)
     {
 
-        $articulosBDef = $request->arrArticulos;
+        $usuario = auth()->user();
 
+         $usuario->id;
+         
+         $folioBaja = DB::table('mov_bajas_definitivas')->count();
+         $folio = $folioBaja+1;
+         //$folioComp = str_pad($folio, 5, "0", STR_PAD_LEFT);
 
-     
-        //$numeroinv = $request->numInv;
-        //$usuario  = auth()->user();
-        //$articulo = articulos::where('numeroinv', $numeroinv)->where('nombrearea', 'BODEGA')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
-        //$totalArt = count($articulo);
+        $arts = [];
 
-        return response()->json($request);
+        $totalArts= count($request->arrArticulos);
+        
+
+        for ($i = 0; $i <= ($totalArts-1); $i++){ 
+            
+            //$articulosBDef[$i] 
+            $artMov = articulos::where('numeroinv', $request->arrArticulos[$i] )->where('nombrearea', 'BODEGA')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
+
+            //array_push($arts,[$artMov->numeroinv,$artMov->partida]);
+            array_push($arts,[$artMov[0]->partida]);
+
+            DB::table('mov_bajas_definitivas')->insert(
+            [
+                'movimiento'=>$folio,
+                'usuarioBaja'=>$usuario->id,
+                'fechaBaja'=> date('d-m-Y H:i:s'),
+                    'concilFelix'=>1,
+                'iev'=>$artMov[0]->iev,
+                'partida'=>$artMov[0]->partida,
+                'descpartida'=>$artMov[0]->descpartida,
+                'linea'=>$artMov[0]->linea,
+                'desclinea'=>$artMov[0]->desclinea,
+                'sublinea'=>$artMov[0]->sublinea,
+                'descsublinea'=>$artMov[0]->descsublinea,
+                'consecutivo'=>$artMov[0]->consecutivo,
+                'numeroinv'=>$artMov[0]->numeroinv,
+                'concepto'=>$artMov[0]->concepto,
+                'marca'=>$artMov[0]->marca,
+                'importe'=>$artMov[0]->importe,
+                'colores'=>$artMov[0]->colores,
+                'fechacomp'=>$artMov[0]->fechacomp,
+                'idarea'=>$artMov[0]->idarea,
+                'nombrearea'=>$artMov[0]->nombrearea,
+                'numemple'=>$artMov[0]->numemple,
+                'nombreemple'=>$artMov[0]->nombreemple,
+                'numserie'=>$artMov[0]->numserie,
+                'medidas'=>$artMov[0]->medidas,
+                'modelo'=>$artMov[0]->modelo,
+                'material'=>$artMov[0]->material,
+                'clvestado'=>$artMov[0]->clvestado,
+                'estado'=>$artMov[0]->estado,
+                'factura'=>$artMov[0]->factura,
+                'idclasi'=>$artMov[0]->idclasi,
+            ]
+            );
+
+            //$importMov = DB::table('mov_bajas_definitivas')->where('movimiento', $folioComp)->select('importe')->get();
+            //$importeMovimiento += $importMov;
+            DB::table('articulos')->where('numeroinv', $request->arrArticulos[$i])->delete();          
+
+        }
+        return response()->json($arts);
 
     }
 
+
+    public function consultaBajasDefinitivas()
+    {
+        $usuario = auth()->user();
+        $articulos = DB::table('mov_bajas_definitivas')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi','movimiento','fechaBaja')->get();
+   
+        
+        return view('catalogos.consultaBajasDefinitivas', compact('usuario','articulos'));
+    }
 
 
     // ************ vista previa de reportes ************

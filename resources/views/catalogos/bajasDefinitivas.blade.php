@@ -15,7 +15,7 @@
         <i class="fa fa-plus"></i> 
         Alta del bien        
     </a!-->
-    <label style="width: 100%;">No. De Movimiento: 1</label>
+    <label style="width: 100%;">No. De Movimiento: {{$folio}}</label>
   </div>
 </div>
 

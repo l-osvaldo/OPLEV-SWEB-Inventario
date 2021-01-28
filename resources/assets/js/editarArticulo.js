@@ -371,65 +371,77 @@ function confirmBajaArt(){
 
 function buscaArt(){
 	var numInv = document.getElementById('numeroinvArt').value;
-	
+
+	var arrArticulos = [];
+
 	var ievopl = numInv.split('-');
-	//alert(ievopl[0]);
+	var idArts = [];
 	
-	//Validación de que no pongan el mismo número de articulo en inventario
-	
-	
-	if (ievopl[0] == 'IEV' || ievopl[0] == 'iev' || ievopl[0] == 'OPLEV' || ievopl[0] == 'oplev') {
-		
-		$.ajax({
-          type:'POST', 
-          url:'./buscaArt',
-          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-          data:{numInv:numInv},
-         success:function(data){
-            //document.getElementById('loader').classList.add('o-hidden-loader');
-            console.log(data.length );
+	var importArts = document.getElementsByClassName('artIdInvt');
 
-            if (data.length >= 1) {
-            	//Llamar modal con los datos
+	for (var i = 0; i < importArts.length; i++) {
+           importArts[i].textContent;
+           idArts.push(importArts[i].textContent);
+           
+        }
+    
+    var numArt = idArts.includes(numInv);
+	console.log(numArt);
 
-            	$("#agregaArt").modal()
+	if (numArt == false) {
+		if (ievopl[0] == 'IEV' || ievopl[0] == 'iev' || ievopl[0] == 'OPLEV' || ievopl[0] == 'oplev') {
+			$.ajax({
+	        	type:'POST', 
+	        	url:'./buscaArt',
+	        	headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+	        	data:{numInv:numInv},
+	        	success:function(data){
+	            //console.log(data.length );
+	            if (data.length >= 1) {
+	            	
+	            	$("#agregaArt").modal()
 
+	            	document.getElementById('numInvBdef').innerHTML= numInv;
+	            	document.getElementById('concepBdef').innerHTML=data[0].concepto;
+	            	document.getElementById('facturaBdef').innerHTML=data[0].factura;
+	            	document.getElementById('fechaCBdef').innerHTML=data[0].fechacomp;
+	            	document.getElementById('importeBdef').innerHTML='$ '+data[0].importe;
 
-            	document.getElementById('numInvBdef').innerHTML= numInv;
-            	document.getElementById('concepBdef').innerHTML=data[0].concepto;
-            	document.getElementById('facturaBdef').innerHTML=data[0].factura;
-            	document.getElementById('fechaCBdef').innerHTML=data[0].fechacomp;
-            	document.getElementById('importeBdef').innerHTML='$ '+data[0].importe;
+	            }else{
+		            swal({
+			            position: 'center',
+			            type:'error',
+			            title: 'El artículo ingresado no se encuentra en la bodea',
+			            showConfirmButton: false,
+			            timer: 3000
+		            });
+	            }
+	            //location.reload();
+	           },
+	           error: function (xhr, ajaxOptions, thrownError) {
+	            console.log('err')
+	           }
+	        });
 
-            }else{
-	            swal({
-		            position: 'center',
-		            type:'error',
-		            title: 'El artículo ingresado no se encuentra en la bodea' ,
-		            showConfirmButton: false,
-		            timer: 3000
+		}else{
+			swal({
+	              position: 'center',
+	              type:'warning',
+	              title: 'Verifique el número de inventario escrito' ,
+	              showConfirmButton: false,
+	              timer: 3000
 	            });
-            }
-
-
-            //location.reload();
-            
-           },
-           error: function (xhr, ajaxOptions, thrownError) {
-            console.log('err')
-           }
-        });
+		}
 
 	}else{
 		swal({
-              position: 'center',
-              type:'warning',
-              title: 'Verifique el número de inventario escrito' ,
-              showConfirmButton: false,
-              timer: 3000
-            });
+        	position: 'center',
+        	type:'warning',
+        	title: 'Este artículo ya fue ingresado a la lista' ,
+        	showConfirmButton: false,
+        	timer: 3000
+        });
 	}
-
 }
 
 
@@ -443,10 +455,8 @@ function agregaArtBajDef(){
 	var facturaBdef =document.getElementById('facturaBdef').textContent;
 	var fechaCBdef =document.getElementById('fechaCBdef').textContent;
 	var importeBdef =document.getElementById('importeBdef').textContent;
-
 	//alert(numInvBdef+concepBdef+facturaBdef+fechaCBdef+importeBdef);
-
-	var tablaInconsis = document.getElementById('tableBajasDef');
+	var tablaArtBDef = document.getElementById('tableBajasDef');
 
     var datoInconsis = document.createElement('tr');
         datoInconsis.id = numInvBdef;
@@ -473,46 +483,39 @@ function agregaArtBajDef(){
         importBajDef.className = 'importArtInvt';
         datoInconsis.appendChild(importBajDef);
 
-    tablaInconsis.appendChild(datoInconsis);
-
+    tablaArtBDef.appendChild(datoInconsis);
 
     var importArts = document.getElementsByClassName('importArtInvt');
-
-	 var arrImportArticulos = [];
+    //var imptotal = importArts.replace('$','');
+    var total = 0;
 
         for (var i = 0; i < importArts.length; i++) {
            importArts[i].textContent;
-           arrImportArticulos.push(importArts[i].textContent);
-           console.log(importArts[i].textContent);
-           var total = parseInt(importArts[i].textContent);
-           
-           console.log(total);
+           var impTotal = importArts[i].textContent;
+           var importeTotal = impTotal.replace('$','')
+           total += parseInt(importeTotal);
+           //console.log(total);
         }
 
 	$("#agregaArt").modal('hide');
 
 	document.getElementById('importeTotalArts').classList.remove('d-none');
 	document.getElementById('importeTotBajDef').textContent = total;
-
 	//importeTotalArts
-     
 }
 
 
 function enviaArtBajaDefinit(){
 	 var articulosBDef = document.getElementsByClassName('artIdInvt');
-
+	 //var importeTot = document.getElementById('importeTotBajDef').textContent;
 	 var arrArticulos = [];
 
         for (var i = 0; i < articulosBDef.length; i++) {
            articulosBDef[i].textContent;
            arrArticulos.push(articulosBDef[i].textContent);
-           console.log(articulosBDef[i].textContent);
-
+           //console.log(articulosBDef[i].textContent);
         }
-
         console.log(arrArticulos);
-
    
 		$.ajax({
           type:'POST', 
@@ -520,11 +523,8 @@ function enviaArtBajaDefinit(){
           headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
           data:{arrArticulos:arrArticulos},
          success:function(data){
-            //document.getElementById('loader').classList.add('o-hidden-loader');
             console.log(data);
-
             //location.reload();
-            
            },
            error: function (xhr, ajaxOptions, thrownError) {
             console.log('err')
