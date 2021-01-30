@@ -45,7 +45,7 @@
                               <td> {{ $articulo->concepto }} </td>
                               <td> {{ $articulo->factura }} </td>
                               <td> {{ $articulo->fechacomp }} </td>
-                              <td> $ {{ $articulo->importe }} </td>
+                              <td> $ {{ number_format($articulo->importe,2) }} </td>
                             </tr>
                              
                           @endforeach

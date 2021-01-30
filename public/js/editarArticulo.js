@@ -371,9 +371,7 @@ function confirmBajaArt(){
 
 function buscaArt(){
 	var numInv = document.getElementById('numeroinvArt').value;
-
 	var arrArticulos = [];
-
 	var ievopl = numInv.split('-');
 	var idArts = [];
 	
@@ -381,8 +379,7 @@ function buscaArt(){
 
 	for (var i = 0; i < importArts.length; i++) {
            importArts[i].textContent;
-           idArts.push(importArts[i].textContent);
-           
+           idArts.push(importArts[i].textContent); 
         }
     
     var numArt = idArts.includes(numInv);
@@ -399,19 +396,23 @@ function buscaArt(){
 	            //console.log(data.length );
 	            if (data.length >= 1) {
 	            	
+
+					var intImporte = parseFloat(data[0].importe);
+					var formatImporte = new Intl.NumberFormat('es-MX').format(intImporte);
+					//alert(formatImporte);
 	            	$("#agregaArt").modal()
 
 	            	document.getElementById('numInvBdef').innerHTML= numInv;
 	            	document.getElementById('concepBdef').innerHTML=data[0].concepto;
 	            	document.getElementById('facturaBdef').innerHTML=data[0].factura;
 	            	document.getElementById('fechaCBdef').innerHTML=data[0].fechacomp;
-	            	document.getElementById('importeBdef').innerHTML='$ '+data[0].importe;
+	            	document.getElementById('importeBdef').innerHTML='$ '+formatImporte;
 
 	            }else{
 		            swal({
 			            position: 'center',
 			            type:'error',
-			            title: 'El artículo ingresado no se encuentra en la bodea',
+			            title: 'El artículo ingresado no se encuentra en la bodega',
 			            showConfirmButton: false,
 			            timer: 3000
 		            });
@@ -455,35 +456,49 @@ function agregaArtBajDef(){
 	var facturaBdef =document.getElementById('facturaBdef').textContent;
 	var fechaCBdef =document.getElementById('fechaCBdef').textContent;
 	var importeBdef =document.getElementById('importeBdef').textContent;
-	//alert(numInvBdef+concepBdef+facturaBdef+fechaCBdef+importeBdef);
+	
 	var tablaArtBDef = document.getElementById('tableBajasDef');
 
-    var datoInconsis = document.createElement('tr');
-        datoInconsis.id = numInvBdef;
+    var artBajaList = document.createElement('tr');
+        artBajaList.id = numInvBdef;
 
     var numInv = document.createElement('td');
         numInv.textContent = numInvBdef;
         numInv.className = 'artIdInvt';
-        datoInconsis.appendChild(numInv);
+        artBajaList.appendChild(numInv);
 
     var conceptBajaD = document.createElement('td');
         conceptBajaD.textContent = concepBdef;
-        datoInconsis.appendChild(conceptBajaD);
+        artBajaList.appendChild(conceptBajaD);
 
     var factBajDef = document.createElement('td');
         factBajDef.textContent = facturaBdef;
-        datoInconsis.appendChild(factBajDef);
+        artBajaList.appendChild(factBajDef);
 
     var fechCompBDef = document.createElement('td');
         fechCompBDef.textContent = fechaCBdef;
-        datoInconsis.appendChild(fechCompBDef);
+        artBajaList.appendChild(fechCompBDef);
 
     var importBajDef = document.createElement('td');
         importBajDef.textContent = importeBdef;
         importBajDef.className = 'importArtInvt';
-        datoInconsis.appendChild(importBajDef);
+        artBajaList.appendChild(importBajDef);
 
-    tablaArtBDef.appendChild(datoInconsis);
+    var elim = document.createElement('td');    
+    var icon = document.createElement("i");
+        //icon.addEventListener('click', quitaBeneficiarioFall, false);
+        icon.addEventListener('click', quitaArticulo, false);
+        icon.className='fa fa-times-circle';
+        icon.style.cursor='pointer';
+        icon.style.color='#dc3545';
+        icon.style.fontSize='24px';
+        elim.style.textAlign = 'center';
+        elim.appendChild(icon);
+        artBajaList.appendChild(elim);
+        //icon.style.float='right';
+        //icon.setAttribute('data-idRegistro',datoInconsis.id);
+
+    tablaArtBDef.appendChild(artBajaList);
 
     var importArts = document.getElementsByClassName('importArtInvt');
     //var imptotal = importArts.replace('$','');
@@ -493,16 +508,47 @@ function agregaArtBajDef(){
            importArts[i].textContent;
            var impTotal = importArts[i].textContent;
            var importeTotal = impTotal.replace('$','')
-           total += parseInt(importeTotal);
+           var formImporte = importeTotal.replace(',','');
+           total += parseFloat(formImporte);
            //console.log(total);
         }
 
 	$("#agregaArt").modal('hide');
 
 	document.getElementById('importeTotalArts').classList.remove('d-none');
-	document.getElementById('importeTotBajDef').textContent = total;
+	document.getElementById('importeTotBajDef').textContent = new Intl.NumberFormat('es-MX').format(total);
+;
 	//importeTotalArts
 }
+
+
+function quitaArticulo(){
+	swal({
+      title: "Éste artículo se eliminará de la lista de baja definitiva",
+      text: "¿Desea continuar?",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#E71096",
+      confirmButtonText: "Sí",
+      closeOnConfirm: false
+  }, function(isConfirm){
+      if (isConfirm) {
+
+      	//OPERACION DE ELIMINAR EL TR Y RECALCULAR EL TOTAL DEL IMPORTE
+        swal({
+        	position: 'center',
+        	type:'success',
+        	title: 'Artículo Eliminado' ,
+        	showConfirmButton: false,
+        	timer: 3000
+        });
+      }else {
+        swal("Cancelado!", "El artículo no se eliminó de la lista");
+      }
+      
+  });
+}
+
 
 
 function enviaArtBajaDefinit(){
@@ -530,9 +576,166 @@ function enviaArtBajaDefinit(){
             console.log('err')
            }
         });
+}
 
+
+
+ /* **********************************************************************************
+    Funcionalidad: Función para buscar un artículo y llenar la tabla de articulos de baja
+    Parámetros: No recibe parámetros 
+    Retorna: Confirmación o negación de búsqueda de artículo
+
+********************************************************************************** */
+
+function buscaArtEco(){
+	var numInv = document.getElementById('numeroinvArt').value;
+	//alert('numInv');
+	var arrArticulos = [];
+
+	var ievopl = numInv.split('-');
+	var idArts = [];
+	
+	var importArts = document.getElementsByClassName('artIdInvt');
+
+	for (var i = 0; i < importArts.length; i++) {
+           importArts[i].textContent;
+           idArts.push(importArts[i].textContent); 
+        }
+    
+    var numArt = idArts.includes(numInv);
+	//alert(numArt);
+	if (numArt == false) {
+		if (ievopl[0] == 'IEV' || ievopl[0] == 'iev' || ievopl[0] == 'ECO') {
+			$.ajax({
+	        	type:'POST', 
+	        	url:'./buscaArtEco',
+	        	headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+	        	data:{numInv:numInv},
+	        	success:function(data){
+	            //console.log(data.length );
+	            if (data.length >= 1) {
+	            	$("#agregaArt").modal()
+	            	document.getElementById('numInvBdef').innerHTML= numInv;
+	            	document.getElementById('concepBdef').innerHTML=data[0].concepto;
+	            	document.getElementById('facturaBdef').innerHTML=data[0].factura;
+	            	document.getElementById('fechaCBdef').innerHTML=data[0].fechacompra;
+	            	document.getElementById('importeBdef').innerHTML='$ '+data[0].importe;
+
+	            }else{
+		            swal({
+			            position: 'center',
+			            type:'error',
+			            title: 'El artículo ingresado no se encuentra en la bodega',
+			            showConfirmButton: false,
+			            timer: 3000
+		            });
+	            }
+	            //location.reload();
+	           },
+	           error: function (xhr, ajaxOptions, thrownError) {
+	            console.log('err')
+	           }
+	        });
+		}else{
+			swal({
+	          position: 'center',
+	          type:'warning',
+	          title: 'Verifique el número de inventario escrito' ,
+	          showConfirmButton: false,
+	          timer: 3000
+	        });
+		}
+	}else{
+		swal({
+        	position: 'center',
+        	type:'warning',
+        	title: 'Este artículo ya fue ingresado a la lista' ,
+        	showConfirmButton: false,
+        	timer: 3000
+        });
+	}
+}
+
+
+ /* **********************************************************************************
+    Funcionalidad: Función para confirmar la baja del artículo y hacer el update en la tabla de articulos
+    Parámetros: No recibe parámetros 
+    Retorna: Confirmación de baja de artículo
+
+********************************************************************************** */
+
+function confirmBajaArtEco(){
+	var numInv = document.getElementById('editarNoInventario').textContent;
+	var area = document.getElementById('editarArea').textContent;
+
+	swal({
+	      title: "Este artículo SERÁ ENVIADO A BODEGA",
+	      text: "¿Desea continuar?",
+	      type: "warning",
+	      showCancelButton: true,
+	      confirmButtonColor: "#E71096",
+	      confirmButtonText: "Sí",
+	      closeOnConfirm: false
+	  }, function(isConfirm){
+	      if (isConfirm) {
+	        
+	        $.ajax({
+	          type:'get',
+	          url:'./bajaArticuloEco',
+	          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+	          data:{numInv:numInv},
+	          success:function(data){
+	            console.log(data);
+	            swal({
+	              position: 'center',
+	              type:'success',
+	              title: 'Este artículo HA SIDO ENVIADO A BODEGA',
+	              showConfirmButton: false,
+	              timer: 1800
+	            })
+	           //location.reload();
+	          },
+	          error: function (xhr, ajaxOptions, thrownError) {
+	              //alert('error');
+	          }
+	        });
+		
+	      }else {
+	        swal("Cancelado!", "El artículo no se dio de baja", "error");
+	      }
+	      
+	  });
 
 }
 
+
+
+
+function enviaArtBajaDefinitEco(){
+	 var articulosBDef = document.getElementsByClassName('artIdInvt');
+	 //var importeTot = document.getElementById('importeTotBajDef').textContent;
+	 var arrArticulos = [];
+
+        for (var i = 0; i < articulosBDef.length; i++) {
+           articulosBDef[i].textContent;
+           arrArticulos.push(articulosBDef[i].textContent);
+           //console.log(articulosBDef[i].textContent);
+        }
+        console.log(arrArticulos);
+   
+		$.ajax({
+          type:'POST', 
+          url:'./articulosBajaDefinitivaEco',
+          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+          data:{arrArticulos:arrArticulos},
+         success:function(data){
+            console.log(data);
+            //location.reload();
+           },
+           error: function (xhr, ajaxOptions, thrownError) {
+            console.log('err')
+           }
+        });
+}
 
 

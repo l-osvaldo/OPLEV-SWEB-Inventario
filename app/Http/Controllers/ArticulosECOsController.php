@@ -226,6 +226,133 @@ class ArticulosECOsController extends Controller
         return redirect()->route('catalogoeco');
     }
 
+
+    //BAJAS ALX
+
+    public function bodegaEco()
+    {
+        $usuario  = auth()->user();
+
+        $articulos = articulosecos::where('nombrearea', 'BODEGA')->select('iev','partida','descripcionpartida','linea','descripcionlinea','sublinea','descripcionsublinea','consecutivo','numeroinventario','concepto','marca','importe','colores','fechacompra','idarea','nombrearea','numeroempleado','nombreempleado','numeroserie','medidas','modelo','material','claveestado','estado','factura')->get();
+
+        return view('catalogos.BodegaEco', compact('usuario','articulos'));
+    }
+
+
+    public function buscaArtEco(Request $request)
+    {
+        $numeroinv = $request->numInv;
+        $usuario  = auth()->user();
+        $articulo = articulosecos::where('numeroinventario', $numeroinv)->where('nombrearea', 'BODEGA')->select('concepto','factura','fechacompra','importe')->get();
+        $totalArt = count($articulo);
+        return response()->json($articulo);
+    }
+
+    public function bajaArticuloEco(Request $request)
+    {
+
+    $infoArticulo = articulosecos::where('numeroinv', $request->numInv)->select('iev','partida','descripcionpartida','linea','descripcionlinea','sublinea','descripcionsublinea','consecutivo','numeroinventario','concepto','marca','importe','colores','fechacompra','idarea','nombrearea','numeroempleado','nombreempleado','numeroserie','medidas','modelo','material','claveestado','estado','factura')->get();
+
+        articulos::where('numeroinv', $request->numInv)->update([
+                    //'concilFelix'    => 1,
+                'nombrearea' => 'BODEGA',
+                'nombreempleado' => 'BODEGA',
+                'idarea'   => 15,
+                ]);
+        
+        return response()->json($infoArticulo);
+    }
+
+
+    public function bajasDefinitivasEco()
+    {
+        $usuario  = auth()->user();
+
+        $articulos = articulosecos::where('nombrearea', 'BODEGA')->select('iev','partida','descripcionpartida','linea','descripcionlinea','sublinea','descripcionsublinea','consecutivo','numeroinventario','concepto','marca','importe','colores','fechacompra','idarea','nombrearea','numeroempleado','nombreempleado','numeroserie','medidas','modelo','material','claveestado','estado','factura')->get();
+
+        return view('catalogos.bajasDefinitivasEco', compact('usuario','articulos'));
+    }
+
+
+
+    public function articulosBajaDefinitivaEco(Request $request)
+    {
+        $usuario = auth()->user();
+        $usuario->id;
+         
+        $folioBaja = DB::table('mov_bajas_definitivas')->count();
+        $folio = $folioBaja+1;
+         //$folioComp = str_pad($folio, 5, "0", STR_PAD_LEFT);
+        $arts = [];
+
+        $totalArts= count($request->arrArticulos);
+        
+        for ($i = 0; $i <= ($totalArts-1); $i++){ 
+            
+            //$articulosBDef[$i] 
+            $artMov = articulosecos::where('numeroinventario', $request->arrArticulos[$i] )->where('nombrearea','BODEGA')->select('iev','partida','descripcionpartida','linea','descripcionlinea','sublinea','descripcionsublinea','consecutivo','numeroinventario','concepto','marca','importe','colores','fechacompra','idarea','nombrearea','numeroempleado','nombreempleado','numeroserie','medidas','modelo','material','claveestado','estado','factura')->get();
+
+            //array_push($arts,[$artMov->numeroinv,$artMov->partida]);
+            array_push($arts,[$artMov[0]->partida]);
+
+            DB::table('mov_bajas_definitivas')->insert(
+            [   
+                'iev'=>$artMov[0]->iev,
+                'movimiento'=>$folio,
+                'usuarioBaja'=>$usuario->id,
+                'fechaBaja'=> date('d-m-Y H:i:s'),
+                'partida'=>$artMov[0]->partida,
+                'descpartida'=>$artMov[0]->descripcionpartida,
+                'linea'=>$artMov[0]->linea,
+                'desclinea'=>$artMov[0]->descripcionlinea,
+                'sublinea'=>$artMov[0]->sublinea,
+                'descsublinea'=>$artMov[0]->descripcionsublinea,
+                'consecutivo'=>$artMov[0]->consecutivo,
+                'numeroinv'=>$artMov[0]->numeroinventario,
+                'concepto'=>$artMov[0]->concepto,
+                'marca'=>$artMov[0]->marca,
+                'importe'=>$artMov[0]->importe,
+                'colores'=>$artMov[0]->colores,
+                'fechacomp'=>$artMov[0]->fechacompra,
+                'idarea'=>$artMov[0]->idarea,
+                'nombrearea'=>$artMov[0]->nombrearea,
+                'numemple'=>$artMov[0]->numeroempleado,
+                'nombreemple'=>$artMov[0]->nombreempleado,
+                'numserie'=>$artMov[0]->numeroserie,
+                'medidas'=>$artMov[0]->medidas,
+                'modelo'=>$artMov[0]->modelo,
+                'material'=>$artMov[0]->material,
+                'clvestado'=>$artMov[0]->claveestado,
+                'estado'=>$artMov[0]->estado,
+                'factura'=>$artMov[0]->factura,
+                    'bienEco' => 1,
+            ]
+            );
+            //$importMov = DB::table('mov_bajas_definitivas')->where('movimiento', $folioComp)->select('importe')->get();
+            //$importeMovimiento += $importMov;
+            //DB::table('articulosecos')->where('numeroinventario', $request->arrArticulos[$i])->delete();
+        }
+        return response()->json($arts);
+
+    }
+
+
+
+
+    public function consultaBajasDefinitivasEco()
+    {
+       $usuario = auth()->user();
+        $articulos = DB::table('mov_bajas_definitivas')
+                //-> where('bienEco',1)
+                -> select('movimiento',DB::raw('COUNT(movimiento) as total'), DB::raw('SUM(importe) as articulo'), DB::raw('MAX(fechaBaja) as fecha'))
+                ->groupBy('movimiento')
+                ->get();
+        
+        return view('catalogos.consultaBajasDefinitivasEco', compact('usuario','articulos'));
+    }
+
+    
+
     // ************ vista de reportes ************
 
     /* **********************************************************************************

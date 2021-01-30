@@ -190,6 +190,8 @@ class ArticulosController extends Controller
 
         $articulos = articulos::where('nombrearea', 'BODEGA')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
 
+        //$artImport = $articulos[0]->importe;
+        //dd(strlen($artImport) ,$artImport);
         return view('catalogos.Bodega', compact('usuario', 'partidas','articulos'));
     }
 
@@ -209,9 +211,7 @@ class ArticulosController extends Controller
     {
 
         $numeroinv = $request->numInv;
-
         $usuario  = auth()->user();
-
         $articulo = articulos::where('numeroinv', $numeroinv)->where('nombrearea', 'BODEGA')->select('concepto','factura','fechacomp','importe')->get();
         $totalArt = count($articulo);
 
@@ -222,7 +222,6 @@ class ArticulosController extends Controller
 
     public function bajasDefinitivas(Request $request)
     {
-
         $numeroinv = $request->numInv;
 
         $usuario  = auth()->user();
@@ -238,20 +237,16 @@ class ArticulosController extends Controller
 
     public function articulosBajaDefinitiva(Request $request)
     {
-
         $usuario = auth()->user();
-
-         $usuario->id;
+        $usuario->id;
          
-         $folioBaja = DB::table('mov_bajas_definitivas')->count();
-         $folio = $folioBaja+1;
+        $folioBaja = DB::table('mov_bajas_definitivas')->count();
+        $folio = $folioBaja+1;
          //$folioComp = str_pad($folio, 5, "0", STR_PAD_LEFT);
-
         $arts = [];
 
         $totalArts= count($request->arrArticulos);
         
-
         for ($i = 0; $i <= ($totalArts-1); $i++){ 
             
             //$articulosBDef[$i] 
@@ -308,13 +303,36 @@ class ArticulosController extends Controller
     public function consultaBajasDefinitivas()
     {
         $usuario = auth()->user();
-        $articulos = DB::table('mov_bajas_definitivas')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi','movimiento','fechaBaja')->get();
-   
+
+        $articulos = DB::table('mov_bajas_definitivas')
+                -> select('movimiento',DB::raw('COUNT(movimiento) as total'), DB::raw('SUM(importe) as articulo'), DB::raw('MAX(fechaBaja) as fecha'))
+                ->groupBy('movimiento')
+                ->get();
         
         return view('catalogos.consultaBajasDefinitivas', compact('usuario','articulos'));
     }
 
 
+
+    public function bajasDefinitivasPDF(Request $request){
+        $folio = $request->mov;
+        //dd($folio);
+        $usuario = auth()->user();
+
+        $articulos = DB::table('mov_bajas_definitivas')->where('movimiento', $folio)->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi','movimiento','fechaBaja')->get();
+        $numArt = count($articulos);
+
+        $impTotal = DB::table('mov_bajas_definitivas')->where('movimiento',$folio)
+                -> select('movimiento',DB::raw('SUM(importe) as imptotal'))
+                ->groupBy('movimiento')
+                ->get();
+
+        $fechaImpres = date('d/m/Y H:i:s');
+        
+        $pdf = PDF::loadView('catalogos.bajasDefinitivasPDF', compact('usuario','folio','articulos','numArt','impTotal','fechaImpres'))->setPaper('letter', 'landscape');
+        return $pdf->inline('MovimientoBajaDefinitiva-'.'.pdf');
+
+    }
     // ************ vista previa de reportes ************
 
     /* **********************************************************************************

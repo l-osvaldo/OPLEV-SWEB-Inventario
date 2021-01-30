@@ -246,9 +246,20 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-12">
+     
                       <div class="form-group">
-                        <input type="hidden" name="numeroInventarioECO" id="numeroInventarioECO" value="">
-                        <label>Número de inventario: <strong id="editarNoInventarioECO" style="background-color: #F694D0"></strong> </label> 
+                        <div class="row">
+                          <div class="col-md-6" style="text-align: left;">
+                            <input type="hidden" name="numeroInventarioECO" id="numeroInventarioECO" value="">
+                            <label>Número de inventario: <strong id="editarNoInventarioECO" style="background-color: #F694D0"></strong> </label> 
+                          </div>
+                          <div class="col-md-6" style="text-align: right;" id="btnBajaArt">
+                            <div style="background-color: #E71096" class="btn btn-secondary" type="button"  onclick="confirmBajaArtEco()">
+                                <i class="fa fa-minus"></i> 
+                                Dar de Baja       
+                            </div>
+                          </div>
+                        </div>
                         <hr>
                         <br>
                         <table width="100%" class="table">

@@ -187,7 +187,18 @@ Route::group(['middleware' => 'disablepreventback'], function () {
 
     Route::get('/catalogos/consultaBajasDefinitivas', 'ArticulosController@consultaBajasDefinitivas')->name('consultaBajasDefinitivas');
 
+    Route::get('/catalogos/bajasDefinitivasPDF/{mov}', 'ArticulosController@bajasDefinitivasPDF')->name('bajasDefinitivasPDF');
 
+
+    //Bajas ECO
+    
+    Route::get('/catalogos/bajasDefinitivasEco', 'ArticulosECOsController@bajasDefinitivasEco')->name('bajasDefinitivasEco');
+    Route::get('/catalogos/bodegaEco', 'ArticulosECOsController@bodegaEco')->name('bodegaEco');
+    Route::post('/catalogos/buscaArtEco', 'ArticulosECOsController@buscaArtEco')->name('buscaArtEco');
+
+    Route::post('/catalogos/articulosBajaDefinitivaEco', 'ArticulosECOsController@articulosBajaDefinitivaEco')->name('articulosBajaDefinitivaEco');
+
+    Route::get('/catalogos/consultaBajasDefinitivasEco', 'ArticulosECOsController@consultaBajasDefinitivasEco')->name('consultaBajasDefinitivasEco');
 
     /* ****************************************************************************************************************** */
 

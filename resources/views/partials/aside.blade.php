@@ -93,20 +93,20 @@
             </li>
             <li class="nav-item" style="margin-left: 25px;">
               <a href="{{ route('bodega') }}" class="{!! Request::is('catalogos/bodega','catalogos/bajasDefinitivas') ? 'nav-link active' : 'nav-link' !!}" style="font-size: .95em;">
-                <i class="fa fa-check-circle"></i>
+                <i class="fa fa-archive"></i>
                 <p style="margin-left: 10px;">Bodega</p>
               </a>
             </li>
             <li class="nav-item" style="margin-left: 25px;">
               <a href="{{ route('consultaBajasDefinitivas') }}" class="{!! Request::is('catalogos/consultaBajasDefinitivas') ? 'nav-link active' : 'nav-link' !!}" style="font-size: .95em;">
-                <i class="fa fa-check-circle"></i>
+                <i class="fa fa-level-down"></i>
                 <p style="margin-left: 10px;">Bajas Definitivas</p>
               </a>
             </li>
           </ul>
         </li>
-        <li id="eco" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bieneseco','catalogos/reportesECO') ? 'menu-open' : '' !!}">
-          <a class="{!! Request::is('catalogos/bieneseco','catalogos/reportesECO') ? 'nav-link active' : 'nav-link' !!}">
+        <li id="eco" class="nav-item d-none d-sm-inline-block {!! Request::is('catalogos/bieneseco','catalogos/reportesECO','catalogos/bajasDefinitivasEco','catalogos/bodegaEco','catalogos/consultaBajasDefinitivasEco') ? 'menu-open' : '' !!}">
+        <a class="{!! Request::is('catalogos/bieneseco','catalogos/reportesECO','catalogos/bajasDefinitivasEco','catalogos/consultaBajasDefinitivasEco') ? 'nav-link active' : 'nav-link' !!}">
             <i class="nav-icon fa">E</i>
             <p>
               <b>BIENES ECO</b>
@@ -124,6 +124,18 @@
               <a href="{{ route('reportesECO') }}" class="{!! Request::is('catalogos/reportesECO') ? 'nav-link active' : 'nav-link' !!}" style="font-size: .95em;">
                 <i class="fa fa-file-pdf-o"></i>
                 <p style="margin-left: 10px;">Reportes</p>
+              </a>
+            </li>
+            <li class="nav-item" style="margin-left: 25px;">
+              <a href="{{ route('bodegaEco') }}" class="{!! Request::is('catalogos/bodegaEco','catalogos/bajasDefinitivasEco') ? 'nav-link active' : 'nav-link' !!}" style="font-size: .95em;">
+                <i class="fa fa-archive"></i>
+                <p style="margin-left: 10px;">Bodega</p>
+              </a>
+            </li>
+            <li class="nav-item" style="margin-left: 25px;">
+              <a href="{{ route('consultaBajasDefinitivasEco') }}" class="{!! Request::is('catalogos/consultaBajasDefinitivasEco') ? 'nav-link active' : 'nav-link' !!}" style="font-size: .95em;">
+                <i class="fa fa-level-down"></i>
+                <p style="margin-left: 10px;">Bajas Definitivas</p>
               </a>
             </li>
           </ul>
