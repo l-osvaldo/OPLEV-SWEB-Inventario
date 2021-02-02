@@ -8,7 +8,19 @@
 <!-- /.navbar -->
 
 @include('sweet::alert')
-
+<div id="loader" class="o-hidden-loader d-none">
+        <div class="cubes">
+            <div class="sk-cube sk-cube1"></div>
+            <div class="sk-cube sk-cube2"></div>
+            <div class="sk-cube sk-cube3"></div>
+            <div class="sk-cube sk-cube4"></div>
+            <div class="sk-cube sk-cube5"></div>
+            <div class="sk-cube sk-cube6"></div>
+            <div class="sk-cube sk-cube7"></div>
+            <div class="sk-cube sk-cube8"></div>
+            <div class="sk-cube sk-cube9"></div>
+        </div>
+    </div>
 <div class="card">
   <div class="card-body" style="text-align: right;">
     <!--a href="" style="background-color: #E71096" class="btn btn-secondary" data-toggle="modal" data-target="#altasModal">
@@ -59,7 +71,7 @@
 
                 <div class="row">
                   <div id="importeTotalArts" class="col-md-12 d-none" style="text-align: right;">
-                        <label style="width: 100%;">Importe total: $ <span id="importeTotBajDef"></span></label>
+                        <label style="width: 100%;">Importe total: <span id="importeTotBajDef"></span></label>
                   </button>
                   </div>
                 </div>

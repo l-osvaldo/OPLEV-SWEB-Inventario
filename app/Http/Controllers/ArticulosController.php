@@ -146,9 +146,7 @@ class ArticulosController extends Controller
 
 
     /// BAJAS [ALX]
-
     // ************ vista de bajas ************
-
     /* **********************************************************************************
 
     Funcionalidad: Confirma la baja de un artículo. Cambia de área a un artículo y lo pasa
@@ -186,13 +184,12 @@ class ArticulosController extends Controller
     public function bodega()
     {
         $usuario  = auth()->user();
-        $partidas = partidas::select('partida', 'descpartida')->whereNotNull(['porcentajeDepreciacion', 'aniosvida'])->get();
-
+        //$partidas = partidas::select('partida', 'descpartida')->whereNotNull(['porcentajeDepreciacion', 'aniosvida'])->get();
         $articulos = articulos::where('nombrearea', 'BODEGA')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
 
         //$artImport = $articulos[0]->importe;
         //dd(strlen($artImport) ,$artImport);
-        return view('catalogos.Bodega', compact('usuario', 'partidas','articulos'));
+        return view('catalogos.Bodega', compact('usuario','articulos'));
     }
 
 
@@ -205,33 +202,24 @@ class ArticulosController extends Controller
             artículo.
 
      ********************************************************************************** */
-
-
     public function buscaArt(Request $request)
     {
-
         $numeroinv = $request->numInv;
         $usuario  = auth()->user();
         $articulo = articulos::where('numeroinv', $numeroinv)->where('nombrearea', 'BODEGA')->select('concepto','factura','fechacomp','importe')->get();
         $totalArt = count($articulo);
-
         return response()->json($articulo);
     }
 
 
 
-    public function bajasDefinitivas(Request $request)
+    public function bajasDefinitivas()
     {
-        $numeroinv = $request->numInv;
-
         $usuario  = auth()->user();
-
-        $articulo = articulos::where('numeroinv', $numeroinv)->where('nombrearea', 'BODEGA')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
-        $totalArt = count($articulo);
-
-        $folioMov = DB::table('mov_bajas_definitivas')->select('movimiento')->orderBy('movimiento','desc')->first();
-        $folio =  str_pad($folioMov->movimiento+1, 5, "0", STR_PAD_LEFT);
-        return view('catalogos.bajasDefinitivas', compact('usuario','articulo','folio'));
+        //$folioMov = DB::table('mov_bajas_definitivas')->select('movimiento')->orderBy('movimiento','desc')->first();
+        $folioMov = DB::table('mov_bajas_definitivas')->select('movimiento')->get();
+        $folio =  str_pad(count($folioMov)+1, 5, "0", STR_PAD_LEFT);
+        return view('catalogos.bajasDefinitivas', compact('usuario','folio'));
 
     }
 
@@ -244,14 +232,11 @@ class ArticulosController extends Controller
         $folio = $folioBaja+1;
          //$folioComp = str_pad($folio, 5, "0", STR_PAD_LEFT);
         $arts = [];
-
         $totalArts= count($request->arrArticulos);
         
         for ($i = 0; $i <= ($totalArts-1); $i++){ 
-            
             //$articulosBDef[$i] 
             $artMov = articulos::where('numeroinv', $request->arrArticulos[$i] )->where('nombrearea', 'BODEGA')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
-
             //array_push($arts,[$artMov->numeroinv,$artMov->partida]);
             array_push($arts,[$artMov[0]->partida]);
 
@@ -292,7 +277,9 @@ class ArticulosController extends Controller
 
             //$importMov = DB::table('mov_bajas_definitivas')->where('movimiento', $folioComp)->select('importe')->get();
             //$importeMovimiento += $importMov;
-            DB::table('articulos')->where('numeroinv', $request->arrArticulos[$i])->delete();          
+            
+            //DB::table('articulos')->where('numeroinv', $request->arrArticulos[$i])->delete();
+            Alert::success('Baja Definitva Confirmada', 'Artículo Eliminado')->autoclose(2500);         
 
         }
         return response()->json($arts);

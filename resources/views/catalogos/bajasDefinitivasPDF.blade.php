@@ -56,7 +56,7 @@
     @while ($contador < $numArt)
       <table>
         <tr>          
-          <td style="width: 120px;vertical-align: text-top"><img class="logo" src="{{ public_path('images/logoople.png') }}" alt=""></td>
+          <td style="width: 120px;vertical-align: text-top;"><img class="logo" src="{{ public_path('images/logoople.png') }}" alt=""></td>
           <td style="width: calc(100% - 240px); text-align: center!important;">
               <h2>
                 <small>
@@ -67,11 +67,19 @@
                     <br>
                     DEPARTAMENTO DE RECURSOS MATERIALES Y SERVICIOS GENERALES
                   </small>
+                  <small>
+                    <br>
+                    BAJA DEFINITIVA DE ARTICULOS
+                  </small>
+                  <small>
+                    <br>
+                    Movimiento: {{$folio}}
+                  </small>
                 </small>
               </h2>   
           </td>
         </tr>
-        <tr>
+        <!--tr>
           <td colspan="2" align="center">
             <label><strong>BAJA DEFINITIVA DE ARTICULOS</strong></label>
           </td>
@@ -80,7 +88,7 @@
           <td colspan="2" align="center">
             <label><strong>Movimiento: {{$folio}}</strong></label>
           </td>
-        </tr>
+        </tr!-->
       </table>
       <table>
         <tbody>      

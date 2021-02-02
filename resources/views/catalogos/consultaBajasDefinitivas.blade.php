@@ -32,9 +32,9 @@
                         <thead>
                             <tr>
                                 <th style="text-align: center">Movimiento</th>
-                                <th style="text-align: center">Artículos</th>
+                                <th style="text-align: center">Artículos Del Movimiento</th>
                                 <th style="text-align: center">Fecha y Hora de Baja</th>
-                                <th style="text-align: center">Importe Total</th>
+                                <th style="text-align: center">Importe Total Del Movimiento</th>
                                 <th style="text-align: center">Detalle</th>
                             </tr>
                         </thead>

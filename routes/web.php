@@ -200,6 +200,8 @@ Route::group(['middleware' => 'disablepreventback'], function () {
 
     Route::get('/catalogos/consultaBajasDefinitivasEco', 'ArticulosECOsController@consultaBajasDefinitivasEco')->name('consultaBajasDefinitivasEco');
 
+    Route::get('/catalogos/bajasDefinitivasEcoPDF/{mov}', 'ArticulosECOsController@bajasDefinitivasEcoPDF')->name('bajasDefinitivasEcoPDF');
+
     /* ****************************************************************************************************************** */
 
     // Depreciación

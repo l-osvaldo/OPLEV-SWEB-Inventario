@@ -32,20 +32,20 @@
                         <thead>
                             <tr>
                                 <th style="text-align: center">Movimiento</th>
-                                <th style="text-align: center">Artículos</th>
+                                <th style="text-align: center">Artículos Del Movimiento</th>
                                 <th style="text-align: center">Fecha y Hora de Baja</th>
-                                <th style="text-align: center">Importe Total</th>
+                                <th style="text-align: center">Importe Total Del Movimiento</th>
                                 <th style="text-align: center">Detalle</th>
                             </tr>
                         </thead>
                         <tbody>
                           @foreach ($articulos as $articulo)
                             <tr data-toggle="tooltip" data-placement="top" title="Click para ver toda la información del artículo: {{ $articulo->movimiento }}, Número de inventario: {{ $articulo->movimiento }} ">
-                              <td style="text-align: center" onclick="abrirModalEditar('{{ $articulo->movimiento }}');"> {{ $articulo->movimiento }} </td>
+                              <td style="text-align: center" onclick="abrirModalEditar('{{ $articulo->movimiento }}');"> 000{{ $articulo->movimiento }} </td>
                               <td style="text-align: center" onclick="abrirModalEditar('{{ $articulo->movimiento }}');"> {{ $articulo->total }} </td>
                               <td style="text-align: center" onclick="abrirModalEditar('{{ $articulo->movimiento }}');"> {{ $articulo->fecha }}</td>
                               <td style="text-align: center" onclick="abrirModalEditar('{{ $articulo->movimiento }}');"> $ {{ number_format($articulo->articulo,2) }} </td>
-                              <td style="text-align: center"><a href="{{ route('bajasDefinitivasPDF', $articulo->movimiento) }} " class="btn btn-secondary" style="background-color: #E71096; border-color: #E71096" target="_blank"><i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i></a></td>
+                              <td style="text-align: center"><a href="{{ route('bajasDefinitivasEcoPDF', $articulo->movimiento) }} " class="btn btn-secondary" style="background-color: #E71096; border-color: #E71096" target="_blank"><i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i></a></td>
                             </tr>
                              
                           @endforeach

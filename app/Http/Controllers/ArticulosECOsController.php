@@ -229,25 +229,6 @@ class ArticulosECOsController extends Controller
 
     //BAJAS ALX
 
-    public function bodegaEco()
-    {
-        $usuario  = auth()->user();
-
-        $articulos = articulosecos::where('nombrearea', 'BODEGA')->select('iev','partida','descripcionpartida','linea','descripcionlinea','sublinea','descripcionsublinea','consecutivo','numeroinventario','concepto','marca','importe','colores','fechacompra','idarea','nombrearea','numeroempleado','nombreempleado','numeroserie','medidas','modelo','material','claveestado','estado','factura')->get();
-
-        return view('catalogos.BodegaEco', compact('usuario','articulos'));
-    }
-
-
-    public function buscaArtEco(Request $request)
-    {
-        $numeroinv = $request->numInv;
-        $usuario  = auth()->user();
-        $articulo = articulosecos::where('numeroinventario', $numeroinv)->where('nombrearea', 'BODEGA')->select('concepto','factura','fechacompra','importe')->get();
-        $totalArt = count($articulo);
-        return response()->json($articulo);
-    }
-
     public function bajaArticuloEco(Request $request)
     {
 
@@ -264,13 +245,30 @@ class ArticulosECOsController extends Controller
     }
 
 
+    public function bodegaEco()
+    {
+        $usuario  = auth()->user();
+        $articulos = articulosecos::where('nombrearea', 'BODEGA')->select('iev','partida','descripcionpartida','linea','descripcionlinea','sublinea','descripcionsublinea','consecutivo','numeroinventario','concepto','marca','importe','colores','fechacompra','idarea','nombrearea','numeroempleado','nombreempleado','numeroserie','medidas','modelo','material','claveestado','estado','factura')->get();
+
+        return view('catalogos.BodegaEco', compact('usuario','articulos'));
+    }
+
+
+    public function buscaArtEco(Request $request)
+    {
+        $numeroinv = $request->numInv;
+        $usuario  = auth()->user();
+        $articulo = articulosecos::where('numeroinventario', $numeroinv)->where('nombrearea', 'BODEGA')->select('concepto','factura','fechacompra','importe')->get();
+        $totalArt = count($articulo);
+        return response()->json($articulo);
+    }
+
     public function bajasDefinitivasEco()
     {
         $usuario  = auth()->user();
-
-        $articulos = articulosecos::where('nombrearea', 'BODEGA')->select('iev','partida','descripcionpartida','linea','descripcionlinea','sublinea','descripcionsublinea','consecutivo','numeroinventario','concepto','marca','importe','colores','fechacompra','idarea','nombrearea','numeroempleado','nombreempleado','numeroserie','medidas','modelo','material','claveestado','estado','factura')->get();
-
-        return view('catalogos.bajasDefinitivasEco', compact('usuario','articulos'));
+        $folioMov = DB::table('mov_bajas_definitivas')->select('movimiento')->get();
+        $folio =  str_pad(count($folioMov)+1, 5, "0", STR_PAD_LEFT);
+        return view('catalogos.bajasDefinitivasEco', compact('usuario','folio'));
     }
 
 
@@ -330,13 +328,13 @@ class ArticulosECOsController extends Controller
             );
             //$importMov = DB::table('mov_bajas_definitivas')->where('movimiento', $folioComp)->select('importe')->get();
             //$importeMovimiento += $importMov;
+
             //DB::table('articulosecos')->where('numeroinventario', $request->arrArticulos[$i])->delete();
+            Alert::success('Baja Definitva Confirmada', 'Artículo Eliminado')->autoclose(2500);
         }
         return response()->json($arts);
 
     }
-
-
 
 
     public function consultaBajasDefinitivasEco()
@@ -352,6 +350,27 @@ class ArticulosECOsController extends Controller
     }
 
     
+    public function bajasDefinitivasEcoPDF(Request $request){
+        $folio = $request->mov;
+        //dd($folio);
+        $usuario = auth()->user();
+
+        $articulos = DB::table('mov_bajas_definitivas')->where('movimiento', $folio)->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi','movimiento','fechaBaja')->get();
+        $numArt = count($articulos);
+
+        $impTotal = DB::table('mov_bajas_definitivas')->where('movimiento',$folio)
+                -> select('movimiento',DB::raw('SUM(importe) as imptotal'))
+                ->groupBy('movimiento')
+                ->get();
+
+        $fechaImpres = date('d/m/Y H:i:s');
+        
+        $pdf = PDF::loadView('catalogos.bajasDefinitivasPDF', compact('usuario','folio','articulos','numArt','impTotal','fechaImpres'))->setPaper('letter', 'landscape');
+        return $pdf->inline('MovimientoBajaDefinitiva-'.'.pdf');
+
+    }
+
+
 
     // ************ vista de reportes ************
 

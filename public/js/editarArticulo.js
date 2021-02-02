@@ -396,17 +396,22 @@ function buscaArt(){
 	            //console.log(data.length );
 	            if (data.length >= 1) {
 	            	
+	            	var styleOpt = { style: 'currency', currency: 'USD' };
+					var totalFormat = new Intl.NumberFormat('en-US', styleOpt);
+					totalFormat.format(intImporte);
 
 					var intImporte = parseFloat(data[0].importe);
 					var formatImporte = new Intl.NumberFormat('es-MX').format(intImporte);
-					//alert(formatImporte);
+					console.log(totalFormat.format(intImporte));
+
 	            	$("#agregaArt").modal()
 
 	            	document.getElementById('numInvBdef').innerHTML= numInv;
 	            	document.getElementById('concepBdef').innerHTML=data[0].concepto;
 	            	document.getElementById('facturaBdef').innerHTML=data[0].factura;
 	            	document.getElementById('fechaCBdef').innerHTML=data[0].fechacomp;
-	            	document.getElementById('importeBdef').innerHTML='$ '+formatImporte;
+	            	document.getElementById('importeBdef').innerHTML='$ '+data[0].importe;
+	            	//document.getElementById('importeBdef').innerHTML='$ '+totalFormat.format(intImporte);
 
 	            }else{
 		            swal({
@@ -457,7 +462,14 @@ function agregaArtBajDef(){
 	var fechaCBdef =document.getElementById('fechaCBdef').textContent;
 	var importeBdef =document.getElementById('importeBdef').textContent;
 	
+	var importeFormat = importeBdef.replace('$','')
+
 	var tablaArtBDef = document.getElementById('tableBajasDef');
+
+	var styleOpt = { style: 'currency', currency: 'USD' };
+	var totalFormat = new Intl.NumberFormat('en-US', styleOpt);
+	//totalFormat.format(importeFormat);
+	//console.log(totalFormat.format(importeFormat));
 
     var artBajaList = document.createElement('tr');
         artBajaList.id = numInvBdef;
@@ -480,7 +492,7 @@ function agregaArtBajDef(){
         artBajaList.appendChild(fechCompBDef);
 
     var importBajDef = document.createElement('td');
-        importBajDef.textContent = importeBdef;
+        importBajDef.textContent = totalFormat.format(importeFormat);
         importBajDef.className = 'importArtInvt';
         artBajaList.appendChild(importBajDef);
 
@@ -507,22 +519,40 @@ function agregaArtBajDef(){
         for (var i = 0; i < importArts.length; i++) {
            importArts[i].textContent;
            var impTotal = importArts[i].textContent;
-           var importeTotal = impTotal.replace('$','')
+           var importeTotal = impTotal.replace('$','');
            var formImporte = importeTotal.replace(',','');
            total += parseFloat(formImporte);
            //console.log(total);
         }
 
+    icon.setAttribute('data-importArt',formImporte);
+
 	$("#agregaArt").modal('hide');
 
 	document.getElementById('importeTotalArts').classList.remove('d-none');
-	document.getElementById('importeTotBajDef').textContent = new Intl.NumberFormat('es-MX').format(total);
-;
-	//importeTotalArts
+	document.getElementById('importeTotBajDef').textContent = totalFormat.format(total);
+	//importeTotalArts new Intl.NumberFormat('en-US', options2);
+	//const amount = total;
+	//console.log(totalFormat.format(total));
 }
 
 
+
 function quitaArticulo(){
+
+	//var importe = this.getElementById('importArt').textContent; getAttribute('data-idRegistro');
+	var importeBtn = this.getAttribute('data-importArt');
+	var rowArt = this.parentNode.parentNode;
+	var impAnterior = document.getElementById('importeTotBajDef').textContent;
+
+	var impReplace = impAnterior.replace('$','');
+	var impReplaceForm = impReplace.replace(',','');
+	//alert(impReplace);
+	var calcTotalN = parseFloat(impReplaceForm)-parseFloat(importeBtn);
+	console.log(importeBtn, impReplaceForm, calcTotalN);
+
+	var importArts = document.getElementsByClassName('importArtInvt');
+	console.log(importArts.length);
 	swal({
       title: "Éste artículo se eliminará de la lista de baja definitiva",
       text: "¿Desea continuar?",
@@ -534,6 +564,20 @@ function quitaArticulo(){
   }, function(isConfirm){
       if (isConfirm) {
 
+      	console.log(calcTotalN);
+      	//impAnterior = calcTotalN;
+      	document.getElementById('importeTotBajDef').textContent = calcTotalN;
+      	rowArt.remove();
+
+      	//importeTotBajDef
+      	
+      	importArts.length === 0 ? (
+        document.getElementById('tableBajasDef').classList.add('d-none'),
+        document.getElementById('btnEnvArtBajDef').classList.add('d-none'),
+        document.getElementById('importeTotalArts').classList.add('d-none'),
+        document.getElementById('importeTotBajDef').textContent = ''
+        ) : '';
+      	
       	//OPERACION DE ELIMINAR EL TR Y RECALCULAR EL TOTAL DEL IMPORTE
         swal({
         	position: 'center',
@@ -548,6 +592,7 @@ function quitaArticulo(){
       
   });
 }
+
 
 
 
@@ -570,7 +615,8 @@ function enviaArtBajaDefinit(){
           data:{arrArticulos:arrArticulos},
          success:function(data){
             console.log(data);
-            //location.reload();
+            document.getElementById('loader').classList.remove('d-none');
+            location.reload();
            },
            error: function (xhr, ajaxOptions, thrownError) {
             console.log('err')
@@ -614,6 +660,17 @@ function buscaArtEco(){
 	        	success:function(data){
 	            //console.log(data.length );
 	            if (data.length >= 1) {
+
+	            	var styleOpt = { style: 'currency', currency: 'USD' };
+					var totalFormat = new Intl.NumberFormat('en-US', styleOpt);
+					totalFormat.format(intImporte);
+
+					var intImporte = parseFloat(data[0].importe);
+					var formatImporte = new Intl.NumberFormat('es-MX').format(intImporte);
+					console.log(totalFormat.format(intImporte));
+					//document.getElementById('importeBdef').innerHTML='$ '+totalFormat.format(intImporte);
+
+
 	            	$("#agregaArt").modal()
 	            	document.getElementById('numInvBdef').innerHTML= numInv;
 	            	document.getElementById('concepBdef').innerHTML=data[0].concepto;
@@ -730,7 +787,8 @@ function enviaArtBajaDefinitEco(){
           data:{arrArticulos:arrArticulos},
          success:function(data){
             console.log(data);
-            //location.reload();
+            document.getElementById('loader').classList.remove('d-none');
+            location.reload();
            },
            error: function (xhr, ajaxOptions, thrownError) {
             console.log('err')
