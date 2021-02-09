@@ -28,35 +28,32 @@
         <div class="center-block">
           <div class="card">
             <div class="card-body" >
-                    <table id="tableCatalogo" name="tableCatalogo" class="table table-bordered table-striped display" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th style="text-align: center">Movimiento</th>
-                                <th style="text-align: center">Artículos Del Movimiento</th>
-                                <th style="text-align: center">Fecha y Hora de Baja</th>
-                                <th style="text-align: center">Importe Total Del Movimiento</th>
-                                <th style="text-align: center">Detalle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                          @foreach ($articulos as $articulo)
-                            <tr data-toggle="tooltip" data-placement="top" title="Click para ver toda la información del artículo: {{ $articulo->movimiento }}, Número de inventario: {{ $articulo->movimiento }} ">
-                              <td style="text-align: center" onclick="abrirModalEditar('{{ $articulo->movimiento }}');"> 000{{ $articulo->movimiento }} </td>
-                              <td style="text-align: center" onclick="abrirModalEditar('{{ $articulo->movimiento }}');"> {{ $articulo->total }} </td>
-                              <td style="text-align: center" onclick="abrirModalEditar('{{ $articulo->movimiento }}');"> {{ $articulo->fecha }}</td>
-                              <td style="text-align: center" onclick="abrirModalEditar('{{ $articulo->movimiento }}');"> $ {{ number_format($articulo->articulo,2) }} </td>
-                              <td style="text-align: center"><a href="{{ route('bajasDefinitivasEcoPDF', $articulo->movimiento) }} " class="btn btn-secondary" style="background-color: #E71096; border-color: #E71096" target="_blank"><i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i></a></td>
-                            </tr>
-                             
-                          @endforeach
-                            
-                        </tbody>
-                    </table>
-                </div>
-
+              <table id="tableCatalogo" name="tableCatalogo" class="table table-bordered table-striped display" style="width:100%">
+                <thead>
+                  <tr>
+                    <th style="text-align: center">Movimiento</th>
+                    <th style="text-align: center">Artículos Del Movimiento</th>
+                    <th style="text-align: center">Fecha y Hora de Baja</th>
+                    <th style="text-align: center">Importe Total Del Movimiento</th>
+                    <th style="text-align: center">Detalle</th>
+                  </tr>
+                  </thead>
+                <tbody>
+                  @foreach ($articulos as $articulo)
+                  <tr data-toggle="tooltip" data-placement="top" title="Click para ver toda la información del movimiento: Número de inventario: 000{{ $articulo->movimiento }}, Total de artículos: {{ $articulo->total }} ">
+                    <td style="text-align: center" > 000{{ $articulo->movimiento }} </td>
+                    <td style="text-align: center" > {{ $articulo->total }} </td>
+                    <td style="text-align: center" > {{ $articulo->fecha }}</td>
+                    <td style="text-align: center" > $ {{ number_format($articulo->articulo,2) }} </td>
+                    <td style="text-align: center"><a href="{{ route('bajasDefinitivasEcoPDF', $articulo->movimiento) }} " class="btn btn-secondary" style="background-color: #E71096; border-color: #E71096" target="_blank"><i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i></a></td>
+                  </tr>  
+                  @endforeach
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
+      </div>
     </div>
 
 

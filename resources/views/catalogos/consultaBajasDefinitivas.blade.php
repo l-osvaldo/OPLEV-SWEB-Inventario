@@ -41,7 +41,7 @@
                         <tbody>
                           @foreach ($articulos as $articulo)
                             <tr data-toggle="tooltip" data-placement="top" title="Click para ver toda la información del artículo: {{ $articulo->movimiento }}, Número de inventario: {{ $articulo->movimiento }} ">
-                              <td style="text-align: center" onclick="abrirModalEditar('{{ $articulo->movimiento }}');"> {{ $articulo->movimiento }} </td>
+                              <td style="text-align: center" onclick="abrirModalEditar('{{ $articulo->movimiento }}');"> 000{{ $articulo->movimiento }} </td>
                               <td style="text-align: center" onclick="abrirModalEditar('{{ $articulo->movimiento }}');"> {{ $articulo->total }} </td>
                               <td style="text-align: center" onclick="abrirModalEditar('{{ $articulo->movimiento }}');"> {{ $articulo->fecha }}</td>
                               <td style="text-align: center" onclick="abrirModalEditar('{{ $articulo->movimiento }}');"> $ {{ number_format($articulo->articulo,2) }} </td>

@@ -341,7 +341,7 @@ class ArticulosECOsController extends Controller
     {
        $usuario = auth()->user();
         $articulos = DB::table('mov_bajas_definitivas')
-                //-> where('bienEco',1)
+                -> where('bienEco',1)
                 -> select('movimiento',DB::raw('COUNT(movimiento) as total'), DB::raw('SUM(importe) as articulo'), DB::raw('MAX(fechaBaja) as fecha'))
                 ->groupBy('movimiento')
                 ->get();

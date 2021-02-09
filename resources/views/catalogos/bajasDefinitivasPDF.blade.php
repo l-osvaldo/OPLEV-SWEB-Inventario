@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Reporte | Cancelación de Resguardo| OPLE Veracruz</title>
+    <title>Reporte | Movimiento de Baja Definitiva | OPLE Veracruz</title>
     <link rel="stylesheet" type="text/css" src="css/normalize.css">
 
     <style type="text/css" media="all">
@@ -52,6 +52,7 @@
       $corte = 10;
       $inicioBloque = 0;
       $contador = 0;  
+      $pagina = 1;
     @endphp
     @while ($contador < $numArt)
       <table>
@@ -223,6 +224,13 @@
         </label>
       </div!-->
       <br>
+      <br>
+    <div class="row" align="right">
+        <label>Página:   {{ $pagina }} </label>
+        @php
+          $pagina += 1;
+        @endphp
+    </div>
     @endwhile
     
       

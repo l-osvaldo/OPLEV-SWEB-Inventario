@@ -61,7 +61,6 @@
                                 <th style="text-align: center; background-color: #bdbbbb;">Fecha Compra</th>
                                 <th style="text-align: center; background-color: #bdbbbb;">Importe </th>
                                 <th style="text-align: center; background-color: #bdbbbb;">Eliminar </th>
-
                             </tr>
                         </thead>
                         <tbody>

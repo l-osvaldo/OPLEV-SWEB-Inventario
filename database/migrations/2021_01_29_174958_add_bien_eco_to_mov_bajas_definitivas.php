@@ -14,7 +14,7 @@ class AddBienEcoToMovBajasDefinitivas extends Migration
     public function up()
     {
         Schema::table('mov_bajas_definitivas', function (Blueprint $table) {
-            $table->string('bienEco')->nullable();
+            $table->string('bienEco')->default(0)->nullable()->after('idclasi');
         });
     }
 
@@ -26,7 +26,7 @@ class AddBienEcoToMovBajasDefinitivas extends Migration
     public function down()
     {
         Schema::table('mov_bajas_definitivas', function (Blueprint $table) {
-            $table->string('bienEco')->nullable();
+            $table->string('bienEco')->default(0)->nullable();
         });
     }
 }
