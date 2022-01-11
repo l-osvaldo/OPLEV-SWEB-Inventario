@@ -33,7 +33,6 @@ class articulos extends Model
         'clvestado',
         'estado',
         'factura',
-        'idclasi',
     ];
 
 }
