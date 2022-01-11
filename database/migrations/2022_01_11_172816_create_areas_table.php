@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUsernameToUsers extends Migration
+class CreateAreasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddUsernameToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('username')->unique()->after('name');
+        Schema::create('areas', function (Blueprint $table) {
+            $table->string('idarea')->primary();
+            $table->string('nombrearea');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class AddUsernameToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('username');
-        });
+        Schema::dropIfExists('areas');
     }
 }
