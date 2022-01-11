@@ -44,8 +44,7 @@ class CreateMovBajasDefinitivasTable extends Migration
             $table->string('clvestado')->nullable();
             $table->string('estado')->nullable();
             $table->string('factura')->nullable();
-            $table->string('idclasi')->nullable();
-
+            $table->integer('bienEco')->unsigned()->nullable();
             $table->timestamps();
         });
     }

@@ -11,6 +11,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Session;
 use App\User;
 use Auth;
+use Hash;
 
 class LoginController extends Controller
 {
@@ -55,7 +56,7 @@ class LoginController extends Controller
         $status = $user->status;
         if($status == 1){
           if ($user) {
-            if (Crypt::decryptString($user->password) == $decrypted) {
+            if (Hash::check($decrypted, $user->password)) {
               Auth::login($user);
 
               return $this->sendLoginResponse($request);

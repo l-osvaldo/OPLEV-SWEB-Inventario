@@ -116,7 +116,6 @@ class ArticulosController extends Controller
             $articulo->clvestado    = $request->txtEstadoClave;
             $articulo->estado       = $request->txtEstadoNombre;
             $articulo->factura      = $request->txtFactura;
-            $articulo->idclasi      = '0';
 
             $articulo->save();
 
@@ -160,7 +159,7 @@ class ArticulosController extends Controller
     public function bajaArticulo(Request $request)
     {
 
-    $infoArticulo = articulos::where('numeroinv', $request->numInv)->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
+    $infoArticulo = articulos::where('numeroinv', $request->numInv)->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura')->get();
 
         articulos::where('numeroinv', $request->numInv)->update([
                     'concilFelix'    => 1,
@@ -185,7 +184,7 @@ class ArticulosController extends Controller
     {
         $usuario  = auth()->user();
         //$partidas = partidas::select('partida', 'descpartida')->whereNotNull(['porcentajeDepreciacion', 'aniosvida'])->get();
-        $articulos = articulos::where('nombrearea', 'BODEGA')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
+        $articulos = articulos::where('nombrearea', 'BODEGA')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura')->get();
 
         //$artImport = $articulos[0]->importe;
         //dd(strlen($artImport) ,$artImport);
@@ -236,7 +235,7 @@ class ArticulosController extends Controller
         
         for ($i = 0; $i <= ($totalArts-1); $i++){ 
             //$articulosBDef[$i] 
-            $artMov = articulos::where('numeroinv', $request->arrArticulos[$i] )->where('nombrearea', 'BODEGA')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
+            $artMov = articulos::where('numeroinv', $request->arrArticulos[$i] )->where('nombrearea', 'BODEGA')->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura')->get();
             //array_push($arts,[$artMov->numeroinv,$artMov->partida]);
             array_push($arts,[$artMov[0]->partida]);
 
@@ -271,7 +270,6 @@ class ArticulosController extends Controller
                 'clvestado'=>$artMov[0]->clvestado,
                 'estado'=>$artMov[0]->estado,
                 'factura'=>$artMov[0]->factura,
-                'idclasi'=>$artMov[0]->idclasi,
             ]
             );
 
@@ -307,7 +305,7 @@ class ArticulosController extends Controller
         //dd($folio);
         $usuario = auth()->user();
 
-        $articulos = DB::table('mov_bajas_definitivas')->where('movimiento', $folio)->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi','movimiento','fechaBaja')->get();
+        $articulos = DB::table('mov_bajas_definitivas')->where('movimiento', $folio)->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','movimiento','fechaBaja')->get();
         $numArt = count($articulos);
 
         $impTotal = DB::table('mov_bajas_definitivas')->where('movimiento',$folio)
@@ -942,7 +940,7 @@ class ArticulosController extends Controller
     public function InformacionArticulo(Request $request)
     {
 
-$infoArticulo = articulos::where('numeroinv', $request->numInventario)->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura','idclasi')->get();
+$infoArticulo = articulos::where('numeroinv', $request->numInventario)->select('partida','fechacomp','idarea','iev','descpartida','linea','desclinea','sublinea','descsublinea','consecutivo','numeroinv','concepto','marca','importe','colores','nombrearea','numemple','nombreemple','numserie','medidas','modelo','material','clvestado','estado','factura')->get();
 
         /*foreach ($infoArticulo as $value) {
             if ($value->fechacomp === '  -   -') {
