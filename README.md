@@ -12,6 +12,7 @@ _Plantilla para el desarrollo de aplicaciones del OPLE Veracruz_
 
 ## Contruido con 
 
+* [Laravel 5.8](https://laravel.com/docs/5.8)
 
 ## Comenzando 🚀
 
