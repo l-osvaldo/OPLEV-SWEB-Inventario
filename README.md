@@ -1,13 +1,17 @@
 # INVENTARIO
 
-_Plantilla de Laravel 5.8 para el desarrollo de aplicaciones del OPLE Veracruz_
+_Plantilla para el desarrollo de aplicaciones del OPLE Veracruz_
 
 # Tabla de Contenidos  
 
+- ### [Construido con](#contruido-con)
 - ### [Comenzando](#comenzando)
 - ### [Pre-requisitos](#pre-requisitos)
 - ### [Instalación](#instalación)
 - ### [Correr Proyecto](#correr-proyecto)
+
+## Contruido con 
+
 
 ## Comenzando 🚀
 
