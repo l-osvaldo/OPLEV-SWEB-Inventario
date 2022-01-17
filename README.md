@@ -113,7 +113,7 @@ _Como el .env está configurado como Production, va a preguntar si quieres prose
 **************************************
 Do you really wish to run this command? (yes/no) [no]:
 > yes
-```
+
 ## Correr proyecto
 
 Abre tu navegador y dirígete a [http://nuevo-proyecto.test](http://nuevo-proyecto.test). Debes ver una pantalla similar a la siguiente imagen:
