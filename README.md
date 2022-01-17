@@ -117,7 +117,5 @@ Do you really wish to run this command? (yes/no) [no]:
 
 ## Correr proyecto
 
-Abre tu navegador y dirígete a [http://nuevo-proyecto.test](http://nuevo-proyecto.test). Debes ver una pantalla similar a la siguiente imagen:
-
-![](resources/assets/readme/dashboard_login.png)
+Abre tu navegador y dirígete a [http://nuevo-proyecto.test](http://nuevo-proyecto.test). 
 
