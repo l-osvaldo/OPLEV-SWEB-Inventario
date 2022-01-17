@@ -113,6 +113,7 @@ _Como el .env está configurado como Production, va a preguntar si quieres prose
 **************************************
 Do you really wish to run this command? (yes/no) [no]:
 > yes
+```
 
 ## Correr proyecto
 
