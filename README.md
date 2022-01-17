@@ -10,7 +10,7 @@ _Plantilla para el desarrollo de aplicaciones del OPLE Veracruz_
 - ### [Instalación](#instalación)
 - ### [Correr Proyecto](#correr-proyecto)
 
-## Contruido con 
+## Construido con 
 
 * [Laravel 5.8](https://laravel.com/docs/5.8)
 * [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
