@@ -7,10 +7,6 @@ _Plantilla de Laravel 5.8 para el desarrollo de aplicaciones del OPLE Veracruz_
 - ### [Comenzando](#comenzando)
 - ### [Pre-requisitos](#pre-requisitos)
 - ### [Instalación](#instalación)
-- ### [Configuración de git](#configuración-de-git)
-    - ### [Verificar configuración local](#verificar-configuración-local)
-    - ### [Renombrar origin](#renombrar-origin)
-    - ### [Crear nuevo origin](#crear-nuevo-origin)
 - ### [Correr Proyecto](#correr-proyecto)
 
 ## Comenzando 🚀
@@ -117,52 +113,6 @@ _Como el .env está configurado como Production, va a preguntar si quieres prose
 **************************************
 Do you really wish to run this command? (yes/no) [no]:
 > yes
-```
-
-## Configuración de git 🖇️
-
-Para poder trabajar en tu nuevo proyecto pero aún poder recibir actualizaciones a la plantilla en un futuro, se deben realizar unos cambios a los **remote**, que son _aliases_ de los repositorios a los que se apunta en los comandos `git fetch`, `git pull`, `gut push`, entre otros.
-
-#### Verificar configuración local
-
-Debido a que se pueden realizar cambios de parte de diferentes usuarios en la plantilla, es esencial configurar el nombre de usuario y correo para identificar correctamente a los usuarios en el historial de commits, utiliza el correo que tienes registrado en gitlab:
-
-```
-$ git config --global user.name "Mi Nombre"
-$ git config --global user.email "micorreo@correo.com"
-```
-#### Renombrar origin
-
-Cuando escribes el comando `git remote -v` te aparece una lista de los remotes (aliases) y el repositorio (url) al que apuntan:
-
-```
-$ git remote -v
-origin  https://github.com/l-osvaldo/OPLEV-SWEB-Inventario.git (fetch)
-origin  https://github.com/l-osvaldo/OPLEV-SWEB-Inventario.git (push)
-
-```
-
-Esto quiere decir que cuando utilizas el comando `git fetch origin master` o `git push origin master` estas diciéndole a git que revise o envíe cambios a la rama **master** del repositorio en el url **https://gitlab.com/opleveracruz/dashboardclon.git**, respectivamente.
-
-Por conveniencia y buena práctica el remote **origin** siempre debe ser correspondiente al repositorio de tu proyecto por lo cual en este caso ya no puede ser _~/dashboardclon.git_.
-
-Renombra **origin** a **dashboard** con el comando `git remote rename origin dashboard`
-
-#### Crear nuevo origin 
-
-Crea el un nuevo remote **origin**:
-
-```
-$ git remote add origin https://gitlab.com/opleveracruz/nuevo-proyecto.git
-```
-
-Verifica que se hayan modificado los remote correctamente con `remote -v`:
-```
-$ git remote -v
-dashboard       https://gitlab.com/opleveracruz/dashboardclon.git (fetch)
-dashboard       https://gitlab.com/opleveracruz/dashboardclon.git (push)
-origin  https://gitlab.com/opleveracruz/nuevo-proyecto.git (fetch)
-origin  https://gitlab.com/opleveracruz/nuevo-proyecto.git (push)
 
 ```
 
