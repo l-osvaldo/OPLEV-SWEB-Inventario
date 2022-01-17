@@ -13,8 +13,6 @@ _Plantilla de Laravel 5.8 para el desarrollo de aplicaciones del OPLE Veracruz_
 
 Estas instrucciones te permitirán obtener una copia de la plantilla para el desarrollo de tu nuevo proyecto en tu máquina local.
 
-Ve a la sección **Contribuyendo** para saber como contribuir a la plantilla con mejoras o correcciones.  
-
 ### Pre-requisitos 📋
 
 Para correr el proyecto es necesario tener el entorno de desarrollo configurado correctamente:
