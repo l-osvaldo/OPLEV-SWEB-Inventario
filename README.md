@@ -12,10 +12,6 @@ _Plantilla de Laravel 5.8 para el desarrollo de aplicaciones del OPLE Veracruz_
     - ### [Renombrar origin](#renombrar-origin)
     - ### [Crear nuevo origin](#crear-nuevo-origin)
 - ### [Correr Proyecto](#correr-proyecto)
-- ### [Actualizar Proyecto](#actualizar-proyecto)
-    - ### [Bajar cambios de dashboardclon](#bajar-cambios-de-dashboardclon)
-    - ### [Arreglar conflictos](#arreglar-conflictos)
-- ### [Contribuyendo](#contribuyendo)
 
 ## Comenzando 🚀
 
@@ -141,8 +137,9 @@ Cuando escribes el comando `git remote -v` te aparece una lista de los remotes (
 
 ```
 $ git remote -v
-origin  https://gitlab.com/opleveracruz/dashboardclon.git (fetch)
-origin  https://gitlab.com/opleveracruz/dashboardclon.git (push)
+origin  https://github.com/l-osvaldo/OPLEV-SWEB-Inventario.git (fetch)
+origin  https://github.com/l-osvaldo/OPLEV-SWEB-Inventario.git (push)
+
 ```
 
 Esto quiere decir que cuando utilizas el comando `git fetch origin master` o `git push origin master` estas diciéndole a git que revise o envíe cambios a la rama **master** del repositorio en el url **https://gitlab.com/opleveracruz/dashboardclon.git**, respectivamente.
