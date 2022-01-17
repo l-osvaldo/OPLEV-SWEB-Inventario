@@ -13,6 +13,8 @@ _Plantilla para el desarrollo de aplicaciones del OPLE Veracruz_
 ## Contruido con 
 
 * [Laravel 5.8](https://laravel.com/docs/5.8)
+* [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
+* [JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript)
 
 ## Comenzando 🚀
 
@@ -39,7 +41,7 @@ Clona la plantilla con el nombre de tu nuevo proyecto dentro del directorio **co
 
 ```
 $ cd code
-$ git clone https://gitlab.com/opleveracruz/dashboardclon nuevo-proyecto
+$ git clone https://github.com/l-osvaldo/OPLEV-SWEB-Inventario.git nuevo-proyecto
 ```
 
 Agrega la rutas del proyecto y su base de datos a Homestead:
